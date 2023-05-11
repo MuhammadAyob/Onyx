@@ -1,0 +1,140 @@
+
+<div style="padding-left: 3em; padding-right: 3em; padding-top: 9em;height:100vh;background-image: url('../../assets/gradient.gif');background-repeat: no-repeat;background-size: 100% 25%;">
+  <mat-card class="matCard">
+    <mat-tab-group>
+      <mat-tab label="Add Resource" class="resource" style="color: #0e1a3c;">
+        <br>
+        <mat-card-header class="cardHeader" style="padding-bottom: 1%;text-align: center">
+          <mat-card-title-group style="margin: 0 auto;">
+            <mat-card-title style="font-weight: 500">New Resource</mat-card-title>
+          </mat-card-title-group>
+  
+        
+        </mat-card-header>
+
+        <mat-card-content class="matContent">
+          <!--Project Details-->
+          <form>
+            <div class="form-group">
+              <br /><br />
+              <div style="padding-left: 2em; margin:0 auto;">
+                <mat-label style="color: #0e1a3c; margin:0 auto;padding-bottom: 20px;">Upload Lesson Resource </mat-label>
+  
+                <br />
+  
+                <mat-form-field
+                enctype="multipart/form-data"
+                style="position: relative; bottom: 15px"
+              >
+                <div style="padding-top: 14%">
+                  <input
+                              type="file"
+                              accept="application/pdf"
+                              #fileInput
+                              id="uploadFile"
+                              (change)="uploadFileEvt($event)"
+                              name="uploadFile"
+                              [formControl]="resourceFormControl"
+                              style="display: none"
+                              required
+                          />
+                           
+                              <!-- label of input -->
+                            <label
+                              for="uploadFile"
+                              class="btn"
+                              style="background-color: #0e1a3c; color: #ffffff;font-family: Montserrat;"
+                              >Choose File</label
+                            >
+                            <br />
+                            <br>
+                            
+                            <!-- Display files names -->
+                            <input
+                              style="width: 30vw"
+                              matInput
+                              [(ngModel)]="fileAttr"
+                              readonly
+                              name="name"
+                            />
+        
+                  <mat-error *ngIf="resourceFormControl.hasError('required')">
+                    No file <strong>chosen</strong>
+                  </mat-error>
+                </div>
+              </mat-form-field>
+               
+              </div>
+      
+             <div class="form-group" style="padding-right: 40%"></div>
+            </div>
+            <br>
+            <div class="button-container">
+              <button id="cancel" class="btn" (click)="onBack()">Cancel</button>
+              <button id="confirm" class="btn" (click)="onSubmit()">Confirm</button>
+
+
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-tab>
+      
+      <mat-tab label="Existing Resources" class="resources" style="color: #0e1a3c;">
+<mat-card>
+ <!--Section table-->
+
+<div class="bigDiv" style="margin-bottom: -35px;">
+  <div class="leftSearch">
+    <form class="navbar-form">
+      <mat-form-field appearance="outline" color="white" style="width: 100%; border-color: white !important; color: #ffffff; padding-top: 1%;">
+        <mat-label style=" color: #ffffff; background-color: transparent; border-bottom: none; font-size: 15px; width: 100%;">Search Resources</mat-label>
+        <input type="text" style="border-color: #5090d000;" matInput name="searchDept" (keydown.enter)="doFilter($event)" placeholder="Ex. Angular Course">
+        <mat-icon class="search" style="float: right; margin-top: -22px;">search</mat-icon>
+      </mat-form-field>
+    </form>
+  </div>
+  
+</div>
+<br>
+<mat-card-content style="padding-top: 1em;">
+<div>
+  <table
+    mat-table
+    [dataSource]="ResourceDataSource"
+    class="mat-elevation-z8"
+    id="SectionTable"
+  >
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef style="color: #ffffff">
+        Resource Name
+      </th>
+      <td mat-cell *matCellDef="let resource">
+        {{ resource.ResourceName }}
+      </td>
+    </ng-container>
+
+   
+
+
+   
+
+    <tr
+      mat-header-row
+      *matHeaderRowDef="ResourceDisplayedColumns; sticky: true"
+    ></tr>
+    <tr mat-row *matRowDef="let row; columns: ResourceDisplayedColumns"></tr>
+  </table>
+  <div *ngIf="noData | async" class="no-records" style="text-align: center; padding-top: 4em; font-size: larger;">
+      No records found, please try again.
+    </div>
+</div>
+</mat-card-content>
+<br>
+<mat-paginator style="color:white" [pageSize]="5" [pageSizeOptions]="[5, 10, 15, 20]"></mat-paginator>
+</mat-card>
+
+      </mat-tab>
+    </mat-tab-group>
+   </mat-card>
+</div>

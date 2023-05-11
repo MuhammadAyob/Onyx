@@ -1,0 +1,165 @@
+  <!-- Card Form for Input -->
+  <div  style="padding-left: 3em; padding-right: 3em; padding-top: 8em;padding-bottom: 2em;height:100vh;background-image: url('../../assets/gradient.gif');background-repeat: no-repeat;background-size: 100% 25%;">
+    <!-- Mat Card Form for Read faq -->
+   
+     <div>
+       <mat-card class="matCard" style="border-radius: 34px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8), 0 1px 3px rgba(0, 0, 0, 0.8);">
+         <mat-card-header class="cardHeader" style="padding-bottom: 1%;text-align: center">
+           <mat-card-title-group style="margin:0 auto">
+             <mat-card-title style="font-weight: 500; ">My Profile</mat-card-title>
+           </mat-card-title-group>
+         </mat-card-header>
+   
+         <mat-card-content class="matContent">
+           <form>
+             <div class="form-group">
+               <br /><br />
+               <div style="padding: 0% 2.5% 0% 2%; min-width: 100%">
+   
+            
+                 <mat-form-field
+                   class="example-full-width"
+                   appearance="legacy"
+                   style="width: 95%;"
+                 >
+                   <mat-label style="color: #0e1a3c">
+                    Select Title</mat-label
+                   >
+                   <mat-select
+                   name="TitleID"
+                   [formControl]="titleFormControl"
+                   [(ngModel)]="student.TitleID"
+                 >
+                   <mat-option
+                     *ngFor="let item of titleList"
+                     [value]="item.TitleID"
+                   >
+                     {{ item.TitleName }}
+                   </mat-option>
+                 </mat-select>
+                 <mat-error *ngIf="titleFormControl.hasError('required')">
+                   Title is <strong>required</strong>
+                 </mat-error>
+                 </mat-form-field>
+                 <br />
+                 <br />
+
+                 <mat-form-field
+                 class="example-full-width"
+                 appearance="legacy"
+                 style="width: 95%;"
+               >
+                 <mat-label style="color:#0e1a3c">
+                   Enter Name</mat-label
+
+                 >
+                 <input
+                 type="text"
+                 matInput
+                 [formControl]="nameFormControl"
+                 name="ClientName"
+                 [(ngModel)]="student.Name"
+                 placeholder="Dwight"
+                 required
+               />
+               <mat-error *ngIf="nameFormControl.hasError('required')">
+                 Student Name is <strong>required</strong>
+               </mat-error>
+               </mat-form-field>
+               <br>
+               <br>
+              
+              
+               <mat-form-field
+               class="example-full-width"
+               style="width: 95%"
+               appearance="legacy"
+             >
+               <mat-label style="color: #0e1a3c"
+                 >Surname</mat-label
+               >
+               <input
+               type="text"
+               matInput
+               [formControl]="surnameFormControl"
+               name="ClientSurname"
+               [(ngModel)]="student.Surname"
+               placeholder="Schrute"
+               required
+             />
+             <mat-error *ngIf="surnameFormControl.hasError('required')">
+              Surname is <strong>required</strong>
+             </mat-error>
+             </mat-form-field>
+<br>
+<br>
+<mat-form-field
+class="example-full-width"
+style="width: 95%"
+appearance="legacy"
+>
+<mat-label style="color: #0e1a3c"
+  >Enter Phone Number</mat-label
+>
+<input
+type="text"
+matInput
+[formControl]="phoneFormControl"
+name="ClientPhone"
+[(ngModel)]="student.Phone"
+placeholder="0712345678"
+required
+/>
+<mat-error *ngIf="phoneFormControl.hasError('required')">
+Phone Number is <strong>required</strong>
+</mat-error>
+<mat-error *ngIf="phoneFormControl.hasError('pattern')">
+Phone Number must be <strong>valid</strong>
+</mat-error>
+</mat-form-field>
+<br>
+<br>
+<mat-form-field
+class="example-full-width"
+style="width: 95%"
+appearance="legacy"
+>
+<mat-label style="color: #0e1a3c"
+  >Enter Email</mat-label
+>
+<input
+type="email"
+matInput
+[formControl]="emailReqFormControl"
+name="ClientEmail"
+[(ngModel)]="student.Email"
+placeholder="DwightSchrute@dundermifflin.com"
+required
+/>
+<mat-error *ngIf="emailReqFormControl.hasError('required')">
+ Email Address is <strong>required</strong>
+</mat-error>
+<mat-error *ngIf="emailReqFormControl.hasError('email')">
+ Email Address must be <strong>valid</strong>
+</mat-error>
+</mat-form-field>
+<br>
+<br>
+
+
+                 
+               </div>
+   
+               <div class="form-group" style="padding-right: 40%"></div>
+             </div>
+             <br>
+             <br>
+             <div class="button-container">
+               <button id="cancel" class="btn" (click)="onBack()">Cancel</button>
+               <button id="confirm" class="btn" (click)="onSubmit()">Confirm</button>
+           </div>
+           </form>
+         </mat-card-content>
+       </mat-card>
+     </div>
+   </div>

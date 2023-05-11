@@ -1,0 +1,149 @@
+<div style="padding-left: 2em; padding-right: 2em; padding-top: 9em;height:100vh;background-image: url('../../assets/gradient.gif');background-repeat: no-repeat;background-size: 100% 25%;">
+  <!-- Mat Card Form for Read -->
+  <div class="container-fluid">
+    <mat-card class="matCard">
+      <div class="bigDiv" style="margin-bottom: -37px;">
+        <div class="leftSearch">
+          <form class="navbar-form">
+            <mat-form-field appearance="outline" color="white" style="width: 100%; border-color: white !important; color: #ffffff; padding-top: 1%;">
+              <mat-label style=" color: #ffffff; background-color: transparent; border-bottom: none; font-size: 15px; width: 100%;">Search Employees</mat-label>
+              <input type="text" style="border-color: #5090d000;" matInput name="searchDept" (keydown.enter)="doFilter($event)" placeholder="Ex. Muhammad">
+              <mat-icon class="search" style="float: right; margin-top: -22px;">search</mat-icon>
+            </mat-form-field>
+          </form>
+        </div>
+        <div fxFlex></div>
+          <div fxLayoutAlign="center center" style="margin-top: 25px;padding-right: 10px;" >
+            <button type="button" mat-mini-fab style="float: right; background-color: #920f4c;" class="btn btn-default btn-lg" (click)="addNew()">
+              <mat-icon aria-hidden="false" aria-label="Add FAQ" style="color: white; ">add</mat-icon></button>
+            </div>
+      </div>
+
+      <br>
+     
+      <mat-card-content style="padding-top: 1em;">
+        <div class="table-hover table-container mat-elevation-z8">
+          <table
+            mat-table
+            matSort
+            [dataSource]="dataSource"
+            class="mat-elevation-z8"
+          >
+
+          <!-- Employee Image Column -->
+          <ng-container matColumnDef="Image">
+             <th mat-header-cell mat-sort-header *matHeaderCellDef style="color: #ffffff;">Employee Image</th>
+            <td mat-cell *matCellDef="let employee">
+           <img src="{{'data:image/png;base64,' + employee.Image}}" style= "border-radius:150px ;height: 100px;width:100px;">
+             </td>
+             </ng-container>
+            <!-- Employee Name Column -->
+            <ng-container matColumnDef="Name">
+              <th mat-header-cell mat-sort-header *matHeaderCellDef style="color: #ffffff;">Employee Name</th>
+              <td mat-cell *matCellDef="let employee">
+                {{ employee.Name }}
+              </td>
+            </ng-container>
+
+            <!-- Employee Surname Column -->
+            <ng-container matColumnDef="Surname">
+              <th mat-header-cell mat-sort-header *matHeaderCellDef style="color: #ffffff;">Employee Surname</th>
+              <td mat-cell *matCellDef="let employee">
+                {{ employee.Surname }}
+              </td>
+            </ng-container>
+
+         
+
+            <!-- View Column -->
+            <ng-container matColumnDef="view">
+              <th mat-header-cell *matHeaderCellDef style="text-align: center; color: #ffffff">
+                View
+              </th>
+              <td
+                mat-cell
+                *matCellDef="let employee"
+                style="text-align: center"
+              >
+                <button
+                  type="button"
+                  class="btn btn-default btn-lg"
+                  style="
+                  background-color:transparent;border-style: none;" 
+                  (click)="onView(employee.EmployeeID)"
+                >
+                  <mat-icon aria-hidden="false" aria-label="View Employee"
+                    >reply</mat-icon
+                  >
+                </button>
+              </td>
+            </ng-container>
+
+            <!-- Edit Column -->
+            <ng-container matColumnDef="edit">
+              <th mat-header-cell *matHeaderCellDef style="text-align: center; color: #ffffff">
+                Edit
+              </th>
+              <td
+                mat-cell
+                *matCellDef="let employee"
+                style="text-align: center"
+              >
+                <button
+                  type="button"
+                  class="btn btn-default btn-lg"
+                  style="
+                  background-color:transparent;border-style: none;" 
+                  (click)="onEdit(employee.EmployeeID)"
+                >
+                  <mat-icon aria-hidden="false" aria-label="Edit Employee"
+                    >edit</mat-icon
+                  >
+                </button>
+              </td>
+            </ng-container>
+
+            <!-- Delete Column -->
+            <ng-container matColumnDef="delete">
+              <th mat-header-cell *matHeaderCellDef style="text-align: center; color: #ffffff">
+                Delete
+              </th>
+              <td
+                mat-cell
+                *matCellDef="let employee"
+                style="text-align: center"
+              >
+                <button
+                  type="button"
+                  class="btn btn-default btn-lg"
+                  style="
+                  background-color:transparent;border-style: none;" 
+                  (click)="onDelete(employee.EmployeeID)"
+                >
+                  <mat-icon aria-hidden="false" aria-label="Delete Employee"
+                    >delete</mat-icon
+                  >
+                </button>
+              </td>
+            </ng-container>
+
+            <tr
+              mat-header-row
+              *matHeaderRowDef="displayedColumns; sticky: true"
+            ></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+          <div
+          *ngIf="noData | async"
+          class="no-records"
+          style="text-align: center; padding-top: 4em; font-size: larger"
+        >
+          No records found, please try again.
+        </div>
+        </div>
+      </mat-card-content>
+      <mat-paginator  style="color: white;"[pageSize]="5" [pageSizeOptions]="[5, 10, 15, 20]">
+      </mat-paginator>
+    </mat-card>
+  </div>
+</div>

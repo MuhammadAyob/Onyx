@@ -1,0 +1,734 @@
+<div *ngIf="!flag">
+  <div class="loader" id="loader"></div>
+
+  <div id="overlay"></div>
+  
+  <!-- Admin panel-->
+  <div *ngIf="admin">
+    <mat-sidenav-container style="height: 100vh; margin: 0">
+      <mat-sidenav
+        #sidenav
+        mode="side"
+        opened
+        [class.mat-elevation-z4]="true"
+      
+        style="width: 240px; background-color: #920f4c; color: rgb(0, 0, 0);"
+      >
+        <div>
+          <img
+            style="padding-left: 0%;padding-top: 10%;padding-bottom: 10%; height:150px; width: 133px;"
+            src="../../assets/Images/DSLogo.png"
+          />
+        </div>
+        <div style="margin-right: 4%">
+          <svg height="5" width="200">
+            <line
+              x1="0"
+              y1="0"
+              x2="200"
+              y2="0"
+              style="stroke: rgb(255, 255, 255); stroke-width: 2"
+            />
+          </svg>
+        </div>
+
+        <div class="admin" style="color: rgb(255, 255, 255); text-align: center;">
+          Administration <br />
+          Portal
+        </div>
+
+        <div style="margin-right: 4%">
+          <svg height="5" width="200">
+            <line
+              x1="0"
+              y1="0"
+              x2="200"
+              y2="0"
+              style="stroke: rgb(255, 255, 255); stroke-width: 2"
+            />
+          </svg>
+        </div>
+        <mat-nav-list style="font-family:'Montserrat';" dense>
+          <mat-list-item
+
+            style="color: white;font: montserrat;font-size: 16px; "
+            routerLink="/home/admin-home"
+            ><mat-icon style="margin-right: 12px;" >home</mat-icon>Home</mat-list-item
+          >
+       
+          <mat-list-item
+            style="color: white;font-size: 16px;"
+            routerLink="/admin/client/read-client"
+            ><mat-icon style="margin-right: 12px;">people</mat-icon>Students</mat-list-item
+          >
+
+         
+      
+          <mat-list-item
+            style="color: white;font-size: 16px;"
+            routerLink="admin/read-instructional-videos"
+            ><mat-icon style="margin-right: 12px;">videocam</mat-icon>Instructional Videos</mat-list-item
+          >
+          <mat-list-item
+
+          style="color: white;font: montserrat;font-size: 16px; "
+          routerLink="/admin/read-faq"
+          ><mat-icon style="margin-right: 12px;">question_answer</mat-icon>FAQ</mat-list-item
+        >
+          
+          <mat-list-item style="color: white;font-size: 16px;" routerLink="/reports"
+            ><mat-icon style="margin-right: 12px;">assessment</mat-icon>Reports</mat-list-item
+          >
+          <mat-list-item
+            style="color: white;font-size: 16px;"
+            routerLink="/admin/read-user-role"
+            ><mat-icon style="margin-right: 12px;">manage_accounts</mat-icon>User Role</mat-list-item
+          >
+          <mat-list-item
+            style="color: white;font-size: 16px;"
+            routerLink="/admin/re-activate-user"
+            ><mat-icon style="margin-right: 12px;">admin_panel_settings</mat-icon>Reactivate
+            Users</mat-list-item
+          >
+          <mat-list-item style="color: white;font-size: 16px;" routerLink="/admin/view-audit-log"
+            ><mat-icon style="margin-right: 12px;">history</mat-icon>Audit Log</mat-list-item
+          >
+
+          <mat-expansion-panel
+          [class.mat-elevation-z0]="true"
+          dense
+          style="
+            
+            background-color: #920f4c;
+            color: white;
+            
+          "
+        >
+          <mat-expansion-panel-header style="color: white; background-color: #920f4c;font-size: 16px;margin-left: -8px;">
+            <mat-icon style="margin-right: 12px;">settings</mat-icon>Configurations
+          </mat-expansion-panel-header>
+          <mat-nav-list dense style="color: white;background-color: #920f4c;">
+
+            <a
+            mat-list-item
+            routerLink="/admin/read-terms"
+            style="color: white; font-size: 14px;"
+            ><mat-icon style="margin-right: 8px;">attach_file</mat-icon> T&C's</a
+          >
+            <a
+              mat-list-item
+              routerLink="/admin/read-otp-timer"
+              style="color: white; font-size: 14px;"
+              ><mat-icon style="margin-right: 8px;">timer</mat-icon> OTP Timer</a
+            >
+            <a
+              mat-list-item
+              routerLink="/admin/read-vat"
+              style="color: white;font-size: 14px;"
+              ><mat-icon style="margin-right: 8px;">attach_money</mat-icon> VAT</a
+            >
+          </mat-nav-list>
+        </mat-expansion-panel>
+
+          <mat-expansion-panel
+            [class.mat-elevation-z0]="true"
+            dense
+            style="
+              
+              background-color: #920f4c;
+              color: white;
+              
+            "
+          >
+            <mat-expansion-panel-header style="color: white; background-color: #920f4c;font-size: 16px;margin-left: -8px;">
+              <mat-icon style="margin-right: 12px;">contacts</mat-icon>Employee
+            </mat-expansion-panel-header>
+            <mat-nav-list dense style="color: white;background-color: #920f4c;">
+              <a
+                mat-list-item
+                routerLink="/admin/read-employees"
+                style="color: white; font-size: 14px;"
+                ><mat-icon style="margin-right: 8px;">person_add</mat-icon> Employees</a
+              >
+              <a
+                mat-list-item
+                routerLink="/admin/read-update-requests"
+                style="color: white;font-size: 14px;"
+                ><mat-icon style="margin-right: 8px;">feedback</mat-icon> Requests</a
+              >
+              <a
+                mat-list-item
+                routerLink="/admin/read-skill"
+                style="color: white;font-size: 14px;"
+                ><mat-icon style="margin-right: 8px;">keyboard_alt</mat-icon> Skill</a
+              >
+              <a
+                mat-list-item
+                routerLink="/admin/read-skill-type"
+                style="color: white;font-size: 14px;"
+                ><mat-icon style="margin-right: 8px;">pattern</mat-icon> Skill Type</a
+              >
+              <a
+                mat-list-item
+                routerLink="/admin/read-department"
+                style="color: white;font-size: 14px;"
+                ><mat-icon style="margin-right: 8px;">business</mat-icon> Department</a
+              >
+              <a
+                mat-list-item
+                routerLink="/admin/read-qualification"
+                style="color: white;font-size: 14px;"
+                ><mat-icon style="margin-right: 8px;">school</mat-icon> Qualification</a
+              >
+            </mat-nav-list>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel
+          [class.mat-elevation-z0]="true"
+          dense
+          style="
+            
+            background-color: #920f4c;
+            color: white;
+            
+          "
+        >
+          <mat-expansion-panel-header style="color: white; background-color: #920f4c;font-size: 16px;margin-left: -8px;">
+            <mat-icon style="margin-right: 12px;">collections_bookmark</mat-icon>Courses
+          </mat-expansion-panel-header>
+          <mat-nav-list dense style="color: white;background-color: #920f4c;">
+            <a
+              mat-list-item
+              routerLink="/admin/read-courses"
+              style="color: white; font-size: 14px;"
+              ><mat-icon style="margin-right: 8px;">games</mat-icon> Courses</a
+            >
+            <a
+              mat-list-item
+              routerLink="/admin/read-categories"
+              style="color: white;font-size: 14px;"
+              ><mat-icon style="margin-right: 8px;">unfold_more</mat-icon> Categories</a
+            >
+          
+          </mat-nav-list>
+        </mat-expansion-panel>
+
+
+
+
+          <mat-expansion-panel
+          [class.mat-elevation-z0]="true"
+          dense
+          style="
+            
+            background-color: #920f4c;
+            color: white;
+            
+          "
+        >
+          <mat-expansion-panel-header style="color: white; background-color: #920f4c;font-size: 16px;margin-left: -8px;">
+            <mat-icon style="margin-right: 12px;">engineering</mat-icon>Maintenance
+          </mat-expansion-panel-header>
+          <mat-nav-list dense style="color: white;background-color: #920f4c;">
+
+            <a
+            mat-list-item
+            routerLink="/admin/read-maintenance-requests"
+            style="color: white; font-size: 14px;"
+            ><mat-icon style="margin-right: 8px;">mail</mat-icon> Queries</a
+          >
+            <a
+              mat-list-item
+              routerLink="/admin/read-maintenance-priorities"
+              style="color: white; font-size: 14px;"
+              ><mat-icon style="margin-right: 8px;">priority_high</mat-icon> Priorities</a
+            >
+            <a
+              mat-list-item
+              routerLink="/admin/read-maintenance-types"
+              style="color: white;font-size: 14px;"
+              ><mat-icon style="margin-right: 8px;">unfold_more</mat-icon> Types</a
+            >
+          </mat-nav-list>
+        </mat-expansion-panel>
+
+          <mat-expansion-panel
+            [class.mat-elevation-z0]="true"
+            dense
+           
+            style="
+              
+              background-color: #920f4c;
+              color: white;
+              justify-content: left;
+            "
+          >
+            <mat-expansion-panel-header style="color: white;font-size: 16px;margin-left: -5.4px">
+              <mat-icon style="margin-right: 12px;margin-left: -4px;">ballot</mat-icon>Applications
+            </mat-expansion-panel-header>
+            <mat-nav-list dense style="color: white;background-color: #920f4c;">
+              <a
+                mat-list-item
+                routerLink="/apply/job-opportunity/read-job-opportunity"
+                style="color: white;font-size: 14px;"
+                ><mat-icon style="margin-right: 8px;">work_outline</mat-icon> Job Opportunity</a
+              >
+              <a
+                mat-list-item
+                routerLink="/apply/applicant-applications/read-applicant-applications"
+                style="color: white;font-size: 14px;"
+                ><mat-icon style="margin-right: 8px;">grading</mat-icon> Applicants
+              </a>
+              <a
+                mat-list-item
+                routerLink="/apply/interviewee/read-interviewee"
+                style="color: white;font-size: 14px;"
+                ><mat-icon style="margin-right: 8px;">group</mat-icon> Interviewees</a
+              >
+              <a
+                mat-list-item
+                routerLink="/apply/interview-slot/read-interview-slot"
+                style="color: white;font-size: 14px;"
+                ><mat-icon style="margin-right: 8px;">event</mat-icon> Interview Slot</a
+              >
+              
+            </mat-nav-list>
+          </mat-expansion-panel>
+      
+        </mat-nav-list>
+      </mat-sidenav>
+      <mat-sidenav-content>
+        <mat-toolbar class="bg" style="color: #ffffff;box-shadow:0px 2px 4px rgba(0, 0, 0, 0.75);z-index: 2;position: relative;;">
+          <button
+            mat-icon-button
+            matTooltip="Application Menu"
+            (click)="sidenav.toggle()"
+          >
+            <mat-icon>dehaze</mat-icon>
+          </button>
+          <!-- place page name in span -->
+          <span style="margin-left: 7px;"> {{ getTitle() }}</span>
+          <span style="flex: 1 1 auto"></span>
+          <div>
+            <label style="padding-right: 15px; padding-top: 10px;">
+              Hi, {{ username }}.</label
+            >
+          <button mat-icon-button
+            matTooltip="Log Maintenance Request"
+            routerLink="/user/log-maintenance-request"
+            >
+             <mat-icon>engineering</mat-icon>
+            </button>
+
+            <button
+              mat-icon-button
+              matTooltip="My Account"
+              [matMenuTriggerFor]="accountMenu"
+            >
+              <mat-icon>power_settings_new</mat-icon
+              ><mat-icon>keyboard_arrow_down</mat-icon>
+            </button>
+            <mat-menu class="customize" #accountMenu [overlapTrigger]="false" yPosition="below">
+              <button mat-menu-item style="background-color: #920f4c;color: #ffffff;" routerLink="/admin/update-profile">
+                <mat-icon style="color: #ffffff;">person</mat-icon><span>My Account</span>
+              </button>
+              <button mat-menu-item style="background-color: #920f4c;">
+                <a
+                  style="color: rgb(255, 255, 255);"
+                  target="_blank"
+                  href="../assets/WebHelp/index.html"
+                  ><mat-icon style="color: #ffffff;">help</mat-icon><span>Help</span></a
+                >
+              </button>
+              <mat-divider></mat-divider>
+              <button mat-menu-item style="background-color: #920f4c;color: #ffffff;" (click)="onLogout()">
+                <mat-icon style="color: #ffffff;">exit_to_app</mat-icon>Logout
+              </button>
+            </mat-menu>
+          </div>
+        </mat-toolbar>
+        <router-outlet></router-outlet>
+       </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
+
+  <!-- Student panel-->
+  <div *ngIf="student">
+    <mat-sidenav-container style="height: 100vh; margin: 0">
+      <mat-sidenav
+        #sidenav
+        mode="side"
+        opened
+        [class.mat-elevation-z4]="true"
+      
+        style="width: 240px; background-color: #920f4c; color: rgb(0, 0, 0);"
+      >
+        <div>
+          <img
+            style="padding-left: 0%;padding-top: 20%;padding-bottom: 10%; height:150px; width: 133px;"
+            src="../../assets/Images/DSLogo.png"
+          />
+        </div>
+        <div style="margin-right: 4%">
+          <svg height="5" width="200">
+            <line
+              x1="0"
+              y1="0"
+              x2="200"
+              y2="0"
+              style="stroke: rgb(255, 255, 255); stroke-width: 2"
+            />
+          </svg>
+        </div>
+
+        <div class="admin" style="color: rgb(255, 255, 255); text-align: center;">
+          Student <br>
+          Portal
+        </div>
+
+        <div style="margin-right: 4%">
+          <svg height="5" width="200">
+            <line
+              x1="0"
+              y1="0"
+              x2="200"
+              y2="0"
+              style="stroke: rgb(255, 255, 255); stroke-width: 2"
+            />
+          </svg>
+        </div>
+        <mat-nav-list style="font-family:'Montserrat';" dense>
+          <mat-list-item
+
+            style="color: white;font: montserrat;font-size: 16px; "
+            routerLink="/home/student-home"
+            ><mat-icon style="margin-right: 12px;" >home</mat-icon>Home</mat-list-item
+          >
+          <mat-list-item
+
+          style="color: white;font: montserrat;font-size: 16px; "
+          routerLink="/home/student-home"
+          ><mat-icon style="margin-right: 12px;" >store</mat-icon>Store</mat-list-item
+        >
+        <mat-list-item
+
+        style="color: white;font: montserrat;font-size: 16px; "
+        routerLink="/home/student-home"
+        ><mat-icon style="margin-right: 12px;" >receipt</mat-icon>Invoices</mat-list-item
+      >
+
+      <mat-list-item
+
+      style="color: white;font: montserrat;font-size: 16px; "
+      routerLink="/home/student-home"
+      ><mat-icon style="margin-right: 12px;" >collections_bookmark</mat-icon>My Courses</mat-list-item
+    >
+
+    <mat-list-item
+
+    style="color: white;font: montserrat;font-size: 16px; "
+    routerLink="/home/student-home"
+    ><mat-icon style="margin-right: 12px;" >star_border</mat-icon> Ratings</mat-list-item
+  >
+
+  <mat-list-item
+
+  style="color: white;font: montserrat;font-size: 16px; "
+  routerLink="/home/student-home"
+  ><mat-icon style="margin-right: 12px;" >receipt</mat-icon>Submitted Queries </mat-list-item
+>
+
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <div style="margin-right: 4%">
+    <svg height="5" width="200">
+      <line
+        x1="0"
+        y1="0"
+        x2="200"
+        y2="0"
+        style="stroke: rgb(255, 255, 255); stroke-width: 2"
+      />
+    </svg>
+  </div>
+  <mat-list-item
+
+  style="color: white;font: montserrat;font-size: 14px; "
+  routerLink="/home/student-home"
+  ><mat-icon style="margin-right: 12px;" >attach_file</mat-icon> Terms & Conditions</mat-list-item
+>
+     
+      
+  </mat-nav-list>
+       
+      </mat-sidenav>
+      <mat-sidenav-content>
+        <mat-toolbar class="bg" style="color: #ffffff;box-shadow:0px 2px 4px rgba(0, 0, 0, 0.75);z-index: 2;position: relative;;">
+          <button
+            mat-icon-button
+            matTooltip="Application Menu"
+            (click)="sidenav.toggle()"
+          >
+            <mat-icon>dehaze</mat-icon>
+          </button>
+          <!-- place page name in span -->
+          <span style="margin-left: 7px;"> {{ getTitle() }}</span>
+          <span style="flex: 1 1 auto"></span>
+          <div>
+            <label style="padding-right: 15px; padding-top: 10px;">
+              Hi, {{ username }}</label
+            >
+
+            <button mat-icon-button
+            matTooltip="Cart"
+            >
+            <mat-icon mat-badge="0" matBadgeColor="warn">shopping_cart</mat-icon>
+            </button>
+
+          <button mat-icon-button
+            matTooltip="Log Maintenance Request"
+            >
+             <mat-icon>engineering</mat-icon>
+            </button>
+
+            <button
+              mat-icon-button
+              matTooltip="My Account"
+              [matMenuTriggerFor]="accountMenu"
+            >
+              <mat-icon>settings</mat-icon
+              ><mat-icon>keyboard_arrow_down</mat-icon>
+            </button>
+            <mat-menu class="customize" #accountMenu [overlapTrigger]="false" yPosition="below">
+              <button mat-menu-item style="background-color: #920f4c;color: #ffffff;" routerLink="/student/update-profile">
+                <mat-icon style="color: #ffffff;">person</mat-icon><span>My Account</span>
+              </button>
+              <button mat-menu-item style="background-color: #920f4c;">
+                <a
+                  style="color: rgb(255, 255, 255);"
+                  target="_blank"
+                  href="../assets/WebHelp/index.html"
+                  ><mat-icon style="color: #ffffff;">help</mat-icon><span>Help</span></a
+                >
+              </button>
+              <mat-divider></mat-divider>
+              <button mat-menu-item style="background-color: #920f4c;color: #ffffff;" (click)="onLogout()">
+                <mat-icon style="color: #ffffff;">exit_to_app</mat-icon>Logout
+              </button>
+            </mat-menu>
+          </div>
+        </mat-toolbar>
+        <router-outlet></router-outlet>
+       </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
+
+  <!-- Employee/TA Panel-->
+  <div *ngIf="employee">
+    <mat-sidenav-container style="height: 100vh; margin: 0">
+      <mat-sidenav
+        #sidenav
+        mode="side"
+        opened
+        [class.mat-elevation-z4]="true"
+      
+        style="width: 240px; background-color: #920f4c; color: rgb(0, 0, 0);"
+      >
+        <div>
+          <img
+            style="padding-left: 5%;padding-top: 20%;padding-bottom: 20%; height:150px; width: 133px;"
+            src="../../assets/Images/DSLogo.png"
+          />
+        </div>
+        <div style="margin-right: 4%">
+          <svg height="5" width="200">
+            <line
+              x1="0"
+              y1="0"
+              x2="200"
+              y2="0"
+              style="stroke: rgb(255, 255, 255); stroke-width: 2"
+            />
+          </svg>
+        </div>
+
+        <div class="admin" style="color: rgb(255, 255, 255); text-align: center;">
+          Course Correspondent <br />
+          Portal
+        </div>
+
+        <div style="margin-right: 4%">
+          <svg height="5" width="200">
+            <line
+              x1="0"
+              y1="0"
+              x2="200"
+              y2="0"
+              style="stroke: rgb(255, 255, 255); stroke-width: 2"
+            />
+          </svg>
+        </div>
+        <mat-nav-list style="font-family:'MriyaGrotesk';" dense>
+          <mat-list-item
+
+            style="color: white;font: montserrat;font-size: 16px; "
+            routerLink="/home/employee-home"
+            ><mat-icon style="margin-right: 12px;" >home</mat-icon>Home</mat-list-item
+          >
+          <mat-list-item
+
+            style="color: white;font: montserrat;font-size: 16px; "
+            routerLink="/home/employee-home"
+            ><mat-icon style="margin-right: 12px;" >videocam</mat-icon>Instructional Videos</mat-list-item
+          >
+          <mat-list-item
+
+            style="color: white;font: montserrat;font-size: 16px; "
+            routerLink="/home/employee-home"
+            ><mat-icon style="margin-right: 12px;" >collections_bookmark</mat-icon>Assigned Courses</mat-list-item
+          >
+
+          <mat-list-item
+
+          style="color: white;font: montserrat;font-size: 16px; "
+          routerLink="/home/employee-home"
+          ><mat-icon style="margin-right: 12px;" >receipt</mat-icon>Submitted Queries </mat-list-item
+        >
+
+          <mat-expansion-panel
+          [class.mat-elevation-z0]="true"
+          dense
+          style="
+            
+            background-color: #920f4c;
+            color: white;
+            
+          "
+        >
+          <mat-expansion-panel-header style="color: white; background-color: #920f4c;font-size: 16px;margin-left: -8px;">
+            <mat-icon style="margin-right: 12px;">track_changes</mat-icon>Skills & Qualifications
+          </mat-expansion-panel-header>
+          <mat-nav-list dense style="color: white;background-color: #920f4c;">
+
+            <a
+            mat-list-item
+            routerLink="/employee/request-update"
+            style="color: white; font-size: 14px;"
+            ><mat-icon style="margin-right: 8px;">update</mat-icon> Request Update</a
+          >
+            <a
+              mat-list-item
+              routerLink="/employee/request-update"
+              style="color: white; font-size: 14px;"
+              ><mat-icon style="margin-right: 8px;">list</mat-icon> Requests</a
+            >
+           
+          </mat-nav-list>
+        </mat-expansion-panel>
+
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          
+          <div style="margin-right: 4%">
+            <svg height="5" width="200">
+              <line
+                x1="0"
+                y1="0"
+                x2="200"
+                y2="0"
+                style="stroke: rgb(255, 255, 255); stroke-width: 2"
+              />
+            </svg>
+          </div>
+          <mat-list-item
+        
+          style="color: white;font: montserrat;font-size: 14px; "
+          routerLink="/home/employee-home"
+          ><mat-icon style="margin-right: 12px;" >attach_file</mat-icon> Terms & Conditions</mat-list-item
+        >
+       
+      
+        </mat-nav-list>
+      </mat-sidenav>
+      <mat-sidenav-content>
+        <mat-toolbar class="bg" style="color: #ffffff;box-shadow:0px 2px 4px rgba(0, 0, 0, 0.75);z-index: 2;position: relative;;">
+          <button
+            mat-icon-button
+            matTooltip="Application Menu"
+            (click)="sidenav.toggle()"
+          >
+            <mat-icon>dehaze</mat-icon>
+          </button>
+          <!-- place page name in span -->
+          <span style="margin-left: 7px;"> {{ getTitle() }}</span>
+          <span style="flex: 1 1 auto"></span>
+          <div>
+            <label style="padding-right: 15px; padding-top: 10px;">
+              Hi, {{ username }}</label
+            >
+          <button mat-icon-button
+            matTooltip="Log Maintenance Request"
+            >
+             <mat-icon>engineering</mat-icon>
+            </button>
+
+            <button
+              mat-icon-button
+              matTooltip="My Account"
+              [matMenuTriggerFor]="accountMenu"
+            >
+              <mat-icon>settings</mat-icon
+              ><mat-icon>keyboard_arrow_down</mat-icon>
+            </button>
+            <mat-menu class="customize" #accountMenu [overlapTrigger]="false" yPosition="below">
+              <button mat-menu-item style="background-color: #920f4c;color: #ffffff;" routerLink="/employee/update-profile">
+                <mat-icon style="color: #ffffff;">person</mat-icon><span>My Account</span>
+              </button>
+              <button mat-menu-item style="background-color: #920f4c;">
+                <a
+                  style="color: rgb(255, 255, 255);"
+                  target="_blank"
+                  href="../assets/WebHelp/index.html"
+                  ><mat-icon style="color: #ffffff;">help</mat-icon><span>Help</span></a
+                >
+              </button>
+              <mat-divider></mat-divider>
+              <button mat-menu-item style="background-color: #920f4c;color: #ffffff;" (click)="onLogout()">
+                <mat-icon style="color: #ffffff;">exit_to_app</mat-icon>Logout
+              </button>
+            </mat-menu>
+          </div>
+        </mat-toolbar>
+        <router-outlet></router-outlet>
+       </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
+
+
+</div>
+
+<!-- Add Other div to nest router outer content for pages that don't need the side nav-->
+<div *ngIf="flag">
+  <router-outlet></router-outlet>
+</div>
+
+

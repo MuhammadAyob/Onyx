@@ -1,0 +1,228 @@
+<!-- Card Form for Input -->
+<br />
+<br />
+<br />
+<div style="padding-left: 10%; padding-right: 10%">
+  <mat-card class="matCard">
+    <mat-card-header class="cardHeader" style="padding-bottom: 1%">
+      <mat-card-title-group style="padding-right: 80%">
+        <mat-card-title style="font-weight: 500">View Employee</mat-card-title>
+      </mat-card-title-group>
+      <button mat-icon-button style="color: green" (click)="onEdit()">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button style="color: red" (click)="onDelete()">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-card-header>
+
+    <mat-card-content class="matContent">
+      <form>
+        <div class="form-group">
+          <br /><br />
+          <div style="padding: 0% 2.5% 0% 2%; min-width: 100%">
+            
+            <label style="color: #5090d0; padding-right: 10.8%"
+            >Employee Image</label>
+            <div>
+                <img
+                  src="{{ 'data:image/png;base64,' + dataImage }}" 
+                  style="border-radius:50%; width:300px";
+                >
+              </div>
+
+            <label style="color: #5090d0; padding-right: 10.8%"
+              >Title</label
+            >
+            <mat-form-field appearance="outline" [style.width.px]="1000">
+              <input
+                readonly
+                type="text"
+                matInput
+                name="TitleID"
+                [(ngModel)]="titleName"
+                required
+                style="color: #5090d0"
+              />
+            </mat-form-field>
+            
+            <label style="color: #5090d0; padding-right: 6.5%"
+              >Employee Name</label
+            >
+            <mat-form-field appearance="outline" [style.width.px]="1000">
+              <input
+                readonly
+                type="text"
+                matInput
+                name="EmployeeName"
+                [(ngModel)]="test.Employee.Name"
+                required
+                style="color: #5090d0"
+              />
+            </mat-form-field>
+
+            <label style="color: #5090d0; padding-right: 5%"
+              >Employee Surname</label
+            >
+            <mat-form-field appearance="outline" [style.width.px]="1000">
+              <input
+                readonly
+                type="text"
+                matInput
+                name="EmployeeSurname"
+                [(ngModel)]="test.Employee.Surname"
+                required
+                style="color: #5090d0"
+              />
+            </mat-form-field>
+
+            <label style="color: #5090d0; padding-right: 7%"
+              >Employee Email</label
+            >
+            <mat-form-field appearance="outline" [style.width.px]="1000">
+              <input
+                readonly
+                type="text"
+                matInput
+                name="EmployeeEmail"
+                [(ngModel)]="test.Employee.Email"
+                required
+                style="color: #5090d0"
+              />
+            </mat-form-field>
+
+            <label style="color: #5090d0; padding-right: 2.5%"
+              >Employee Phone Number</label
+            >
+            <mat-form-field appearance="outline" [style.width.px]="1000">
+              <input
+                readonly
+                type="text"
+                matInput
+                name="EmployeePhoneNumber"
+                [(ngModel)]="test.Employee.Phone"
+                required
+                style="color: #5090d0"
+              />
+            </mat-form-field>
+
+
+            <label style="color: #5090d0; padding-right: 5%"
+              >Employee ID Number</label
+            >
+            <mat-form-field appearance="outline" [style.width.px]="1000">
+              <input
+                readonly
+                type="text"
+                matInput
+                name="EmployeeIDNumber"
+                [(ngModel)]="test.Employee.RSAIDNumber"
+                required
+                style="color: #5090d0; padding-right: 6%"
+              />
+            </mat-form-field>
+
+            <label style="color: #5090d0; padding-right: 10.8%"
+            >Biography</label>
+
+            <textarea
+            type="text"
+            style="min-height: 40px"
+            matInput
+            readonly
+            name="MaintainDesc"
+            [(ngModel)]="test.Employee.Biography"
+            placeholder="Add Employee Button not working; Screen Not Displaying"
+            style="color: #5090d0"
+          >
+        </textarea>
+
+            <label style="color: #5090d0; padding-right: 10.8%"
+              >User Role</label
+            >
+            <mat-form-field appearance="outline" [style.width.px]="1000">
+              <input
+                readonly
+                type="text"
+                matInput
+                name="UserRoleID"
+                [(ngModel)]="roleName"
+                required
+                style="color: #5090d0"
+              />
+            </mat-form-field>
+
+            <label style="color: #5090d0; padding-right: 9.6%"
+              >Department</label
+            >
+            <mat-form-field appearance="outline" [style.width.px]="1000">
+              <input
+                readonly
+                type="text"
+                matInput
+                name="DeptID"
+                [(ngModel)]="deptName"
+                required
+                style="color: #5090d0"
+              />
+            </mat-form-field>
+
+            <label style="color: #5090d0; padding-right: 13%">Skills</label>
+            <mat-form-field appearance="outline" [style.width.px]="470">
+              <input
+                readonly
+                type="text"
+                matInput
+                name="Qualification"
+                style="color: #5090d0"
+              />
+              <mat-list *ngFor="let item of EmployeeSkillList">
+                <mat-list-item style="color: #5090d0; font-size: 14px">
+                  {{ item.SkillName}} - {{ item.SkillTypeName }}
+                </mat-list-item>
+              </mat-list>
+            </mat-form-field>
+
+            <br />
+
+            <label style="color: #5090d0; padding-right: 8.5%"
+              >Qualifications</label
+            >
+            <mat-form-field appearance="outline" [style.width.px]="470">
+              <input
+                readonly
+                type="text"
+                matInput
+                name="Qualification"
+                style="color: #5090d0"
+              />
+              <mat-list *ngFor="let item of EmployeeQualificationList">
+                <mat-list-item style="color: #5090d0; font-size: 14px">
+                  {{ item.QualificationName }}
+                </mat-list-item>
+              </mat-list>
+            </mat-form-field>
+          </div>
+
+          <div class="form-group" style="padding-right: 40%"></div>
+        </div>
+
+        <button
+          type="button"
+          (click)="onBack()"
+          class="btn"
+          style="
+            color: white;
+            background-color: #5090d0;
+            margin-left: 83.5%;
+            padding-left: 5%;
+            padding-right: 5%;
+          "
+        >
+          View All
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+  <br />
+</div>

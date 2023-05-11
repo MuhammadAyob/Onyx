@@ -1,0 +1,278 @@
+<div class="contactSection">
+    <div class="contactLeft">
+      <div class="creatediv">
+        <h1>Create Account</h1>
+      </div>
+  
+      <div class="test">
+        <form class="test">
+          <div class="form-group">
+            <br /><br />
+            <div style="padding: 0% 2.5% 0% 2%; min-width: 100%">
+                <div style="float: left; ">
+                    <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                    [style.width.px]="240"
+      
+                  >
+                       <mat-label style="color: #ffffff">Select Title</mat-label>
+                      <mat-select
+                        name="TitleID"
+                        [formControl]="titleFormControl"
+                        [(ngModel)]="student.TitleID"
+                        placeholder="Doctor"
+                        required
+                      >
+                        <mat-option
+                          *ngFor="let item of titleList"
+                          [value]="item.TitleID"
+                        >
+                          {{ item.TitleName }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="titleFormControl.hasError('required')">
+                        Title is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+              <div style="float: left">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label style="color: white; text-align: left">
+                    Enter Name</mat-label
+                  >
+                  <input
+                    type="text"
+                    matInput
+                    [formControl]="nameFormControl"
+                    name="ClientName"
+                    [(ngModel)]="student.Name"
+                    placeholder="Ex. Peter"
+                    required
+                  />
+                  <mat-error *ngIf="nameFormControl.hasError('required')">
+                    Name is <strong>required</strong>
+                  </mat-error>
+                  <mat-error *ngIf="nameFormControl.hasError('pattern')">
+                    Name must contain only <strong>alphabetic characters</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+  
+              <div style="float: left; padding-left: 5%">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label style="color: white; text-align: left">
+                    Enter Surname</mat-label
+                  >
+                  <input
+                    type="text"
+                    matInput
+                    [formControl]="surnameFormControl"
+                    name="ClientSurname"
+                    [(ngModel)]="student.Surname"
+                    placeholder="Ex. Pan"
+                    required
+                  />
+                  <mat-error *ngIf="surnameFormControl.hasError('required')">
+                    Surname is <strong>required</strong>
+                  </mat-error>
+                  <mat-error *ngIf="nameFormControl.hasError('pattern')">
+                    Surname must contain only <strong>alphabetic characters</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+  
+              <div style="float: left">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label style="color: white; text-align: left">
+                    Enter Phone number</mat-label
+                  >
+                  <input
+                    type="text"
+                    matInput
+                    [formControl]="phoneFormControl"
+                    name="ClientPhone"
+                    [(ngModel)]="student.Phone"
+                    placeholder="Ex. Pan"
+                    required
+                  />
+                  <mat-error *ngIf="phoneFormControl.hasError('required')">
+                    Phone Number is <strong>required</strong>
+                  </mat-error>
+                  <mat-error *ngIf="phoneFormControl.hasError('pattern')">
+                    Enter a <strong>valid</strong> phone number
+                  </mat-error>
+                </mat-form-field>
+              </div>
+  
+              <br />
+              <br />
+  
+  
+              <div style="float: left">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label style="color: white; text-align: left">
+                    Enter Email</mat-label
+                  >
+                  <input
+                    type="text"
+                    matInput
+                    [formControl]="emailFormControl"
+                    name="ClientEmail"
+                    [(ngModel)]="student.Email"
+                    placeholder="Ex. Pan"
+                    required
+                  />
+                  <mat-error *ngIf="emailFormControl.hasError('required')">
+                    Email is <strong>required</strong>
+                  </mat-error>
+                  <mat-error *ngIf="emailFormControl.hasError('required')">
+                    Enter a <strong>valid</strong> email address
+                  </mat-error>
+                </mat-form-field>
+              </div>
+  
+  
+              <mat-form-field class="example-full-width">
+                <mat-label style="color: white; text-align: left"
+                  >Password</mat-label
+                >
+                <input
+                  [formControl]="passwordFormControl"
+                  [type]="hide ? 'password' : 'text'"
+                  name="Password"
+                  [(ngModel)]="student.Password"
+                  matInput
+                  placeholder="Enter password"
+                  minlength="6"
+                  maxlength="16"
+                  required
+                />
+                <button
+                  mat-icon-button
+                  matSuffix
+                  (click)="hide = !hide"
+                  [attr.aria-label]="'Hide Password'"
+                  [attr.aria-pressed]="hide"
+                >
+                  <mat-icon>
+                    {{ hide ? "visibility_off" : "visibility" }}
+                  </mat-icon>
+                </button>
+                <mat-error *ngIf="passwordFormControl.hasError('required')">
+                  Password is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="passwordFormControl.hasError('minlength')">
+                  Password is to short <strong>!</strong>
+                </mat-error>
+                <mat-error *ngIf="passwordFormControl.hasError('maxlength')">
+                  Password is to long <strong>!</strong>
+                </mat-error>
+                <mat-hint style="color: white; text-align: left; font-size:6;"
+                  >Password must be longer than 6 characters and a maximum of 16 characters</mat-hint
+                >
+              </mat-form-field>
+  
+              <mat-form-field class="example-full-width" style="margin-left: 7%;">
+                <mat-label style="color: white; text-align: left"
+                  >Confirm Password</mat-label
+                >
+                <input
+                  [formControl]="confirmPasswordFormControl"
+                  [type]="hide ? 'password' : 'text'"
+                  matInput
+                  name="confirmPassword"
+                  [(ngModel)]="confirmPassword"
+                  placeholder="Enter password"
+                  minlength="6"
+                  maxlength="16"
+                  required
+                />
+                <button
+                  mat-icon-button
+                  matSuffix
+                  (click)="hide = !hide"
+                  [attr.aria-label]="'Hide Password'"
+                  [attr.aria-pressed]="hide"
+                >
+                  <mat-icon>
+                    {{ hide ? "visibility_off" : "visibility" }}
+                  </mat-icon>
+                </button>
+                <mat-error
+                  *ngIf="confirmPasswordFormControl.hasError('required')"
+                >
+                  Confirm password is <strong>required</strong>
+                </mat-error>
+                <mat-error
+                  *ngIf="confirmPasswordFormControl.hasError('minlength')"
+                >
+                  Password is to short <strong>!</strong>
+                </mat-error>
+                <mat-error *ngIf="passwordFormControl.hasError('maxlength')">
+                  Password is to long <strong>!</strong>
+                </mat-error>
+              
+              </mat-form-field>
+            </div>
+          </div>
+  
+          <br />
+          <div>
+            <button
+              type="button"
+              mat-button
+              class="btnLandingCancel"
+              (click)="onBack()"
+              style="margin-left: 50%;"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              mat-button
+              class="btnLanding"
+              style="margin-left: 5%"
+              (click)="onSubmit()"
+            >
+              Register
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="contactRight">
+      <img style="height: 35%; padding-left: 20%; padding-bottom: 10%;" src="../../assets/img/mikabyte.png">
+      <h1 class="welcomeheader">Welcome to the MikaByte Family!</h1>
+      <br /><br />
+  
+      <svg height="5" width="50">
+        <line
+          x1="0"
+          y1="0"
+          x2="200"
+          y2="0"
+          style="stroke: #93c9ff; stroke-width: 2"
+        />
+      </svg>
+  
+      <br /><br /><br />
+  
+      <h2>
+        As a MikaByte client, we give you access to our system for efficient
+        communication!
+      </h2>
+  
+      <br />
+  
+      <h4 style="padding-bottom: 0;">
+        Sign up and login to see our range of services, request custom quotations and keep track of all your projects with our all new
+      </h4>
+        <h4 style="font-weight: 800; margin-top: -15px;">
+        AvoByte System.
+  
+      </h4>
+    </div>
+  </div>
+  

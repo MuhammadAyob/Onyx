@@ -1,0 +1,1211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Applicant">
+    <Key>
+      <PropertyRef Name="ApplicantID" />
+    </Key>
+    <Property Name="ApplicantID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Motivation" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CV" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Biography" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RSAIDNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Applications" Relationship="Self.FK_Application_Applicant" FromRole="Applicant" ToRole="Application" />
+  </EntityType>
+  <EntityType Name="Application">
+    <Key>
+      <PropertyRef Name="ApplicationID" />
+    </Key>
+    <Property Name="ApplicationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="JobOppID" Type="Int32" Nullable="false" />
+    <Property Name="ApplicantID" Type="Int32" Nullable="false" />
+    <Property Name="ApplicationStatusID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Applicant" Relationship="Self.FK_Application_Applicant" FromRole="Application" ToRole="Applicant" />
+    <NavigationProperty Name="ApplicationStatu" Relationship="Self.FK_Application_ApplicationStatus" FromRole="Application" ToRole="ApplicationStatus" />
+    <NavigationProperty Name="JobOpportunity" Relationship="Self.FK_Application_JobOpportunity" FromRole="Application" ToRole="JobOpportunity" />
+    <NavigationProperty Name="ShortLists" Relationship="Self.FK_ShortList_Application" FromRole="Application" ToRole="ShortList" />
+  </EntityType>
+  <EntityType Name="ApplicationStatu">
+    <Key>
+      <PropertyRef Name="ApplicationStatusID" />
+    </Key>
+    <Property Name="ApplicationStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Applications" Relationship="Self.FK_Application_ApplicationStatus" FromRole="ApplicationStatus" ToRole="Application" />
+  </EntityType>
+  <EntityType Name="AuditLog">
+    <Key>
+      <PropertyRef Name="AuditLogID" />
+    </Key>
+    <Property Name="AuditLogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AuditName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="Self.FK_AuditLog_User" FromRole="AuditLog" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Cart">
+    <Key>
+      <PropertyRef Name="CartID" />
+    </Key>
+    <Property Name="CartID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StudentID" Type="Int32" Nullable="false" />
+    <Property Name="Total" Type="Double" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Student" Relationship="Self.FK_Cart_Student" FromRole="Cart" ToRole="Student" />
+    <NavigationProperty Name="CartCourses" Relationship="Self.FK_CartCourse_Cart" FromRole="Cart" ToRole="CartCourse" />
+    <NavigationProperty Name="Payments" Relationship="Self.FK_Payment_Cart" FromRole="Cart" ToRole="Payment" />
+  </EntityType>
+  <EntityType Name="CartCourse">
+    <Key>
+      <PropertyRef Name="CartLineID" />
+    </Key>
+    <Property Name="CartLineID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CartID" Type="Int32" Nullable="false" />
+    <Property Name="CourseID" Type="Int32" Nullable="false" />
+    <Property Name="PriceAtTimeOfPurchase" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Cart" Relationship="Self.FK_CartCourse_Cart" FromRole="CartCourse" ToRole="Cart" />
+    <NavigationProperty Name="Course" Relationship="Self.FK_CartCourse_Course" FromRole="CartCourse" ToRole="Course" />
+  </EntityType>
+  <EntityType Name="Contact">
+    <Key>
+      <PropertyRef Name="ContactID" />
+    </Key>
+    <Property Name="ContactID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Query" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Course">
+    <Key>
+      <PropertyRef Name="CourseID" />
+    </Key>
+    <Property Name="CourseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="CategoryID" Type="Int32" Nullable="false" />
+    <Property Name="Active" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="CartCourses" Relationship="Self.FK_CartCourse_Course" FromRole="Course" ToRole="CartCourse" />
+    <NavigationProperty Name="CourseCategory" Relationship="Self.FK_Course_CourseCategory" FromRole="Course" ToRole="CourseCategory" />
+    <NavigationProperty Name="CourseAssistants" Relationship="Self.FK_CourseAssistant_Course" FromRole="Course" ToRole="CourseAssistant" />
+    <NavigationProperty Name="CoursePrices" Relationship="Self.FK_CoursePrice_Course" FromRole="Course" ToRole="CoursePrice" />
+    <NavigationProperty Name="CourseRatings" Relationship="Self.FK_CourseRating_Course" FromRole="Course" ToRole="CourseRating" />
+    <NavigationProperty Name="Sections" Relationship="Self.FK_Section_Course" FromRole="Course" ToRole="Section" />
+    <NavigationProperty Name="StudentCourses" Relationship="Self.FK_StudentCourse_Course" FromRole="Course" ToRole="StudentCourse" />
+    <Property Name="Preview" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="CourseAssistant">
+    <Key>
+      <PropertyRef Name="AssistantCourseID" />
+    </Key>
+    <Property Name="AssistantCourseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+    <Property Name="CourseID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Course" Relationship="Self.FK_CourseAssistant_Course" FromRole="CourseAssistant" ToRole="Course" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK_CourseAssistant_Employee" FromRole="CourseAssistant" ToRole="Employee" />
+  </EntityType>
+  <EntityType Name="CourseCategory">
+    <Key>
+      <PropertyRef Name="CategoryID" />
+    </Key>
+    <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Courses" Relationship="Self.FK_Course_CourseCategory" FromRole="CourseCategory" ToRole="Course" />
+  </EntityType>
+  <EntityType Name="CoursePrice">
+    <Key>
+      <PropertyRef Name="PriceID" />
+    </Key>
+    <Property Name="PriceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Price" Type="Double" Nullable="false" />
+    <Property Name="CourseID" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Course" Relationship="Self.FK_CoursePrice_Course" FromRole="CoursePrice" ToRole="Course" />
+  </EntityType>
+  <EntityType Name="CourseRating">
+    <Key>
+      <PropertyRef Name="RatingID" />
+    </Key>
+    <Property Name="RatingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CourseID" Type="Int32" Nullable="false" />
+    <Property Name="StudentID" Type="Int32" Nullable="false" />
+    <Property Name="Rating" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Course" Relationship="Self.FK_CourseRating_Course" FromRole="CourseRating" ToRole="Course" />
+    <NavigationProperty Name="Student" Relationship="Self.FK_CourseRating_Student" FromRole="CourseRating" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="DepartmentID" />
+    </Key>
+    <Property Name="DepartmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DepartmentName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Employees" Relationship="Self.FK_Employee_Department" FromRole="Department" ToRole="Employee" />
+    <NavigationProperty Name="JobOpportunities" Relationship="Self.FK_JobOpportunity_Department" FromRole="Department" ToRole="JobOpportunity" />
+    <Property Name="DepartmentDescription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+    </Key>
+    <Property Name="EmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Biography" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RSAIDNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TitleID" Type="Int32" Nullable="false" />
+    <Property Name="Deleted" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DepartmentID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CourseAssistants" Relationship="Self.FK_CourseAssistant_Employee" FromRole="Employee" ToRole="CourseAssistant" />
+    <NavigationProperty Name="Department" Relationship="Self.FK_Employee_Department" FromRole="Employee" ToRole="Department" />
+    <NavigationProperty Name="Title" Relationship="Self.FK_Employee_Title" FromRole="Employee" ToRole="Title" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Employee_User" FromRole="Employee" ToRole="User" />
+    <NavigationProperty Name="EmployeeQualifications" Relationship="Self.FK_EmployeeQualification_Employee" FromRole="Employee" ToRole="EmployeeQualification" />
+    <NavigationProperty Name="EmployeeSkills" Relationship="Self.FK_EmployeeSkill_Employee" FromRole="Employee" ToRole="EmployeeSkill" />
+    <NavigationProperty Name="UpdateRequests" Relationship="Self.FK_UpdateRequest_Employee" FromRole="Employee" ToRole="UpdateRequest" />
+  </EntityType>
+  <EntityType Name="EmployeeQualification">
+    <Key>
+      <PropertyRef Name="EmployeeQualificationID" />
+    </Key>
+    <Property Name="EmployeeQualificationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+    <Property Name="QualificationID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK_EmployeeQualification_Employee" FromRole="EmployeeQualification" ToRole="Employee" />
+    <NavigationProperty Name="Qualification" Relationship="Self.FK_EmployeeQualification_Qualification" FromRole="EmployeeQualification" ToRole="Qualification" />
+  </EntityType>
+  <EntityType Name="EmployeeSkill">
+    <Key>
+      <PropertyRef Name="EmployeeSkillID" />
+    </Key>
+    <Property Name="EmployeeSkillID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+    <Property Name="SkillID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK_EmployeeSkill_Employee" FromRole="EmployeeSkill" ToRole="Employee" />
+    <NavigationProperty Name="Skill" Relationship="Self.FK_EmployeeSkill_Skill" FromRole="EmployeeSkill" ToRole="Skill" />
+  </EntityType>
+  <EntityType Name="FAQ">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Question" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Answer" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="InstructionalVideo">
+    <Key>
+      <PropertyRef Name="VideoID" />
+    </Key>
+    <Property Name="VideoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="VideoName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="VideoLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="InterviewSlot">
+    <Key>
+      <PropertyRef Name="InterviewSlotID" />
+    </Key>
+    <Property Name="InterviewSlotID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ShortListID" Type="Int32" Nullable="false" />
+    <Property Name="InterviewDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="InterviewTime" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="InterviewCode" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ShortList" Relationship="Self.FK_InterviewSlot_ShortList" FromRole="InterviewSlot" ToRole="ShortList" />
+  </EntityType>
+  <EntityType Name="JobOpportunity">
+    <Key>
+      <PropertyRef Name="JobOppID" />
+    </Key>
+    <Property Name="JobOppID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="JobOppTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="JobOppDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="JobOppRequirements" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DepartmentID" Type="Int32" Nullable="false" />
+    <Property Name="JobOppDeadline" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="WorkTypeID" Type="Int32" Nullable="false" />
+    <Property Name="JobOppStatusID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Applications" Relationship="Self.FK_Application_JobOpportunity" FromRole="JobOpportunity" ToRole="Application" />
+    <NavigationProperty Name="Department" Relationship="Self.FK_JobOpportunity_Department" FromRole="JobOpportunity" ToRole="Department" />
+    <NavigationProperty Name="JobOppStatu" Relationship="Self.FK_JobOpportunity_JobOppStatus" FromRole="JobOpportunity" ToRole="JobOppStatus" />
+    <NavigationProperty Name="WorkType" Relationship="Self.FK_JobOpportunity_WorkType" FromRole="JobOpportunity" ToRole="WorkType" />
+  </EntityType>
+  <EntityType Name="JobOppStatu">
+    <Key>
+      <PropertyRef Name="JobOppStatusID" />
+    </Key>
+    <Property Name="JobOppStatusID" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="JobOpportunities" Relationship="Self.FK_JobOpportunity_JobOppStatus" FromRole="JobOppStatus" ToRole="JobOpportunity" />
+  </EntityType>
+  <EntityType Name="Lesson">
+    <Key>
+      <PropertyRef Name="LessonID" />
+    </Key>
+    <Property Name="LessonID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SectionID" Type="Int32" Nullable="false" />
+    <Property Name="LessonName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LessonDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="VideoID" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Section" Relationship="Self.FK_Lesson_Section" FromRole="Lesson" ToRole="Section" />
+    <NavigationProperty Name="LessonResources" Relationship="Self.FK_LessonResource_Lesson" FromRole="Lesson" ToRole="LessonResource" />
+  </EntityType>
+  <EntityType Name="LessonResource">
+    <Key>
+      <PropertyRef Name="ResourceID" />
+    </Key>
+    <Property Name="ResourceID" Type="Int32" Nullable="false" />
+    <Property Name="LessonID" Type="Int32" Nullable="false" />
+    <Property Name="ResourceName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ResourceFile" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <NavigationProperty Name="Lesson" Relationship="Self.FK_LessonResource_Lesson" FromRole="LessonResource" ToRole="Lesson" />
+  </EntityType>
+  <EntityType Name="Maintenance">
+    <Key>
+      <PropertyRef Name="MaintenanceID" />
+    </Key>
+    <Property Name="MaintenanceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="MaintenanceTypeID" Type="Int32" Nullable="false" />
+    <Property Name="MaintenanceStatusID" Type="Int32" Nullable="false" />
+    <Property Name="MaintenancePriorityID" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DateLogged" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DateResolved" Type="DateTime" Precision="3" />
+    <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <NavigationProperty Name="MaintenancePriority" Relationship="Self.FK_Maintenance_MaintenancePriority" FromRole="Maintenance" ToRole="MaintenancePriority" />
+    <NavigationProperty Name="MaintenanceStatu" Relationship="Self.FK_Maintenance_MaintenanceStatus" FromRole="Maintenance" ToRole="MaintenanceStatus" />
+    <NavigationProperty Name="MaintenanceType" Relationship="Self.FK_Maintenance_MaintenanceType" FromRole="Maintenance" ToRole="MaintenanceType" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Maintenance_User" FromRole="Maintenance" ToRole="User" />
+  </EntityType>
+  <EntityType Name="MaintenancePriority">
+    <Key>
+      <PropertyRef Name="MaintenancePriorityID" />
+    </Key>
+    <Property Name="MaintenancePriorityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Priority" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Maintenances" Relationship="Self.FK_Maintenance_MaintenancePriority" FromRole="MaintenancePriority" ToRole="Maintenance" />
+  </EntityType>
+  <EntityType Name="MaintenanceStatu">
+    <Key>
+      <PropertyRef Name="MaintenanceStatusID" />
+    </Key>
+    <Property Name="MaintenanceStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Maintenances" Relationship="Self.FK_Maintenance_MaintenanceStatus" FromRole="MaintenanceStatus" ToRole="Maintenance" />
+  </EntityType>
+  <EntityType Name="MaintenanceType">
+    <Key>
+      <PropertyRef Name="MaintenanceTypeID" />
+    </Key>
+    <Property Name="MaintenanceTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Maintenances" Relationship="Self.FK_Maintenance_MaintenanceType" FromRole="MaintenanceType" ToRole="Maintenance" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="PaymentID" />
+    </Key>
+    <Property Name="PaymentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CartID" Type="Int32" Nullable="false" />
+    <Property Name="Amount" Type="Double" Nullable="false" />
+    <Property Name="pf_payment_id" Type="Int32" Nullable="false" />
+    <Property Name="payment_status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Cart" Relationship="Self.FK_Payment_Cart" FromRole="Payment" ToRole="Cart" />
+  </EntityType>
+  <EntityType Name="Qualification">
+    <Key>
+      <PropertyRef Name="QualificationID" />
+    </Key>
+    <Property Name="QualificationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="QualificationName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="EmployeeQualifications" Relationship="Self.FK_EmployeeQualification_Qualification" FromRole="Qualification" ToRole="EmployeeQualification" />
+  </EntityType>
+  <EntityType Name="Section">
+    <Key>
+      <PropertyRef Name="SectionID" />
+    </Key>
+    <Property Name="SectionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CourseID" Type="Int32" Nullable="false" />
+    <Property Name="SectionName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SectionDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Course" Relationship="Self.FK_Section_Course" FromRole="Section" ToRole="Course" />
+    <NavigationProperty Name="Lessons" Relationship="Self.FK_Lesson_Section" FromRole="Section" ToRole="Lesson" />
+  </EntityType>
+  <EntityType Name="ShortList">
+    <Key>
+      <PropertyRef Name="ShortListID" />
+    </Key>
+    <Property Name="ShortListID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ApplicationID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Application" Relationship="Self.FK_ShortList_Application" FromRole="ShortList" ToRole="Application" />
+    <NavigationProperty Name="InterviewSlots" Relationship="Self.FK_InterviewSlot_ShortList" FromRole="ShortList" ToRole="InterviewSlot" />
+  </EntityType>
+  <EntityType Name="Skill">
+    <Key>
+      <PropertyRef Name="SkillID" />
+    </Key>
+    <Property Name="SkillID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SkillTypeID" Type="Int32" Nullable="false" />
+    <Property Name="SkillName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="EmployeeSkills" Relationship="Self.FK_EmployeeSkill_Skill" FromRole="Skill" ToRole="EmployeeSkill" />
+    <NavigationProperty Name="SkillType" Relationship="Self.FK_Skill_SkillType" FromRole="Skill" ToRole="SkillType" />
+  </EntityType>
+  <EntityType Name="SkillType">
+    <Key>
+      <PropertyRef Name="SkillTypeID" />
+    </Key>
+    <Property Name="SkillTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SkillTypeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TypeDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Skills" Relationship="Self.FK_Skill_SkillType" FromRole="SkillType" ToRole="Skill" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="StudentID" />
+    </Key>
+    <Property Name="StudentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TitleID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Deleted" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Carts" Relationship="Self.FK_Cart_Student" FromRole="Student" ToRole="Cart" />
+    <NavigationProperty Name="CourseRatings" Relationship="Self.FK_CourseRating_Student" FromRole="Student" ToRole="CourseRating" />
+    <NavigationProperty Name="Title" Relationship="Self.FK_Student_Title" FromRole="Student" ToRole="Title" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Student_User" FromRole="Student" ToRole="User" />
+    <NavigationProperty Name="StudentCourses" Relationship="Self.FK_StudentCourse_Student" FromRole="Student" ToRole="StudentCourse" />
+  </EntityType>
+  <EntityType Name="StudentCourse">
+    <Key>
+      <PropertyRef Name="EnrollmentID" />
+    </Key>
+    <Property Name="EnrollmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StudentID" Type="Int32" Nullable="false" />
+    <Property Name="CourseID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Course" Relationship="Self.FK_StudentCourse_Course" FromRole="StudentCourse" ToRole="Course" />
+    <NavigationProperty Name="Student" Relationship="Self.FK_StudentCourse_Student" FromRole="StudentCourse" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="Title">
+    <Key>
+      <PropertyRef Name="TitleID" />
+    </Key>
+    <Property Name="TitleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TitleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Employees" Relationship="Self.FK_Employee_Title" FromRole="Title" ToRole="Employee" />
+    <NavigationProperty Name="Students" Relationship="Self.FK_Student_Title" FromRole="Title" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="UpdateRequest">
+    <Key>
+      <PropertyRef Name="UpdateRequestID" />
+    </Key>
+    <Property Name="UpdateRequestID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+    <Property Name="UpdateSubject" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UpdateDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UpdateRequestStatusID" Type="Int32" Nullable="false" />
+    <Property Name="Proof" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK_UpdateRequest_Employee" FromRole="UpdateRequest" ToRole="Employee" />
+    <NavigationProperty Name="UpdateRequestStatu" Relationship="Self.FK_UpdateRequest_UpdateRequestStatus" FromRole="UpdateRequest" ToRole="UpdateRequestStatus" />
+  </EntityType>
+  <EntityType Name="UpdateRequestStatu">
+    <Key>
+      <PropertyRef Name="UpdateRequestStatusID" />
+    </Key>
+    <Property Name="UpdateRequestStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="UpdateRequests" Relationship="Self.FK_UpdateRequest_UpdateRequestStatus" FromRole="UpdateRequestStatus" ToRole="UpdateRequest" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="GUID" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Activity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="OTP" Type="Int32" />
+    <Property Name="UserRoleID" Type="Int32" Nullable="false" />
+    <Property Name="OTPExpiry" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="AuditLogs" Relationship="Self.FK_AuditLog_User" FromRole="User" ToRole="AuditLog" />
+    <NavigationProperty Name="Employees" Relationship="Self.FK_Employee_User" FromRole="User" ToRole="Employee" />
+    <NavigationProperty Name="Maintenances" Relationship="Self.FK_Maintenance_User" FromRole="User" ToRole="Maintenance" />
+    <NavigationProperty Name="Students" Relationship="Self.FK_Student_User" FromRole="User" ToRole="Student" />
+    <NavigationProperty Name="UserRole" Relationship="Self.FK_User_UserRole" FromRole="User" ToRole="UserRole" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="UserRoleID" />
+    </Key>
+    <Property Name="UserRoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RoleDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_User_UserRole" FromRole="UserRole" ToRole="User" />
+  </EntityType>
+  <EntityType Name="VAT">
+    <Key>
+      <PropertyRef Name="VatID" />
+    </Key>
+    <Property Name="VatID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="VatDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="VatAmount" Type="Double" Nullable="false" />
+  </EntityType>
+  <EntityType Name="WorkType">
+    <Key>
+      <PropertyRef Name="WorkTypeID" />
+    </Key>
+    <Property Name="WorkTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="JobOpportunities" Relationship="Self.FK_JobOpportunity_WorkType" FromRole="WorkType" ToRole="JobOpportunity" />
+  </EntityType>
+  <EntityType Name="PayFast">
+    <Key>
+      <PropertyRef Name="MerchantID" />
+      <PropertyRef Name="MerchantKey" />
+      <PropertyRef Name="return_url" />
+      <PropertyRef Name="cancel_url" />
+    </Key>
+    <Property Name="MerchantID" Type="Int32" Nullable="false" />
+    <Property Name="MerchantKey" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="return_url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="cancel_url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Application_Applicant">
+    <End Role="Applicant" Type="Self.Applicant" Multiplicity="1" />
+    <End Role="Application" Type="Self.Application" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Applicant">
+        <PropertyRef Name="ApplicantID" />
+      </Principal>
+      <Dependent Role="Application">
+        <PropertyRef Name="ApplicantID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Application_ApplicationStatus">
+    <End Role="ApplicationStatus" Type="Self.ApplicationStatu" Multiplicity="1" />
+    <End Role="Application" Type="Self.Application" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ApplicationStatus">
+        <PropertyRef Name="ApplicationStatusID" />
+      </Principal>
+      <Dependent Role="Application">
+        <PropertyRef Name="ApplicationStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Application_JobOpportunity">
+    <End Role="JobOpportunity" Type="Self.JobOpportunity" Multiplicity="1" />
+    <End Role="Application" Type="Self.Application" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="JobOpportunity">
+        <PropertyRef Name="JobOppID" />
+      </Principal>
+      <Dependent Role="Application">
+        <PropertyRef Name="JobOppID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ShortList_Application">
+    <End Role="Application" Type="Self.Application" Multiplicity="1" />
+    <End Role="ShortList" Type="Self.ShortList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Application">
+        <PropertyRef Name="ApplicationID" />
+      </Principal>
+      <Dependent Role="ShortList">
+        <PropertyRef Name="ApplicationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AuditLog_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="AuditLog" Type="Self.AuditLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="AuditLog">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cart_Student">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="Cart">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CartCourse_Cart">
+    <End Role="Cart" Type="Self.Cart" Multiplicity="1" />
+    <End Role="CartCourse" Type="Self.CartCourse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cart">
+        <PropertyRef Name="CartID" />
+      </Principal>
+      <Dependent Role="CartCourse">
+        <PropertyRef Name="CartID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Payment_Cart">
+    <End Role="Cart" Type="Self.Cart" Multiplicity="1" />
+    <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cart">
+        <PropertyRef Name="CartID" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="CartID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CartCourse_Course">
+    <End Role="Course" Type="Self.Course" Multiplicity="1" />
+    <End Role="CartCourse" Type="Self.CartCourse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="CourseID" />
+      </Principal>
+      <Dependent Role="CartCourse">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Course_CourseCategory">
+    <End Role="CourseCategory" Type="Self.CourseCategory" Multiplicity="1" />
+    <End Role="Course" Type="Self.Course" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CourseCategory">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="Course">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CourseAssistant_Course">
+    <End Role="Course" Type="Self.Course" Multiplicity="1" />
+    <End Role="CourseAssistant" Type="Self.CourseAssistant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="CourseID" />
+      </Principal>
+      <Dependent Role="CourseAssistant">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CoursePrice_Course">
+    <End Role="Course" Type="Self.Course" Multiplicity="1" />
+    <End Role="CoursePrice" Type="Self.CoursePrice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="CourseID" />
+      </Principal>
+      <Dependent Role="CoursePrice">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CourseRating_Course">
+    <End Role="Course" Type="Self.Course" Multiplicity="1" />
+    <End Role="CourseRating" Type="Self.CourseRating" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="CourseID" />
+      </Principal>
+      <Dependent Role="CourseRating">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Section_Course">
+    <End Role="Course" Type="Self.Course" Multiplicity="1" />
+    <End Role="Section" Type="Self.Section" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="CourseID" />
+      </Principal>
+      <Dependent Role="Section">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentCourse_Course">
+    <End Role="Course" Type="Self.Course" Multiplicity="1" />
+    <End Role="StudentCourse" Type="Self.StudentCourse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="CourseID" />
+      </Principal>
+      <Dependent Role="StudentCourse">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CourseAssistant_Employee">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="CourseAssistant" Type="Self.CourseAssistant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="CourseAssistant">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CourseRating_Student">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="CourseRating" Type="Self.CourseRating" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="CourseRating">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Employee_Department">
+    <End Role="Department" Type="Self.Department" Multiplicity="1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="DepartmentID" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="DepartmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_JobOpportunity_Department">
+    <End Role="Department" Type="Self.Department" Multiplicity="1" />
+    <End Role="JobOpportunity" Type="Self.JobOpportunity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="DepartmentID" />
+      </Principal>
+      <Dependent Role="JobOpportunity">
+        <PropertyRef Name="DepartmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Employee_Title">
+    <End Role="Title" Type="Self.Title" Multiplicity="1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Title">
+        <PropertyRef Name="TitleID" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="TitleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Employee_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmployeeQualification_Employee">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="EmployeeQualification" Type="Self.EmployeeQualification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="EmployeeQualification">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmployeeSkill_Employee">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="EmployeeSkill" Type="Self.EmployeeSkill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="EmployeeSkill">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UpdateRequest_Employee">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="UpdateRequest" Type="Self.UpdateRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="UpdateRequest">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmployeeQualification_Qualification">
+    <End Role="Qualification" Type="Self.Qualification" Multiplicity="1" />
+    <End Role="EmployeeQualification" Type="Self.EmployeeQualification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Qualification">
+        <PropertyRef Name="QualificationID" />
+      </Principal>
+      <Dependent Role="EmployeeQualification">
+        <PropertyRef Name="QualificationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmployeeSkill_Skill">
+    <End Role="Skill" Type="Self.Skill" Multiplicity="1" />
+    <End Role="EmployeeSkill" Type="Self.EmployeeSkill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Skill">
+        <PropertyRef Name="SkillID" />
+      </Principal>
+      <Dependent Role="EmployeeSkill">
+        <PropertyRef Name="SkillID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InterviewSlot_ShortList">
+    <End Role="ShortList" Type="Self.ShortList" Multiplicity="1" />
+    <End Role="InterviewSlot" Type="Self.InterviewSlot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ShortList">
+        <PropertyRef Name="ShortListID" />
+      </Principal>
+      <Dependent Role="InterviewSlot">
+        <PropertyRef Name="ShortListID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_JobOpportunity_JobOppStatus">
+    <End Role="JobOppStatus" Type="Self.JobOppStatu" Multiplicity="1" />
+    <End Role="JobOpportunity" Type="Self.JobOpportunity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="JobOppStatus">
+        <PropertyRef Name="JobOppStatusID" />
+      </Principal>
+      <Dependent Role="JobOpportunity">
+        <PropertyRef Name="JobOppStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_JobOpportunity_WorkType">
+    <End Role="WorkType" Type="Self.WorkType" Multiplicity="1" />
+    <End Role="JobOpportunity" Type="Self.JobOpportunity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WorkType">
+        <PropertyRef Name="WorkTypeID" />
+      </Principal>
+      <Dependent Role="JobOpportunity">
+        <PropertyRef Name="WorkTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Lesson_Section">
+    <End Role="Section" Type="Self.Section" Multiplicity="1" />
+    <End Role="Lesson" Type="Self.Lesson" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Section">
+        <PropertyRef Name="SectionID" />
+      </Principal>
+      <Dependent Role="Lesson">
+        <PropertyRef Name="SectionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LessonResource_Lesson">
+    <End Role="Lesson" Type="Self.Lesson" Multiplicity="1" />
+    <End Role="LessonResource" Type="Self.LessonResource" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Lesson">
+        <PropertyRef Name="LessonID" />
+      </Principal>
+      <Dependent Role="LessonResource">
+        <PropertyRef Name="LessonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Maintenance_MaintenancePriority">
+    <End Role="MaintenancePriority" Type="Self.MaintenancePriority" Multiplicity="1" />
+    <End Role="Maintenance" Type="Self.Maintenance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MaintenancePriority">
+        <PropertyRef Name="MaintenancePriorityID" />
+      </Principal>
+      <Dependent Role="Maintenance">
+        <PropertyRef Name="MaintenancePriorityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Maintenance_MaintenanceStatus">
+    <End Role="MaintenanceStatus" Type="Self.MaintenanceStatu" Multiplicity="1" />
+    <End Role="Maintenance" Type="Self.Maintenance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MaintenanceStatus">
+        <PropertyRef Name="MaintenanceStatusID" />
+      </Principal>
+      <Dependent Role="Maintenance">
+        <PropertyRef Name="MaintenanceStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Maintenance_MaintenanceType">
+    <End Role="MaintenanceType" Type="Self.MaintenanceType" Multiplicity="1" />
+    <End Role="Maintenance" Type="Self.Maintenance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MaintenanceType">
+        <PropertyRef Name="MaintenanceTypeID" />
+      </Principal>
+      <Dependent Role="Maintenance">
+        <PropertyRef Name="MaintenanceTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Maintenance_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Maintenance" Type="Self.Maintenance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Maintenance">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Skill_SkillType">
+    <End Role="SkillType" Type="Self.SkillType" Multiplicity="1" />
+    <End Role="Skill" Type="Self.Skill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SkillType">
+        <PropertyRef Name="SkillTypeID" />
+      </Principal>
+      <Dependent Role="Skill">
+        <PropertyRef Name="SkillTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Student_Title">
+    <End Role="Title" Type="Self.Title" Multiplicity="1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Title">
+        <PropertyRef Name="TitleID" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="TitleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Student_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentCourse_Student">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="StudentCourse" Type="Self.StudentCourse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="StudentCourse">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UpdateRequest_UpdateRequestStatus">
+    <End Role="UpdateRequestStatus" Type="Self.UpdateRequestStatu" Multiplicity="1" />
+    <End Role="UpdateRequest" Type="Self.UpdateRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UpdateRequestStatus">
+        <PropertyRef Name="UpdateRequestStatusID" />
+      </Principal>
+      <Dependent Role="UpdateRequest">
+        <PropertyRef Name="UpdateRequestStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_UserRole">
+    <End Role="UserRole" Type="Self.UserRole" Multiplicity="1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserRole">
+        <PropertyRef Name="UserRoleID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="UserRoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Applicants" EntityType="Self.Applicant" />
+    <EntitySet Name="Applications" EntityType="Self.Application" />
+    <EntitySet Name="ApplicationStatus" EntityType="Self.ApplicationStatu" />
+    <EntitySet Name="AuditLogs" EntityType="Self.AuditLog" />
+    <EntitySet Name="Carts" EntityType="Self.Cart" />
+    <EntitySet Name="CartCourses" EntityType="Self.CartCourse" />
+    <EntitySet Name="Contacts" EntityType="Self.Contact" />
+    <EntitySet Name="Courses" EntityType="Self.Course" />
+    <EntitySet Name="CourseAssistants" EntityType="Self.CourseAssistant" />
+    <EntitySet Name="CourseCategories" EntityType="Self.CourseCategory" />
+    <EntitySet Name="CoursePrices" EntityType="Self.CoursePrice" />
+    <EntitySet Name="CourseRatings" EntityType="Self.CourseRating" />
+    <EntitySet Name="Departments" EntityType="Self.Department" />
+    <EntitySet Name="Employees" EntityType="Self.Employee" />
+    <EntitySet Name="EmployeeQualifications" EntityType="Self.EmployeeQualification" />
+    <EntitySet Name="EmployeeSkills" EntityType="Self.EmployeeSkill" />
+    <EntitySet Name="FAQs" EntityType="Self.FAQ" />
+    <EntitySet Name="InstructionalVideos" EntityType="Self.InstructionalVideo" />
+    <EntitySet Name="InterviewSlots" EntityType="Self.InterviewSlot" />
+    <EntitySet Name="JobOpportunities" EntityType="Self.JobOpportunity" />
+    <EntitySet Name="JobOppStatus" EntityType="Self.JobOppStatu" />
+    <EntitySet Name="Lessons" EntityType="Self.Lesson" />
+    <EntitySet Name="LessonResources" EntityType="Self.LessonResource" />
+    <EntitySet Name="Maintenances" EntityType="Self.Maintenance" />
+    <EntitySet Name="MaintenancePriorities" EntityType="Self.MaintenancePriority" />
+    <EntitySet Name="MaintenanceStatus" EntityType="Self.MaintenanceStatu" />
+    <EntitySet Name="MaintenanceTypes" EntityType="Self.MaintenanceType" />
+    <EntitySet Name="Payments" EntityType="Self.Payment" />
+    <EntitySet Name="Qualifications" EntityType="Self.Qualification" />
+    <EntitySet Name="Sections" EntityType="Self.Section" />
+    <EntitySet Name="ShortLists" EntityType="Self.ShortList" />
+    <EntitySet Name="Skills" EntityType="Self.Skill" />
+    <EntitySet Name="SkillTypes" EntityType="Self.SkillType" />
+    <EntitySet Name="Students" EntityType="Self.Student" />
+    <EntitySet Name="StudentCourses" EntityType="Self.StudentCourse" />
+    <EntitySet Name="Titles" EntityType="Self.Title" />
+    <EntitySet Name="UpdateRequests" EntityType="Self.UpdateRequest" />
+    <EntitySet Name="UpdateRequestStatus" EntityType="Self.UpdateRequestStatu" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
+    <EntitySet Name="VATs" EntityType="Self.VAT" />
+    <EntitySet Name="WorkTypes" EntityType="Self.WorkType" />
+    <EntitySet Name="PayFasts" EntityType="Self.PayFast" />
+    <AssociationSet Name="FK_Application_Applicant" Association="Self.FK_Application_Applicant">
+      <End Role="Applicant" EntitySet="Applicants" />
+      <End Role="Application" EntitySet="Applications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Application_ApplicationStatus" Association="Self.FK_Application_ApplicationStatus">
+      <End Role="ApplicationStatus" EntitySet="ApplicationStatus" />
+      <End Role="Application" EntitySet="Applications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Application_JobOpportunity" Association="Self.FK_Application_JobOpportunity">
+      <End Role="JobOpportunity" EntitySet="JobOpportunities" />
+      <End Role="Application" EntitySet="Applications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ShortList_Application" Association="Self.FK_ShortList_Application">
+      <End Role="Application" EntitySet="Applications" />
+      <End Role="ShortList" EntitySet="ShortLists" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AuditLog_User" Association="Self.FK_AuditLog_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="AuditLog" EntitySet="AuditLogs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cart_Student" Association="Self.FK_Cart_Student">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="Cart" EntitySet="Carts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CartCourse_Cart" Association="Self.FK_CartCourse_Cart">
+      <End Role="Cart" EntitySet="Carts" />
+      <End Role="CartCourse" EntitySet="CartCourses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Payment_Cart" Association="Self.FK_Payment_Cart">
+      <End Role="Cart" EntitySet="Carts" />
+      <End Role="Payment" EntitySet="Payments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CartCourse_Course" Association="Self.FK_CartCourse_Course">
+      <End Role="Course" EntitySet="Courses" />
+      <End Role="CartCourse" EntitySet="CartCourses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Course_CourseCategory" Association="Self.FK_Course_CourseCategory">
+      <End Role="CourseCategory" EntitySet="CourseCategories" />
+      <End Role="Course" EntitySet="Courses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CourseAssistant_Course" Association="Self.FK_CourseAssistant_Course">
+      <End Role="Course" EntitySet="Courses" />
+      <End Role="CourseAssistant" EntitySet="CourseAssistants" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CoursePrice_Course" Association="Self.FK_CoursePrice_Course">
+      <End Role="Course" EntitySet="Courses" />
+      <End Role="CoursePrice" EntitySet="CoursePrices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CourseRating_Course" Association="Self.FK_CourseRating_Course">
+      <End Role="Course" EntitySet="Courses" />
+      <End Role="CourseRating" EntitySet="CourseRatings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Section_Course" Association="Self.FK_Section_Course">
+      <End Role="Course" EntitySet="Courses" />
+      <End Role="Section" EntitySet="Sections" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentCourse_Course" Association="Self.FK_StudentCourse_Course">
+      <End Role="Course" EntitySet="Courses" />
+      <End Role="StudentCourse" EntitySet="StudentCourses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CourseAssistant_Employee" Association="Self.FK_CourseAssistant_Employee">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="CourseAssistant" EntitySet="CourseAssistants" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CourseRating_Student" Association="Self.FK_CourseRating_Student">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="CourseRating" EntitySet="CourseRatings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Employee_Department" Association="Self.FK_Employee_Department">
+      <End Role="Department" EntitySet="Departments" />
+      <End Role="Employee" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_JobOpportunity_Department" Association="Self.FK_JobOpportunity_Department">
+      <End Role="Department" EntitySet="Departments" />
+      <End Role="JobOpportunity" EntitySet="JobOpportunities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Employee_Title" Association="Self.FK_Employee_Title">
+      <End Role="Title" EntitySet="Titles" />
+      <End Role="Employee" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Employee_User" Association="Self.FK_Employee_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Employee" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmployeeQualification_Employee" Association="Self.FK_EmployeeQualification_Employee">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="EmployeeQualification" EntitySet="EmployeeQualifications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmployeeSkill_Employee" Association="Self.FK_EmployeeSkill_Employee">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="EmployeeSkill" EntitySet="EmployeeSkills" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UpdateRequest_Employee" Association="Self.FK_UpdateRequest_Employee">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="UpdateRequest" EntitySet="UpdateRequests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmployeeQualification_Qualification" Association="Self.FK_EmployeeQualification_Qualification">
+      <End Role="Qualification" EntitySet="Qualifications" />
+      <End Role="EmployeeQualification" EntitySet="EmployeeQualifications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmployeeSkill_Skill" Association="Self.FK_EmployeeSkill_Skill">
+      <End Role="Skill" EntitySet="Skills" />
+      <End Role="EmployeeSkill" EntitySet="EmployeeSkills" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InterviewSlot_ShortList" Association="Self.FK_InterviewSlot_ShortList">
+      <End Role="ShortList" EntitySet="ShortLists" />
+      <End Role="InterviewSlot" EntitySet="InterviewSlots" />
+    </AssociationSet>
+    <AssociationSet Name="FK_JobOpportunity_JobOppStatus" Association="Self.FK_JobOpportunity_JobOppStatus">
+      <End Role="JobOppStatus" EntitySet="JobOppStatus" />
+      <End Role="JobOpportunity" EntitySet="JobOpportunities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_JobOpportunity_WorkType" Association="Self.FK_JobOpportunity_WorkType">
+      <End Role="WorkType" EntitySet="WorkTypes" />
+      <End Role="JobOpportunity" EntitySet="JobOpportunities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Lesson_Section" Association="Self.FK_Lesson_Section">
+      <End Role="Section" EntitySet="Sections" />
+      <End Role="Lesson" EntitySet="Lessons" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LessonResource_Lesson" Association="Self.FK_LessonResource_Lesson">
+      <End Role="Lesson" EntitySet="Lessons" />
+      <End Role="LessonResource" EntitySet="LessonResources" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Maintenance_MaintenancePriority" Association="Self.FK_Maintenance_MaintenancePriority">
+      <End Role="MaintenancePriority" EntitySet="MaintenancePriorities" />
+      <End Role="Maintenance" EntitySet="Maintenances" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Maintenance_MaintenanceStatus" Association="Self.FK_Maintenance_MaintenanceStatus">
+      <End Role="MaintenanceStatus" EntitySet="MaintenanceStatus" />
+      <End Role="Maintenance" EntitySet="Maintenances" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Maintenance_MaintenanceType" Association="Self.FK_Maintenance_MaintenanceType">
+      <End Role="MaintenanceType" EntitySet="MaintenanceTypes" />
+      <End Role="Maintenance" EntitySet="Maintenances" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Maintenance_User" Association="Self.FK_Maintenance_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Maintenance" EntitySet="Maintenances" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Skill_SkillType" Association="Self.FK_Skill_SkillType">
+      <End Role="SkillType" EntitySet="SkillTypes" />
+      <End Role="Skill" EntitySet="Skills" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Student_Title" Association="Self.FK_Student_Title">
+      <End Role="Title" EntitySet="Titles" />
+      <End Role="Student" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Student_User" Association="Self.FK_Student_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Student" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentCourse_Student" Association="Self.FK_StudentCourse_Student">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="StudentCourse" EntitySet="StudentCourses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UpdateRequest_UpdateRequestStatus" Association="Self.FK_UpdateRequest_UpdateRequestStatus">
+      <End Role="UpdateRequestStatus" EntitySet="UpdateRequestStatus" />
+      <End Role="UpdateRequest" EntitySet="UpdateRequests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_UserRole" Association="Self.FK_User_UserRole">
+      <End Role="UserRole" EntitySet="UserRoles" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <EntitySet Name="OTPTimers" EntityType="Model.OTPTimer" />
+    <EntitySet Name="TermsAndConditions" EntityType="Model.TermsAndCondition" />
+    <EntitySet Name="MaxSlotsPerDays" EntityType="Model.MaxSlotsPerDay" />
+  </EntityContainer>
+  <EntityType Name="OTPTimer">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MinutesUntilExpiry" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TermsAndCondition">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TCFile" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="MaxSlotsPerDay">
+    <Key>
+      <PropertyRef Name="MaxID" />
+    </Key>
+    <Property Name="MaxID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NumberOfSlots" Type="Int32" Nullable="false" />
+  </EntityType>
+</Schema>

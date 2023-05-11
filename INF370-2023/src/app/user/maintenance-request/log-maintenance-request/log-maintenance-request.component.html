@@ -1,0 +1,166 @@
+<!-- Card Form for Input -->
+<div style="padding-left: 3em; padding-right: 3em; padding-top: 9em;height:100vh;background-image: url('../../assets/gradient.gif');background-repeat: no-repeat;background-size: 100% 25%;">
+
+  <div>
+    <mat-card class="matCard" style="border-radius: 34px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8), 0 1px 3px rgba(0, 0, 0, 0.8);">
+      <mat-card-header class="cardHeader" style="padding-bottom: 1%;text-align: center">
+        <mat-card-title-group style="margin-left: 40%;">
+          <mat-card-title style="font-weight: 500; "
+            >Log Maintenance</mat-card-title
+          >
+        </mat-card-title-group>
+  
+     
+      </mat-card-header>
+  
+      <mat-card-content class="matContent">
+        <form>
+          <div class="form-group">
+            <br /><br />
+            <div style="padding: 0% 2.5% 0% 2%; min-width: 100%">
+            <!-- image preview -->
+            <div style="margin-left: 35%;" >
+              <mat-label style="color: #0e1a3c; padding-left: 8%;">
+                Maintenance Issue Image</mat-label>
+              <div style="padding-top: 10px">
+                <img src="{{dataimage}}"  style="width:300px; height:300px;" ></div>
+            </div>
+
+            <mat-form-field enctype="multipart/form-data" style="margin-left: 41%; padding-top: 15px;">
+              <div>
+                <!-- Fetch selected filed on change -->
+                <input type="file" title=" " #fileInput id="uploadFile" (change)="uploadFileEvt($event)" name="uploadFile"
+                  accept="image/*" [formControl] = "imgFormControl" style="display: none;" required/>
+                  <!-- label of input -->
+                  <label for="uploadFile" class="btn" style="background-color: #0e1a3c; color: white;font-family: Montserrat;">Choose File</label>
+                  <br>
+                <!-- Display files names -->
+                  <input style="padding-top: 11%;" matInput [(ngModel)]="fileAttr" readonly name="name" />
+
+                  <mat-error *ngIf="imgFormControl.hasError('required')">
+                    No file <strong>chosen</strong>
+                  </mat-error>
+              </div>
+
+
+            </mat-form-field>
+            <br>
+            <br>
+
+
+              <mat-label style="color: #0e1a3c">
+                Select Maintenance Issue Type</mat-label>
+  
+              <br />
+              <mat-form-field 
+              class="example-full-width" 
+              appearance="legacy"
+              style="width: 95%;">
+  
+              
+              <mat-select (valueChange)="selectType($event)" [formControl]="typeFormControl" required>
+                <mat-option
+                  *ngFor="let item of maintenanceTypeList"
+                  [value]="item.MaintenanceTypeID"
+                >
+                  {{ item.Type }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="typeFormControl.hasError('required')">
+                Maintenance Type Selection is <strong>required</strong>
+              </mat-error>
+              </mat-form-field>
+              <br />
+              <br />
+
+              <mat-label style="color: #0e1a3c">
+                Select Maintenance Issue Priority Level</mat-label>
+  
+              <br />
+              <mat-form-field 
+              class="example-full-width" 
+              appearance="legacy"
+              style="width: 95%;">
+              <mat-select (valueChange)="selectPriority($event)" [formControl]="priorityFormControl" required>
+                <mat-option
+                  *ngFor="let item of maintenancePriorityList"
+                  [value]="item.MaintenancePriorityID"
+                >
+                  {{ item.Priority }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="priorityFormControl.hasError('required')">
+                Priority Level Selection is <strong>required</strong>
+              </mat-error>
+              
+              </mat-form-field>
+              <br />
+              <br />
+  
+              <mat-label style="color: #0e1a3c">
+                Maintenance Issue Location</mat-label
+              >
+  
+              <br />
+              <mat-form-field
+                class="example-full-width"
+                appearance="legacy"
+                style="width: 95%;"
+              >
+  
+              <textarea
+              type="text"
+              matInput
+              [formControl]="locationFormControl"
+              [(ngModel)]="maintenance.Location"
+              name="MaintainLocation"
+              placeholder="Read Employee Screen; Login Screen"
+              required
+            ></textarea>
+            <mat-error *ngIf="locationFormControl.hasError('required')">
+              Maintenance Issue Location is <strong>required</strong><br>
+            </mat-error>
+              </mat-form-field>
+              <br>
+              <br>
+
+              <mat-label style="color: #0e1a3c">
+                Maintenance Issue Description</mat-label
+              >
+  
+              <br />
+              <mat-form-field
+                class="example-full-width"
+                appearance="legacy"
+                style="width: 95%;"
+              >
+  
+              <textarea
+              type="text"
+              matInput
+              [formControl]="descFormControl"
+              [(ngModel)]="maintenance.Description"
+              name="MaintainDesc"
+              placeholder="Add Employee Button not working; Screen Not Displaying"
+              required
+            ></textarea>
+            <mat-error *ngIf="descFormControl.hasError('required')">
+              Maintenance Issue Description is <strong>required</strong>
+            </mat-error>
+              </mat-form-field>
+              <br>
+              <br>
+            </div>
+  
+            <div class="form-group" style="padding-right: 40%"></div>
+          </div>
+  
+          <div class="button-container">
+            <button id="cancel" class="btn" (click)="onBack()">Cancel</button>
+            <button id="confirm" class="btn" (click)="onSubmit()">Confirm</button>
+        </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  </div>

@@ -1,0 +1,15 @@
+
+    <div style="background-color: #920f4c;">
+        <h2 mat-dialog-title style="color: #ffffff;font-family: Montserrat;margin-left: 30% ;padding: 20px 0px 10px 35px;" >{{data.dialogTitle}}</h2>
+    </div>
+    <mat-dialog-content class="mat-typogrpahy" style="padding: 40px 20px 20px 80px;">
+        <h4 style="color: #000000;margin-left:16% ;font-family: Montserrat;">{{data.dialogMessage}}</h4>
+    </mat-dialog-content>
+    <mat-dialog-actions style=" padding-right: 20px;" >
+        <div class="button-container">
+        <button id="cancel"  (click)="Cancel()"class="btn" >Cancel</button>
+        <button id="confirm" type="submit"  (click)="Confirm()"  class="btn" >Confirm</button>
+        </div>
+    </mat-dialog-actions>
+
+
