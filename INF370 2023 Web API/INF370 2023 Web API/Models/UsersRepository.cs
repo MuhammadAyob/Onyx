@@ -310,7 +310,7 @@ namespace INF370_2023_Web_API.Models
         private async Task SendOTPEmail(string emailID, string name, string surname, int OTP, dynamic OTPExpiry)
         {
             var fromEmailAccount = "dseiqueries@gmail.com";
-            var fromEmailAccountPassword = "gijvcgzwrnjoorey";
+            var fromEmailAccountPassword = "epqshwdnwmokortk";
 
             var fromAddress = new MailAddress(fromEmailAccount);
             var toAddress = new MailAddress(emailID);

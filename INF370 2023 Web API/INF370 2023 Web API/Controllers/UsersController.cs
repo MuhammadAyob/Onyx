@@ -455,9 +455,9 @@ namespace INF370_2023_Web_API.Controllers
                 return await _userRepo.ForgotPassword(user);
             }
 
-            catch (Exception)
+            catch (Exception ex)
             {
-                return new { Status = 500, Message = "Internal server error, please try again" };
+                return ex.ToString();
             }
         }
 
