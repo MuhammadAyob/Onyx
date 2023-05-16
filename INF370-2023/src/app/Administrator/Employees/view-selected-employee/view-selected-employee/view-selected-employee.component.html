@@ -1,0 +1,262 @@
+<!-- Card Form for Input -->
+<div style="padding-left: 3em; padding-right: 3em; padding-top: 9em;height:100vh;background-image: url('../../assets/gradient.gif');background-repeat: no-repeat;background-size: 100% 25%;">
+
+  <div>
+    <mat-card class="matCard" style="border-radius: 34px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8), 0 1px 3px rgba(0, 0, 0, 0.8);">
+      <mat-card-header class="cardHeader" style="padding-bottom: 1%;text-align: center">
+        <mat-card-title-group style="margin-left: 40.2%;">
+          <mat-card-title style="font-weight: 500; "
+            >{{test.Employee.Name}} {{test.Employee.Surname}}</mat-card-title
+          >
+        </mat-card-title-group>
+  
+        <button mat-icon-button style="color: rgb(255, 255, 255); margin-left: 40%;margin-top: 0px;" (click)="onEdit()">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button style="margin-top: 0px;" (click)="onDelete()">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-card-header>
+  
+      <mat-card-content class="matContent">
+        <form>
+          <div class="form-group">
+            <div style="margin-left: 41.8%; padding-top: 55px;padding-bottom: 50px">
+              <div>
+                <div>
+                  <mat-label style="color: #0e1a3c">
+                    Employee Image</mat-label>
+                    <br>
+                    <br>
+                  <img
+                    src="{{ 'data:image/png;base64,' + dataImage }}"
+                    style="width: 150px;height: 150px; margin-left: -2%;"
+                  >
+                </div>
+              </div>
+            </div>
+            <br /><br />
+            <div style="padding: 0% 2.5% 0% 2%; min-width: 100%">
+              <mat-label style="color: #0e1a3c">
+                Title</mat-label>
+  
+              <br />
+              <mat-form-field 
+              class="example-full-width" 
+              appearance="legacy"
+              style="width: 95%;">
+  
+                <input
+                  readonly
+                  type="text"
+                  matInput
+                  name="TitleID"
+                  [(ngModel)]="titleName"
+                  required
+                  style="color: #0e1a3c"
+                />
+              </mat-form-field>
+              <br />
+              <br />
+
+              <label style="color: #0e1a3c">Employee Name</label>
+
+            <br />
+            <mat-form-field class="example-full-width" appearance="legacy" style="width: 95%;">
+              <input
+                readonly
+                type="text"
+                matInput
+                name="EmployeeName"
+                [(ngModel)]="test.Employee.Name"
+                required
+                style="color: #0e1a3c"
+              />
+            </mat-form-field>
+            <br />
+            <br />
+
+            <label style="color: #0e1a3c">Employee Surname</label>
+
+            <br />
+            <mat-form-field class="example-full-width" appearance="legacy" style="width: 95%;">
+              <input
+                readonly
+                type="text"
+                matInput
+                name="EmployeeSurname"
+                [(ngModel)]="test.Employee.Surname"
+                required
+                style="color: #0e1a3c"
+              />
+            </mat-form-field>
+            <br />
+            <br />
+
+            <label style="color: #0e1a3c">Email</label>
+
+            <br />
+            <mat-form-field class="example-full-width" appearance="legacy" style="width: 95%;">
+              <input
+                readonly
+                type="text"
+                matInput
+                name="EmployeeEmail"
+                [(ngModel)]="test.Employee.Email"
+                required
+                style="color: #0e1a3c"
+              />
+            </mat-form-field>
+            <br />
+            <br />
+
+            <label style="color: #0e1a3c">Phone Number</label>
+
+            <br />
+            <mat-form-field class="example-full-width" appearance="legacy" style="width: 95%;">
+              <input
+                readonly
+                type="text"
+                matInput
+                name="EmployeePhoneNumber"
+                [(ngModel)]="test.Employee.Phone"
+                required
+                style="color: #0e1a3c"
+              />
+            </mat-form-field>
+            <br />
+            <br />
+
+            <label style="color: #0e1a3c">ID Number</label>
+
+            <br />
+            <mat-form-field class="example-full-width" appearance="legacy" style="width: 95%;">
+              <input
+                readonly
+                type="text"
+                matInput
+                name="EmployeeIDNumber"
+                [(ngModel)]="test.Employee.RSAIDNumber"
+                required
+                style="color: #0e1a3c"
+              />
+            </mat-form-field>
+            <br />
+            <br />
+
+            
+  
+              <mat-label style="color: #0e1a3c">
+                Biography</mat-label
+              >
+  
+              <br />
+              <mat-form-field
+                class="example-full-width"
+                appearance="legacy"
+                style="width: 95%;"
+              >
+  
+                <textarea
+                  readonly
+                  matInput
+                  rows="5"
+                  cols="90"
+                  name="MaintainDesc"
+                  [(ngModel)]="test.Employee.Biography"
+                 
+                  style="color: #0e1a3c"></textarea>
+              </mat-form-field>
+              <br>
+              <br>
+              
+              <label style="color: #0e1a3c">User Role</label>
+
+              <br />
+              <mat-form-field class="example-full-width" appearance="legacy" style="width: 95%;">
+                <input
+                  readonly
+                  type="text"
+                  matInput
+                  name="UserRoleID"
+                  [(ngModel)]="roleName"
+                  required
+                  style="color: #0e1a3c"
+                />
+              </mat-form-field>
+              <br />
+              <br />
+
+              <label style="color: #0e1a3c">Department</label>
+
+              <br />
+              <mat-form-field class="example-full-width" appearance="legacy" style="width: 95%;">
+                <input
+                  readonly
+                  type="text"
+                  matInput
+                  name="DeptID"
+                  [(ngModel)]="deptName"
+                  required
+                  style="color: #0e1a3c"
+                />
+              </mat-form-field>
+              <br />
+              <br />
+
+              <label style="color: #0e1a3c">Qualifications</label>
+
+             
+              <mat-form-field class="example-full-width" appearance="legacy" style="width: 95%;">
+                <input
+                  readonly
+                  type="text"
+                  matInput
+                  name="Qualification"
+                  required
+                  style="color: #0e1a3c"
+                />
+                <mat-list *ngFor="let item of EmployeeSkillList">
+                  <mat-list-item style="color: #0e1a3c;">
+                    {{ item.SkillName}} - {{ item.SkillTypeName }}
+                  </mat-list-item>
+                </mat-list>
+              </mat-form-field>
+              <br />
+              <br />
+
+              <label style="color: #0e1a3c">Qualifications</label>
+
+             
+              <mat-form-field class="example-full-width" appearance="legacy" style="width: 95%;">
+                <input
+                  readonly
+                  type="text"
+                  matInput
+                  name="Qualification"
+                  required
+                  style="color: #0e1a3c"
+                />
+                <mat-list *ngFor="let item of EmployeeQualificationList">
+                  <mat-list-item style="color: #0e1a3c;">
+                    {{ item.QualificationName }}
+                  </mat-list-item>
+                </mat-list>
+              </mat-form-field>
+              <br />
+              <br />
+
+            </div>
+  
+            
+          </div>
+  
+          <div class="button-container">
+            <button id="cancel" class="btn" (click)="onBack()">View All</button>
+            
+        </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  </div>

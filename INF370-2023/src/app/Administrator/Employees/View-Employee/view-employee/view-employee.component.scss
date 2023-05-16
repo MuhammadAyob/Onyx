@@ -1,0 +1,111 @@
+.cardButton{
+    float: right;
+  }
+  
+  .bigDiv{
+    // background-image: linear-gradient(to right, fade-out($color: #DEEAF6, $amount: 0.05),#5090D0 );
+    background-color: #DEEAF6;
+    display: flex;
+  }
+  
+  .leftSearch{
+    padding: 0.5% 2% 0.5% 2%;
+    width: 100%;
+    float: left;
+    background-color: transparent;
+  }
+  
+  .rightSearch{
+    width: 20%;
+    float: right;
+    background-color: transparent;
+    padding: 1% 3% 0.5% 2%;
+  
+  
+  }
+  
+  .cardHeader{
+  
+    // background-image: linear-gradient(to right, fade-out($color: #DEEAF6, $amount: 0.05),#5090D0 );
+    background-color: #DEEAF6;
+    padding-top: 2%;
+    color: #5090D0;
+    width: 100%;
+  
+  }
+  
+  .mat-icon{
+    padding-right: 17%;
+  }
+  
+  table{
+   width: 100%;
+  }
+  
+  .table-container{
+   overflow: auto;
+   height: 315px;
+  }
+  
+  .table-container::-webkit-scrollbar{
+  display: none;
+  }
+  
+  .matCard{
+  border-style:solid;
+  // border-color:fade-out($color: #5090D0, $amount: 0.68);
+  border-color: #c7dff8;
+  }
+  
+    
+  
+  .addStyle{
+      padding: 10% 20% 10% 10%;
+      justify-content: space-around;
+      max-width: 70% ;
+    }
+  
+    .form-Group{
+      padding: 2% 2% 2% 2%;
+    }
+  
+    :root {
+      --offcanvas-width: 270px;
+    }
+    .sidebar-nav {
+      width: var(--offcanvas-width);
+    }
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+    }
+    .sidebar-link .right-icon {
+      display: inline-flex;
+    }
+    .sidebar-link[aria-expanded="true"] .right-icon {
+      transform: rotate(180deg);
+    }
+    @media (min-width: 992px) {
+      body {
+        overflow: auto !important;
+      }
+      main {
+        margin-left: 20vw;
+        padding-right: 2vw;;
+      }
+      /* this is to remove the backdrop */
+      .offcanvas-backdrop::before {
+        display: none;
+      }
+      .sidebar-nav {
+        -webkit-transform: none;
+        transform: none;
+        visibility: visible !important;
+        // padding-top: 10%;
+        padding-left: 5vw;
+        padding-right: 5vw;
+        // height: calc(100% - var(--topNavbarHeight));
+        // top: var(--topNavbarHeight);
+      }
+    }
+  

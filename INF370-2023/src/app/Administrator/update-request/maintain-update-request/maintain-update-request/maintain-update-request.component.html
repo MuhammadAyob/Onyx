@@ -1,0 +1,122 @@
+<div style="padding-left: 10%; padding-right: 10%">
+    <mat-card class="matCard">
+      <mat-tab-group dynamicHeight style='position: sticky;'>
+        <mat-tab label="Update Request Details" sticky='true'>
+          <mat-card-header class="cardHeader" style="padding-bottom: 1%;">
+            <mat-card-title-group style="padding-right: 80%">
+              <mat-card-title style="font-weight: 500"
+                >Update Request</mat-card-title
+              >
+            </mat-card-title-group>
+          </mat-card-header>
+  
+          <mat-card-content class="matContent">
+            <form>
+              <div class="form-group">
+                <br />
+                <div style="padding: 0% 2.5% 0% 2%; float: left;">
+  
+                <mat-form-field 
+                appearance="outline" 
+                style="width: 30vw;"
+                >
+                  <mat-label style="color: #5090d0">Employee </mat-label>
+                  <input
+                    readonly
+                    type="text"
+                    matInput
+                    name="employee"
+                    value="{{ test.EmployeeName }} {{ test.EmployeeSurname }}"
+                    style="color: #5090d0"
+                  />
+                </mat-form-field>
+                </div>
+  
+                <div style="float: left; padding-left: 2%;">
+                <mat-form-field 
+                appearance="outline"             
+                style="width: 30vw;"
+                >
+                  <mat-label style="color: #5090d0">Update Subject</mat-label>
+                  <input
+                    readonly
+                    type="text"
+                    matInput
+                    name="updateName"
+                    value="{{ test.UpdateSubject }}"
+                    style="color: #5090d0"
+                  />
+                </mat-form-field>
+                </div>
+  
+                <div style="padding: 0% 2.5% 0% 2%; float: left;">
+  
+                <mat-form-field appearance="outline" style="width: 63vw;">
+                  <mat-label style="color: #5090d0">Update Description</mat-label>
+                  <textarea
+                    readonly
+                    matInput
+                    rows="5"
+                    cols="90"
+                    name="updateDesc"
+                    value="{{ test.UpdateDesc }}"
+                    style="color: #5090d0"
+                  ></textarea>
+                </mat-form-field>
+                </div>
+  
+              </div>
+  
+              <button
+                type="button"
+                (click)="onReject()"
+                class="btn"
+                style="
+                  color: white;
+                  background-color: red;
+                  margin-left: 66%;
+                  padding-left: 5%;
+                  padding-right: 5%;
+                "
+              >
+                Reject
+              </button>
+              
+              <button
+                type="button"
+                (click)="onAccept()"
+                class="btn"
+                style="
+                  color: white;
+                  background-color: #5090d0;
+                  margin-left: 2%;
+                  padding-left: 5%;
+                  padding-right: 5%;
+                "
+              >
+                Accept
+              </button> 
+            </form>
+          </mat-card-content>
+        </mat-tab>
+        <mat-tab label="Update Request Proof">
+          <mat-card-header class="cardHeader" style="padding-bottom: 1%">
+            <mat-card-title-group style="padding-right: 80%">
+              <mat-card-title style="font-weight: 500"
+                >Update Request Proof</mat-card-title
+              >
+            </mat-card-title-group>
+          </mat-card-header>
+  
+            <pdf-viewer
+              [src]="pdfSrc"
+              [autoresize]="true"
+              [original-size]="true"
+              [fit-to-page]="true"
+              [render-text]="false"
+            ></pdf-viewer>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card>
+  </div>
+  

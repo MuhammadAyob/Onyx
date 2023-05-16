@@ -1,0 +1,374 @@
+  <!-- Card Form for Input -->
+  <div  style="padding-left: 3em; padding-right: 3em; padding-top: 8em;padding-bottom: 2em;height:100vh;background-image: url('../../assets/gradient.gif');background-repeat: no-repeat;background-size: 100% 25%;">
+    <!-- Mat Card Form for Read faq -->
+   
+     <div>
+       <mat-card class="matCard" style="border-radius: 34px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8), 0 1px 3px rgba(0, 0, 0, 0.8);">
+         <mat-card-header class="cardHeader" style="padding-bottom: 1%;text-align: center">
+           <mat-card-title-group style="margin-left: 40%;">
+             <mat-card-title style="font-weight: 500; ">New Employee</mat-card-title>
+           </mat-card-title-group>
+         </mat-card-header>
+   
+         <mat-card-content class="matContent">
+           <form>
+             <div class="form-group">
+               <br /><br />
+               <div style="padding: 0% 2.5% 0% 2%; min-width: 100%">
+   
+
+             
+                
+                <!-- image preview -->
+                  <div style="margin-left: 41%;" >
+                    <div><img src="{{dataImage}}"  style="width:150px; height:150px;" ></div>
+                  </div>
+
+                  <mat-form-field enctype="multipart/form-data" style="margin-left: 41%; padding-top: 15px;">
+                    <div>
+                      <!-- Fetch selected filed on change -->
+                      <input type="file" title=" " #fileInput id="uploadFile" (change)="uploadFileEvt($event)" name="uploadFile"
+                        accept="image/*" [formControl] = "imageFormControl" style="display: none;" required/>
+                        <!-- label of input -->
+                        <label for="uploadFile" class="btn" style="background-color: #0e1a3c; color: white;font-family: Montserrat;">Choose File</label>
+                        <br>
+                      <!-- Display files names -->
+                        <input style="padding-top: 11%;" matInput [(ngModel)]="fileAttr" readonly name="name" />
+  
+                        <mat-error *ngIf="imageFormControl.hasError('required')">
+                          No file <strong>chosen</strong>
+                        </mat-error>
+                    </div>
+  
+  
+                  </mat-form-field>
+                  <br>
+                  <br>
+
+                  <mat-form-field
+                  class="example-full-width"
+                  appearance="legacy"
+                  [style.width.px]="240"
+                  
+    
+                >
+                     <mat-label style="color: #0e1a3c">Select Title</mat-label>
+                    <mat-select
+                      name="TitleID"
+                      [formControl]="titleFormControl"
+                      [(ngModel)]="employee.Employee.TitleID"
+                      placeholder="Doctor"
+                      required
+                    >
+                      <mat-option
+                        *ngFor="let item of titleList"
+                        [value]="item.TitleID"
+                      >
+                        {{ item.TitleName }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="titleFormControl.hasError('required')">
+                      Title is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+<br>
+<br>
+                 <mat-form-field
+                   class="example-full-width"
+                   appearance="legacy"
+                   style="width: 95%;"
+                 >
+                   <mat-label style="color: #0e1a3c">
+                     Enter Employee Name</mat-label
+                   >
+                   <input
+                     type="text"
+                     style="color: #0e1a3c"
+                     matInput
+                     [formControl]="nameFormControl"
+                  name="EmployeeName"
+                  [(ngModel)]="employee.Employee.Name"
+                     ngModelOptions="{standalone:true}"
+                     placeholder="Ex. Peter Pan"
+                     required
+                   />
+                   <mat-error *ngIf="nameFormControl.hasError('required')">
+                    Employee Name is <strong>required</strong>
+                  </mat-error>
+  
+                <mat-error *ngIf="nameFormControl.hasError('pattern')">
+                  Employee name must contain only <strong>alpha characters</strong>
+                </mat-error>
+                 </mat-form-field>
+                 <br />
+                 <br />
+   
+   
+                 <mat-form-field
+                 class="example-full-width"
+                 appearance="legacy"
+                 style="width: 95%;"
+   
+               >
+                    <mat-label style="color: #0e1a3c">
+                     Enter Employee Surname</mat-label
+                   >
+                   <input
+                     type="text"
+                     matInput
+                     [formControl]="surnameFormControl"
+                     name="EmployeeSurname"
+                     [(ngModel)]="employee.Employee.Surname"
+                     placeholder="Ex. Pan"
+                     required
+                   />
+                   <mat-error *ngIf="surnameFormControl.hasError('required')">
+                     Employee Surname is <strong>required</strong>
+                   </mat-error>
+   
+                 <mat-error *ngIf="surnameFormControl.hasError('pattern')">
+                   Employee surname must contain only <strong>alpha characters</strong>
+                 </mat-error>
+                 </mat-form-field>
+                 <br>
+                 <br>
+                 <mat-form-field
+                 class="example-full-width"
+                 appearance="legacy"
+                 style="width: 95%;"
+   
+               >
+                    <mat-label style="color:#0e1a3c"> Enter Email</mat-label>
+                   <input
+                     type="text"
+                     matInput
+                     [formControl]="emailFormControl"
+                     name="EmployeeEmail"
+                     [(ngModel)]="employee.Employee.Email"
+                     placeholder="Ex. Pan"
+                     required
+                   />
+                   <mat-error *ngIf="emailFormControl.hasError('required')">
+                     Employee Email is <strong>required</strong>
+                   </mat-error>
+                 </mat-form-field>
+<br>
+<br>
+                 <mat-form-field
+                 class="example-full-width"
+                 appearance="legacy"
+                 style="width: 95%;"
+   
+               >
+                    <mat-label style="color: #0e1a3c">
+                     Enter Phone number</mat-label
+                   >
+                   <input
+                     type="text"
+                     matInput
+                     [formControl]="phoneFormControl"
+                     name="EmployeePhoneNumber"
+                     [(ngModel)]="employee.Employee.Phone"
+                     placeholder="Ex. Pan"
+                     required
+                   />
+                   <mat-error *ngIf="phoneFormControl.hasError('required')">
+                     Employee Phone Number is <strong>required</strong>
+                   </mat-error>
+                   <mat-error *ngIf="idFormControl.hasError('pattern')">
+                     Enter <strong>Valid</strong> phone Number
+                   </mat-error>
+                 </mat-form-field>
+                 <br>
+                 <br>
+
+                 <mat-form-field
+                 class="example-full-width"
+                 appearance="legacy"
+                 style="width: 95%;"
+   
+               >
+                    <mat-label style="color:#0e1a3c"> Enter ID Number</mat-label>
+                   <input
+                     type="text"
+                     matInput
+                     [formControl]="idFormControl"
+                     name="EmployeeIDNumber"
+                     [(ngModel)]="employee.Employee.RSAIDNumber"
+                     placeholder="Ex. Pan"
+                     required
+                   />
+                   <mat-error *ngIf="idFormControl.hasError('required')">
+                     Employee ID Number is <strong>required</strong>
+                   </mat-error>
+                   <mat-error *ngIf="idFormControl.hasError('pattern')">
+                     Enter <strong>Valid</strong> ID Number
+                   </mat-error>
+                 </mat-form-field>
+                 <br>
+                 <br>
+
+                 <mat-form-field
+                 class="example-full-width"
+                 appearance="legacy"
+                 style="width: 95%;"
+               >
+                 <mat-label style="color:#0e1a3c">
+                   Enter Employee Biography</mat-label
+
+                 >
+                 <textarea
+                   type="text"
+                   matInput
+                   style="min-height: 40px;"
+                   [formControl]="biographyFormControl"
+                   [(ngModel)]="employee.Employee.Biography"
+                   name="MaintainDesc"
+                   placeholder="Add Employee Button not working; Screen Not Displaying"
+                   required
+                 ></textarea>
+                 <mat-error *ngIf="biographyFormControl.hasError('required')">
+                   Employee Biography is <strong>required</strong>
+                 </mat-error>
+               </mat-form-field>
+               <br>
+               <br>
+               <br>
+               <br>
+              <!--3 Columns-->
+               <div class="container">
+                <div class="row">
+                  <div class="col-sm" style="float: left;">
+                    <mat-form-field
+                    
+                    appearance="legacy"
+                   
+      
+                  >
+                       <mat-label style="color:#0e1a3c">Select Department</mat-label>
+                      <mat-select
+                        name="DeptID"
+                        placeholder="Favorite food"
+                        [formControl]="deptFormControl"
+                        [(ngModel)]="employee.Employee.DepartmentID"
+                        required
+                      >
+                        <mat-option
+                          *ngFor="let item of departmentList"
+                          [value]="item.DepartmentID"
+                          required
+                        >
+                          {{ item.DepartmentName }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="deptFormControl.hasError('required')">
+                        Department is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  
+                  <div class="col-sm" style="float: left; margin-left: 100px; ">
+                    <mat-form-field
+                    
+                    appearance="legacy"
+                    
+      
+                  >
+                       <mat-label style="color:#0e1a3c">Select Qualifications</mat-label>
+                    <mat-select
+                      multiple
+                      [formControl]="qualificationFormControl"
+                      name="EmployeeQualification"
+                      [(ngModel)]="employee.Qualifications"
+                      required
+                    >
+                      <mat-option
+                        *ngFor="let item of qualificationList"
+                        [value]="item.QualificationID"
+                      >
+                        {{ item.QualificationName }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="qualificationFormControl.hasError('required')">
+                      Qualifications selection is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+                  </div>
+
+                  <div class="col-sm" style="float:right;margin-right: 100px" >
+                    <mat-form-field
+              
+              appearance="legacy"
+             
+
+            >
+                 <mat-label style="color: #0e1a3c">Select User Role</mat-label>
+                <mat-select
+                  name="UserRoleID"
+                  placeholder="Favorite food"
+                  [(ngModel)]="employee.Employee.UserRoleID"
+                  [formControl]="userroleFormControl"
+                  required
+                >
+                  <mat-option
+                    *ngFor="let userrole of userRoleList"
+                    [value]="userrole.UserRoleID"
+                  >
+                    {{ userrole.RoleName }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="userroleFormControl.hasError('required')">
+                  User Role selection is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+                  </div>
+                  
+                  <div class="col-sm" style="float: right; padding-right: 5%;">
+                    <mat-form-field
+            
+              appearance="legacy"
+              
+
+            >
+            <mat-label style="color: #0e1a3c">Select Skills</mat-label>
+              <mat-select
+                multiple
+                name="EmployeeSkill"
+                [(ngModel)]="employee.Skills"
+                [formControl]="skillFormControl"
+                required
+              >
+                <mat-option
+                  *ngFor="let item of skillList"
+                  [value]="item.SkillID"
+                >
+                  {{ item.SkillName}} - {{item.SkillType}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="skillFormControl.hasError('required')">
+                Skills selection is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+                  </div>
+                </div>
+              </div>
+              <br>
+              <br>
+
+
+                 
+               </div>
+   
+               <div class="form-group" style="padding-right: 40%"></div>
+             </div>
+             <br>
+             <br>
+             <div class="button-container">
+               <button id="cancel" class="btn" (click)="onBack()">Cancel</button>
+               <button id="confirm" class="btn" (click)="onSubmit()">Confirm</button>
+           </div>
+           </form>
+         </mat-card-content>
+       </mat-card>
+     </div>
+   </div>

@@ -1,0 +1,79 @@
+
+
+          <div style= "padding-left: 2em; padding-right: 2em; padding-top: 9em;  height: 100vh;background-image: url('../../assets/gradient.gif');background-repeat: no-repeat;background-size: 100% 25%;;">
+            <!-- Mat Card Form for Read User Role -->
+            <div class="container-fluid" >
+              <mat-card class="matCard" style="border-bottom-left-radius: 15px;
+              border-bottom-right-radius: 15px;background-color: #ffffffd6;">
+                <div class="bigDiv" style="border-bottom-left-radius: 0px;
+                border-bottom-right-radius: 0px;">
+                  <div class="leftSearch" style="border-color: white;">
+                    <form class="navbar-form">
+                      <mat-form-field appearance="outline" color="white" style="width: 100%; border-color: white !important; color: #ffffff; padding-top: 1%;">
+                        <mat-label style=" color: #ffffff; background-color: transparent; border-bottom: none; font-size: 15px; width: 100%;">Search User Role</mat-label>
+                        <input type="text" style="border-color: #5090d000;" matInput name="searchDept" (keydown.enter)="doFilter($event)" placeholder="Ex. Admin">
+                        <mat-icon class="search" style="float: right; margin-top: -22px;">search</mat-icon>
+                      </mat-form-field>
+                    </form>
+                  </div>
+                </div>
+                
+
+               
+
+                <mat-card-content >
+                  <div class="table-hover table-container mat-elevation-z8" style="border-bottom-left-radius: 15px;
+                  border-bottom-right-radius: 15px;">
+                    <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8" id="DeptTable" style="border-bottom-left-radius: 15px;
+                    border-bottom-right-radius: 15px;">
+
+                      <!-- userRole Name Column -->
+                      <ng-container matColumnDef="RoleName">
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef style="color: #ffffff;">User Role Name</th>
+                        <td mat-cell *matCellDef="let userRole">
+                          {{ userRole.RoleName }}
+                        </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="RoleDescription">
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef style="color: #ffffff;">User Role Description</th>
+                        <td mat-cell *matCellDef="let userRole">
+                          {{ userRole.RoleDescription }}
+                        </td>
+                      </ng-container>
+
+                      <!-- View Column -->
+                      <ng-container matColumnDef="view">
+                        <th mat-header-cell *matHeaderCellDef style="text-align: center; color: #ffffff;">
+                          View
+                        </th>
+                        <td mat-cell *matCellDef="let userRole" style="text-align: center;">
+                          <button type="button" class="btn btn-default btn-lg" style="border-style: none;background-color: transparent;" (click)="onView(userRole)">
+                            <mat-icon aria-hidden="false" aria-label="View User Role">reply</mat-icon>
+                          </button>
+                        </td>
+                      </ng-container>
+
+                      <!-- Edit Column -->
+                      <ng-container matColumnDef="edit">
+                        <th mat-header-cell *matHeaderCellDef style="text-align: center; color: #ffffff;">
+                          Edit
+                        </th>
+                        <td mat-cell *matCellDef="let userRole" style="text-align: center;">
+                          <button type="button" class="btn btn-default btn-lg" style="border-style: none;background-color: transparent;" (click)="onEdit(userRole)">
+                            <mat-icon aria-hidden="false" aria-label="Edit User Role">edit</mat-icon>
+                          </button>
+                        </td>
+                      </ng-container>
+
+                      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+                    </table>
+                    <div *ngIf="noData | async" class="no-records" style="text-align: center; padding-top: 4em; font-size: larger;">
+                      No records found, please try again.
+                    </div>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </div>
+          </div>

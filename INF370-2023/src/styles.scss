@@ -1,0 +1,193 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$INF370-2023-primary: mat.define-palette(mat.$indigo-palette);
+$INF370-2023-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$INF370-2023-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$INF370-2023-theme: mat.define-light-theme((
+  color: (
+    primary: $INF370-2023-primary,
+    accent: $INF370-2023-accent,
+    warn: $INF370-2023-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($INF370-2023-theme);
+
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+*:not(.mat-icon){
+  font-family: 'Montserrat';
+  }
+
+.admin
+ {
+   margin: auto;
+   color: white;
+   font-size: 20px;
+   font-weight: 500;
+   padding: 5px 10px 5px 5px;
+   text-align: center;
+ }
+ .mat-drawer-inner-container::-webkit-scrollbar {
+  display: none;
+}
+.mat-expansion-panel-header-description,
+.mat-expansion-indicator::after {
+    color: white;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+.success-snackbar {
+  background: #d4edda;
+  color: #155724;
+}
+
+.warning-snackbar{
+  background: #fff3cd;
+  color: #856404;
+}
+
+.error-snackbar {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+
+// report styling
+.report-content{
+  position: absolute;
+  top: 9em;
+  left: 20em;
+  z-index: 2;
+}
+
+#report-type-title{
+  font-size: x-large;
+}
+
+.report-types{
+  padding:0 8em;
+  margin-top: 2em;
+  display: grid;
+  grid-gap: 60px 60px;
+  grid-template-columns: auto auto auto;
+}
+
+.report-type-tile{
+  height: 24em;
+  color: #5090D0;
+  width: 20em;
+  text-align: center;
+  box-shadow: 2px 5px 20px 10px rgba($color: #000000, $alpha: 0.1);
+}
+
+.report-icon-wrap{
+  padding: 2em 0;
+}
+
+mat-icon.report-icon{
+  text-align: center;
+  font-size: 50px;
+}
+
+.report-title{
+  line-height: 18px;
+  padding: 0 2em;
+  font-size: large;
+  font-weight: bold;
+}
+
+.report-type-description{
+  margin: 0 1.6em;
+  padding: 0 2em;
+  line-height: 18px;
+}
+
+.report-link{
+  font-weight: bold;
+  line-height: 18px;
+  margin: 2em 0!important;
+  // padding-left: 2em!important;
+  line-height: 18px;
+  display: grid;
+  grid-gap: 0 0;
+  grid-template-columns: auto auto;
+}
+
+.report-link{
+  margin-left: 4em!important;
+}
+
+mat-icon.report-link-icon{
+  font-weight: bold;
+  // margin-right: 2em;
+}
+
+.report-link:hover{
+  cursor: pointer;
+}
+.overlay {
+  width: 80%;
+  height: 70%;
+  background-color: white;
+  position: fixed;
+  z-index: 2;
+  margin-left: auto;
+  left: 10%;
+  bottom: 10%;
+  text-align: center;
+  z-index: -1;
+}
+#ending-space{
+  display: block;
+  margin: 4em!important;
+}
+
+.custom-modalbox {
+  mat-dialog-container {
+      padding-bottom: 5%;
+      padding-left: 0%;
+      padding-right: 0%;
+      padding-top: 0%;
+      overflow: hidden;
+  }
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Montserrat, "Montserrat", sans-serif !important; }
+
+

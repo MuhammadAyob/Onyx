@@ -1,0 +1,142 @@
+<!-- PARTICLE SYSTEM -->
+<div class="page-bg"></div>
+
+<div class="animation-wrapper">
+  <div class="particle particle-1"></div>
+  <div class="particle particle-2"></div>
+  <div class="particle particle-3"></div>
+  <div class="particle particle-4"></div>
+</div>
+
+
+  <div class="blurred-box">
+    <div style="background-image: url('../../assets/loading.gif');background-repeat: no-repeat;background-size: 100% 100%;" class="bouncer" *ngIf="isLoading">   
+    </div>
+    <div style="padding: 0% 2.5% 0% 2%;">
+      <br>
+      <br>
+      <br>
+   <div>
+    <p style="font-size:32px;padding-left: 37%; color: white;">Enter OTP</p>
+    <br>
+    <p style="font-size:12px;padding-left: 6%; color: white;">Ensure that you enter the OTP before the expiration date and time as specified in the email sent to you.</p>
+   </div>
+  
+      <form
+        #form="ngForm"
+        class="emailInput"
+        name="form"
+      >
+
+      <br>
+      <br>
+
+      <mat-form-field class="full-width" appearance="fill" style="font-family: Montserrat;">
+        <mat-label  style="font-family: Montserrat;">Enter OTP</mat-label>
+        <input
+        matInput
+        [formControl]="OTPFormControl"
+        placeholder="123456"
+        type="number"
+        maxlength="6"
+        name="ResetPasswordOTP"
+        [(ngModel)]="formData.OTP"
+        required
+      />
+      <mat-error *ngIf="OTPFormControl.hasError('required')">
+        OTP is <strong>required</strong>
+      </mat-error>
+      <mat-error *ngIf="OTPFormControl.hasError('pattern')">
+        OTP cannot be <strong>0</strong>and must NOT contain <strong>decimals</strong>
+      </mat-error>
+     
+      
+      </mat-form-field>
+<br>
+<br>
+<mat-form-field class="full-width" appearance="fill" style="font-family: Montserrat;">
+  <mat-label  style="font-family: Montserrat;">Enter Password</mat-label>
+  <input
+  [formControl]="passwordFormControl"
+                [type]="hide ? 'password' : 'text'"
+                name="Password"           
+                matInput
+                placeholder="Password must be minimum 6 characters and maximum 16 characters"
+                minlength="6"
+                [(ngModel)]="formData.Password"
+                required
+/>
+<button
+mat-icon-button
+matSuffix
+(click)="hide = !hide"
+[attr.aria-label]="'Hide Password'"
+[attr.aria-pressed]="hide"
+>
+<mat-icon>
+  {{ hide ? "visibility_off" : "visibility" }}
+</mat-icon>
+</button>
+
+<mat-error *ngIf="passwordFormControl.hasError('required')">
+  Password is <strong>required</strong>
+</mat-error>
+<mat-error *ngIf="passwordFormControl.hasError('minlength')">
+  Password must have a minimum of <strong>6</strong> characters
+</mat-error>
+<mat-error *ngIf="passwordFormControl.hasError('maxlength')">
+  Password must have a maxiumum of <strong>16</strong> characters
+</mat-error>
+</mat-form-field>
+<br>
+<br>
+<mat-form-field class="full-width" appearance="fill" style="font-family: Montserrat;">
+  <mat-label  style="font-family: Montserrat;">Confirm Password</mat-label>
+  <input
+  [formControl]="confirmPasswordFormControl"
+  [type]="hide ? 'password' : 'text'"
+  matInput
+  name="confirmPassword"            
+  placeholder="Confirm Password must be minimum 6 characters and maximum 16 characters"
+  minlength="6"
+  [(ngModel)]="confirmPassword"
+  required
+/>
+<button
+  mat-icon-button
+  matSuffix
+  (click)="hide = !hide"
+  [attr.aria-label]="'Hide Password'"
+  [attr.aria-pressed]="hide"
+>
+  <mat-icon>
+    {{ hide ? "visibility_off" : "visibility" }}
+  </mat-icon>
+</button>
+
+<mat-error *ngIf="confirmPasswordFormControl.hasError('required')">
+  Confirm password is <strong>required</strong>
+</mat-error>
+<mat-error *ngIf="confirmPasswordFormControl.hasError('minlength')">
+  Password must have a minimum of <strong>6</strong> characters
+</mat-error>
+<mat-error *ngIf="confirmPasswordFormControl.hasError('maxlength')">
+  Password must have a maxiumum of <strong>16</strong> characters
+</mat-error>
+</mat-form-field>
+<br>
+<br>
+      <div class="button-container">
+        <button id="cancel" class="btn"  (click)="onOTP(form)">Submit</button>
+        <button id="confirm" class="btn"  [routerLink]="['/reset-password']" routerLinkActive="router-link-active"> Back</button>
+    </div>
+    
+      </form>
+    </div>
+  </div>
+
+
+
+
+
+<!-- </body> -->

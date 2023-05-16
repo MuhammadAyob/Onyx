@@ -1,0 +1,72 @@
+<div style="padding-left: 3em; padding-right: 3em; padding-top: 9em;height:100vh;background-image: url('../../assets/gradient.gif');background-repeat: no-repeat;background-size: 100% 25%;">
+
+  <div>
+    <mat-card class="matCard" style="border-radius: 34px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8), 0 1px 3px rgba(0, 0, 0, 0.8);">
+      <mat-card-header class="cardHeader" style="padding-bottom: 1%;text-align: center">
+        <mat-card-title-group style="margin-left: 40%;">
+          <mat-card-title style="font-weight: 500; "> Update Type </mat-card-title>
+        </mat-card-title-group>
+      </mat-card-header>
+      <mat-card-content class="matContent">
+        <form>
+          <br />
+          <br />
+          <div class="form-group">
+            <div style="padding: 0% 2.5% 0% 2%; min-width: 100%">
+              <mat-form-field 
+              class="example-full-width" 
+              appearance="legacy"
+              style="width: 95%;"
+              >
+                <mat-label style="color: #0e1a3c">Skill Type Name</mat-label>
+                <input
+                  type="text"
+                  matInput
+                  [formControl]="nameFormControl"
+                  name="SkillTypeName"
+                  [(ngModel)]="skillType.SkillTypeName"
+                  style="color: #0e1a3c"
+                  required
+                />
+                <mat-error *ngIf="nameFormControl.hasError('required')">
+                  Skill Type Name is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+              <br />
+              <br />
+  
+              <mat-form-field
+                class="example-full-width"
+                appearance="legacy"
+                style="width: 95%;"
+              >
+                <mat-label style="color: #0e1a3c"
+                  >Skill Type Description</mat-label
+                >
+                <textarea
+                  matInput
+                  [formControl]="descFormControl"
+                  rows="5"
+                  cols="90"
+                  name="SkillTypeDesc"
+                  [(ngModel)]="skillType.TypeDescription"
+                  placeholder="Ex. The Flying Man"
+                  required
+                ></textarea>
+                <mat-error *ngIf="descFormControl.hasError('required')">
+                  Skill Type Description is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="form-group" style="padding-right: 40%"></div>
+          </div>
+          <div class="button-container">
+            <button id="cancel" class="btn" (click)="onBack()">Cancel</button>
+            <button id="confirm" class="btn" (click)="onSubmit()">Confirm</button>
+        </div>
+         
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  </div>

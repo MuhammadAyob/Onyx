@@ -1,0 +1,111 @@
+<!-- PARTICLE SYSTEM -->
+<div class="page-bg"></div>
+
+<div class="animation-wrapper">
+  <div class="particle particle-1"></div>
+  <div class="particle particle-2"></div>
+  <div class="particle particle-3"></div>
+  <div class="particle particle-4"></div>
+</div>
+
+
+  <div class="blurred-box">
+    <div style="background-image: url('../../assets/loading.gif');background-repeat: no-repeat;background-size: 100% 100%;" class="bouncer" *ngIf="isLoading">   
+    </div>
+    <div style="padding: 0% 2.5% 0% 2%;">
+      <br>
+      <br>
+      <br>
+   <div>
+    <p style="font-size:32px;padding-left: 42%; color: white;"> Login</p>
+   </div>
+  
+      <form
+        #form="ngForm"
+        class="emailInput"
+        name="loginForm"
+        [formGroup]="loginForm"
+      >
+
+      <br>
+      <br>
+      <br>
+
+      <mat-form-field class="full-width" appearance="fill" style="font-family: Montserrat;">
+        <mat-label  style="font-family: Montserrat;">Email</mat-label>
+        <input
+          formControlName="Username"
+          matInput
+          type="email"
+          name="Username"
+          [pattern]="emailPattern"
+          placeholder="xyz@gmail.com"
+          [(ngModel)]="formData.Username"
+          required
+        />
+        <mat-error *ngIf="!loginForm.controls['Username'].valid">
+          Email invalid
+        </mat-error>
+      </mat-form-field>
+<br>
+<br>
+      <div>
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label >Password</mat-label>
+          <input
+            formControlName="Password"
+            matInput
+            [type]="hide ? 'password' : 'text'"
+            name="Password"
+            placeholder="Enter password"
+            [(ngModel)]="formData.Password"
+            (keydown.enter)="onLogin(form)"
+            required
+          />
+
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="hide = !hide"
+            (keydown.enter)="$event.preventDefault()"
+            [attr.aria-label]="'Hide Password'"
+            [attr.aria-pressed]="hide"
+          >
+            <mat-icon>
+              {{ hide ? "visibility_off" : "visibility" }}
+            </mat-icon>
+          </button>
+
+          <mat-error *ngIf="!loginForm.controls['Password'].valid">
+            Password is must be minimum 6 characters and maximum 16 characters
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <br>
+        <span>
+          <a
+          style="color:white;padding-left: 39.5%;"
+            class="text-link"
+            class="aLink"
+            routerLink="/reset-password"
+            >Reset Password</a
+          >
+        </span>
+        <br>
+        <br>
+        
+      </div>
+      <div class="button-container">
+        <button id="cancel" class="btn" (click)="onLogin(form)">Login</button>
+        <button id="confirm" class="btn" (click)="onRegister()">Register</button>
+    </div>
+    
+      </form>
+    </div>
+  </div>
+
+
+
+
+
+<!-- </body> -->

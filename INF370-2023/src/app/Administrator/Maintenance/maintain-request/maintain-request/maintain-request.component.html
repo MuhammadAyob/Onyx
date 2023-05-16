@@ -1,0 +1,182 @@
+<!-- Card Form for Input -->
+<div style="padding-left: 3em; padding-right: 3em; padding-top: 9em;height:100vh;background-image: url('../../assets/gradient.gif');background-repeat: no-repeat;background-size: 100% 25%;">
+
+  <div>
+    <mat-card class="matCard" style="border-radius: 34px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8), 0 1px 3px rgba(0, 0, 0, 0.8);">
+      <mat-card-header class="cardHeader" style="padding-bottom: 1%;text-align: center">
+        <mat-card-title-group style="margin-left: 40%;">
+          <mat-card-title style="font-weight: 500; "
+            >View Query</mat-card-title
+          >
+        </mat-card-title-group>
+  
+     
+      </mat-card-header>
+  
+      <mat-card-content class="matContent">
+        <form>
+          <div class="form-group">
+            <br /><br />
+            <div style="padding: 0% 2.5% 0% 2%; min-width: 100%">
+              <!--Image-->
+              <div style="margin-left: 33%; padding-bottom: 50px">
+                <mat-label style="color:#0e1a3c ; padding-left: 7%;"
+                  >Maintenance Issue Image</mat-label
+                >
+                <div>
+                  <div style="padding-top: 10px;">
+                    <img
+                      src="{{'data:image/png;base64,' + maintenance.Image}}"
+                      width="300px; height;300px"
+                    >
+                  </div>
+                </div>
+              </div>
+              <!--End of Image-->
+
+              <mat-label style="color: #0e1a3c">
+                Select Maintenance Issue Type</mat-label>
+  
+              <br />
+              <mat-form-field 
+              class="example-full-width" 
+              appearance="legacy"
+              style="width: 95%;">
+  
+              
+              <mat-select
+              name="MaintainTypeID"
+              [(ngModel)]="maintenance.MaintenanceTypeID"
+              (valueChange)="selectMaintenanceType($event)"
+              [formControl]="typeFormControl"
+              required
+            >
+              <mat-option
+                *ngFor="let item of maintenanceTypeList"
+                [value]="item.MaintenanceTypeID"
+              >
+                {{ item.Type }}
+              </mat-option>
+            </mat-select>
+             <mat-error *ngIf="typeFormControl.hasError('required')">
+              Maintenance type is <strong>required</strong><br />
+            </mat-error>
+              </mat-form-field>
+              <br />
+              <br />
+
+              <mat-label style="color: #0e1a3c">
+                Select Maintenance Issue Priority Level</mat-label>
+  
+              <br />
+              <mat-form-field 
+              class="example-full-width" 
+              appearance="legacy"
+              style="width: 95%;">
+              <mat-select
+              name="MaintainPriorityID"
+              [(ngModel)]="maintenance.MaintenancePriorityID"
+              (valueChange)="selectMaintenancePriority($event)"
+              [formControl]="priorityFormControl"
+            required>
+              <mat-option
+              *ngFor="let item of maintenancePriorityList"
+              [value]="item.MaintenancePriorityID"
+              >
+                {{ item.Priority }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="priorityFormControl.hasError('required')">
+              Maintenance priority is <strong>required</strong><br />
+            </mat-error>
+              
+              </mat-form-field>
+              <br />
+              <br />
+  
+              <mat-label style="color: #0e1a3c">
+                Maintenance Issue Location</mat-label
+              >
+  
+              <br />
+              <mat-form-field
+                class="example-full-width"
+                appearance="legacy"
+                style="width: 95%;"
+              >
+  
+                <textarea
+                  readonly
+                  matInput
+                  rows="5"
+                  cols="90"
+                  name="MaintainLocation"
+                  [formControl]="locationFormControl"
+                  [(ngModel)]="maintenance.Location"
+                  
+                 
+                  style="color: #0e1a3c"></textarea>
+                  
+                <mat-error
+                *ngIf="locationFormControl.hasError('required')"
+                >
+                  Maintenance Issue Location is <strong>required</strong><br />
+                </mat-error>
+                <mat-error
+                *ngIf="locationFormControl.hasError('pattern')"
+                >
+                  Maintenance Issue Location must only contain <strong>alpha characters</strong><br />
+                </mat-error>
+              </mat-form-field>
+              <br>
+              <br>
+
+              <mat-label style="color: #0e1a3c">
+                Maintenance Issue Description</mat-label
+              >
+  
+              <br />
+              <mat-form-field
+                class="example-full-width"
+                appearance="legacy"
+                style="width: 95%;"
+              >
+  
+                <textarea
+                  readonly
+                  matInput
+                  rows="5"
+                  cols="90"
+                  [formControl]="descFormControl"
+                  name="MaintainDesc"
+                  [(ngModel)]="maintenance.Description"
+                  
+                 
+                  style="color: #0e1a3c"></textarea>
+                  <mat-error
+                  *ngIf="descFormControl.hasError('required')"
+                  >
+                    Maintenance Issue Description is <strong>required</strong>
+                  </mat-error>
+                  <mat-error
+                  *ngIf="descFormControl.hasError('pattern')"
+                  >
+                    Maintenance Issue Description must only contain <strong>alpha characters</strong><br />
+                  </mat-error>
+              </mat-form-field>
+              <br>
+              <br>
+            </div>
+  
+            <div class="form-group" style="padding-right: 40%"></div>
+          </div>
+  
+          <div class="button-container">
+            <button id="cancel" class="btn" (click)="onBack()">Cancel</button>
+            <button id="confirm" class="btn" (click)="onSubmit()">Confirm</button>
+        </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  </div>

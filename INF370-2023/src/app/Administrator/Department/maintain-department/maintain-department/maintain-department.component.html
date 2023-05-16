@@ -1,0 +1,76 @@
+<div style="padding-left: 3em; padding-right: 3em; padding-top: 9em;height:100vh;background-image: url('../../assets/gradient.gif');background-repeat: no-repeat;background-size: 100% 25%;">
+
+  <div>
+    <mat-card class="matCard" style="border-radius: 34px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8), 0 1px 3px rgba(0, 0, 0, 0.8);">
+      <mat-card-header class="cardHeader" style="padding-bottom: 1%;text-align: center">
+        <mat-card-title-group style="margin-left: 38%;">
+          <mat-card-title style="font-weight: 500; "> Update Department </mat-card-title>
+        </mat-card-title-group>
+      </mat-card-header>
+      <mat-card-content class="matContent">
+        <form>
+          <br />
+          <br />
+          <div class="form-group">
+            <div style="padding: 0% 2.5% 0% 2%; min-width: 100%">
+              <mat-form-field 
+              class="example-full-width" 
+              appearance="legacy"
+              style="width: 95%;"
+              >
+                <mat-label style="color: #0e1a3c">Department Name</mat-label>
+                <input
+                  type="text"
+                  matInput
+                  [formControl]="nameFormControl"
+                  name="DeptName"
+                  [(ngModel)]="department.DepartmentName"
+                  style="color: #0e1a3c"
+                  placeholder="Ex. Department of Informatics"
+                  required
+                />
+                <mat-error *ngIf="nameFormControl.hasError('required')">
+                  Department Name is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+              <br />
+                 <br />
+                 <mat-form-field
+                 class="example-full-width"
+                 style="width: 95%;"
+                 appearance="legacy"
+               >
+                 <mat-label style="color: #0e1a3c"
+                   >Enter Department Description</mat-label
+                 >
+                 <textarea
+                   matInput
+                   style="color: #0e1a3c"
+                   [formControl]="descFormControl"
+                   rows="5"
+                   cols="90"
+                   name="QualificationDesc"
+                   [(ngModel)]="department.DepartmentDescription"  
+                   ngModelOptions="{standalone:true}"
+                   placeholder="Ex. This department involves all IS aspects"
+                   required
+                 ></textarea>
+                 <mat-error *ngIf="descFormControl.hasError('required')">
+                  Department Description is <strong>required</strong>
+                </mat-error>
+               </mat-form-field>
+  
+            
+            </div>
+            <div class="form-group" style="padding-right: 40%"></div>
+          </div>
+          <div class="button-container">
+            <button id="cancel" class="btn" (click)="onBack()">Cancel</button>
+            <button id="confirm" class="btn" (click)="onSubmit()">Confirm</button>
+        </div>
+         
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  </div>

@@ -1,0 +1,93 @@
+<div style="padding-left: 2em; padding-right: 2em; padding-top: 9em;height:100vh;background-image: url('../../assets/gradient.gif');background-repeat: no-repeat;background-size: 100% 25%;">
+
+
+  <!-- Mat Card Form for Read Departments -->
+  <div class="container-fluid">
+    <mat-card class="matCard">
+      <div class="bigDiv">
+        <div class="leftSearch">
+          <form class="navbar-form">
+            <mat-form-field appearance="outline" color="white" style="width: 100%; border-color: white !important; color: #ffffff; padding-top: 1%;">
+              <mat-label style=" color: #ffffff; background-color: transparent; border-bottom: none; font-size: 15px; width: 100%;">Search Videos</mat-label>
+              <input type="text" style="border-color: #5090d000;" matInput name="searchDept" 
+               [(ngModel)]="search"
+              placeholder="Ex. Effective Communication in the workplace">
+              <mat-icon class="search" style="float: right; margin-top: -22px;">search</mat-icon>
+            </mat-form-field>
+          </form>
+        </div>
+        <div fxFlex></div>
+        <div fxLayoutAlign="center center" style="margin-top: 25px;padding-right: 10px;" >
+          <button type="button" mat-mini-fab style="float: right; background-color: #920f4c;" class="btn btn-default btn-lg" (click)="addNew()">
+            <mat-icon aria-hidden="false" aria-label="Add FAQ" style="color: white; ">add</mat-icon></button>
+          </div>
+      </div>
+
+      <br />
+
+    
+
+      <mat-card-content style="padding-top: 1em;" class="matContentRow" >
+        <div
+          style="
+            text-align: center;
+            margin: 0 2% 2% 0;
+            padding: 10% 2% 0 2%;
+          "
+          *ngFor="let url of holderList | videoPipe: search"
+          class="raisedbox"
+          
+        >
+          <ng-container>
+           <iframe [src]="url.VideoLink | VimeoUrl" height="150" width="300" style="border-radius: 40px;"
+           mozallowfullscreen allowfullscreen></iframe>
+            
+            <br />
+            <mat-label style="padding-top: 3%; margin: 0 auto;">
+              <b>{{url.VideoName}}</b> 
+            </mat-label>
+            <br>
+            <br>
+            <mat-label style="padding-top: 3%; margin: 0 auto;">
+              {{url.Description}}
+            </mat-label>
+            <button
+              style="float: right"
+              mat-icon-button
+              [matMenuTriggerFor]="menu"
+              aria-label="Example icon-button with a menu"
+            >
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu" class="my-class">
+              <button mat-menu-item (click)="onEdit(url)">
+                <mat-icon style="color: green">brush</mat-icon>
+                <span>Edit</span>
+              </button>
+              <button mat-menu-item (click)="onDelete(url.VideoID)">
+                <mat-icon style="color: red">remove_circle_outline</mat-icon>
+                <span>Delete</span>
+              </button>
+            </mat-menu>
+          </ng-container>
+        </div>
+
+        <div *ngIf="( holderList | videoPipe: search)!.length <= 0" class="no-records" style="text-align: center; margin-bottom: 6%; padding-left: 42%; padding-top: 4em; font-size: larger;">
+          No videos found on this page, please try again.
+        </div>
+
+        <br />
+      </mat-card-content>
+      <div style="width: 100%;">
+      <button  style="
+      background-color:transparent;border-style: none;"  class= 'btn ' [disabled]='currentPage == 0' (click)="prevPage()"><mat-icon>arrow_back_ios</mat-icon></button>
+      <span style="padding-left: 42%;">( Page: {{currentPage}} )</span>
+      <button class='btn ' [disabled]='(currentPage+1)*pageSize > instructionalVideoList.length' style="float: right; 
+        background-color:transparent;border-style: none; " (click)="nextPage()"><mat-icon>arrow_forward_ios</mat-icon></button>
+    </div>
+    </mat-card>
+  </div>
+</div>
+
+<br>
+<br>
