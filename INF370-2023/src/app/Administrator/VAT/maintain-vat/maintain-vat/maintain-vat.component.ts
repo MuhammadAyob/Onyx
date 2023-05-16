@@ -162,7 +162,7 @@ showDialog(title: string, message: string): void {
               {
                 data: {
                   dialogTitle: 'Error',
-                  dialogMessage: 'VAT Value cannot be the same as the next immeediate date record, please enter a different amount',
+                  dialogMessage: 'VAT Value cannot be the same as the next date record, please enter a different amount',
                   operation: 'ok',
                 },
                 width: '50vw',
