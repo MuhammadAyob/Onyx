@@ -101,7 +101,7 @@ showDialog(title: string, message: string): void {
       dialogMessage: message,
       operation: 'add',
       departmentData: this.vat,
-    }, //^captured department info here for validation
+    }, //^captured vat info here for validation
     height: '30vh',
     width: '50vw',
   });
