@@ -73,7 +73,7 @@ export class AddQualificationComponent implements OnInit {
     else
     {return true}
   }
-
+//
   onArrowBack(): void {
     this.location.back();
   }
