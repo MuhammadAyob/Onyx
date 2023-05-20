@@ -74,9 +74,7 @@ export class AddQualificationComponent implements OnInit {
     {return true}
   }
 
-  onArrowBack(): void {
-    this.location.back();
-  }
+
   onBack() {
     this.location.back();
   }
