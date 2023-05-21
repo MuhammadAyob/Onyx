@@ -131,7 +131,7 @@ faq!:FAQ;
                 {
                   data: {
                     dialogTitle: 'Error',
-                    dialogMessage: 'FAQ Exists, please enterS a different FAQ',
+                    dialogMessage: 'FAQ Exists, please enter a different FAQ',
                     operation: 'ok',
                   },
                   width: '50vw',

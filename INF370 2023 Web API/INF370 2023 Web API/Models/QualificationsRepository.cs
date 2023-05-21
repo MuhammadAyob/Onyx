@@ -57,7 +57,7 @@ namespace INF370_2023_Web_API.Models
 
             if (await QualificationNameExists(qualification.QualificationName))
             {
-                return new { Status = 403, Message = "Qualification exists" };
+                return new { Status = 404, Message = "Qualification exists" };
             }
 
             try

@@ -147,7 +147,7 @@ showDialog(title: string, message: string): void {
               ExistsDialogComponent,
               {
                 data: {
-                  dialogTitle: 'Error',
+                  dialogTitle: 'Input error',
                   dialogMessage: 'VAT Amount cannot be the same as current amount, please enter a different %.',
                   operation: 'ok',
                 },

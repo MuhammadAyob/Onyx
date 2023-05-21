@@ -111,8 +111,8 @@ export class ReadVATComponent implements OnInit {
   }
   
   onDelete(obj:any) {
-    const title = 'Confirm Delete VAT';
-    const message = 'Are you sure you want to delete the VAT?';
+    const title = 'Confirm Delete VAT record';
+    const message = 'Are you sure you want to delete the VAT record?';
     
     const dialogReference = this.dialog.open(ConfirmDialogComponent, {
       data: {

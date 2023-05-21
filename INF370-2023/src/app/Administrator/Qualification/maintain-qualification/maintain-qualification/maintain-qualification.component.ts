@@ -129,7 +129,7 @@ showDialog(title: string, message: string): void {
               {
                 data: {
                   dialogTitle: 'Error',
-                  dialogMessage: 'Qualification exists, please enter a different qualification name',
+                  dialogMessage: 'Qualification exists, please enter a different qualification',
                   operation: 'ok',
                 },
                 width: '50vw',

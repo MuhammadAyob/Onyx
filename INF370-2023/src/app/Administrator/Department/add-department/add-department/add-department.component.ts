@@ -63,7 +63,7 @@ export class AddDepartmentComponent implements OnInit {
       });
     } else {
       const title = 'Confirm New Department';
-      const message = 'Are you sure you want to add the new department?';
+      const message = 'Are you sure you want to add the new Department?';
       this.showDialog(title, message);
     }
   }
@@ -140,7 +140,7 @@ export class AddDepartmentComponent implements OnInit {
                 {
                   data: {
                     dialogTitle: 'Error',
-                    dialogMessage: 'Department Name exists in database, please enter a different name.',
+                    dialogMessage: 'Department exists, please enter a different Department.',
                     operation: 'ok',
                   },
                   width: '50vw',

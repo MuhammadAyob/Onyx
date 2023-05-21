@@ -152,7 +152,7 @@ export class AddTrainingVideoComponent implements OnInit {
                 ExistsDialogComponent,
                 {
                   data: {
-                    dialogTitle: 'InstructionalVideo Exists',
+                    dialogTitle: 'Instructional Video Exists',
                     dialogMessage: 'Enter a new video name',
                     operation: 'ok',
                   },
@@ -167,7 +167,7 @@ export class AddTrainingVideoComponent implements OnInit {
                 ExistsDialogComponent,
                 {
                   data: {
-                    dialogTitle: 'InstructionalVideo Link Exists',
+                    dialogTitle: 'Instructional Video Link Exists',
                     dialogMessage: 'Enter a new video link',
                     operation: 'ok',
                   },

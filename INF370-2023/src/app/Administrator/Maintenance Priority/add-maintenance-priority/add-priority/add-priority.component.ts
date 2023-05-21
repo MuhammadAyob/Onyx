@@ -137,7 +137,7 @@ showDialog(title: string, message: string): void {
               {
                 data: {
                   dialogTitle: 'Error',
-                  dialogMessage: 'Maintenance Priority exists in database, please enter a different name.',
+                  dialogMessage: 'Maintenance Priority exists, please enter a different name.',
                   operation: 'ok',
                 },
                 width: '50vw',

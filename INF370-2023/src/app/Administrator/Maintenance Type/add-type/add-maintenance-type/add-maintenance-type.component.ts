@@ -139,7 +139,7 @@ constructor(
                 {
                   data: {
                     dialogTitle: 'Error',
-                    dialogMessage: 'Maintenance Type exists in database, please enter a different name.',
+                    dialogMessage: 'Maintenance Type exists, please enter a different Maintenance Type.',
                     operation: 'ok',
                   },
                   width: '50vw',

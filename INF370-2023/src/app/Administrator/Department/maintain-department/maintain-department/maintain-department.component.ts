@@ -63,8 +63,8 @@ public dataSource = new MatTableDataSource<Department>();
         height: '27vh',
       });
     } else {
-      const title = 'Confirm Edit Department';
-      const message = 'Are you sure you want to save changes the department?';
+      const title = 'Confirm Update Department';
+      const message = 'Are you sure you want to save changes to the Department?';
       const popupMessage = 'Department changes successful!';
       this.showDialog(title, message, popupMessage);
     }
@@ -125,7 +125,7 @@ public dataSource = new MatTableDataSource<Department>();
                 {
                   data: {
                     dialogTitle: 'Error',
-                    dialogMessage: 'Department name exists, please enter a different name',
+                    dialogMessage: 'Department exists, please enter a different Department',
                     operation: 'ok',
                   },
                   width: '50vw',

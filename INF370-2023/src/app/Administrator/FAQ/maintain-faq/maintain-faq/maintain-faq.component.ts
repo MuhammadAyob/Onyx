@@ -104,11 +104,12 @@ export class MaintainFaqComponent implements OnInit {
                 ExistsDialogComponent,
                 {
                   data: {
-                    dialogTitle: 'FAQ Exists',
-                    dialogMessage: 'Enter a different question',
+                    dialogTitle: 'Error',
+                    dialogMessage: 'FAQ exists, please enter a different FAQ',
                     operation: 'ok',
                   },
-                  width: '25vw',
+                  width: '50vw',
+                  height:'30vh'
                 }
               );
             }

@@ -135,8 +135,8 @@ export class AddQualificationComponent implements OnInit {
                 ExistsDialogComponent,
                 {
                   data: {
-                    dialogTitle: 'Qualification Exists',
-                    dialogMessage: 'Enter a different qualification name',
+                    dialogTitle: 'Error',
+                    dialogMessage: 'Qualification exists, please enter a different qualification',
                     operation: 'ok',
                   },
                   width: '50vw',
