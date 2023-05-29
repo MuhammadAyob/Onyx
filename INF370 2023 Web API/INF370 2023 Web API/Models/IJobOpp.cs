@@ -14,5 +14,6 @@ namespace INF370_2023_Web_API.Models
         Task<object> GetJobOpps();
         Task<object> GetWorkTypes();
         Task<object> GetStatuses();
+        Task<object> ExpiredJobOpportunity();
     }
 }

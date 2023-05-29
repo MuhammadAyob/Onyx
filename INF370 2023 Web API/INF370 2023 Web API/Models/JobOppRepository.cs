@@ -57,6 +57,33 @@ namespace INF370_2023_Web_API.Models
             }
         }
 
+        public async Task<object> ExpiredJobOpportunity()
+        {
+            try
+            {
+                db.Configuration.ProxyCreationEnabled=false;
+                List<JobOpportunity> opportunity = await db.JobOpportunities.Where(s => s.JobOppStatusID !=3).ToListAsync();
+                
+                foreach (JobOpportunity job in opportunity)
+                {
+                    if ((DateTime.Now).AddDays(-1) > job.JobOppDeadline)
+
+                    {
+                        job.JobOppStatusID = 2;
+                        db.Entry(job).State = EntityState.Modified;
+
+                    }
+                    await db.SaveChangesAsync();
+                }
+
+                return new { Status = 200, Message = "Status updated" };
+            }
+            catch (Exception)
+            {
+                return new { Status = 500, Message = "Internal server error, please try again" };
+            }
+        }
+
         public async Task<object> GetJobOpps()
         {
             try
@@ -131,6 +158,16 @@ namespace INF370_2023_Web_API.Models
                 if (dup != null)
                 {
                     return new { Status = 400, Message = "Job exists" };
+                }
+
+                if(job.JobOppStatusID == 2)
+                {
+                    job.JobOppDeadline = DateTime.Now;
+                }
+
+                if(job.JobOppStatusID == 1 && ((DateTime.Now).AddDays(-1) > job.JobOppDeadline))
+                {
+                    return new { Status = 600, Message = "Ensure that deadline is set to another day" };
                 }
 
                 db.Entry(job).State = EntityState.Modified;

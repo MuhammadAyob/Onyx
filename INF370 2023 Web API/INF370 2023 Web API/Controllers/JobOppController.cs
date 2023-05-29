@@ -39,6 +39,13 @@ namespace INF370_2023_Web_API.Controllers
             return await _jobRepo.GetStatuses();
         }
 
+        [HttpGet]
+        [Route("api/ExpiredJobs")]
+        public async Task<object> ExpiredJobs()
+        {
+            return await _jobRepo.ExpiredJobOpportunity();
+        }
+
         [HttpPost]
         [Route("api/AddJob")]
         public async Task<object>AddJob(JobOpportunity job)
