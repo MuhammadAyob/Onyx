@@ -189,7 +189,6 @@
     <Property Name="JobOppTitle" Type="varchar(max)" Nullable="false" />
     <Property Name="JobOppDescription" Type="varchar(max)" Nullable="false" />
     <Property Name="JobOppRequirements" Type="varchar(max)" Nullable="false" />
-    <Property Name="DepartmentID" Type="int" Nullable="false" />
     <Property Name="JobOppDeadline" Type="date" Nullable="false" />
     <Property Name="WorkTypeID" Type="int" Nullable="false" />
     <Property Name="JobOppStatusID" Type="int" Nullable="false" />
@@ -676,18 +675,6 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_JobOpportunity_Department">
-    <End Role="Department" Type="Self.Department" Multiplicity="1" />
-    <End Role="JobOpportunity" Type="Self.JobOpportunity" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Department">
-        <PropertyRef Name="DepartmentID" />
-      </Principal>
-      <Dependent Role="JobOpportunity">
-        <PropertyRef Name="DepartmentID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_JobOpportunity_JobOppStatus">
     <End Role="JobOppStatus" Type="Self.JobOppStatus" Multiplicity="1" />
     <End Role="JobOpportunity" Type="Self.JobOpportunity" Multiplicity="*" />
@@ -1053,10 +1040,6 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
     <AssociationSet Name="FK_InterviewSlot_ShortList" Association="Self.FK_InterviewSlot_ShortList">
       <End Role="ShortList" EntitySet="ShortList" />
       <End Role="InterviewSlot" EntitySet="InterviewSlot" />
-    </AssociationSet>
-    <AssociationSet Name="FK_JobOpportunity_Department" Association="Self.FK_JobOpportunity_Department">
-      <End Role="Department" EntitySet="Department" />
-      <End Role="JobOpportunity" EntitySet="JobOpportunity" />
     </AssociationSet>
     <AssociationSet Name="FK_JobOpportunity_JobOppStatus" Association="Self.FK_JobOpportunity_JobOppStatus">
       <End Role="JobOppStatus" EntitySet="JobOppStatus" />

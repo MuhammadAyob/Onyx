@@ -24,14 +24,12 @@ namespace INF370_2023_Web_API.Models
         public string JobOppTitle { get; set; }
         public string JobOppDescription { get; set; }
         public string JobOppRequirements { get; set; }
-        public int DepartmentID { get; set; }
         public System.DateTime JobOppDeadline { get; set; }
         public int WorkTypeID { get; set; }
         public int JobOppStatusID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Application> Applications { get; set; }
-        public virtual Department Department { get; set; }
         public virtual JobOppStatu JobOppStatu { get; set; }
         public virtual WorkType WorkType { get; set; }
     }

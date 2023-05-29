@@ -201,20 +201,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="JobOpportunities">
-      <EntityTypeMapping TypeName="Model.JobOpportunity">
-        <MappingFragment StoreEntitySet="JobOpportunity">
-          <ScalarProperty Name="JobOppID" ColumnName="JobOppID" />
-          <ScalarProperty Name="JobOppTitle" ColumnName="JobOppTitle" />
-          <ScalarProperty Name="JobOppDescription" ColumnName="JobOppDescription" />
-          <ScalarProperty Name="JobOppRequirements" ColumnName="JobOppRequirements" />
-          <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
-          <ScalarProperty Name="JobOppDeadline" ColumnName="JobOppDeadline" />
-          <ScalarProperty Name="WorkTypeID" ColumnName="WorkTypeID" />
-          <ScalarProperty Name="JobOppStatusID" ColumnName="JobOppStatusID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="JobOppStatus">
       <EntityTypeMapping TypeName="Model.JobOppStatu">
         <MappingFragment StoreEntitySet="JobOppStatus">
@@ -463,6 +449,19 @@
         <MappingFragment StoreEntitySet="MaxSlotsPerDay">
           <ScalarProperty Name="NumberOfSlots" ColumnName="NumberOfSlots" />
           <ScalarProperty Name="MaxID" ColumnName="MaxID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JobOpportunities">
+      <EntityTypeMapping TypeName="Model.JobOpportunity">
+        <MappingFragment StoreEntitySet="JobOpportunity">
+          <ScalarProperty Name="JobOppStatusID" ColumnName="JobOppStatusID" />
+          <ScalarProperty Name="WorkTypeID" ColumnName="WorkTypeID" />
+          <ScalarProperty Name="JobOppDeadline" ColumnName="JobOppDeadline" />
+          <ScalarProperty Name="JobOppRequirements" ColumnName="JobOppRequirements" />
+          <ScalarProperty Name="JobOppDescription" ColumnName="JobOppDescription" />
+          <ScalarProperty Name="JobOppTitle" ColumnName="JobOppTitle" />
+          <ScalarProperty Name="JobOppID" ColumnName="JobOppID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

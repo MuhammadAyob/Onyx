@@ -44,7 +44,6 @@ namespace INF370_2023_Web_API.Models
         public virtual DbSet<FAQ> FAQs { get; set; }
         public virtual DbSet<InstructionalVideo> InstructionalVideos { get; set; }
         public virtual DbSet<InterviewSlot> InterviewSlots { get; set; }
-        public virtual DbSet<JobOpportunity> JobOpportunities { get; set; }
         public virtual DbSet<JobOppStatu> JobOppStatus { get; set; }
         public virtual DbSet<Lesson> Lessons { get; set; }
         public virtual DbSet<LessonResource> LessonResources { get; set; }
@@ -71,5 +70,6 @@ namespace INF370_2023_Web_API.Models
         public virtual DbSet<OTPTimer> OTPTimers { get; set; }
         public virtual DbSet<TermsAndCondition> TermsAndConditions { get; set; }
         public virtual DbSet<MaxSlotsPerDay> MaxSlotsPerDays { get; set; }
+        public virtual DbSet<JobOpportunity> JobOpportunities { get; set; }
     }
 }

@@ -18,7 +18,6 @@ namespace INF370_2023_Web_API.Models
         public Department()
         {
             this.Employees = new HashSet<Employee>();
-            this.JobOpportunities = new HashSet<JobOpportunity>();
         }
     
         public int DepartmentID { get; set; }
@@ -27,7 +26,5 @@ namespace INF370_2023_Web_API.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Employee> Employees { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<JobOpportunity> JobOpportunities { get; set; }
     }
 }

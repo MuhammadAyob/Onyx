@@ -194,7 +194,6 @@
           <Property Name="JobOppTitle" Type="varchar(max)" Nullable="false" />
           <Property Name="JobOppDescription" Type="varchar(max)" Nullable="false" />
           <Property Name="JobOppRequirements" Type="varchar(max)" Nullable="false" />
-          <Property Name="DepartmentID" Type="int" Nullable="false" />
           <Property Name="JobOppDeadline" Type="date" Nullable="false" />
           <Property Name="WorkTypeID" Type="int" Nullable="false" />
           <Property Name="JobOppStatusID" Type="int" Nullable="false" />
@@ -681,18 +680,6 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_JobOpportunity_Department">
-          <End Role="Department" Type="Self.Department" Multiplicity="1" />
-          <End Role="JobOpportunity" Type="Self.JobOpportunity" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Department">
-              <PropertyRef Name="DepartmentID" />
-            </Principal>
-            <Dependent Role="JobOpportunity">
-              <PropertyRef Name="DepartmentID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_JobOpportunity_JobOppStatus">
           <End Role="JobOppStatus" Type="Self.JobOppStatus" Multiplicity="1" />
           <End Role="JobOpportunity" Type="Self.JobOpportunity" Multiplicity="*" />
@@ -1059,10 +1046,6 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
             <End Role="ShortList" EntitySet="ShortList" />
             <End Role="InterviewSlot" EntitySet="InterviewSlot" />
           </AssociationSet>
-          <AssociationSet Name="FK_JobOpportunity_Department" Association="Self.FK_JobOpportunity_Department">
-            <End Role="Department" EntitySet="Department" />
-            <End Role="JobOpportunity" EntitySet="JobOpportunity" />
-          </AssociationSet>
           <AssociationSet Name="FK_JobOpportunity_JobOppStatus" Association="Self.FK_JobOpportunity_JobOppStatus">
             <End Role="JobOppStatus" EntitySet="JobOppStatus" />
             <End Role="JobOpportunity" EntitySet="JobOpportunity" />
@@ -1170,8 +1153,8 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
           <Property Name="ApplicationStatusID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Applicant" Relationship="Self.FK_Application_Applicant" FromRole="Application" ToRole="Applicant" />
           <NavigationProperty Name="ApplicationStatu" Relationship="Self.FK_Application_ApplicationStatus" FromRole="Application" ToRole="ApplicationStatus" />
-          <NavigationProperty Name="JobOpportunity" Relationship="Self.FK_Application_JobOpportunity" FromRole="Application" ToRole="JobOpportunity" />
           <NavigationProperty Name="ShortLists" Relationship="Self.FK_ShortList_Application" FromRole="Application" ToRole="ShortList" />
+          <NavigationProperty Name="JobOpportunity" Relationship="Model.FK_Application_JobOpportunity" FromRole="Application" ToRole="JobOpportunity" />
         </EntityType>
         <EntityType Name="ApplicationStatu">
           <Key>
@@ -1289,7 +1272,6 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
           <Property Name="DepartmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DepartmentName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Employees" Relationship="Self.FK_Employee_Department" FromRole="Department" ToRole="Employee" />
-          <NavigationProperty Name="JobOpportunities" Relationship="Self.FK_JobOpportunity_Department" FromRole="Department" ToRole="JobOpportunity" />
           <Property Name="DepartmentDescription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Employee">
@@ -1364,30 +1346,13 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
           <Property Name="InterviewCode" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ShortList" Relationship="Self.FK_InterviewSlot_ShortList" FromRole="InterviewSlot" ToRole="ShortList" />
         </EntityType>
-        <EntityType Name="JobOpportunity">
-          <Key>
-            <PropertyRef Name="JobOppID" />
-          </Key>
-          <Property Name="JobOppID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="JobOppTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="JobOppDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="JobOppRequirements" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="DepartmentID" Type="Int32" Nullable="false" />
-          <Property Name="JobOppDeadline" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="WorkTypeID" Type="Int32" Nullable="false" />
-          <Property Name="JobOppStatusID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Applications" Relationship="Self.FK_Application_JobOpportunity" FromRole="JobOpportunity" ToRole="Application" />
-          <NavigationProperty Name="Department" Relationship="Self.FK_JobOpportunity_Department" FromRole="JobOpportunity" ToRole="Department" />
-          <NavigationProperty Name="JobOppStatu" Relationship="Self.FK_JobOpportunity_JobOppStatus" FromRole="JobOpportunity" ToRole="JobOppStatus" />
-          <NavigationProperty Name="WorkType" Relationship="Self.FK_JobOpportunity_WorkType" FromRole="JobOpportunity" ToRole="WorkType" />
-        </EntityType>
         <EntityType Name="JobOppStatu">
           <Key>
             <PropertyRef Name="JobOppStatusID" />
           </Key>
           <Property Name="JobOppStatusID" Type="Int32" Nullable="false" />
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="JobOpportunities" Relationship="Self.FK_JobOpportunity_JobOppStatus" FromRole="JobOppStatus" ToRole="JobOpportunity" />
+          <NavigationProperty Name="JobOpportunities" Relationship="Model.FK_JobOpportunity_JobOppStatus" FromRole="JobOppStatu" ToRole="JobOpportunity" />
         </EntityType>
         <EntityType Name="Lesson">
           <Key>
@@ -1613,7 +1578,7 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
           </Key>
           <Property Name="WorkTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="JobOpportunities" Relationship="Self.FK_JobOpportunity_WorkType" FromRole="WorkType" ToRole="JobOpportunity" />
+          <NavigationProperty Name="JobOpportunities" Relationship="Model.FK_JobOpportunity_WorkType" FromRole="WorkType" ToRole="JobOpportunity" />
         </EntityType>
         <EntityType Name="PayFast">
           <Key>
@@ -1648,18 +1613,6 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
             </Principal>
             <Dependent Role="Application">
               <PropertyRef Name="ApplicationStatusID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Application_JobOpportunity">
-          <End Role="JobOpportunity" Type="Self.JobOpportunity" Multiplicity="1" />
-          <End Role="Application" Type="Self.Application" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="JobOpportunity">
-              <PropertyRef Name="JobOppID" />
-            </Principal>
-            <Dependent Role="Application">
-              <PropertyRef Name="JobOppID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1843,18 +1796,6 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_JobOpportunity_Department">
-          <End Role="Department" Type="Self.Department" Multiplicity="1" />
-          <End Role="JobOpportunity" Type="Self.JobOpportunity" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Department">
-              <PropertyRef Name="DepartmentID" />
-            </Principal>
-            <Dependent Role="JobOpportunity">
-              <PropertyRef Name="DepartmentID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Employee_Title">
           <End Role="Title" Type="Self.Title" Multiplicity="1" />
           <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
@@ -1948,30 +1889,6 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
             </Principal>
             <Dependent Role="InterviewSlot">
               <PropertyRef Name="ShortListID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_JobOpportunity_JobOppStatus">
-          <End Role="JobOppStatus" Type="Self.JobOppStatu" Multiplicity="1" />
-          <End Role="JobOpportunity" Type="Self.JobOpportunity" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="JobOppStatus">
-              <PropertyRef Name="JobOppStatusID" />
-            </Principal>
-            <Dependent Role="JobOpportunity">
-              <PropertyRef Name="JobOppStatusID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_JobOpportunity_WorkType">
-          <End Role="WorkType" Type="Self.WorkType" Multiplicity="1" />
-          <End Role="JobOpportunity" Type="Self.JobOpportunity" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="WorkType">
-              <PropertyRef Name="WorkTypeID" />
-            </Principal>
-            <Dependent Role="JobOpportunity">
-              <PropertyRef Name="WorkTypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2139,7 +2056,6 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
           <EntitySet Name="FAQs" EntityType="Self.FAQ" />
           <EntitySet Name="InstructionalVideos" EntityType="Self.InstructionalVideo" />
           <EntitySet Name="InterviewSlots" EntityType="Self.InterviewSlot" />
-          <EntitySet Name="JobOpportunities" EntityType="Self.JobOpportunity" />
           <EntitySet Name="JobOppStatus" EntityType="Self.JobOppStatu" />
           <EntitySet Name="Lessons" EntityType="Self.Lesson" />
           <EntitySet Name="LessonResources" EntityType="Self.LessonResource" />
@@ -2169,10 +2085,6 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
           </AssociationSet>
           <AssociationSet Name="FK_Application_ApplicationStatus" Association="Self.FK_Application_ApplicationStatus">
             <End Role="ApplicationStatus" EntitySet="ApplicationStatus" />
-            <End Role="Application" EntitySet="Applications" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Application_JobOpportunity" Association="Self.FK_Application_JobOpportunity">
-            <End Role="JobOpportunity" EntitySet="JobOpportunities" />
             <End Role="Application" EntitySet="Applications" />
           </AssociationSet>
           <AssociationSet Name="FK_ShortList_Application" Association="Self.FK_ShortList_Application">
@@ -2235,10 +2147,6 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
             <End Role="Department" EntitySet="Departments" />
             <End Role="Employee" EntitySet="Employees" />
           </AssociationSet>
-          <AssociationSet Name="FK_JobOpportunity_Department" Association="Self.FK_JobOpportunity_Department">
-            <End Role="Department" EntitySet="Departments" />
-            <End Role="JobOpportunity" EntitySet="JobOpportunities" />
-          </AssociationSet>
           <AssociationSet Name="FK_Employee_Title" Association="Self.FK_Employee_Title">
             <End Role="Title" EntitySet="Titles" />
             <End Role="Employee" EntitySet="Employees" />
@@ -2270,14 +2178,6 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
           <AssociationSet Name="FK_InterviewSlot_ShortList" Association="Self.FK_InterviewSlot_ShortList">
             <End Role="ShortList" EntitySet="ShortLists" />
             <End Role="InterviewSlot" EntitySet="InterviewSlots" />
-          </AssociationSet>
-          <AssociationSet Name="FK_JobOpportunity_JobOppStatus" Association="Self.FK_JobOpportunity_JobOppStatus">
-            <End Role="JobOppStatus" EntitySet="JobOppStatus" />
-            <End Role="JobOpportunity" EntitySet="JobOpportunities" />
-          </AssociationSet>
-          <AssociationSet Name="FK_JobOpportunity_WorkType" Association="Self.FK_JobOpportunity_WorkType">
-            <End Role="WorkType" EntitySet="WorkTypes" />
-            <End Role="JobOpportunity" EntitySet="JobOpportunities" />
           </AssociationSet>
           <AssociationSet Name="FK_Lesson_Section" Association="Self.FK_Lesson_Section">
             <End Role="Section" EntitySet="Sections" />
@@ -2330,6 +2230,19 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
           <EntitySet Name="OTPTimers" EntityType="Model.OTPTimer" />
           <EntitySet Name="TermsAndConditions" EntityType="Model.TermsAndCondition" />
           <EntitySet Name="MaxSlotsPerDays" EntityType="Model.MaxSlotsPerDay" />
+          <EntitySet Name="JobOpportunities" EntityType="Model.JobOpportunity" />
+          <AssociationSet Name="FK_Application_JobOpportunity" Association="Model.FK_Application_JobOpportunity">
+            <End Role="JobOpportunity" EntitySet="JobOpportunities" />
+            <End Role="Application" EntitySet="Applications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobOpportunity_JobOppStatus" Association="Model.FK_JobOpportunity_JobOppStatus">
+            <End Role="JobOppStatu" EntitySet="JobOppStatus" />
+            <End Role="JobOpportunity" EntitySet="JobOpportunities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobOpportunity_WorkType" Association="Model.FK_JobOpportunity_WorkType">
+            <End Role="WorkType" EntitySet="WorkTypes" />
+            <End Role="JobOpportunity" EntitySet="JobOpportunities" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="OTPTimer">
           <Key>
@@ -2352,6 +2265,57 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
           <Property Name="MaxID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NumberOfSlots" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="JobOpportunity">
+          <Key>
+            <PropertyRef Name="JobOppID" />
+          </Key>
+          <Property Name="JobOppID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JobOppTitle" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="JobOppDescription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="JobOppRequirements" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="JobOppDeadline" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="WorkTypeID" Type="Int32" Nullable="false" />
+          <Property Name="JobOppStatusID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Applications" Relationship="Model.FK_Application_JobOpportunity" FromRole="JobOpportunity" ToRole="Application" />
+          <NavigationProperty Name="JobOppStatu" Relationship="Model.FK_JobOpportunity_JobOppStatus" FromRole="JobOpportunity" ToRole="JobOppStatu" />
+          <NavigationProperty Name="WorkType" Relationship="Model.FK_JobOpportunity_WorkType" FromRole="JobOpportunity" ToRole="WorkType" />
+        </EntityType>
+        <Association Name="FK_Application_JobOpportunity">
+          <End Type="Model.JobOpportunity" Role="JobOpportunity" Multiplicity="1" />
+          <End Type="Model.Application" Role="Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobOpportunity">
+              <PropertyRef Name="JobOppID" />
+            </Principal>
+            <Dependent Role="Application">
+              <PropertyRef Name="JobOppID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobOpportunity_JobOppStatus">
+          <End Type="Model.JobOppStatu" Role="JobOppStatu" Multiplicity="1" />
+          <End Type="Model.JobOpportunity" Role="JobOpportunity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobOppStatu">
+              <PropertyRef Name="JobOppStatusID" />
+            </Principal>
+            <Dependent Role="JobOpportunity">
+              <PropertyRef Name="JobOppStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobOpportunity_WorkType">
+          <End Type="Model.WorkType" Role="WorkType" Multiplicity="1" />
+          <End Type="Model.JobOpportunity" Role="JobOpportunity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkType">
+              <PropertyRef Name="WorkTypeID" />
+            </Principal>
+            <Dependent Role="JobOpportunity">
+              <PropertyRef Name="WorkTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2555,20 +2519,6 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
                 <ScalarProperty Name="InterviewDate" ColumnName="InterviewDate" />
                 <ScalarProperty Name="InterviewTime" ColumnName="InterviewTime" />
                 <ScalarProperty Name="InterviewCode" ColumnName="InterviewCode" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="JobOpportunities">
-            <EntityTypeMapping TypeName="Model.JobOpportunity">
-              <MappingFragment StoreEntitySet="JobOpportunity">
-                <ScalarProperty Name="JobOppID" ColumnName="JobOppID" />
-                <ScalarProperty Name="JobOppTitle" ColumnName="JobOppTitle" />
-                <ScalarProperty Name="JobOppDescription" ColumnName="JobOppDescription" />
-                <ScalarProperty Name="JobOppRequirements" ColumnName="JobOppRequirements" />
-                <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
-                <ScalarProperty Name="JobOppDeadline" ColumnName="JobOppDeadline" />
-                <ScalarProperty Name="WorkTypeID" ColumnName="WorkTypeID" />
-                <ScalarProperty Name="JobOppStatusID" ColumnName="JobOppStatusID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2820,6 +2770,19 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
               <MappingFragment StoreEntitySet="MaxSlotsPerDay">
                 <ScalarProperty Name="NumberOfSlots" ColumnName="NumberOfSlots" />
                 <ScalarProperty Name="MaxID" ColumnName="MaxID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobOpportunities">
+            <EntityTypeMapping TypeName="Model.JobOpportunity">
+              <MappingFragment StoreEntitySet="JobOpportunity">
+                <ScalarProperty Name="JobOppStatusID" ColumnName="JobOppStatusID" />
+                <ScalarProperty Name="WorkTypeID" ColumnName="WorkTypeID" />
+                <ScalarProperty Name="JobOppDeadline" ColumnName="JobOppDeadline" />
+                <ScalarProperty Name="JobOppRequirements" ColumnName="JobOppRequirements" />
+                <ScalarProperty Name="JobOppDescription" ColumnName="JobOppDescription" />
+                <ScalarProperty Name="JobOppTitle" ColumnName="JobOppTitle" />
+                <ScalarProperty Name="JobOppID" ColumnName="JobOppID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

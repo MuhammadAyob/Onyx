@@ -183,6 +183,7 @@
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\FAQController.cs" />
     <Compile Include="Controllers\InstructionalVideosController.cs" />
+    <Compile Include="Controllers\JobOppController.cs" />
     <Compile Include="Controllers\LessonResourcesController.cs" />
     <Compile Include="Controllers\LessonsController.cs" />
     <Compile Include="Controllers\MaintenacePrioritiesController.cs" />
@@ -265,6 +266,7 @@
     <Compile Include="Models\IEmployees.cs" />
     <Compile Include="Models\IFaq.cs" />
     <Compile Include="Models\IInstructionalVideos.cs" />
+    <Compile Include="Models\IJobOpp.cs" />
     <Compile Include="Models\ILessonResource.cs" />
     <Compile Include="Models\ILessons.cs" />
     <Compile Include="Models\IMaintenancePriorities.cs" />
@@ -291,6 +293,7 @@
     <Compile Include="Models\JobOpportunity.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\JobOppRepository.cs" />
     <Compile Include="Models\JobOppStatu.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
