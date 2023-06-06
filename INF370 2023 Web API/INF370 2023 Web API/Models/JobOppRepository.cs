@@ -35,7 +35,7 @@ namespace INF370_2023_Web_API.Models
             }
             catch (Exception)
             {
-                return new { Status = 501, Message = "Internal server error, please try again" };
+                return new { Status = 500, Message = "Internal server error, please try again" };
             }
         }
 
@@ -66,7 +66,7 @@ namespace INF370_2023_Web_API.Models
                 
                 foreach (JobOpportunity job in opportunity)
                 {
-                    if ((DateTime.Now).AddDays(-1) > job.JobOppDeadline)
+                    if (DateTime.Today > job.JobOppDeadline)
 
                     {
                         job.JobOppStatusID = 2;
@@ -154,13 +154,38 @@ namespace INF370_2023_Web_API.Models
         {
             try
             {
+                // Duplication Case
                 var dup = await db.JobOpportunities.Where(x => x.JobOppTitle == job.JobOppTitle && x.JobOppStatusID != 3 && x.JobOppID != id).FirstOrDefaultAsync();
                 if (dup != null)
                 {
                     return new { Status = 400, Message = "Job exists" };
                 }
 
-               
+                // Case 1: Disabling a job opp temporarily
+                if (job.JobOppDeadline == DateTime.Today.AddDays(-1) && job.JobOppStatusID == 1)
+                {
+                    job.JobOppStatusID = 2;
+                }
+
+                // Case 2: Preventing an open job opp deadline prior to yesterday
+                if(job.JobOppDeadline < DateTime.Today.AddDays(-1) && job.JobOppStatusID == 1)
+                {
+                    return new { Status = 600, Message = "You can't change deadline prior to yesterday" };
+                }
+
+                // Case 3: Preventing an expired job from changing deadline if prior to today
+                var xx = await db.JobOpportunities.FindAsync(id);
+
+                if ((job.JobOppStatusID == 2) && (job.JobOppDeadline != xx.JobOppDeadline) && (job.JobOppDeadline < DateTime.Today))
+                {
+                    return new { Status = 601, Message = "You can't change an expired opp's deadline prior to today's date" };
+                }
+
+                // Case 4: Re-activating an expired job opp
+                if(job.JobOppDeadline >= DateTime.Today && job.JobOppStatusID == 2)
+                {
+                    job.JobOppStatusID = 1;  
+                }
 
                 db.Entry(job).State = EntityState.Modified;
                 await db.SaveChangesAsync();
@@ -169,7 +194,7 @@ namespace INF370_2023_Web_API.Models
             }
             catch (Exception)
             {
-                return new { Status = 501, Message = "Internal server error, please try again" };
+                return new { Status = 500, Message = "Internal server error, please try again" };
             }
         }
 

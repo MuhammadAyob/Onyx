@@ -59,9 +59,9 @@ namespace INF370_2023_Web_API.Controllers
 
                 return await _jobRepo.AddJobOpp(job);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return new { Status = 500, Message = "Internal server error, please try again" };
+                return ex.ToString();
             }
         }
 
@@ -78,9 +78,9 @@ namespace INF370_2023_Web_API.Controllers
 
                 return await _jobRepo.UpdateJobOpp(id, job);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return new { Status = 500, Message = "Internal server error, please try again" };
+                return ex.ToString();
             }
         }
 
