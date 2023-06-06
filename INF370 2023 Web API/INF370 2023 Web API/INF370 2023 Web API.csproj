@@ -189,6 +189,7 @@
     <Compile Include="Controllers\MaintenacePrioritiesController.cs" />
     <Compile Include="Controllers\MaintenancesController.cs" />
     <Compile Include="Controllers\MaintenanceTypesController.cs" />
+    <Compile Include="Controllers\MaxSlotsController.cs" />
     <Compile Include="Controllers\OTPTimerController.cs" />
     <Compile Include="Controllers\QualificationsController.cs" />
     <Compile Include="Controllers\SectionsController.cs" />
@@ -272,6 +273,7 @@
     <Compile Include="Models\IMaintenancePriorities.cs" />
     <Compile Include="Models\IMaintenances.cs" />
     <Compile Include="Models\IMaintenanceTypes.cs" />
+    <Compile Include="Models\IMaxSlots.cs" />
     <Compile Include="Models\InstructionalVideosRepository.cs" />
     <Compile Include="Models\InstructionalVideo.cs">
       <DependentUpon>Model.tt</DependentUpon>
@@ -323,6 +325,7 @@
     <Compile Include="Models\MaxSlotsPerDay.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MaxSlotsRepository.cs" />
     <Compile Include="Models\Model.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

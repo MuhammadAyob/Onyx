@@ -160,15 +160,7 @@ namespace INF370_2023_Web_API.Models
                     return new { Status = 400, Message = "Job exists" };
                 }
 
-                if(job.JobOppStatusID == 2)
-                {
-                    job.JobOppDeadline = DateTime.Now;
-                }
-
-                if(job.JobOppStatusID == 1 && ((DateTime.Now).AddDays(-1) > job.JobOppDeadline))
-                {
-                    return new { Status = 600, Message = "Ensure that deadline is set to another day" };
-                }
+               
 
                 db.Entry(job).State = EntityState.Modified;
                 await db.SaveChangesAsync();
