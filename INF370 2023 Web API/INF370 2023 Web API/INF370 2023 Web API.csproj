@@ -261,6 +261,7 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\FAQRepository.cs" />
+    <Compile Include="Models\IApplicants.cs" />
     <Compile Include="Models\ICourseCategory.cs" />
     <Compile Include="Models\ICourses.cs" />
     <Compile Include="Models\IDepartments.cs" />
