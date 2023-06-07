@@ -7,7 +7,6 @@
       <Diagram DiagramId="b57861c8e0384a1d92366af1e54a7e21" Name="Diagram1" ZoomLevel="94">
         <EntityTypeShape EntityType="Model.Applicant" Width="1.5" PointX="9" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Application" Width="1.5" PointX="11.25" PointY="8.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.ApplicationStatu" Width="1.5" PointX="9" PointY="14.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.AuditLog" Width="1.5" PointX="3" PointY="24.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Cart" Width="1.5" PointX="14.25" PointY="12.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.CartCourse" Width="1.5" PointX="16.5" PointY="12.25" IsExpanded="true" />
@@ -48,7 +47,6 @@
         <EntityTypeShape EntityType="Model.WorkType" Width="1.5" PointX="3.75" PointY="21.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.PayFast" Width="1.5" PointX="13.75" PointY="1.25" IsExpanded="true" />
         <AssociationConnector Association="Model.FK_Application_Applicant" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_Application_ApplicationStatus" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_ShortList_Application" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_AuditLog_User" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Cart_Student" ManuallyRouted="false" />
@@ -91,6 +89,8 @@
         <AssociationConnector Association="Model.FK_Application_JobOpportunity" />
         <AssociationConnector Association="Model.FK_JobOpportunity_JobOppStatus" />
         <AssociationConnector Association="Model.FK_JobOpportunity_WorkType" />
+        <EntityTypeShape EntityType="Model.ApplicationStatu" Width="1.5" PointX="8.375" PointY="14.875" />
+        <AssociationConnector Association="Model.FK_Application_ApplicationStatus" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

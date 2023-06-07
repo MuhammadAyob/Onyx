@@ -202,7 +202,7 @@
           <Key>
             <PropertyRef Name="JobOppStatusID" />
           </Key>
-          <Property Name="JobOppStatusID" Type="int" Nullable="false" />
+          <Property Name="JobOppStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Lesson">
@@ -1152,17 +1152,9 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
           <Property Name="ApplicantID" Type="Int32" Nullable="false" />
           <Property Name="ApplicationStatusID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Applicant" Relationship="Self.FK_Application_Applicant" FromRole="Application" ToRole="Applicant" />
-          <NavigationProperty Name="ApplicationStatu" Relationship="Self.FK_Application_ApplicationStatus" FromRole="Application" ToRole="ApplicationStatus" />
           <NavigationProperty Name="ShortLists" Relationship="Self.FK_ShortList_Application" FromRole="Application" ToRole="ShortList" />
           <NavigationProperty Name="JobOpportunity" Relationship="Model.FK_Application_JobOpportunity" FromRole="Application" ToRole="JobOpportunity" />
-        </EntityType>
-        <EntityType Name="ApplicationStatu">
-          <Key>
-            <PropertyRef Name="ApplicationStatusID" />
-          </Key>
-          <Property Name="ApplicationStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Applications" Relationship="Self.FK_Application_ApplicationStatus" FromRole="ApplicationStatus" ToRole="Application" />
+          <NavigationProperty Name="ApplicationStatu" Relationship="Model.FK_Application_ApplicationStatus" FromRole="Application" ToRole="ApplicationStatu" />
         </EntityType>
         <EntityType Name="AuditLog">
           <Key>
@@ -1604,18 +1596,6 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Application_ApplicationStatus">
-          <End Role="ApplicationStatus" Type="Self.ApplicationStatu" Multiplicity="1" />
-          <End Role="Application" Type="Self.Application" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ApplicationStatus">
-              <PropertyRef Name="ApplicationStatusID" />
-            </Principal>
-            <Dependent Role="Application">
-              <PropertyRef Name="ApplicationStatusID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ShortList_Application">
           <End Role="Application" Type="Self.Application" Multiplicity="1" />
           <End Role="ShortList" Type="Self.ShortList" Multiplicity="*" />
@@ -2039,7 +2019,6 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Applicants" EntityType="Self.Applicant" />
           <EntitySet Name="Applications" EntityType="Self.Application" />
-          <EntitySet Name="ApplicationStatus" EntityType="Self.ApplicationStatu" />
           <EntitySet Name="AuditLogs" EntityType="Self.AuditLog" />
           <EntitySet Name="Carts" EntityType="Self.Cart" />
           <EntitySet Name="CartCourses" EntityType="Self.CartCourse" />
@@ -2081,10 +2060,6 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
           <EntitySet Name="PayFasts" EntityType="Self.PayFast" />
           <AssociationSet Name="FK_Application_Applicant" Association="Self.FK_Application_Applicant">
             <End Role="Applicant" EntitySet="Applicants" />
-            <End Role="Application" EntitySet="Applications" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Application_ApplicationStatus" Association="Self.FK_Application_ApplicationStatus">
-            <End Role="ApplicationStatus" EntitySet="ApplicationStatus" />
             <End Role="Application" EntitySet="Applications" />
           </AssociationSet>
           <AssociationSet Name="FK_ShortList_Application" Association="Self.FK_ShortList_Application">
@@ -2243,6 +2218,11 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
             <End Role="WorkType" EntitySet="WorkTypes" />
             <End Role="JobOpportunity" EntitySet="JobOpportunities" />
           </AssociationSet>
+          <EntitySet Name="ApplicationStatus" EntityType="Model.ApplicationStatu" />
+          <AssociationSet Name="FK_Application_ApplicationStatus" Association="Model.FK_Application_ApplicationStatus">
+            <End Role="ApplicationStatu" EntitySet="ApplicationStatus" />
+            <End Role="Application" EntitySet="Applications" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="OTPTimer">
           <Key>
@@ -2316,6 +2296,26 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ApplicationStatu">
+          <Key>
+            <PropertyRef Name="ApplicationStatusID" />
+          </Key>
+          <Property Name="ApplicationStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Applications" Relationship="Model.FK_Application_ApplicationStatus" FromRole="ApplicationStatu" ToRole="Application" />
+        </EntityType>
+        <Association Name="FK_Application_ApplicationStatus">
+          <End Type="Model.ApplicationStatu" Role="ApplicationStatu" Multiplicity="1" />
+          <End Type="Model.Application" Role="Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApplicationStatu">
+              <PropertyRef Name="ApplicationStatusID" />
+            </Principal>
+            <Dependent Role="Application">
+              <PropertyRef Name="ApplicationStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2345,14 +2345,6 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
                 <ScalarProperty Name="JobOppID" ColumnName="JobOppID" />
                 <ScalarProperty Name="ApplicantID" ColumnName="ApplicantID" />
                 <ScalarProperty Name="ApplicationStatusID" ColumnName="ApplicationStatusID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ApplicationStatus">
-            <EntityTypeMapping TypeName="Model.ApplicationStatu">
-              <MappingFragment StoreEntitySet="ApplicationStatus">
-                <ScalarProperty Name="ApplicationStatusID" ColumnName="ApplicationStatusID" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2783,6 +2775,14 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
                 <ScalarProperty Name="JobOppDescription" ColumnName="JobOppDescription" />
                 <ScalarProperty Name="JobOppTitle" ColumnName="JobOppTitle" />
                 <ScalarProperty Name="JobOppID" ColumnName="JobOppID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ApplicationStatus">
+            <EntityTypeMapping TypeName="Model.ApplicationStatu">
+              <MappingFragment StoreEntitySet="ApplicationStatus">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ApplicationStatusID" ColumnName="ApplicationStatusID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

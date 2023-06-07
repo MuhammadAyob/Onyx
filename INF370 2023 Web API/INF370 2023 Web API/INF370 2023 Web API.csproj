@@ -177,6 +177,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ApplicantsController.cs" />
     <Compile Include="Controllers\CourseCategoryController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\DepartmentsController.cs" />
@@ -208,6 +209,7 @@
     <Compile Include="Models\Applicant.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ApplicantRepository.cs" />
     <Compile Include="Models\Application.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

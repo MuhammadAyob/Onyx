@@ -40,4 +40,19 @@ namespace INF370_2023_Web_API.ViewModel
         public double Price { get; set; }
         public List<int> CourseAssistants { get; set; }
     }
+
+    public class ApplicantDetails
+    {
+        //public int ApplicantID { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string Email { get; set; }
+        public string Motivation { get; set; }
+        public byte[] CV { get; set; }
+        public byte[] Image { get; set; }
+        public string Phone { get; set; }
+        public string Biography { get; set; }
+        public string RSAIDNumber { get; set; }
+        public int JobOppID { get; set; }
+    }
 }

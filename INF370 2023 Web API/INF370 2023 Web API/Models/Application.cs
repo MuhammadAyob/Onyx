@@ -26,9 +26,9 @@ namespace INF370_2023_Web_API.Models
         public int ApplicationStatusID { get; set; }
     
         public virtual Applicant Applicant { get; set; }
-        public virtual ApplicationStatu ApplicationStatu { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ShortList> ShortLists { get; set; }
         public virtual JobOpportunity JobOpportunity { get; set; }
+        public virtual ApplicationStatu ApplicationStatu { get; set; }
     }
 }
