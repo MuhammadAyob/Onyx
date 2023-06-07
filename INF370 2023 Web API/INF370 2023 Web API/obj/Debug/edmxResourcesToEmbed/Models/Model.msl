@@ -27,14 +27,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ApplicationStatus">
-      <EntityTypeMapping TypeName="Model.ApplicationStatu">
-        <MappingFragment StoreEntitySet="ApplicationStatus">
-          <ScalarProperty Name="ApplicationStatusID" ColumnName="ApplicationStatusID" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="AuditLogs">
       <EntityTypeMapping TypeName="Model.AuditLog">
         <MappingFragment StoreEntitySet="AuditLog">
@@ -187,17 +179,6 @@
           <ScalarProperty Name="VideoName" ColumnName="VideoName" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="VideoLink" ColumnName="VideoLink" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="InterviewSlots">
-      <EntityTypeMapping TypeName="Model.InterviewSlot">
-        <MappingFragment StoreEntitySet="InterviewSlot">
-          <ScalarProperty Name="InterviewSlotID" ColumnName="InterviewSlotID" />
-          <ScalarProperty Name="ShortListID" ColumnName="ShortListID" />
-          <ScalarProperty Name="InterviewDate" ColumnName="InterviewDate" />
-          <ScalarProperty Name="InterviewTime" ColumnName="InterviewTime" />
-          <ScalarProperty Name="InterviewCode" ColumnName="InterviewCode" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -462,6 +443,27 @@
           <ScalarProperty Name="JobOppDescription" ColumnName="JobOppDescription" />
           <ScalarProperty Name="JobOppTitle" ColumnName="JobOppTitle" />
           <ScalarProperty Name="JobOppID" ColumnName="JobOppID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ApplicationStatus">
+      <EntityTypeMapping TypeName="Model.ApplicationStatu">
+        <MappingFragment StoreEntitySet="ApplicationStatus">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="ApplicationStatusID" ColumnName="ApplicationStatusID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InterviewSlots">
+      <EntityTypeMapping TypeName="Model.InterviewSlot">
+        <MappingFragment StoreEntitySet="InterviewSlot">
+          <ScalarProperty Name="Attended" ColumnName="Attended" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="InterviewCode" ColumnName="InterviewCode" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="InterviewDate" ColumnName="InterviewDate" />
+          <ScalarProperty Name="ShortListID" ColumnName="ShortListID" />
+          <ScalarProperty Name="InterviewSlotID" ColumnName="InterviewSlotID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

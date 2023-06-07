@@ -178,8 +178,10 @@
     <Property Name="InterviewSlotID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ShortListID" Type="int" Nullable="false" />
     <Property Name="InterviewDate" Type="date" Nullable="false" />
-    <Property Name="InterviewTime" Type="time" Precision="7" Nullable="false" />
+    <Property Name="StartTime" Type="time" Precision="7" Nullable="false" />
     <Property Name="InterviewCode" Type="int" Nullable="false" />
+    <Property Name="EndTime" Type="time" Precision="7" Nullable="false" />
+    <Property Name="Attended" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="JobOpportunity">
     <Key>
@@ -197,7 +199,7 @@
     <Key>
       <PropertyRef Name="JobOppStatusID" />
     </Key>
-    <Property Name="JobOppStatusID" Type="int" Nullable="false" />
+    <Property Name="JobOppStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="Lesson">

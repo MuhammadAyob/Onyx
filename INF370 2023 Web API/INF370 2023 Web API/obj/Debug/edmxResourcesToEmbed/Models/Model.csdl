@@ -25,17 +25,9 @@
     <Property Name="ApplicantID" Type="Int32" Nullable="false" />
     <Property Name="ApplicationStatusID" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Applicant" Relationship="Self.FK_Application_Applicant" FromRole="Application" ToRole="Applicant" />
-    <NavigationProperty Name="ApplicationStatu" Relationship="Self.FK_Application_ApplicationStatus" FromRole="Application" ToRole="ApplicationStatus" />
     <NavigationProperty Name="ShortLists" Relationship="Self.FK_ShortList_Application" FromRole="Application" ToRole="ShortList" />
     <NavigationProperty Name="JobOpportunity" Relationship="Model.FK_Application_JobOpportunity" FromRole="Application" ToRole="JobOpportunity" />
-  </EntityType>
-  <EntityType Name="ApplicationStatu">
-    <Key>
-      <PropertyRef Name="ApplicationStatusID" />
-    </Key>
-    <Property Name="ApplicationStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="Applications" Relationship="Self.FK_Application_ApplicationStatus" FromRole="ApplicationStatus" ToRole="Application" />
+    <NavigationProperty Name="ApplicationStatu" Relationship="Model.FK_Application_ApplicationStatus" FromRole="Application" ToRole="ApplicationStatu" />
   </EntityType>
   <EntityType Name="AuditLog">
     <Key>
@@ -208,17 +200,6 @@
     <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="VideoLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
   </EntityType>
-  <EntityType Name="InterviewSlot">
-    <Key>
-      <PropertyRef Name="InterviewSlotID" />
-    </Key>
-    <Property Name="InterviewSlotID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ShortListID" Type="Int32" Nullable="false" />
-    <Property Name="InterviewDate" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="InterviewTime" Type="Time" Nullable="false" Precision="7" />
-    <Property Name="InterviewCode" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="ShortList" Relationship="Self.FK_InterviewSlot_ShortList" FromRole="InterviewSlot" ToRole="ShortList" />
-  </EntityType>
   <EntityType Name="JobOppStatu">
     <Key>
       <PropertyRef Name="JobOppStatusID" />
@@ -330,7 +311,7 @@
     <Property Name="ShortListID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ApplicationID" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Application" Relationship="Self.FK_ShortList_Application" FromRole="ShortList" ToRole="Application" />
-    <NavigationProperty Name="InterviewSlots" Relationship="Self.FK_InterviewSlot_ShortList" FromRole="ShortList" ToRole="InterviewSlot" />
+    <NavigationProperty Name="InterviewSlots" Relationship="Model.FK_InterviewSlot_ShortList" FromRole="ShortList" ToRole="InterviewSlot" />
   </EntityType>
   <EntityType Name="Skill">
     <Key>
@@ -474,18 +455,6 @@
       </Principal>
       <Dependent Role="Application">
         <PropertyRef Name="ApplicantID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Application_ApplicationStatus">
-    <End Role="ApplicationStatus" Type="Self.ApplicationStatu" Multiplicity="1" />
-    <End Role="Application" Type="Self.Application" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ApplicationStatus">
-        <PropertyRef Name="ApplicationStatusID" />
-      </Principal>
-      <Dependent Role="Application">
-        <PropertyRef Name="ApplicationStatusID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -753,18 +722,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_InterviewSlot_ShortList">
-    <End Role="ShortList" Type="Self.ShortList" Multiplicity="1" />
-    <End Role="InterviewSlot" Type="Self.InterviewSlot" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ShortList">
-        <PropertyRef Name="ShortListID" />
-      </Principal>
-      <Dependent Role="InterviewSlot">
-        <PropertyRef Name="ShortListID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Lesson_Section">
     <End Role="Section" Type="Self.Section" Multiplicity="1" />
     <End Role="Lesson" Type="Self.Lesson" Multiplicity="*" />
@@ -912,7 +869,6 @@
   <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Applicants" EntityType="Self.Applicant" />
     <EntitySet Name="Applications" EntityType="Self.Application" />
-    <EntitySet Name="ApplicationStatus" EntityType="Self.ApplicationStatu" />
     <EntitySet Name="AuditLogs" EntityType="Self.AuditLog" />
     <EntitySet Name="Carts" EntityType="Self.Cart" />
     <EntitySet Name="CartCourses" EntityType="Self.CartCourse" />
@@ -928,7 +884,6 @@
     <EntitySet Name="EmployeeSkills" EntityType="Self.EmployeeSkill" />
     <EntitySet Name="FAQs" EntityType="Self.FAQ" />
     <EntitySet Name="InstructionalVideos" EntityType="Self.InstructionalVideo" />
-    <EntitySet Name="InterviewSlots" EntityType="Self.InterviewSlot" />
     <EntitySet Name="JobOppStatus" EntityType="Self.JobOppStatu" />
     <EntitySet Name="Lessons" EntityType="Self.Lesson" />
     <EntitySet Name="LessonResources" EntityType="Self.LessonResource" />
@@ -954,10 +909,6 @@
     <EntitySet Name="PayFasts" EntityType="Self.PayFast" />
     <AssociationSet Name="FK_Application_Applicant" Association="Self.FK_Application_Applicant">
       <End Role="Applicant" EntitySet="Applicants" />
-      <End Role="Application" EntitySet="Applications" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Application_ApplicationStatus" Association="Self.FK_Application_ApplicationStatus">
-      <End Role="ApplicationStatus" EntitySet="ApplicationStatus" />
       <End Role="Application" EntitySet="Applications" />
     </AssociationSet>
     <AssociationSet Name="FK_ShortList_Application" Association="Self.FK_ShortList_Application">
@@ -1048,10 +999,6 @@
       <End Role="Skill" EntitySet="Skills" />
       <End Role="EmployeeSkill" EntitySet="EmployeeSkills" />
     </AssociationSet>
-    <AssociationSet Name="FK_InterviewSlot_ShortList" Association="Self.FK_InterviewSlot_ShortList">
-      <End Role="ShortList" EntitySet="ShortLists" />
-      <End Role="InterviewSlot" EntitySet="InterviewSlots" />
-    </AssociationSet>
     <AssociationSet Name="FK_Lesson_Section" Association="Self.FK_Lesson_Section">
       <End Role="Section" EntitySet="Sections" />
       <End Role="Lesson" EntitySet="Lessons" />
@@ -1115,6 +1062,16 @@
     <AssociationSet Name="FK_JobOpportunity_WorkType" Association="Model.FK_JobOpportunity_WorkType">
       <End Role="WorkType" EntitySet="WorkTypes" />
       <End Role="JobOpportunity" EntitySet="JobOpportunities" />
+    </AssociationSet>
+    <EntitySet Name="ApplicationStatus" EntityType="Model.ApplicationStatu" />
+    <AssociationSet Name="FK_Application_ApplicationStatus" Association="Model.FK_Application_ApplicationStatus">
+      <End Role="ApplicationStatu" EntitySet="ApplicationStatus" />
+      <End Role="Application" EntitySet="Applications" />
+    </AssociationSet>
+    <EntitySet Name="InterviewSlots" EntityType="Model.InterviewSlot" />
+    <AssociationSet Name="FK_InterviewSlot_ShortList" Association="Model.FK_InterviewSlot_ShortList">
+      <End Role="ShortList" EntitySet="ShortLists" />
+      <End Role="InterviewSlot" EntitySet="InterviewSlots" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="OTPTimer">
@@ -1186,6 +1143,51 @@
       </Principal>
       <Dependent Role="JobOpportunity">
         <PropertyRef Name="WorkTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ApplicationStatu">
+    <Key>
+      <PropertyRef Name="ApplicationStatusID" />
+    </Key>
+    <Property Name="ApplicationStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Applications" Relationship="Model.FK_Application_ApplicationStatus" FromRole="ApplicationStatu" ToRole="Application" />
+  </EntityType>
+  <Association Name="FK_Application_ApplicationStatus">
+    <End Type="Model.ApplicationStatu" Role="ApplicationStatu" Multiplicity="1" />
+    <End Type="Model.Application" Role="Application" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ApplicationStatu">
+        <PropertyRef Name="ApplicationStatusID" />
+      </Principal>
+      <Dependent Role="Application">
+        <PropertyRef Name="ApplicationStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="InterviewSlot">
+    <Key>
+      <PropertyRef Name="InterviewSlotID" />
+    </Key>
+    <Property Name="InterviewSlotID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ShortListID" Type="Int32" Nullable="false" />
+    <Property Name="InterviewDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="StartTime" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="InterviewCode" Type="Int32" Nullable="false" />
+    <Property Name="EndTime" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="Attended" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ShortList" Relationship="Model.FK_InterviewSlot_ShortList" FromRole="InterviewSlot" ToRole="ShortList" />
+  </EntityType>
+  <Association Name="FK_InterviewSlot_ShortList">
+    <End Type="Model.ShortList" Role="ShortList" Multiplicity="1" />
+    <End Type="Model.InterviewSlot" Role="InterviewSlot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ShortList">
+        <PropertyRef Name="ShortListID" />
+      </Principal>
+      <Dependent Role="InterviewSlot">
+        <PropertyRef Name="ShortListID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

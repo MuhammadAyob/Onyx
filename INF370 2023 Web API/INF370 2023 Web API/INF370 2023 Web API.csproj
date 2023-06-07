@@ -178,6 +178,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ApplicantsController.cs" />
+    <Compile Include="Controllers\ApplicationsController.cs" />
     <Compile Include="Controllers\CourseCategoryController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\DepartmentsController.cs" />
@@ -194,6 +195,7 @@
     <Compile Include="Controllers\OTPTimerController.cs" />
     <Compile Include="Controllers\QualificationsController.cs" />
     <Compile Include="Controllers\SectionsController.cs" />
+    <Compile Include="Controllers\ShortlistController.cs" />
     <Compile Include="Controllers\SkillsController.cs" />
     <Compile Include="Controllers\SkillTypesController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
@@ -213,6 +215,7 @@
     <Compile Include="Models\Application.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ApplicationsRepository.cs" />
     <Compile Include="Models\ApplicationStatu.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -264,6 +267,7 @@
     </Compile>
     <Compile Include="Models\FAQRepository.cs" />
     <Compile Include="Models\IApplicants.cs" />
+    <Compile Include="Models\IApplications.cs" />
     <Compile Include="Models\ICourseCategory.cs" />
     <Compile Include="Models\ICourses.cs" />
     <Compile Include="Models\IDepartments.cs" />
@@ -287,6 +291,7 @@
     <Compile Include="Models\IOTPTimer.cs" />
     <Compile Include="Models\IQualifications.cs" />
     <Compile Include="Models\ISections.cs" />
+    <Compile Include="Models\IShortList.cs" />
     <Compile Include="Models\ISkills.cs" />
     <Compile Include="Models\ISkillTypes.cs" />
     <Compile Include="Models\IStudents.cs" />
@@ -366,6 +371,7 @@
     <Compile Include="Models\ShortList.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ShortlistRepository.cs" />
     <Compile Include="Models\Skill.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

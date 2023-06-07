@@ -84,6 +84,8 @@ namespace INF370_2023_Web_API.Models
             kernel.Bind<IJobOpp>().To<JobOppRepository>().InSingletonScope();
             kernel.Bind<IMaxSlots>().To<MaxSlotsRepository>().InSingletonScope();
             kernel.Bind<IApplicants>().To<ApplicantRepository>().InSingletonScope();
+            kernel.Bind<IApplications>().To<ApplicationsRepository>().InSingletonScope();
+            kernel.Bind<IShortList>().To<ShortlistRepository>().InSingletonScope();
 
             return kernel;
         }

@@ -22,7 +22,6 @@
         <EntityTypeShape EntityType="Model.EmployeeSkill" Width="1.5" PointX="8.25" PointY="11.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.FAQ" Width="1.5" PointX="10.75" PointY="5.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.InstructionalVideo" Width="1.5" PointX="11.75" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.InterviewSlot" Width="1.5" PointX="15.75" PointY="8.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.JobOppStatu" Width="1.5" PointX="3.75" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Lesson" Width="1.5" PointX="10.5" PointY="30.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.LessonResource" Width="1.5" PointX="12.75" PointY="30.875" IsExpanded="true" />
@@ -69,7 +68,6 @@
         <AssociationConnector Association="Model.FK_UpdateRequest_Employee" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_EmployeeQualification_Qualification" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_EmployeeSkill_Skill" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_InterviewSlot_ShortList" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Lesson_Section" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_LessonResource_Lesson" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Maintenance_MaintenancePriority" ManuallyRouted="false" />
@@ -91,6 +89,8 @@
         <AssociationConnector Association="Model.FK_JobOpportunity_WorkType" />
         <EntityTypeShape EntityType="Model.ApplicationStatu" Width="1.5" PointX="8.375" PointY="14.875" />
         <AssociationConnector Association="Model.FK_Application_ApplicationStatus" />
+        <EntityTypeShape EntityType="Model.InterviewSlot" Width="1.5" PointX="15.75" PointY="8.25" />
+        <AssociationConnector Association="Model.FK_InterviewSlot_ShortList" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
