@@ -179,7 +179,7 @@
     <Property Name="ShortListID" Type="int" Nullable="false" />
     <Property Name="InterviewDate" Type="date" Nullable="false" />
     <Property Name="StartTime" Type="time" Precision="7" Nullable="false" />
-    <Property Name="InterviewCode" Type="int" Nullable="false" />
+    <Property Name="InterviewCode" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="EndTime" Type="time" Precision="7" Nullable="false" />
     <Property Name="Attended" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>

@@ -18,7 +18,7 @@ namespace INF370_2023_Web_API.Models
         public int ShortListID { get; set; }
         public System.DateTime InterviewDate { get; set; }
         public System.TimeSpan StartTime { get; set; }
-        public int InterviewCode { get; set; }
+        public string InterviewCode { get; set; }
         public System.TimeSpan EndTime { get; set; }
         public string Attended { get; set; }
     

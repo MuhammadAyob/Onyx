@@ -1174,7 +1174,7 @@
     <Property Name="ShortListID" Type="Int32" Nullable="false" />
     <Property Name="InterviewDate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="StartTime" Type="Time" Nullable="false" Precision="7" />
-    <Property Name="InterviewCode" Type="Int32" Nullable="false" />
+    <Property Name="InterviewCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="EndTime" Type="Time" Nullable="false" Precision="7" />
     <Property Name="Attended" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="ShortList" Relationship="Model.FK_InterviewSlot_ShortList" FromRole="InterviewSlot" ToRole="ShortList" />

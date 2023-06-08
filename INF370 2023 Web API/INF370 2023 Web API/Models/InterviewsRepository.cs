@@ -1,5 +1,5 @@
 ﻿using INF370_2023_Web_API.ViewModel;
-using iTextSharp.text.pdf.qrcode;
+using IronBarCode;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -40,13 +40,19 @@ namespace INF370_2023_Web_API.Models
 
                 var code = new Random().Next(100000, 1000000);
 
-                slot.InterviewCode = code;
+                string qrCode = Convert.ToString(code);
+                slot.InterviewCode = qrCode;
                 slot.EndTime = interview.EndTime;
                 slot.Attended = "Awaiting";
                 db.InterviewSlots.Add(slot);
                 await db.SaveChangesAsync();
 
                 var application = await db.Applications.Where(x => x.ApplicationID == interview.ApplicationID).FirstOrDefaultAsync();
+
+                application.ApplicationStatusID = 4;
+                db.Entry(application).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+
                 var applicant = await db.Applicants.Where(x => x.ApplicantID == application.ApplicantID).FirstOrDefaultAsync();
 
                 string name = applicant.Name;
@@ -57,7 +63,7 @@ namespace INF370_2023_Web_API.Models
                 string endTime = Convert.ToString(interview.EndTime);
 
                 // Send Invite
-                await SendInvite(email, name, surname, date, startTime, endTime, code);
+                await SendInvite(email, name, surname, date, startTime, endTime, qrCode);
                 
                 return new { Status = 200, Message = "Slot added" };
             }
@@ -102,17 +108,17 @@ namespace INF370_2023_Web_API.Models
             }
         }
        
-        private async Task SendInvite(string emailID, string name, string surname, string date, string startTime, string endTime, int code)
+        private async Task SendInvite(string emailID, string name, string surname, string date, string startTime, string endTime, string code)
         {
             string location = "https://goo.gl/maps/v3oBkBV3DASbmxBq9";
 
             // Create QR Code
 
             string fileName = "qrCode.pdf";
-            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"attachments\", fileName);
+            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
 
 
-           // QRCodeWriter.CreateQrCode(qrCode, 500, QRCodeWriter.QrErrorCorrectionLevel.Medium).SaveAsPdf(path);
+            QRCodeWriter.CreateQrCode(code, 500, QRCodeWriter.QrErrorCorrectionLevel.Medium).SaveAsPdf(path);
 
             /////
             var fromEmailAccount = "dseiqueries@gmail.com";
@@ -127,7 +133,7 @@ namespace INF370_2023_Web_API.Models
                     "<br/><br/>" + "Date: " + date +
                     "<br/>" + "Time: " + startTime + " " + "-" + " " + endTime +
                     "<br/>" + "Location: " + location +
-                   "<br/><br/>Please keep your QR Code attachment safe, as it will be used to mark your attendance. " +
+                   "<br/><br/>Please keep your QR Code attachment safe, as it will be used to mark and verfiy your attendance. " +
                 "<br/><br/> If you require any further assistance please contact us at dseiqueries@gmail.com" +
                     "<br/> Sincerely, The Onyx Team" +
                     "<br/><h5>Powered by Onyx</h5>";
@@ -139,6 +145,9 @@ namespace INF370_2023_Web_API.Models
                 compiledMessage.Body = string.Format(message);
                 compiledMessage.IsBodyHtml = true;
 
+                // Attach the QR code file
+                Attachment attachment = new Attachment(path);
+                compiledMessage.Attachments.Add(attachment);
 
                 using (var smtp = new SmtpClient())
                 {
