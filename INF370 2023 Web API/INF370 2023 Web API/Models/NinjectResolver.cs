@@ -86,6 +86,7 @@ namespace INF370_2023_Web_API.Models
             kernel.Bind<IApplicants>().To<ApplicantRepository>().InSingletonScope();
             kernel.Bind<IApplications>().To<ApplicationsRepository>().InSingletonScope();
             kernel.Bind<IShortList>().To<ShortlistRepository>().InSingletonScope();
+            kernel.Bind<IInterviews>().To<InterviewsRepository>().InSingletonScope();
 
             return kernel;
         }

@@ -55,4 +55,15 @@ namespace INF370_2023_Web_API.ViewModel
         public string RSAIDNumber { get; set; }
         public int JobOppID { get; set; }
     }
+
+    public class InterviewDetails
+    {
+        public int InterviewSlotID { get; set; }
+        public int ApplicationID { get; set; }
+        public DateTime InterviewDate { get; set; }
+        public TimeSpan StartTime { get; set; }
+        public int InterviewCode { get; set; }
+        public TimeSpan EndTime { get; set; }
+        
+    }
 }

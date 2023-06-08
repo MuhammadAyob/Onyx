@@ -11,5 +11,7 @@ namespace INF370_2023_Web_API.Models
         Task<object> GetShortlist();
         Task<object> RemoveFromShortlist(int id);
         Task<object> RejectShortlistedCandidate(int id);
+        Task<object> AcceptShortlistedCandidate(int id);
+        Task<object> OfferEmployment(int id);
     }
 }
