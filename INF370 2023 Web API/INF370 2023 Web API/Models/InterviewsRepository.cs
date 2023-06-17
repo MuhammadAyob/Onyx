@@ -26,6 +26,43 @@ namespace INF370_2023_Web_API.Models
         {
             try
             {
+                if(DateTime.Today == interview.InterviewDate && DateTime.Now.TimeOfDay > interview.StartTime)
+                {
+                    return new { Status = 250, Message = "Start time today has passed" };
+                }
+
+                var max = await db.MaxSlotsPerDays.FirstOrDefaultAsync();
+                var count = await db.InterviewSlots.CountAsync(x => x.InterviewDate == interview.InterviewDate);
+                if (count >= max.NumberOfSlots)
+                {
+                    return new { Status = 300, Message = "Max slots reached" };
+                }
+
+                // Make sure doesn't overlap
+                List<InterviewSlot> interviewSlots = await db.InterviewSlots.Where(x => x.InterviewDate == interview.InterviewDate).ToListAsync();
+
+                //Loop through list and check for overlaps
+
+                foreach(var slott in interviewSlots)
+                {
+                    // The interview starts during an exisitng interview
+                    if(interview.StartTime >= slott.StartTime)
+                    {
+                        return new { Status = 350, Message = "Max slots reached" };
+                    }
+
+                    // The interview ends during an existing interview
+                    else if (interview.EndTime > slott.StartTime && interview.EndTime <=slott.EndTime)
+                    {
+                        return new { Status = 400, Message = "Max slots reached" };
+                    }
+
+                    // The interview completely overlaps an existing interview
+                    else if(interview.StartTime<=slott.StartTime && interview.EndTime >= slott.EndTime)
+                    {
+                        return new { Status = 450, Message = "Max slots reached" };
+                    }
+                }
                 var getShort = await db.ShortLists.Where(x => x.ApplicationID == interview.ApplicationID).FirstOrDefaultAsync();
                 
                 // Create Slot
@@ -73,6 +110,11 @@ namespace INF370_2023_Web_API.Models
             }
         }
 
+        public Task<object> DeleteInterviewSlot(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<object> GetPending()
         {
             try
@@ -107,7 +149,92 @@ namespace INF370_2023_Web_API.Models
                 return new { Status = 500, Message = "Internal server error, please try again" };
             }
         }
-       
+
+        public async Task<object> UpdateInterviewSlot(int id, InterviewDetails interview)
+        {
+            try
+            {
+               
+
+                var max = await db.MaxSlotsPerDays.FirstOrDefaultAsync();
+                var count = await db.InterviewSlots.CountAsync(x => x.InterviewDate == interview.InterviewDate);
+                if (interview.InterviewDate != DateTime.Today && count >= max.NumberOfSlots)
+                {
+                    return new { Status = 300, Message = "Max slots reached" };
+                }
+
+                // Make sure doesn't overlap
+                List<InterviewSlot> interviewSlots = await db.InterviewSlots.Where(x => x.InterviewDate == interview.InterviewDate).ToListAsync();
+
+                //Loop through list and check for overlaps
+
+                foreach (var slott in interviewSlots)
+                {
+                    // The interview starts during an exisitng interview
+                    if (interview.StartTime >= slott.StartTime)
+                    {
+                        return new { Status = 350, Message = "Max slots reached" };
+                    }
+
+                    // The interview ends during an existing interview
+                    else if (interview.EndTime > slott.StartTime && interview.EndTime <= slott.EndTime)
+                    {
+                        return new { Status = 400, Message = "Max slots reached" };
+                    }
+
+                    // The interview completely overlaps an existing interview
+                    else if (interview.StartTime <= slott.StartTime && interview.EndTime >= slott.EndTime)
+                    {
+                        return new { Status = 450, Message = "Max slots reached" };
+                    }
+                }
+                var getShort = await db.ShortLists.Where(x => x.ApplicationID == interview.ApplicationID).FirstOrDefaultAsync();
+
+                // Create Slot
+
+                InterviewSlot slot = new InterviewSlot();
+                slot.InterviewSlotID = 0;
+                slot.ShortListID = getShort.ShortListID;
+                slot.InterviewDate = interview.InterviewDate;
+                slot.StartTime = interview.StartTime;
+
+                // generate code
+
+                var code = new Random().Next(100000, 1000000);
+
+                string qrCode = Convert.ToString(code);
+                slot.InterviewCode = qrCode;
+                slot.EndTime = interview.EndTime;
+                slot.Attended = "Awaiting";
+                db.InterviewSlots.Add(slot);
+                await db.SaveChangesAsync();
+
+                var application = await db.Applications.Where(x => x.ApplicationID == interview.ApplicationID).FirstOrDefaultAsync();
+
+                application.ApplicationStatusID = 4;
+                db.Entry(application).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+
+                var applicant = await db.Applicants.Where(x => x.ApplicantID == application.ApplicantID).FirstOrDefaultAsync();
+
+                string name = applicant.Name;
+                string surname = applicant.Surname;
+                string email = applicant.Email;
+                string date = interview.InterviewDate.ToString("dd/MM/yyyy");
+                string startTime = Convert.ToString(interview.StartTime);
+                string endTime = Convert.ToString(interview.EndTime);
+
+                // Send Invite
+                await SendInvite(email, name, surname, date, startTime, endTime, qrCode);
+
+                return new { Status = 200, Message = "Slot added" };
+            }
+            catch (Exception)
+            {
+                return new { Status = 500, Message = "Internal server error, please try again" };
+            }
+        }
+
         private async Task SendInvite(string emailID, string name, string surname, string date, string startTime, string endTime, string code)
         {
             string location = "https://goo.gl/maps/v3oBkBV3DASbmxBq9";
@@ -133,7 +260,7 @@ namespace INF370_2023_Web_API.Models
                     "<br/><br/>" + "Date: " + date +
                     "<br/>" + "Time: " + startTime + " " + "-" + " " + endTime +
                     "<br/>" + "Location: " + location +
-                   "<br/><br/>Please keep your QR Code attachment safe, as it will be used to mark and verfiy your attendance. " +
+                   "<br/><br/>Please keep your QR Code attachment safe, as it will be used to mark and verify your attendance. " +
                 "<br/><br/> If you require any further assistance please contact us at dseiqueries@gmail.com" +
                     "<br/> Sincerely, The Onyx Team" +
                     "<br/><h5>Powered by Onyx</h5>";
