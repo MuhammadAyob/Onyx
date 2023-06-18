@@ -84,6 +84,42 @@ namespace INF370_2023_Web_API.Models
             }
         }
 
+        public async Task<object> GetActiveJobs()
+        {
+            try
+            {
+                db.Configuration.ProxyCreationEnabled = false;
+                var obj = await db.JobOpportunities.Where(o => o.JobOppStatusID == 1)
+                            .Join(db.JobOppStatus,
+                             job => job.JobOppStatusID,
+                             status => status.JobOppStatusID,
+                             (job, status) => new { Job = job, Status = status })
+                             .Join(db.WorkTypes,
+                                   jobStatus => jobStatus.Job.WorkTypeID,
+                                   workType => workType.WorkTypeID,
+                                   (jobStatus, workType) => new { jobStatus.Job, jobStatus.Status, WorkType = workType })
+                             .Select(j => new
+                             {
+                                 JobOppID = j.Job.JobOppID,
+                                 JobOppTitle = j.Job.JobOppTitle,
+                                 JobOppDescription = j.Job.JobOppDescription,
+                                 JobOppRequirements = j.Job.JobOppRequirements,
+                                 JobOppDeadline = j.Job.JobOppDeadline,
+                                 WorkTypeID = j.Job.WorkTypeID,
+                                 WorkType = j.WorkType.Type,
+                                 JobOppStatusID = j.Job.JobOppStatusID,
+                                 Status = j.Status.Status,
+                             }).ToListAsync();
+
+                return obj;
+            }
+
+            catch (Exception)
+            {
+                return new { Status = 500, Message = "Internal server error, please try again" };
+            }
+        }
+
         public async Task<object> GetJobOpps()
         {
             try

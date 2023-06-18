@@ -1,0 +1,73 @@
+<!-- PARTICLE SYSTEM -->
+<div class="page-bg"></div>
+<div class="animation-wrapper">
+  <div class="particle particle-1"></div>
+  <div class="particle particle-2"></div>
+  <div class="particle particle-3"></div>
+  <div class="particle particle-4"></div>
+</div>
+<div class="jobsDiv">
+  <div class="searchBar">
+      <form class="navbar-form">
+          <mat-form-field class="input-group no-border" appearance="fill" color="white" >
+            <mat-label style="color: #ffffff;">Search Jobs</mat-label>
+            <input style="color: white;" type="text" matInput name="searchDept" [(ngModel)]="search" placeholder="Ex. Web Design">
+          </mat-form-field>
+        </form>
+  </div>
+
+  <div>
+      <b class="heading">
+          Available Job Opportunities
+      </b>
+    </div>
+  <mat-tab-group [@.disabled]="true">
+      <mat-tab *ngFor="let jobOpp of jobOpportunityList | viewJobOpp: search">
+          <ng-template mat-tab-label>
+              <h1 >{{jobOpp.JobOppTitle}} 
+                 
+              </h1>
+          </ng-template>
+          <div class="tabContent">
+              <h1 class="jobTitle">
+                {{jobOpp.JobOppTitle}} - {{jobOpp.WorkType}}
+              </h1>
+              <p class="jobTitleSub"> Deadline - {{jobOpp.JobOppDeadline | date: 'dd MMM yyyy'}}. You will have up until midnight (23:59) to apply for this opportunity.</p>
+
+             
+
+               
+
+                <div class="tabDescr">
+                  <h1 class="tabDescrTitle">
+                      Description
+                  </h1>
+                  <p>
+                      {{jobOpp.JobOppDescription}}
+                  </p>
+                </div>
+
+                <div class="tabQualifications">
+                  <h1 class="tabQualificationsTitle">
+                      Requirements
+                  </h1>
+                 <p>
+                  {{jobOpp.JobOppRequirements}}
+                 </p>
+                </div>
+<br>
+<br>
+                <mat-dialog-actions class="buttonsDiv">
+                  <button id="cancel" mat-raised-button (click)="onBack()" class="btn" >Back</button>
+                  <button id="confirm" type="submit" (click)="onApply(jobOpp)" mat-raised-button class="btn">Apply</button>
+              </mat-dialog-actions>
+
+          </div>
+        </mat-tab>
+  </mat-tab-group>
+  <div *ngIf="( jobOpportunityList | viewJobOpp: search)!.length <= 0" class="no-records" style="text-align: center; margin-bottom: 6%; font-size: larger; color: #ffffff;">
+    No matching Job Opportunities were found, please try again.
+  </div>
+</div>
+
+

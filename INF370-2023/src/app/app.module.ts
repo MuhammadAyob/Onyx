@@ -107,6 +107,11 @@ import { AddJobComponent } from './Administrator/JobOpps/add-job/add-job/add-job
 import { MaintainJobComponent } from './Administrator/JobOpps/maintain-job/maintain-job/maintain-job.component';
 import { ReadJobsComponent } from './Administrator/JobOpps/read-job-opps/read-jobs/read-jobs.component';
 import { ViewJobComponent } from './Administrator/JobOpps/view-job/view-job/view-job.component';
+import { ViewJobOppsComponent } from './user/job-listings/view-job-opps/view-job-opps.component';
+import { ApplicantApplyComponent } from './user/apply/applicant-apply/applicant-apply.component';
+import { ViewJobOppPipe } from './view-job-opp.pipe';
+import { ReadSlotsComponent } from './Administrator/MaxSlots/read-slots/read-slots/read-slots.component';
+import { MaintainSlotsComponent } from './Administrator/MaxSlots/maintain-slots/maintain-slots/maintain-slots.component';
 //import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
@@ -209,7 +214,12 @@ import { ViewJobComponent } from './Administrator/JobOpps/view-job/view-job/view
     AddJobComponent,
     MaintainJobComponent,
     ReadJobsComponent,
-    ViewJobComponent
+    ViewJobComponent,
+    ViewJobOppsComponent,
+    ApplicantApplyComponent,
+    ViewJobOppPipe,
+    ReadSlotsComponent,
+    MaintainSlotsComponent
   ],
   imports: [
     BrowserModule,

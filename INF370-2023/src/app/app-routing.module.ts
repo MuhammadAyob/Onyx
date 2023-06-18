@@ -93,6 +93,10 @@ import { AddJobComponent } from './Administrator/JobOpps/add-job/add-job/add-job
 import { MaintainJobComponent } from './Administrator/JobOpps/maintain-job/maintain-job/maintain-job.component';
 import { ReadJobsComponent } from './Administrator/JobOpps/read-job-opps/read-jobs/read-jobs.component';
 import { ViewJobComponent } from './Administrator/JobOpps/view-job/view-job/view-job.component';
+import { ViewJobOppsComponent } from './user/job-listings/view-job-opps/view-job-opps.component';
+import { ApplicantApplyComponent } from './user/apply/applicant-apply/applicant-apply.component';
+import { ReadSlotsComponent } from './Administrator/MaxSlots/read-slots/read-slots/read-slots.component';
+import { MaintainSlotsComponent } from './Administrator/MaxSlots/maintain-slots/maintain-slots/maintain-slots.component';
 
 
 const routes: Routes = [
@@ -234,6 +238,15 @@ component:ViewDepartmentComponent
   component:MaintainQualificationComponent
   //add guards later
 },
+{
+path:'careers',
+component:ViewJobOppsComponent
+},
+
+{
+path:'applicant-apply',
+component:ApplicantApplyComponent
+},
 
 {
 path:'admin/add-job',
@@ -282,6 +295,18 @@ canActivate:[AuthGuardGuard,AdminGuard]
   path:'admin/read-vat',
   component:ReadVATComponent,
   canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+path:'admin/read-max-slots',
+component:ReadSlotsComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+path:'admin/maintain-max-slots',
+component:MaintainSlotsComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
 },
 
 {

@@ -26,6 +26,13 @@ namespace INF370_2023_Web_API.Controllers
         }
 
         [HttpGet]
+        [Route("api/GetActiveJobs")]
+        public async Task<object> GetActiveJobs()
+        {
+            return await _jobRepo.GetActiveJobs();
+        }
+
+        [HttpGet]
         [Route("api/GetWorkTypes")]
         public async Task<object> GetWorkTypes()
         {

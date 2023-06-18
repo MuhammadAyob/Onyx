@@ -11,7 +11,7 @@ import { ConfirmDialogComponent } from './Dialog/confirm-dialog/confirm-dialog/c
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { JobOppService } from './Services/job-opp.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -37,9 +37,11 @@ export class AppComponent {
     private dialog: MatDialog,
     private toastr: ToastrService,
     private ref: ChangeDetectorRef,
-    private snack:MatSnackBar
+    private snack:MatSnackBar,
+    private JService:JobOppService
   ) {
     this.router.events.subscribe((e) => {
+      //this.jobOppExpired();
       if (e instanceof NavigationEnd) {
         if (
           e.url === '/index' ||
@@ -48,8 +50,8 @@ export class AppComponent {
           e.url === '/' ||
           e.url === '/landing-page' ||
           e.url === '/register-student' ||
-          e.url === '/apply/apply-applicant/view-job-opportunity' ||
-          e.url === '/apply/apply-applicant/submit-applicant-application' ||
+          e.url === '/careers' ||
+          e.url === '/applicant-apply' ||
           e.url === '/enter-otp' ||
           e.url === '/reset-password'
         ) {
@@ -153,7 +155,11 @@ export class AppComponent {
     this.help = !this.help;
   }
 
-  
+  jobOppExpired(){
+    this.JService.ExpiredJob().subscribe(()=>{
+      console.log('hitting');
+    })
+  }
 
   onLogout() {
     const dialogReference = this.dialog.open(ConfirmDialogComponent, {

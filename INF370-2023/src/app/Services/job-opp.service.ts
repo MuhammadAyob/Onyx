@@ -3,12 +3,13 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { map }from 'rxjs/operators';
+import { JobOpportunities } from '../Models/JobOpportunities.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JobOppService {
-
+test!: JobOpportunities;
 //CORS
 
 httpOptions = {
@@ -37,6 +38,10 @@ ExpiredJob(){
 
 GetJobOpps(){
   return this.http.get(environment.WebAPI + 'GetJobOpps', this.httpOptions);
+}
+
+GetActiveJobs(){
+  return this.http.get(environment.WebAPI + 'GetActiveJobs', this.httpOptions);
 }
 
 GetWorkTypes(){
