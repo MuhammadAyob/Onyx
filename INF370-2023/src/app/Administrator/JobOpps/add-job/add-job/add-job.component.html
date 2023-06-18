@@ -1,0 +1,158 @@
+  <!-- Card Form for Input -->
+  <div  style="padding-left: 3em; padding-right: 3em; padding-top: 9em;height:100vh;background-image: url('../../assets/gradient.gif');background-repeat: no-repeat;background-size: 100% 25%;">
+    <!-- Mat Card Form for Read faq -->
+   
+     <div>
+       <mat-card class="matCard" style="border-radius: 34px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8), 0 1px 3px rgba(0, 0, 0, 0.8);">
+         <mat-card-header class="cardHeader" style="padding-bottom: 1%;text-align: center">
+           <mat-card-title-group style="margin: 0 auto">
+             <mat-card-title style="font-weight: 500; ">New Job Opportunity</mat-card-title>
+           </mat-card-title-group>
+         </mat-card-header>
+   
+         <mat-card-content class="matContent">
+           <form>
+             <div class="form-group">
+               <br /><br />
+               <div style="padding: 0% 2.5% 0% 2%; min-width: 100%">
+   
+                 <mat-form-field
+                   class="example-full-width"
+                   appearance="legacy"
+                   style="width: 95%;"
+                 >
+                   <mat-label style="color: #0e1a3c">
+                    Enter Job Opportunity Title </mat-label
+                   >
+                   <input
+                     type="text"
+                     style="color: #0e1a3c"
+                     matInput
+                     [formControl]="titleFormControl"
+                     name="DeptName"
+                     [(ngModel)]="JobOpportunity.JobOppTitle"
+                     ngModelOptions="{standalone:true}"
+                     placeholder="Ex. Python Tutor"
+                     required
+                   />
+                   <mat-error *ngIf="titleFormControl.hasError('required')">
+                        Title is <strong>required</strong>
+                  </mat-error>
+                 </mat-form-field>
+                 <br />
+                 <br />
+                 <mat-form-field
+                 class="example-full-width"
+                 style="width: 95%;"
+                 appearance="legacy"
+               >
+                 <mat-label style="color: #0e1a3c"
+                   >Enter Job Opportunity Description</mat-label
+                 >
+                 <textarea
+                   matInput
+                   style="color: #0e1a3c"
+                   [formControl]="descFormControl"
+                   rows="5"
+                   cols="90"
+                   name="QualificationDesc"
+                   [(ngModel)]="JobOpportunity.JobOppDescription"  
+                   ngModelOptions="{standalone:true}"
+                   placeholder="Ex. As a python tutor, you will be expected to..."
+                   required
+                 ></textarea>
+                 <mat-error *ngIf="descFormControl.hasError('required')">
+                   Description is <strong>required</strong>
+                </mat-error>
+               </mat-form-field>
+               <br>
+               <br>
+               <mat-form-field
+               class="example-full-width"
+               style="width: 95%;"
+               appearance="legacy"
+             >
+               <mat-label style="color: #0e1a3c"
+                 >Enter Job Opportunity Requirements</mat-label
+               >
+               <textarea
+                 matInput
+                 style="color: #0e1a3c"
+                 [formControl]="requirementsFormControl"
+                 rows="5"
+                 cols="90"
+                 name="QualificationDesc"
+                 [(ngModel)]="JobOpportunity.JobOppRequirements"  
+                 ngModelOptions="{standalone:true}"
+                 placeholder="Ex. BSc Computer Science Degree and 2 years of Python development experience"
+                 required
+               ></textarea>
+               <mat-error *ngIf="requirementsFormControl.hasError('required')">
+                 Requirements are <strong>required</strong>
+              </mat-error>
+             </mat-form-field>
+                 <br>
+                 <br>
+                 <mat-form-field
+                 class="example-full-width"
+                 style="width: 95%;"
+                 appearance="legacy"
+               >
+                 <mat-label style="color: #0e1a3c"
+                   >Select Job Opportunity Deadline</mat-label
+                 >
+                 <input
+                  style="color: #0e1a3c;"
+                  matInput
+                  [formControl]="deadlineFormControl"
+                  [matDatepicker]="JobOppDeadline"
+                  name="JobOppDeadline"
+                  [(ngModel)]="JobOpportunity.JobOppDeadline"
+                  required
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="JobOppDeadline"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #JobOppDeadline></mat-datepicker>
+                 <mat-error *ngIf="deadlineFormControl.hasError('required')">
+                   Deadline is <strong>required</strong>
+                </mat-error>
+               </mat-form-field>
+               <br>
+               <br>
+               <mat-label style="color: #0e1a3c">
+                Select Work Type</mat-label>
+  
+              <br />
+              <mat-form-field 
+              class="example-full-width" 
+              appearance="legacy"
+              style="width: 95%;">
+  
+              
+              <mat-select (valueChange)="selectWorkType($event)" [formControl]="workTypeFormControl" required>
+                <mat-option
+                  *ngFor="let item of WorkTypeList"
+                  [value]="item.WorkTypeID"
+                >
+                  {{ item.Type }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="workTypeFormControl.hasError('required')">
+                Work Type Selection is <strong>required</strong>
+              </mat-error>
+              </mat-form-field>
+               </div>
+   
+               <div class="form-group" style="padding-right: 40%"></div>
+             </div>
+             <div class="button-container">
+               <button id="cancel" class="btn" (click)="onBack()">Cancel</button>
+               <button id="confirm" class="btn" (click)="onSubmit()">Confirm</button>
+           </div>
+           </form>
+         </mat-card-content>
+       </mat-card>
+     </div>
+   </div>

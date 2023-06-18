@@ -89,6 +89,10 @@ import { ReadOTPComponent } from './Administrator/OTP/read-otp/read-otp/read-otp
 import { MaintainOTPComponent } from './Administrator/OTP/maintain-otp/maintain-otp/maintain-otp.component';
 import { ReadTermsComponent } from './Administrator/TermsAndConditions/read-terms/read-terms.component';
 import { MaintainTermsComponent } from './Administrator/TermsAndConditions/maintain-terms/maintain-terms/maintain-terms.component';
+import { AddJobComponent } from './Administrator/JobOpps/add-job/add-job/add-job.component';
+import { MaintainJobComponent } from './Administrator/JobOpps/maintain-job/maintain-job/maintain-job.component';
+import { ReadJobsComponent } from './Administrator/JobOpps/read-job-opps/read-jobs/read-jobs.component';
+import { ViewJobComponent } from './Administrator/JobOpps/view-job/view-job/view-job.component';
 
 
 const routes: Routes = [
@@ -231,6 +235,29 @@ component:ViewDepartmentComponent
   //add guards later
 },
 
+{
+path:'admin/add-job',
+component:AddJobComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+path:'admin/maintain-job',
+component:MaintainJobComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+path:'admin/read-jobs',
+component:ReadJobsComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+path:'admin/view-job',
+component:ViewJobComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
 // Configurations
 
 {

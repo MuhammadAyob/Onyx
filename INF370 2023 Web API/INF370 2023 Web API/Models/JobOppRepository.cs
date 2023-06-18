@@ -100,15 +100,15 @@ namespace INF370_2023_Web_API.Models
                                    (jobStatus, workType) => new { jobStatus.Job, jobStatus.Status, WorkType = workType })
                              .Select(j => new 
                              {
-                                 j.Job.JobOppID,
-                                 j.Job.JobOppTitle,
-                                 j.Job.JobOppDescription,
-                                 j.Job.JobOppRequirements,
-                                 j.Job.JobOppDeadline,
-                                 j.Job.WorkTypeID,
-                                 j.WorkType.Type,
-                                 j.Job.JobOppStatusID,
-                                 j.Status.Status,
+                                JobOppID = j.Job.JobOppID,
+                                JobOppTitle = j.Job.JobOppTitle,
+                                JobOppDescription = j.Job.JobOppDescription,
+                                JobOppRequirements = j.Job.JobOppRequirements,
+                                JobOppDeadline = j.Job.JobOppDeadline,
+                                WorkTypeID = j.Job.WorkTypeID,
+                                WorkType = j.WorkType.Type,
+                                JobOppStatusID = j.Job.JobOppStatusID,
+                                Status = j.Status.Status,
                              }).ToListAsync();
 
                 return obj;
@@ -150,53 +150,60 @@ namespace INF370_2023_Web_API.Models
             }
         }
 
-        public async Task<object> UpdateJobOpp(int id, JobOpportunity job)
+        public async Task<object> UpdateJobOpp(int id, JobOpportunity updatedJob)
         {
             try
             {
+                var existingJob = await db.JobOpportunities.FindAsync(id);
+
+                if (existingJob == null)
+                {
+                    return new { Status = 404, Message = "Job not found" };
+                }
+
                 // Duplication Case
-                var dup = await db.JobOpportunities.Where(x => x.JobOppTitle == job.JobOppTitle && x.JobOppStatusID != 3 && x.JobOppID != id).FirstOrDefaultAsync();
-                if (dup != null)
+                var duplicateJob = await db.JobOpportunities.FirstOrDefaultAsync(x =>
+                    x.JobOppTitle == updatedJob.JobOppTitle &&
+                    x.JobOppStatusID != 3 &&
+                    x.JobOppID != id);
+
+                if (duplicateJob != null)
                 {
-                    return new { Status = 400, Message = "Job exists" };
+                    return new { Status = 400, Message = "Job already exists" };
                 }
 
-                // Case 1: Disabling a job opp temporarily
-                if (job.JobOppDeadline == DateTime.Today.AddDays(-1) && job.JobOppStatusID == 1)
+                if (updatedJob.JobOppStatusID == 2 && updatedJob.JobOppDeadline.Date < DateTime.Today.Date && updatedJob.JobOppDeadline.Date != existingJob.JobOppDeadline.Date)
                 {
-                    job.JobOppStatusID = 2;
+                    return new { Status = 601, Message = "You can't change an expired opportunity's deadline to a date prior to today" };
                 }
 
-                // Case 2: Preventing an open job opp deadline prior to yesterday
-                if(job.JobOppDeadline < DateTime.Today.AddDays(-1) && job.JobOppStatusID == 1)
+                // Update the existingJob entity with the changes from updatedJob
+                db.Entry(existingJob).CurrentValues.SetValues(updatedJob);
+
+                // Handle different cases
+                if (updatedJob.JobOppDeadline.Date == DateTime.Today.AddDays(-1).Date && updatedJob.JobOppStatusID == 1)
                 {
-                    return new { Status = 600, Message = "You can't change deadline prior to yesterday" };
+                    existingJob.JobOppStatusID = 2;
+                }
+                else if (updatedJob.JobOppDeadline.Date < DateTime.Today.AddDays(-1).Date && updatedJob.JobOppStatusID == 1)
+                {
+                    return new { Status = 600, Message = "You can't change the deadline prior to yesterday" };
+                }
+               
+                else if (updatedJob.JobOppDeadline.Date >= DateTime.Today.Date && updatedJob.JobOppStatusID == 2)
+                {
+                    existingJob.JobOppStatusID = 1;
                 }
 
-                // Case 3: Preventing an expired job from changing deadline if prior to today
-                var xx = await db.JobOpportunities.FindAsync(id);
-
-                if ((job.JobOppStatusID == 2) && (job.JobOppDeadline != xx.JobOppDeadline) && (job.JobOppDeadline < DateTime.Today))
-                {
-                    return new { Status = 601, Message = "You can't change an expired opp's deadline prior to today's date" };
-                }
-
-                // Case 4: Re-activating an expired job opp
-                if(job.JobOppDeadline >= DateTime.Today && job.JobOppStatusID == 2)
-                {
-                    job.JobOppStatusID = 1;  
-                }
-
-                db.Entry(job).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return new { Status = 200, Message = "Job updated" };
-
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return new { Status = 500, Message = "Internal server error, please try again" };
+                return ex.ToString();
             }
         }
+
 
 
     }

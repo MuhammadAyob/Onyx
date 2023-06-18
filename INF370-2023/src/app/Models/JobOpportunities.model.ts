@@ -1,9 +1,12 @@
-export class JobOpportunity{
+export class JobOpportunities{
     JobOppID!:number;
     JobOppTitle!:string;
     JobOppDescription!:string;
     JobOppRequirements!:string;
-    JobOppDeadline!: Date |any;
-    WorkTypeID!: number|any;
+    JobOppDeadline!: Date;
+    WorkTypeID!: number;
+    WorkType!: string;
     JobOppStatusID!:number;
+    Status!:string;
+   
 }

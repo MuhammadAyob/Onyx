@@ -103,6 +103,10 @@ import { AddVatComponent } from './Administrator/VAT/add-vat/add-vat/add-vat.com
 import { MaintainVATComponent } from './Administrator/VAT/maintain-vat/maintain-vat/maintain-vat.component';
 import { ReadVATComponent } from './Administrator/VAT/read-vat/read-vat/read-vat.component';
 import { ViewVATComponent } from './Administrator/VAT/view-vat/view-vat/view-vat.component';
+import { AddJobComponent } from './Administrator/JobOpps/add-job/add-job/add-job.component';
+import { MaintainJobComponent } from './Administrator/JobOpps/maintain-job/maintain-job/maintain-job.component';
+import { ReadJobsComponent } from './Administrator/JobOpps/read-job-opps/read-jobs/read-jobs.component';
+import { ViewJobComponent } from './Administrator/JobOpps/view-job/view-job/view-job.component';
 //import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
@@ -201,7 +205,11 @@ import { ViewVATComponent } from './Administrator/VAT/view-vat/view-vat/view-vat
     AddVatComponent,
     MaintainVATComponent,
     ReadVATComponent,
-    ViewVATComponent
+    ViewVATComponent,
+    AddJobComponent,
+    MaintainJobComponent,
+    ReadJobsComponent,
+    ViewJobComponent
   ],
   imports: [
     BrowserModule,

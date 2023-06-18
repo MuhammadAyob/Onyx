@@ -9,7 +9,7 @@ namespace INF370_2023_Web_API.Models
     public interface IJobOpp
     {
         Task<object> AddJobOpp(JobOpportunity job);
-        Task<object> UpdateJobOpp(int id, JobOpportunity job);
+        Task<object> UpdateJobOpp(int id, JobOpportunity updatedJob);
         Task<object> DeleteJobOpp(int id);
         Task<object> GetJobOpps();
         Task<object> GetWorkTypes();
