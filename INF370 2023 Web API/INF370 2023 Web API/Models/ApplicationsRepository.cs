@@ -64,7 +64,7 @@ namespace INF370_2023_Web_API.Models
                             Name = s.Applicant.Name,
                             Surname = s.Applicant.Surname,
                             Email = s.Applicant.Email,
-                            Motivation = s.Applicant.Motivation,
+                            //Motivation = s.Applicant.Motivation,
                             CV = s.Applicant.CV,
                             Image = s.Applicant.Image,
                             Phone = s.Applicant.Phone,

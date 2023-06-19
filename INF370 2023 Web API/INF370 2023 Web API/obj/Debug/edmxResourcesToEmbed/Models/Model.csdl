@@ -1,21 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="Applicant">
-    <Key>
-      <PropertyRef Name="ApplicantID" />
-    </Key>
-    <Property Name="ApplicantID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Motivation" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="CV" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-    <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Biography" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="RSAIDNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="Applications" Relationship="Self.FK_Application_Applicant" FromRole="Applicant" ToRole="Application" />
-  </EntityType>
   <EntityType Name="Application">
     <Key>
       <PropertyRef Name="ApplicationID" />
@@ -24,10 +8,10 @@
     <Property Name="JobOppID" Type="Int32" Nullable="false" />
     <Property Name="ApplicantID" Type="Int32" Nullable="false" />
     <Property Name="ApplicationStatusID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Applicant" Relationship="Self.FK_Application_Applicant" FromRole="Application" ToRole="Applicant" />
     <NavigationProperty Name="ShortLists" Relationship="Self.FK_ShortList_Application" FromRole="Application" ToRole="ShortList" />
     <NavigationProperty Name="JobOpportunity" Relationship="Model.FK_Application_JobOpportunity" FromRole="Application" ToRole="JobOpportunity" />
     <NavigationProperty Name="ApplicationStatu" Relationship="Model.FK_Application_ApplicationStatus" FromRole="Application" ToRole="ApplicationStatu" />
+    <NavigationProperty Name="Applicant" Relationship="Model.FK_Application_Applicant" FromRole="Application" ToRole="Applicant" />
   </EntityType>
   <EntityType Name="AuditLog">
     <Key>
@@ -446,18 +430,6 @@
     <Property Name="return_url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="cancel_url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
   </EntityType>
-  <Association Name="FK_Application_Applicant">
-    <End Role="Applicant" Type="Self.Applicant" Multiplicity="1" />
-    <End Role="Application" Type="Self.Application" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Applicant">
-        <PropertyRef Name="ApplicantID" />
-      </Principal>
-      <Dependent Role="Application">
-        <PropertyRef Name="ApplicantID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_ShortList_Application">
     <End Role="Application" Type="Self.Application" Multiplicity="1" />
     <End Role="ShortList" Type="Self.ShortList" Multiplicity="*" />
@@ -867,7 +839,6 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Applicants" EntityType="Self.Applicant" />
     <EntitySet Name="Applications" EntityType="Self.Application" />
     <EntitySet Name="AuditLogs" EntityType="Self.AuditLog" />
     <EntitySet Name="Carts" EntityType="Self.Cart" />
@@ -907,10 +878,6 @@
     <EntitySet Name="VATs" EntityType="Self.VAT" />
     <EntitySet Name="WorkTypes" EntityType="Self.WorkType" />
     <EntitySet Name="PayFasts" EntityType="Self.PayFast" />
-    <AssociationSet Name="FK_Application_Applicant" Association="Self.FK_Application_Applicant">
-      <End Role="Applicant" EntitySet="Applicants" />
-      <End Role="Application" EntitySet="Applications" />
-    </AssociationSet>
     <AssociationSet Name="FK_ShortList_Application" Association="Self.FK_ShortList_Application">
       <End Role="Application" EntitySet="Applications" />
       <End Role="ShortList" EntitySet="ShortLists" />
@@ -1073,6 +1040,11 @@
       <End Role="ShortList" EntitySet="ShortLists" />
       <End Role="InterviewSlot" EntitySet="InterviewSlots" />
     </AssociationSet>
+    <EntitySet Name="Applicants" EntityType="Model.Applicant" />
+    <AssociationSet Name="FK_Application_Applicant" Association="Model.FK_Application_Applicant">
+      <End Role="Applicant" EntitySet="Applicants" />
+      <End Role="Application" EntitySet="Applications" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="OTPTimer">
     <Key>
@@ -1188,6 +1160,33 @@
       </Principal>
       <Dependent Role="InterviewSlot">
         <PropertyRef Name="ShortListID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Applicant">
+    <Key>
+      <PropertyRef Name="ApplicantID" />
+    </Key>
+    <Property Name="ApplicantID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CV" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <Property Name="Image" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <Property Name="Phone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Biography" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="RSAIDNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Applications" Relationship="Model.FK_Application_Applicant" FromRole="Applicant" ToRole="Application" />
+  </EntityType>
+  <Association Name="FK_Application_Applicant">
+    <End Type="Model.Applicant" Role="Applicant" Multiplicity="1" />
+    <End Type="Model.Application" Role="Application" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Applicant">
+        <PropertyRef Name="ApplicantID" />
+      </Principal>
+      <Dependent Role="Application">
+        <PropertyRef Name="ApplicantID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

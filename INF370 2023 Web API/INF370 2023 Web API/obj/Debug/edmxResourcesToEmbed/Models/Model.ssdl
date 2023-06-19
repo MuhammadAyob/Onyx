@@ -8,7 +8,6 @@
     <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Surname" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Motivation" Type="varchar(max)" Nullable="false" />
     <Property Name="CV" Type="varbinary(max)" Nullable="false" />
     <Property Name="Image" Type="varbinary(max)" Nullable="false" />
     <Property Name="Phone" Type="varchar" MaxLength="50" Nullable="false" />

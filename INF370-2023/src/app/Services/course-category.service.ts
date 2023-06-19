@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 })
 export class CourseCategoryService {
 
-  //CORS
+//CORS
 
 httpOptions = {
   headers: new HttpHeaders({

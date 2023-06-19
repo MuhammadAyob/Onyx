@@ -84,7 +84,7 @@ namespace INF370_2023_Web_API.Models
                     appliExists.Name = applicant.Name;
                     appliExists.Surname = applicant.Surname;
                     appliExists.Email = applicant.Email;
-                    appliExists.Motivation = applicant.Motivation;
+                   // appliExists.Motivation = applicant.Motivation;
                     appliExists.CV = applicant.CV;
                     appliExists.Image = applicant.Image;
                     appliExists.Phone = applicant.Phone;
@@ -118,7 +118,7 @@ namespace INF370_2023_Web_API.Models
                     app.Name = applicant.Name;
                     app.Surname = applicant.Surname;
                     app.Email = applicant.Email;
-                    app.Motivation = applicant.Motivation;
+                    //app.Motivation = applicant.Motivation;
                     app.CV = applicant.CV;
                     app.Image = applicant.Image;
                     app.Phone = applicant.Phone;

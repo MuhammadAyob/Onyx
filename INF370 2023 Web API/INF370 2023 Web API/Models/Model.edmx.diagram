@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="b57861c8e0384a1d92366af1e54a7e21" Name="Diagram1" ZoomLevel="94">
-        <EntityTypeShape EntityType="Model.Applicant" Width="1.5" PointX="9" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Application" Width="1.5" PointX="11.25" PointY="8.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.AuditLog" Width="1.5" PointX="3" PointY="24.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Cart" Width="1.5" PointX="14.25" PointY="12.25" IsExpanded="true" />
@@ -45,7 +44,6 @@
         <EntityTypeShape EntityType="Model.VAT" Width="1.5" PointX="12.75" PointY="4.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.WorkType" Width="1.5" PointX="3.75" PointY="21.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.PayFast" Width="1.5" PointX="13.75" PointY="1.25" IsExpanded="true" />
-        <AssociationConnector Association="Model.FK_Application_Applicant" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_ShortList_Application" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_AuditLog_User" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Cart_Student" ManuallyRouted="false" />
@@ -91,6 +89,8 @@
         <AssociationConnector Association="Model.FK_Application_ApplicationStatus" />
         <EntityTypeShape EntityType="Model.InterviewSlot" Width="1.5" PointX="15.75" PointY="8.25" />
         <AssociationConnector Association="Model.FK_InterviewSlot_ShortList" />
+        <EntityTypeShape EntityType="Model.Applicant" Width="1.5" PointX="8.375" PointY="1" />
+        <AssociationConnector Association="Model.FK_Application_Applicant" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

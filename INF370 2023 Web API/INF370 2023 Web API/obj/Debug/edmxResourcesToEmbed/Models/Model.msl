@@ -1,22 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
-    <EntitySetMapping Name="Applicants">
-      <EntityTypeMapping TypeName="Model.Applicant">
-        <MappingFragment StoreEntitySet="Applicant">
-          <ScalarProperty Name="ApplicantID" ColumnName="ApplicantID" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Surname" ColumnName="Surname" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="Motivation" ColumnName="Motivation" />
-          <ScalarProperty Name="CV" ColumnName="CV" />
-          <ScalarProperty Name="Image" ColumnName="Image" />
-          <ScalarProperty Name="Phone" ColumnName="Phone" />
-          <ScalarProperty Name="Biography" ColumnName="Biography" />
-          <ScalarProperty Name="RSAIDNumber" ColumnName="RSAIDNumber" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Applications">
       <EntityTypeMapping TypeName="Model.Application">
         <MappingFragment StoreEntitySet="Application">
@@ -464,6 +448,21 @@
           <ScalarProperty Name="InterviewDate" ColumnName="InterviewDate" />
           <ScalarProperty Name="ShortListID" ColumnName="ShortListID" />
           <ScalarProperty Name="InterviewSlotID" ColumnName="InterviewSlotID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Applicants">
+      <EntityTypeMapping TypeName="Model.Applicant">
+        <MappingFragment StoreEntitySet="Applicant">
+          <ScalarProperty Name="RSAIDNumber" ColumnName="RSAIDNumber" />
+          <ScalarProperty Name="Biography" ColumnName="Biography" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="CV" ColumnName="CV" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ApplicantID" ColumnName="ApplicantID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
