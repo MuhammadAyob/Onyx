@@ -99,6 +99,7 @@ import { ReadSlotsComponent } from './Administrator/MaxSlots/read-slots/read-slo
 import { MaintainSlotsComponent } from './Administrator/MaxSlots/maintain-slots/maintain-slots/maintain-slots.component';
 import { ReadApplicationsComponent } from './Administrator/Applications/read-applications/read-applications/read-applications.component';
 import { ViewApplicationComponent } from './Administrator/Applications/view-application/view-application/view-application.component';
+import { ViewShortlistComponent } from './Administrator/Shortlist/view-shortlist/view-shortlist/view-shortlist.component';
 
 
 const routes: Routes = [
@@ -323,6 +324,17 @@ component:ViewApplicationComponent,
 canActivate:[AuthGuardGuard,AdminGuard]
 },
 
+{
+path:'admin/read-shortlist',
+component:ViewShortlistComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+path:'admin/view-shortlist',
+component:ViewShortlistComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
 
 {
   path:'admin/read-otp-timer',

@@ -114,6 +114,8 @@ import { ReadSlotsComponent } from './Administrator/MaxSlots/read-slots/read-slo
 import { MaintainSlotsComponent } from './Administrator/MaxSlots/maintain-slots/maintain-slots/maintain-slots.component';
 import { ReadApplicationsComponent } from './Administrator/Applications/read-applications/read-applications/read-applications.component';
 import { ViewApplicationComponent } from './Administrator/Applications/view-application/view-application/view-application.component';
+import { ReadShortlistComponent } from './Administrator/Shortlist/read-shortlist/read-shortlist/read-shortlist.component';
+import { ViewShortlistComponent } from './Administrator/Shortlist/view-shortlist/view-shortlist/view-shortlist.component';
 //import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
@@ -223,7 +225,9 @@ import { ViewApplicationComponent } from './Administrator/Applications/view-appl
     ReadSlotsComponent,
     MaintainSlotsComponent,
     ReadApplicationsComponent,
-    ViewApplicationComponent
+    ViewApplicationComponent,
+    ReadShortlistComponent,
+    ViewShortlistComponent
   ],
   imports: [
     BrowserModule,
