@@ -23,7 +23,7 @@ namespace INF370_2023_Web_API.Models
         {
             try
             {
-                // Case 1: Check if Employee Exists
+                // Case 1: Check if Employee Existssss
                 var exists =  await db.Employees.CountAsync(x => x.RSAIDNumber == applicant.RSAIDNumber) > 0;
                 if(exists)
                 {
