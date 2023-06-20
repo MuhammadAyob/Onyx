@@ -49,6 +49,7 @@ export class ReadJobsComponent implements OnInit {
     private snack: MatSnackBar) {this.titleservice.setTitle('Job Opportunity'); }
 
   ngOnInit(): void {
+    this.expiredJobs();
     this.refreshList();
   }
 
@@ -58,6 +59,20 @@ export class ReadJobsComponent implements OnInit {
     this.refreshList();
   }
 
+  expiredJobs(){
+    this.service.ExpiredJob().subscribe((result:any)=>{
+      if(result.Status === 200)
+      {
+        console.log('success');
+      }
+      else
+      {
+        console.log('fail');
+      }
+      
+    })
+  }
+  
   refreshList(){
     this.service.GetJobOpps().subscribe((result:any)=>{
       this.dataSource.data=result as JobOpportunities[];

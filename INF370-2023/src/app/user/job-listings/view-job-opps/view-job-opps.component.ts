@@ -35,7 +35,22 @@ constructor(
   {this.titleservice.setTitle('View Available Job Opportunities'); }
 
   ngOnInit(): void {
+    this.expiredJobs();
     this.refreshList();
+  }
+
+  expiredJobs(){
+    this.service.ExpiredJob().subscribe((result:any)=>{
+      if(result.Status === 200)
+      {
+        console.log('success');
+      }
+      else
+      {
+        console.log('fail');
+      }
+      
+    })
   }
 
   public refreshList(){

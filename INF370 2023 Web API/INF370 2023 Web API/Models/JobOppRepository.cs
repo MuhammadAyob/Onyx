@@ -66,14 +66,14 @@ namespace INF370_2023_Web_API.Models
                 
                 foreach (JobOpportunity job in opportunity)
                 {
-                    if (DateTime.Today > job.JobOppDeadline)
+                    if (DateTime.Today.Date > job.JobOppDeadline.Date)
 
                     {
                         job.JobOppStatusID = 2;
                         db.Entry(job).State = EntityState.Modified;
-
+                        await db.SaveChangesAsync();
                     }
-                    await db.SaveChangesAsync();
+                    
                 }
 
                 return new { Status = 200, Message = "Status updated" };

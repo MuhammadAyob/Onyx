@@ -100,6 +100,8 @@ import { MaintainSlotsComponent } from './Administrator/MaxSlots/maintain-slots/
 import { ReadApplicationsComponent } from './Administrator/Applications/read-applications/read-applications/read-applications.component';
 import { ViewApplicationComponent } from './Administrator/Applications/view-application/view-application/view-application.component';
 import { ViewShortlistComponent } from './Administrator/Shortlist/view-shortlist/view-shortlist/view-shortlist.component';
+import { ReadShortlistComponent } from './Administrator/Shortlist/read-shortlist/read-shortlist/read-shortlist.component';
+import { AcceptApplicantComponent } from './Administrator/Accept-Applicant/accept-applicant/accept-applicant.component';
 
 
 const routes: Routes = [
@@ -326,13 +328,19 @@ canActivate:[AuthGuardGuard,AdminGuard]
 
 {
 path:'admin/read-shortlist',
-component:ViewShortlistComponent,
+component:ReadShortlistComponent,
 canActivate:[AuthGuardGuard,AdminGuard]
 },
 
 {
 path:'admin/view-shortlist',
 component:ViewShortlistComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+path:'admin/accept-applicant',
+component:AcceptApplicantComponent,
 canActivate:[AuthGuardGuard,AdminGuard]
 },
 

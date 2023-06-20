@@ -87,19 +87,23 @@ namespace INF370_2023_Web_API.Models
 
         private async Task SendAccountDetailsEmail(string emailID, string name, string surname, string password)
         {
-            var fromEmailAccount = "muhammad.ayob7@gmail.com";
-            var fromEmailAccountPassword = "wkguzejivsgpirle";
+            var fromEmailAccount = "dseiqueries@gmail.com";
+            var fromEmailAccountPassword = "epqshwdnwmokortk";
 
             var fromAddress = new MailAddress(fromEmailAccount);
             var toAddress = new MailAddress(emailID);
 
             var subject = "Employee Account";
-            var message = "Dear" + "" + name + "" + surname
+            var message = "Dear" + " " + name + " " + surname
                 + "<br> We are delighted to welcome you to the team!"
+                +"<br>"
                 + "<br> Please use the following user credentials to access your user profile, and feel free to change it accordingly under the 'My Account' tab located within the 'settings' icon dropdown on the top right corner -"
-                + "<br>Email/Username:" + emailID
-                + "<br>Password:" + password
-                + "<br>For further assistance or enquiries, please contact us at" + "" + fromAddress;
+                + "<br>Email/Username:" + " " + emailID
+                + "<br>Password:" + " " + password
+                + "<br>" +
+                "<br/> If you require any further assistance please contact us at dseiqueries@gmail.com" +
+                "<br/> Sincerely, The Onyx Team" +
+                "<br/><h5>Powered by Onyx</h5>";
 
 
 

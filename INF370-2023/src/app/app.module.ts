@@ -116,6 +116,7 @@ import { ReadApplicationsComponent } from './Administrator/Applications/read-app
 import { ViewApplicationComponent } from './Administrator/Applications/view-application/view-application/view-application.component';
 import { ReadShortlistComponent } from './Administrator/Shortlist/read-shortlist/read-shortlist/read-shortlist.component';
 import { ViewShortlistComponent } from './Administrator/Shortlist/view-shortlist/view-shortlist/view-shortlist.component';
+import { AcceptApplicantComponent } from './Administrator/Accept-Applicant/accept-applicant/accept-applicant.component';
 //import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
@@ -227,7 +228,8 @@ import { ViewShortlistComponent } from './Administrator/Shortlist/view-shortlist
     ReadApplicationsComponent,
     ViewApplicationComponent,
     ReadShortlistComponent,
-    ViewShortlistComponent
+    ViewShortlistComponent,
+    AcceptApplicantComponent
   ],
   imports: [
     BrowserModule,

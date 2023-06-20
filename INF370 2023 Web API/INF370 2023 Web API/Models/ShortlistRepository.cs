@@ -119,6 +119,7 @@ namespace INF370_2023_Web_API.Models
                         await db.SaveChangesAsync();
 
                         application.ApplicationStatusID = 5;
+                        db.Entry(application).State = EntityState.Modified;
                         await db.SaveChangesAsync();
 
                         //Send Employment Email
@@ -132,12 +133,13 @@ namespace INF370_2023_Web_API.Models
                     }
                     else
                     {
-                        return new { Status = 400, Messagec = "Applicant has upcoming interview, please remove slot first" };
+                        return new { Status = 400, Message = "Applicant has upcoming interview, please remove slot first" };
                     }
                 }
                 else
                 {
                     application.ApplicationStatusID = 5;
+                    db.Entry(application).State = EntityState.Modified;
                     await db.SaveChangesAsync();
 
                     // Send Employment Email
@@ -222,6 +224,10 @@ namespace INF370_2023_Web_API.Models
                 }
                 else
                 {
+                    var sshort = await db.ShortLists.Where(x => x.ApplicationID == id).FirstOrDefaultAsync();
+                    db.ShortLists.Remove(sshort);
+                    await db.SaveChangesAsync();
+
                     var applicationn = await db.Applications.FindAsync(id);
                     applicationn.ApplicationStatusID = 2;
                     db.Entry(applicationn).State = EntityState.Modified;
