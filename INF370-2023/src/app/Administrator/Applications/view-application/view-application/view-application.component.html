@@ -1,0 +1,214 @@
+
+<div style="padding-left: 3em; padding-right: 3em; padding-top: 9em;height:100vh;background-image: url('../../assets/gradient.gif');background-repeat: no-repeat;background-size: 100% 25%;">
+    <mat-card class="matCard">
+      <mat-tab-group>
+        <mat-tab label="Applicant Details" class="applicant" style="color: #0e1a3c;">
+          <br>
+          <mat-card-header class="cardHeader" style="padding-bottom: 1%;text-align: center">
+            <mat-card-title-group style="margin: 0 auto;">
+              <mat-card-title style="font-weight: 500">{{application.Name}} {{application.Surname}}</mat-card-title>
+            </mat-card-title-group>
+    
+          
+          </mat-card-header>
+  
+          <mat-card-content class="matContent">
+            <!--Project Details-->
+            <form>
+              <div class="form-group">
+                <br /><br />
+                <!--Image-->
+                <div style="margin-left: 42%; padding-bottom: 50px;">
+                  <mat-label style="color: #0e1a3c; padding-left: 5%"
+                    >Applicant Image</mat-label
+                  >
+                  <div>
+                    <div>
+                      <img
+                        src="{{ 'data:image/png;base64,' + dataImage }}"
+                        style="width: 200px; height:200px;padding-top: 10px;"
+                      >
+                    </div>
+                  </div>
+                </div>
+                 
+                  
+                <mat-label style="color:#0e1a3c">Applicant Name</mat-label>
+                      <mat-form-field
+                      
+                      class="example-full-width" appearance="legacy" style="width: 95%;"
+        
+                    >
+                        
+                         <input
+                         readonly
+                         type="text"
+                         matInput
+                         name="ProjectName"
+                         [(ngModel)]="application.Name"
+                         required
+                      
+                       />
+                      </mat-form-field>
+                      <br>
+      <br>
+                    
+              
+                    
+                      <mat-label style="color: #0e1a3c">Applicant Surname</mat-label>
+                      <mat-form-field
+              
+                      class="example-full-width" appearance="legacy" style="width: 95%;"
+              >
+              
+              <input
+              readonly
+              type="text"
+              matInput
+              name="ProjectStatusName"
+              [(ngModel)]="application.Surname"
+              required
+             
+            />
+              </mat-form-field>
+                   
+                
+                
+      <br>
+      <br>
+                
+                <!--2 Columns-->
+              
+                 
+                <mat-label style="color:#0e1a3c">Applicant Email</mat-label>
+        <mat-form-field
+        class="example-full-width" appearance="legacy" style="width: 95%;"
+  
+      >
+          
+           <input
+           readonly
+           type="text"
+           matInput
+           name="ProjectStartDate"
+           [(ngModel)]="application.Email"
+           required
+        
+         />
+        </mat-form-field>
+        <br>
+        <br>
+      
+  
+      
+        <mat-label style="color: #0e1a3c">Applicant Phone Number</mat-label>
+        <mat-form-field
+  
+        class="example-full-width" appearance="legacy" style="width: 95%;"
+  
+  >
+ 
+  <input
+  readonly
+  type="text"
+  matInput
+  name="ProjectEndDate"
+  [(ngModel)]="application.Phone"
+  required
+  />
+  
+  </mat-form-field>
+  <br>
+  <br>
+  <mat-label style="color: #0e1a3c">Applicant ID Number</mat-label>
+  <mat-form-field
+  
+  class="example-full-width" appearance="legacy" style="width: 95%;"
+
+>
+
+<input
+readonly
+type="text"
+matInput
+name="ProjectEFEW"
+[(ngModel)]="application.RSAIDNumber"
+required
+/>
+
+</mat-form-field>  
+                
+  <br>
+  <br>
+  <mat-label style="color: #0e1a3c">Applicant Biography</mat-label>
+                <mat-form-field
+              
+                class="example-full-width" appearance="legacy" style="width: 95%;"
+          
+          >
+          
+          <textarea
+                readonly
+                matInput
+                rows="7"
+                cols="90"
+                name="ProjectDesc"
+                [(ngModel)]="application.Biography"
+               
+               ></textarea>
+          </mat-form-field>
+  <br>
+ 
+  <div class="form-group" style="padding-right: 40%"></div>
+  </div>
+  <div class="button-container">
+    <button id="cancel" class="btn" (click)="onReject()">Reject</button>
+    <button id="view" class="btn" (click)="onBack()">View All</button>
+    <button id="confirm" class="btn" (click)="onShortlist()">Add to shortlist</button>
+     </div>
+            </form>
+          </mat-card-content>
+        </mat-tab>
+        
+   <mat-tab label="CV">
+    <mat-card-header class="cardHeader" style="padding-bottom: 1%;text-align: center">
+        <mat-card-title-group style="margin: 0 auto;">
+          <mat-card-title style="font-weight: 500">{{application.Name}}'s Curriculum Vitae</mat-card-title>
+        </mat-card-title-group>
+
+      
+      </mat-card-header>
+    <mat-card-content class="matContent">
+        
+          
+            <pdf-viewer
+            [src]="pdfSrc"
+            
+            [rotation]="0"
+            [original-size]="false"
+            [show-all]="true"
+            [fit-to-page]="false"
+            [zoom]="0.85"
+            [zoom-scale]="'page-width'"
+            [stick-to-page]="false"
+            [render-text]="true"
+            [external-link-target]="'blank'"
+            [autoresize]="true"
+            [show-borders]="true"
+            style="width: 80%; height: 600px; margin:0 auto"
+          ></pdf-viewer>
+  
+            <div class="form-group" style="padding-right: 40%"></div>
+       
+          <div class="button-container">
+            <button id="view2" class="btn" (click)="downloadPDF()">Download</button>
+            
+        </div>
+        
+      </mat-card-content>
+
+   </mat-tab>
+      </mat-tab-group>
+     </mat-card>
+  </div>
+  

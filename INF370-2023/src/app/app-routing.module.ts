@@ -97,6 +97,8 @@ import { ViewJobOppsComponent } from './user/job-listings/view-job-opps/view-job
 import { ApplicantApplyComponent } from './user/apply/applicant-apply/applicant-apply.component';
 import { ReadSlotsComponent } from './Administrator/MaxSlots/read-slots/read-slots/read-slots.component';
 import { MaintainSlotsComponent } from './Administrator/MaxSlots/maintain-slots/maintain-slots/maintain-slots.component';
+import { ReadApplicationsComponent } from './Administrator/Applications/read-applications/read-applications/read-applications.component';
+import { ViewApplicationComponent } from './Administrator/Applications/view-application/view-application/view-application.component';
 
 
 const routes: Routes = [
@@ -308,6 +310,19 @@ path:'admin/maintain-max-slots',
 component:MaintainSlotsComponent,
 canActivate:[AuthGuardGuard,AdminGuard]
 },
+
+{
+path:'admin/read-applications',
+component:ReadApplicationsComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+path:'admin/view-application',
+component:ViewApplicationComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
 
 {
   path:'admin/read-otp-timer',
