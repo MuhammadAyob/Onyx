@@ -117,6 +117,8 @@ import { ViewApplicationComponent } from './Administrator/Applications/view-appl
 import { ReadShortlistComponent } from './Administrator/Shortlist/read-shortlist/read-shortlist/read-shortlist.component';
 import { ViewShortlistComponent } from './Administrator/Shortlist/view-shortlist/view-shortlist/view-shortlist.component';
 import { AcceptApplicantComponent } from './Administrator/Accept-Applicant/accept-applicant/accept-applicant.component';
+import { ViewSlotComponent } from './Administrator/Interview-Slots/view-slot/view-slot/view-slot.component';
+import { MaintainSlotComponent } from './Administrator/Interview-Slots/maintain-slot/maintain-slot/maintain-slot.component';
 //import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
@@ -229,7 +231,9 @@ import { AcceptApplicantComponent } from './Administrator/Accept-Applicant/accep
     ViewApplicationComponent,
     ReadShortlistComponent,
     ViewShortlistComponent,
-    AcceptApplicantComponent
+    AcceptApplicantComponent,
+    ViewSlotComponent,
+    MaintainSlotComponent
   ],
   imports: [
     BrowserModule,

@@ -102,6 +102,7 @@ import { ViewApplicationComponent } from './Administrator/Applications/view-appl
 import { ViewShortlistComponent } from './Administrator/Shortlist/view-shortlist/view-shortlist/view-shortlist.component';
 import { ReadShortlistComponent } from './Administrator/Shortlist/read-shortlist/read-shortlist/read-shortlist.component';
 import { AcceptApplicantComponent } from './Administrator/Accept-Applicant/accept-applicant/accept-applicant.component';
+import { ViewSlotComponent } from './Administrator/Interview-Slots/view-slot/view-slot/view-slot.component';
 
 
 const routes: Routes = [
@@ -341,6 +342,24 @@ canActivate:[AuthGuardGuard,AdminGuard]
 {
 path:'admin/accept-applicant',
 component:AcceptApplicantComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+path:'admin/read-slots',
+component:ReadSlotsComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+path:'admin/maintain-slot',
+component:MaintainSlotsComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+path:'admin/view-slot',
+component:ViewSlotComponent,
 canActivate:[AuthGuardGuard,AdminGuard]
 },
 

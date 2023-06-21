@@ -37,14 +37,14 @@ namespace INF370_2023_Web_API.Models
                 }
 
                 var max = await db.MaxSlotsPerDays.FirstOrDefaultAsync();
-                var count = await db.InterviewSlots.CountAsync(x => x.InterviewDate == interview.InterviewDate);
+                var count = await db.InterviewSlots.CountAsync(x => x.InterviewDate.Date == interview.InterviewDate.Date);
                 if (count >= max.NumberOfSlots)
                 {
                     return new { Status = 300, Message = "Max slots reached" };
                 }
 
                 // Make sure doesn't overlap
-                List<InterviewSlot> interviewSlots = await db.InterviewSlots.Where(x => x.InterviewDate == interview.InterviewDate).ToListAsync();
+                List<InterviewSlot> interviewSlots = await db.InterviewSlots.Where(x => x.InterviewDate.Date == interview.InterviewDate.Date).ToListAsync();
 
                 //Loop through list and check for overlaps
 
@@ -165,9 +165,9 @@ namespace INF370_2023_Web_API.Models
                         StartTime = i.Interview.StartTime,
                         EndTime = i.Interview.EndTime,
                         //Attended = i.Interview.Attended,
-                        ShortlistID = i.Shortlist.ShortListID,
+                        //ShortlistID = i.Shortlist.ShortListID,
                         ApplicationID = i.Application.ApplicationID,
-                        ApplicantName = i.Applicant.Name,
+                        Name = i.Applicant.Name,
                         Surname = i.Applicant.Surname,
                         JobOpp = i.JobOpportunity.JobOppTitle
                     })
@@ -233,15 +233,15 @@ namespace INF370_2023_Web_API.Models
 
 
                 var max = await db.MaxSlotsPerDays.FirstOrDefaultAsync();
-                var count = await db.InterviewSlots.CountAsync(x => x.InterviewDate == interview.InterviewDate && x.InterviewSlotID!=interview.InterviewSlotID);
+                var count = await db.InterviewSlots.CountAsync(x => x.InterviewDate.Date == interview.InterviewDate.Date && x.InterviewSlotID!=interview.InterviewSlotID);
                 var slot = await db.InterviewSlots.Where(x => x.InterviewSlotID == interview.InterviewSlotID).FirstOrDefaultAsync();
-                if (slot.InterviewDate != interview.InterviewDate && count >= max.NumberOfSlots)
+                if (slot.InterviewDate.Date != interview.InterviewDate.Date && count >= max.NumberOfSlots)
                 {
                     return new { Status = 300, Message = "Max slots reached" };
                 }
 
                 // Make sure doesn't overlap
-                List<InterviewSlot> interviewSlots = await db.InterviewSlots.Where(x => x.InterviewDate == interview.InterviewDate && x.InterviewSlotID != interview.InterviewSlotID).ToListAsync();
+                List<InterviewSlot> interviewSlots = await db.InterviewSlots.Where(x => x.InterviewDate.Date == interview.InterviewDate.Date && x.InterviewSlotID != interview.InterviewSlotID).ToListAsync();
 
                 //Loop through list and check for overlaps
 
