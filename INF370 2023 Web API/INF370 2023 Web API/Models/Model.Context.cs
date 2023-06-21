@@ -69,7 +69,7 @@ namespace INF370_2023_Web_API.Models
         public virtual DbSet<MaxSlotsPerDay> MaxSlotsPerDays { get; set; }
         public virtual DbSet<JobOpportunity> JobOpportunities { get; set; }
         public virtual DbSet<ApplicationStatu> ApplicationStatus { get; set; }
-        public virtual DbSet<InterviewSlot> InterviewSlots { get; set; }
         public virtual DbSet<Applicant> Applicants { get; set; }
+        public virtual DbSet<InterviewSlot> InterviewSlots { get; set; }
     }
 }

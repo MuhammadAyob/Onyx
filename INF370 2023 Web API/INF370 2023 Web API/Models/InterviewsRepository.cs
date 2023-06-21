@@ -26,9 +26,14 @@ namespace INF370_2023_Web_API.Models
         {
             try
             {
-                if(DateTime.Today == interview.InterviewDate && DateTime.Now.TimeOfDay > interview.StartTime)
+                if(DateTime.Today.Date == interview.InterviewDate.Date && DateTime.Now.TimeOfDay > interview.StartTime)
                 {
                     return new { Status = 250, Message = "Start time today has passed" };
+                }
+
+                if (interview.EndTime <= interview.StartTime)
+                {
+                    return new { Status = 251, Message = "End time is less than or equal to start time" };
                 }
 
                 var max = await db.MaxSlotsPerDays.FirstOrDefaultAsync();
@@ -45,22 +50,9 @@ namespace INF370_2023_Web_API.Models
 
                 foreach(var slott in interviewSlots)
                 {
-                    // The interview starts during an exisitng interview
-                    if(interview.StartTime >= slott.StartTime)
+                    if (interview.StartTime <= slott.EndTime && interview.EndTime >= slott.StartTime)
                     {
-                        return new { Status = 350, Message = "Max slots reached" };
-                    }
-
-                    // The interview ends during an existing interview
-                    else if (interview.EndTime > slott.StartTime && interview.EndTime <=slott.EndTime)
-                    {
-                        return new { Status = 400, Message = "Max slots reached" };
-                    }
-
-                    // The interview completely overlaps an existing interview
-                    else if(interview.StartTime<=slott.StartTime && interview.EndTime >= slott.EndTime)
-                    {
-                        return new { Status = 450, Message = "Max slots reached" };
+                        return new { Status = 350, Message = "The new interview slot intersects with an existing slot." };
                     }
                 }
                 var getShort = await db.ShortLists.Where(x => x.ApplicationID == interview.ApplicationID).FirstOrDefaultAsync();
@@ -80,7 +72,7 @@ namespace INF370_2023_Web_API.Models
                 string qrCode = Convert.ToString(code);
                 slot.InterviewCode = qrCode;
                 slot.EndTime = interview.EndTime;
-                slot.Attended = "Awaiting";
+               // slot.Attended = "Awaiting";
                 db.InterviewSlots.Add(slot);
                 await db.SaveChangesAsync();
 
@@ -110,9 +102,84 @@ namespace INF370_2023_Web_API.Models
             }
         }
 
-        public Task<object> DeleteInterviewSlot(int id)
+        public async Task<object> DeleteInterviewSlot(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var interview = await db.InterviewSlots.FindAsync(id);
+                var shortlist = await db.ShortLists.Where(x => x.ShortListID == interview.ShortListID).FirstOrDefaultAsync();
+                var application = await db.Applications.Where(x => x.ApplicationID == shortlist.ApplicationID).FirstOrDefaultAsync();
+                var applicant = await db.Applicants.Where(x => x.ApplicantID == application.ApplicantID).FirstOrDefaultAsync();
+
+                db.InterviewSlots.Remove(interview);
+                await db.SaveChangesAsync();
+
+                application.ApplicationStatusID = 3;
+                db.Entry(application).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+
+                // Send Email
+                string name = applicant.Name;
+                string surname = applicant.Surname;
+                string email = applicant.Email;
+                string date = interview.InterviewDate.ToString("dd/MM/yyyy");
+                string startTime = Convert.ToString(interview.StartTime);
+                string endTime = Convert.ToString(interview.EndTime);
+
+                await SendCancelled(email, name, surname, startTime, endTime, date);
+                return new { Status = 200, Message = "Interview Cancelled" };
+            }
+
+            catch (Exception)
+            {
+                return new { Status = 500, Message = "Internal server error, please try again" };
+            }
+        }
+
+        public async Task<object> GetInterviewSlots()
+        {
+            try
+            {
+                db.Configuration.ProxyCreationEnabled = false;
+                var InterviewSlots = await db.InterviewSlots
+                    .Join(db.ShortLists,
+                        interview => interview.ShortListID,
+                        shortlist => shortlist.ShortListID,
+                        (interview, shortlist) => new { Interview = interview, Shortlist = shortlist })
+                    .Join(db.Applications,
+                        interviewShortlist => interviewShortlist.Shortlist.ApplicationID,
+                        application => application.ApplicationID,
+                        (interviewShortlist, application) => new { interviewShortlist.Interview, interviewShortlist.Shortlist, Application = application })
+                    .Join(db.Applicants,
+                        interviewShortlistApplication => interviewShortlistApplication.Application.ApplicantID,
+                        applicant => applicant.ApplicantID,
+                        (interviewShortlistApplication, applicant) => new { interviewShortlistApplication.Interview, interviewShortlistApplication.Shortlist, interviewShortlistApplication.Application, Applicant = applicant })
+                    .Join(db.JobOpportunities,
+                        interviewShortlistApplication => interviewShortlistApplication.Application.JobOppID,
+                        jobOpportunity => jobOpportunity.JobOppID,
+                        (interviewShortlistApplication, jobOpportunity) => new { interviewShortlistApplication.Interview, interviewShortlistApplication.Shortlist, interviewShortlistApplication.Application, interviewShortlistApplication.Applicant, JobOpportunity = jobOpportunity })
+                    .Select(i => new
+                    {
+                        InterviewSlotID = i.Interview.InterviewSlotID,
+                        InterviewDate = i.Interview.InterviewDate,
+                        StartTime = i.Interview.StartTime,
+                        EndTime = i.Interview.EndTime,
+                        //Attended = i.Interview.Attended,
+                        ShortlistID = i.Shortlist.ShortListID,
+                        ApplicationID = i.Application.ApplicationID,
+                        ApplicantName = i.Applicant.Name,
+                        Surname = i.Applicant.Surname,
+                        JobOpp = i.JobOpportunity.JobOppTitle
+                    })
+                    .ToListAsync();
+
+                return InterviewSlots;
+
+            }
+            catch (Exception)
+            {
+                return new { Status = 500, Message = "Internal server error, please try again" };
+            }
         }
 
         public async Task<object> GetPending()
@@ -154,49 +221,41 @@ namespace INF370_2023_Web_API.Models
         {
             try
             {
-               
+                if (DateTime.Today.Date == interview.InterviewDate.Date && DateTime.Now.TimeOfDay > interview.StartTime)
+                {
+                    return new { Status = 250, Message = "Start time today has passed" };
+                }
+
+                if (interview.EndTime <= interview.StartTime)
+                {
+                    return new { Status = 251, Message = "End time is less than or equal to start time" };
+                }
+
 
                 var max = await db.MaxSlotsPerDays.FirstOrDefaultAsync();
-                var count = await db.InterviewSlots.CountAsync(x => x.InterviewDate == interview.InterviewDate);
-                if (interview.InterviewDate != DateTime.Today && count >= max.NumberOfSlots)
+                var count = await db.InterviewSlots.CountAsync(x => x.InterviewDate == interview.InterviewDate && x.InterviewSlotID!=interview.InterviewSlotID);
+                var slot = await db.InterviewSlots.Where(x => x.InterviewSlotID == interview.InterviewSlotID).FirstOrDefaultAsync();
+                if (slot.InterviewDate != interview.InterviewDate && count >= max.NumberOfSlots)
                 {
                     return new { Status = 300, Message = "Max slots reached" };
                 }
 
                 // Make sure doesn't overlap
-                List<InterviewSlot> interviewSlots = await db.InterviewSlots.Where(x => x.InterviewDate == interview.InterviewDate).ToListAsync();
+                List<InterviewSlot> interviewSlots = await db.InterviewSlots.Where(x => x.InterviewDate == interview.InterviewDate && x.InterviewSlotID != interview.InterviewSlotID).ToListAsync();
 
                 //Loop through list and check for overlaps
 
                 foreach (var slott in interviewSlots)
                 {
-                    // The interview starts during an exisitng interview
-                    if (interview.StartTime >= slott.StartTime)
+                    if (interview.StartTime <= slott.EndTime && interview.EndTime >= slott.StartTime)
                     {
-                        return new { Status = 350, Message = "Max slots reached" };
-                    }
-
-                    // The interview ends during an existing interview
-                    else if (interview.EndTime > slott.StartTime && interview.EndTime <= slott.EndTime)
-                    {
-                        return new { Status = 400, Message = "Max slots reached" };
-                    }
-
-                    // The interview completely overlaps an existing interview
-                    else if (interview.StartTime <= slott.StartTime && interview.EndTime >= slott.EndTime)
-                    {
-                        return new { Status = 450, Message = "Max slots reached" };
+                        return new { Status = 350, Message = "The new interview slot intersects with an existing slot." };
                     }
                 }
+
                 var getShort = await db.ShortLists.Where(x => x.ApplicationID == interview.ApplicationID).FirstOrDefaultAsync();
 
-                // Create Slot
-
-                InterviewSlot slot = new InterviewSlot();
-                slot.InterviewSlotID = 0;
-                slot.ShortListID = getShort.ShortListID;
-                slot.InterviewDate = interview.InterviewDate;
-                slot.StartTime = interview.StartTime;
+                // Update Slot
 
                 // generate code
 
@@ -204,16 +263,16 @@ namespace INF370_2023_Web_API.Models
 
                 string qrCode = Convert.ToString(code);
                 slot.InterviewCode = qrCode;
+                slot.InterviewDate = interview.InterviewDate;
+                slot.StartTime = interview.StartTime;
                 slot.EndTime = interview.EndTime;
-                slot.Attended = "Awaiting";
-                db.InterviewSlots.Add(slot);
+               // slot.Attended = "Awaiting";
+                db.Entry(slot).State = EntityState.Modified;
                 await db.SaveChangesAsync();
 
                 var application = await db.Applications.Where(x => x.ApplicationID == interview.ApplicationID).FirstOrDefaultAsync();
 
-                application.ApplicationStatusID = 4;
-                db.Entry(application).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+              
 
                 var applicant = await db.Applicants.Where(x => x.ApplicantID == application.ApplicantID).FirstOrDefaultAsync();
 
@@ -225,9 +284,9 @@ namespace INF370_2023_Web_API.Models
                 string endTime = Convert.ToString(interview.EndTime);
 
                 // Send Invite
-                await SendInvite(email, name, surname, date, startTime, endTime, qrCode);
+                await SendUpdatedInvite(email, name, surname, date, startTime, endTime, qrCode);
 
-                return new { Status = 200, Message = "Slot added" };
+                return new { Status = 200, Message = "Slot updated" };
             }
             catch (Exception)
             {
@@ -260,7 +319,7 @@ namespace INF370_2023_Web_API.Models
                     "<br/><br/>" + "Date: " + date +
                     "<br/>" + "Time: " + startTime + " " + "-" + " " + endTime +
                     "<br/>" + "Location: " + location +
-                   "<br/><br/>Please keep your QR Code attachment safe, as it will be used to mark and verify your attendance. " +
+                   "<br/><br/>Please keep your QR Code attachment safe, as it will be used as part of the verification process. " +
                 "<br/><br/> If you require any further assistance please contact us at dseiqueries@gmail.com" +
                     "<br/> Sincerely, The Onyx Team" +
                     "<br/><h5>Powered by Onyx</h5>";
@@ -288,5 +347,108 @@ namespace INF370_2023_Web_API.Models
                 }
             }
         }
+
+        private async Task SendUpdatedInvite(string emailID, string name, string surname, string date, string startTime, string endTime, string code)
+        {
+            string location = "https://goo.gl/maps/v3oBkBV3DASbmxBq9";
+
+            // Create QR Code
+
+            string fileName = "qrCode.pdf";
+            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
+
+
+            QRCodeWriter.CreateQrCode(code, 500, QRCodeWriter.QrErrorCorrectionLevel.Medium).SaveAsPdf(path);
+
+            /////
+            var fromEmailAccount = "dseiqueries@gmail.com";
+            var fromEmailAccountPassword = "epqshwdnwmokortk";
+
+            var fromAddress = new MailAddress(fromEmailAccount);
+            var toAddress = new MailAddress(emailID);
+
+            var subject = "Job Application: Updated Interview Invitation";
+            var message = "Dear " + name + " " + surname + 
+                     "<br/>" + "Please take note of the following updated details regarding the interview process:" +
+                    "<br/><br/>" + "Date: " + date +
+                    "<br/>" + "Time: " + startTime + " " + "-" + " " + endTime +
+                    "<br/>" + "Location: " + location +
+                   "<br/><br/>Please keep your QR Code attachment safe, as it " +
+                   "will be used as part of the verification process. " +
+                "<br/><br/> If you require any further assistance please contact us at dseiqueries@gmail.com" +
+                    "<br/> Sincerely, The Onyx Team" +
+                    "<br/><h5>Powered by Onyx</h5>";
+
+
+            using (var compiledMessage = new MailMessage(fromAddress, toAddress))
+            {
+                compiledMessage.Subject = subject;
+                compiledMessage.Body = string.Format(message);
+                compiledMessage.IsBodyHtml = true;
+
+                // Attach the QR code file
+                Attachment attachment = new Attachment(path);
+                compiledMessage.Attachments.Add(attachment);
+
+                using (var smtp = new SmtpClient())
+                {
+                    smtp.Host = "smtp.gmail.com"; // for example: smtp.gmail.com
+                    smtp.Port = 587;
+                    smtp.EnableSsl = true;
+                    smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                    smtp.UseDefaultCredentials = false;
+                    smtp.Credentials = new NetworkCredential(fromEmailAccount, fromEmailAccountPassword); // your own provided email and password
+                    await smtp.SendMailAsync(compiledMessage);
+                }
+            }
+        }
+
+        private async Task SendCancelled(string emailID, string name, string surname, dynamic startTime, dynamic endTime, dynamic date)
+        {
+            var fromEmailAccount = "dseiqueries@gmail.com";
+            var fromEmailAccountPassword = "epqshwdnwmokortk";
+
+            var fromAddress = new MailAddress(fromEmailAccount);
+            var toAddress = new MailAddress(emailID);
+
+            var subject = "Job Application: Interview Cancellation";
+            var message = "Dear " + name + " " + surname + "<br/><br/> This email serves to inform you that your previous interview slot" +
+                    "<br/>on: " + date +
+                    "<br/> between: " + startTime + " " + "-"+" "+endTime +
+                    "<br/> has been terminated " +
+                  "<br/> Please check your inbox for future updates/invites on your application." +
+                    "<br/><br/> If you require any further assistance please contact us at dseiqueries@gmail.com" +
+                    "<br/> Sincerely, The Onyx Team" +
+                    "<br/><h5>Powered by Onyx</h5>";
+
+
+
+
+
+
+
+
+            using (var compiledMessage = new MailMessage(fromAddress, toAddress))
+            {
+                compiledMessage.Subject = subject;
+                compiledMessage.Body = string.Format(message);
+                compiledMessage.IsBodyHtml = true;
+
+
+                using (var smtp = new SmtpClient())
+                {
+                    smtp.Host = "smtp.gmail.com"; // for example: smtp.gmail.com
+                    smtp.Port = 587;
+                    smtp.EnableSsl = true;
+                    smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                    smtp.UseDefaultCredentials = false;
+                    smtp.Credentials = new NetworkCredential(fromEmailAccount, fromEmailAccountPassword); // your own provided email and password
+                    await smtp.SendMailAsync(compiledMessage);
+                }
+            }
+        }
+
+
+
     }
 }

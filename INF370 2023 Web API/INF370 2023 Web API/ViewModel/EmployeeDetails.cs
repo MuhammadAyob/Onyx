@@ -62,7 +62,7 @@ namespace INF370_2023_Web_API.ViewModel
         public int ApplicationID { get; set; }
         public DateTime InterviewDate { get; set; }
         public TimeSpan StartTime { get; set; }
-        public string InterviewCode { get; set; }
+       // public string InterviewCode { get; set; }
         public TimeSpan EndTime { get; set; }
         
     }

@@ -438,19 +438,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="InterviewSlots">
-      <EntityTypeMapping TypeName="Model.InterviewSlot">
-        <MappingFragment StoreEntitySet="InterviewSlot">
-          <ScalarProperty Name="Attended" ColumnName="Attended" />
-          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
-          <ScalarProperty Name="InterviewCode" ColumnName="InterviewCode" />
-          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
-          <ScalarProperty Name="InterviewDate" ColumnName="InterviewDate" />
-          <ScalarProperty Name="ShortListID" ColumnName="ShortListID" />
-          <ScalarProperty Name="InterviewSlotID" ColumnName="InterviewSlotID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Applicants">
       <EntityTypeMapping TypeName="Model.Applicant">
         <MappingFragment StoreEntitySet="Applicant">
@@ -463,6 +450,18 @@
           <ScalarProperty Name="Surname" ColumnName="Surname" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="ApplicantID" ColumnName="ApplicantID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InterviewSlots">
+      <EntityTypeMapping TypeName="Model.InterviewSlot">
+        <MappingFragment StoreEntitySet="InterviewSlot">
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="InterviewCode" ColumnName="InterviewCode" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="InterviewDate" ColumnName="InterviewDate" />
+          <ScalarProperty Name="ShortListID" ColumnName="ShortListID" />
+          <ScalarProperty Name="InterviewSlotID" ColumnName="InterviewSlotID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

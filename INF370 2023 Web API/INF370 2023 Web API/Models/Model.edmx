@@ -185,7 +185,6 @@
           <Property Name="StartTime" Type="time" Precision="7" Nullable="false" />
           <Property Name="InterviewCode" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="EndTime" Type="time" Precision="7" Nullable="false" />
-          <Property Name="Attended" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="JobOpportunity">
           <Key>
@@ -2163,15 +2162,15 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
             <End Role="ApplicationStatu" EntitySet="ApplicationStatus" />
             <End Role="Application" EntitySet="Applications" />
           </AssociationSet>
-          <EntitySet Name="InterviewSlots" EntityType="Model.InterviewSlot" />
-          <AssociationSet Name="FK_InterviewSlot_ShortList" Association="Model.FK_InterviewSlot_ShortList">
-            <End Role="ShortList" EntitySet="ShortLists" />
-            <End Role="InterviewSlot" EntitySet="InterviewSlots" />
-          </AssociationSet>
           <EntitySet Name="Applicants" EntityType="Model.Applicant" />
           <AssociationSet Name="FK_Application_Applicant" Association="Model.FK_Application_Applicant">
             <End Role="Applicant" EntitySet="Applicants" />
             <End Role="Application" EntitySet="Applications" />
+          </AssociationSet>
+          <EntitySet Name="InterviewSlots" EntityType="Model.InterviewSlot" />
+          <AssociationSet Name="FK_InterviewSlot_ShortList" Association="Model.FK_InterviewSlot_ShortList">
+            <End Role="ShortList" EntitySet="ShortLists" />
+            <End Role="InterviewSlot" EntitySet="InterviewSlots" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="OTPTimer">
@@ -2266,31 +2265,6 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="InterviewSlot">
-          <Key>
-            <PropertyRef Name="InterviewSlotID" />
-          </Key>
-          <Property Name="InterviewSlotID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ShortListID" Type="Int32" Nullable="false" />
-          <Property Name="InterviewDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="StartTime" Type="Time" Nullable="false" Precision="7" />
-          <Property Name="InterviewCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="EndTime" Type="Time" Nullable="false" Precision="7" />
-          <Property Name="Attended" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ShortList" Relationship="Model.FK_InterviewSlot_ShortList" FromRole="InterviewSlot" ToRole="ShortList" />
-        </EntityType>
-        <Association Name="FK_InterviewSlot_ShortList">
-          <End Type="Model.ShortList" Role="ShortList" Multiplicity="1" />
-          <End Type="Model.InterviewSlot" Role="InterviewSlot" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ShortList">
-              <PropertyRef Name="ShortListID" />
-            </Principal>
-            <Dependent Role="InterviewSlot">
-              <PropertyRef Name="ShortListID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Applicant">
           <Key>
             <PropertyRef Name="ApplicantID" />
@@ -2315,6 +2289,30 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
             </Principal>
             <Dependent Role="Application">
               <PropertyRef Name="ApplicantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="InterviewSlot">
+          <Key>
+            <PropertyRef Name="InterviewSlotID" />
+          </Key>
+          <Property Name="InterviewSlotID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ShortListID" Type="Int32" Nullable="false" />
+          <Property Name="InterviewDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="StartTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="InterviewCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EndTime" Type="Time" Nullable="false" Precision="7" />
+          <NavigationProperty Name="ShortList" Relationship="Model.FK_InterviewSlot_ShortList" FromRole="InterviewSlot" ToRole="ShortList" />
+        </EntityType>
+        <Association Name="FK_InterviewSlot_ShortList">
+          <End Type="Model.ShortList" Role="ShortList" Multiplicity="1" />
+          <End Type="Model.InterviewSlot" Role="InterviewSlot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShortList">
+              <PropertyRef Name="ShortListID" />
+            </Principal>
+            <Dependent Role="InterviewSlot">
+              <PropertyRef Name="ShortListID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2761,19 +2759,6 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="InterviewSlots">
-            <EntityTypeMapping TypeName="Model.InterviewSlot">
-              <MappingFragment StoreEntitySet="InterviewSlot">
-                <ScalarProperty Name="Attended" ColumnName="Attended" />
-                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
-                <ScalarProperty Name="InterviewCode" ColumnName="InterviewCode" />
-                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
-                <ScalarProperty Name="InterviewDate" ColumnName="InterviewDate" />
-                <ScalarProperty Name="ShortListID" ColumnName="ShortListID" />
-                <ScalarProperty Name="InterviewSlotID" ColumnName="InterviewSlotID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Applicants">
             <EntityTypeMapping TypeName="Model.Applicant">
               <MappingFragment StoreEntitySet="Applicant">
@@ -2786,6 +2771,18 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ApplicantID" ColumnName="ApplicantID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InterviewSlots">
+            <EntityTypeMapping TypeName="Model.InterviewSlot">
+              <MappingFragment StoreEntitySet="InterviewSlot">
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="InterviewCode" ColumnName="InterviewCode" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="InterviewDate" ColumnName="InterviewDate" />
+                <ScalarProperty Name="ShortListID" ColumnName="ShortListID" />
+                <ScalarProperty Name="InterviewSlotID" ColumnName="InterviewSlotID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
