@@ -1,1 +1,157 @@
-<p>maintain-slot works!</p>
+<div style="padding-left: 3em; padding-right: 3em; padding-top: 9em;height:100vh;background-image: url('../../assets/gradient.gif');background-repeat: no-repeat;background-size: 100% 25%;">
+
+    <div>
+      <mat-card class="matCard" style="border-radius: 34px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8), 0 1px 3px rgba(0, 0, 0, 0.8);">
+        <mat-card-header class="cardHeader" style="padding-bottom: 1%;text-align: center">
+          <mat-card-title-group style="margin:0 auto">
+            <mat-card-title style="font-weight: 500; "> Update Interview Slot </mat-card-title>
+          </mat-card-title-group>
+        </mat-card-header>
+        <mat-card-content class="matContent">
+          <form>
+            <br />
+            <br />
+            <div class="form-group">
+              <div style="padding: 0% 2.5% 0% 2%; min-width: 100%">
+                <mat-form-field 
+                class="example-full-width" 
+                appearance="legacy"
+                style="width: 95%;"
+                >
+                  <mat-label style="color: #0e1a3c">Interviewee Name</mat-label>
+                  <input
+                    type="text"
+                    matInput
+                    name="IntName"
+                    value="{{interviewSlot.Name}}"
+                    style="color: #0e1a3c"
+                    placeholder="Ex. Department of Informatics"
+                    readonly
+                  />
+                </mat-form-field>
+                <br />
+                   <br />
+                   <mat-form-field
+                   class="example-full-width"
+                   style="width: 95%;"
+                   appearance="legacy"
+                 >
+                   <mat-label style="color: #0e1a3c"
+                     >Interviewee Surname</mat-label
+                   >
+                   <input
+                   type="text"
+                   matInput
+                   name="IntSurname"
+                   value="{{interviewSlot.Surname}}"
+                   style="color: #0e1a3c"
+                   placeholder="Ex. Department of Informatics"
+                   readonly
+                 />
+                 </mat-form-field>
+                 <br>
+                 <br>
+                 <mat-form-field
+                 class="example-full-width"
+                 style="width: 95%;"
+                 appearance="legacy"
+               >
+                 <mat-label style="color: #0e1a3c"
+                   >Job Opportunity Applied for</mat-label
+                 >
+                 <input
+                 type="text"
+                 matInput
+                 name="IntJob"
+                 value="{{interviewSlot.JobOpp}}"
+                 style="color: #0e1a3c"
+                 placeholder="Ex. Department of Informatics"
+                 readonly
+               />
+               </mat-form-field>
+               <br>
+                 <br>
+                 <mat-form-field
+                 class="example-full-width"
+                 style="width: 95%;"
+                 appearance="legacy"
+               >
+               <mat-label style="color: #0e1a3c"
+               >Select Interview Date</mat-label
+             >
+             <input
+              style="color: #0e1a3c;"
+              matInput
+              [formControl]="dateFormControl"
+              [matDatepicker]="InterviewDate"
+              name="InterviewDate"
+              [(ngModel)]="interviewSlot.InterviewDate"
+              required
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="InterviewDate"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #InterviewDate></mat-datepicker>
+             <mat-error *ngIf="dateFormControl.hasError('required')">
+               Deadline is <strong>required</strong>
+            </mat-error>
+               </mat-form-field>
+               <br>
+               <br>
+               <mat-form-field
+               class="example-full-width"
+               style="width: 95%;"
+               appearance="legacy"
+             >
+               <mat-label style="color: #0e1a3c"
+                 >Select Interview Slot Start Time</mat-label
+               >
+               <input
+               type="time"
+                matInput
+                [formControl]="startTimeFormControl"
+                name="InterviewStartTime"
+                [(ngModel)]="interviewSlot.StartTime"
+                required
+             />
+             <mat-error *ngIf="startTimeFormControl.hasError('required')">
+               Start Time is <strong>required</strong>
+              </mat-error>
+             </mat-form-field>
+             <br>
+             <br>
+             <mat-form-field
+             class="example-full-width"
+             style="width: 95%;"
+             appearance="legacy"
+           >
+             <mat-label style="color: #0e1a3c"
+               >Select Interview Slot End Time</mat-label
+             >
+             <input
+             type="time"
+              matInput
+              [formControl]="endTimeFormControl"
+              name="InterviewEndTime"
+              [(ngModel)]="interviewSlot.EndTime"
+              required
+           />
+           <mat-error *ngIf="endTimeFormControl.hasError('required')">
+             End Time is <strong>required</strong>
+            </mat-error>
+           </mat-form-field>
+           <br>
+              </div>
+              <div class="form-group" style="padding-right: 40%"></div>
+            </div>
+            <div class="button-container">
+              <button id="cancel" class="btn" (click)="onBack()">Cancel</button>
+              <button id="confirm" class="btn" (click)="onSubmit()">Confirm</button>
+          </div>
+           
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    </div>

@@ -219,7 +219,7 @@ export class ReadInterviewSlotsComponent implements OnInit {
 
   onEdit(obj:any) {
     sessionStorage['interviewSlot'] = JSON.stringify(obj);
-    this.router.navigate(['admin/maintain-slot']);
+    this.router.navigate(['admin/maintain-interview-slot']);
   }
 
   onDelete(obj:any) {
