@@ -571,6 +571,7 @@ C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 202
 \\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\obj\Debug\INF370 2023 Web API.csproj.CopyComplete
 \\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\obj\Debug\INF370 2023 Web API.dll
 \\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\obj\Debug\INF370 2023 Web API.pdb
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\IronBarCode.dll
 C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\runtimes\linux-x64\native\IronPdfInterop.so
 C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\runtimes\osx-arm64\native\IronPdfInterop.dylib
 C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\runtimes\osx-x64\native\IronPdfInterop.dylib
@@ -632,7 +633,6 @@ C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF37
 C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\BouncyCastle.Crypto.dll
 C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\EntityFramework.dll
 C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\EntityFramework.SqlServer.dll
-C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\IronBarCode.dll
 C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\IronSoftware.Drawing.Common.dll
 C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\itextsharp.dll
 C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.AspNetCore.Http.Abstractions.dll
@@ -704,8 +704,9 @@ C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF37
 C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Web.Http.WebHost.xml
 C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Twilio.xml
 C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\obj\Debug\INF370 2023 Web API.csproj.AssemblyReference.cache
 C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\obj\Debug\INF370 2023 Web API.csproj.CoreCompileInputs.cache
 C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\obj\Debug\INF370 2023 Web API.csproj.CopyComplete
 C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\obj\Debug\INF370 2023 Web API.dll
 C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\obj\Debug\INF370 2023 Web API.pdb
-C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\obj\Debug\INF370 2023 Web API.csproj.AssemblyReference.cache
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\QRCoder.dll

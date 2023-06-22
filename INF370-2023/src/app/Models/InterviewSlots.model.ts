@@ -1,6 +1,6 @@
 export class InterviewSlots{
-    InterviewSlotID!:string;
-    InterviewDate:any;
+    InterviewSlotID!:number;
+    InterviewDate!:Date;
     StartTime:any;
     EndTime:any;
     ApplicationID!:number;

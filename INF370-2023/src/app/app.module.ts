@@ -119,8 +119,20 @@ import { ViewShortlistComponent } from './Administrator/Shortlist/view-shortlist
 import { AcceptApplicantComponent } from './Administrator/Accept-Applicant/accept-applicant/accept-applicant.component';
 import { ViewSlotComponent } from './Administrator/Interview-Slots/view-slot/view-slot/view-slot.component';
 import { MaintainSlotComponent } from './Administrator/Interview-Slots/maintain-slot/maintain-slot/maintain-slot.component';
+import { ReadInterviewSlotsComponent } from './Administrator/Interview-Slots/read-interview-slots/read-interview-slots/read-interview-slots.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/moment';
+import * as moment from 'moment';
+import { AddInterviewSlotModal,IsPast,CalenderDialogComponent } from './Administrator/Interview-Slots/read-interview-slots/read-interview-slots/read-interview-slots.component';
+import { SlotInfoDialogComponent } from './Dialog/slot-info-dialog/slot-info-dialog/slot-info-dialog.component';
+import { AddInterviewDialogComponent } from './Dialog/add-new-interview-dialog/add-interview-dialog/add-interview-dialog.component';
+//import { CalendarDialogComponent } from './Dialog/calendar-dialog/calendar-dialog/calendar-dialog.component';
 //import { ServiceWorkerModule } from '@angular/service-worker';
 
+export function momentAdapterFactory() {
+  return adapterFactory(moment);
+  
+};
 @NgModule({
   declarations: [
     AppComponent,
@@ -233,7 +245,15 @@ import { MaintainSlotComponent } from './Administrator/Interview-Slots/maintain-
     ViewShortlistComponent,
     AcceptApplicantComponent,
     ViewSlotComponent,
-    MaintainSlotComponent
+    MaintainSlotComponent,
+    ReadInterviewSlotsComponent,
+    IsPast,
+    AddInterviewSlotModal,
+    CalenderDialogComponent,
+    SlotInfoDialogComponent,
+    AddInterviewDialogComponent,
+
+    
   ],
   imports: [
     BrowserModule,
@@ -246,6 +266,7 @@ import { MaintainSlotComponent } from './Administrator/Interview-Slots/maintain-
     ReactiveFormsModule,
     PdfViewerModule,
     ToastrModule.forRoot(),
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: momentAdapterFactory }),
  //   ServiceWorkerModule.register('ngsw-worker.js', {
   //    enabled: environment,
       // Register the ServiceWorker as soon as the app is stable
@@ -253,6 +274,11 @@ import { MaintainSlotComponent } from './Administrator/Interview-Slots/maintain-
    //   registrationStrategy: 'registerWhenStable:30000'
   //  }),
     
+  ],
+  entryComponents:[
+    IsPast,
+    AddInterviewSlotModal,
+    CalenderDialogComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

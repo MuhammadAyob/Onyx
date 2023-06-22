@@ -103,6 +103,7 @@ import { ViewShortlistComponent } from './Administrator/Shortlist/view-shortlist
 import { ReadShortlistComponent } from './Administrator/Shortlist/read-shortlist/read-shortlist/read-shortlist.component';
 import { AcceptApplicantComponent } from './Administrator/Accept-Applicant/accept-applicant/accept-applicant.component';
 import { ViewSlotComponent } from './Administrator/Interview-Slots/view-slot/view-slot/view-slot.component';
+import { ReadInterviewSlotsComponent } from './Administrator/Interview-Slots/read-interview-slots/read-interview-slots/read-interview-slots.component';
 
 
 const routes: Routes = [
@@ -346,9 +347,9 @@ canActivate:[AuthGuardGuard,AdminGuard]
 },
 
 {
-path:'admin/read-slots',
-component:ReadSlotsComponent,
-canActivate:[AuthGuardGuard,AdminGuard]
+path:'admin/read-interview-slots',
+component:ReadInterviewSlotsComponent,
+//canActivate:[AuthGuardGuard,AdminGuard]
 },
 
 {

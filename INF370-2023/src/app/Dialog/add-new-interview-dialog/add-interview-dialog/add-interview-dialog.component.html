@@ -1,0 +1,97 @@
+  <!-- Card Form for Input -->
+ 
+    <!-- Mat Card Form for Read faq -->
+   
+     <div>
+       <mat-card class="matCard" style="border-radius: 34px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8), 0 1px 3px rgba(0, 0, 0, 0.8);">
+         <mat-card-header class="cardHeader" style="padding-bottom: 1%;text-align: center">
+           <mat-card-title-group style="margin:0 auto;">
+             <mat-card-title style="font-weight: 500; ">Date Selected: {{data.date | date: 'dd MMM yyyy'}}</mat-card-title>
+           </mat-card-title-group>
+         </mat-card-header>
+   
+         <mat-card-content class="matContent">
+           <form>
+             <div class="form-group">
+               <br /><br />
+               <div style="padding: 0% 2.5% 0% 2%; min-width: 100%">
+   
+                 <mat-form-field
+                   class="example-full-width"
+                   appearance="legacy"
+                   style="width: 95%;"
+                 >
+                 <mat-label>Select Interviewee</mat-label>
+      <mat-select
+      (valueChange)="selectInterviewee($event)" [formControl]="intervieweeFormControl" required
+      >
+        <ng-container *ngFor="let interviewee of intervieweeList">
+        <mat-option
+
+          [value]="interviewee"
+          >{{interviewee.Name}} {{interviewee.Surname}} - {{interviewee.Email}}
+          applied for: {{interviewee.JobOpp}}</mat-option
+        >
+      </ng-container>
+      </mat-select>
+      <mat-error *ngIf="intervieweeFormControl.hasError('required')">
+         Interviewee is <strong>required</strong>
+      </mat-error>
+                 </mat-form-field>
+                 <br />
+                 <br />
+
+                 <mat-form-field
+                 class="example-full-width"
+                 style="width: 95%;"
+                 appearance="legacy"
+               >
+                <mat-label>Select Interview Slot Start Time</mat-label>
+      <input
+      type="time"
+      matInput
+      [formControl]="startTimeFormControl"
+      [(ngModel)]="InterviewDetails.StartTime"
+      required
+      >
+      <mat-error *ngIf="startTimeFormControl.hasError('required')">
+        Start Time is <strong>required</strong>
+      </mat-error>
+               </mat-form-field>
+
+               <br />
+               <br />
+
+               <mat-form-field
+               class="example-full-width"
+               style="width: 95%;"
+               appearance="legacy"
+             >
+              <mat-label>Select Interview Slot End Time</mat-label>
+    <input
+    type="time"
+    matInput
+    [formControl]="endTimeFormControl"
+    [(ngModel)]="InterviewDetails.EndTime"
+    required
+    >
+    <mat-error *ngIf="endTimeFormControl.hasError('required')">
+      End Time is <strong>required</strong>
+    </mat-error>
+             </mat-form-field>
+   
+                
+                 
+               </div>
+   
+               <div class="form-group" style="padding-right: 40%"></div>
+             </div>
+             <div class="button-container">
+               <button id="cancel" class="btn" mat-button mat-dialog-close>Cancel</button>
+               <button id="confirm" class="btn" (click)="onSubmit()">Confirm</button>
+           </div>
+           </form>
+         </mat-card-content>
+       </mat-card>
+     </div>
+  

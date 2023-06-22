@@ -1,8 +1,10 @@
 ﻿using INF370_2023_Web_API.ViewModel;
 using IronBarCode;
+using QRCoder;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Drawing;
 using System.Dynamic;
 using System.IO;
 using System.Linq;
@@ -26,7 +28,7 @@ namespace INF370_2023_Web_API.Models
         {
             try
             {
-                if(DateTime.Today.Date == interview.InterviewDate.Date && DateTime.Now.TimeOfDay > interview.StartTime)
+                if(DateTime.Today.Date == interview.InterviewDate && DateTime.Now.TimeOfDay > interview.StartTime)
                 {
                     return new { Status = 250, Message = "Start time today has passed" };
                 }
@@ -37,14 +39,14 @@ namespace INF370_2023_Web_API.Models
                 }
 
                 var max = await db.MaxSlotsPerDays.FirstOrDefaultAsync();
-                var count = await db.InterviewSlots.CountAsync(x => x.InterviewDate.Date == interview.InterviewDate.Date);
+                var count = await db.InterviewSlots.CountAsync(x => x.InterviewDate == interview.InterviewDate);
                 if (count >= max.NumberOfSlots)
                 {
                     return new { Status = 300, Message = "Max slots reached" };
                 }
 
                 // Make sure doesn't overlap
-                List<InterviewSlot> interviewSlots = await db.InterviewSlots.Where(x => x.InterviewDate.Date == interview.InterviewDate.Date).ToListAsync();
+                List<InterviewSlot> interviewSlots = await db.InterviewSlots.Where(x => x.InterviewDate == interview.InterviewDate).ToListAsync();
 
                 //Loop through list and check for overlaps
 
@@ -221,7 +223,7 @@ namespace INF370_2023_Web_API.Models
         {
             try
             {
-                if (DateTime.Today.Date == interview.InterviewDate.Date && DateTime.Now.TimeOfDay > interview.StartTime)
+                if (DateTime.Today.Date == interview.InterviewDate && DateTime.Now.TimeOfDay > interview.StartTime)
                 {
                     return new { Status = 250, Message = "Start time today has passed" };
                 }
@@ -233,15 +235,15 @@ namespace INF370_2023_Web_API.Models
 
 
                 var max = await db.MaxSlotsPerDays.FirstOrDefaultAsync();
-                var count = await db.InterviewSlots.CountAsync(x => x.InterviewDate.Date == interview.InterviewDate.Date && x.InterviewSlotID!=interview.InterviewSlotID);
+                var count = await db.InterviewSlots.CountAsync(x => x.InterviewDate == interview.InterviewDate && x.InterviewSlotID!=interview.InterviewSlotID);
                 var slot = await db.InterviewSlots.Where(x => x.InterviewSlotID == interview.InterviewSlotID).FirstOrDefaultAsync();
-                if (slot.InterviewDate.Date != interview.InterviewDate.Date && count >= max.NumberOfSlots)
+                if (slot.InterviewDate != interview.InterviewDate && count >= max.NumberOfSlots)
                 {
                     return new { Status = 300, Message = "Max slots reached" };
                 }
 
                 // Make sure doesn't overlap
-                List<InterviewSlot> interviewSlots = await db.InterviewSlots.Where(x => x.InterviewDate.Date == interview.InterviewDate.Date && x.InterviewSlotID != interview.InterviewSlotID).ToListAsync();
+                List<InterviewSlot> interviewSlots = await db.InterviewSlots.Where(x => x.InterviewDate == interview.InterviewDate && x.InterviewSlotID != interview.InterviewSlotID).ToListAsync();
 
                 //Loop through list and check for overlaps
 
@@ -300,11 +302,14 @@ namespace INF370_2023_Web_API.Models
 
             // Create QR Code
 
-            string fileName = "qrCode.pdf";
-            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
+            QRCodeGenerator qrGenerator = new QRCodeGenerator();
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(code, QRCodeGenerator.ECCLevel.Q);
+            QRCode qrCode = new QRCode(qrCodeData);
+            Bitmap qrCodeImage = qrCode.GetGraphic(20);
 
-
-            QRCodeWriter.CreateQrCode(code, 500, QRCodeWriter.QrErrorCorrectionLevel.Medium).SaveAsPdf(path);
+            MemoryStream qrCodeStream = new MemoryStream();
+            qrCodeImage.Save(qrCodeStream, System.Drawing.Imaging.ImageFormat.Png);
+            qrCodeStream.Position = 0;
 
             /////
             var fromEmailAccount = "dseiqueries@gmail.com";
@@ -314,8 +319,10 @@ namespace INF370_2023_Web_API.Models
             var toAddress = new MailAddress(emailID);
 
             var subject = "Job Application: Interview Invitation";
-            var message = "Dear " + name + " " + surname + "<br/><br/>Thank you for your application! We would like to invite you for an interview." +
-                     "<br/>" + "Below are your invitation details:" +
+            var message = "Dear " + name + " " + surname + "<br/><br/>We are pleased to inform you that you have made it to the interview round/s process! Therefore, we would like to invite you for an interview." +
+                     "<br/>" 
+                     +"<br>"
+                     + "Below are your invitation details:" +
                     "<br/><br/>" + "Date: " + date +
                     "<br/>" + "Time: " + startTime + " " + "-" + " " + endTime +
                     "<br/>" + "Location: " + location +
@@ -331,9 +338,8 @@ namespace INF370_2023_Web_API.Models
                 compiledMessage.Body = string.Format(message);
                 compiledMessage.IsBodyHtml = true;
 
-                // Attach the QR code file
-                Attachment attachment = new Attachment(path);
-                compiledMessage.Attachments.Add(attachment);
+                compiledMessage.Attachments.Add(new Attachment(qrCodeStream, "qr_code.png"));
+
 
                 using (var smtp = new SmtpClient())
                 {
@@ -354,13 +360,16 @@ namespace INF370_2023_Web_API.Models
 
             // Create QR Code
 
-            string fileName = "qrCode.pdf";
-            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
+            QRCodeGenerator qrGenerator = new QRCodeGenerator();
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(code, QRCodeGenerator.ECCLevel.Q);
+            QRCode qrCode = new QRCode(qrCodeData);
+            Bitmap qrCodeImage = qrCode.GetGraphic(20);
 
+            MemoryStream qrCodeStream = new MemoryStream();
+            qrCodeImage.Save(qrCodeStream, System.Drawing.Imaging.ImageFormat.Png);
+            qrCodeStream.Position = 0;
 
-            QRCodeWriter.CreateQrCode(code, 500, QRCodeWriter.QrErrorCorrectionLevel.Medium).SaveAsPdf(path);
-
-            /////
+            /////////
             var fromEmailAccount = "dseiqueries@gmail.com";
             var fromEmailAccountPassword = "epqshwdnwmokortk";
 
@@ -386,9 +395,7 @@ namespace INF370_2023_Web_API.Models
                 compiledMessage.Body = string.Format(message);
                 compiledMessage.IsBodyHtml = true;
 
-                // Attach the QR code file
-                Attachment attachment = new Attachment(path);
-                compiledMessage.Attachments.Add(attachment);
+                compiledMessage.Attachments.Add(new Attachment(qrCodeStream, "qr_code.png"));
 
                 using (var smtp = new SmtpClient())
                 {
@@ -412,11 +419,10 @@ namespace INF370_2023_Web_API.Models
             var toAddress = new MailAddress(emailID);
 
             var subject = "Job Application: Interview Cancellation";
-            var message = "Dear " + name + " " + surname + "<br/><br/> This email serves to inform you that your previous interview slot" +
-                    "<br/>on: " + date +
-                    "<br/> between: " + startTime + " " + "-"+" "+endTime +
-                    "<br/> has been terminated " +
-                  "<br/> Please check your inbox for future updates/invites on your application." +
+            var message = "Dear " + name + " " + surname + "<br/><br/> This email serves to inform you that your allocated interview slot" +
+                    "<br/>on: " + date + " " + " between: " + startTime + " " + "-"+" "+endTime + " " + " has been cancelled. " + 
+                    "<br>" +
+                  "<br/> Please check your inbox for future updates/invites on your application" + "<br>" + " P.S. If the interview date, relative to the above given details, has already been surpassed or attended, you can ignore this email." +
                     "<br/><br/> If you require any further assistance please contact us at dseiqueries@gmail.com" +
                     "<br/> Sincerely, The Onyx Team" +
                     "<br/><h5>Powered by Onyx</h5>";

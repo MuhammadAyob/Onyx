@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ReadSlotsComponent } from './read-slots.component';
+import { SlotInfoDialogComponent } from './slot-info-dialog.component';
 
-describe('ReadSlotsComponent', () => {
-  let component: ReadSlotsComponent;
-  let fixture: ComponentFixture<ReadSlotsComponent>;
+describe('SlotInfoDialogComponent', () => {
+  let component: SlotInfoDialogComponent;
+  let fixture: ComponentFixture<SlotInfoDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ReadSlotsComponent ]
+      declarations: [ SlotInfoDialogComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ReadSlotsComponent);
+    fixture = TestBed.createComponent(SlotInfoDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

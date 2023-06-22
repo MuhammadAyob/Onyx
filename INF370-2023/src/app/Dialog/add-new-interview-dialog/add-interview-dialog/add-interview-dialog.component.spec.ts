@@ -1,0 +1,23 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { AddInterviewDialogComponent } from './add-interview-dialog.component';
+
+describe('AddInterviewDialogComponent', () => {
+  let component: AddInterviewDialogComponent;
+  let fixture: ComponentFixture<AddInterviewDialogComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ AddInterviewDialogComponent ]
+    })
+    .compileComponents();
+
+    fixture = TestBed.createComponent(AddInterviewDialogComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
