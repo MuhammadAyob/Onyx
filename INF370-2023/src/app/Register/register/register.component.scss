@@ -1,152 +1,328 @@
-.contactSection {
-    // padding: 10% 10% 10% 10%;
-    // align-content: center;
-    // width: 100%;
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.com/svgjs' width='1440' height='560' preserveAspectRatio='none' viewBox='0 0 1440 560'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1159%26quot%3b)' fill='none'%3e%3crect width='1440' height='560' x='0' y='0' fill='rgba(80%2c 144%2c 208%2c 1)'%3e%3c/rect%3e%3cpath d='M1118.313%2c604.48C1147.44%2c602.045%2c1166.098%2c577.412%2c1181.604%2c552.635C1198.592%2c525.491%2c1219.16%2c494.773%2c1204.923%2c466.09C1189.704%2c435.43%2c1152.429%2c422.344%2c1118.313%2c425.128C1088.327%2c427.575%2c1068.74%2c452.74%2c1053.154%2c478.474C1036.734%2c505.584%2c1019.033%2c536.855%2c1033.592%2c565.008C1048.93%2c594.669%2c1085.037%2c607.262%2c1118.313%2c604.48' fill='rgba(255%2c 255%2c 255%2c 0.16)' class='triangle-float3'%3e%3c/path%3e%3cpath d='M1035.127%2c241.201C1071.295%2c241.851%2c1108.088%2c228.588%2c1126.413%2c197.399C1144.945%2c165.858%2c1139.525%2c126.66%2c1120.937%2c95.152C1102.676%2c64.199%2c1071.065%2c42.84%2c1035.127%2c42.662C998.893%2c42.483%2c965.68%2c62.761%2c947.833%2c94.295C930.247%2c125.367%2c931.111%2c163.526%2c949.349%2c194.219C967.198%2c224.257%2c1000.192%2c240.574%2c1035.127%2c241.201' fill='rgba(255%2c 255%2c 255%2c 0.16)' class='triangle-float1'%3e%3c/path%3e%3cpath d='M1202.561%2c410.784C1221.444%2c410.745%2c1235.83%2c395.362%2c1244.459%2c378.566C1252.293%2c363.318%2c1251.818%2c345.72%2c1243.765%2c330.586C1235.136%2c314.368%2c1220.928%2c299.448%2c1202.561%2c299.822C1184.619%2c300.187%2c1172.624%2c316.38%2c1164.162%2c332.206C1156.297%2c346.914%2c1153.041%2c363.753%2c1160.364%2c378.738C1168.675%2c395.746%2c1183.631%2c410.823%2c1202.561%2c410.784' fill='rgba(255%2c 255%2c 255%2c 0.16)' class='triangle-float2'%3e%3c/path%3e%3cpath d='M225.022%2c593.283C261.626%2c594.186%2c295.027%2c574.137%2c314.342%2c543.031C334.86%2c509.988%2c341.654%2c468.999%2c323.585%2c434.556C304.277%2c397.752%2c266.559%2c371.369%2c225.022%2c372.767C185.383%2c374.101%2c154.878%2c405.263%2c137.316%2c440.824C121.789%2c472.263%2c125.536%2c508.41%2c143.021%2c538.804C160.559%2c569.291%2c189.861%2c592.416%2c225.022%2c593.283' fill='rgba(255%2c 255%2c 255%2c 0.16)' class='triangle-float3'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1159'%3e%3crect width='1440' height='560' fill='white'%3e%3c/rect%3e%3c/mask%3e%3cstyle%3e %40keyframes float1 %7b 0%25%7btransform: translate(0%2c 0)%7d 50%25%7btransform: translate(-10px%2c 0)%7d 100%25%7btransform: translate(0%2c 0)%7d %7d .triangle-float1 %7b animation: float1 5s infinite%3b %7d %40keyframes float2 %7b 0%25%7btransform: translate(0%2c 0)%7d 50%25%7btransform: translate(-5px%2c -5px)%7d 100%25%7btransform: translate(0%2c 0)%7d %7d .triangle-float2 %7b animation: float2 4s infinite%3b %7d %40keyframes float3 %7b 0%25%7btransform: translate(0%2c 0)%7d 50%25%7btransform: translate(0%2c -10px)%7d 100%25%7btransform: translate(0%2c 0)%7d %7d .triangle-float3 %7b animation: float3 6s infinite%3b %7d %3c/style%3e%3c/defs%3e%3c/svg%3e");
-    background-size: cover;
-    height: 100vh;
-  }
-  
-  .split {
+/* Config */
+$color-bg: #111;
+$color-particle: #fff;
+$spacing: 2560px;
+$time-1: 60s;
+$time-2: 120s;
+$time-3: 180s;
+$time-4: 600s;
+
+/* Pauls awesome mixin */
+@function particles($max) {
+   $val: 0px 0px $color-particle;
+   @for $i from 1 through $max {
+      $val: #{$val},
+      random($spacing)+px random($spacing)+px $color-particle;
+   }
+   @return $val;
+}
+
+@mixin particles($max) {
+   box-shadow: particles($max);
+}
+
+/* Styles */
+html, body {
     height: 100%;
-    width: 50%;
-    position: fixed;
-    // background-color: #222;
-    // z-index: 1;
-    // padding-top: 20px;
-  }
-  
-  .contactRight {
-    padding: 5% 7% 10% 7%;
-    width: 36.7%;
-    background-color: white;
-    height: 100vh;
-    float: right;
-    // position: fixed;
-  }
-  
-  
-  .contactLeft {
-    padding: 5% 7% 10% 7%;
-    width: 63.3%;
-    background-color: transparent;
-    height: 100vh;
-    color: white;
-    float: left;
-    // position: fixed;
-  }
-  
-  // .test{
-  //   ng-deep.mat-form-field-underline {
-  //     background-color: white !important;
-  //   }
-    
-  //   ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-end {
-  //     border-radius: 0px !important;
-  //   }
-  //   ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-start {
-  //     border-radius: 0px !important;
-  //   }
-    
-  //   ng-deep {
-  //     .mat-form-field-appearance-outline .mat-form-field-outline {
-  //       color: white;
-  //     } 
-   
-  // }
-  
-  
-  // mat-form-field {
-  //   .mat-hint,
-  //   input,
-  //   ::placeholder,
-  //   .mat-form-field-label {
-  //     color: white;
-  //   }
-  // }
-  // }
-  
-  
-  
-  /* Control the left side */
-  .left {
-    left: 0;
-    // background-color: #41BFA9;
-    background-size: cover;
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.com/svgjs' width='1440' height='560' preserveAspectRatio='none' viewBox='0 0 1440 560'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1047%26quot%3b)' fill='none'%3e%3crect width='1440' height='560' x='0' y='0' fill='rgba(80%2c 144%2c 208%2c 1)'%3e%3c/rect%3e%3cpath d='M1401.447%2c453.793C1430.665%2c454.349%2c1452.339%2c429.451%2c1466.08%2c403.66C1478.882%2c379.63%2c1481.487%2c351.552%2c1468.733%2c327.497C1455.117%2c301.816%2c1430.497%2c280.775%2c1401.447%2c281.759C1373.596%2c282.702%2c1354.203%2c306.938%2c1341.616%2c331.801C1330.404%2c353.948%2c1330.011%2c378.99%2c1340.942%2c401.277C1353.546%2c426.976%2c1372.829%2c453.248%2c1401.447%2c453.793' fill='rgba(255%2c 255%2c 255%2c 0.16)' class='triangle-float3'%3e%3c/path%3e%3cpath d='M654.448%2c516.48C676.373%2c517.158%2c699.978%2c511.333%2c710.884%2c492.301C721.746%2c473.346%2c715.08%2c449.894%2c703.056%2c431.653C692.311%2c415.353%2c673.953%2c407.515%2c654.448%2c406.683C633.04%2c405.769%2c609.319%2c408.93%2c598.081%2c427.174C586.45%2c446.056%2c591.913%2c470.233%2c603.75%2c488.987C614.747%2c506.411%2c633.854%2c515.843%2c654.448%2c516.48' fill='rgba(255%2c 255%2c 255%2c 0.16)' class='triangle-float1'%3e%3c/path%3e%3cpath d='M38.309%2c136.435C61.253%2c135.416%2c79.512%2c119.007%2c90.423%2c98.797C100.737%2c79.693%2c101.814%2c57.105%2c91.431%2c38.039C80.567%2c18.088%2c61.02%2c3.618%2c38.309%2c3.095C14.725%2c2.552%2c-7.036%2c15.295%2c-19.227%2c35.491C-31.855%2c56.411%2c-34.587%2c82.579%2c-22.487%2c103.809C-10.281%2c125.225%2c13.683%2c137.528%2c38.309%2c136.435' fill='rgba(255%2c 255%2c 255%2c 0.16)' class='triangle-float1'%3e%3c/path%3e%3cpath d='M544.121%2c687.752C593.903%2c688.922%2c631.812%2c646.47%2c653.863%2c601.823C673.337%2c562.395%2c670.223%2c516.419%2c647.267%2c478.912C625.343%2c443.091%2c586.099%2c423.804%2c544.121%2c422.52C499.483%2c421.155%2c451.85%2c433.622%2c429.437%2c472.25C406.962%2c510.985%2c421.922%2c557.335%2c442.961%2c596.868C465.785%2c639.757%2c495.55%2c686.611%2c544.121%2c687.752' fill='rgba(255%2c 255%2c 255%2c 0.16)' class='triangle-float1'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1047'%3e%3crect width='1440' height='560' fill='white'%3e%3c/rect%3e%3c/mask%3e%3cstyle%3e %40keyframes float1 %7b 0%25%7btransform: translate(0%2c 0)%7d 50%25%7btransform: translate(-10px%2c 0)%7d 100%25%7btransform: translate(0%2c 0)%7d %7d .triangle-float1 %7b animation: float1 5s infinite%3b %7d %40keyframes float2 %7b 0%25%7btransform: translate(0%2c 0)%7d 50%25%7btransform: translate(-5px%2c -5px)%7d 100%25%7btransform: translate(0%2c 0)%7d %7d .triangle-float2 %7b animation: float2 4s infinite%3b %7d %40keyframes float3 %7b 0%25%7btransform: translate(0%2c 0)%7d 50%25%7btransform: translate(0%2c -10px)%7d 100%25%7btransform: translate(0%2c 0)%7d %7d .triangle-float3 %7b animation: float3 6s infinite%3b %7d %3c/style%3e%3c/defs%3e%3c/svg%3e");
-  }
-  
-  /* Control the right side */
-  .right {
-    right: 0;
-    background-color: white;
-  }
-  
-  .welcomeheader {
-    font-weight: 700;
-    font-size: 50px;
-    line-height: 100%;
-  }
-  
-  .btnLanding {
-    background-color: transparent;
-    color: white;
-    min-width: 150px;
-    border: 3px solid #ffffff;
-    margin-top: 5%;
-  }
-  
-  .btnLanding:hover {
-    text-decoration: none;
-    color: #5090d0;
-    background-color: white;
-    transition: ease 0.3s;
-  }
-  
-  .btnLandingCancel {
-    color: white;
-    min-width: 150px;
-    background-color: transparent;
-    border: 3px solid red;
-    margin-top: 5%;
-    border: 3px solid red;
-    background-color: transparent;
-  }
-  
-  .btnLandingCancel:hover {
-    text-decoration: none;
-    color: #ffffff;
-    background-color: red;
-    transition: ease 0.3s;
-  }
-  
-  .creatediv {
-    width: 100%;
-    height: 7%;
-    background-color: rgba(255, 255, 255, 0.19);
-    color: white;
-    padding: 1% 1% 1% 1%;
-  }
-  
-  .formDiv {
-    margin-top: 5%;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    overflow: hidden;
+}
+
+.page-bg,
+.animation-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes AnimationName {
+    0%{background-position:0% 14%}
+    50%{background-position:100% 87%}
+    100%{background-position:0% 14%}
+}
+
+.page-bg { 
+  background: linear-gradient(320deg, #920f4c, #0e1a3c);
+  background-size: 400% 400%;
+  animation: AnimationName 20s ease infinite;
+  background-size: cover;
+  z-index: -1;
+}
+
+.particle,
+.particle:after {
+  background: transparent;
+}
+
+.particle:after {
+  position: absolute;
+  content: "";
+  top: $spacing;
+}
+
+.particle-1 {
+  animation: animParticle $time-1 linear infinite;
+  @include particles(600);
+  height: 1px;
+  width: 1px;
+}
+
+.particle-1:after {
+  @include particles(600);
+  height: 1px;
+  width: 1px;
+}
+
+.particle-2 {
+  animation: animParticle $time-2 linear infinite;
+  @include particles(200);
+  height: 2px;
+  width: 2px;
+}
+
+.particle-2:after {
+  @include particles(200);
+  height: 2px;
+  width: 2px;
+}
+
+.particle-3 {
+  animation: animParticle $time-3 linear infinite;
+  @include particles(100);
+  height: 3px;
+  width: 3px;
+}
+
+.particle-3:after {
+  @include particles(100);
+  height: 3px;
+  width: 3px;
+}
+
+.particle-4 {
+  animation: animParticle $time-4 linear infinite;
+  @include particles(400);
+  height: 1px;
+  width: 1px;
+}
+
+.particle-4:after {
+  @include particles(400);
+  height: 1px;
+  width: 1px;
+}
+
+@keyframes animParticle {
+  from { transform: translateY(0px); }
+  to   { transform: translateY($spacing * -1); }
+}
+
+.page-wrapper {
     text-align: center;
-  }
-  
-  .example-full-width {
-    width: 400px;
-    font-size: 20px;
-    padding-right: 5%;
+    color: #fff;
+  // z-index: 300;
+    margin: 0;
+    position: absolute;
+    top: 35%;
+    left: 26%;
+
+}
+
+/**
+ * CODEPEN PROMOTION
+ * unrelated to particle system
+ */
+
+
+
+
+body
+{
+    height: 100vh;
+    display: flex;
+}
+
+.white-text ::ng-deep .mat-select-value-text {
+  color: white !important;
+}
+
+
+
+.blurred-box{
+  margin-left: -4%;
+  position: absolute;
+  width: 50%;
+  height: 660px;
+  top: 9%;
+  left: 30%;
+  background: inherit;
+  border-radius: 2px;
+  overflow: hidden;
+  z-index: 100;
+  background-color: rgba($color: #ffffff, $alpha: 0.2);
+    backdrop-filter: blur( 5.0px );
+    -webkit-backdrop-filter: blur( 5.0px );
+    border-radius: 30px;
+    box-shadow: 0px 3px 15px rgba(0,0,0,0.5);
+}
+
+.page-wrapper {
+  text-align: center;
+  color: #fff;
+  z-index: 50;
+  margin: 0;
+
+  // position: absolute;
+  // top: 35%;
+  // left: 30%;
+
+}
+
+
+
+
+
+
+
+
+mat-form-field
+{
+    width: 100%;
     color: white;
+}
+
+mat-label
+{
+    color: white;
+    font-family: 'Montserrat';
+}
+
+input
+{
+    font-family: 'Montserrat';
+}
+
+.mat-form-field ::placeholder {
+  color: white;
+}
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: rgba(255, 255, 255, 0);
+  border-width: 1.5px;
+  border-style: solid;
+  border-radius: 20px;
+  
+
+}
+
+
+
+::ng-deep .mat-form-field:focus-within .mat-form-field-outline {
+  outline: none;
+  border-color: rgba(255, 0, 0, 0);
+  box-shadow: none;
+}
+
+::ng-deep .mat-input-element {
+    caret-color: white!important;
+  }
+
+
+
+
+  .btn
+  {
+     // border: 2px solid rgb(0, 0, 0);
+      border-radius: 50px;
+      
+      font-family: MontserratMedium;
+      font-size: 16px;
+      color: white;
+      padding: 10px 25px 10px 25px;
   }
   
-  .buttndiv {
-    float: right;
-    margin-top: 10%;
-    // margin-right: 5%;
+  .btn:hover
+  {
+      background-color: white;
+      color: #00efd1;
+      transition-duration: 500ms;
   }
+  
+  #cancel
+  {
+      margin-left: 50px;
+      font-family: Montserrat;
+      background-color: #920f4c;
+  }
+  
+  
+  
+  #cancel:hover{
+      color: red;
+      background-color: white;
+  }
+  
+  #confirm
+  {
+      margin-right: 50px;
+      float: right;
+      font-family: Montserrat;
+      background-color:  #19274b;;
+  }
+  
+  #confirm:hover
+  {
+  color: #19274b;
+  background-color: white;
+  }
+  
+  .button-container
+  {
+      margin-top: 20px;
+      width: 100%;
+      
+  }
+
+
+
+/* Styles for the ink bar */
+
+
+
+
+.loginForm{
+  margin-top: 90px;
+}
+
+.bouncer{    
+  display: flex;   
+  justify-content: center;   
+  align-items: center;   
+  position: absolute;   
+  top: 0;   
+  left: 0;   
+  background-color: #21252b;   
+  width: 100%;   
+  height: 100%; 
+  z-index: 1000000;
+} 
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
   /* Firefox */
   input[type=number] {
     -moz-appearance: textfield;
     appearance: textfield;
-  }  
+  }

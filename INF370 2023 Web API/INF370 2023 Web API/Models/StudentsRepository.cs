@@ -18,6 +18,29 @@ namespace INF370_2023_Web_API.Models
             this.db = database;
         }
 
+        public async Task<object> DeactivateStudent(int id)
+        {
+            try
+            {
+                var student = await db.Students.FindAsync(id);
+                student.Deleted = "True";
+
+                db.Entry(student).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+
+                var user = await db.Users.Where(x => x.UserID == student.UserID).FirstOrDefaultAsync();
+                user.Activity = "False";
+                db.Entry(user).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+
+                return new { Status = 200, Message = "Student deactivated" };
+            }
+            catch(Exception ex)
+            {
+                return ex.ToString();
+            }
+        }
+
         public async Task<object> DeleteStudent(int id, Student student)
         {
             try
@@ -88,7 +111,26 @@ namespace INF370_2023_Web_API.Models
         {
             try
             {
-                return await db.Students.Where(x => x.Deleted == "False").ToListAsync();
+                db.Configuration.ProxyCreationEnabled = false;
+                var obj = await db.Students.Where(za=>za.Deleted == "False")
+                    .Join(db.Titles,
+                        student => student.TitleID,
+                        title => title.TitleID,
+                        (student, title) => new { Student = student, Title = title })
+                    .Select(st => new
+                    {
+                        StudentID = st.Student.StudentID,
+                        Title = st.Title.TitleName,
+                        Name = st.Student.Name,
+                        Surname = st.Student.Surname,
+                        Email = st.Student.Email,
+                        Phone = st.Student.Phone
+                       
+                    })
+                    .ToListAsync();
+               
+                return obj;
+
             }
             catch (Exception)
             {

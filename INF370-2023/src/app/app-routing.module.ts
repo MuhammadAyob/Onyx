@@ -105,6 +105,7 @@ import { AcceptApplicantComponent } from './Administrator/Accept-Applicant/accep
 import { ViewSlotComponent } from './Administrator/Interview-Slots/view-slot/view-slot/view-slot.component';
 import { ReadInterviewSlotsComponent } from './Administrator/Interview-Slots/read-interview-slots/read-interview-slots/read-interview-slots.component';
 import { MaintainSlotComponent } from './Administrator/Interview-Slots/maintain-slot/maintain-slot/maintain-slot.component';
+import { ReadStudentsComponent } from './Administrator/Students/read-students/read-students.component';
 
 
 const routes: Routes = [
@@ -254,6 +255,12 @@ component:ViewJobOppsComponent
 {
 path:'applicant-apply',
 component:ApplicantApplyComponent
+},
+
+{
+path:'admin/read-students',
+component:ReadStudentsComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
 },
 
 {

@@ -20,4 +20,12 @@ AddStudent(obj:any){
   return this.http.post(environment.WebAPI + 'NewStudent/', obj, this.httpOptions);
 }
 
+GetStudents(){
+  return this.http.get(environment.WebAPI + 'GetStudents', this.httpOptions); 
+}
+
+DeleteStudent(id:number){
+  return this.http.put(environment.WebAPI +'DeleteStudent/' + id, this.httpOptions);
+}
+
 }

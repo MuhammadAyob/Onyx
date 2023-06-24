@@ -17,5 +17,7 @@ namespace INF370_2023_Web_API.Models
         Task<object> GetStudentID(int id);
 
         Task<object> DeleteStudent(int id, Student student);
+
+        Task<object> DeactivateStudent(int id);
     }
 }

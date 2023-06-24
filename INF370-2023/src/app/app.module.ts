@@ -126,6 +126,7 @@ import * as moment from 'moment';
 import { AddInterviewSlotModal,IsPast,CalenderDialogComponent } from './Administrator/Interview-Slots/read-interview-slots/read-interview-slots/read-interview-slots.component';
 import { SlotInfoDialogComponent } from './Dialog/slot-info-dialog/slot-info-dialog/slot-info-dialog.component';
 import { AddInterviewDialogComponent } from './Dialog/add-new-interview-dialog/add-interview-dialog/add-interview-dialog.component';
+import { ReadStudentsComponent } from './Administrator/Students/read-students/read-students.component';
 //import { CalendarDialogComponent } from './Dialog/calendar-dialog/calendar-dialog/calendar-dialog.component';
 //import { ServiceWorkerModule } from '@angular/service-worker';
 
@@ -252,6 +253,7 @@ export function momentAdapterFactory() {
     CalenderDialogComponent,
     SlotInfoDialogComponent,
     AddInterviewDialogComponent,
+    ReadStudentsComponent,
 
     
   ],
