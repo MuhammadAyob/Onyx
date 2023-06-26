@@ -29,6 +29,8 @@ namespace INF370_2023_Web_API.Models
 
         Task<object> ViewStore(int studentID);
 
+        Task<object> ViewCourseStructure(int id);
+
 
     }
 }

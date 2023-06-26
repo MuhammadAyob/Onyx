@@ -107,6 +107,7 @@ import { ReadInterviewSlotsComponent } from './Administrator/Interview-Slots/rea
 import { MaintainSlotComponent } from './Administrator/Interview-Slots/maintain-slot/maintain-slot/maintain-slot.component';
 import { ReadStudentsComponent } from './Administrator/Students/read-students/read-students.component';
 import { StoreComponent } from './Student Portal/Store/store/store.component';
+import { ViewStructureComponent } from './Student Portal/view-course-structure/view-structure/view-structure.component';
 
 
 const routes: Routes = [
@@ -400,6 +401,12 @@ canActivate:[AuthGuardGuard,AdminGuard]
 {
 path:'student/view-store',
 component:StoreComponent,
+canActivate:[AuthGuardGuard,StudentGuard]
+},
+
+{
+path:'student/view-course-structure',
+component:ViewStructureComponent,
 canActivate:[AuthGuardGuard,StudentGuard]
 },
 

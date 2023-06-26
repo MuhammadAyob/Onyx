@@ -62,9 +62,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
  .mat-drawer-inner-container::-webkit-scrollbar {
   display: none;
 }
-.mat-expansion-panel-header-description,
+
 .mat-expansion-indicator::after {
-    color: white;
+    color: rgb(0, 0, 0);
 }
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

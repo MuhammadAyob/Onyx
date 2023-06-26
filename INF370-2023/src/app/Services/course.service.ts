@@ -56,6 +56,10 @@ ViewStore(studentID:number){
   return this.http.get(environment.WebAPI + 'ViewStore/' + studentID, this.httpOptions);
 }
 
+ViewCourseStructure(id:number){
+  return this.http.get(environment.WebAPI + 'ViewCourseStructure/' + id, this.httpOptions);
+}
+
 
 
 }

@@ -131,5 +131,12 @@ namespace INF370_2023_Web_API.Controllers
         {
             return await _courseRepo.ViewStore(studentID);
         }
+
+        [HttpGet]
+        [Route("api/ViewCourseStructure/{id}")]
+        public async Task<object> ViewCourseStructure(int id)
+        {
+            return await _courseRepo.ViewCourseStructure(id);
+        }
     }
 }

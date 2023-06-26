@@ -128,6 +128,7 @@ import { SlotInfoDialogComponent } from './Dialog/slot-info-dialog/slot-info-dia
 import { AddInterviewDialogComponent } from './Dialog/add-new-interview-dialog/add-interview-dialog/add-interview-dialog.component';
 import { ReadStudentsComponent } from './Administrator/Students/read-students/read-students.component';
 import { StoreComponent } from './Student Portal/Store/store/store.component';
+import { ViewStructureComponent } from './Student Portal/view-course-structure/view-structure/view-structure.component';
 //import { CalendarDialogComponent } from './Dialog/calendar-dialog/calendar-dialog/calendar-dialog.component';
 //import { ServiceWorkerModule } from '@angular/service-worker';
 
@@ -256,6 +257,7 @@ export function momentAdapterFactory() {
     AddInterviewDialogComponent,
     ReadStudentsComponent,
     StoreComponent,
+    ViewStructureComponent,
 
     
   ],

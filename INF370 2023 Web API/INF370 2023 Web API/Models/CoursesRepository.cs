@@ -465,5 +465,35 @@ namespace INF370_2023_Web_API.Models
                 return new { Status = 500, Message = "Internal server error, please try again" };
             }
         }
+
+        public async Task<object> ViewCourseStructure(int id)
+        {
+            try
+            {
+                var courseDetails = await db.Courses.Where(c => c.CourseID == id)
+                    .Select(c => new { 
+                        CourseID = c.CourseID,
+                        CourseName = c.Name,
+                        Sections = c.Sections
+                    .Select(s => new {
+                                 SectionID = s.SectionID,
+                                 SectionName = s.SectionName,
+                                 SectionDescription = s.SectionDescription,
+                                 Lessons = s.Lessons
+                    .Select(l => new {
+                    LessonID = l.LessonID,
+                    LessonName = l.LessonName,
+                    LessonDescription = l.LessonDescription
+                    })
+                  }) 
+                }).FirstOrDefaultAsync();
+
+                return courseDetails;
+            }
+            catch (Exception)
+            {
+                return new { Status = 500, Message = "Internal server error, please try again" };
+            }
+        }
     }
 }

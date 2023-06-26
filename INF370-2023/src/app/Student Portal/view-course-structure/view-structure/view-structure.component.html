@@ -1,0 +1,24 @@
+<div style="padding-left: 2em; padding-right: 2em; padding-top: 9em;height:100vh;background-image: url('../../assets/gradient.gif');background-repeat: no-repeat;background-size: 100% 25%;">
+<div class="container">
+  <mat-accordion class="accordion">
+    <mat-expansion-panel *ngFor="let section of courseDetails?.Sections">
+      <mat-expansion-panel-header>
+        <mat-panel-title class="title">
+         <b>{{ section.SectionName }}</b>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-panel-description class="desc">
+        {{ section.SectionDescription }}
+      </mat-panel-description>
+      <br>
+      <p *ngFor="let lesson of section.Lessons">
+        •<mat-icon class="icon-display">ondemand_video</mat-icon>
+        <b>{{ lesson.LessonName }}</b>
+        <br>
+        <br>
+        {{ lesson.LessonDescription }}
+      </p>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+</div>

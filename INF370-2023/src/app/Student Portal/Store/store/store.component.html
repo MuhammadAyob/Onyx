@@ -80,22 +80,22 @@
                 <th mat-header-cell *matHeaderCellDef style="text-align: center; color: #ffffff;">
                   View Course Details
                 </th>
-                <td mat-cell *matCellDef="let department" style="text-align: center;">
+                <td mat-cell *matCellDef="let course" style="text-align: center;">
                   <button type="button" class="btn btn-default btn-lg" style="
-                  background-color:transparent;border-style: none;" (click)="onView(department)">
+                  background-color:transparent;border-style: none;" (click)="onView(course)">
                     <mat-icon aria-hidden="false" aria-label="View Department">reply</mat-icon>
                   </button>
                 </td>
               </ng-container>
 
-              <!-- View Column -->
+              <!-- add Column -->
               <ng-container matColumnDef="add">
                 <th mat-header-cell *matHeaderCellDef style="text-align: center; color: #ffffff;">
                   Add to Basket 
                 </th>
-                <td mat-cell *matCellDef="let department" style="text-align: center;">
+                <td mat-cell *matCellDef="let course" style="text-align: center;">
                   <button type="button" class="btn btn-default btn-lg" style="
-                  background-color:transparent;border-style: none;" (click)="onView(department)">
+                  background-color:transparent;border-style: none;" (click)="onView(course)">
                     <mat-icon aria-hidden="false" aria-label="View Department">add_shopping_cart</mat-icon>
                   </button>
                 </td>

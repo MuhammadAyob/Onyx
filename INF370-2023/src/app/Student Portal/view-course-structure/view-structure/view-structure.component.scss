@@ -1,0 +1,48 @@
+.container {
+  width: 80%; /* Adjust the width value as per your needs */
+  margin: 0 auto;
+
+}
+
+
+
+.icon-display {
+  transform: scale(0.8);
+  margin-bottom: -7px;
+}
+
+.title{
+  font-family: 'Montserrat';
+  font-size:20px;
+}
+
+.desc{
+  font-family: 'Montserrat';
+  font-size: medium;
+}
+
+
+
+
+
+
+
+
+
+
+
+.mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+
+/* For the panel titles */
+.mat-expansion-panel-header,
+.mat-expansion-panel-header-title {
+  color: black;
+}
+
+/* For the panel descriptions */
+.mat-expansion-panel-header-description,
+.mat-expansion-panel-content {
+  color: black;
+}

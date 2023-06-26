@@ -130,5 +130,7 @@ GetCategories(){
 }
  onView(obj:any){
   console.log(obj);
+  sessionStorage['course-structure'] = JSON.stringify(obj)
+  this.router.navigate(['student/view-course-structure']);
  }
 }
