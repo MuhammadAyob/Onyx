@@ -418,5 +418,43 @@ namespace INF370_2023_Web_API.Models
                 return e.ToString();
             }
         }
+
+        public async Task<object> ViewStore(int studentID)
+        {
+            try
+            {
+                db.Configuration.ProxyCreationEnabled = false;
+
+                
+
+                var courses = await db.Courses
+                    .Join(db.CourseCategories,
+                        course => course.CategoryID,
+                        category => category.CategoryID,
+                        (course, category) => new { Course = course, Category = category })
+                    .Join(db.CoursePrices,
+                        courseCategory => courseCategory.Course.CourseID,
+                        price => price.CourseID,
+                        (courseCategory, price) => new { Course = courseCategory.Course, Category = courseCategory.Category, Price = price })
+                    .Where(c => c.Course.Active == "True" &&
+                                !db.StudentCourses.Any(sc => sc.CourseID == c.Course.CourseID && sc.StudentID == studentID))
+                    .Select(c => new
+                    {
+                        CourseID = c.Course.CourseID,
+                        CourseName = c.Course.Name,
+                        CategoryID = c.Category.CategoryID,
+                        CategoryName = c.Category.Category,
+                        Price = c.Price.Price
+                    })
+                    .ToListAsync();
+
+                return courses;
+
+            }
+            catch (Exception)
+            {
+                return new { Status = 500, Message = "Internal server error, please try again" };
+            }
+        }
     }
 }
