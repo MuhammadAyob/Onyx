@@ -144,8 +144,8 @@ showDialog(title: string, message: string): void {
       dialogMessage: message,
       operation: 'add',
     },
-    height: '27vh',
-    width: '25vw',
+    height: '30vh',
+    width: '50vw',
   });
 
   dialogReference.afterClosed().subscribe((result) => {

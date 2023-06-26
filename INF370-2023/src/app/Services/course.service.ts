@@ -52,6 +52,10 @@ GetCategory(id:number){
   return this.http.get(environment.WebAPI + 'GetCategory/'+ id, this.httpOptions);
 }
 
+ViewStore(studentID:number){
+  return this.http.get(environment.WebAPI + 'ViewStore/' + studentID, this.httpOptions);
+}
+
 
 
 }

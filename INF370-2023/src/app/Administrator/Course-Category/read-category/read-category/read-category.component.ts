@@ -52,7 +52,7 @@ constructor(
 
 ngOnInit(): void {
   this.refreshList();
-  this.getEmployeesList();
+ 
 }
 
 ngAfterViewInit() {
@@ -76,12 +76,7 @@ public doFilter = (event:Event) => {
 
 
 
-getEmployeesList(){
-  this.cService.GetEmployeeList().subscribe((res)=>{
-  this.employeeList = res as EmployeeListForCourses[];
-  console.log(this.employeeList);
-  })
-}
+
 
 
 
@@ -124,8 +119,8 @@ onDelete(id:number) {
       operation: 'delete',
       qualificationData: this.category,
     }, //^captured department info here for validation
-    height: '27vh',
-    width: '25vw',
+    height: '30vh',
+    width: '50vw',
   });
 
   dialogReference.afterClosed().subscribe((result) => {
@@ -148,8 +143,8 @@ onDelete(id:number) {
           else
           {
             this.dialog.open(InputDialogComponent, {
-              height: '27vh',
-              width: '25vw',
+              height: '30vh',
+              width: '50vw',
               data: {
                 dialogTitle: 'Delete Category',
                 dialogMessage:'Cannot delete Category as it is in use in other parts of the system.'

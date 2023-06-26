@@ -425,30 +425,39 @@ namespace INF370_2023_Web_API.Models
             {
                 db.Configuration.ProxyCreationEnabled = false;
 
-                
+
 
                 var courses = await db.Courses
-                    .Join(db.CourseCategories,
-                        course => course.CategoryID,
-                        category => category.CategoryID,
-                        (course, category) => new { Course = course, Category = category })
-                    .Join(db.CoursePrices,
-                        courseCategory => courseCategory.Course.CourseID,
-                        price => price.CourseID,
-                        (courseCategory, price) => new { Course = courseCategory.Course, Category = courseCategory.Category, Price = price })
-                    .Where(c => c.Course.Active == "True" &&
-                                !db.StudentCourses.Any(sc => sc.CourseID == c.Course.CourseID && sc.StudentID == studentID))
-                    .Select(c => new
-                    {
-                        CourseID = c.Course.CourseID,
-                        CourseName = c.Course.Name,
-                        CategoryID = c.Category.CategoryID,
-                        CategoryName = c.Category.Category,
-                        Price = c.Price.Price
-                    })
-                    .ToListAsync();
+    .Join(db.CourseCategories,
+        course => course.CategoryID,
+        category => category.CategoryID,
+        (course, category) => new { Course = course, Category = category })
+    .GroupJoin(db.CoursePrices,
+        courseCategory => courseCategory.Course.CourseID,
+        prices => prices.CourseID,
+        (courseCategory, prices) => new { Course = courseCategory.Course, Category = courseCategory.Category, Prices = prices })
+    .SelectMany(
+        courseGroup => courseGroup.Prices.OrderByDescending(price => price.Date).Take(1),
+        (courseGroup, price) => new { Course = courseGroup.Course, Category = courseGroup.Category, Price = price })
+    .Where(c => c.Course.Active == "True" &&
+                !db.StudentCourses.Any(sc => sc.CourseID == c.Course.CourseID && sc.StudentID == studentID))
+    .Select(c => new
+    {
+        CourseID = c.Course.CourseID,
+        Name = c.Course.Name,
+        Description = c.Course.Description,
+        Image = c.Course.Image,
+        CategoryID = c.Category.CategoryID,
+        Preview = c.Course.Preview,
+        Category = c.Category.Category,
+        Price = c.Price.Price
+    })
+    .ToListAsync();
 
                 return courses;
+
+
+
 
             }
             catch (Exception)

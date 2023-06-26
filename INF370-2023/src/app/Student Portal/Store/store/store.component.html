@@ -1,0 +1,121 @@
+
+<div style="padding-left: 2em; padding-right: 2em; padding-top: 9em;height:100vh;background-image: url('../../assets/gradient.gif');background-repeat: no-repeat;background-size: 100% 25%;">
+    <!-- Mat Card Form for Read Departments -->
+   
+
+
+ <div class="container-fluid">
+      <mat-card class="matCard">
+        <div class="bigDiv" style="margin-bottom: 0px;">
+          <div class="leftSearch">
+            <form class="navbar-form">
+              <mat-form-field appearance="outline" color="white" style="width: 100%; border-color: white !important; color: #ffffff; padding-top: 1%;">
+                <mat-label style=" color: #ffffff; background-color: transparent; border-bottom: none; font-size: 15px; width: 100%;">Search Courses</mat-label>
+                <input type="text" style="border-color: #5090d000;" matInput name="searchDept" (keydown.enter)="doFilter($event)" placeholder="Ex. Department of Informatics">
+                <mat-icon class="search" style="float: right; margin-top: -22px;">search</mat-icon>
+              </mat-form-field>
+            </form>
+          </div>
+
+
+        </div>
+        
+
+        <br>
+        <div class="chips-container">
+            <mat-chip-list aria-label="Fish selection">
+                <mat-chip (click)="onChipFilter('')" >Clear</mat-chip>
+              <mat-chip class="chip" (click)="onChipFilter(category.Category)" 
+               *ngFor="let category of categoryList">
+                {{ category.Category }}
+              </mat-chip>
+            </mat-chip-list>
+          </div>
+          
+       
+
+        <mat-card-content style="padding-top: 1em;">
+
+          <div class="table-hover table-container mat-elevation-z8">
+            <table mat-table matSort [dataSource]="dataSource"  class="mat-elevation-z8" id="DeptTable">
+
+                 <!-- Price Column -->
+                 <ng-container matColumnDef="Price">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef style="color: #ffffff;" >Course Price</th>
+                    <td mat-cell *matCellDef="let course">
+                     <b> R{{ course.Price }} </b>
+                    </td>
+                  </ng-container>
+                 
+        <!--  Image Column -->
+        <ng-container matColumnDef="Image">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef style="color: #ffffff;">Course Image</th>
+           <td mat-cell *matCellDef="let course">
+          <img src="{{'data:image/png;base64,' + course.Image}}" style="border-radius: 150px; height: 100px;width:100px;">
+            </td>
+            </ng-container>
+            
+              <!-- Name Column -->
+              <ng-container matColumnDef="Name">
+                <th mat-header-cell mat-sort-header *matHeaderCellDef style="color: #ffffff;" >Course Name</th>
+                <td mat-cell *matCellDef="let course">
+                  {{ course.Name }}
+                </td>
+              </ng-container>
+
+                <!-- Description Column -->
+                <ng-container matColumnDef="Category">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef style="color: #ffffff;" >Category</th>
+                  <td mat-cell *matCellDef="let course">
+                    {{ course.Category }}
+                  </td>
+                </ng-container>
+
+              
+
+                  
+
+              <!-- View Column -->
+              <ng-container matColumnDef="view">
+                <th mat-header-cell *matHeaderCellDef style="text-align: center; color: #ffffff;">
+                  View Course Details
+                </th>
+                <td mat-cell *matCellDef="let department" style="text-align: center;">
+                  <button type="button" class="btn btn-default btn-lg" style="
+                  background-color:transparent;border-style: none;" (click)="onView(department)">
+                    <mat-icon aria-hidden="false" aria-label="View Department">reply</mat-icon>
+                  </button>
+                </td>
+              </ng-container>
+
+              <!-- View Column -->
+              <ng-container matColumnDef="add">
+                <th mat-header-cell *matHeaderCellDef style="text-align: center; color: #ffffff;">
+                  Add to Basket 
+                </th>
+                <td mat-cell *matCellDef="let department" style="text-align: center;">
+                  <button type="button" class="btn btn-default btn-lg" style="
+                  background-color:transparent;border-style: none;" (click)="onView(department)">
+                    <mat-icon aria-hidden="false" aria-label="View Department">add_shopping_cart</mat-icon>
+                  </button>
+                </td>
+              </ng-container>
+
+             
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+            </table>
+            <div *ngIf="noData | async" class="no-records" style="text-align: center; padding-top: 4em; font-size: larger;">
+              No records found, please try again.
+            </div>
+          </div>
+
+        </mat-card-content>
+        <mat-paginator  style="color: white;" [pageSize]="5" [pageSizeOptions]="[5, 10, 15, 20]"></mat-paginator>
+      </mat-card>
+    </div>
+    <br />
+  </div>
+
