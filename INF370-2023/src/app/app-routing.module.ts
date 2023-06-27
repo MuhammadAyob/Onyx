@@ -407,7 +407,6 @@ canActivate:[AuthGuardGuard,StudentGuard]
 {
 path:'student/view-course-structure',
 component:ViewStructureComponent,
-canActivate:[AuthGuardGuard,StudentGuard]
 },
 
 // admin skill and skill type
