@@ -20,9 +20,9 @@ namespace INF370_2023_Web_API.Models
             this.CartCourses = new HashSet<CartCourse>();
             this.CourseAssistants = new HashSet<CourseAssistant>();
             this.CoursePrices = new HashSet<CoursePrice>();
-            this.CourseRatings = new HashSet<CourseRating>();
             this.Sections = new HashSet<Section>();
             this.StudentCourses = new HashSet<StudentCourse>();
+            this.CourseRatings = new HashSet<CourseRating>();
         }
     
         public int CourseID { get; set; }
@@ -41,10 +41,10 @@ namespace INF370_2023_Web_API.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CoursePrice> CoursePrices { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CourseRating> CourseRatings { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Section> Sections { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentCourse> StudentCourses { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CourseRating> CourseRatings { get; set; }
     }
 }

@@ -148,6 +148,51 @@
     </mat-card-content>
 
  </mat-tab>
+ <mat-tab label="Reviews">
+  <br>
+  <mat-card-header class="cardHeader" style="padding-bottom: 1%;text-align: center">
+      <mat-card-title-group style="margin: 0 auto;">
+        <mat-card-title style="font-weight: 500"> Total Reviews: {{ NumberOfRatings }} <br> Course Average: {{ AverageRating }}/5 Star Rating</mat-card-title>
+      </mat-card-title-group>
+
+    
+    </mat-card-header>
+  <mat-card-content class="matContent">
+      
+        <br>
+   
+        <mat-list>
+          <mat-list-item *ngFor="let rating of ratings">
+            <mat-icon style="font-size: small;"class="initials-icon" mat-list-icon>{{ getInitials(rating.Name, rating.Surname) }}</mat-icon>
+            <p style="font-size:medium;" mat-line><b>Author:</b> {{ rating.Name }} {{ rating.Surname }}</p>
+            <p style="color:white;" mat-line>x</p>
+            <p style="font-size: medium;" mat-line><b>Date:</b> {{ rating.Date | date: 'dd MMM yyyy' }}</p> 
+            <p style="color:white;" mat-line>x</p>
+            <p style="font-size: medium;" mat-line><b>Comment:</b> {{ rating.Comment }}</p>
+            <p style="color:white;" mat-line>x</p>
+            <p mat-line><ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+              <mat-icon class="star-icon" [ngClass]="{'star-filled': star <= rating.Rating, 'star-empty': star > rating.Rating}">star</mat-icon>
+            </ng-container></p>
+            <mat-divider></mat-divider>
+          </mat-list-item>
+        </mat-list>
+
+        <div *ngIf="notRetrieved">
+          No reviews available yet!
+        </div>
+        
+        
+    
+    
+    
+
+          <div class="form-group" style="padding-right: 40%"></div>
+     
+    
+      
+    </mat-card-content>
+
+ </mat-tab>
     </mat-tab-group>
    </mat-card>
 </div>

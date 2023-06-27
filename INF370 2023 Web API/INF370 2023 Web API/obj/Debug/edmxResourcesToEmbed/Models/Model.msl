@@ -92,16 +92,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="CourseRatings">
-      <EntityTypeMapping TypeName="Model.CourseRating">
-        <MappingFragment StoreEntitySet="CourseRating">
-          <ScalarProperty Name="RatingID" ColumnName="RatingID" />
-          <ScalarProperty Name="CourseID" ColumnName="CourseID" />
-          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
-          <ScalarProperty Name="Rating" ColumnName="Rating" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Departments">
       <EntityTypeMapping TypeName="Model.Department">
         <MappingFragment StoreEntitySet="Department">
@@ -462,6 +452,18 @@
           <ScalarProperty Name="InterviewDate" ColumnName="InterviewDate" />
           <ScalarProperty Name="ShortListID" ColumnName="ShortListID" />
           <ScalarProperty Name="InterviewSlotID" ColumnName="InterviewSlotID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CourseRatings">
+      <EntityTypeMapping TypeName="Model.CourseRating">
+        <MappingFragment StoreEntitySet="CourseRating">
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Rating" ColumnName="Rating" />
+          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+          <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+          <ScalarProperty Name="RatingID" ColumnName="RatingID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

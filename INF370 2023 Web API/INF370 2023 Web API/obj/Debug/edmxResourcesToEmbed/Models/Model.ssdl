@@ -110,7 +110,9 @@
     <Property Name="RatingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CourseID" Type="int" Nullable="false" />
     <Property Name="StudentID" Type="int" Nullable="false" />
-    <Property Name="Rating" Type="float" Nullable="false" />
+    <Property Name="Rating" Type="int" Nullable="false" />
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="Comment" Type="varchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Department">
     <Key>

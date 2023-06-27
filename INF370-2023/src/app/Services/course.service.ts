@@ -60,6 +60,9 @@ ViewCourseStructure(id:number){
   return this.http.get(environment.WebAPI + 'ViewCourseStructure/' + id, this.httpOptions);
 }
 
+GetRatings(id:number){
+  return this.http.get(environment.WebAPI + 'GetRatings/' + id, this.httpOptions);
+}
 
 
 }

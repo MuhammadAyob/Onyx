@@ -17,7 +17,9 @@ namespace INF370_2023_Web_API.Models
         public int RatingID { get; set; }
         public int CourseID { get; set; }
         public int StudentID { get; set; }
-        public double Rating { get; set; }
+        public int Rating { get; set; }
+        public System.DateTime Date { get; set; }
+        public string Comment { get; set; }
     
         public virtual Course Course { get; set; }
         public virtual Student Student { get; set; }

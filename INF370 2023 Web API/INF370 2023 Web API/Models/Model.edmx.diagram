@@ -14,7 +14,6 @@
         <EntityTypeShape EntityType="Model.CourseAssistant" Width="1.5" PointX="8.25" PointY="8.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.CourseCategory" Width="1.5" PointX="3.75" PointY="13.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.CoursePrice" Width="1.5" PointX="8.25" PointY="28" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.CourseRating" Width="1.5" PointX="14.25" PointY="15.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Department" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Employee" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.EmployeeQualification" Width="1.5" PointX="8.25" PointY="5.5" IsExpanded="true" />
@@ -53,11 +52,9 @@
         <AssociationConnector Association="Model.FK_Course_CourseCategory" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_CourseAssistant_Course" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_CoursePrice_Course" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_CourseRating_Course" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Section_Course" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_StudentCourse_Course" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_CourseAssistant_Employee" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_CourseRating_Student" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Employee_Department" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Employee_Title" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Employee_User" ManuallyRouted="false" />
@@ -91,6 +88,9 @@
         <AssociationConnector Association="Model.FK_Application_Applicant" />
         <EntityTypeShape EntityType="Model.InterviewSlot" Width="1.5" PointX="15.75" PointY="8.375" />
         <AssociationConnector Association="Model.FK_InterviewSlot_ShortList" />
+        <EntityTypeShape EntityType="Model.CourseRating" Width="1.5" PointX="14.25" PointY="15.875" />
+        <AssociationConnector Association="Model.FK_CourseRating_Course" />
+        <AssociationConnector Association="Model.FK_CourseRating_Student" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -495,5 +495,45 @@ namespace INF370_2023_Web_API.Models
                 return new { Status = 500, Message = "Internal server error, please try again" };
             }
         }
+
+        public async Task<object> GetRatings(int id)
+        {
+            try
+            {
+                var ratings = await db.CourseRatings
+                    .Join(db.Students,
+                        rating => rating.StudentID,
+                        student => student.StudentID,
+                        (rating, student) => new { Rating = rating, Student = student })
+                    .Where(r => r.Rating.CourseID == id)
+                    .Select(r => new
+                    {
+                        RatingID = r.Rating.RatingID,
+                        CourseID = r.Rating.CourseID,
+                        Date = r.Rating.Date,
+                        StudentID = r.Rating.StudentID,
+                        Name = r.Student.Name,
+                        Surname = r.Student.Surname,
+                        Rating = r.Rating.Rating,
+                        Comment = r.Rating.Comment
+                    })
+                    .ToListAsync();
+
+                int numberOfRatings = ratings.Count;
+                double averageRating = 0;
+
+                if (numberOfRatings > 0)
+                {
+                    averageRating = ratings.Average(r => r.Rating);
+                }
+
+                return new { Ratings = ratings, NumberOfRatings = numberOfRatings, AverageRating = averageRating };
+            }
+            catch (Exception)
+            {
+                return new { Status = 500, Message = "Internal server error, please try again" };
+            }
+
+        }
     }
 }

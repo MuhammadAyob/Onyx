@@ -14,11 +14,12 @@ import { MatExpansionPanel, MatExpansionPanelTitle, MatExpansionPanelDescription
 import { MatAccordion } from '@angular/material/expansion';
 import { FAQService } from 'src/app/Services/faq.service';
 import { FAQ } from 'src/app/Models/faq.model';
+import { NgxStarRatingService } from 'ngx-star-rating';
 
 @Component({
   selector: 'app-view-structure',
   templateUrl: './view-structure.component.html',
-  styleUrls: ['./view-structure.component.scss']
+  styleUrls: ['./view-structure.component.scss'],
 })
 export class ViewStructureComponent implements OnInit {
 
@@ -26,6 +27,11 @@ panelOpenState = false;
 courseDetails:any;
 course:any
 faqList!:FAQ[];
+ratings:any;
+
+notRetrieved = true;
+NumberOfRatings:any
+AverageRating:any
 
   constructor(
     private dialog:MatDialog,
@@ -37,13 +43,17 @@ faqList!:FAQ[];
     public toaster:ToastrService,
     private _snackBar:MatSnackBar,
     private titleservice:Title
-  ) { this.titleservice.setTitle('Course Details');}
+  ) { 
+    this.titleservice.setTitle('Course Details');
+   
+}
 
 ngOnInit(): void {
 this.course = JSON.parse( sessionStorage['course-structure'] );
 console.log(this.course);
 this.getStructure();
 this.GetFAQ();
+this.GetRatings();
 }
 
 getStructure(){
@@ -52,6 +62,12 @@ getStructure(){
   })
 }
 
+getInitials(firstName: string, lastName: string): string {
+  const initials = firstName.charAt(0) + lastName.charAt(0);
+  return initials.toUpperCase();
+}
+
+
 onBack(){
   this.router.navigate(['student/view-store']);
 }
@@ -59,6 +75,22 @@ onBack(){
 GetFAQ(){
 this.FAQService.GetFAQs().subscribe((result)=>{
   this.faqList = result as FAQ[];
+})
+}
+
+GetRatings(){
+this.service.GetRatings(this.course.CourseID).subscribe((result:any)=>{
+this.ratings = result.Ratings as any[];
+this.NumberOfRatings=result.NumberOfRatings as any;
+this.AverageRating = result.AverageRating as any;
+
+if(this.ratings.length == 0 )
+{
+this.notRetrieved = true;
+}
+else{
+  this.notRetrieved = false;
+}
 })
 }
 

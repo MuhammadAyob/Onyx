@@ -31,6 +31,8 @@ namespace INF370_2023_Web_API.Models
 
         Task<object> ViewCourseStructure(int id);
 
+        Task<object> GetRatings(int id);
+
 
     }
 }

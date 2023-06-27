@@ -115,7 +115,9 @@
           <Property Name="RatingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CourseID" Type="int" Nullable="false" />
           <Property Name="StudentID" Type="int" Nullable="false" />
-          <Property Name="Rating" Type="float" Nullable="false" />
+          <Property Name="Rating" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Comment" Type="varchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Department">
           <Key>
@@ -1197,10 +1199,10 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
           <NavigationProperty Name="CourseCategory" Relationship="Self.FK_Course_CourseCategory" FromRole="Course" ToRole="CourseCategory" />
           <NavigationProperty Name="CourseAssistants" Relationship="Self.FK_CourseAssistant_Course" FromRole="Course" ToRole="CourseAssistant" />
           <NavigationProperty Name="CoursePrices" Relationship="Self.FK_CoursePrice_Course" FromRole="Course" ToRole="CoursePrice" />
-          <NavigationProperty Name="CourseRatings" Relationship="Self.FK_CourseRating_Course" FromRole="Course" ToRole="CourseRating" />
           <NavigationProperty Name="Sections" Relationship="Self.FK_Section_Course" FromRole="Course" ToRole="Section" />
           <NavigationProperty Name="StudentCourses" Relationship="Self.FK_StudentCourse_Course" FromRole="Course" ToRole="StudentCourse" />
           <Property Name="Preview" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CourseRatings" Relationship="Model.FK_CourseRating_Course" FromRole="Course" ToRole="CourseRating" />
         </EntityType>
         <EntityType Name="CourseAssistant">
           <Key>
@@ -1229,17 +1231,6 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
           <Property Name="CourseID" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Course" Relationship="Self.FK_CoursePrice_Course" FromRole="CoursePrice" ToRole="Course" />
-        </EntityType>
-        <EntityType Name="CourseRating">
-          <Key>
-            <PropertyRef Name="RatingID" />
-          </Key>
-          <Property Name="RatingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CourseID" Type="Int32" Nullable="false" />
-          <Property Name="StudentID" Type="Int32" Nullable="false" />
-          <Property Name="Rating" Type="Double" Nullable="false" />
-          <NavigationProperty Name="Course" Relationship="Self.FK_CourseRating_Course" FromRole="CourseRating" ToRole="Course" />
-          <NavigationProperty Name="Student" Relationship="Self.FK_CourseRating_Student" FromRole="CourseRating" ToRole="Student" />
         </EntityType>
         <EntityType Name="Department">
           <Key>
@@ -1457,10 +1448,10 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
           <Property Name="Deleted" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Carts" Relationship="Self.FK_Cart_Student" FromRole="Student" ToRole="Cart" />
-          <NavigationProperty Name="CourseRatings" Relationship="Self.FK_CourseRating_Student" FromRole="Student" ToRole="CourseRating" />
           <NavigationProperty Name="Title" Relationship="Self.FK_Student_Title" FromRole="Student" ToRole="Title" />
           <NavigationProperty Name="User" Relationship="Self.FK_Student_User" FromRole="Student" ToRole="User" />
           <NavigationProperty Name="StudentCourses" Relationship="Self.FK_StudentCourse_Student" FromRole="Student" ToRole="StudentCourse" />
+          <NavigationProperty Name="CourseRatings" Relationship="Model.FK_CourseRating_Student" FromRole="Student" ToRole="CourseRating" />
         </EntityType>
         <EntityType Name="StudentCourse">
           <Key>
@@ -1665,18 +1656,6 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_CourseRating_Course">
-          <End Role="Course" Type="Self.Course" Multiplicity="1" />
-          <End Role="CourseRating" Type="Self.CourseRating" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Course">
-              <PropertyRef Name="CourseID" />
-            </Principal>
-            <Dependent Role="CourseRating">
-              <PropertyRef Name="CourseID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Section_Course">
           <End Role="Course" Type="Self.Course" Multiplicity="1" />
           <End Role="Section" Type="Self.Section" Multiplicity="*" />
@@ -1710,18 +1689,6 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
             </Principal>
             <Dependent Role="CourseAssistant">
               <PropertyRef Name="EmployeeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CourseRating_Student">
-          <End Role="Student" Type="Self.Student" Multiplicity="1" />
-          <End Role="CourseRating" Type="Self.CourseRating" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Student">
-              <PropertyRef Name="StudentID" />
-            </Principal>
-            <Dependent Role="CourseRating">
-              <PropertyRef Name="StudentID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1975,7 +1942,6 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
           <EntitySet Name="CourseAssistants" EntityType="Self.CourseAssistant" />
           <EntitySet Name="CourseCategories" EntityType="Self.CourseCategory" />
           <EntitySet Name="CoursePrices" EntityType="Self.CoursePrice" />
-          <EntitySet Name="CourseRatings" EntityType="Self.CourseRating" />
           <EntitySet Name="Departments" EntityType="Self.Department" />
           <EntitySet Name="Employees" EntityType="Self.Employee" />
           <EntitySet Name="EmployeeQualifications" EntityType="Self.EmployeeQualification" />
@@ -2041,10 +2007,6 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
             <End Role="Course" EntitySet="Courses" />
             <End Role="CoursePrice" EntitySet="CoursePrices" />
           </AssociationSet>
-          <AssociationSet Name="FK_CourseRating_Course" Association="Self.FK_CourseRating_Course">
-            <End Role="Course" EntitySet="Courses" />
-            <End Role="CourseRating" EntitySet="CourseRatings" />
-          </AssociationSet>
           <AssociationSet Name="FK_Section_Course" Association="Self.FK_Section_Course">
             <End Role="Course" EntitySet="Courses" />
             <End Role="Section" EntitySet="Sections" />
@@ -2056,10 +2018,6 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
           <AssociationSet Name="FK_CourseAssistant_Employee" Association="Self.FK_CourseAssistant_Employee">
             <End Role="Employee" EntitySet="Employees" />
             <End Role="CourseAssistant" EntitySet="CourseAssistants" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CourseRating_Student" Association="Self.FK_CourseRating_Student">
-            <End Role="Student" EntitySet="Students" />
-            <End Role="CourseRating" EntitySet="CourseRatings" />
           </AssociationSet>
           <AssociationSet Name="FK_Employee_Department" Association="Self.FK_Employee_Department">
             <End Role="Department" EntitySet="Departments" />
@@ -2171,6 +2129,15 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
           <AssociationSet Name="FK_InterviewSlot_ShortList" Association="Model.FK_InterviewSlot_ShortList">
             <End Role="ShortList" EntitySet="ShortLists" />
             <End Role="InterviewSlot" EntitySet="InterviewSlots" />
+          </AssociationSet>
+          <EntitySet Name="CourseRatings" EntityType="Model.CourseRating" />
+          <AssociationSet Name="FK_CourseRating_Course" Association="Model.FK_CourseRating_Course">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="CourseRating" EntitySet="CourseRatings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseRating_Student" Association="Model.FK_CourseRating_Student">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="CourseRating" EntitySet="CourseRatings" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="OTPTimer">
@@ -2316,6 +2283,43 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="CourseRating">
+          <Key>
+            <PropertyRef Name="RatingID" />
+          </Key>
+          <Property Name="RatingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CourseID" Type="Int32" Nullable="false" />
+          <Property Name="StudentID" Type="Int32" Nullable="false" />
+          <Property Name="Rating" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Comment" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Course" Relationship="Model.FK_CourseRating_Course" FromRole="CourseRating" ToRole="Course" />
+          <NavigationProperty Name="Student" Relationship="Model.FK_CourseRating_Student" FromRole="CourseRating" ToRole="Student" />
+        </EntityType>
+        <Association Name="FK_CourseRating_Course">
+          <End Type="Model.Course" Role="Course" Multiplicity="1" />
+          <End Type="Model.CourseRating" Role="CourseRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="CourseRating">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseRating_Student">
+          <End Type="Model.Student" Role="Student" Multiplicity="1" />
+          <End Type="Model.CourseRating" Role="CourseRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="CourseRating">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2410,16 +2414,6 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="CourseID" ColumnName="CourseID" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CourseRatings">
-            <EntityTypeMapping TypeName="Model.CourseRating">
-              <MappingFragment StoreEntitySet="CourseRating">
-                <ScalarProperty Name="RatingID" ColumnName="RatingID" />
-                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
-                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
-                <ScalarProperty Name="Rating" ColumnName="Rating" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2783,6 +2777,18 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
                 <ScalarProperty Name="InterviewDate" ColumnName="InterviewDate" />
                 <ScalarProperty Name="ShortListID" ColumnName="ShortListID" />
                 <ScalarProperty Name="InterviewSlotID" ColumnName="InterviewSlotID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CourseRatings">
+            <EntityTypeMapping TypeName="Model.CourseRating">
+              <MappingFragment StoreEntitySet="CourseRating">
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+                <ScalarProperty Name="RatingID" ColumnName="RatingID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -34,7 +34,6 @@ namespace INF370_2023_Web_API.Models
         public virtual DbSet<CourseAssistant> CourseAssistants { get; set; }
         public virtual DbSet<CourseCategory> CourseCategories { get; set; }
         public virtual DbSet<CoursePrice> CoursePrices { get; set; }
-        public virtual DbSet<CourseRating> CourseRatings { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<EmployeeQualification> EmployeeQualifications { get; set; }
@@ -71,5 +70,6 @@ namespace INF370_2023_Web_API.Models
         public virtual DbSet<ApplicationStatu> ApplicationStatus { get; set; }
         public virtual DbSet<Applicant> Applicants { get; set; }
         public virtual DbSet<InterviewSlot> InterviewSlots { get; set; }
+        public virtual DbSet<CourseRating> CourseRatings { get; set; }
     }
 }

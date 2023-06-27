@@ -242,8 +242,41 @@
       font-family: Montserrat;
       background-color: #0e1a3c;
   }
+
+  .rating {
+  display: flex;
+  align-items: center;
+}
+
+.star-icon {
+  font-size: 12px; /* Adjust the font size as desired */
+}
+
+.star-filled {
+  color: gold; /* Adjust the color for filled stars */
+}
+
+.star-empty {
+  color: gray; /* Adjust the color for empty stars */
+}
+
   
+  .initials-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #000000;
+    color: #fff;
+    //font-size: 6px;
+    font-family: 'Montserrat';
+  }
   
+  mat-list-item p.mat-line {
+    white-space: normal;
+  }
   
   #cancel:hover{
       color: #0e1a3c;
