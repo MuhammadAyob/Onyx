@@ -108,6 +108,7 @@ import { MaintainSlotComponent } from './Administrator/Interview-Slots/maintain-
 import { ReadStudentsComponent } from './Administrator/Students/read-students/read-students.component';
 import { StoreComponent } from './Student Portal/Store/store/store.component';
 import { ViewStructureComponent } from './Student Portal/view-course-structure/view-structure/view-structure.component';
+import { CartComponent } from './Student Portal/cart/cart/cart.component';
 
 
 const routes: Routes = [
@@ -407,6 +408,12 @@ canActivate:[AuthGuardGuard,StudentGuard]
 {
 path:'student/view-course-structure',
 component:ViewStructureComponent,
+},
+
+{
+  path:'student/view-cart',
+  component:CartComponent,
+  canActivate:[AuthGuardGuard,StudentGuard]
 },
 
 // admin skill and skill type

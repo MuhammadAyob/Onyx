@@ -17,7 +17,8 @@ import { CourseCategoryService } from 'src/app/Services/course-category.service'
 import { CourseCategory } from 'src/app/Models/CourseCategory.model';
 import { map } from 'rxjs/operators';
 import { MatChipList } from '@angular/material/chips';
-
+import { CartService } from 'src/app/Services/cart.service';
+import { VATService } from 'src/app/Services/vat.service';
 @Component({
   selector: 'app-store',
   templateUrl: './store.component.html',
@@ -44,6 +45,7 @@ noData = this.dataSource.connect().pipe(map(data=>data.length===0));
 courselist!:any[];
 categoryList!:CourseCategory[];
 StudentID: any;
+VAT!:number;
 
 constructor(
   private dialog:MatDialog,
@@ -53,7 +55,9 @@ constructor(
     private catService: CourseCategoryService,
     public toaster:ToastrService,
     private _snackBar:MatSnackBar,
-    private titleservice:Title
+    private titleservice:Title,
+    private cartService:CartService,
+    private VATService:VATService
 ) { this.titleservice.setTitle('Store');}
 
 ngOnInit(): void {
@@ -61,6 +65,7 @@ this.StudentID = sessionStorage.getItem('StudentID');
 console.log('getting');
 this.refreshList();
 this.GetCategories();
+this.GetVAT();
 }
 
 ngAfterViewInit(){
@@ -70,7 +75,12 @@ ngAfterViewInit(){
   this.GetCategories();
 }
 
-
+GetVAT(){
+  this.VATService.GetCurrentVAT().subscribe((result)=>{
+  this.VAT = result as any;
+  sessionStorage['CurrentVAT'] = JSON.stringify(this.VAT)
+  })
+}
 
 public doFilter = (event: Event) => {
   this.dataSource.filter = (event.target as HTMLInputElement).value.trim().toLocaleLowerCase();
@@ -133,4 +143,55 @@ GetCategories(){
   sessionStorage['course-structure'] = JSON.stringify(obj)
   this.router.navigate(['student/view-course-structure']);
  }
+
+ AddToCart(course: any) {
+  // Retrieve the cart data from the session storage
+  const cartData = sessionStorage.getItem('cart');
+
+  if (cartData) {
+    // Parse the cart data from JSON string to an array of courses
+    const cart: any[] = JSON.parse(cartData);
+
+    // Check if the course already exists in the cart
+    const existingCourse = cart.find(item => item.CourseID === course.CourseID);
+    if (existingCourse) {
+      // Course already exists in the cart, display a snackbar notification
+      this._snackBar.open('Course is already in the cart!', 'Dismiss', {
+        duration: 3000,
+        horizontalPosition: 'center',
+        verticalPosition: 'bottom',
+                      
+      });
+      return;
+    }
+    
+    // Add the course to the cart
+    cart.push(course);
+
+    // Update the cart data in the session storage
+    sessionStorage.setItem('cart', JSON.stringify(cart));
+
+    // Display a snackbar notification for successful addition to the cart
+    this._snackBar.open('Course added to the cart!', 'Dismiss', {
+      duration: 3000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom',
+    });
+  } else {
+    // Create a new cart and add the course
+    const cart = [course];
+
+    // Update the cart data in the session storage
+    sessionStorage.setItem('cart', JSON.stringify(cart));
+
+    // Display a snackbar notification for successful addition to the cart
+    this._snackBar.open('Course added to the cart!', 'Dismiss', {
+      duration: 3000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom',
+    });
+  }
+}
+
+
 }

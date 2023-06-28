@@ -27,7 +27,7 @@ GetVATAmounts(){
 }
 
 GetCurrentVAT(){
-    return this.http.get(environment.WebAPI + ' GetCurrentVAT', this.httpOptions);
+    return this.http.get(environment.WebAPI + 'GetCurrentVAT', this.httpOptions);
 }
 
 UpdateVAT(id: number, obj:any){

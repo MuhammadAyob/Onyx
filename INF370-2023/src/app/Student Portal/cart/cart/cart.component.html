@@ -1,0 +1,134 @@
+<!-- Card Form for Input -->
+<div style="padding-left: 3em; padding-right: 3em; padding-top: 9em;height:100vh;background-image: url('../../assets/gradient.gif');background-repeat: no-repeat;background-size: 100% 25%;">
+
+    <div>
+      <mat-card class="matCard" style="border-radius: 34px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8), 0 1px 3px rgba(0, 0, 0, 0.8);">
+        <mat-card-header class="cardHeader" style="padding-bottom: 1%;text-align: center">
+          <mat-card-title-group style="margin-left:39.5%;">
+            <mat-card-title style="font-weight: 500; "
+              >View Courses in Cart</mat-card-title
+            >
+          </mat-card-title-group>
+         
+        </mat-card-header>
+    
+        <mat-card-content class="matContent">
+            <div class="container">
+                <div *ngIf="cartItems.length > 0; else emptyCart">
+                    <div class="table-hover table-container mat-elevation-z8">
+                        <table mat-table matSort [dataSource]="cartItems"  class="mat-elevation-z8" id="DeptTable">
+                         <!--  Image Column -->
+        <ng-container matColumnDef="image">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef style="color: #ffffff;">Course Image</th>
+           <td mat-cell *matCellDef="let course">
+          <img src="{{'data:image/png;base64,' + course.Image}}" style="border-radius: 150px; height: 100px;width:100px;">
+            </td>
+            </ng-container>
+                            <!-- Course Column -->
+                          <ng-container matColumnDef="course">
+                            <th mat-header-cell mat-sort-header *matHeaderCellDef style="color: #ffffff;" >Course Name</th>
+                            <td mat-cell *matCellDef="let course">
+                              {{ course.Name }}
+                            </td>
+                          </ng-container>
+
+                            <!-- Amount Column -->
+                            <ng-container matColumnDef="amount">
+                              <th mat-header-cell mat-sort-header *matHeaderCellDef style="color: #ffffff;" >Course Amount in Rands</th>
+                              <td mat-cell *matCellDef="let course">
+                                R{{ course.Price }}
+                              </td>
+                            </ng-container>
+            
+                          <!-- Actions Column -->
+                          <ng-container matColumnDef="actions">
+                            <th mat-header-cell *matHeaderCellDef style="text-align: center; color: #ffffff;">
+                              Remove from Cart
+                            </th>
+                            <td mat-cell *matCellDef="let course" style="text-align: center;">
+                                <button mat-icon-button color="warn" (click)="removeFromCart(course)">
+                                    <mat-icon>clear</mat-icon>
+                                  </button>
+                            </td>
+                          </ng-container>
+            
+            
+                        
+            
+                          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            
+                        </table>
+                        <br>
+                        <h1 style="margin-left:42%;color: #0e1a3c;"><b>Cart Summary</b></h1>
+                        <br>
+                        <!-- VAT calculations and total -->
+                        <div class="vat-section" style="text-align: center;">
+                            <mat-list style="width: 70%; margin: 0 auto;">
+                              <mat-list-item>
+                                <div style="text-align: left; flex-grow: 1;">
+                                  <span style="font-size: 20px;"><b>VAT Exclusive:</b></span>
+                                </div>
+                                <div style="text-align: right;">
+                                  <span style="font-size: 24px;">R{{ getVatExclusive() }}</span>
+                                </div>
+                              </mat-list-item>
+                              <mat-divider></mat-divider>
+                              <mat-list-item>
+                                <div style="text-align: left; flex-grow: 1;">
+                                  <span style="font-size: 20px;"><b>VAT @ {{VAT.VAT}}%:</b></span>
+                                </div>
+                                <div style="text-align: right;">
+                                  <span style="font-size: 24px;">R{{ getVatAmount() }}</span>
+                                </div>
+                              </mat-list-item>
+                              <mat-divider></mat-divider>
+                              <mat-list-item>
+                                <div style="text-align: left; flex-grow: 1;">
+                                    <span style="font-size: 20px;"><b>Grand Total:</b></span>
+                                  </div>
+                                  <div style="text-align: right;">
+                                    <span style="font-size: 24px;">R{{ getTotalAmount() }}</span>
+                                  </div>
+                                <mat-divider></mat-divider>
+                              </mat-list-item>
+                            </mat-list>
+                          
+                          </div>
+                          
+                          <br>
+                          <div class="button-container">
+                            <button style=" 
+                            border: 2px solid rgb(0, 0, 0);
+                            border-radius: 50px;
+                            font-family: Montserrat;
+                            font-size: 16px;
+                            padding: 10px 25px 10px 25px;"
+                            id="cancel" class="btn" (click)="onCheckout()">Checkout</button>
+                             </div>
+                          <br>
+                          
+                      </div>
+                  
+                </div>
+                <ng-template #emptyCart>
+                    <br>
+                    <br>
+                  <p style="margin-left:42%;font-size: large;">Your cart is empty!</p>
+                  <br>
+                  <div class="button-container">
+                    <button style=" 
+                    border: 2px solid rgb(0, 0, 0);
+                    border-radius: 50px;
+                    font-family: Montserrat;
+                    font-size: 16px;
+                    padding: 10px 25px 10px 25px;"
+                    id="cancel" class="btn" (click)="onBack()">View Store</button>
+                     </div>
+                </ng-template>
+              </div>
+        </mat-card-content>
+        
+      </mat-card>
+    </div>
+    </div>

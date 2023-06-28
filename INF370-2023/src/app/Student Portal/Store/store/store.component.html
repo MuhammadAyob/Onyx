@@ -91,11 +91,11 @@
               <!-- add Column -->
               <ng-container matColumnDef="add">
                 <th mat-header-cell *matHeaderCellDef style="text-align: center; color: #ffffff;">
-                  Add to Basket 
+                  Add to Cart 
                 </th>
                 <td mat-cell *matCellDef="let course" style="text-align: center;">
                   <button type="button" class="btn btn-default btn-lg" style="
-                  background-color:transparent;border-style: none;" (click)="onView(course)">
+                  background-color:transparent;border-style: none;" (click)="AddToCart(course)">
                     <mat-icon aria-hidden="false" aria-label="View Department">add_shopping_cart</mat-icon>
                   </button>
                 </td>

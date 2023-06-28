@@ -12,6 +12,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { JobOppService } from './Services/job-opp.service';
+import { CartService } from './Services/cart.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -27,6 +29,7 @@ export class AppComponent {
   username='';
   employeeDetails!:Employee;
   studentDetails!:Student;
+  cartItemCount: number = 0;
 
   constructor(
     public router: Router,
@@ -38,7 +41,8 @@ export class AppComponent {
     private toastr: ToastrService,
     private ref: ChangeDetectorRef,
     private snack:MatSnackBar,
-    private JService:JobOppService
+    private JService:JobOppService,
+    private cartService:CartService
   ) {
     this.router.events.subscribe((e) => {
       //this.jobOppExpired();
@@ -110,6 +114,18 @@ export class AppComponent {
     this.ref.detectChanges();
   }
 
+  ngOnInit(): void {
+    this.cartService.cartItemCount$.subscribe(itemCount => {
+      this.cartItemCount = itemCount;
+      this.ref.detectChanges();
+    });
+  }
+
+  getCartCount(): number {
+    return this.cartService.getCartCount();
+  }
+  
+
   public findName() {
     if (this.security.isLoggedIn) {
       if (this.userlog === 3) {
@@ -154,6 +170,8 @@ export class AppComponent {
   onBot() {
     this.help = !this.help;
   }
+
+
 
   jobOppExpired(){
     this.JService.ExpiredJob().subscribe(()=>{

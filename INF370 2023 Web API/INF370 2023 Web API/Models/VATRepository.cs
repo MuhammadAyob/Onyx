@@ -69,7 +69,10 @@ namespace INF370_2023_Web_API.Models
             try
             {
                 db.Configuration.ProxyCreationEnabled = false;
-                var obj = await db.VATs.OrderByDescending(z=>z.VatDate).FirstOrDefaultAsync();
+                var obj = await db.VATs.OrderByDescending(z=>z.VatDate).Select(x=> new 
+                { 
+                    VAT = x.VatAmount
+                }).FirstOrDefaultAsync();
                 return obj;
             }
             catch (Exception)
