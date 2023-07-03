@@ -79,7 +79,7 @@ namespace INF370_2023_Web_API.Models
                     await SendMaintenanceEmail(emailID, name, surname, maintenanceRequest, subjectFor, dateLogged);
 
                     //Send SMS
-                     SendMaintenanceSMS(finalPhone, maintenanceRequest, name, surname, subjectFor, dateLogged);
+                    // SendMaintenanceSMS(finalPhone, maintenanceRequest, name, surname, subjectFor, dateLogged);
                 }
 
                 else
@@ -107,7 +107,7 @@ namespace INF370_2023_Web_API.Models
                     await SendMaintenanceEmail(emailID, name, surname, maintenanceRequest, subjectFor, dateLogged);
 
                     //Send SMS
-                     SendMaintenanceSMS(finalPhone, maintenanceRequest, name, surname, subjectFor, dateLogged);
+                     //SendMaintenanceSMS(finalPhone, maintenanceRequest, name, surname, subjectFor, dateLogged);
                 }
 
 
@@ -157,7 +157,7 @@ namespace INF370_2023_Web_API.Models
                     await SendMaintenanceEmail(emailID, name, surname, maintenanceRequest, subjectFor, dateLogged);
 
                     //Send SMS
-                     SendMaintenanceSMS(finalPhone, maintenanceRequest, name, surname, subjectFor, dateLogged);
+                    // SendMaintenanceSMS(finalPhone, maintenanceRequest, name, surname, subjectFor, dateLogged);
                 }
 
                 else
@@ -185,7 +185,7 @@ namespace INF370_2023_Web_API.Models
                     await SendMaintenanceEmail(emailID, name, surname, maintenanceRequest, subjectFor, dateLogged);
 
                     //Send SMS
-                    SendMaintenanceSMS(finalPhone, maintenanceRequest, name, surname, subjectFor, dateLogged);
+                    //SendMaintenanceSMS(finalPhone, maintenanceRequest, name, surname, subjectFor, dateLogged);
                 }
 
                 return new { Status = 200, Message = "Maintenance Request discarded" };
@@ -347,7 +347,7 @@ namespace INF370_2023_Web_API.Models
                     await SendMaintenanceEmail(emailID, name, surname, maintenanceRequest, subjectFor, dateLogged);
 
                     //Send SMS
-                    SendMaintenanceSMS(finalPhone, maintenanceRequest, name, surname, subjectFor, dateLogged);
+                  //  SendMaintenanceSMS(finalPhone, maintenanceRequest, name, surname, subjectFor, dateLogged);
                 }
 
                 else
@@ -374,7 +374,7 @@ namespace INF370_2023_Web_API.Models
                     await SendMaintenanceEmail(emailID, name, surname, maintenanceRequest, subjectFor, dateLogged);
 
                     //Send SMS
-                    SendMaintenanceSMS(finalPhone, maintenanceRequest, name, surname, subjectFor, dateLogged);
+                   // SendMaintenanceSMS(finalPhone, maintenanceRequest, name, surname, subjectFor, dateLogged);
                 }
                 
        
