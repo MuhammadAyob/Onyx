@@ -14,8 +14,17 @@ namespace INF370_2023_Web_API.Models
     
     public partial class VAT
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public VAT()
+        {
+            this.Carts = new HashSet<Cart>();
+        }
+    
         public int VatID { get; set; }
         public System.DateTime VatDate { get; set; }
         public double VatAmount { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cart> Carts { get; set; }
     }
 }

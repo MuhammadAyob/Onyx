@@ -18,18 +18,18 @@ namespace INF370_2023_Web_API.Models
         public Cart()
         {
             this.CartCourses = new HashSet<CartCourse>();
-            this.Payments = new HashSet<Payment>();
         }
     
         public int CartID { get; set; }
         public int StudentID { get; set; }
         public double Total { get; set; }
         public System.DateTime Date { get; set; }
+        public string PurchaseNumber { get; set; }
+        public int VatID { get; set; }
     
         public virtual Student Student { get; set; }
+        public virtual VAT VAT { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CartCourse> CartCourses { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Payment> Payments { get; set; }
     }
 }

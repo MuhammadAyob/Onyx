@@ -19,7 +19,7 @@ namespace INF370_2023_Web_API.Models
         public int CourseID { get; set; }
         public double PriceAtTimeOfPurchase { get; set; }
     
-        public virtual Cart Cart { get; set; }
         public virtual Course Course { get; set; }
+        public virtual Cart Cart { get; set; }
     }
 }

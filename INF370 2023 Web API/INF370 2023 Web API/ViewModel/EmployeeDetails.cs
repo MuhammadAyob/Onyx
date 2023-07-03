@@ -66,4 +66,12 @@ namespace INF370_2023_Web_API.ViewModel
         public TimeSpan EndTime { get; set; }
         
     }
+
+    public class CartDetails
+    {
+        public int StudentID { get; set; }
+        public double Total { get; set; }
+        public int PayFastNumber { get; set; }
+       
+    }
 }

@@ -230,6 +230,7 @@
     <Compile Include="Controllers\MaintenanceTypesController.cs" />
     <Compile Include="Controllers\MaxSlotsController.cs" />
     <Compile Include="Controllers\OTPTimerController.cs" />
+    <Compile Include="Controllers\PaymentsController.cs" />
     <Compile Include="Controllers\QualificationsController.cs" />
     <Compile Include="Controllers\SectionsController.cs" />
     <Compile Include="Controllers\ShortlistController.cs" />
@@ -328,6 +329,7 @@
     </Compile>
     <Compile Include="Models\InterviewsRepository.cs" />
     <Compile Include="Models\IOTPTimer.cs" />
+    <Compile Include="Models\IPayments.cs" />
     <Compile Include="Models\IQualifications.cs" />
     <Compile Include="Models\ISections.cs" />
     <Compile Include="Models\IShortList.cs" />
@@ -396,9 +398,7 @@
     <Compile Include="Models\PayFast.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Payment.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\PaymentsRepository.cs" />
     <Compile Include="Models\Qualification.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

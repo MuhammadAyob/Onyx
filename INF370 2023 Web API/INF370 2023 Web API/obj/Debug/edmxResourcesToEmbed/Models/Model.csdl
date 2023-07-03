@@ -24,18 +24,6 @@
     <Property Name="AuditName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="User" Relationship="Self.FK_AuditLog_User" FromRole="AuditLog" ToRole="User" />
   </EntityType>
-  <EntityType Name="Cart">
-    <Key>
-      <PropertyRef Name="CartID" />
-    </Key>
-    <Property Name="CartID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="StudentID" Type="Int32" Nullable="false" />
-    <Property Name="Total" Type="Double" Nullable="false" />
-    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
-    <NavigationProperty Name="Student" Relationship="Self.FK_Cart_Student" FromRole="Cart" ToRole="Student" />
-    <NavigationProperty Name="CartCourses" Relationship="Self.FK_CartCourse_Cart" FromRole="Cart" ToRole="CartCourse" />
-    <NavigationProperty Name="Payments" Relationship="Self.FK_Payment_Cart" FromRole="Cart" ToRole="Payment" />
-  </EntityType>
   <EntityType Name="CartCourse">
     <Key>
       <PropertyRef Name="CartLineID" />
@@ -44,8 +32,8 @@
     <Property Name="CartID" Type="Int32" Nullable="false" />
     <Property Name="CourseID" Type="Int32" Nullable="false" />
     <Property Name="PriceAtTimeOfPurchase" Type="Double" Nullable="false" />
-    <NavigationProperty Name="Cart" Relationship="Self.FK_CartCourse_Cart" FromRole="CartCourse" ToRole="Cart" />
     <NavigationProperty Name="Course" Relationship="Self.FK_CartCourse_Course" FromRole="CartCourse" ToRole="Course" />
+    <NavigationProperty Name="Cart" Relationship="Model.FK_CartCourse_Cart" FromRole="CartCourse" ToRole="Cart" />
   </EntityType>
   <EntityType Name="Contact">
     <Key>
@@ -246,17 +234,6 @@
     <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="Maintenances" Relationship="Self.FK_Maintenance_MaintenanceType" FromRole="MaintenanceType" ToRole="Maintenance" />
   </EntityType>
-  <EntityType Name="Payment">
-    <Key>
-      <PropertyRef Name="PaymentID" />
-    </Key>
-    <Property Name="PaymentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="CartID" Type="Int32" Nullable="false" />
-    <Property Name="Amount" Type="Double" Nullable="false" />
-    <Property Name="pf_payment_id" Type="Int32" Nullable="false" />
-    <Property Name="payment_status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="Cart" Relationship="Self.FK_Payment_Cart" FromRole="Payment" ToRole="Cart" />
-  </EntityType>
   <EntityType Name="Qualification">
     <Key>
       <PropertyRef Name="QualificationID" />
@@ -318,11 +295,11 @@
     <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Deleted" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="UserID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Carts" Relationship="Self.FK_Cart_Student" FromRole="Student" ToRole="Cart" />
     <NavigationProperty Name="Title" Relationship="Self.FK_Student_Title" FromRole="Student" ToRole="Title" />
     <NavigationProperty Name="User" Relationship="Self.FK_Student_User" FromRole="Student" ToRole="User" />
     <NavigationProperty Name="StudentCourses" Relationship="Self.FK_StudentCourse_Student" FromRole="Student" ToRole="StudentCourse" />
     <NavigationProperty Name="CourseRatings" Relationship="Model.FK_CourseRating_Student" FromRole="Student" ToRole="CourseRating" />
+    <NavigationProperty Name="Carts" Relationship="Model.FK_Cart_Student" FromRole="Student" ToRole="Cart" />
   </EntityType>
   <EntityType Name="StudentCourse">
     <Key>
@@ -398,6 +375,7 @@
     <Property Name="VatID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="VatDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="VatAmount" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Carts" Relationship="Model.FK_Cart_VAT" FromRole="VAT" ToRole="Cart" />
   </EntityType>
   <EntityType Name="WorkType">
     <Key>
@@ -440,42 +418,6 @@
       </Principal>
       <Dependent Role="AuditLog">
         <PropertyRef Name="UserID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Cart_Student">
-    <End Role="Student" Type="Self.Student" Multiplicity="1" />
-    <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Student">
-        <PropertyRef Name="StudentID" />
-      </Principal>
-      <Dependent Role="Cart">
-        <PropertyRef Name="StudentID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_CartCourse_Cart">
-    <End Role="Cart" Type="Self.Cart" Multiplicity="1" />
-    <End Role="CartCourse" Type="Self.CartCourse" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Cart">
-        <PropertyRef Name="CartID" />
-      </Principal>
-      <Dependent Role="CartCourse">
-        <PropertyRef Name="CartID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Payment_Cart">
-    <End Role="Cart" Type="Self.Cart" Multiplicity="1" />
-    <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Cart">
-        <PropertyRef Name="CartID" />
-      </Principal>
-      <Dependent Role="Payment">
-        <PropertyRef Name="CartID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -806,7 +748,6 @@
   <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Applications" EntityType="Self.Application" />
     <EntitySet Name="AuditLogs" EntityType="Self.AuditLog" />
-    <EntitySet Name="Carts" EntityType="Self.Cart" />
     <EntitySet Name="CartCourses" EntityType="Self.CartCourse" />
     <EntitySet Name="Contacts" EntityType="Self.Contact" />
     <EntitySet Name="Courses" EntityType="Self.Course" />
@@ -826,7 +767,6 @@
     <EntitySet Name="MaintenancePriorities" EntityType="Self.MaintenancePriority" />
     <EntitySet Name="MaintenanceStatus" EntityType="Self.MaintenanceStatu" />
     <EntitySet Name="MaintenanceTypes" EntityType="Self.MaintenanceType" />
-    <EntitySet Name="Payments" EntityType="Self.Payment" />
     <EntitySet Name="Qualifications" EntityType="Self.Qualification" />
     <EntitySet Name="Sections" EntityType="Self.Section" />
     <EntitySet Name="ShortLists" EntityType="Self.ShortList" />
@@ -849,18 +789,6 @@
     <AssociationSet Name="FK_AuditLog_User" Association="Self.FK_AuditLog_User">
       <End Role="User" EntitySet="Users" />
       <End Role="AuditLog" EntitySet="AuditLogs" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Cart_Student" Association="Self.FK_Cart_Student">
-      <End Role="Student" EntitySet="Students" />
-      <End Role="Cart" EntitySet="Carts" />
-    </AssociationSet>
-    <AssociationSet Name="FK_CartCourse_Cart" Association="Self.FK_CartCourse_Cart">
-      <End Role="Cart" EntitySet="Carts" />
-      <End Role="CartCourse" EntitySet="CartCourses" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Payment_Cart" Association="Self.FK_Payment_Cart">
-      <End Role="Cart" EntitySet="Carts" />
-      <End Role="Payment" EntitySet="Payments" />
     </AssociationSet>
     <AssociationSet Name="FK_CartCourse_Course" Association="Self.FK_CartCourse_Course">
       <End Role="Course" EntitySet="Courses" />
@@ -1009,6 +937,19 @@
     <AssociationSet Name="FK_CourseRating_Student" Association="Model.FK_CourseRating_Student">
       <End Role="Student" EntitySet="Students" />
       <End Role="CourseRating" EntitySet="CourseRatings" />
+    </AssociationSet>
+    <EntitySet Name="Carts" EntityType="Model.Cart" />
+    <AssociationSet Name="FK_Cart_Student" Association="Model.FK_Cart_Student">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="Cart" EntitySet="Carts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cart_VAT" Association="Model.FK_Cart_VAT">
+      <End Role="VAT" EntitySet="VATs" />
+      <End Role="Cart" EntitySet="Carts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CartCourse_Cart" Association="Model.FK_CartCourse_Cart">
+      <End Role="Cart" EntitySet="Carts" />
+      <End Role="CartCourse" EntitySet="CartCourses" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="OTPTimer">
@@ -1188,6 +1129,56 @@
       </Principal>
       <Dependent Role="CourseRating">
         <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Cart">
+    <Key>
+      <PropertyRef Name="CartID" />
+    </Key>
+    <Property Name="CartID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StudentID" Type="Int32" Nullable="false" />
+    <Property Name="Total" Type="Double" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PurchaseNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="VatID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Student" Relationship="Model.FK_Cart_Student" FromRole="Cart" ToRole="Student" />
+    <NavigationProperty Name="VAT" Relationship="Model.FK_Cart_VAT" FromRole="Cart" ToRole="VAT" />
+    <NavigationProperty Name="CartCourses" Relationship="Model.FK_CartCourse_Cart" FromRole="Cart" ToRole="CartCourse" />
+  </EntityType>
+  <Association Name="FK_Cart_Student">
+    <End Type="Model.Student" Role="Student" Multiplicity="1" />
+    <End Type="Model.Cart" Role="Cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="Cart">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cart_VAT">
+    <End Type="Model.VAT" Role="VAT" Multiplicity="1" />
+    <End Type="Model.Cart" Role="Cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VAT">
+        <PropertyRef Name="VatID" />
+      </Principal>
+      <Dependent Role="Cart">
+        <PropertyRef Name="VatID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CartCourse_Cart">
+    <End Type="Model.Cart" Role="Cart" Multiplicity="1" />
+    <End Type="Model.CartCourse" Role="CartCourse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cart">
+        <PropertyRef Name="CartID" />
+      </Principal>
+      <Dependent Role="CartCourse">
+        <PropertyRef Name="CartID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

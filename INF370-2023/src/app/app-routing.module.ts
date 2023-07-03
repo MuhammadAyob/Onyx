@@ -109,6 +109,9 @@ import { ReadStudentsComponent } from './Administrator/Students/read-students/re
 import { StoreComponent } from './Student Portal/Store/store/store.component';
 import { ViewStructureComponent } from './Student Portal/view-course-structure/view-structure/view-structure.component';
 import { CartComponent } from './Student Portal/cart/cart/cart.component';
+import { PaymentSuccessComponent } from './Student Portal/payment-success/payment-success/payment-success.component';
+import { CancelPaymentComponent } from './Student Portal/cancel/cancel-payment/cancel-payment.component';
+import { StudentNotifyComponent } from './Student Portal/notify/student-notify/student-notify.component';
 
 
 const routes: Routes = [
@@ -397,6 +400,20 @@ canActivate:[AuthGuardGuard,AdminGuard]
   path:'admin/maintain-terms',
   component:MaintainTermsComponent,
   canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+path:'student/payment-success',
+component:PaymentSuccessComponent
+},
+
+{
+path:'student/cancel',
+component:CancelPaymentComponent
+},
+
+{path:'student/notify',
+component:StudentNotifyComponent
 },
 
 {

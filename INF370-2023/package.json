@@ -30,6 +30,7 @@
     "ngx-star-rating": "^2.1.0",
     "ngx-toastr": "^15.2.0",
     "rxjs": "~7.5.0",
+    "ts-md5": "^1.3.1",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {

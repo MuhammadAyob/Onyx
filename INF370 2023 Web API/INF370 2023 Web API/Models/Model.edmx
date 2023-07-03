@@ -53,6 +53,8 @@
           <Property Name="StudentID" Type="int" Nullable="false" />
           <Property Name="Total" Type="float" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="PurchaseNumber" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="VatID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="CartCourse">
           <Key>
@@ -290,16 +292,6 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
           <Property Name="return_url" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="cancel_url" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="Payment">
-          <Key>
-            <PropertyRef Name="PaymentID" />
-          </Key>
-          <Property Name="PaymentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CartID" Type="int" Nullable="false" />
-          <Property Name="Amount" Type="float" Nullable="false" />
-          <Property Name="pf_payment_id" Type="int" Nullable="false" />
-          <Property Name="payment_status" Type="varchar" MaxLength="50" Nullable="false" />
-        </EntityType>
         <EntityType Name="Qualification">
           <Key>
             <PropertyRef Name="QualificationID" />
@@ -487,6 +479,18 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
             </Principal>
             <Dependent Role="Cart">
               <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cart_VAT">
+          <End Role="VAT" Type="Self.VAT" Multiplicity="1" />
+          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VAT">
+              <PropertyRef Name="VatID" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="VatID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -778,18 +782,6 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Payment_Cart">
-          <End Role="Cart" Type="Self.Cart" Multiplicity="1" />
-          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cart">
-              <PropertyRef Name="CartID" />
-            </Principal>
-            <Dependent Role="Payment">
-              <PropertyRef Name="CartID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Section_Course">
           <End Role="Course" Type="Self.Course" Multiplicity="1" />
           <End Role="Section" Type="Self.Section" Multiplicity="*" />
@@ -940,7 +932,6 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
           <EntitySet Name="MaintenanceType" EntityType="Self.MaintenanceType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MaxSlotsPerDay" EntityType="Self.MaxSlotsPerDay" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OTPTimer" EntityType="Self.OTPTimer" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Qualification" EntityType="Self.Qualification" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Section" EntityType="Self.Section" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ShortList" EntityType="Self.ShortList" Schema="dbo" store:Type="Tables" />
@@ -982,6 +973,10 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
           </AssociationSet>
           <AssociationSet Name="FK_Cart_Student" Association="Self.FK_Cart_Student">
             <End Role="Student" EntitySet="Student" />
+            <End Role="Cart" EntitySet="Cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cart_VAT" Association="Self.FK_Cart_VAT">
+            <End Role="VAT" EntitySet="VAT" />
             <End Role="Cart" EntitySet="Cart" />
           </AssociationSet>
           <AssociationSet Name="FK_CartCourse_Cart" Association="Self.FK_CartCourse_Cart">
@@ -1080,10 +1075,6 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
             <End Role="User" EntitySet="User" />
             <End Role="Maintenance" EntitySet="Maintenance" />
           </AssociationSet>
-          <AssociationSet Name="FK_Payment_Cart" Association="Self.FK_Payment_Cart">
-            <End Role="Cart" EntitySet="Cart" />
-            <End Role="Payment" EntitySet="Payment" />
-          </AssociationSet>
           <AssociationSet Name="FK_Section_Course" Association="Self.FK_Section_Course">
             <End Role="Course" EntitySet="Course" />
             <End Role="Section" EntitySet="Section" />
@@ -1153,18 +1144,6 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
           <Property Name="AuditName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="User" Relationship="Self.FK_AuditLog_User" FromRole="AuditLog" ToRole="User" />
         </EntityType>
-        <EntityType Name="Cart">
-          <Key>
-            <PropertyRef Name="CartID" />
-          </Key>
-          <Property Name="CartID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="StudentID" Type="Int32" Nullable="false" />
-          <Property Name="Total" Type="Double" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Student" Relationship="Self.FK_Cart_Student" FromRole="Cart" ToRole="Student" />
-          <NavigationProperty Name="CartCourses" Relationship="Self.FK_CartCourse_Cart" FromRole="Cart" ToRole="CartCourse" />
-          <NavigationProperty Name="Payments" Relationship="Self.FK_Payment_Cart" FromRole="Cart" ToRole="Payment" />
-        </EntityType>
         <EntityType Name="CartCourse">
           <Key>
             <PropertyRef Name="CartLineID" />
@@ -1173,8 +1152,8 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
           <Property Name="CartID" Type="Int32" Nullable="false" />
           <Property Name="CourseID" Type="Int32" Nullable="false" />
           <Property Name="PriceAtTimeOfPurchase" Type="Double" Nullable="false" />
-          <NavigationProperty Name="Cart" Relationship="Self.FK_CartCourse_Cart" FromRole="CartCourse" ToRole="Cart" />
           <NavigationProperty Name="Course" Relationship="Self.FK_CartCourse_Course" FromRole="CartCourse" ToRole="Course" />
+          <NavigationProperty Name="Cart" Relationship="Model.FK_CartCourse_Cart" FromRole="CartCourse" ToRole="Cart" />
         </EntityType>
         <EntityType Name="Contact">
           <Key>
@@ -1375,17 +1354,6 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
           <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Maintenances" Relationship="Self.FK_Maintenance_MaintenanceType" FromRole="MaintenanceType" ToRole="Maintenance" />
         </EntityType>
-        <EntityType Name="Payment">
-          <Key>
-            <PropertyRef Name="PaymentID" />
-          </Key>
-          <Property Name="PaymentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CartID" Type="Int32" Nullable="false" />
-          <Property Name="Amount" Type="Double" Nullable="false" />
-          <Property Name="pf_payment_id" Type="Int32" Nullable="false" />
-          <Property Name="payment_status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Cart" Relationship="Self.FK_Payment_Cart" FromRole="Payment" ToRole="Cart" />
-        </EntityType>
         <EntityType Name="Qualification">
           <Key>
             <PropertyRef Name="QualificationID" />
@@ -1447,11 +1415,11 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
           <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Deleted" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Carts" Relationship="Self.FK_Cart_Student" FromRole="Student" ToRole="Cart" />
           <NavigationProperty Name="Title" Relationship="Self.FK_Student_Title" FromRole="Student" ToRole="Title" />
           <NavigationProperty Name="User" Relationship="Self.FK_Student_User" FromRole="Student" ToRole="User" />
           <NavigationProperty Name="StudentCourses" Relationship="Self.FK_StudentCourse_Student" FromRole="Student" ToRole="StudentCourse" />
           <NavigationProperty Name="CourseRatings" Relationship="Model.FK_CourseRating_Student" FromRole="Student" ToRole="CourseRating" />
+          <NavigationProperty Name="Carts" Relationship="Model.FK_Cart_Student" FromRole="Student" ToRole="Cart" />
         </EntityType>
         <EntityType Name="StudentCourse">
           <Key>
@@ -1527,6 +1495,7 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
           <Property Name="VatID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="VatDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="VatAmount" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Carts" Relationship="Model.FK_Cart_VAT" FromRole="VAT" ToRole="Cart" />
         </EntityType>
         <EntityType Name="WorkType">
           <Key>
@@ -1569,42 +1538,6 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
             </Principal>
             <Dependent Role="AuditLog">
               <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Cart_Student">
-          <End Role="Student" Type="Self.Student" Multiplicity="1" />
-          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Student">
-              <PropertyRef Name="StudentID" />
-            </Principal>
-            <Dependent Role="Cart">
-              <PropertyRef Name="StudentID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CartCourse_Cart">
-          <End Role="Cart" Type="Self.Cart" Multiplicity="1" />
-          <End Role="CartCourse" Type="Self.CartCourse" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cart">
-              <PropertyRef Name="CartID" />
-            </Principal>
-            <Dependent Role="CartCourse">
-              <PropertyRef Name="CartID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Payment_Cart">
-          <End Role="Cart" Type="Self.Cart" Multiplicity="1" />
-          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cart">
-              <PropertyRef Name="CartID" />
-            </Principal>
-            <Dependent Role="Payment">
-              <PropertyRef Name="CartID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1935,7 +1868,6 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Applications" EntityType="Self.Application" />
           <EntitySet Name="AuditLogs" EntityType="Self.AuditLog" />
-          <EntitySet Name="Carts" EntityType="Self.Cart" />
           <EntitySet Name="CartCourses" EntityType="Self.CartCourse" />
           <EntitySet Name="Contacts" EntityType="Self.Contact" />
           <EntitySet Name="Courses" EntityType="Self.Course" />
@@ -1955,7 +1887,6 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
           <EntitySet Name="MaintenancePriorities" EntityType="Self.MaintenancePriority" />
           <EntitySet Name="MaintenanceStatus" EntityType="Self.MaintenanceStatu" />
           <EntitySet Name="MaintenanceTypes" EntityType="Self.MaintenanceType" />
-          <EntitySet Name="Payments" EntityType="Self.Payment" />
           <EntitySet Name="Qualifications" EntityType="Self.Qualification" />
           <EntitySet Name="Sections" EntityType="Self.Section" />
           <EntitySet Name="ShortLists" EntityType="Self.ShortList" />
@@ -1978,18 +1909,6 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
           <AssociationSet Name="FK_AuditLog_User" Association="Self.FK_AuditLog_User">
             <End Role="User" EntitySet="Users" />
             <End Role="AuditLog" EntitySet="AuditLogs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Cart_Student" Association="Self.FK_Cart_Student">
-            <End Role="Student" EntitySet="Students" />
-            <End Role="Cart" EntitySet="Carts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CartCourse_Cart" Association="Self.FK_CartCourse_Cart">
-            <End Role="Cart" EntitySet="Carts" />
-            <End Role="CartCourse" EntitySet="CartCourses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Payment_Cart" Association="Self.FK_Payment_Cart">
-            <End Role="Cart" EntitySet="Carts" />
-            <End Role="Payment" EntitySet="Payments" />
           </AssociationSet>
           <AssociationSet Name="FK_CartCourse_Course" Association="Self.FK_CartCourse_Course">
             <End Role="Course" EntitySet="Courses" />
@@ -2138,6 +2057,19 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
           <AssociationSet Name="FK_CourseRating_Student" Association="Model.FK_CourseRating_Student">
             <End Role="Student" EntitySet="Students" />
             <End Role="CourseRating" EntitySet="CourseRatings" />
+          </AssociationSet>
+          <EntitySet Name="Carts" EntityType="Model.Cart" />
+          <AssociationSet Name="FK_Cart_Student" Association="Model.FK_Cart_Student">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="Cart" EntitySet="Carts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cart_VAT" Association="Model.FK_Cart_VAT">
+            <End Role="VAT" EntitySet="VATs" />
+            <End Role="Cart" EntitySet="Carts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CartCourse_Cart" Association="Model.FK_CartCourse_Cart">
+            <End Role="Cart" EntitySet="Carts" />
+            <End Role="CartCourse" EntitySet="CartCourses" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="OTPTimer">
@@ -2320,6 +2252,56 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="CartID" />
+          </Key>
+          <Property Name="CartID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentID" Type="Int32" Nullable="false" />
+          <Property Name="Total" Type="Double" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PurchaseNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VatID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Student" Relationship="Model.FK_Cart_Student" FromRole="Cart" ToRole="Student" />
+          <NavigationProperty Name="VAT" Relationship="Model.FK_Cart_VAT" FromRole="Cart" ToRole="VAT" />
+          <NavigationProperty Name="CartCourses" Relationship="Model.FK_CartCourse_Cart" FromRole="Cart" ToRole="CartCourse" />
+        </EntityType>
+        <Association Name="FK_Cart_Student">
+          <End Type="Model.Student" Role="Student" Multiplicity="1" />
+          <End Type="Model.Cart" Role="Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cart_VAT">
+          <End Type="Model.VAT" Role="VAT" Multiplicity="1" />
+          <End Type="Model.Cart" Role="Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VAT">
+              <PropertyRef Name="VatID" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="VatID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CartCourse_Cart">
+          <End Type="Model.Cart" Role="Cart" Multiplicity="1" />
+          <End Type="Model.CartCourse" Role="CartCourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cart">
+              <PropertyRef Name="CartID" />
+            </Principal>
+            <Dependent Role="CartCourse">
+              <PropertyRef Name="CartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2344,16 +2326,6 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="AuditName" ColumnName="AuditName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Carts">
-            <EntityTypeMapping TypeName="Model.Cart">
-              <MappingFragment StoreEntitySet="Cart">
-                <ScalarProperty Name="CartID" ColumnName="CartID" />
-                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2547,17 +2519,6 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
               <MappingFragment StoreEntitySet="MaintenanceType">
                 <ScalarProperty Name="MaintenanceTypeID" ColumnName="MaintenanceTypeID" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Payments">
-            <EntityTypeMapping TypeName="Model.Payment">
-              <MappingFragment StoreEntitySet="Payment">
-                <ScalarProperty Name="PaymentID" ColumnName="PaymentID" />
-                <ScalarProperty Name="CartID" ColumnName="CartID" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="pf_payment_id" ColumnName="pf_payment_id" />
-                <ScalarProperty Name="payment_status" ColumnName="payment_status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2789,6 +2750,18 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
                 <ScalarProperty Name="StudentID" ColumnName="StudentID" />
                 <ScalarProperty Name="CourseID" ColumnName="CourseID" />
                 <ScalarProperty Name="RatingID" ColumnName="RatingID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Carts">
+            <EntityTypeMapping TypeName="Model.Cart">
+              <MappingFragment StoreEntitySet="Cart">
+                <ScalarProperty Name="VatID" ColumnName="VatID" />
+                <ScalarProperty Name="PurchaseNumber" ColumnName="PurchaseNumber" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="CartID" ColumnName="CartID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

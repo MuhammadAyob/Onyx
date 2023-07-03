@@ -130,6 +130,9 @@ import { ReadStudentsComponent } from './Administrator/Students/read-students/re
 import { StoreComponent } from './Student Portal/Store/store/store.component';
 import { ViewStructureComponent } from './Student Portal/view-course-structure/view-structure/view-structure.component';
 import { CartComponent } from './Student Portal/cart/cart/cart.component';
+import { PaymentSuccessComponent } from './Student Portal/payment-success/payment-success/payment-success.component';
+import { CancelPaymentComponent } from './Student Portal/cancel/cancel-payment/cancel-payment.component';
+import { StudentNotifyComponent } from './Student Portal/notify/student-notify/student-notify.component';
 
 
 //import { CalendarDialogComponent } from './Dialog/calendar-dialog/calendar-dialog/calendar-dialog.component';
@@ -262,6 +265,9 @@ export function momentAdapterFactory() {
     StoreComponent,
     ViewStructureComponent,
     CartComponent,
+    PaymentSuccessComponent,
+    CancelPaymentComponent,
+    StudentNotifyComponent,
 
     
   ],
