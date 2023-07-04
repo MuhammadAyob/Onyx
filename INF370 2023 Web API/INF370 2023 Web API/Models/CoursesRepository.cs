@@ -535,5 +535,35 @@ namespace INF370_2023_Web_API.Models
             }
 
         }
+
+        public async Task<object> GetPersonalRatings(int id)
+        {
+            try
+            {
+                db.Configuration.ProxyCreationEnabled = false;
+                var ratings = await db.CourseRatings
+                    .Where(cr => cr.StudentID == id)
+                    .Join(db.Courses,
+            cr => cr.CourseID,
+            c => c.CourseID,
+            (cr, c) => new
+            {
+               RatingID = cr.RatingID,
+               Rating = cr.Rating,
+               Date = cr.Date.ToShortDateString(),
+               Comment = cr.Comment,
+               StudentID = cr.StudentID,
+               Name = c.Name
+            })
+        .ToListAsync();
+
+                return ratings;
+            }
+
+            catch (Exception)
+            {
+                return new { Status = 500, Message = "Internal server error, please try again" };
+            }
+        }
     }
 }

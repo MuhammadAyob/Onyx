@@ -64,5 +64,9 @@ GetRatings(id:number){
   return this.http.get(environment.WebAPI + 'GetRatings/' + id, this.httpOptions);
 }
 
+GetPersonalRatings(id:number){
+  return this.http.get(environment.WebAPI + 'GetPersonalRatings/' + id, this.httpOptions);
+}
+
 
 }

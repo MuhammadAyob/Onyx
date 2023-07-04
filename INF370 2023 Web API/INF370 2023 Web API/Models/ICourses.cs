@@ -33,6 +33,8 @@ namespace INF370_2023_Web_API.Models
 
         Task<object> GetRatings(int id);
 
+        Task<object> GetPersonalRatings(int id);
+
 
     }
 }

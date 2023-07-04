@@ -74,4 +74,14 @@ namespace INF370_2023_Web_API.ViewModel
         public int PayFastNumber { get; set; }
        
     }
+
+    public class CourseReview
+    {
+        public int RatingID { get; set; }
+        public int Rating { get; set; }
+        public DateTime Date { get; set; }
+        public string Comment { get; set; }
+        public int StudentID { get; set; }
+        public string Name { get; set; }
+    }
 }

@@ -135,6 +135,9 @@ import { CancelPaymentComponent } from './Student Portal/cancel/cancel-payment/c
 import { StudentNotifyComponent } from './Student Portal/notify/student-notify/student-notify.component';
 import { ReadInvoicesComponent } from './Student Portal/invoices/read-invoices/read-invoices/read-invoices.component';
 import { ViewInvoiceComponent } from './Student Portal/invoices/view-invoice/view-invoice/view-invoice.component';
+import { MaintainRatingComponent } from './Student Portal/ratings/maintain-rating/maintain-rating/maintain-rating.component';
+import { ReadRatingsComponent } from './Student Portal/ratings/read-ratings/read-ratings/read-ratings.component';
+import { AddRatingComponent } from './Student Portal/ratings/add-rating/add-rating/add-rating.component';
 
 
 //import { CalendarDialogComponent } from './Dialog/calendar-dialog/calendar-dialog/calendar-dialog.component';
@@ -272,6 +275,9 @@ export function momentAdapterFactory() {
     StudentNotifyComponent,
     ReadInvoicesComponent,
     ViewInvoiceComponent,
+    MaintainRatingComponent,
+    ReadRatingsComponent,
+    AddRatingComponent,
 
     
   ],

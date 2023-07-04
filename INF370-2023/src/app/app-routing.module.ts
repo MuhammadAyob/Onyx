@@ -114,6 +114,9 @@ import { CancelPaymentComponent } from './Student Portal/cancel/cancel-payment/c
 import { StudentNotifyComponent } from './Student Portal/notify/student-notify/student-notify.component';
 import { ReadInvoicesComponent } from './Student Portal/invoices/read-invoices/read-invoices/read-invoices.component';
 import { ViewInvoiceComponent } from './Student Portal/invoices/view-invoice/view-invoice/view-invoice.component';
+import { ReadRatingsComponent } from './Student Portal/ratings/read-ratings/read-ratings/read-ratings.component';
+import { MaintainRatingComponent } from './Student Portal/ratings/maintain-rating/maintain-rating/maintain-rating.component';
+import { AddRatingComponent } from './Student Portal/ratings/add-rating/add-rating/add-rating.component';
 
 
 const routes: Routes = [
@@ -446,6 +449,25 @@ path:'student/view-invoice',
 component:ViewInvoiceComponent,
 canActivate:[AuthGuardGuard,StudentGuard]
 },
+
+{
+path:'student/read-ratings',
+component:ReadRatingsComponent,
+canActivate:[AuthGuardGuard,StudentGuard]
+},
+
+{
+path:'student/add-rating',
+component:AddRatingComponent,
+canActivate:[AuthGuardGuard,StudentGuard]
+},
+
+{
+path:'student/maintain-rating',
+component:MaintainRatingComponent,
+canActivate:[AuthGuardGuard,StudentGuard]
+},
+
 
 // admin skill and skill type
 {

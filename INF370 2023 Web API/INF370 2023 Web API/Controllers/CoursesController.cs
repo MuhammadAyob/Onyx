@@ -145,5 +145,12 @@ namespace INF370_2023_Web_API.Controllers
         {
             return await _courseRepo.GetRatings(id);
         }
+
+        [HttpGet]
+        [Route("api/GetPersonalRatings/{id}")]
+        public async Task<object>GetPersonalRatings(int id)
+        {
+            return await _courseRepo.GetPersonalRatings(id);
+        }
     }
 }

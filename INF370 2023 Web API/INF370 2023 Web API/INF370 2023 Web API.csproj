@@ -232,6 +232,7 @@
     <Compile Include="Controllers\OTPTimerController.cs" />
     <Compile Include="Controllers\PaymentsController.cs" />
     <Compile Include="Controllers\QualificationsController.cs" />
+    <Compile Include="Controllers\RatingsController.cs" />
     <Compile Include="Controllers\SectionsController.cs" />
     <Compile Include="Controllers\ShortlistController.cs" />
     <Compile Include="Controllers\SkillsController.cs" />
@@ -331,6 +332,7 @@
     <Compile Include="Models\IOTPTimer.cs" />
     <Compile Include="Models\IPayments.cs" />
     <Compile Include="Models\IQualifications.cs" />
+    <Compile Include="Models\IRatings.cs" />
     <Compile Include="Models\ISections.cs" />
     <Compile Include="Models\IShortList.cs" />
     <Compile Include="Models\ISkills.cs" />
@@ -403,6 +405,7 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\QualificationsRepository.cs" />
+    <Compile Include="Models\RatingRepository.cs" />
     <Compile Include="Models\Section.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
