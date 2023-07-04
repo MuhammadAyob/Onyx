@@ -1,0 +1,111 @@
+<!-- Card Form for Input -->
+<div style="padding-left: 3em; padding-right: 3em; padding-top: 9em;height:100vh;background-image: url('../../assets/gradient.gif');background-repeat: no-repeat;background-size: 100% 25%;">
+
+    <div>
+      <mat-card class="matCard" style="border-radius: 34px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8), 0 1px 3px rgba(0, 0, 0, 0.8);">
+        <mat-card-header class="cardHeader" style="padding-bottom: 1%;text-align: center">
+          <mat-card-title-group style="margin:0 auto">
+            <mat-card-title style="font-weight: 500; "
+              >Digital Receipt: {{invoice.Date | date: "dd MMM yyyy"}}</mat-card-title
+            >
+          </mat-card-title-group>
+         
+        </mat-card-header>
+    
+        <mat-card-content class="matContent">
+            <div class="container">
+                <div>
+                    <div class="table-hover table-container mat-elevation-z8">
+                        <table mat-table matSort [dataSource]="invoice.Courses"  class="mat-elevation-z8" id="DeptTable">
+                   
+                            <!-- Course Column -->
+                          <ng-container matColumnDef="CourseID">
+                            <th mat-header-cell mat-sort-header *matHeaderCellDef style="color: #ffffff;" >Course ID</th>
+                            <td mat-cell *matCellDef="let course">
+                              {{ course.CourseID }}
+                            </td>
+                          </ng-container>
+
+                              <!-- Course Column -->
+                              <ng-container matColumnDef="Name">
+                                <th mat-header-cell mat-sort-header *matHeaderCellDef style="color: #ffffff;" >Name of Course Purchased</th>
+                                <td mat-cell *matCellDef="let course">
+                                  {{ course.CourseName }}
+                                </td>
+                              </ng-container>
+
+                            <!--  Column -->
+                            <ng-container matColumnDef="Price">
+                              <th mat-header-cell mat-sort-header *matHeaderCellDef style="color: #ffffff;" >Course Price</th>
+                              <td mat-cell *matCellDef="let course">
+                                R{{ course.PriceAtTimeOfPurchase }}
+                              </td>
+                            </ng-container>
+            
+                       
+            
+                        
+            
+                          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            
+                        </table>
+                        <br>
+                        <h1 style="margin-left:35%;color: #0e1a3c;"><b>Purchase: #{{invoice.PurchaseNumber}} Summary</b></h1>
+                        <br>
+                        <!-- VAT calculations and total -->
+                        <div class="vat-section" style="text-align: center;">
+                            <mat-list style="width: 70%; margin: 0 auto;">
+                              <mat-list-item>
+                                <div style="text-align: left; flex-grow: 1;">
+                                  <span style="font-size: 20px;"><b>VAT Exclusive:</b></span>
+                                </div>
+                                <div style="text-align: right;">
+                                  <span style="font-size: 24px;">R{{ getVatExclusive() }}</span>
+                                </div>
+                              </mat-list-item>
+                              <mat-divider></mat-divider>
+                              <mat-list-item>
+                                <div style="text-align: left; flex-grow: 1;">
+                                  <span style="font-size: 20px;"><b>VAT @ {{invoice.VatAmount}}%:</b></span>
+                                </div>
+                                <div style="text-align: right;">
+                                  <span style="font-size: 24px;">R{{ getVatAmount() }}</span>
+                                </div>
+                              </mat-list-item>
+                              <mat-divider></mat-divider>
+                              <mat-list-item>
+                                <div style="text-align: left; flex-grow: 1;">
+                                    <span style="font-size: 20px;"><b>Grand Total:</b></span>
+                                  </div>
+                                  <div style="text-align: right;">
+                                    <span style="font-size: 24px;">R{{ invoice.Total }}</span>
+                                  </div>
+                                <mat-divider></mat-divider>
+                              </mat-list-item>
+                            </mat-list>
+                          
+                          </div>
+                          
+                          <br>
+                          <div class="button-container">
+                            <button style=" 
+                            border: 2px solid rgb(0, 0, 0);
+                            border-radius: 50px;
+                            font-family: Montserrat;
+                            font-size: 16px;
+                            padding: 10px 25px 10px 25px;"
+                            id="cancel" class="btn" (click)="onBack()">Back</button>
+                             </div>
+                          <br>
+                          
+                      </div>
+                  
+                </div>
+          
+              </div>
+        </mat-card-content>
+        
+      </mat-card>
+    </div>
+    </div>

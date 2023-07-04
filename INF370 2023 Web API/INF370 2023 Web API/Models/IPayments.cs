@@ -11,5 +11,6 @@ namespace INF370_2023_Web_API.Models
     {
         Task<object> NewCart(CartDetails details);
         Task<object> NewPurchase(int id, dynamic cartObject);
+        Task<object> GetInvoices(int id);
     }
 }

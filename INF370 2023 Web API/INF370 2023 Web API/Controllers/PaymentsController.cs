@@ -49,5 +49,12 @@ namespace INF370_2023_Web_API.Controllers
                 return new { Status = 500, Message = "Internal server error, please try again" };
             }
         }
+
+        [HttpGet]
+        [Route("api/GetInvoices/{id}")]
+        public async Task<object>GetInvoices(int id)
+        {
+            return await _paymentRepo.GetInvoices(id);
+        }
     }
 }

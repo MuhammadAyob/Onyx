@@ -25,4 +25,8 @@ NewCart(details:any){
   return this.http.post(environment.WebAPI + 'NewCart', details, this.httpOptions);
 }
 
+GetInvoices(id:number){
+  return this.http.get(environment.WebAPI + 'GetInvoices/' + id, this.httpOptions);
+}
+
 }

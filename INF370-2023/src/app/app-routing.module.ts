@@ -112,6 +112,8 @@ import { CartComponent } from './Student Portal/cart/cart/cart.component';
 import { PaymentSuccessComponent } from './Student Portal/payment-success/payment-success/payment-success.component';
 import { CancelPaymentComponent } from './Student Portal/cancel/cancel-payment/cancel-payment.component';
 import { StudentNotifyComponent } from './Student Portal/notify/student-notify/student-notify.component';
+import { ReadInvoicesComponent } from './Student Portal/invoices/read-invoices/read-invoices/read-invoices.component';
+import { ViewInvoiceComponent } from './Student Portal/invoices/view-invoice/view-invoice/view-invoice.component';
 
 
 const routes: Routes = [
@@ -431,6 +433,18 @@ component:ViewStructureComponent,
   path:'student/view-cart',
   component:CartComponent,
   canActivate:[AuthGuardGuard,StudentGuard]
+},
+
+{
+path:'student/read-invoices',
+component:ReadInvoicesComponent,
+canActivate:[AuthGuardGuard,StudentGuard]
+},
+
+{
+path:'student/view-invoice',
+component:ViewInvoiceComponent,
+canActivate:[AuthGuardGuard,StudentGuard]
 },
 
 // admin skill and skill type

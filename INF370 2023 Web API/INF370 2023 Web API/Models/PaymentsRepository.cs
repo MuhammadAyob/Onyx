@@ -19,6 +19,61 @@ namespace INF370_2023_Web_API.Models
             this.db = database;
         }
 
+        public async Task<object> GetInvoices(int id)
+        {
+            try
+            {
+                db.Configuration.ProxyCreationEnabled = false;
+                var invoices = await db.Carts
+        .Where(cart => cart.StudentID == id)
+        .Join(db.CartCourses,
+            cart => cart.CartID,
+            cartCourse => cartCourse.CartID,
+            (cart, cartCourse) => new { Cart = cart, CartCourse = cartCourse })
+        .Join(db.Courses,
+            joinResult => joinResult.CartCourse.CourseID,
+            course => course.CourseID,
+            (joinResult, course) => new { joinResult.Cart, joinResult.CartCourse, Course = course })
+        .Join(db.VATs,
+            joinResult => joinResult.Cart.VatID,
+            vat => vat.VatID,
+            (joinResult, vat) => new { joinResult.Cart, joinResult.CartCourse, joinResult.Course, VAT = vat })
+        .GroupBy(joinResult => new
+        {
+            joinResult.Cart.CartID,
+            joinResult.Cart.PurchaseNumber,
+            joinResult.Cart.Total,
+            joinResult.Cart.VatID,
+            joinResult.Cart.Date,
+            joinResult.VAT.VatAmount
+        })
+        .Select(groupedResult => new
+        {
+            CartID = groupedResult.Key.CartID,
+            Date= groupedResult.Key.Date,
+            PurchaseNumber = groupedResult.Key.PurchaseNumber,
+            Total = groupedResult.Key.Total,
+            VatID = groupedResult.Key.VatID,
+            VatAmount = groupedResult.Key.VatAmount,
+            Courses = groupedResult.Select(item => new
+            {
+                CourseID = item.Course.CourseID,
+                CourseName = item.Course.Name,
+                PriceAtTimeOfPurchase = item.CartCourse.PriceAtTimeOfPurchase
+            })
+        })
+        .ToListAsync();
+
+                return invoices;
+
+
+            }
+            catch (Exception ex)
+            {
+                return ex.ToString();
+            }
+        }
+
         public async Task<object> NewCart(CartDetails details)
         {
             try
