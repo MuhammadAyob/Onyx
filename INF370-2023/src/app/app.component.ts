@@ -57,7 +57,8 @@ export class AppComponent {
           e.url === '/careers' ||
           e.url === '/applicant-apply' ||
           e.url === '/enter-otp' ||
-          e.url === '/reset-password'
+          e.url === '/reset-password' ||
+          e.url === '/contact'
         ) {
           this.flag = true;
         } else {

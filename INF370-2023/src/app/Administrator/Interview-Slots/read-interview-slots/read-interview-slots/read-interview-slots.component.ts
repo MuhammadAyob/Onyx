@@ -2,6 +2,7 @@ import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location, Time } from '@angular/common';
 import { Title } from '@angular/platform-browser';
+import { ScanDialogComponent } from 'src/app/Dialog/scan-dialog/scan-dialog/scan-dialog.component';
 import { ConfirmDialogComponent } from 'src/app/Dialog/confirm-dialog/confirm-dialog/confirm-dialog.component';
 import { InputDialogComponent } from 'src/app/Dialog/input-dialog/input-dialog/input-dialog.component';
 import { ExistsDialogComponent } from 'src/app/Dialog/exists-dialog/exists-dialog/exists-dialog.component';
@@ -57,6 +58,7 @@ export class ReadInterviewSlotsComponent implements OnInit {
     'Name',
     'Surname',
     'JobOpp',
+    'scan',
     'view',
     'edit',
     'delete',
@@ -152,6 +154,14 @@ export class ReadInterviewSlotsComponent implements OnInit {
       this.openAddInterviewDialog(f);
       console.log(f);
     }
+  }
+
+  scanQRCode(obj:any){
+    sessionStorage['Code'] = JSON.stringify(obj.Code);
+    const dialogReference = this.dialog.open(ScanDialogComponent,{
+      width: '50vw',
+      height:'70vh'
+    })
   }
 
   openPastDialog() {

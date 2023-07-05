@@ -171,7 +171,8 @@ namespace INF370_2023_Web_API.Models
                         ApplicationID = i.Application.ApplicationID,
                         Name = i.Applicant.Name,
                         Surname = i.Applicant.Surname,
-                        JobOpp = i.JobOpportunity.JobOppTitle
+                        JobOpp = i.JobOpportunity.JobOppTitle,
+                        Code = i.Interview.InterviewCode
                     })
                     .ToListAsync();
 

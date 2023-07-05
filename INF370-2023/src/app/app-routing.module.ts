@@ -118,6 +118,8 @@ import { ReadRatingsComponent } from './Student Portal/ratings/read-ratings/read
 import { MaintainRatingComponent } from './Student Portal/ratings/maintain-rating/maintain-rating/maintain-rating.component';
 import { AddRatingComponent } from './Student Portal/ratings/add-rating/add-rating/add-rating.component';
 import { SendAnnouncementComponent } from './Administrator/Courses/send-announcement/send-announcement/send-announcement.component';
+import { ScanCodeComponent } from './Administrator/Interview-Slots/scan-code/scan-code/scan-code.component';
+import { ContactUsComponent } from './contact/contact-us/contact-us.component';
 
 
 const routes: Routes = [
@@ -262,6 +264,11 @@ component:ViewDepartmentComponent
 {
 path:'careers',
 component:ViewJobOppsComponent
+},
+
+{
+path:'contact',
+component:ContactUsComponent
 },
 
 {
@@ -702,6 +709,11 @@ path:'admin/send-course-announcement',
 component:SendAnnouncementComponent,
 canActivate:[AuthGuardGuard,AdminGuard]
 
+},
+
+{
+path:'admin/scan-code',
+component:ScanCodeComponent
 },
 
 {

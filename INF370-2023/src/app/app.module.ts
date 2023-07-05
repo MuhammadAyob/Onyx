@@ -139,7 +139,10 @@ import { MaintainRatingComponent } from './Student Portal/ratings/maintain-ratin
 import { ReadRatingsComponent } from './Student Portal/ratings/read-ratings/read-ratings/read-ratings.component';
 import { AddRatingComponent } from './Student Portal/ratings/add-rating/add-rating/add-rating.component';
 import { SendAnnouncementComponent } from './Administrator/Courses/send-announcement/send-announcement/send-announcement.component';
-
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
+import { ScanCodeComponent } from './Administrator/Interview-Slots/scan-code/scan-code/scan-code.component';
+import { ScanDialogComponent } from './Dialog/scan-dialog/scan-dialog/scan-dialog.component';
+import { ContactUsComponent } from './contact/contact-us/contact-us.component';
 
 //import { CalendarDialogComponent } from './Dialog/calendar-dialog/calendar-dialog/calendar-dialog.component';
 //import { ServiceWorkerModule } from '@angular/service-worker';
@@ -280,11 +283,15 @@ export function momentAdapterFactory() {
     ReadRatingsComponent,
     AddRatingComponent,
     SendAnnouncementComponent,
+    ScanCodeComponent,
+    ScanDialogComponent,
+    ContactUsComponent,
 
     
   ],
   imports: [
     BrowserModule,
+    ZXingScannerModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,

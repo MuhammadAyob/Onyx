@@ -83,6 +83,19 @@
                 </td>
               </ng-container>
 
+                 <!-- View Column -->
+                 <ng-container matColumnDef="scan">
+                  <th mat-header-cell *matHeaderCellDef style="text-align: center; color: #ffffff;">
+                    Scan QR Code
+                  </th>
+                  <td mat-cell *matCellDef="let slot" style="text-align: center;">
+                    <button type="button" class="btn btn-default btn-lg" style="
+                    background-color:transparent;border-style: none;" (click)="scanQRCode(slot)">
+                      <mat-icon aria-hidden="false" aria-label="View Department">security</mat-icon>
+                    </button>
+                  </td>
+                </ng-container>
+
               <!-- View Column -->
               <ng-container matColumnDef="view">
                 <th mat-header-cell *matHeaderCellDef style="text-align: center; color: #ffffff;">
