@@ -68,5 +68,12 @@ GetPersonalRatings(id:number){
   return this.http.get(environment.WebAPI + 'GetPersonalRatings/' + id, this.httpOptions);
 }
 
+SendContactQuery(obj:any){
+  return this.http.post(environment.WebAPI + 'SendContactQuery', obj, this.httpOptions);
+}
+
+SendAnnouncement(obj:any){
+  return this.http.post(environment.WebAPI + 'SendAnnouncement', obj , this.httpOptions);
+}
 
 }

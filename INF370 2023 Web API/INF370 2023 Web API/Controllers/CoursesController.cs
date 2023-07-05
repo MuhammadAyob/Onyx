@@ -152,5 +152,19 @@ namespace INF370_2023_Web_API.Controllers
         {
             return await _courseRepo.GetPersonalRatings(id);
         }
+
+        [HttpPost]
+        [Route("api/SendContactQuery")]
+        public async Task <object> SendContactQuery(dynamic body)
+        {
+            return await _courseRepo.SendContactQuery(body);
+        }
+
+        [HttpPost]
+        [Route("api/SendAnnouncement")]
+        public async Task<object> SendAnnouncement(Announcement announcement)
+        {
+            return await _courseRepo.SendAnnouncement(announcement);
+        }
     }
 }

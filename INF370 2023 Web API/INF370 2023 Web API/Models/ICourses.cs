@@ -35,6 +35,10 @@ namespace INF370_2023_Web_API.Models
 
         Task<object> GetPersonalRatings(int id);
 
+        Task<object> SendAnnouncement(Announcement announcement);
+
+        Task<object> SendContactQuery(dynamic body);
+
 
     }
 }

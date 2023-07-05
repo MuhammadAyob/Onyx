@@ -56,7 +56,8 @@ constructor(
   
 ngOnInit(): void {
 this.StudentID = sessionStorage.getItem('StudentID');
-console.log('getting');
+console.log(this.StudentID);
+this.refreshList();
 }
 
 ngAfterViewInit(){
@@ -82,6 +83,7 @@ public doFilter = (event: Event) => {
 
 refreshList() {
   this.service.GetPersonalRatings(this.StudentID).subscribe((result) => {
+    console.log(result);
     this.dataSource.data = result as any[];
   });
 }

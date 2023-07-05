@@ -6,6 +6,8 @@ using System.Data.Entity.Validation;
 using System.Diagnostics;
 using System.Dynamic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -550,7 +552,7 @@ namespace INF370_2023_Web_API.Models
             {
                RatingID = cr.RatingID,
                Rating = cr.Rating,
-               Date = cr.Date.ToShortDateString(),
+               Date = cr.Date,
                Comment = cr.Comment,
                StudentID = cr.StudentID,
                Name = c.Name
@@ -563,6 +565,122 @@ namespace INF370_2023_Web_API.Models
             catch (Exception)
             {
                 return new { Status = 500, Message = "Internal server error, please try again" };
+            }
+        }
+
+        public async Task<object> SendAnnouncement(Announcement announcement)
+        {
+            try
+            {
+                var studentEmails = await db.StudentCourses
+                    .Where(sc => sc.CourseID == announcement.CourseID)
+                    .Select(sc => sc.Student.Email)
+                    .ToListAsync();
+
+                if (studentEmails.Count == 0)
+                {
+                    return new { Status = 404, Message = "No students enrolled in this course" };
+                }
+                var course = await db.Courses.Where(x => x.CourseID == announcement.CourseID).FirstOrDefaultAsync();
+                string name = course.Name;
+                await SendCourseAnnouncement(studentEmails, announcement.Message, name);
+
+                return new { Status = 200, Message = "Announcement sent" };
+            }
+
+            catch (Exception ex)
+            {
+                return ex.ToString();
+            }
+        }
+
+        private async Task SendCourseAnnouncement(IEnumerable<string> emails, string messageBody, string name)
+        {
+            var fromEmailAccount = "dseiqueries@gmail.com";
+            var fromEmailAccountPassword = "epqshwdnwmokortk";
+
+            var fromAddress = new MailAddress(fromEmailAccount);
+            var subject = "Course Announcement:" + " " + name;
+            var message = messageBody;
+
+            using (var smtp = new SmtpClient("smtp.gmail.com", 587))
+            {
+                smtp.EnableSsl = true;
+                smtp.UseDefaultCredentials = false;
+                smtp.Credentials = new NetworkCredential(fromEmailAccount, fromEmailAccountPassword);
+
+                using (var compiledMessage = new MailMessage())
+                {
+                    compiledMessage.From = fromAddress;
+                    compiledMessage.Subject = subject;
+                    compiledMessage.Body = message;
+                    compiledMessage.IsBodyHtml = true;
+
+                    foreach (var email in emails)
+                    {
+                        compiledMessage.Bcc.Add(email);
+                    }
+
+                    await smtp.SendMailAsync(compiledMessage);
+                }
+            }
+        }
+
+        private async Task SendContact(dynamic body)
+        {
+            var fromEmailAccount = "dseiqueries@gmail.com";
+            var fromEmailAccountPassword = "epqshwdnwmokortk";
+
+            var fromAddress = new MailAddress(fromEmailAccount);
+            var toAddress = new MailAddress(fromEmailAccount);
+
+            var subject = "New Contact Query";
+            var message = "Name:" + " " + body.Name +
+                    "<br> Email: " + " " + body.Email +
+                    "<br><br> Message:" + " " + body.Query;
+;
+
+            using (var compiledMessage = new MailMessage(fromAddress, toAddress))
+            {
+                compiledMessage.Subject = subject;
+                compiledMessage.Body = string.Format(message);
+                compiledMessage.IsBodyHtml = true;
+
+
+                using (var smtp = new SmtpClient())
+                {
+                    smtp.Host = "smtp.gmail.com"; // for example: smtp.gmail.com
+                    smtp.Port = 587;
+                    smtp.EnableSsl = true;
+                    smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                    smtp.UseDefaultCredentials = false;
+                    smtp.Credentials = new NetworkCredential(fromEmailAccount, fromEmailAccountPassword); // your own provided email and password
+                    await smtp.SendMailAsync(compiledMessage);
+                }
+            }
+        }
+
+        public async Task<object> SendContactQuery(dynamic body)
+        {
+            try
+            {
+                Contact contact = new Contact();
+                contact.ContactID = 0;
+                contact.Email = body.Email;
+                contact.Name = body.Name;
+                contact.Query = body.Query;
+
+                db.Contacts.Add(contact);
+                await db.SaveChangesAsync();
+
+                await SendContact(body);
+
+                return new { Status = 200, Message = "Contact sent" };
+            }
+
+            catch (Exception ex)
+            {
+                return ex.ToString();
             }
         }
     }

@@ -28,6 +28,7 @@ displayedColumns: string[] = [
   'CourseName',
   'Price',
   'Active',
+  'send',
   'view'
 ];
 public dataSource = new MatTableDataSource<any>();
@@ -91,6 +92,10 @@ addNew(): void {
   this.router.navigate(['admin/add-course']);
 }
   
+onSend(obj:any){
+  sessionStorage['Course'] = JSON.stringify(obj);
+  this.router.navigate(['admin/send-course-announcement']);
+}
   
 
 

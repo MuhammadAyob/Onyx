@@ -117,6 +117,7 @@ import { ViewInvoiceComponent } from './Student Portal/invoices/view-invoice/vie
 import { ReadRatingsComponent } from './Student Portal/ratings/read-ratings/read-ratings/read-ratings.component';
 import { MaintainRatingComponent } from './Student Portal/ratings/maintain-rating/maintain-rating/maintain-rating.component';
 import { AddRatingComponent } from './Student Portal/ratings/add-rating/add-rating/add-rating.component';
+import { SendAnnouncementComponent } from './Administrator/Courses/send-announcement/send-announcement/send-announcement.component';
 
 
 const routes: Routes = [
@@ -696,6 +697,12 @@ component:ViewLessonComponent
 },
 
 // Courses admin
+{
+path:'admin/send-course-announcement',
+component:SendAnnouncementComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+
+},
 
 {
 path:'admin/add-course',

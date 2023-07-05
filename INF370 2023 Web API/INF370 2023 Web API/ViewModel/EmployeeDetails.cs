@@ -84,4 +84,10 @@ namespace INF370_2023_Web_API.ViewModel
         public int StudentID { get; set; }
         public string Name { get; set; }
     }
+
+    public class Announcement
+    {
+        public int CourseID { get; set; }
+        public string Message { get; set; }
+    }
 }
