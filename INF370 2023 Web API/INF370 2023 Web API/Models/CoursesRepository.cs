@@ -119,7 +119,9 @@ namespace INF370_2023_Web_API.Models
                     {
                         Name = z.Employee.Name,
                         Surname = z.Employee.Surname,
-                        Email = z.Employee.Email
+                        Email = z.Employee.Email,
+                        Image = z.Employee.Image,
+                        Biography = z.Employee.Biography
                     }).ToListAsync();
 
                 return obj;
@@ -681,6 +683,91 @@ namespace INF370_2023_Web_API.Models
             catch (Exception ex)
             {
                 return ex.ToString();
+            }
+        }
+
+        public async Task<object> GetCourseView(int id)
+        {
+            
+                try
+                {
+                    var courseDetails = await db.Courses.Where(c => c.CourseID == id)
+                        .Select(c => new
+                        {
+                            CourseID = c.CourseID,
+                            CourseName = c.Name,
+                            Sections = c.Sections.Select(s => new
+                            {
+                                SectionID = s.SectionID,
+                                SectionName = s.SectionName,
+                                SectionDescription = s.SectionDescription,
+                                Lessons = s.Lessons.Select(l => new
+                                {
+                                    LessonID = l.LessonID,
+                                    LessonName = l.LessonName,
+                                    LessonDescription = l.LessonDescription,
+                                    VideoID =l.VideoID,
+                                    LessonResources = l.LessonResources.Select(r => new
+                                    {
+                                        ResourceID = r.ResourceID,
+                                        ResourceName = r.ResourceName,
+                                        ResourceFile = r.ResourceFile
+                                    })
+                                })
+                            })
+                        })
+                        .FirstOrDefaultAsync();
+
+                    return courseDetails;
+                }
+                catch (Exception)
+                {
+                    return new { Status = 500, Message = "Internal server error, please try again" };
+                }
+            
+
+        }
+
+        public async Task<object> GetEnrolledCourses(int id)
+        {
+            try
+            {
+                
+
+                var enrolledCourses = await db.StudentCourses
+                    .Where(sc => sc.StudentID == id)
+                    .Join(db.Courses,
+                        sc => sc.CourseID,
+                        c => c.CourseID,
+                        (sc, c) => new
+                        {
+                            CourseID = c.CourseID,
+                            Name = c.Name,
+                            Image = c.Image,
+                            Description = c.Description,
+                            FirstLesson = c.Sections
+                                .SelectMany(s => s.Lessons)
+                                .OrderBy(l => l.LessonID)
+                                .FirstOrDefault()
+                        })
+                    .Select(ec => new
+                    {
+                        ec.CourseID,
+                        ec.Name,
+                        ec.Image,
+                        ec.Description,
+                        LessonName = ec.FirstLesson.LessonName,
+                        VideoID = ec.FirstLesson.VideoID
+                    })
+                    .ToListAsync();
+
+                return enrolledCourses;
+
+            }
+
+            catch (Exception)
+            {
+                return new { Status = 500, Message = "Internal server error, please try again" };
             }
         }
     }

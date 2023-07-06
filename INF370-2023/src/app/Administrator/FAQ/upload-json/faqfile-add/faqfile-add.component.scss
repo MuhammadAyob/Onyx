@@ -29,7 +29,14 @@
       
     }
     
+    ::ng-deep .mat-tab-header{
+      margin:0 auto;
+    }
+  
     
+    ::ng-deep mat-tab-group .mat-tab-label{
+      color:#0e1a3c;
+    }
     
     ::ng-deep .mat-form-field-outline {
       border-color: white;
@@ -49,17 +56,17 @@
       
     }
     
-    .cardHeader{
-      background: linear-gradient( #0e1a3c, #b0c7fc);
-      background-size: 400% 400%;
-     // animation: AnimationName 30s ease infinite;
-      padding-top: 2%;
-      color: white;
-      width: 100%;
-      border-top-left-radius: 34px;
-      border-top-right-radius: 34px;
-      margin-bottom: 0px;
-    }
+    .cardHeader {
+      background: #920f4c;
+        color: white;
+        padding-top: 2%;
+        width: 100%;
+        border-radius: 20px;
+      
+        .mat-icon {
+          padding-right: 17%;
+        }
+      }
     
     ::ng-deep mat-icon {
      background-color: transparent;
@@ -155,4 +162,55 @@
       box-shadow: none;
     }
     
-    
+    .btn
+  {
+      border: 2px solid rgb(0, 0, 0);
+      border-radius: 50px;
+      
+      font-family: MontserratMedium;
+      font-size: 16px;
+      color: white;
+      padding: 10px 25px 10px 25px;
+  }
+  
+  .btn:hover
+  {
+      background-color: white;
+      color: #00efd1;
+      transition-duration: 500ms;
+  }
+  
+  #cancel
+  {
+      margin-left: 10px;
+      font-family: Montserrat;
+      background-color: #920f4c;
+  }
+  
+  
+  
+  #cancel:hover{
+      color: red;
+      background-color: white;
+  }
+  
+  #confirm
+  {
+      margin-right: 10px;
+      float: right;
+      font-family: Montserrat;
+      background-color:  #19274b;;
+  }
+  
+  #confirm:hover
+  {
+  color: #19274b;
+  background-color: white;
+  }
+  
+  .button-container
+  {
+      margin-top: 20px;
+      width: 100%;
+      
+  }

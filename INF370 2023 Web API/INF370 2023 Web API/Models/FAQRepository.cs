@@ -106,5 +106,39 @@ namespace INF370_2023_Web_API.Models
                 return new { Status = 500, Message = "Internal server error, please try again" };
             }
         }
+
+        public async Task<object> OverrideFAQs(IEnumerable<FAQ> faqs)
+        {
+            using (var transaction = db.Database.BeginTransaction())
+            {
+                try
+                {
+                    var count = await db.FAQs.CountAsync();
+                    if (count > 0)
+                    {
+                        // Clear existing FAQs
+                        db.FAQs.RemoveRange(db.FAQs);
+                    }
+
+                    // Add new FAQs from the faqs array
+                    db.FAQs.AddRange(faqs);
+
+                    await db.SaveChangesAsync();
+
+                    // Commit the transaction if all operations succeed
+                     transaction.Commit();
+                    return new { Status = 200, Message = "FAQs added" };
+                }
+                catch (Exception ex)
+                {
+                    // Handle any database update errors
+                     transaction.Rollback();
+                    return ex.ToString();
+                }
+            }
+
+           
+        }
+
     }
 }

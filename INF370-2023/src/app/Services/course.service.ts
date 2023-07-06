@@ -76,4 +76,12 @@ SendAnnouncement(obj:any){
   return this.http.post(environment.WebAPI + 'SendAnnouncement', obj , this.httpOptions);
 }
 
+GetCourseView(id:number){
+return this.http.get(environment.WebAPI + 'GetCourseView/' + id, this.httpOptions);
+}
+
+GetEnrolledCourses(id:number){
+  return this.http.get(environment.WebAPI + 'GetEnrolledCourses/' + id, this.httpOptions);
+}
+
 }

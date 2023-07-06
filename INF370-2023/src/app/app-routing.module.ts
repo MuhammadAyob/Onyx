@@ -120,6 +120,8 @@ import { AddRatingComponent } from './Student Portal/ratings/add-rating/add-rati
 import { SendAnnouncementComponent } from './Administrator/Courses/send-announcement/send-announcement/send-announcement.component';
 import { ScanCodeComponent } from './Administrator/Interview-Slots/scan-code/scan-code/scan-code.component';
 import { ContactUsComponent } from './contact/contact-us/contact-us.component';
+import { FaqfileAddComponent } from './Administrator/FAQ/upload-json/faqfile-add/faqfile-add.component';
+import { ViewCourseContentComponent } from './Student Portal/view-content/view-course-content/view-course-content.component';
 
 
 const routes: Routes = [
@@ -269,6 +271,11 @@ component:ViewJobOppsComponent
 {
 path:'contact',
 component:ContactUsComponent
+},
+
+{
+path:'admin/override-faqs',
+component:FaqfileAddComponent,
 },
 
 {
@@ -790,8 +797,15 @@ canActivate:[AuthGuardGuard,EmployeeGuard]
 },
 
 {
-  path:'student/view-courses',
-  component:ViewAllCoursesComponent
+path:'student/view-course-content',
+component:ViewCourseContentComponent,
+//canActivate:[AuthGuardGuard,StudentGuard]
+},
+
+{
+  path:'student/view-enrolled-courses',
+  component:ViewAllCoursesComponent,
+  canActivate:[AuthGuardGuard,StudentGuard]
 },
 //Login and Register
 {

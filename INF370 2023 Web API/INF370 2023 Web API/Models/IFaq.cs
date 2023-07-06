@@ -16,5 +16,7 @@ namespace INF370_2023_Web_API.Models
         Task<object> DeleteFAQ(int id);
 
         Task<object> GetFAQs();
+
+        Task<object> OverrideFAQs(IEnumerable<FAQ> faqs);
     }
 }

@@ -1,0 +1,184 @@
+
+<div style="padding-left: 3em; padding-right: 3em; padding-top: 9em;height:100vh;background-image: url('../../assets/gradient.gif');background-repeat: no-repeat;background-size: 100% 25%;">
+    <mat-card class="matCard">
+      <mat-tab-group>
+        <mat-tab label="Course Content" class="applicant" style="color: #0e1a3c;">
+          <br>
+          <mat-card-header class="cardHeader" style="padding-bottom: 1%;text-align: center">
+            <mat-card-title-group style="margin: 0 auto;">
+              <mat-card-title style="font-weight: 500">Current Lesson -> {{LessonName}}</mat-card-title>
+            </mat-card-title-group>
+    
+          
+          </mat-card-header>
+  
+          <mat-card-content class="matContent">
+              <!--Image-->
+              <br>
+              <br>
+              <!--Image-->
+              <h1 style="margin-left:43.5%;color: #0e1a3c; margin-bottom: -70px;"><b>Lesson Video</b></h1>
+              <br>
+             
+              <div class='embed-container'>
+                <iframe [src]="VideoID | VimeoUrl" frameborder='0' webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+              </div>
+              <br>
+              <br>
+            
+            <!--Project Details-->
+            <form>
+                <div class="container">
+                    <mat-accordion class="accordion">
+                      <mat-expansion-panel class="shadow-panel" *ngFor="let section of courseDetails?.Sections">
+                        <mat-expansion-panel-header>
+                          <mat-panel-title class="title center-align">
+                            <b><u>{{ section.SectionName }}</u></b>
+                          </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <mat-panel-description class="desc center-align">
+                          {{ section.SectionDescription }}
+                        </mat-panel-description>
+                        <h2 class="lessons-header">Hover over and click on a lesson name to switch the player to the desired content</h2>
+                        <div class="lessons-container">
+                          <div class="lesson-card" [class.active]="lesson.LessonID === activeLessonId" *ngFor="let lesson of section.Lessons">
+                            <mat-card>
+                              <mat-card-content>
+                                <div class="lesson-info">
+                                  <div class="lesson-name">
+                                   <p (click)="changeVideo(lesson)">{{ lesson.LessonName }}</p> 
+                                  </div>
+                                  <p class="lesson-description">{{ lesson.LessonDescription }}</p>
+                                </div>
+                                <div class="lesson-resources" *ngIf="lesson.LessonResources?.length">
+                                  <h4>Lesson Resources:</h4>
+                                  <ul>
+                                    <li *ngFor="let resource of lesson.LessonResources">
+                                      <div class="resource">
+                                        <span>{{ resource.ResourceName }}</span>
+                                        <button (click)="downloadResource(resource)" mat-icon-button class="download-button" matTooltip="Download">
+                                          <mat-icon>cloud_upload</mat-icon>
+                                        </button>
+                                      </div>
+                                    </li>
+                                  </ul>
+                                </div>
+                                <div class="no-resources" *ngIf="!lesson.LessonResources || lesson.LessonResources.length === 0">
+                                  No lesson resources attached.
+                                </div>
+                              </mat-card-content>
+                            </mat-card>
+                            <div class="lesson-divider"></div>
+                          </div>
+                        </div>
+                      </mat-expansion-panel>
+                    </mat-accordion>
+                  </div>
+                  
+                  
+                  
+                  
+                  
+  <div class="button-container">
+    <button style=" 
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 50px;
+    font-family: Montserrat;
+    font-size: 16px;
+    color: white;
+    padding: 10px 25px 10px 25px;"
+    id="cancel" class="btn" (click)="onBack()">Back</button>
+     </div>
+            </form>
+          </mat-card-content>
+        </mat-tab>
+        <mat-tab label="Course Assistants">
+          <br>
+          <mat-card-header class="cardHeader" style="padding-bottom: 1%;text-align: center">
+              <mat-card-title-group style="margin: 0 auto;">
+                <mat-card-title style="font-weight: 500"> Course Assistants for {{course.Name}}</mat-card-title>
+              </mat-card-title-group>
+        
+            
+            </mat-card-header>
+          <mat-card-content class="matContent">
+              
+                <br>
+           
+                <mat-list>
+                  <mat-list-item *ngFor="let emp of empList">
+                    
+                  
+                    <p style="font-size:medium;" mat-line><b>Full Name:</b> {{ emp.Name }} {{ emp.Surname }}</p>
+                    <p style="color:white;" mat-line>x</p>
+                    <p style="font-size: medium;" mat-line><b>Email:</b> {{ emp.Email }}</p> 
+                    <p style="color:white;" mat-line>x</p>
+                    <p style="font-size: medium;" mat-line><b>Assistant Biography:</b> {{ emp.Biography }}</p>
+                    <p style="color:white;" mat-line>x</p>
+                    <img
+                    src="{{ 'data:image/png;base64,' + emp.Image }}"
+                    style="display: flex;
+                    align-items: left;
+                    justify-content: left;
+                    height:150px;
+                    width:150px"
+                  >
+                   
+                    <mat-divider></mat-divider>
+                  </mat-list-item>
+                </mat-list>
+        
+           
+                
+                
+            
+            
+            
+        
+                  <div class="form-group" style="padding-right: 40%"></div>
+             
+            
+              
+            </mat-card-content>
+        
+         </mat-tab>
+         <mat-tab label="FAQ">
+          <br>
+          <mat-card-header class="cardHeader" style="padding-bottom: 1%;text-align: center">
+              <mat-card-title-group style="margin: 0 auto;">
+                <mat-card-title style="font-weight: 500">Frequently asked Questions</mat-card-title>
+              </mat-card-title-group>
+        
+            
+            </mat-card-header>
+          <mat-card-content class="matContent">
+              
+                <br>
+            <div class="container">
+             
+              <mat-accordion class="accordion">
+                <mat-expansion-panel *ngFor="let faq of faqList">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title class="title">
+                     <b>{{ faq.Question }}</b>
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <mat-panel-description class="desc">
+                    {{ faq.Answer }}
+                  </mat-panel-description>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+        
+                  <div class="form-group" style="padding-right: 40%"></div>
+             
+            
+              
+            </mat-card-content>
+        
+         </mat-tab>
+  
+      </mat-tab-group>
+     </mat-card>
+  </div>
+  

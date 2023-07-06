@@ -143,6 +143,8 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { ScanCodeComponent } from './Administrator/Interview-Slots/scan-code/scan-code/scan-code.component';
 import { ScanDialogComponent } from './Dialog/scan-dialog/scan-dialog/scan-dialog.component';
 import { ContactUsComponent } from './contact/contact-us/contact-us.component';
+import { FaqfileAddComponent } from './Administrator/FAQ/upload-json/faqfile-add/faqfile-add.component';
+import { ViewCourseContentComponent } from './Student Portal/view-content/view-course-content/view-course-content.component';
 
 //import { CalendarDialogComponent } from './Dialog/calendar-dialog/calendar-dialog/calendar-dialog.component';
 //import { ServiceWorkerModule } from '@angular/service-worker';
@@ -286,6 +288,8 @@ export function momentAdapterFactory() {
     ScanCodeComponent,
     ScanDialogComponent,
     ContactUsComponent,
+    FaqfileAddComponent,
+    ViewCourseContentComponent,
 
     
   ],

@@ -82,6 +82,10 @@ faq!:FAQ;
     this.location.back();
   }
 
+  onBulkAdd(){
+    this.router.navigate(['admin/override-faqs']);
+  }
+
   showDialog(title: string, message: string): void {
     const dialogReference = this.dialog.open(ConfirmDialogComponent, {
       data: {

@@ -72,5 +72,24 @@ namespace INF370_2023_Web_API.Controllers
         {
             return await _faqRepo.GetFAQs();
         }
+
+        [HttpPost]
+        [Route("api/OverrideFAQs")]
+        public async Task<object> OverrideFAQs(IEnumerable<FAQ> faqs)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return new { Status = 404, Message = "Invalid data" };
+                }
+
+                return await _faqRepo.OverrideFAQs(faqs);
+            }
+            catch (Exception)
+            {
+                return new { Status = 500, Message = "Internal server error. Please try again" };
+            }
+        }
     }
 }

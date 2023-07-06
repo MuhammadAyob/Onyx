@@ -39,6 +39,8 @@ namespace INF370_2023_Web_API.Models
 
         Task<object> SendContactQuery(dynamic body);
 
+        Task<object> GetCourseView(int id);
 
+        Task<object> GetEnrolledCourses(int id);
     }
 }

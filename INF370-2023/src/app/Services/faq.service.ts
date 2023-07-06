@@ -33,4 +33,8 @@ export class FAQService {
     return this.http.get(environment.WebAPI + 'GetFAQs', this.httpOptions);
   }
 
+  OverrideFAQs(obj:any){
+    return this.http.post(environment.WebAPI + 'OverrideFAQs',obj,this.httpOptions);
+  }
+
 }
