@@ -229,7 +229,7 @@ export class ReadShortlistComponent implements OnInit {
             width: '50vw',
             data: {
               dialogTitle: "Error",
-              dialogMessage: "Applicant has an upcoming interview slot. Please remove slot first before offering employment"
+              dialogMessage: "Applicant has not attended interview. Please ensure attendance has been taken before proceeding."
             },
           }
         );

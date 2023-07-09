@@ -45,6 +45,13 @@ namespace INF370_2023_Web_API.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("api/ScanQRCode/{id}")]
+        public async Task<object> ScanQRCode(int id)
+        {
+            return await _interviewRepo.ScanQRCode(id);
+        }
+
         [HttpPut]
         [Route("api/UpdateSlot/{id}")]
         public async Task<object> UpdateInterviewSlot(int id, InterviewDetails interview)

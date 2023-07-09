@@ -67,8 +67,8 @@ namespace INF370_2023_Web_API.Models
         public virtual DbSet<JobOpportunity> JobOpportunities { get; set; }
         public virtual DbSet<ApplicationStatu> ApplicationStatus { get; set; }
         public virtual DbSet<Applicant> Applicants { get; set; }
-        public virtual DbSet<InterviewSlot> InterviewSlots { get; set; }
         public virtual DbSet<CourseRating> CourseRatings { get; set; }
         public virtual DbSet<Cart> Carts { get; set; }
+        public virtual DbSet<InterviewSlot> InterviewSlots { get; set; }
     }
 }

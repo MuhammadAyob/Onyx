@@ -37,4 +37,8 @@ GetSlots(){
   return this.http.get(environment.WebAPI + 'GetSlots', this.httpOptions);
 }
 
+ScanQRCode(id:number){
+  return this.http.get(environment.WebAPI + 'ScanQRCode/' + id, this.httpOptions);
+}
+
 }

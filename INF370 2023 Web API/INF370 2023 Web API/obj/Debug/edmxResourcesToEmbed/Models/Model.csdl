@@ -924,11 +924,6 @@
       <End Role="Applicant" EntitySet="Applicants" />
       <End Role="Application" EntitySet="Applications" />
     </AssociationSet>
-    <EntitySet Name="InterviewSlots" EntityType="Model.InterviewSlot" />
-    <AssociationSet Name="FK_InterviewSlot_ShortList" Association="Model.FK_InterviewSlot_ShortList">
-      <End Role="ShortList" EntitySet="ShortLists" />
-      <End Role="InterviewSlot" EntitySet="InterviewSlots" />
-    </AssociationSet>
     <EntitySet Name="CourseRatings" EntityType="Model.CourseRating" />
     <AssociationSet Name="FK_CourseRating_Course" Association="Model.FK_CourseRating_Course">
       <End Role="Course" EntitySet="Courses" />
@@ -950,6 +945,11 @@
     <AssociationSet Name="FK_CartCourse_Cart" Association="Model.FK_CartCourse_Cart">
       <End Role="Cart" EntitySet="Carts" />
       <End Role="CartCourse" EntitySet="CartCourses" />
+    </AssociationSet>
+    <EntitySet Name="InterviewSlots" EntityType="Model.InterviewSlot" />
+    <AssociationSet Name="FK_InterviewSlot_ShortList" Association="Model.FK_InterviewSlot_ShortList">
+      <End Role="ShortList" EntitySet="ShortLists" />
+      <End Role="InterviewSlot" EntitySet="InterviewSlots" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="OTPTimer">
@@ -1071,30 +1071,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="InterviewSlot">
-    <Key>
-      <PropertyRef Name="InterviewSlotID" />
-    </Key>
-    <Property Name="InterviewSlotID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ShortListID" Type="Int32" Nullable="false" />
-    <Property Name="InterviewDate" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="StartTime" Type="Time" Nullable="false" Precision="7" />
-    <Property Name="InterviewCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="EndTime" Type="Time" Nullable="false" Precision="7" />
-    <NavigationProperty Name="ShortList" Relationship="Model.FK_InterviewSlot_ShortList" FromRole="InterviewSlot" ToRole="ShortList" />
-  </EntityType>
-  <Association Name="FK_InterviewSlot_ShortList">
-    <End Type="Model.ShortList" Role="ShortList" Multiplicity="1" />
-    <End Type="Model.InterviewSlot" Role="InterviewSlot" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ShortList">
-        <PropertyRef Name="ShortListID" />
-      </Principal>
-      <Dependent Role="InterviewSlot">
-        <PropertyRef Name="ShortListID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="CourseRating">
     <Key>
       <PropertyRef Name="RatingID" />
@@ -1179,6 +1155,32 @@
       </Principal>
       <Dependent Role="CartCourse">
         <PropertyRef Name="CartID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="InterviewSlot">
+    <Key>
+      <PropertyRef Name="InterviewSlotID" />
+    </Key>
+    <Property Name="InterviewSlotID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ShortListID" Type="Int32" Nullable="false" />
+    <Property Name="InterviewDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="StartTime" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="InterviewCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EndTime" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="Attended" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DateAttended" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="ShortList" Relationship="Model.FK_InterviewSlot_ShortList" FromRole="InterviewSlot" ToRole="ShortList" />
+  </EntityType>
+  <Association Name="FK_InterviewSlot_ShortList">
+    <End Type="Model.ShortList" Role="ShortList" Multiplicity="1" />
+    <End Type="Model.InterviewSlot" Role="InterviewSlot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ShortList">
+        <PropertyRef Name="ShortListID" />
+      </Principal>
+      <Dependent Role="InterviewSlot">
+        <PropertyRef Name="ShortListID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

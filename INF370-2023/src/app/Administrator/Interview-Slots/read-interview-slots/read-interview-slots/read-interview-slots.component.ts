@@ -56,10 +56,9 @@ export class ReadInterviewSlotsComponent implements OnInit {
     'StartTime',
     'EndTime',
     'Name',
-    'Surname',
     'JobOpp',
+    'DateAttended',
     'scan',
-    'view',
     'edit',
     'delete',
   ];
@@ -156,12 +155,52 @@ export class ReadInterviewSlotsComponent implements OnInit {
     }
   }
 
+   isDateStringEqualToday(dateString: string): boolean {
+    const targetDate = new Date(dateString);
+    targetDate.setHours(0, 0, 0, 0); // Reset time components to zero
+  
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Reset time components to zero
+  
+    return targetDate.getTime() === today.getTime();
+  }
+
   scanQRCode(obj:any){
-    sessionStorage['Code'] = JSON.stringify(obj.Code);
-    const dialogReference = this.dialog.open(ScanDialogComponent,{
-      width: '50vw',
-      height:'70vh'
-    })
+   
+    if(!this.isDateStringEqualToday(obj.InterviewDate))
+    {
+      const dialogReference = this.dialog.open(ExistsDialogComponent, {
+        data: {
+          dialogTitle: 'Oops',
+          dialogMessage: 'You can only take attendance on the day of the interview date! If the date for the interview has been passed, please re-schedule this slot',
+          operation: 'ok',
+        },
+        width: '50vw',
+        height:'40vh'
+      });
+    }
+    else if(obj.Attended == "Yes")
+    {
+      const dialogReference = this.dialog.open(ExistsDialogComponent, {
+        data: {
+          dialogTitle: 'Oops',
+          dialogMessage: 'This slot has already been scanned',
+          operation: 'ok',
+        },
+        width: '50vw',
+        height:'40vh'
+      });
+    }
+    else
+    {
+      sessionStorage['slot'] = JSON.stringify(obj);
+      const dialogReference = this.dialog.open(ScanDialogComponent,{
+        data:this.refreshList(),
+        width: '50vw',
+        height:'70vh'
+      })
+    }
+    
   }
 
   openPastDialog() {
@@ -376,6 +415,8 @@ export class AddInterviewSlotModal {
       StartTime: '',
       EndTime:'',
       ApplicationID: 0,
+      Attended:'',
+      DateAttended:null
      
     };
   }

@@ -422,18 +422,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="InterviewSlots">
-      <EntityTypeMapping TypeName="Model.InterviewSlot">
-        <MappingFragment StoreEntitySet="InterviewSlot">
-          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
-          <ScalarProperty Name="InterviewCode" ColumnName="InterviewCode" />
-          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
-          <ScalarProperty Name="InterviewDate" ColumnName="InterviewDate" />
-          <ScalarProperty Name="ShortListID" ColumnName="ShortListID" />
-          <ScalarProperty Name="InterviewSlotID" ColumnName="InterviewSlotID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="CourseRatings">
       <EntityTypeMapping TypeName="Model.CourseRating">
         <MappingFragment StoreEntitySet="CourseRating">
@@ -455,6 +443,20 @@
           <ScalarProperty Name="Total" ColumnName="Total" />
           <ScalarProperty Name="StudentID" ColumnName="StudentID" />
           <ScalarProperty Name="CartID" ColumnName="CartID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InterviewSlots">
+      <EntityTypeMapping TypeName="Model.InterviewSlot">
+        <MappingFragment StoreEntitySet="InterviewSlot">
+          <ScalarProperty Name="DateAttended" ColumnName="DateAttended" />
+          <ScalarProperty Name="Attended" ColumnName="Attended" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="InterviewCode" ColumnName="InterviewCode" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="InterviewDate" ColumnName="InterviewDate" />
+          <ScalarProperty Name="ShortListID" ColumnName="ShortListID" />
+          <ScalarProperty Name="InterviewSlotID" ColumnName="InterviewSlotID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -81,8 +81,6 @@
         <AssociationConnector Association="Model.FK_Application_ApplicationStatus" />
         <EntityTypeShape EntityType="Model.Applicant" Width="1.5" PointX="8.375" PointY="1" />
         <AssociationConnector Association="Model.FK_Application_Applicant" />
-        <EntityTypeShape EntityType="Model.InterviewSlot" Width="1.5" PointX="15.75" PointY="8.375" />
-        <AssociationConnector Association="Model.FK_InterviewSlot_ShortList" />
         <EntityTypeShape EntityType="Model.CourseRating" Width="1.5" PointX="14.25" PointY="15.875" />
         <AssociationConnector Association="Model.FK_CourseRating_Course" />
         <AssociationConnector Association="Model.FK_CourseRating_Student" />
@@ -90,6 +88,8 @@
         <AssociationConnector Association="Model.FK_Cart_Student" />
         <AssociationConnector Association="Model.FK_Cart_VAT" />
         <AssociationConnector Association="Model.FK_CartCourse_Cart" />
+        <EntityTypeShape EntityType="Model.InterviewSlot" Width="1.5" PointX="15.75" PointY="8.125" />
+        <AssociationConnector Association="Model.FK_InterviewSlot_ShortList" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

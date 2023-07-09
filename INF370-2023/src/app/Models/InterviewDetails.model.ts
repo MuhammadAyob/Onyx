@@ -4,4 +4,6 @@ export class InterviewDetails{
     InterviewDate!: Date;
     StartTime:any;
     EndTime:any;
+    Attended!:string;
+    DateAttended:any
 }

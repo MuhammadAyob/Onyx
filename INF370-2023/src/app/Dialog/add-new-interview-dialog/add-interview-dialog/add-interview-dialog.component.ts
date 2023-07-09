@@ -76,6 +76,8 @@ export class AddInterviewDialogComponent implements OnInit {
       StartTime: '',
       EndTime:'',
       ApplicationID: 0,
+      Attended:'No',
+    DateAttended:null
      
     };
   }

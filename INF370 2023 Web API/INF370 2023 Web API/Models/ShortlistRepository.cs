@@ -113,7 +113,7 @@ namespace INF370_2023_Web_API.Models
                     var getShort = await db.ShortLists.Where(o => o.ApplicationID == id).FirstOrDefaultAsync();
                     var getSlot = await db.InterviewSlots.Where(v => v.ShortListID == getShort.ShortListID).FirstOrDefaultAsync();
                     DateTime interviewDateTime = getSlot.InterviewDate + getSlot.EndTime;
-                    if(DateTime.Now > interviewDateTime)
+                    if(getSlot.Attended == "Yes")
                     {
                         db.InterviewSlots.Remove(getSlot);
                         await db.SaveChangesAsync();
@@ -133,7 +133,7 @@ namespace INF370_2023_Web_API.Models
                     }
                     else
                     {
-                        return new { Status = 400, Message = "Applicant has upcoming interview, please remove slot first" };
+                        return new { Status = 400, Message = "Applicant has not attended interview yet." };
                     }
                 }
                 else
@@ -192,7 +192,7 @@ namespace INF370_2023_Web_API.Models
                     var checkSlot = await db.InterviewSlots.Where(z => z.ShortListID == getShort.ShortListID).FirstOrDefaultAsync();
 
                     DateTime interviewDateTime = checkSlot.InterviewDate + checkSlot.EndTime;
-                    if (DateTime.Now > interviewDateTime)
+                    if (checkSlot.Attended =="Yes")
                     {
 
                         db.InterviewSlots.Remove(checkSlot);
@@ -219,7 +219,7 @@ namespace INF370_2023_Web_API.Models
                     }
                     else
                     {
-                        return new { Status = 400, Message = "Applicant has an upcoming interview, please remove slot first" };
+                        return new { Status = 400, Message = "Applicant has an unattended interview" };
                     }
                 }
                 else

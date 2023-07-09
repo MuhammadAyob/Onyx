@@ -20,6 +20,8 @@ namespace INF370_2023_Web_API.Models
         public System.TimeSpan StartTime { get; set; }
         public string InterviewCode { get; set; }
         public System.TimeSpan EndTime { get; set; }
+        public string Attended { get; set; }
+        public Nullable<System.DateTime> DateAttended { get; set; }
     
         public virtual ShortList ShortList { get; set; }
     }

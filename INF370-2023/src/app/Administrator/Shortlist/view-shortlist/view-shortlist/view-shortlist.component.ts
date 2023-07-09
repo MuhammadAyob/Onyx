@@ -140,7 +140,7 @@ export class ViewShortlistComponent implements OnInit {
               const dialogReference = this.dialog.open(ExistsDialogComponent, {
                 data: {
                   dialogTitle: 'Error',
-                  dialogMessage: 'Applicant has an upcoming interview, please remove interview slot first',
+                  dialogMessage: 'Applicant has an unattended interview slot. Ensure attendance has been taken or remove the slot first before proceeding',
                   operation: 'ok',
                 },
                 width: '50vw',

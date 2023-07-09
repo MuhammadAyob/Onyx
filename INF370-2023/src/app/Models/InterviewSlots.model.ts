@@ -7,4 +7,6 @@ export class InterviewSlots{
     Name!:string;
     Surname!:string;
     JobOpp!:string;
+    Attended!:string;
+    DateAttended:any
 }

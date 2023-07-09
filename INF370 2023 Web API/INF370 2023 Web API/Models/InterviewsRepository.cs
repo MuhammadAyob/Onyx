@@ -74,7 +74,8 @@ namespace INF370_2023_Web_API.Models
                 string qrCode = Convert.ToString(code);
                 slot.InterviewCode = qrCode;
                 slot.EndTime = interview.EndTime;
-               // slot.Attended = "Awaiting";
+                slot.Attended = "No";
+                slot.DateAttended = null;
                 db.InterviewSlots.Add(slot);
                 await db.SaveChangesAsync();
 
@@ -172,7 +173,9 @@ namespace INF370_2023_Web_API.Models
                         Name = i.Applicant.Name,
                         Surname = i.Applicant.Surname,
                         JobOpp = i.JobOpportunity.JobOppTitle,
-                        Code = i.Interview.InterviewCode
+                        Code = i.Interview.InterviewCode,
+                        Attended = i.Interview.Attended,
+                        DateAttended = i.Interview.DateAttended
                     })
                     .ToListAsync();
 
@@ -269,7 +272,8 @@ namespace INF370_2023_Web_API.Models
                 slot.InterviewDate = interview.InterviewDate;
                 slot.StartTime = interview.StartTime;
                 slot.EndTime = interview.EndTime;
-               // slot.Attended = "Awaiting";
+                slot.Attended = "No";
+                slot.DateAttended = null;
                 db.Entry(slot).State = EntityState.Modified;
                 await db.SaveChangesAsync();
 
@@ -419,9 +423,9 @@ namespace INF370_2023_Web_API.Models
             var fromAddress = new MailAddress(fromEmailAccount);
             var toAddress = new MailAddress(emailID);
 
-            var subject = "Job Application: Interview Cancellation";
+            var subject = "Job Application: Interview Termination";
             var message = "Dear " + name + " " + surname + "<br/><br/> This email serves to inform you that your allocated interview slot" +
-                    "<br/>on: " + date + " " + " between: " + startTime + " " + "-"+" "+endTime + " " + " has been cancelled. " + 
+                    "<br/>on: " + date + " " + " between: " + startTime + " " + "-"+" "+endTime + " " + " has been terminated. " + 
                     "<br>" +
                   "<br/> Please check your inbox for future updates/invites on your application" + "<br>" + " P.S. If the interview date, relative to the above given details, has already been surpassed or attended, you can ignore this email." +
                     "<br/><br/> If you require any further assistance please contact us at dseiqueries@gmail.com" +
@@ -455,7 +459,78 @@ namespace INF370_2023_Web_API.Models
             }
         }
 
+        public async Task<object> ScanQRCode(int id)
+        {
+            try
+            {
+                var slot = await db.InterviewSlots.Where(x => x.InterviewSlotID == id).FirstOrDefaultAsync();
+                slot.Attended = "Yes";
+                slot.DateAttended = DateTime.Now;
+                db.Entry(slot).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+
+                var applicant = await db.ShortLists.Where(x => x.ShortListID == slot.ShortListID).Select(x => new
+                {
+                    Name = x.Application.Applicant.Name,
+                    Surname = x.Application.Applicant.Surname,
+                    Email = x.Application.Applicant.Email
+
+                }).FirstOrDefaultAsync();  
+
+                await SendAttended(applicant.Email, applicant.Name, applicant.Surname, slot);
+                return new { Status = 200, Message = "Interview attended" };
+            }
+            catch (Exception)
+            {
+                return new { Status = 500, Message = "Internal server error" };
+            }
+        }
+
+        private async Task SendAttended(string emailID, string name, string surname, InterviewSlot slot)
+        {
+            
+
+            /////
+            var fromEmailAccount = "dseiqueries@gmail.com";
+            var fromEmailAccountPassword = "epqshwdnwmokortk";
+
+            var fromAddress = new MailAddress(fromEmailAccount);
+            var toAddress = new MailAddress(emailID);
+
+            var subject = "Job Application: Interview Attendance";
+            var message = "Dear " + name + " " + surname + "<br/><br/This email hereby confirms your attendance of your interview and that the QR Code was scanned." +
+                     "<br/>"
+                     + "<br>"
+                     + "Interview details:" +
+                    "<br/><br/>" + "Date: " + slot.InterviewDate +
+                    "<br/>" + "Time: " + slot.StartTime + " " + "-" + " " + slot.EndTime +
+                    "<br/>" + "Date Attended: " + slot.DateAttended +
+                   "<br/><br/>Please keep this email safe as a form of proof of attendance. " +
+                "<br/><br/> If you require any further assistance please contact us at dseiqueries@gmail.com" +
+                    "<br/> Sincerely, The Onyx Team" +
+                    "<br/><h5>Powered by Onyx</h5>";
 
 
+            using (var compiledMessage = new MailMessage(fromAddress, toAddress))
+            {
+                compiledMessage.Subject = subject;
+                compiledMessage.Body = string.Format(message);
+                compiledMessage.IsBodyHtml = true;
+
+                //compiledMessage.Attachments.Add(new Attachment(qrCodeStream, "qr_code.png"));
+
+
+                using (var smtp = new SmtpClient())
+                {
+                    smtp.Host = "smtp.gmail.com"; // for example: smtp.gmail.com
+                    smtp.Port = 587;
+                    smtp.EnableSsl = true;
+                    smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                    smtp.UseDefaultCredentials = false;
+                    smtp.Credentials = new NetworkCredential(fromEmailAccount, fromEmailAccountPassword); // your own provided email and password
+                    await smtp.SendMailAsync(compiledMessage);
+                }
+            }
+        }
     }
 }

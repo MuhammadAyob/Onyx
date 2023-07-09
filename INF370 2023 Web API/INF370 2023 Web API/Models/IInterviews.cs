@@ -14,5 +14,6 @@ namespace INF370_2023_Web_API.Models
         Task<object> UpdateInterviewSlot(int id, InterviewDetails interview);
         Task<object> DeleteInterviewSlot(int id);
         Task<object> GetInterviewSlots();
+        Task<object> ScanQRCode(int id);
     }
 }
