@@ -26,7 +26,7 @@ export class AddVatComponent implements OnInit {
 vatFormControl = new FormControl('', [Validators.required,Validators.min(0),Validators.max(100)]);
 vat!:VAT;
 currentDate!: Date;
-
+isLoading:boolean=false;
 constructor(
   public router: Router,
   private location: Location,
@@ -108,6 +108,7 @@ showDialog(title: string, message: string): void {
 
   dialogReference.afterClosed().subscribe((result) => {
     if (result == true) {
+      this.isLoading=true
       this.service.AddVAT(this.vat).subscribe(
         (result:any) => {
           console.log(result);
@@ -123,10 +124,12 @@ showDialog(title: string, message: string): void {
                     }
             );
             this.router.navigate(['admin/read-vat']);
+            this.isLoading=false;
           }
 
           else if(result.Status===404)
           {
+            this.isLoading=false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {
@@ -143,6 +146,7 @@ showDialog(title: string, message: string): void {
 
           else if(result.Status===500)
           {
+            this.isLoading=false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {
@@ -159,6 +163,7 @@ showDialog(title: string, message: string): void {
 
           else if(result.Status===501)
           {
+            this.isLoading=false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {
@@ -175,6 +180,7 @@ showDialog(title: string, message: string): void {
 
           else
           {
+            this.isLoading=false;
             console.log(result);
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,

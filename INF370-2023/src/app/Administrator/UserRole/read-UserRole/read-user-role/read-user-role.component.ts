@@ -33,6 +33,7 @@ export class ReadUserRoleComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   noData = this.dataSource.connect().pipe(map((data) => data.length === 0));
+  isLoading:boolean =true;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -79,6 +80,7 @@ export class ReadUserRoleComponent implements OnInit {
   refreshList() {
     this.service.GetUserRoles().subscribe((result) => {
       this.dataSource.data = result as UserRole[];
+      this.isLoading=false;
     });
   }
 

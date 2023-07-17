@@ -18,7 +18,14 @@
     
         <mat-card-content class="matContent">
           <form>
-            <div class="form-group">
+            <div *ngIf="MaxSlotsPerDay== null || undefined"
+            style="
+           display: flex;
+           align-items: center;
+           justify-content: center;">
+             <mat-spinner ></mat-spinner>
+           </div>
+            <div class="form-group"  *ngIf="!(MaxSlotsPerDay == null || undefined)">
               <br /><br />
               <div style="padding: 0% 2.5% 0% 2%; min-width: 100%">
                 <mat-label style="color: #0e1a3c">

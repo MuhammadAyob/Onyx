@@ -34,7 +34,7 @@ export class ReadQualificationComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-
+isLoading:boolean=true;
   qualificationList!: Qualification[];
 
   qualification!: Qualification;
@@ -82,6 +82,7 @@ export class ReadQualificationComponent implements OnInit {
   refreshList() {
     this.service.GetQualifications().subscribe((result) => {
       this.dataSource.data = result as Qualification[];
+      this.isLoading=false;
     });
   }
 

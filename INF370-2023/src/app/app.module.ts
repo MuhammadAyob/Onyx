@@ -145,7 +145,7 @@ import { ScanDialogComponent } from './Dialog/scan-dialog/scan-dialog/scan-dialo
 import { ContactUsComponent } from './contact/contact-us/contact-us.component';
 import { FaqfileAddComponent } from './Administrator/FAQ/upload-json/faqfile-add/faqfile-add.component';
 import { ViewCourseContentComponent } from './Student Portal/view-content/view-course-content/view-course-content.component';
-
+import { YtPipePipe } from './yt-pipe.pipe';
 //import { CalendarDialogComponent } from './Dialog/calendar-dialog/calendar-dialog/calendar-dialog.component';
 //import { ServiceWorkerModule } from '@angular/service-worker';
 
@@ -290,6 +290,7 @@ export function momentAdapterFactory() {
     ContactUsComponent,
     FaqfileAddComponent,
     ViewCourseContentComponent,
+    YtPipePipe,
 
     
   ],
@@ -303,7 +304,7 @@ export function momentAdapterFactory() {
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    PdfViewerModule,
+    PdfViewerModule,  
     ToastrModule.forRoot(),
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: momentAdapterFactory }),
  //   ServiceWorkerModule.register('ngsw-worker.js', {

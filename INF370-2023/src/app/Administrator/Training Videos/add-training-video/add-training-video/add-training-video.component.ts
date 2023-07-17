@@ -27,7 +27,7 @@ export interface DialogData {
 export class AddTrainingVideoComponent implements OnInit {
   nameFormControl = new FormControl('', [Validators.required]);
   descFormControl = new FormControl('', [Validators.required]);
-  videoFormControl = new FormControl('', [Validators.required,Validators.pattern('^[0-9]*$')]);
+  videoFormControl = new FormControl('', [Validators.required]);
 
   instructionalVideo!: InstructionalVideo;
 
@@ -67,8 +67,7 @@ export class AddTrainingVideoComponent implements OnInit {
     if (
       this.descFormControl.hasError('required') == false &&
       this.nameFormControl.hasError('required') == false &&
-      this.videoFormControl.hasError('required') == false &&
-      this.videoFormControl.hasError('pattern') == false
+      this.videoFormControl.hasError('required') == false
     ){return false}
     else
     {return true}

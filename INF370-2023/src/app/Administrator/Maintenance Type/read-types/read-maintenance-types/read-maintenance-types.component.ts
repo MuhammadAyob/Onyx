@@ -32,7 +32,7 @@ export class ReadMaintenanceTypesComponent implements OnInit {
 
     public dataSource = new MatTableDataSource<MaintenanceType>();
     noData = this.dataSource.connect().pipe(map(data=>data.length===0));
-    
+    isLoading:boolean=true;
     
       @ViewChild(MatPaginator) paginator!: MatPaginator;
       @ViewChild(MatSort) sort!:MatSort;
@@ -86,6 +86,7 @@ constructor(
   refreshList() {
     this.service.GetTypes().subscribe((result) => {
       this.dataSource.data = result as MaintenanceType[];
+      this.isLoading=false;
     });
   }
 

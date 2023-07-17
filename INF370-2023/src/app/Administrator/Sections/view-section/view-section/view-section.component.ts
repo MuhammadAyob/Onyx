@@ -40,7 +40,7 @@ constructor(
 
 test!:Section;
 course!:any
-
+isLoading:boolean=true;
 LessonDisplayedColumns: string[] = [
   'name',
   'description',
@@ -85,6 +85,7 @@ ngAfterViewInit() {
 refreshList() {
   this.serviceL.GetSectionLessons(this.test.SectionID).subscribe((result) => {
     this.LessonDataSource.data = result as Lesson[];
+    this.isLoading=false;
   });
 }
 

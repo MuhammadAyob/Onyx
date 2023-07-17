@@ -65,7 +65,7 @@ export class AddEmployeeComponent implements OnInit {
   userRoleList!: UserRole[];
   titleList!:Titles[];
   dataImage:any;
-  
+  isLoading:boolean=true;
   constructor( public router: Router,
     private dialog: MatDialog,
     public formbuilder: FormBuilder,
@@ -126,6 +126,7 @@ export class AddEmployeeComponent implements OnInit {
 getTitleList(){
  this.serviceT.GetTitles().subscribe((result)=>{
    this.titleList=result as Titles[];
+   this.isLoading=false;
   });
 }
 

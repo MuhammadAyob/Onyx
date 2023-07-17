@@ -125,8 +125,8 @@ namespace INF370_2023_Web_API.Models
         {
             try
             {
-                
 
+                db.Configuration.ProxyCreationEnabled = false;
                 var requestList = await db.UpdateRequests.Where(x => x.EmployeeID == id && x.UpdateRequestStatusID==1).ToListAsync();
 
                 return requestList;

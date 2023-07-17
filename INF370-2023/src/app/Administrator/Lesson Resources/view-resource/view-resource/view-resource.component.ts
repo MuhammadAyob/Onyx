@@ -36,7 +36,7 @@ private titleservice: Title)
 storageResource:any;
 resource:any;
 pdfSrc:any;
-
+isLoading:boolean=true;
 ngOnInit(): void {
   this.storageResource=JSON.parse(sessionStorage['LessonResource']);
   this.getResource();
@@ -48,6 +48,7 @@ this.service.MaintainLessonResource(this.storageResource.ResourceID).subscribe((
 console.log(result);
 this.resource = result as any;
 this.pdfSrc = 'data:image/pdf;base64,' + this.resource.ResourceFile;
+this.isLoading=false;
 })
 }
 

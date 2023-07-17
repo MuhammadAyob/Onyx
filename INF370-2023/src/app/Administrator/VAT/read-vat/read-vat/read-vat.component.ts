@@ -32,7 +32,7 @@ export class ReadVATComponent implements OnInit {
   ];
   
   public dataSource = new MatTableDataSource<any>();
-  
+  isLoading:boolean=true;
   noData = this.dataSource.connect().pipe(map((data) => data.length === 0));
   
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -62,6 +62,7 @@ export class ReadVATComponent implements OnInit {
     this.service.GetVATAmounts().subscribe((result) => {
       this.displayList= result as any[];
       this.dataSource.data = this.displayList;
+      this.isLoading=false;
     });
   }
   

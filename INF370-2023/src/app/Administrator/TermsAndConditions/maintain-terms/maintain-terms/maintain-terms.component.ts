@@ -25,6 +25,7 @@ import { SearchDialogComponent } from 'src/app/Dialog/search-dialog/search-dialo
 export class MaintainTermsComponent implements OnInit {
 
 resourceFormControl = new FormControl('', [Validators.required]);
+isLoading:boolean=false;
 
 constructor(
 private fb: FormBuilder,
@@ -101,6 +102,7 @@ onSubmit() {
    dialogReference.afterClosed().subscribe((result) => {
      if (result == true) 
      {
+      this.isLoading=true;
        this.service.UpdateTerms(this.test.ID, this.test).subscribe((result:any)=>
        {
          console.log(result)
@@ -117,10 +119,12 @@ onSubmit() {
            );
            //this.refreshForm();
            this.router.navigate(['admin/read-terms']);
+           this.isLoading=false;
          }
       
          else
          {
+          this.isLoading=false;
            const dialogReference = this.dialog.open(
              ExistsDialogComponent,
              {

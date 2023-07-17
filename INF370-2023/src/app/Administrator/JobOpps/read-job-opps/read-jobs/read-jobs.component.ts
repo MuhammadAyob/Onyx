@@ -32,7 +32,7 @@ export class ReadJobsComponent implements OnInit {
   public dataSource = new MatTableDataSource<JobOpportunity>();
 
   noData = this.dataSource.connect().pipe(map((data) => data.length === 0));
-
+isLoading:boolean=true;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -76,7 +76,7 @@ export class ReadJobsComponent implements OnInit {
   refreshList(){
     this.service.GetJobOpps().subscribe((result:any)=>{
       this.dataSource.data=result as JobOpportunities[];
-      console.log(result);
+      this.isLoading=false;
     })
   }
 

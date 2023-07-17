@@ -46,7 +46,7 @@ export class AdminProfileUpdateComponent implements OnInit {
   
   hide: boolean = true;
   employeeID!:any;
-
+  isLoading:boolean=false;
   change!:boolean;
 
   constructor(
@@ -115,7 +115,7 @@ export class AdminProfileUpdateComponent implements OnInit {
   }
 
   onBack() {
-    this.location.back();
+   this.router.navigate(['home/admin-home'])
   }
 
   onSubmit() {
@@ -143,6 +143,7 @@ export class AdminProfileUpdateComponent implements OnInit {
 
         dialogReference.afterClosed().subscribe((result) => {
           if (result == true) {
+            this.isLoading=true;
             this.serviceUpdate.UpdateEmployeeProfile(this.employee.EmployeeID, this.employee).subscribe((result:any) => {
               console.log(result);
               if(result.Status === 200)
@@ -156,11 +157,13 @@ export class AdminProfileUpdateComponent implements OnInit {
                           duration: 3000,
                         }
                 );
-                this.location.back();
+                this.isLoading=false;
+                this.router.navigate(['home/admin-home']);
               }
 
               else if(result.Status === 400)
               {
+                this.isLoading=false;
                 const dialogReference = this.dialog.open(ExistsDialogComponent, {
                   data: {
                     dialogTitle: 'Error',
@@ -173,6 +176,7 @@ export class AdminProfileUpdateComponent implements OnInit {
 
               else if(result.Status === 404)
               {
+                this.isLoading=false;
                 const dialogReference = this.dialog.open(ExistsDialogComponent, {
                   data: {
                     dialogTitle: 'Email in use!',
@@ -184,6 +188,7 @@ export class AdminProfileUpdateComponent implements OnInit {
               }
               else if(result.Status === 405)
               {
+                this.isLoading=false;
                 const dialogReference = this.dialog.open(ExistsDialogComponent, {
                   data: {
                     dialogTitle: 'ID Number in use!',
@@ -196,6 +201,7 @@ export class AdminProfileUpdateComponent implements OnInit {
 
               else if(result.Status === 406)
               {
+                this.isLoading=false;
                 const dialogReference = this.dialog.open(ExistsDialogComponent, {
                   data: {
                     dialogTitle: 'Phone number in use!',
@@ -207,6 +213,7 @@ export class AdminProfileUpdateComponent implements OnInit {
               }
               else
               {
+                this.isLoading=false;
                 const dialogReference = this.dialog.open(ExistsDialogComponent, {
                   data: {
                     dialogTitle: 'Error',

@@ -25,7 +25,7 @@ export class MaintainTrainingVideoComponent implements OnInit {
   
   nameFormControl = new FormControl('', [Validators.required]);
   descFormControl = new FormControl('', [Validators.required]);
-  videoFormControl = new FormControl('', [Validators.required, Validators.pattern('^[0-9]*$')]);
+  videoFormControl = new FormControl('', [Validators.required]);
 
 
   instructionalVideo!: InstructionalVideo;

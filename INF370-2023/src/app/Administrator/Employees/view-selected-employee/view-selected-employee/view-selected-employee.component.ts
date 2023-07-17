@@ -33,7 +33,7 @@ export class ViewSelectedEmployeeComponent implements OnInit {
   EmployeeQualificationList!: any[];
   roleName!: string;
   dataImage:any;
-
+  isLoading:boolean=true;
   constructor(
     public router: Router,
     private location: Location,
@@ -71,6 +71,7 @@ export class ViewSelectedEmployeeComponent implements OnInit {
 let data=result as Titles;
 this.titleName = data.TitleName;
 console.log(this.titleName)
+this.isLoading=false;
     });
   }
 

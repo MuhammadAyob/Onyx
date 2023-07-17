@@ -30,7 +30,7 @@ export class ReadApplicationsComponent implements OnInit {
   
   public dataSource = new MatTableDataSource<Application>();
   noData = this.dataSource.connect().pipe(map((data) => data.length === 0));
-
+isLoading:boolean=true;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -76,6 +76,7 @@ export class ReadApplicationsComponent implements OnInit {
   refreshList(){
     this.service.GetApplications().subscribe((result)=>{
       this.dataSource.data=result as Application[];
+      this.isLoading=false;
     })
   }
 

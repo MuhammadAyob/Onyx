@@ -41,7 +41,7 @@ public dataSource = new MatTableDataSource<any>();
 noData = this.dataSource.connect().pipe(map((data) => data.length === 0));
 
 @ViewChild(MatPaginator) paginator!: MatPaginator;
-
+isLoading:boolean=true;
 displayList!: Section[];
 
 constructor( private dialog: MatDialog,
@@ -60,7 +60,7 @@ constructor( private dialog: MatDialog,
     this.service.GetCourseAssistants(this.test.CourseID).subscribe((result) => {
       console.log(result);
       this.employeeList = result as any[];
-      console.log(this.employeeList);
+     this.isLoading=false;
     });
   }
 

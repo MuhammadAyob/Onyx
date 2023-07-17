@@ -28,7 +28,7 @@ public dataSource = new MatTableDataSource<any>();
 noData = this.dataSource.connect().pipe(map((data) => data.length === 0));
 @ViewChild(MatPaginator) paginator!: MatPaginator;
 @ViewChild(MatSort) sort!: MatSort;
-
+isLoading:boolean=true;
 users!: any;
 
 constructor(
@@ -67,6 +67,7 @@ refreshList() {
   this.service.GetDisabledUsers().subscribe((result) => {
     console.log(result)
     this.dataSource.data = result as any[];
+    this.isLoading=false;
   });
 }
 

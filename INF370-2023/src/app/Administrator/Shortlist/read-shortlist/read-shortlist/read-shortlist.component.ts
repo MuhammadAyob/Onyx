@@ -35,7 +35,7 @@ export class ReadShortlistComponent implements OnInit {
 
   public dataSource = new MatTableDataSource<Shortlist>();
   noData = this.dataSource.connect().pipe(map((data) => data.length === 0));
-
+  isLoading:boolean=true;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -81,6 +81,7 @@ export class ReadShortlistComponent implements OnInit {
   refreshList(){
     this.service.GetShortlist().subscribe((result)=>{
       this.dataSource.data=result as Shortlist[];
+      this.isLoading=false;
     })
   }
 

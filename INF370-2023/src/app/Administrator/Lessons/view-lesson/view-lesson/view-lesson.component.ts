@@ -35,7 +35,7 @@ section: any;
 course: any;
 
 public ResourceDataSource = new MatTableDataSource<any>();
-
+isLoading:boolean=true;
 noData = this.ResourceDataSource.connect().pipe(map((data) => data.length === 0));
 
 @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -62,6 +62,7 @@ this.refreshList();
 refreshList() {
   this.serviceLR.GetLessonsResources(this.test.LessonID).subscribe((result) => {
     this.ResourceDataSource.data = result as any[];
+    this.isLoading=false;
   });
 }
 

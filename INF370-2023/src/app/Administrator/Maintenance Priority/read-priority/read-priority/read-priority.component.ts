@@ -35,7 +35,7 @@ noData = this.dataSource.connect().pipe(map(data=>data.length===0));
     
 @ViewChild(MatPaginator) paginator!: MatPaginator;
 @ViewChild(MatSort) sort!:MatSort;
-    
+isLoading:boolean=true;
 prioritylist!:MaintenancePriority[];
     
 priority!:MaintenancePriority;    
@@ -86,6 +86,7 @@ constructor(
   refreshList() {
     this.service.GetPriorities().subscribe((result) => {
       this.dataSource.data = result as MaintenancePriority[];
+      this.isLoading=false;
     });
   }
 

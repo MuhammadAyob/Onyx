@@ -29,7 +29,7 @@ displayedColumns: string[] = [
 ];
 
 public dataSource = new MatTableDataSource<CourseCategory>();
-
+isLoading:boolean=true;
 noData = this.dataSource.connect().pipe(map((data) => data.length === 0));
 
 @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -90,7 +90,7 @@ refreshObject() {
 refreshList() {
   this.service.GetCategories().subscribe((result) => {
     this.dataSource.data = result as CourseCategory[];
-    console.log(result);
+   this.isLoading=false;
   });
 }
 

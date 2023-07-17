@@ -21,7 +21,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class MaintainSlotsComponent implements OnInit {
   SlotsFormControl = new FormControl('',[Validators.required, Validators.min(1), Validators.pattern('^[0-9][0-9]*$')]);
-
+  isLoading:boolean=false;
   MaxSlotsPerDay!:MaxSlotsPerDay;
   constructor(public router:Router,
     private location:Location,
@@ -73,6 +73,7 @@ export class MaintainSlotsComponent implements OnInit {
   
     dialogReference.afterClosed().subscribe((result) => {
       if (result == true) {
+        this.isLoading=true;
         this.service
           .MaintainSlots(this.MaxSlotsPerDay.MaxID, this.MaxSlotsPerDay)
           .subscribe((result:any) => {
@@ -89,10 +90,12 @@ export class MaintainSlotsComponent implements OnInit {
                       }
               );
               this.router.navigate(['admin/read-max-slots']);
+              this.isLoading=false;
   
             }
             else
-            {
+            { 
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {

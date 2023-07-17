@@ -36,7 +36,7 @@ export class ReadRequestComponent implements OnInit {
 public dataSource = new MatTableDataSource<any>();
 
 noData = this.dataSource.connect().pipe(map((data) => data.length === 0));
-
+isLoading:boolean=true;
 @ViewChild(MatPaginator) paginator!: MatPaginator;
 @ViewChild(MatSort) sort!: MatSort;
 
@@ -64,6 +64,7 @@ refreshList() {
   this.service.GetMaintenanceList().subscribe((result) => {
     this.displayList= result as any[];
     this.dataSource.data = this.displayList;
+    this.isLoading=false;
   });
 }
 

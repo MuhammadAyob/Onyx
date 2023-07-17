@@ -32,7 +32,7 @@ displayedColumns: string[] = [
   'view'
 ];
 public dataSource = new MatTableDataSource<any>();
-
+isLoading:boolean=true;
 noData = this.dataSource.connect().pipe(map((data) => data.length === 0));
 
 @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -76,6 +76,7 @@ constructor(
     this.service.GetCourseDetails().subscribe((result) => {
       this.displayList= result as CourseDetails[];
       this.dataSource.data = this.displayList;
+      this.isLoading=false;
     });
   }
 

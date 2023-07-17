@@ -23,7 +23,7 @@ import { SearchDialogComponent } from 'src/app/Dialog/search-dialog/search-dialo
 export class MaintainUserRoleComponent implements OnInit {
   nameFormControl = new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]);
   descFormControl = new FormControl('', [Validators.required]); 
-
+  isLoading:boolean=false;
   userRole!: UserRole;
   userRoleList!: UserRole[];
   public dataSource = new MatTableDataSource<UserRole>();
@@ -75,6 +75,7 @@ export class MaintainUserRoleComponent implements OnInit {
 
     dialogReference.afterClosed().subscribe((result) => {
       if (result == true) {
+        this.isLoading=true;
         this.service
           .MaintainUserRole(this.userRole.UserRoleID, this.userRole)
           .subscribe((result:any) => {
@@ -89,9 +90,11 @@ export class MaintainUserRoleComponent implements OnInit {
                 });
               }
               this.router.navigate(['admin/read-user-role'])
+              this.isLoading=false;
             } 
             else if(result.Status===404)
             {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {
@@ -107,6 +110,7 @@ export class MaintainUserRoleComponent implements OnInit {
             }
             else
             {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {

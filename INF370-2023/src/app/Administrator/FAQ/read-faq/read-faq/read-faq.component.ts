@@ -39,7 +39,7 @@ export class ReadFaqComponent implements OnInit {
 
 faqlist!: FAQ[];
   faq!: FAQ;
-
+isLoading:boolean =true;
   constructor(
     private dialog: MatDialog,
     public router: Router,
@@ -51,11 +51,11 @@ faqlist!: FAQ[];
   ) { this.titleservice.setTitle('FAQ');}
 
   ngOnInit(): void {
+    
     this.refreshList();
   }
 
   ngAfterViewInit() {
-
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.refreshList();
@@ -84,9 +84,12 @@ faqlist!: FAQ[];
     };
   }
   refreshList() {
+
     this.service.GetFAQs().subscribe((result) => {
       this.dataSource.data = result as FAQ[];
+      this.isLoading=false;
     });
+   
   }
 
   onEdit(obj:any) {

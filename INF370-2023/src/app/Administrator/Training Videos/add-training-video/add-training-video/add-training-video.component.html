@@ -75,7 +75,7 @@
                  style="width: 95%;"
                >
                  <mat-label style="color: #0e1a3c">
-                   Enter Vimeo Video ID</mat-label
+                   Enter YouTube Video ID</mat-label
                  >
                  <input
                    type="text"
@@ -89,11 +89,9 @@
                    required
                  />
                  <mat-error *ngIf="videoFormControl.hasError('required')">
-                  Instructional Video Link is <strong>required</strong>
+                  Instructional Video ID is <strong>required</strong>
                 </mat-error>
-                <mat-error *ngIf="videoFormControl.hasError('pattern')">
-                  Instructional Video Link must not contain <strong>alpha</strong> characters
-                </mat-error>
+               
                </mat-form-field>
                <br />
                <br />

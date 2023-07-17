@@ -34,7 +34,7 @@ displayedColumns: string[] = [
 
 public dataSource = new MatTableDataSource<Department>();
 noData = this.dataSource.connect().pipe(map(data=>data.length===0));
-
+isLoading:boolean=true;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!:MatSort;
@@ -89,6 +89,7 @@ noData = this.dataSource.connect().pipe(map(data=>data.length===0));
   refreshList() {
     this.service.GetDepartments().subscribe((result) => {
       this.dataSource.data = result as Department[];
+      this.isLoading=false;
     });
   }
 

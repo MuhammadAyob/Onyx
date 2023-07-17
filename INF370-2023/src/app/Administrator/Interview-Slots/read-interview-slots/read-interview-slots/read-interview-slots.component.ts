@@ -64,7 +64,7 @@ export class ReadInterviewSlotsComponent implements OnInit {
   ];
 
   public dataSource = new MatTableDataSource<any>();
-
+isLoading:boolean=true;
   noData = this.dataSource.connect().pipe(map((data) => data.length === 0));
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -167,24 +167,24 @@ export class ReadInterviewSlotsComponent implements OnInit {
 
   scanQRCode(obj:any){
    
-    if(!this.isDateStringEqualToday(obj.InterviewDate))
+    if(obj.Attended == "Yes")
     {
       const dialogReference = this.dialog.open(ExistsDialogComponent, {
         data: {
           dialogTitle: 'Oops',
-          dialogMessage: 'You can only take attendance on the day of the interview date! If the date for the interview has been passed, please re-schedule this slot',
+          dialogMessage: 'This slot has already been scanned!',
           operation: 'ok',
         },
         width: '50vw',
         height:'40vh'
       });
     }
-    else if(obj.Attended == "Yes")
+    else if(!this.isDateStringEqualToday(obj.InterviewDate))
     {
       const dialogReference = this.dialog.open(ExistsDialogComponent, {
         data: {
           dialogTitle: 'Oops',
-          dialogMessage: 'This slot has already been scanned',
+          dialogMessage: 'You can only take attendance on the day of the interview date! If the date for the interview has been passed, please re-schedule this slot',
           operation: 'ok',
         },
         width: '50vw',
@@ -263,6 +263,7 @@ export class ReadInterviewSlotsComponent implements OnInit {
   refreshList() {
     this.service.GetSlots().subscribe((result) => {
       this.dataSource.data = result as any;
+      this.isLoading=false;
     });
   }
 

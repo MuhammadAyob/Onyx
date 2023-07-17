@@ -24,7 +24,8 @@
                 <mat-card-content >
                   <div class="table-hover table-container mat-elevation-z8" style="border-bottom-left-radius: 15px;
                   border-bottom-right-radius: 15px;">
-                    <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8" id="DeptTable" style="border-bottom-left-radius: 15px;
+                    <table  *ngIf="!isLoading"
+                    mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8" id="DeptTable" style="border-bottom-left-radius: 15px;
                     border-bottom-right-radius: 15px;">
 
                       <!-- userRole Name Column -->
@@ -69,9 +70,18 @@
                       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
                       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
                     </table>
-                    <div *ngIf="noData | async" class="no-records" style="text-align: center; padding-top: 4em; font-size: larger;">
-                      No records found, please try again.
+                    <div *ngIf="isLoading" 
+                    style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;">
+                      <mat-spinner ></mat-spinner>
                     </div>
+                    <div *ngIf="!isLoading">
+                      <div *ngIf="noData | async" class="no-records" style="text-align: center; padding-top: 4em; font-size: larger;">
+                        No records retrieved!
+                      </div>
+                     </div>
                   </div>
                 </mat-card-content>
               </mat-card>

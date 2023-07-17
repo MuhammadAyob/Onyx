@@ -25,7 +25,7 @@ export class MaintainOTPComponent implements OnInit {
 OTPFormControl = new FormControl('',[Validators.required, Validators.min(1), Validators.pattern('^[0-9][0-9]*$')]);
 
 OTPTimer!:OTPTimer;
-
+isLoading:boolean=false;
 constructor(
   public router:Router,
   private location:Location,
@@ -78,6 +78,7 @@ showDialog(title: string, message: string, popupMessage: string): void {
   });
 
   dialogReference.afterClosed().subscribe((result) => {
+    this.isLoading = true;
     if (result == true) {
       this.service
         .MaintainOTPTimer(this.OTPTimer.ID, this.OTPTimer)
@@ -95,10 +96,12 @@ showDialog(title: string, message: string, popupMessage: string): void {
                     }
             );
             this.router.navigate(['admin/read-otp-timer']);
+            this.isLoading = false;
 
           }
           else
           {
+            this.isLoading = false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {

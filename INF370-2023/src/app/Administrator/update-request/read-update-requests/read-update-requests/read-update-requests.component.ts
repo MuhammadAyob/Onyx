@@ -34,7 +34,7 @@ export class ReadUpdateRequestsComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-
+isLoading:boolean=true;
   displayList!: string[];
 
   constructor(
@@ -53,7 +53,7 @@ export class ReadUpdateRequestsComponent implements OnInit {
   refreshList() {
     this.service.GetUpdateRequestDetails().subscribe((result) => {
       this.dataSource.data = result as any[];
-      console.log(this.dataSource.data);
+      this.isLoading=false;
     });
   }
 

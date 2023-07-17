@@ -20,7 +20,14 @@
   
       <mat-card-content class="matContent">
         <form>
-          <div class="form-group">
+          <div *ngIf="titleName == null || undefined"
+          style="
+         display: flex;
+         align-items: center;
+         justify-content: center;">
+           <mat-spinner ></mat-spinner>
+         </div>
+          <div class="form-group" *ngIf="!(titleName == null || undefined)">
             <div style="margin-left: 41.8%; padding-top: 55px;padding-bottom: 50px">
               <div>
                 <div>

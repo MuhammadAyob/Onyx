@@ -67,7 +67,7 @@
           <mat-list-item
             style="color: white;font-size: 16px;"
             routerLink="admin/read-instructional-videos"
-            ><mat-icon style="margin-right: 12px;">videocam</mat-icon>Instructional Videos</mat-list-item
+            ><mat-icon style="margin-right: 12px;">videocam</mat-icon>Videos</mat-list-item
           >
           <mat-list-item
 
@@ -103,7 +103,7 @@
           "
         >
           <mat-expansion-panel-header style="color: white; background-color: #920f4c;font-size: 16px;margin-left: -8px;">
-            <mat-icon style="margin-right: 12px;">settings</mat-icon>Configurations
+            <mat-icon style="margin-right: 12px;">settings</mat-icon>Business Rules
           </mat-expansion-panel-header>
           <mat-nav-list dense style="color: white;background-color: #920f4c;">
 
@@ -129,7 +129,7 @@
             mat-list-item
             routerLink="/admin/read-max-slots"
             style="color: white;font-size: 14px;"
-            ><mat-icon style="margin-right: 8px;">event</mat-icon> Max Slots per Day</a
+            ><mat-icon style="margin-right: 8px;">event</mat-icon> Max Slots</a
           >
           </mat-nav-list>
         </mat-expansion-panel>
@@ -275,19 +275,19 @@
                 mat-list-item
                 routerLink="/admin/read-jobs"
                 style="color: white;font-size: 14px;"
-                ><mat-icon style="margin-right: 8px;">work_outline</mat-icon> Job Opportunity</a
+                ><mat-icon style="margin-right: 8px;">work_outline</mat-icon> Jobs</a
               >
               <a
                 mat-list-item
                 routerLink="/admin/read-applications"
                 style="color: white;font-size: 14px;"
-                ><mat-icon style="margin-right: 8px;">grading</mat-icon> Applications
+                ><mat-icon style="margin-right: 8px;">grading</mat-icon> Pending App's
               </a>
               <a
                 mat-list-item
                 routerLink="/admin/read-shortlist"
                 style="color: white;font-size: 14px;"
-                ><mat-icon style="margin-right: 8px;">group</mat-icon> Shortlist</a
+                ><mat-icon style="margin-right: 8px;">group</mat-icon> Shortlisted</a
               >
               <a
                 mat-list-item
@@ -502,6 +502,7 @@
 
           <button mat-icon-button
             matTooltip="Log Maintenance Request"
+            routerLink="/user/log-maintenance-request"
             >
              <mat-icon>engineering</mat-icon>
             </button>

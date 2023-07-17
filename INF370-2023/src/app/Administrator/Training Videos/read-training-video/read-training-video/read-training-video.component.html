@@ -3,7 +3,14 @@
 
   <!-- Mat Card Form for Read Departments -->
   <div class="container-fluid">
-    <mat-card class="matCard">
+    <div *ngIf="isLoading" 
+    style="
+    display: flex;
+    align-items: center;
+    justify-content: center;">
+      <mat-spinner ></mat-spinner>
+    </div>
+    <mat-card class="matCard" *ngIf="!isLoading">
       <div class="bigDiv">
         <div class="leftSearch">
           <form class="navbar-form">
@@ -39,7 +46,7 @@
           
         >
           <ng-container>
-           <iframe [src]="url.VideoLink | VimeoUrl" height="150" width="300" style="border-radius: 40px;"
+           <iframe [src]="url.VideoLink | ytPipe" height="225" width="300" 
            mozallowfullscreen allowfullscreen></iframe>
             
             <br />
@@ -72,7 +79,7 @@
           </ng-container>
         </div>
 
-        <div *ngIf="( holderList | videoPipe: search)!.length <= 0" class="no-records" style="text-align: center; margin-bottom: 6%; padding-left: 42%; padding-top: 4em; font-size: larger;">
+        <div *ngIf="( holderList | videoPipe: search) == (null || undefined) || ((holderList | videoPipe: search)!.length <=0)" class="no-records" style="text-align: center; margin-bottom: 6%; padding-left: 42%; padding-top: 4em; font-size: larger;">
           No videos found on this page, please try again.
         </div>
 

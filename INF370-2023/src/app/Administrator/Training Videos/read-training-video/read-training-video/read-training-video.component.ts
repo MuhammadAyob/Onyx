@@ -26,7 +26,7 @@ export class ReadTrainingVideoComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   instructionalVideo!: InstructionalVideo;
   instructionalVideoList!: InstructionalVideo[];
-
+isLoading:boolean=true;
   holderList!: InstructionalVideo[];
 
   initialPage = 0;
@@ -91,6 +91,7 @@ export class ReadTrainingVideoComponent implements OnInit {
     this.service.GetInstructionalVideosDetails().subscribe((result) => {
       this.instructionalVideoList = result as InstructionalVideo[];
       this.PaginateArray();
+      this.isLoading=false;
     });
   }
 

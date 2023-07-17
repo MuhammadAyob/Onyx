@@ -19,7 +19,14 @@
     
         <mat-card-content class="matContent">
           <form>
-            <div class="form-group">
+            <div *ngIf="Terms == null || undefined"
+            style="
+           display: flex;
+           align-items: center;
+           justify-content: center;">
+             <mat-spinner ></mat-spinner>
+           </div>
+            <div class="form-group"  *ngIf="!(Terms == null || undefined)">
               <br /><br />
               <pdf-viewer
               [src]="pdfSrc"

@@ -40,7 +40,7 @@ export class ReadEmployeeComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-
+  isLoading:boolean=true;
   employee!: EmployeeDetails;
   titlename!:string;
   constructor(
@@ -100,8 +100,9 @@ export class ReadEmployeeComponent implements OnInit {
   refreshList() {
     this.service.GetEmployees().subscribe((result) => {
       this.dataSource.data = result as EmployeeDetails[];
-      
+      this.isLoading=false
     });
+    
   }
   
   onEdit(id:number) {

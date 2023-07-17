@@ -30,6 +30,7 @@ export class ReadSkillComponent implements OnInit {
     'delete',
   ];
   public dataSource = new MatTableDataSource<any>();
+  isLoading:boolean =true;
 
   noData = this.dataSource.connect().pipe(map((data) => data.length === 0));
 
@@ -77,7 +78,8 @@ export class ReadSkillComponent implements OnInit {
     this.service.GetSkills().subscribe((result) => {
       this.displayList= result as any[];
       this.dataSource.data = this.displayList;
-      console.log(result)
+      //console.log(result)
+      this.isLoading=false;
     });
   }
 

@@ -24,7 +24,7 @@ export class MaintainVATComponent implements OnInit {
 
 vatFormControl = new FormControl('', [Validators.required,Validators.min(0),Validators.max(100)]);
 vat!:VAT;
-
+isLoading:boolean=false;
 constructor( 
   public router: Router,
   private location: Location,
@@ -91,6 +91,7 @@ showDialog(title: string, message: string): void {
 
   dialogReference.afterClosed().subscribe((result) => {
     if (result == true) {
+      this.isLoading=true;
       this.service.UpdateVAT(this.vat.VatID, this.vat).subscribe(
         (result:any) => {
           console.log(result);
@@ -105,11 +106,13 @@ showDialog(title: string, message: string): void {
                       duration: 3000,
                     }
             );
+            this.isLoading=false;
             this.router.navigate(['admin/read-vat']);
           }
 
           else if(result.Status===404)
           {
+             this.isLoading=false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {
@@ -126,6 +129,7 @@ showDialog(title: string, message: string): void {
 
           else if(result.Status===50)
           {
+            this.isLoading=false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {
@@ -142,6 +146,7 @@ showDialog(title: string, message: string): void {
 
           else if(result.Status===150)
           {
+            this.isLoading=false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {
@@ -157,6 +162,7 @@ showDialog(title: string, message: string): void {
           }
           else if(result.Status===250)
           {
+            this.isLoading=false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {
@@ -172,6 +178,7 @@ showDialog(title: string, message: string): void {
           }
           else
           {
+            this.isLoading=false;
             console.log(result);
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,

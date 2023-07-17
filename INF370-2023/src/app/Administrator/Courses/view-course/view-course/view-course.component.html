@@ -22,7 +22,14 @@
         <mat-card-content class="matContent">
           <!--Project Details-->
           <form>
-            <div class="form-group">
+            <div *ngIf="employeeList == null || undefined"
+            style="
+           display: flex;
+           align-items: center;
+           justify-content: center;">
+             <mat-spinner ></mat-spinner>
+           </div>
+            <div class="form-group"  *ngIf="!(employeeList == null || undefined)">
               <br /><br />
               <!--Image-->
               <div style="margin-left: 38%; padding-bottom: 50px;">
@@ -208,6 +215,7 @@ class="example-full-width" appearance="legacy" style="width:85.5%;padding-left: 
 <mat-card-content style="padding-top: 1em;">
 <div>
   <table
+  *ngIf="!isLoading"
     mat-table
     [dataSource]="dataSource"
     class="mat-elevation-z8"
@@ -265,9 +273,18 @@ class="example-full-width" appearance="legacy" style="width:85.5%;padding-left: 
     ></tr>
     <tr mat-row *matRowDef="let row; columns: SectionDisplayedColumns"></tr>
   </table>
-  <div *ngIf="noData | async" class="no-records" style="text-align: center; padding-top: 4em; font-size: larger;">
-      No records found, please try again.
+  <div *ngIf="isLoading" 
+  style="
+  display: flex;
+  align-items: center;
+  justify-content: center;">
+    <mat-spinner ></mat-spinner>
+  </div>
+  <div *ngIf="!isLoading">
+    <div *ngIf="noData | async" class="no-records" style="text-align: center; padding-top: 4em; font-size: larger;">
+      No records retrieved!
     </div>
+   </div>
 </div>
 </mat-card-content>
 <br>
