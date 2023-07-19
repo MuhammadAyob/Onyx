@@ -35,7 +35,7 @@ test!: LessonResource;
 resourceFile: string = "";
 fileAttr = ' ';
 storageLessonResource:any;
-
+isLoading!:boolean;
 ngOnInit(): void {
   this.storageLessonResource=JSON.parse(sessionStorage['LessonResource']);
   this.refreshForm();
@@ -61,14 +61,14 @@ const isInvalid = this.validateFormControls();
     this.dialog.open(InputDialogComponent, {
       data: {
         dialogTitle: "Input Error",
-        dialogMessage: "Correct Errors"
+        dialogMessage: "Correct Errors on highlighted fields"
       },
       width: '25vw',
       height: '28vh',
     });
   } else {
-    const title = 'Confirm New Application';
-    const message = 'Are you sure you want to submit this application?';
+    const title = 'Confirm Edit Resource';
+    const message = 'Are you sure you want to edit this resource?';
     this.showDialog(title, message);
   }
 }
@@ -92,17 +92,20 @@ showDialog(title: string, message: string): void {
       dialogMessage: message,
       operation: 'add',
     },
-    width: '25vw',
+    width: '50vw',
+    height:'30vh'
   });
 
   dialogReference.afterClosed().subscribe((result) => {
     if (result == true) 
     {
+      this.isLoading=true;
       this.service.UpdateLessonResource(this.test.ResourceID, this.test).subscribe((result:any)=>
       {
         console.log(result)
         if(result.Status===200)
         {
+          this.isLoading=false;
           this.snack.open(
             'Lesson resource updated successfully!',
                   'OK',
@@ -112,11 +115,19 @@ showDialog(title: string, message: string): void {
                     duration: 3000,
                   }
           );
+
+          let obj = {LessonID:0, ResourceID:0, ResourceName:''};
+          obj.LessonID = this.test.LessonID;
+          obj.ResourceID = this.test.ResourceID;
+          obj.ResourceName = this.test.ResourceName;
+          sessionStorage.removeItem('LessonResource');
+          sessionStorage['LessonResource'] = JSON.stringify(this.test);
           this.refreshForm();
-          this.router.navigate(['admin/view-lesson']);
+          this.router.navigate(['admin/view-resource']);
         }
         else if(result.Status===400)
         {
+          this.isLoading=false;
           const dialogReference = this.dialog.open(
             ExistsDialogComponent,
             {
@@ -125,12 +136,14 @@ showDialog(title: string, message: string): void {
                 dialogMessage: 'Invalid data, ensure data is in the correct format',
                 operation: 'ok',
               },
-              width: '25vw',
+              width: '50vw',
+              height:'30vh'
             }
           );
         }
         else if(result.Status===404)
         {
+          this.isLoading=false;
           const dialogReference = this.dialog.open(
             ExistsDialogComponent,
             {
@@ -139,12 +152,14 @@ showDialog(title: string, message: string): void {
                 dialogMessage: 'Upload a different file',
                 operation: 'ok',
               },
-              width: '25vw',
+              width: '50vw',
+              height:'30vh'
             }
           );
         }
         else
         {
+          this.isLoading=false;
           const dialogReference = this.dialog.open(
             ExistsDialogComponent,
             {
@@ -153,7 +168,8 @@ showDialog(title: string, message: string): void {
                 dialogMessage: 'Internal server error, please try again',
                 operation: 'ok',
               },
-              width: '25vw',
+              width: '50vw',
+              height:'30vh'
             }
           );
         }

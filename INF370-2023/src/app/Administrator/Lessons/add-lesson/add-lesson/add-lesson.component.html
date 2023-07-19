@@ -33,7 +33,7 @@
                 [formControl]="nameFormControl"
                 name="TaskName"
                 [(ngModel)]="lesson.LessonName"
-                placeholder="Home screens"
+                placeholder="Ex. Installing node.js"
                 required
               />
               <mat-error *ngIf="nameFormControl.hasError('required')">
@@ -56,7 +56,7 @@
               cols="90"
               name="TaskDesc"
               [(ngModel)]="lesson.LessonDescription"
-              placeholder="Ex. Design home screens"
+              placeholder="Ex. In this lesson we will..."
               required
              ></textarea>
              <mat-error *ngIf="descFormControl.hasError('required')">
@@ -77,13 +77,16 @@
         type="number"
         matInput
         [formControl]="videoFormControl"
-        name="PackagePrice"
+        name="PackagePriddce"
         [(ngModel)]="lesson.VideoID"
         placeholder="Ex. 123456"
         required
       />
       <mat-error *ngIf="videoFormControl.hasError('required')">
-        Video Link is <strong>required</strong>
+        Video ID is <strong>required</strong> and must only contain <strong>numbers</strong>
+      </mat-error>
+      <mat-error *ngIf="videoFormControl.hasError('pattern')">
+        Video ID must only contain <strong>numbers</strong>
       </mat-error>
       </mat-form-field>
      <br>
@@ -92,6 +95,7 @@
       
              <div class="form-group" style="padding-right: 40%"></div>
             </div>
+            <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
             <br>
             <div class="button-container">
               <button id="cancel" class="btn" (click)="onBack()">Cancel</button>
@@ -112,7 +116,7 @@
     <form class="navbar-form">
       <mat-form-field appearance="outline" color="white" style="width: 100%; border-color: white !important; color: #ffffff; padding-top: 1%;">
         <mat-label style=" color: #ffffff; background-color: transparent; border-bottom: none; font-size: 15px; width: 100%;">Search Lessons</mat-label>
-        <input type="text" style="border-color: #5090d000;" matInput name="searchDept" (keydown.enter)="doFilter($event)" placeholder="Ex. Angular Course">
+        <input type="text" class="custom-input" style="border-color: #5090d000;" matInput name="searchDept" (keydown.enter)="doFilter($event)" placeholder="Ex. Angular Course">
         <mat-icon class="search" style="float: right; margin-top: -22px;">search</mat-icon>
       </mat-form-field>
     </form>
@@ -123,6 +127,7 @@
 <mat-card-content style="padding-top: 1em;">
 <div>
   <table
+    *ngIf="!gettingLessons"
     mat-table
     [dataSource]="LessonDataSource"
     class="mat-elevation-z8"
@@ -157,9 +162,18 @@
     ></tr>
     <tr mat-row *matRowDef="let row; columns: LessonDisplayedColumns"></tr>
   </table>
-  <div *ngIf="noData | async" class="no-records" style="text-align: center; padding-top: 4em; font-size: larger;">
-      No records found, please try again.
+  <div *ngIf="gettingLessons"
+  style="
+  display: flex;
+  align-items: center;
+  justify-content: center;">
+    <mat-spinner ></mat-spinner>
+  </div>
+  <div *ngIf="!gettingLessons">
+    <div *ngIf="noData | async" class="no-records" style="text-align: center; padding-top: 4em; font-size: larger;">
+      No records retrieved!
     </div>
+   </div>
 </div>
 </mat-card-content>
 <br>

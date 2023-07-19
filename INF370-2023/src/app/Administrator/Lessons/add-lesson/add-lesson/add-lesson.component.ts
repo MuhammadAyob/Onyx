@@ -31,7 +31,7 @@ storageCourse:any;
 
 nameFormControl = new FormControl('', [Validators.required]);
 descFormControl = new FormControl('', [Validators.required]);
-videoFormControl = new FormControl('', [Validators.required]);
+videoFormControl = new FormControl('', [Validators.required, Validators.pattern('^[0-9]+$')]);
 
 LessonDisplayedColumns: string[] = [
   'name',
@@ -42,6 +42,9 @@ public LessonDataSource = new MatTableDataSource<any>();
 noData = this.LessonDataSource.connect().pipe(map((data) => data.length === 0));
 
 @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+isLoading:boolean=false;
+gettingLessons:boolean=true;
 
 constructor(
   public router: Router,
@@ -85,9 +88,9 @@ constructor(
 refreshList() {
   this.serviceL.GetSectionLessons(this.storageSection.SectionID).subscribe((result) => {
   this.LessonDataSource.data = result as Lesson[];
-  console.log(this.LessonDataSource.data);
-    });
-  }
+  this.gettingLessons=false;
+  });
+}
 
 refreshForm(){
 this.lesson = {
@@ -110,10 +113,10 @@ onArrowBack(){
 
 validateFormControls(): boolean {
   if (
-    this.descFormControl.hasError('required') == false &&
         this.nameFormControl.hasError('required')  == false &&
         this.descFormControl.hasError('required') == false &&
-        this.videoFormControl.hasError('required') == false 
+        this.videoFormControl.hasError('required') == false &&
+        this.videoFormControl.hasError('pattern') == false
   )
   {return false}
   else{return true}
@@ -126,14 +129,17 @@ showDialog(title: string, message: string): void {
       dialogMessage: message,
       operation: 'add',
     },
-    width: '25vw',
+    width: '50vw',
+    height:'30vh'
   });
 
   dialogReference.afterClosed().subscribe((result) => {
     if (result == true) 
     {
+      this.isLoading=true;
       this.serviceL.AddLesson(this.lesson).subscribe((result:any)=>
       {
+        
         if(result.Status===200)
         {
           this.snack.open(
@@ -145,11 +151,13 @@ showDialog(title: string, message: string): void {
                     duration: 3000,
                   }
           );
+          this.isLoading=false;
           this.refreshForm();
           this.router.navigate(['admin/view-section']);
         }
         else if(result.Status===400)
         {
+          this.isLoading=false;
           const dialogReference = this.dialog.open(
             ExistsDialogComponent,
             {
@@ -158,12 +166,14 @@ showDialog(title: string, message: string): void {
                 dialogMessage: 'Invalid data, ensure data is in the correct format',
                 operation: 'ok',
               },
-              width: '25vw',
+              width: '50vw',
+              height:'30vh'
             }
           );
         }
         else if(result.Status===404)
         {
+          this.isLoading=false;
           const dialogReference = this.dialog.open(
             ExistsDialogComponent,
             {
@@ -172,12 +182,14 @@ showDialog(title: string, message: string): void {
                 dialogMessage: 'Enter new lesson name',
                 operation: 'ok',
               },
-              width: '25vw',
+              width: '50vw',
+              height:'30vh'
             }
           );
         }
         else
         {
+          this.isLoading=false;
           const dialogReference = this.dialog.open(
             ExistsDialogComponent,
             {
@@ -186,7 +198,8 @@ showDialog(title: string, message: string): void {
                 dialogMessage: 'Internal server error, please try again',
                 operation: 'ok',
               },
-              width: '25vw',
+              width: '50vw',
+              height:'30vh'
             }
           );
         }
@@ -201,7 +214,7 @@ onSubmit() {
     this.dialog.open(InputDialogComponent, {
       data: {
         dialogTitle: "Input Error",
-        dialogMessage: "Correct Errors"
+        dialogMessage: "Correct Errors on highlighted fields"
       },
       width: '25vw',
       height: '27vh',

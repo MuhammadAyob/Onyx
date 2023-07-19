@@ -142,9 +142,10 @@
     100%{background-position:0% 50%}
   }
   
-  .mat-form-field ::placeholder {
-    color: white;
+  .custom-input::placeholder {
+    color:white;
   }
+  
   ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
     color: rgba(255, 255, 255, 0);
     border-width: 1.5px;
