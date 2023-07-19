@@ -118,7 +118,8 @@ const message = 'Are you sure you want to delete the Lesson?';
 const dialogReference = this.dialog.open(
   ConfirmDialogComponent,
     {
-      width: '25vw',
+      width: '50vw',
+      height:'30vh',
       data: {
         dialogTitle: title,
         operation: 'delete',
@@ -153,7 +154,8 @@ const dialogReference = this.dialog.open(
                 dialogMessage: 'Cannot delete as there are attached lesson resources.',
                 operation: 'ok',
               },
-              width: '25vw',
+              width: '50vw',
+              height:'30vh'
             }
           );
         }

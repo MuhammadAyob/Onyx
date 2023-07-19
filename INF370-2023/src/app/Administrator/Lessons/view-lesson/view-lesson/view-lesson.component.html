@@ -25,6 +25,15 @@
             <div class="form-group">
               <br /><br />
               <div style="padding: 0% 2.5% 0% 2%;">
+<br>
+                <h1 style="margin-left:42.5%;color: #0e1a3c; margin-bottom: -70px;"><b>Lesson Video</b></h1>
+                <br>
+               
+                <div class='embed-container'>
+                  <iframe [src]="test.VideoID | VimeoUrl" frameborder='0' webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+                </div>
+                <br>
+                <br>
               <mat-label style="color: #0e1a3c">
                 Lesson Name</mat-label>
   
@@ -70,12 +79,7 @@
                   style="color: #0e1a3c"></textarea>
               </mat-form-field>
               <br>
-              <ng-container>
-                <iframe [src]="test.VideoID | VimeoUrl" height="144" width="256"frameborder="0"
-                mozallowfullscreen allowfullscreen></iframe>
-                </ng-container>
-              <br>
-              <br>
+         
               <br>
               </div>
               <div class="form-group" style="padding-right: 40%"></div>

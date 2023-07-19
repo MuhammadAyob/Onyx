@@ -28,10 +28,13 @@ lesson!: Lesson;
 storageSection: any;
 storageCourse:any;
 storageLesson:any;
+gettingLesson:boolean=true;
 
 nameFormControl = new FormControl('', [Validators.required]);
 descFormControl = new FormControl('', [Validators.required]);
-videoFormControl = new FormControl('', [Validators.required,]);
+videoFormControl = new FormControl('', [Validators.required, Validators.pattern('^[0-9]+$')]);
+
+isLoading:boolean=false;
 
 constructor(
   public router: Router,
@@ -48,23 +51,23 @@ ngOnInit(): void {
   this.storageLesson=JSON.parse(sessionStorage['Lesson']);
   this.storageSection=JSON.parse(sessionStorage['Section']);
   this.GetLesson();
-  console.log(this.lesson)
 
 }
 
 GetLesson(){
 this.serviceL.MaintainLesson(this.storageLesson.LessonID).subscribe((result)=>{
 this.lesson=result as Lesson;
-console.log(result);
+this.gettingLesson=false;
 })
 }
 
 validateFormControls(): boolean {
   if (
-    this.descFormControl.hasError('required') == false &&
+   
         this.nameFormControl.hasError('required')  == false &&
         this.descFormControl.hasError('required') == false &&
-        this.videoFormControl.hasError('required') == false 
+        this.videoFormControl.hasError('required') == false && 
+        this.videoFormControl.hasError('pattern') == false
   )
   {return false}
   else{return true}
@@ -88,7 +91,7 @@ onSubmit() {
     this.dialog.open(InputDialogComponent, {
       data: {
         dialogTitle: "Input Error",
-        dialogMessage: "Correct Errors"
+        dialogMessage: "Correct Errors on highlighted fields"
       },
       width: '25vw',
       height: '27vh',
@@ -109,12 +112,14 @@ showDialog(title: string, message: string): void {
       dialogMessage: message,
       operation: 'add',
     },
-    width: '25vw',
+    width: '50vw',
+    height: '30vh',
   });
 
   dialogReference.afterClosed().subscribe((result) => {
     if (result == true) 
     {
+      this.isLoading=true;
       this.serviceL.UpdateLesson(this.lesson.LessonID,this.lesson).subscribe((result:any)=>
       {
         if(result.Status===200)
@@ -128,10 +133,14 @@ showDialog(title: string, message: string): void {
                     duration: 3000,
                   }
           );
-          this.router.navigate(['admin/view-section']);
+          this.isLoading=false;
+          sessionStorage.removeItem('Lesson');
+          sessionStorage['Lesson'] = JSON.stringify(this.lesson);
+          this.router.navigate(['admin/view-lesson']);
         }
         else if(result.Status===400)
         {
+          this.isLoading=false;
           const dialogReference = this.dialog.open(
             ExistsDialogComponent,
             {
@@ -140,12 +149,14 @@ showDialog(title: string, message: string): void {
                 dialogMessage: 'Invalid data, ensure data is in the correct format',
                 operation: 'ok',
               },
-              width: '25vw',
+              width: '50vw',
+              height: '30vh',
             }
           );
         }
         else if(result.Status===404)
         {
+          this.isLoading=false;
           const dialogReference = this.dialog.open(
             ExistsDialogComponent,
             {
@@ -154,12 +165,14 @@ showDialog(title: string, message: string): void {
                 dialogMessage: 'Enter new lesson name',
                 operation: 'ok',
               },
-              width: '25vw',
+              width: '50vw',
+              height: '30vh',
             }
           );
         }
         else
         {
+          this.isLoading=false;
           const dialogReference = this.dialog.open(
             ExistsDialogComponent,
             {
@@ -168,7 +181,8 @@ showDialog(title: string, message: string): void {
                 dialogMessage: 'Internal server error, please try again',
                 operation: 'ok',
               },
-              width: '25vw',
+              width: '50vw',
+              height: '30vh',
             }
           );
         }
