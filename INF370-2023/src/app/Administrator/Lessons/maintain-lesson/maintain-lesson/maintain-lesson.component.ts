@@ -138,6 +138,23 @@ showDialog(title: string, message: string): void {
           sessionStorage['Lesson'] = JSON.stringify(this.lesson);
           this.router.navigate(['admin/view-lesson']);
         }
+        
+        else if(result.Status===100)
+        {
+          this.isLoading=false;
+          const dialogReference = this.dialog.open(
+            ExistsDialogComponent,
+            {
+              data: {
+                dialogTitle: 'Video Duplication',
+                dialogMessage: 'Video belongs to another lesson in this course. Please enter a different Video ID',
+                operation: 'ok',
+              },
+              width: '50vw',
+              height:'30vh'
+            }
+          );
+        }
         else if(result.Status===400)
         {
           this.isLoading=false;

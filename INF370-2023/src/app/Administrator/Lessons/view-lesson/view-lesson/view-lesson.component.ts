@@ -134,7 +134,7 @@ const dialogReference = this.dialog.open(
         if(res.Status===200)
         {
           this.snack.open(
-            'Lesson added successfully!',
+            'Lesson deleted successfully!',
                   'OK',
                   {
                     horizontalPosition: 'center',

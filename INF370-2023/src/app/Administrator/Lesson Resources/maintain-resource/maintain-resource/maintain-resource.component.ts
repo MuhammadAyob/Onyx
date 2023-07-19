@@ -125,6 +125,22 @@ showDialog(title: string, message: string): void {
           this.refreshForm();
           this.router.navigate(['admin/view-resource']);
         }
+        else if(result.Status===100)
+        {
+          this.isLoading=false;
+          const dialogReference = this.dialog.open(
+            ExistsDialogComponent,
+            {
+              data: {
+                dialogTitle: 'Error',
+                dialogMessage: 'Resource File exists under this lesson. Please upload a different file',
+                operation: 'ok',
+              },
+              width: '50vw',
+              height:'30vh'
+            }
+          );
+        }
         else if(result.Status===400)
         {
           this.isLoading=false;

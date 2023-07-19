@@ -14,7 +14,14 @@
            <form>
              <div class="form-group">
                <br /><br />
-               <div style="padding: 0% 2.5% 0% 2%; min-width: 100%">
+               <div *ngIf="gettingCourses"
+               style="
+              display: flex;
+              align-items: center;
+              justify-content: center;">
+                <mat-spinner ></mat-spinner>
+              </div>
+               <div style="padding: 0% 2.5% 0% 2%; min-width: 100%" *ngIf="!gettingCourses">
 
                 <mat-label style="color: #0e1a3c">
                 Select Course to Rate</mat-label>
@@ -23,7 +30,8 @@
                   <mat-form-field 
                   class="example-full-width" 
                   appearance="legacy"
-                  style="width: 95%;">
+                  style="width: 95%;"
+                  >
       
                   
                   <mat-select (valueChange)="selectCourse($event)" [formControl]="courseFormControl" required>
@@ -37,7 +45,11 @@
                   <mat-error *ngIf="courseFormControl.hasError('required')">
                    Course Selection is <strong>required</strong>
                   </mat-error>
+                  
+                
                   </mat-form-field>
+<br>
+                 <span><mat-hint style="font-size: 12px;">*No courses in dropdown indicate all your courses have been rated previously or you have no purchased courses currently.</mat-hint></span> 
                   <br>
                   <br>
                  
@@ -58,8 +70,8 @@
                    cols="90"
                    name="QualificationDesc"
                    [(ngModel)]="rating.Comment"  
-                   ngModelOptions="{standalone:true}"
-                   placeholder="Ex. This department involves all IS aspects"
+                  
+                   placeholder="Ex. Excellent experince, I definitely..."
                    required
                  ></textarea>
                  <mat-error *ngIf="commentFormControl.hasError('required')">
@@ -67,11 +79,16 @@
                 </mat-error>
                </mat-form-field>
    <br>
+   <br>
    <mat-label style="color: #0e1a3c">
     Rate out of 5 Stars</mat-label>
     <br>
+    <br>
 <div class="rating">
     <mat-icon *ngFor="let star of stars" (click)="rate(star)" [ngClass]="{ 'filled': star <= sRating }">star</mat-icon>
+    <br>
+    <br>
+    <mat-hint style="font-size: 12px;">*Click on a 'star' icon, starting from left to right, to rate the course out of 5</mat-hint>
   </div>
   <br>
                 
@@ -80,7 +97,8 @@
    
                <div class="form-group" style="padding-right: 40%"></div>
              </div>
-             <div class="button-container">
+             <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+             <div class="button-container" *ngIf="!gettingCourses">
                <button id="cancel" class="btn" (click)="onBack()">Cancel</button>
                <button id="confirm" class="btn" (click)="onSubmit()">Confirm</button>
            </div>

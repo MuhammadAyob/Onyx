@@ -155,6 +155,24 @@ showDialog(title: string, message: string): void {
           this.refreshForm();
           this.router.navigate(['admin/view-section']);
         }
+
+        else if(result.Status===100)
+        {
+          this.isLoading=false;
+          const dialogReference = this.dialog.open(
+            ExistsDialogComponent,
+            {
+              data: {
+                dialogTitle: 'Video Duplication',
+                dialogMessage: 'Video belongs to another lesson in this course. Please enter a different Video ID',
+                operation: 'ok',
+              },
+              width: '50vw',
+              height:'30vh'
+            }
+          );
+        }
+
         else if(result.Status===400)
         {
           this.isLoading=false;

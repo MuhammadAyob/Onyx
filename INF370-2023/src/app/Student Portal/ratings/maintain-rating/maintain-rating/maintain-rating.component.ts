@@ -21,7 +21,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class MaintainRatingComponent implements OnInit {
 rating!:any;
 sRating:number=1;
+
+isLoading!:boolean;
+
 commentFormControl = new FormControl('', [Validators.required]);
+
 constructor(
   public router: Router,
   private location: Location,
@@ -57,10 +61,10 @@ rate(star: number) {
       this.dialog.open(InputDialogComponent, {
         data: {
           dialogTitle: "Input Error",
-          dialogMessage: "Correct Errors"
+          dialogMessage: "Correct Errors on highlighted fields"
         },
-        width: '50vw',
-        height: '30vh',
+        width: '27vw',
+        height: '25vh',
       });
     } else {
       const title = 'Confirm Update Rating';
@@ -85,6 +89,7 @@ rate(star: number) {
 
     dialogReference.afterClosed().subscribe((result) => {
       if (result == true) {
+        this.isLoading=true;
         this.service
           .UpdateRating(this.rating.RatingID, this.rating)
           .subscribe((result:any) => {
@@ -99,6 +104,7 @@ rate(star: number) {
                         duration: 3000,
                       }
               );
+              this.isLoading=false;
               this.router.navigate(['student/read-ratings']);
 
             } 
@@ -106,6 +112,7 @@ rate(star: number) {
 
             else
             {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {

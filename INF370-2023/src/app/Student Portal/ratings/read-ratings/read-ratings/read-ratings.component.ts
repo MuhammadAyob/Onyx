@@ -41,7 +41,8 @@ noData = this.dataSource.connect().pipe(map(data=>data.length===0));
 ratingList!:any[];
 StudentID:any;
 rating:any;
-  
+isLoading:boolean=true;
+
 constructor(
   private dialog:MatDialog,
   public router:Router,
@@ -56,7 +57,6 @@ constructor(
   
 ngOnInit(): void {
 this.StudentID = sessionStorage.getItem('StudentID');
-console.log(this.StudentID);
 this.refreshList();
 }
 
@@ -85,6 +85,7 @@ refreshList() {
   this.service.GetPersonalRatings(this.StudentID).subscribe((result) => {
     console.log(result);
     this.dataSource.data = result as any[];
+    this.isLoading=false;
   });
 }
 

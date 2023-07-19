@@ -25,6 +25,9 @@ import { SearchDialogComponent } from 'src/app/Dialog/search-dialog/search-dialo
 export class AddResourceComponent implements OnInit {
 resourceFormControl = new FormControl('', [Validators.required]);
 
+isLoading!:boolean;
+gettingResources:boolean=true;
+
 constructor( 
 private fb: FormBuilder,
 public router: Router,
@@ -74,9 +77,9 @@ ngAfterViewInit() {
 refreshList() {
   this.service.GetLessonsResources(this.storageLesson.LessonID).subscribe((result) => {
   this.ResourceDataSource.data = result as any[];
-  console.log(this.ResourceDataSource.data);
-    });
-  }
+  this.gettingResources=false;
+  });
+}
 
   public doFilter = (event:Event) => {
     this.ResourceDataSource.filter = (event.target as HTMLInputElement).value.trim().toLocaleLowerCase();
@@ -104,14 +107,14 @@ const isInvalid = this.validateFormControls();
     this.dialog.open(InputDialogComponent, {
       data: {
         dialogTitle: "Input Error",
-        dialogMessage: "Correct Errors"
+        dialogMessage: "Correct Errors on highlighted fields"
       },
       width: '25vw',
       height: '28vh',
     });
   } else {
-    const title = 'Confirm New Application';
-    const message = 'Are you sure you want to submit this application?';
+    const title = 'Confirm New Lesson Resource';
+    const message = 'Are you sure you want to submit this File?';
     this.showDialog(title, message);
   }
 }
@@ -135,15 +138,17 @@ showDialog(title: string, message: string): void {
       dialogMessage: message,
       operation: 'add',
     },
-    width: '25vw',
+    width: '50vw',
+    height:'30vh'
   });
 
   dialogReference.afterClosed().subscribe((result) => {
     if (result == true) 
     {
+      this.isLoading=true;
       this.service.AddLessonResource(this.test).subscribe((result:any)=>
       {
-        console.log(result)
+       
         if(result.Status===200)
         {
           this.snack.open(
@@ -156,10 +161,28 @@ showDialog(title: string, message: string): void {
                   }
           );
           this.refreshForm();
+          this.isLoading=false;
           this.router.navigate(['admin/view-lesson']);
+        }
+        else if(result.Status===100)
+        {
+          this.isLoading=false;
+          const dialogReference = this.dialog.open(
+            ExistsDialogComponent,
+            {
+              data: {
+                dialogTitle: 'Error',
+                dialogMessage: 'Resource File exists under this lesson. Please upload a different file',
+                operation: 'ok',
+              },
+              width: '50vw',
+              height:'30vh'
+            }
+          );
         }
         else if(result.Status===400)
         {
+          this.isLoading=false;
           const dialogReference = this.dialog.open(
             ExistsDialogComponent,
             {
@@ -168,12 +191,14 @@ showDialog(title: string, message: string): void {
                 dialogMessage: 'Invalid data, ensure data is in the correct format',
                 operation: 'ok',
               },
-              width: '25vw',
+              width: '50vw',
+              height:'30vh'
             }
           );
         }
         else if(result.Status===404)
         {
+          this.isLoading=false;
           const dialogReference = this.dialog.open(
             ExistsDialogComponent,
             {
@@ -182,12 +207,14 @@ showDialog(title: string, message: string): void {
                 dialogMessage: 'Upload a different file',
                 operation: 'ok',
               },
-              width: '25vw',
+              width: '50vw',
+              height:'30vh'
             }
           );
         }
         else
         {
+          this.isLoading=false;
           const dialogReference = this.dialog.open(
             ExistsDialogComponent,
             {
@@ -196,7 +223,8 @@ showDialog(title: string, message: string): void {
                 dialogMessage: 'Internal server error, please try again',
                 operation: 'ok',
               },
-              width: '25vw',
+              width: '50vw',
+              height:'30vh'
             }
           );
         }

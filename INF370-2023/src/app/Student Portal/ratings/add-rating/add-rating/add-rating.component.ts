@@ -26,6 +26,8 @@ rating!:Rating;
 StudentID:any;
 courseList!:any[];
 currentDate!: Date;
+isLoading!:boolean;
+gettingCourses:boolean=true;
 
 constructor(
     public router: Router,
@@ -64,6 +66,7 @@ refreshForm() {
 GetCoursesToRate(){
   this.service.GetCoursesToRate(this.StudentID).subscribe((res)=>{
     this.courseList = res as any[];
+    this.gettingCourses=false;
   })
 }
 
@@ -102,6 +105,7 @@ showDialog(title: string, message: string): void {
 
   dialogReference.afterClosed().subscribe((result) => {
     if (result == true) {
+      this.isLoading=true;
       this.service.AddRating(this.rating).subscribe(
         (result:any) => {
           console.log(result);
@@ -116,10 +120,12 @@ showDialog(title: string, message: string): void {
                       duration: 3000,
                     }
             );
+            this.isLoading=false;
             this.router.navigate(['student/read-ratings']);
           }
           else
           {
+            this.isLoading=false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {
@@ -151,10 +157,10 @@ onSubmit() {
     this.dialog.open(InputDialogComponent, {
       data: {
         dialogTitle: "Input Error",
-        dialogMessage: "Correct Errors"
+        dialogMessage: "Correct Errors on Highlighted fields"
       },
-      width: '50vw',
-      height: '30vh',
+      width: '27vw',
+      height: '25vh',
     });
   } else {
     const title = 'Confirm New Rating';

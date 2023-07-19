@@ -77,6 +77,14 @@ namespace INF370_2023_Web_API.Models
         {
             try
             {
+                var course = await db.Sections.Where(x => x.SectionID == lesson.SectionID).FirstOrDefaultAsync();
+                var isDuplicate = await db.Lessons.Where(l => l.Section.Course.CourseID == course.CourseID && l.VideoID == lesson.VideoID).FirstOrDefaultAsync();
+
+                if (isDuplicate != null)
+                {
+                    return new { Status = 100, Message = "Lesson video exists in course" };
+                }
+
                 if (await LessonNameExists(lesson.LessonName, lesson.SectionID))
                 {
                     return new { Status = 404, Message = "Lesson name exists under this section" };
@@ -98,6 +106,14 @@ namespace INF370_2023_Web_API.Models
         {
             try
             {
+                var course = await db.Sections.Where(x => x.SectionID == lesson.SectionID).FirstOrDefaultAsync();
+                var isDuplicate = await db.Lessons.Where(l => l.Section.Course.CourseID == course.CourseID && l.VideoID == lesson.VideoID && l.LessonID != id).FirstOrDefaultAsync();
+
+                if (isDuplicate != null)
+                {
+                    return new { Status = 100, Message = "Lesson video exists in course" };
+                }
+
                 var test =
                     await db.Lessons
                     .Where(x => x.LessonName == lesson.LessonName && x.SectionID == lesson.SectionID && x.LessonID != id)

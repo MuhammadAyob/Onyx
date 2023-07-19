@@ -110,7 +110,7 @@ onArrowBack(): void {
 
 onDelete(id:number) {
   const title = 'Confirm Delete Category';
-  const message = 'Are you sure you want to delete the qualification?';
+  const message = 'Are you sure you want to delete the Category?';
   
   const dialogReference = this.dialog.open(ConfirmDialogComponent, {
     data: {

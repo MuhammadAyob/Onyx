@@ -23,6 +23,7 @@ import { MatTableDataSource } from '@angular/material/table';
 export class MaintainCategoryComponent implements OnInit {
 nameFormControl = new FormControl('', [Validators.required]);
 
+isLoading!:boolean;
 category!: CourseCategory;
 categoryList!: CourseCategory[];
 public dataSource = new MatTableDataSource<CourseCategory>();
@@ -42,7 +43,9 @@ ngOnInit(): void {
 }
 
 onBack(): void {
-  this.location.back();
+  this.router.navigate([
+    'admin/read-categories',
+  ]);
 }
 
 refreshList() {
@@ -57,15 +60,15 @@ onSubmit() {
     this.dialog.open(InputDialogComponent, {
       data: {
         dialogTitle: "Input Error",
-        dialogMessage: "Correct Errors"
+        dialogMessage: "Correct Errors on Highlighted fields"
       },
       width: '25vw',
-      height: '27vh',
+      height: '28vh',
     });
   } else {
     const title = 'Confirm Edit Category';
     const message =
-      'Are you sure you want to save changes the Category?';
+      'Are you sure you want to save changes to the Category?';
     this.showDialog(title, message);
   }
 }
@@ -76,12 +79,13 @@ showDialog(title: string, message: string): void {
       dialogTitle: title,
       dialogMessage: message,
     },
-    height: '27vh',
-    width: '25vw',
+    height: '30vh',
+    width: '50vw',
   });
 
   dialogReference.afterClosed().subscribe((result) => {
     if (result == true) {
+      this.isLoading=true;
       this.service
         .UpdateCategory(
           this.category.CategoryID,
@@ -99,6 +103,7 @@ showDialog(title: string, message: string): void {
                 duration: 3000,
               }
             );
+            this.isLoading=false;
             this.router.navigate([
               'admin/read-categories',
             ]);
@@ -106,6 +111,7 @@ showDialog(title: string, message: string): void {
 
           else if(result.Status===400)
           {
+            this.isLoading=false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {
@@ -114,28 +120,32 @@ showDialog(title: string, message: string): void {
                   dialogMessage: 'Invalid data post, please ensure data is in correct format.',
                   operation: 'ok',
                 },
-                width: '25vw',
+                height: '30vh',
+                width: '50vw',
               }
             );
           }
 
           else if(result.Status===404)
           {
+            this.isLoading=false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {
                 data: {
                   dialogTitle: 'Error',
-                  dialogMessage: 'Category exists, please enter a different qualification name',
+                  dialogMessage: 'Category exists, please enter a different Category name',
                   operation: 'ok',
                 },
-                width: '25vw',
+                height: '30vh',
+                width: '50vw',
               }
             );
           }
 
           else
           {
+            this.isLoading=false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {
@@ -144,7 +154,8 @@ showDialog(title: string, message: string): void {
                   dialogMessage: 'Internal server error, please try again.',
                   operation: 'ok',
                 },
-                width: '25vw',
+                height: '30vh',
+                width: '50vw',
               }
             );
           }
@@ -162,8 +173,6 @@ validateFormControls(): boolean {
   {return true}
 }
 
-onArrowBack(): void {
-  this.location.back();
-}
+
 
 }

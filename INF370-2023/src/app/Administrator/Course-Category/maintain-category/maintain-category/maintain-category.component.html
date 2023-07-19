@@ -26,6 +26,7 @@
                   name="QualificationName"
                   [(ngModel)]="category.Category"
                   style="color: #0e1a3c"
+                  placeholder="Ex. Programming"
                   required
                 />
                 <mat-error *ngIf="nameFormControl.hasError('required')">
@@ -39,6 +40,7 @@
             </div>
             <div class="form-group" style="padding-right: 40%"></div>
           </div>
+          <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
           <div class="button-container">
             <button id="cancel" class="btn" (click)="onBack()">Cancel</button>
             <button id="confirm" class="btn" (click)="onSubmit()">Confirm</button>

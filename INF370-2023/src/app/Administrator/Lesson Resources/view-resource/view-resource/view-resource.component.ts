@@ -63,13 +63,14 @@ this.router.navigate(['admin/maintain-resource']);
 }
 
 onDelete() {
-  const title = 'Confirm Delete Lesson ';
-  const message = 'Are you sure you want to delete the Lesson?';
+  const title = 'Confirm Delete Resource ';
+  const message = 'Are you sure you want to delete the Resource?';
   
   const dialogReference = this.dialog.open(
     ConfirmDialogComponent,
       {
-        width: '25vw',
+        width: '50vw',
+        height:'30vh',
         data: {
           dialogTitle: title,
           operation: 'delete',
@@ -105,7 +106,8 @@ onDelete() {
                   dialogMessage: 'Internal server error, please try again.',
                   operation: 'ok',
                 },
-                width: '25vw',
+                width: '50vw',
+                height:'30vh'
               }
             );
           }

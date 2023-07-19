@@ -22,7 +22,7 @@ export class AddCategoryComponent implements OnInit {
 nameFormControl = new FormControl('', [Validators.required]);
 
 category!:CourseCategory;
-
+isLoading!:boolean;
 constructor(
   public router: Router,
   private location: Location,
@@ -52,14 +52,14 @@ onSubmit() {
     this.dialog.open(InputDialogComponent, {
       data: {
         dialogTitle: "Input Error",
-        dialogMessage: "Correct Errors"
+        dialogMessage: "Correct Errors on Highlighted fields"
       },
       width: '25vw',
-      height: '27vh',
+      height: '28vh',
     });
   } else {
-    const title = 'Confirm New qualification';
-    const message = 'Are you sure you want to add the new qualification?';
+    const title = 'Confirm New Category';
+    const message = 'Are you sure you want to add the new Category?';
     this.showDialog(title, message);
   }
 }
@@ -73,11 +73,9 @@ validateFormControls(): boolean {
   {return true}
 }
 
-onArrowBack(): void {
-  this.location.back();
-}
+
 onBack() {
-  this.location.back();
+  this.router.navigate(['admin/read-categories']);
 }
 
 showDialog(title: string, message: string): void {
@@ -88,18 +86,19 @@ showDialog(title: string, message: string): void {
       operation: 'add',
       qualificationData: this.category,
     }, //^captured department info here for validation
-    height: '27vh',
-    width: '25vw',
+    width: '50vw',
+    height:'30vh'
   });
 
   dialogReference.afterClosed().subscribe((result) => {
     if (result == true) {
+      this.isLoading=true;
       this.service.AddCategory(this.category).subscribe(
         (result:any) => {
           if(result.Status===200)
           {
             this.snack.open(
-              'Qualification added successfully!',
+              'Category added successfully!',
                     'OK',
                     {
                       horizontalPosition: 'center',
@@ -107,13 +106,15 @@ showDialog(title: string, message: string): void {
                       duration: 3000,
                     }
             );
-            this.category = result as CourseCategory;
+            
+            this.isLoading=false;
             this.refreshForm();
             this.router.navigate(['admin/read-categories']);
           }
 
           else if(result.Status===400)
           {
+            this.isLoading=false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {
@@ -122,13 +123,15 @@ showDialog(title: string, message: string): void {
                   dialogMessage: 'Invalid data post, please ensure data is in correct format',
                   operation: 'ok',
                 },
-                width: '25vw',
+                width: '50vw',
+                height:'30vh'
               }
             );
           }
 
           else if(result.Status===404)
           {
+            this.isLoading=false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {
@@ -137,13 +140,15 @@ showDialog(title: string, message: string): void {
                   dialogMessage: 'Enter a different category name',
                   operation: 'ok',
                 },
-                width: '25vw',
+                width: '50vw',
+                height:'30vh'
               }
             );
           }
 
           else
           {
+            this.isLoading=false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {
@@ -152,7 +157,8 @@ showDialog(title: string, message: string): void {
                   dialogMessage: 'Internal server error, please try again.',
                   operation: 'ok',
                 },
-                width: '25vw',
+                width: '50vw',
+                height:'30vh'
               }
             );
           }

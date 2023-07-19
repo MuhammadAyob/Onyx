@@ -22,6 +22,12 @@ namespace INF370_2023_Web_API.Models
         {
             try
             {
+                var exists = await db.LessonResources.Where(p=> p.ResourceFile == lessonResource.ResourceFile && p.LessonID == lessonResource.LessonID).FirstOrDefaultAsync();
+                if(exists != null)
+                {
+                    return new { Status = 100, Message = "Lesson resource file exists under this lesson" };
+                }
+
                 if (await LessonResourceExists(lessonResource.ResourceName, lessonResource.LessonID))
                 {
                     return new { Status = 404, Message = "Lesson resource exists under this lesson" };
@@ -125,6 +131,13 @@ namespace INF370_2023_Web_API.Models
         {
             try
             {
+                var exists = await db.LessonResources.Where(p => p.ResourceFile == lessonResource.ResourceFile && p.LessonID == lessonResource.LessonID && p.ResourceID != id).FirstOrDefaultAsync();
+                
+                if (exists != null)
+                {
+                    return new { Status = 100, Message = "Lesson resource file exists under this lesson" };
+                }
+
                 var test =
                     await db.LessonResources
                     .Where(x => x.ResourceName == lessonResource.ResourceName && x.LessonID == lessonResource.LessonID && x.ResourceID != id)

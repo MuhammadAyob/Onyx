@@ -31,7 +31,7 @@
                       type="text"
                       matInput
                       name="date"
-                      [(ngModel)]="rating.Date"
+                     [value]="rating.Date | date:'yyyy-MM-dd'"
                       
                       required
                       style="color: #0e1a3c"
@@ -77,7 +77,7 @@
                    cols="90"
                    name="QualificationDesc"
                    [(ngModel)]="rating.Comment"  
-                   placeholder="Amazing course!"
+                   placeholder="Ex. Amazing course!"
                   
                    required
                  ></textarea>
@@ -86,12 +86,16 @@
                 </mat-error>
                </mat-form-field>
    <br>
-   <br>
-   <mat-label style="color: #0e1a3c">
+  <br>
+   <mat-label style="color: #0e1a3c" matTooltip="Click on the star icon, starting from left to right, to rate the course out of 5">
     Rate out of 5 Stars</mat-label>
+    <br>
     <br>
 <div class="rating">
     <mat-icon *ngFor="let star of stars" (click)="rate(star)" [ngClass]="{ 'filled': star <= sRating }">star</mat-icon>
+    <br>
+    <br>
+    <mat-hint style="font-size: 12px;">*Click on a 'star' icon, starting from left to right, to rate the course out of 5</mat-hint>
   </div>
   <br>
                 
@@ -100,6 +104,7 @@
    
                <div class="form-group" style="padding-right: 40%"></div>
              </div>
+             <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
              <div class="button-container">
                <button id="cancel" class="btn" (click)="onBack()">Cancel</button>
                <button id="confirm" class="btn" (click)="onSubmit()">Confirm</button>

@@ -2,6 +2,10 @@
   float: right;
   }
   
+  .custom-input::placeholder {
+    color:white;
+  }
+  
   
   .bigDiv{
     background: linear-gradient(90deg, #0e1a3c, #b0c7fc);
