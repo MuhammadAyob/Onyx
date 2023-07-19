@@ -1,0 +1,123 @@
+
+<ion-content>
+
+<div  
+style="padding-top: 3em;height:100vh;
+background-image: url('../../assets/gradient.gif');background-repeat: no-repeat;background-size: 100% 15%;">
+  <div>
+    <mat-card>
+ 
+
+      <mat-card-content>
+        <form>
+          <div class="form-group">
+          
+       
+            <mat-label style="color: #0e1a3c;text-align: center;">
+             Upload Proof of new skill/qualification</mat-label
+            >
+            <br>
+            <br>
+            <mat-form-field  enctype="multipart/form-data"  style="width: 95%;position: relative;">
+              <div>
+                <!-- Fetch selected filed on change -->
+                <input
+                  type="file"
+                  accept="application/pdf"
+                  #fileInput
+                  id="uploadFile"
+                  (change)="uploadFileEvt($event)"
+                  name="uploadFile"
+                  [formControl]="imgFormControl"
+                  style="display: none"
+                  required
+                />
+                <!-- label of input -->
+                <label
+                  for="uploadFile"
+                  class="btn"
+                  style="background-color: #0e1a3c; color: white; font-family: Montserrat;"
+                  >Choose File</label
+                >
+                <br />
+                <!-- Display files names -->
+                <input
+                  style="width: 100vw; padding-top: 20px;"
+                  matInput
+                  [(ngModel)]="fileAttr"
+                  readonly
+                  name="name"
+                />
+
+                <mat-error *ngIf="imgFormControl.hasError('required')">
+                  No file <strong>chosen</strong>
+                </mat-error>
+              </div>
+            </mat-form-field>
+<br>
+            <mat-form-field
+            style="width: 95%;"
+            >
+              <mat-label style="color: #0e1a3c">
+                Enter Request Subject</mat-label
+              >
+              <input
+                type="text"
+                style="color: #0e1a3c"
+                matInput
+                [formControl]="nameFormControl"
+                name="UpdateName"
+                [(ngModel)]="updateRequest.UpdateSubject"
+                ngModelOptions="{standalone:true}"
+                placeholder="Ex. BComHons Informatics"
+                required
+              />
+              <mat-error *ngIf="nameFormControl.hasError('required')">
+               Name is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+            <br />
+            <br />
+
+
+            <mat-form-field
+            style="width: 95%;"
+            >
+              <mat-label style="color: #0e1a3c"
+                >Describe your update request</mat-label
+              >
+              <textarea
+                matInput
+                style="color: #0e1a3c"
+                [formControl]="descFormControl"
+                rows="5"
+                cols="90"
+                name="UpdateDesc"
+                 [(ngModel)]="updateRequest.UpdateDescription"
+                placeholder="Ex. I need a quali update as I have obtained my Hons in.."
+                required
+              ></textarea>
+              <mat-error *ngIf="descFormControl.hasError('required')">
+               Update Request Description is <strong>required</strong>
+             </mat-error>
+            </mat-form-field>
+            
+
+            <div class="form-group" style="padding-right: 40%"></div>
+          </div>
+          <ion-progress-bar *ngIf="isLoading" type="indeterminate"></ion-progress-bar>
+          <div class="button-container">
+              
+          
+           
+            <button id="confirm" class="btn" (click)="onSubmit()">Update</button>
+        </div>
+
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+   
+</ion-content>
+

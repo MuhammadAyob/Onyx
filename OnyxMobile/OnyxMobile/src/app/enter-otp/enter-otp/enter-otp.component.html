@@ -1,0 +1,171 @@
+  <!-- Card Form for Input -->
+ 
+    <!-- Mat Card Form for Read faq -->
+   
+    <div>
+      <mat-card class="matCard">
+       <ion-header style="text-align: center;">
+           <ion-toolbar>
+             <br>
+             <ion-title> Enter OTP</ion-title>
+             <ion-progress-bar *ngIf="isLoading" type="indeterminate"></ion-progress-bar>
+           </ion-toolbar>
+         </ion-header>
+  
+        <mat-card-content class="matContent">
+          <form>
+            <br>
+             <p>
+              Ensure that you enter the OTP before the expiration date and time as specified in the email sent to you.
+            </p>
+             <br>
+            <div class="form-group">
+               <br>
+              
+              <div style="padding: 0% 2.5% 0% 2%; min-width: 100%">
+              
+                   
+                <mat-form-field
+                 
+                  style="width: 95%;"
+                >
+              
+                <mat-label style="color: #0e1a3c">
+                   Enter OTP</mat-label
+                    >
+                   
+                  <input
+                    type="number"
+                    style="color: #0e1a3c"
+                    matInput
+                    [formControl]="OTPFormControl"
+                    name="resetOTP"
+                    [(ngModel)]="formData.OTP"
+                    placeholder="123456"
+                    required
+                    
+                  />
+                  <br>
+                  
+                 
+                  <mat-error *ngIf="OTPFormControl.hasError('required')" style="color: red;">
+                    OTP is <strong>required</strong>
+                  </mat-error>
+                  <mat-error *ngIf="OTPFormControl.hasError('pattern')" style="color: red;">
+                    OTP cannot be <strong>0</strong> and must NOT contain <strong>decimals</strong>
+                  </mat-error>
+                </mat-form-field>
+                <br />
+                <br />
+                <mat-form-field
+                 
+                style="width: 95%;"
+              >
+              
+              <mat-label style="color: #0e1a3c">
+                 Enter Password</mat-label
+                  >
+                  
+                <input
+                  [type]="hide ? 'password' : 'text'"
+                  style="color: #0e1a3c"
+                  matInput
+                  [formControl]="passwordFormControl"
+                  name="pass1"
+                  [(ngModel)]="formData.Password"
+             
+                  placeholder="Password must be minimum 6 characters and maximum 16 characters"
+                  required
+                  
+                />
+                 <button
+           mat-icon-button
+           matSuffix
+           (click)="hide = !hide"
+           (keydown.enter)="$event.preventDefault()"
+           [attr.aria-label]="'Hide Password'"
+           [attr.aria-pressed]="hide"
+         >
+           <mat-icon>
+             {{ hide ? "visibility_off" : "visibility" }}
+           </mat-icon>
+         </button>
+                <br>
+                
+               
+                <mat-error *ngIf="passwordFormControl.hasError('required')" style="color: red;">
+                Password is <strong>required</strong>
+               </mat-error>
+               <mat-error *ngIf="passwordFormControl.hasError('minlength')" style="color: red;">
+                 Password must be minimum 6 and maximum 16 characters.
+                </mat-error>
+                <mat-error *ngIf="passwordFormControl.hasError('maxlength')" style="color: red;">
+                 Password must be minimum 6 and maximum 16 characters.
+                </mat-error>
+              </mat-form-field>
+              <br>
+              <br>
+              <mat-form-field
+                 
+              style="width: 95%;"
+            >
+            
+            <mat-label style="color: #0e1a3c">
+               Confirm Password</mat-label
+                >
+                
+              <input
+                [type]="hide ? 'password' : 'text'"
+                style="color: #0e1a3c"
+                matInput
+                [formControl]="confirmPasswordFormControl"
+                name="confirmPassword"
+                [(ngModel)]="confirmPassword"
+           
+                placeholder="Confirm Password must be minimum 6 characters and maximum 16 characters"
+                required
+                
+              />
+               <button
+         mat-icon-button
+         matSuffix
+         (click)="hide = !hide"
+         (keydown.enter)="$event.preventDefault()"
+         [attr.aria-label]="'Hide Password'"
+         [attr.aria-pressed]="hide"
+       >
+         <mat-icon>
+           {{ hide ? "visibility_off" : "visibility" }}
+         </mat-icon>
+       </button>
+              <br>
+              
+             
+              <mat-error *ngIf="confirmPasswordFormControl.hasError('required')" style="color: red;">
+                Confirm password is <strong>required</strong>
+              </mat-error>
+              <mat-error *ngIf="confirmPasswordFormControl.hasError('minlength')" style="color: red;">
+                Password must have a minimum of <strong>6</strong> characters
+              </mat-error>
+              <mat-error *ngIf="confirmPasswordFormControl.hasError('maxlength')" style="color: red;">
+                Password must have a maxiumum of <strong>16</strong> characters
+              </mat-error>
+            </mat-form-field>             
+             
+             <br>
+             <br>
+       
+                
+              </div>
+  
+              <div class="form-group" style="padding-right: 40%"></div>
+            </div>
+            <div class="button-container">
+             <button id="cancel" class="btn"  routerLink="/reset-password">Back</button> 
+             
+              <button id="confirm" class="btn" (click)="onOTP()">Confirm</button>
+          </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>

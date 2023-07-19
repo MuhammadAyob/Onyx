@@ -1,0 +1,134 @@
+  <!-- Card Form for Input -->
+ 
+    <!-- Mat Card Form for Read faq -->
+   
+    <div>
+        <mat-card class="matCard">
+         <ion-header style="text-align: center;">
+             <ion-toolbar>
+               <br>
+               <ion-title> Login</ion-title>
+               <ion-progress-bar *ngIf="isLoading" type="indeterminate"></ion-progress-bar>
+             </ion-toolbar>
+           </ion-header>
+    
+          <mat-card-content class="matContent">
+            <form>
+              <div class="form-group">
+                 <br>
+                 <br>
+                <br /><br />
+                <div style="padding: 0% 2.5% 0% 2%; min-width: 100%">
+                
+                     
+                  <mat-form-field
+                   
+                    style="width: 95%;"
+                  >
+                  
+                  <mat-label style="color: #0e1a3c">
+                     Enter Email</mat-label
+                      >
+                     
+                    <input
+                      type="text"
+                      style="color: #0e1a3c"
+                      matInput
+                      [formControl]="UsernameFormControl"
+                      name="DeptName"
+                      [(ngModel)]="formData.Username"
+                      ngModelOptions="{standalone:true}"
+                      placeholder="xyz@gmail.com"
+                      required
+                      
+                    />
+                    <br>
+                    
+                   
+                    <mat-error *ngIf="UsernameFormControl.hasError('required')" style="color: red;">
+                    Email is <strong>required</strong>
+                   </mat-error>
+                   <mat-error *ngIf="UsernameFormControl.hasError('email')" style="color: red;">
+                     Email is <strong>invalid</strong>
+                    </mat-error>
+                  </mat-form-field>
+                  <br />
+                  <br />
+                  <mat-form-field
+                   
+                  style="width: 95%;"
+                >
+               
+                <mat-label style="color: #0e1a3c">
+                   Enter Password</mat-label
+                    >
+                  
+                  <input
+                    [type]="hide ? 'password' : 'text'"
+                    style="color: #0e1a3c"
+                    matInput
+                    [formControl]="PasswordFormControl"
+                    name="pass"
+                    [(ngModel)]="formData.Password"
+               
+                    placeholder="Enter Password"
+                    required
+                    
+                  />
+                   <button
+             mat-icon-button
+             matSuffix
+             (click)="hide = !hide"
+             (keydown.enter)="$event.preventDefault()"
+             [attr.aria-label]="'Hide Password'"
+             [attr.aria-pressed]="hide"
+           >
+             <mat-icon>
+               {{ hide ? "visibility_off" : "visibility" }}
+             </mat-icon>
+           </button>
+                  <br>
+                  
+                 
+                  <mat-error *ngIf="PasswordFormControl.hasError('required')" style="color: red;">
+                  Password is <strong>required</strong>
+                 </mat-error>
+                 <mat-error *ngIf="PasswordFormControl.hasError('minlength')" style="color: red;">
+                   Password must be minimum 6 and maximum 16 characters.
+                  </mat-error>
+                  <mat-error *ngIf="PasswordFormControl.hasError('maxlength')" style="color: red;">
+                   Password must be minimum 6 and maximum 16 characters.
+                  </mat-error>
+                </mat-form-field>
+                <br>
+                <br>
+                <br>
+                <div style="margin: auto; width: 100%; text-align: center;">
+                 <span>
+                   <a
+                   style="color:#0e1a3c;"
+                     class="text-link"
+                     class="aLink"
+                     routerLink="/reset"
+                     >Reset Password</a
+                   >
+                 </span>
+                </div>
+               
+               <br>
+               <br>
+         
+                  
+                </div>
+    
+                <div class="form-group" style="padding-right: 40%"></div>
+              </div>
+              <div class="button-container">
+               <button id="cancel" class="btn"  routerLink="/home">Home</button> 
+               
+                <button id="confirm" class="btn" (click)="onLogin()">Login</button>
+            </div>
+            </form>
+          </mat-card-content>
+        </mat-card>
+      </div>

@@ -1,0 +1,29 @@
+<ion-content>
+  <ion-progress-bar *ngIf="isLoading" type="indeterminate"></ion-progress-bar>
+  <div *ngIf="!isLoading"
+  style=" 
+  padding-top: 3em;height:100vh;
+  background-image: url('../../assets/gradient.gif');background-repeat: no-repeat;background-size: 100% 15%;">
+    <div>
+      <ion-searchbar [(ngModel)]="search"></ion-searchbar>
+      <div *ngIf="( updateRequests | update: search) == (null || undefined) || ((updateRequests | update: search)!.length <=0)" class="no-records" style="text-align: center;">
+        No requests found on this page, please try again.
+      </div>
+      <ion-card *ngFor="let req of updateRequests | update: search">
+        <ion-card-header>
+          <ion-card-title>{{req.UpdateSubject}}</ion-card-title>
+          <ion-card-subtitle>Status: Pending</ion-card-subtitle>
+        </ion-card-header>
+      
+        <ion-card-content>
+        {{req.UpdateDescription}}
+        </ion-card-content>
+      
+        <button id="confirm" class="btn" (click)="openPdfModal(req)">View Proof</button>
+        <br>
+        <br>
+      </ion-card>
+    </div>
+  </div>
+
+</ion-content>

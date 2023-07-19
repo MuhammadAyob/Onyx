@@ -1,0 +1,11 @@
+@font-face {
+    font-family: Montserrat;
+    src: local("Montserrat"),url(../assets/Fonts/Montserrat-Regular.ttf) format("truetype");
+}
+*:not(.mat-icon){
+font-family: 'Montserrat';
+}
+
+ion-app {
+    background-color: #ffffff;
+    }

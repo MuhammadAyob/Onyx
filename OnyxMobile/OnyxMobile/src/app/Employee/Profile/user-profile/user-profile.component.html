@@ -1,0 +1,263 @@
+
+<ion-content>
+
+    <!-- Card Form for Input -->
+   
+      <!-- Mat Card Form for Read faq -->
+     <div 
+     style="padding-top: 4em;height:100vh;
+     background-image: url('../../assets/gradient.gif');background-repeat: no-repeat;background-size: 100% 15%;">
+   <div>
+    <mat-card class="matCard">
+ 
+
+      <mat-card-content class="matContent">
+        <form>
+          <div class="form-group">
+          
+            <div>
+             <!--Image Stuff-->
+             <div style="text-align: center;">
+                <mat-label style="color: #0e1a3c;">Upload Personal Portrait</mat-label>
+
+                <br>
+                  <!-- image preview -->
+                   <div >
+                  <!--1-->          
+                   <div *ngIf="!change">
+                        <img src="{{'data:image/png;base64,'+ employee.Image}}" style="width:150px; height: 150px; padding-bottom: 5%;">
+                    </div>
+
+<!--2-->            <div *ngIf="change">
+                        <img src="{{dataImage}}" style=" width:150px; height: 150px;padding-bottom: 5%">
+                    </div>
+                     </div>
+                <mat-form-field enctype="multipart/form-data" style="position: relative; bottom: 15px;">
+                  <div>
+                    <!-- Fetch selected filed on change -->
+                    <input type="file" title=" " #fileInput id="uploadFile" (change)="uploadFileEvt($event)" name="uploadFile"
+                      accept="image/*" [formControl] = "ImageFormControl" style="display: none;" required/>
+                      <br>
+                      <!-- label of input -->
+                      <label for="uploadFile" class="btn" style="background-color: #0e1a3c;font-family: Montserrat; color: white;">Choose File</label>
+                      <br>
+                    <!-- Display files names -->
+                      <input style=" padding-top: 11%;" matInput [(ngModel)]="fileAttr" readonly name="name" />
+
+                    
+                  </div>
+
+
+                </mat-form-field>
+               
+              </div>
+            
+                        
+              
+              <mat-label style="color: #0e1a3c">
+                 Select Title</mat-label
+                   >
+          
+            <ion-select
+            name="TitleID"
+            [formControl]="titleFormControl"
+            [(ngModel)]="employee.TitleID"
+            interface="popover"
+            
+          >
+            <ion-select-option
+              *ngFor="let item of titleList"
+              [value]="item.TitleID"
+            >
+              {{ item.TitleName }}
+            </ion-select-option>
+          </ion-select>
+             
+            <br>
+            <mat-label style="color: #0e1a3c">
+              Enter Name</mat-label
+               >
+              <mat-form-field
+               
+                style="width: 95%;"
+              >
+             
+                <input
+                  type="text"
+                  style="color: #0e1a3c"
+                  matInput
+                  [formControl]="nameFormControl"
+                  name="Name"
+                  [(ngModel)]="employee.Name"
+        
+                  placeholder="Kyle"
+                  required
+                  
+                />
+                <br>
+                <mat-error *ngIf="nameFormControl.hasError('required')" style="color: red;">
+                    Name is <strong>required</strong>
+                   </mat-error>
+                   <mat-error *ngIf="nameFormControl.hasError('pattern')" style="color: red;">
+                    Name must contain only <strong>alpha characters</strong>
+                    </mat-error>
+              </mat-form-field>
+             
+           
+           <br>
+           <br>
+           <mat-label style="color: #0e1a3c">
+              Enter Surname</mat-label
+               >
+           <mat-form-field
+               
+           style="width: 95%;"
+         >
+       
+           <input
+           type="text"
+           matInput
+           [formControl]="surnameFormControl"
+           name="EmployeeSurname"
+           [(ngModel)]="employee.Surname"
+           placeholder="Ex. Pan"
+           required
+             
+           />
+           <br>
+           <mat-error *ngIf="surnameFormControl.hasError('required')" style="color: red;">
+              Employee Surname is <strong>required</strong>
+            </mat-error>
+
+          <mat-error *ngIf="surnameFormControl.hasError('pattern')" style="color: red;">
+            Employee surname must contain only <strong>alpha characters</strong>
+          </mat-error>
+         </mat-form-field>
+         <br>
+         <br>
+         <mat-label style="color: #0e1a3c">
+          Enter Email</mat-label
+           >
+         <mat-form-field
+               
+         style="width: 95%;"
+       >
+
+     
+           <input
+           type="text"
+           matInput
+           [formControl]="emailFormControl"
+           name="EmployeeEmail"
+           [(ngModel)]="employee.Email"
+           placeholder="Ex. Pan"
+           required
+           />
+         <br>
+         <mat-error *ngIf="emailFormControl.hasError('required')">
+           Email is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="emailFormControl.hasError('email')">
+              Email must be <strong>valid</strong>
+             </mat-error>
+       </mat-form-field>
+       <br>
+       <br>
+       <mat-label style="color: #0e1a3c">
+          Phone Number</mat-label
+           >
+       <mat-form-field
+               
+       style="width: 95%;"
+     >
+   
+         <input
+         type="text"
+         matInput
+         [formControl]="phoneFormControl"
+         name="EmployeePhoneNumber"
+         [(ngModel)]="employee.Phone"
+         placeholder="0824445555"
+         required
+         />
+       <br>
+       <mat-error *ngIf="phoneFormControl.hasError('required')" style="color: red;">
+        Phone Number is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="phoneFormControl.hasError('pattern')" style="color: red;">
+          Phone Number must be <strong>valid</strong>
+          </mat-error>
+     </mat-form-field>
+    <br>
+    <br>
+    <mat-label style="color: #0e1a3c">
+      Enter ID Number</mat-label
+       >
+    <mat-form-field
+               
+    style="width: 95%;"
+  >
+ 
+    <input
+    type="text"
+    matInput
+    [formControl]="idFormControl"
+    name="EmployeeIDNumber"
+    [(ngModel)]="employee.RSAIDNumber"
+    placeholder="Ex. Pan"
+    required
+    />
+    <br>
+    <mat-error *ngIf="idFormControl.hasError('required')" style="color: red;">
+        Employee ID Number is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="idFormControl.hasError('pattern')" style="color: red;">
+        Enter <strong>Valid</strong> ID Number
+        </mat-error>
+  </mat-form-field>
+       <br>
+       <br>
+       <mat-label style="color: #0e1a3c">
+          Enter Biography</mat-label
+           >
+           
+      <mat-form-field
+       
+      style="width: 95%;"
+    >
+ 
+        <textarea
+        matInput
+        rows="3"
+        cols="90"
+        [formControl]="biographyFormControl"
+        name="EmployeeAddress"
+        [(ngModel)]="employee.Biography"
+        required
+      ></textarea>
+      <br>
+      <mat-error *ngIf="biographyFormControl.hasError('required')" style="color: red;">
+       Employee Biography is <strong>required</strong>
+     </mat-error>
+    </mat-form-field>
+          
+            </div>
+
+            <div class="form-group" style="padding-right: 40%"></div>
+          </div>
+          <ion-progress-bar *ngIf="isLoading" type="indeterminate"></ion-progress-bar>
+          <div class="button-container">
+              
+          
+           
+            <button id="confirm" class="btn" (click)="onSubmit()">Update</button>
+        </div>
+
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+     </div>
+   
+</ion-content>
+

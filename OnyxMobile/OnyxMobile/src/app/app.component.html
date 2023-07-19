@@ -1,0 +1,63 @@
+<ion-app>
+  <div *ngIf="shouldShowMenu()">
+    <ion-menu side="start" content-id="main-content">
+      <ion-header>
+        <ion-toolbar translucent style="text-align: center;">
+          <br>
+          <div>
+            Hi, {{ username }}.
+          </div>
+          <br>
+           
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-list style="cursor: pointer;">
+          <ion-menu-toggle auto-hide="true" *ngFor="let p of pages">
+            <ion-item [routerLink]="p.url" routerDirection="root">
+              <ion-icon name="{{ p.icon }}"></ion-icon>
+              <ion-label style="padding-left: 10%;">{{ p.title }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+            <ion-item (click)="logOut()">
+              <ion-icon name="log-out-outline"></ion-icon> 
+              <ion-label style="padding-left: 10%;">Log Out</ion-label>
+            </ion-item>
+         
+        </ion-list>
+      </ion-content>
+    
+    </ion-menu>
+    
+    <div class="ion-page" id="main-content">
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons style="--ion-color-primary: #ffffff;" slot="start">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+          <br>
+          <div>
+            {{ getTitle() }}
+          </div>
+         <br>
+         
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-router-outlet></ion-router-outlet>
+      </ion-content>
+    </div>
+    
+  
+    
+  </div>
+
+  <div *ngIf="!shouldShowMenu()">
+    <div class="ion-page" id="main-content">
+      <ion-content>
+        <ion-router-outlet></ion-router-outlet>
+      </ion-content>
+    </div>
+   </div>
+ 
+</ion-app>

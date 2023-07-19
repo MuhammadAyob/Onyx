@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      PDF Uploaded
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closePdfModal()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Place your PDF viewer or other content here -->
+  <pdf-viewer
+            [src]="pdfSrc"
+            
+            [rotation]="0"
+            [original-size]="false"
+            [show-all]="true"
+            [fit-to-page]="false"
+            [zoom]="1"
+            [zoom-scale]="'page-width'"
+            [stick-to-page]="false"
+            [render-text]="true"
+            [external-link-target]="'blank'"
+            [autoresize]="true"
+            [show-borders]="true"
+            style="width: 100%; height: 100%; margin:0 auto"
+          ></pdf-viewer>
+</ion-content>

@@ -1,0 +1,61 @@
+<ion-content>
+    <ion-progress-bar *ngIf="isLoading" type="indeterminate"></ion-progress-bar>
+<div  
+*ngIf="!isLoading" 
+style=" 
+padding-top: 2em;height:100vh;
+background-image: url('../../assets/gradient.gif');background-repeat: no-repeat;background-size: 100% 15%;">
+  <div>
+    <ion-card>
+        <ion-card-header>
+          <ion-card-title>Department</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-list>
+                <ion-item>
+                {{deptName}}
+                </ion-item>
+              </ion-list>
+             
+        </ion-card-content>
+      </ion-card>
+    
+    <ion-card>
+        <ion-searchbar [(ngModel)]="search"></ion-searchbar>
+        <ion-card-header>
+          <ion-card-title>Skills</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-list>
+                <ion-item *ngFor="let item of EmployeeSkillList | skills: search">
+                 {{ item.SkillName}} - {{ item.SkillTypeName }}
+                </ion-item>
+              </ion-list>
+              <div *ngIf="( EmployeeSkillList | skills: search) == (null || undefined) || ((EmployeeSkillList | skills: search)!.length <=0)" class="no-records" style="text-align: center;">
+                No skills match the search input
+              </div>
+              
+        </ion-card-content>
+      </ion-card>
+      <ion-card>
+        <ion-searchbar [(ngModel)]="search2"></ion-searchbar>
+        <ion-card-header>
+          <ion-card-title>Qualifications</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-list>
+                <ion-item *ngFor="let item of EmployeeQualificationList | qualifications:search2">
+                 {{ item.QualificationName }}
+                </ion-item>
+              </ion-list>
+              <div *ngIf="( EmployeeQualificationList | qualifications:search2) == (null || undefined) || ((EmployeeQualificationList | qualifications:search2)!.length <=0)" class="no-records" style="text-align: center;">
+                No qualifications match the search input.
+              </div>
+              
+        </ion-card-content>
+      </ion-card>
+</div>
+</div>
+
+
+</ion-content>

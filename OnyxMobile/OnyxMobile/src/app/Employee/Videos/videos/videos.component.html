@@ -1,0 +1,25 @@
+<ion-content>
+  <ion-progress-bar *ngIf="isLoading" type="indeterminate"></ion-progress-bar>
+  <div *ngIf="!isLoading" 
+  style=" 
+  padding-top: 2.5em;height:100vh;
+  background-image: url('../../assets/gradient.gif');background-repeat: no-repeat;background-size: 100% 15%;">
+  <div >
+    <ion-searchbar [(ngModel)]="search"></ion-searchbar>
+    <div *ngIf="( instructionalVideoList | videoPipe: search) == (null || undefined) || ((instructionalVideoList | videoPipe: search)!.length <=0)" class="no-records" style="text-align: center;">
+      No videos found on this page, please try again.
+    </div>
+    <ion-card *ngFor="let video of instructionalVideoList | videoPipe: search">
+      <iframe [src]="video.VideoLink | ytPipe" height="100%" width="100%" 
+      allowfullscreen></iframe>
+      <ion-card-header>
+        <ion-card-title>{{ video.VideoName }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        {{ video.Description }}
+      </ion-card-content>
+    </ion-card>
+  </div>
+  </div>  
+</ion-content>
+<script src="https://player.vimeo.com/api/player.js"></script>
