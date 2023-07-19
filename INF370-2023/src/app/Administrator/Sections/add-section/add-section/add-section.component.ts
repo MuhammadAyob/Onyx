@@ -37,7 +37,8 @@ SectionDisplayedColumns: string[] = [
   'description'
 ];
 public dataSource = new MatTableDataSource<any>();
-
+isLoading!:boolean;
+gettingSections:boolean=true;
 noData = this.dataSource.connect().pipe(map((data) => data.length === 0));
 
 @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -71,6 +72,7 @@ ngOnInit(): void {
 refreshList() {
   this.serviceS.GetCourseSections(this.courseID).subscribe((result) => {
   this.dataSource.data = result as Section[];
+  this.gettingSections=false;
 })
 }
 
@@ -124,8 +126,8 @@ onSubmit() {
   if (isInvalid == true) {
     this.dialog.open(InputDialogComponent, {
       data: {
-        dialogTitle: 'Add error',
-        dialogMessage: 'Correct errors',
+        dialogTitle: 'Input error',
+        dialogMessage: 'Correct errors on highlighted fields',
         operation: 'ok',
       },
       width: '25vw',
@@ -139,11 +141,13 @@ onSubmit() {
       dialogMessage: 'Are you sure you want to add the new section?',
       operation: 'add',
     },
-    width: '25vw',
+    width: '50vw',
+    height:'30vh'
   });
 
   dialogReference.afterClosed().subscribe((result) => {
     if (result == true) {
+      this.isLoading=true;
       this.serviceS.AddSection(this.section).subscribe((result:any) => {
         console.log(result);
         if(result.Status===200)
@@ -158,11 +162,13 @@ onSubmit() {
                         duration: 3000,
                       }
               );
+              this.isLoading=false;
               this.refreshList();
               this.router.navigate(['admin/view-course']);
             }
             else if(result.Status===400)
             {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {
@@ -171,12 +177,14 @@ onSubmit() {
                     dialogMessage: 'Invalid data, please ensure that the data is in the correct format',
                     operation: 'ok',
                   },
-                  width: '25vw',
+                  width: '50vw',
+                  height:'30vh'
                 }
               );
             }
             else if(result.Status===404)
             {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {
@@ -185,12 +193,14 @@ onSubmit() {
                     dialogMessage: 'Enter a new section name',
                     operation: 'ok',
                   },
-                  width: '25vw',
+                  width: '50vw',
+                  height:'30vh'
                 }
               );
             }
             else
             {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {
@@ -199,7 +209,8 @@ onSubmit() {
                     dialogMessage: 'Internal server error, please try again',
                     operation: 'ok',
                   },
-                  width: '25vw',
+                  width: '50vw',
+                  height:'30vh'
                 }
               );
             }

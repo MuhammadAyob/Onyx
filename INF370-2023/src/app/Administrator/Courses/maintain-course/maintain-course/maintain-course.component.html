@@ -12,7 +12,14 @@
    
          <mat-card-content class="matContent">
            <form>
-             <div class="form-group">
+            <div *ngIf="employeeList == null || undefined"
+            style="
+           display: flex;
+           align-items: center;
+           justify-content: center;">
+             <mat-spinner ></mat-spinner>
+           </div>
+             <div class="form-group" *ngIf="!(employeeList == null || undefined)">
                <br /><br />
                <div style="padding: 0% 2.5% 0% 2%; min-width: 100%">
    
@@ -71,8 +78,8 @@
                      [formControl]="nameFormControl"
                      name="EmployeeName"
                      [(ngModel)]="course.Name"
-                     ngModelOptions="{standalone:true}"
-                     placeholder="Ex. Peter Pan"
+                     
+                     placeholder="Ex. Intro to Programming"
                      required
                    />
                    <mat-error *ngIf="nameFormControl.hasError('required')">
@@ -103,7 +110,7 @@
                    [formControl]="descriptionFormControl"
                   name="EmployeeSurname"
                   [(ngModel)]="course.Description"
-                   placeholder="Add Employee Button not working; Screen Not Displaying"
+                   placeholder="Ex. The course will cover..."
                    required
                  ></textarea>
                  <mat-error *ngIf="descriptionFormControl.hasError('required')">
@@ -114,27 +121,52 @@
                <br>
                <mat-form-field
                class="example-full-width"
+               appearance="legacy"
+               style="width: 95%;"
+             >
+               <mat-label style="color: #0e1a3c">
+                Enter Course Preview Vimeo ID</mat-label
+               >
+               <input
+               type="number"
+               matInput
+               [formControl]="previewFormControl"
+               name="PackagePrivvce"
+               [(ngModel)]="course.Preview"
+               placeholder="Ex. 123456"
+               required
+             />
+             <mat-error *ngIf="previewFormControl.hasError('required')">
+               Video ID is <strong>required</strong> and must only contain <strong>numbers</strong>
+             </mat-error>
+             <mat-error *ngIf="previewFormControl.hasError('pattern')">
+              Video ID must only contain <strong>numbers</strong>
+            </mat-error>
+             </mat-form-field>
+               <br>
+               <br>
+               <mat-form-field
+               class="example-full-width"
                style="width: 95%"
                appearance="legacy"
              >
                <mat-label style="color: #0e1a3c"
-                 >Enter Price in rands</mat-label
+                 >Enter Price in rands (will automatically be rounded to 2 decimal places)</mat-label
                >
                <input
                  type="number"
-                 min="1"
                  matInput
                  [formControl]="priceFormControl"
-                 name="PackagePrice"
+                 name="CPrice"
                  [(ngModel)]="course.Price"
-                 placeholder="Ex. Peter Pan"
+                 placeholder="Ex. 299.99"
                  required
                />
                <mat-error *ngIf="priceFormControl.hasError('required')">
-                 Price is <strong>required</strong>
+                 Price is <strong>required</strong> and must only contain <strong>numbers</strong>
                </mat-error>
                <mat-error *ngIf="priceFormControl.hasError('pattern')">
-                Price can not be equal to <strong>0</strong>
+                Price can not be less than or equal to <strong>0</strong>
               </mat-error>
              </mat-form-field>
 <br>
@@ -239,7 +271,8 @@ style="width: 95%;"
              </div>
              <br>
              <br>
-             <div class="button-container">
+             <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+             <div class="button-container" *ngIf="!(employeeList == null || undefined)">
                <button id="cancel" class="btn" (click)="onBack()">Cancel</button>
                <button id="confirm" class="btn" (click)="onSubmit()">Confirm</button>
            </div>

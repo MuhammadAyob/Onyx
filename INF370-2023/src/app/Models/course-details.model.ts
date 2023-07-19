@@ -5,6 +5,7 @@ export class CourseDetails{
     Image!:string | ArrayBuffer;
     CategoryID!:number;
     Active!:string;
+    Preview!:string;
     Price!:number | any;
     CourseAssistants!:number[]|null;
 }

@@ -5,6 +5,7 @@ export class Course{
     Image!:string | ArrayBuffer;
     CategoryID!:number;
     Active!:string;
+    Preview!:string;
 
 }
 

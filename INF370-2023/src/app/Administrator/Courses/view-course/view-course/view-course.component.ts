@@ -58,8 +58,7 @@ constructor( private dialog: MatDialog,
 
   getEmployeeList() {
     this.service.GetCourseAssistants(this.test.CourseID).subscribe((result) => {
-      console.log(result);
-      this.employeeList = result as any[];
+     this.employeeList = result as any[];
      this.isLoading=false;
     });
   }
@@ -72,7 +71,6 @@ constructor( private dialog: MatDialog,
 
   getCategory(){
     this.service.GetCategory(this.test.CategoryID).subscribe((result)=>{
-      console.log(result)
       this.category = result;
     })
   }
@@ -103,7 +101,8 @@ constructor( private dialog: MatDialog,
       const dialogReference = this.dialog.open(
         ConfirmDialogComponent,
         {
-          width: '25vw',
+          width: '50vw',
+          height:'30vh',
           data: {
             dialogTitle: 'Confirm Delete Course',
             operation: 'delete',
@@ -136,7 +135,8 @@ constructor( private dialog: MatDialog,
                   dialogMessage: 'Course is being used in other parts of the system',
                   operation: 'ok',
                 },
-                width: '25vw',
+                width: '50vw',
+                height:'30vh'
               });
             }
             else
@@ -147,7 +147,8 @@ constructor( private dialog: MatDialog,
                   dialogMessage: 'Internal server error, please try again',
                   operation: 'ok',
                 },
-                width: '25vw',
+                width: '50vw',
+                height:'30vh'
               });
             }
 

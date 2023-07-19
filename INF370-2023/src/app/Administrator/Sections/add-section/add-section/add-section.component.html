@@ -17,57 +17,56 @@
           <form>
             <div class="form-group">
               <br /><br />
-             <div style="padding: 0% 2.5% 0% 2%; ">
-              <mat-form-field
-              class="example-full-width"
-              appearance="legacy"
-              style="width: 99%;"
-            >
-              <mat-label style="color: #0e1a3c">
-               Enter Section Name</mat-label
-              >
-              <input
-                type="text"
-                style="color: #0e1a3c"
-                matInput
-                [formControl]="nameFormControl"
-                name="PhaseName"
-                [(ngModel)]="section.SectionName"
-                placeholder="Ex. Section 1"
-                required
-              />
-              <mat-error *ngIf="nameFormControl.hasError('required')">
-               Section Name is <strong>required</strong>
-             </mat-error>
-            </mat-form-field>
-           <br>
-           <br>
-              <mat-form-field
-            
-              class="example-full-width" appearance="legacy" style="width:99%;"
-        
-        >
-        <mat-label style="color: #0e1a3c">Section Description</mat-label>
-        <textarea
-             type="text"
-              matInput
-              [formControl]="descFormControl"
-              rows="5"
-              cols="90"
-              name="PhaseDesc"
-              [(ngModel)]="section.SectionDescription"
-              placeholder="Syntax basics"
-              required
-             ></textarea>
-             <mat-error *ngIf="descFormControl.hasError('required')">
-              Section Description is <strong>required</strong>
-            </mat-error>
-        </mat-form-field>
-<br>
-             </div>
+              <div style="padding: 0% 2.5% 0% 2%;">
+                <mat-form-field 
+                class="example-full-width" 
+                appearance="legacy"
+                style="width: 95%;"
+                >
+                  <mat-label style="color: #0e1a3c"> Enter Section Name</mat-label>
+                  <input
+                    type="text"
+                    matInput
+                    [formControl]="nameFormControl"
+                    name="PhaseName"
+                    [(ngModel)]="section.SectionName"
+                    placeholder="Ex. Section 1"
+                    required
+                  />
+                  <mat-error *ngIf="nameFormControl.hasError('required')">
+                    Section Name is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+                <br />
+                <br />
+    
+                <mat-form-field
+                  class="example-full-width"
+                  appearance="legacy"
+                  style="width: 95%;"
+                >
+                  <mat-label style="color: #0e1a3c"
+                    >Enter Section Description</mat-label
+                  >
+                  <textarea
+                    matInput
+                    [formControl]="descFormControl"
+                    rows="5"
+                    cols="90"
+                    name="PhaseDesc"
+                    [(ngModel)]="section.SectionDescription"
+                    placeholder="In this section, we learn about..."
+                    required
+                  ></textarea>
+                  <mat-error *ngIf="descFormControl.hasError('required')">
+                    Section Description is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
       
              <div class="form-group" style="padding-right: 40%"></div>
             </div>
+            <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
             <br>
             <div class="button-container">
               <button id="cancel" class="btn" (click)="onBack()">Cancel</button>
@@ -88,7 +87,7 @@
     <form class="navbar-form">
       <mat-form-field appearance="outline" color="white" style="width: 100%; border-color: white !important; color: #ffffff; padding-top: 1%;">
         <mat-label style=" color: #ffffff; background-color: transparent; border-bottom: none; font-size: 15px; width: 100%;">Search Sections</mat-label>
-        <input type="text" style="border-color: #5090d000;" matInput name="searchDept" (keydown.enter)="doFilter($event)" placeholder="Ex. Angular Course">
+        <input class="custom-input" type="text" style="border-color: #5090d000;" matInput name="searchDept" (keydown.enter)="doFilter($event)" placeholder="Ex. Section 1">
         <mat-icon class="search" style="float: right; margin-top: -22px;">search</mat-icon>
       </mat-form-field>
     </form>
@@ -99,6 +98,7 @@
 <mat-card-content style="padding-top: 1em;">
 <div>
   <table
+    *ngIf="!gettingSections"
     mat-table
     [dataSource]="dataSource"
     class="mat-elevation-z8"
@@ -133,9 +133,18 @@
     ></tr>
     <tr mat-row *matRowDef="let row; columns: SectionDisplayedColumns"></tr>
   </table>
-  <div *ngIf="noData | async" class="no-records" style="text-align: center; padding-top: 4em; font-size: larger;">
-      No records found, please try again.
+  <div *ngIf="gettingSections"
+  style="
+  display: flex;
+  align-items: center;
+  justify-content: center;">
+    <mat-spinner ></mat-spinner>
+  </div>
+  <div *ngIf="!gettingSections">
+    <div *ngIf="noData | async" class="no-records" style="text-align: center; padding-top: 4em; font-size: larger;">
+      No records retrieved!
     </div>
+   </div>
 </div>
 </mat-card-content>
 <br>

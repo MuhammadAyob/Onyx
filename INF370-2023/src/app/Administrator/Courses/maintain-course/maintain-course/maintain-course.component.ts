@@ -29,10 +29,11 @@ nameFormControl = new FormControl('', [Validators.required]);
 descriptionFormControl = new FormControl('', [Validators.required]);
 imageFormControl = new FormControl('', [Validators.required]);
 categoryFormControl = new FormControl('', [Validators.required]);
-priceFormControl = new FormControl('', [Validators.required,Validators.pattern('^[1-9][0-9]*(\.[0-9]+)?$')]);
+priceFormControl = new FormControl('', [Validators.required, Validators.pattern('^(?!0(?:\\.0+)?$)(?:\\d+)?(?:\\.\\d+)?$')]);
 assistantsFormControl = new FormControl('', [Validators.required]);
 activeFormControl = new FormControl('',[Validators.required]);
-  
+previewFormControl = new FormControl('',[Validators.required,Validators.pattern('^[0-9]+$')]);
+
 course!: CourseDetails;
 coursePrice!:CoursePrice;
 SelectedCategoryID!: number;
@@ -41,7 +42,7 @@ SelectedEmployees!:number[];
 categoryList!:CourseCategory[];
 employeeList!:EmployeeListForCourses[];
 dataImage:any;
-
+isLoading!:boolean;
 change!:boolean;
 isChecked:any;
 
@@ -68,7 +69,6 @@ this.getEmployeesList();
 
 getCategoriesList(){
   this.catService.GetCategories().subscribe((res)=>{
-  console.log(res)
   this.categoryList = res as CourseCategory[];
   })
 }
@@ -76,7 +76,6 @@ getCategoriesList(){
 getEmployeesList(){
   this.cService.GetEmployeeList().subscribe((res)=>{
   this.employeeList = res as EmployeeListForCourses[];
-   console.log(this.employeeList);
   })
 }
 
@@ -89,7 +88,8 @@ refreshForm(){
     Active:'',
     CategoryID:0,
     CourseAssistants:null,
-    Price:null
+    Price:null,
+    Preview:''
   }
 }
 
@@ -103,14 +103,14 @@ onSubmit() {
     this.dialog.open(InputDialogComponent, {
       data: {
         dialogTitle: "Input Error",
-        dialogMessage: "Correct Errors"
+        dialogMessage: "Correct Errors on highlighted fields"
       },
       width: '25vw',
       height: '27vh',
     });
   } else {
-    const title = 'Confirm New Package';
-    const message = 'Are you sure you want to add the new package?';
+    const title = 'Confirm Edit Course?';
+    const message = 'Are you sure you want to update the course?';
     this.showDialog(title, message);
   }
 }
@@ -123,7 +123,9 @@ validateFormControls(): boolean {
     this.priceFormControl.hasError('required')== false &&
     this.categoryFormControl.hasError('required')==false &&
     this.assistantsFormControl.hasError('required')==false &&
-this.activeFormControl.hasError('required')==false
+    this.activeFormControl.hasError('required')==false &&
+    this.previewFormControl.hasError('required') == false &&
+    this.previewFormControl.hasError('pattern') == false
 
   ){
     return false}
@@ -150,6 +152,7 @@ showDialog(title: string, message: string): void {
 
   dialogReference.afterClosed().subscribe((result) => {
     if (result == true) {
+      this.isLoading=true;
       this.cService.UpdateCourse(this.course.CourseID,this.course).subscribe(
         (result:any) => {
           console.log(result);
@@ -164,11 +167,31 @@ showDialog(title: string, message: string): void {
                       duration: 3000,
                     }
             );
-            this.router.navigate(['admin/read-courses']);
+            sessionStorage.removeItem('Course');
+            sessionStorage['Course'] = JSON.stringify(this.course);
             this.refreshForm();
+            this.router.navigate(['admin/view-course']);
+            this.isLoading=false;
+          }
+          else if(result.Status === 100)
+          {
+            this.isLoading=false;
+            const dialogReference = this.dialog.open(
+              ExistsDialogComponent,
+              {
+                data: {
+                  dialogTitle: 'Preview belongs to another course',
+                  dialogMessage: 'Please enter a different Video ID',
+                  operation: 'ok',
+                },
+                width: '50vw',
+                height:'30vh'
+              }
+            );
           }
           else if(result.Status===400)
           {
+            this.isLoading=false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {
@@ -177,12 +200,14 @@ showDialog(title: string, message: string): void {
                   dialogMessage: 'Please ensure data is in proper format',
                   operation: 'ok',
                 },
-                width: '25vw',
+                width: '50vw',
+                height:'30vh'
               }
             );
           }
           else if(result.Status===401)
           {
+            this.isLoading=false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {
@@ -191,12 +216,14 @@ showDialog(title: string, message: string): void {
                   dialogMessage: 'Invalid data, please ensure data is in the correct format',
                   operation: 'ok',
                 },
-                width: '25vw',
+                width: '50vw',
+                height:'30vh'
               }
             );
           }
           else if(result.Status===404)
           {
+            this.isLoading=false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {
@@ -205,11 +232,13 @@ showDialog(title: string, message: string): void {
                   dialogMessage: 'Enter a new course name',
                   operation: 'ok',
                 },
-                width: '25vw',
+                width: '50vw',
+                height:'30vh'
               }
             );
           }
           else{
+            this.isLoading=false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {
@@ -218,7 +247,8 @@ showDialog(title: string, message: string): void {
                   dialogMessage:'Internal server error, please try again',
                   operation: 'ok',
                 },
-                width: '25vw',
+                width: '50vw',
+                height:'30vh'
               }
             );
           }

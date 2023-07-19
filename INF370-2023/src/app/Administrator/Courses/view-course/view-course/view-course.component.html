@@ -31,8 +31,16 @@
            </div>
             <div class="form-group"  *ngIf="!(employeeList == null || undefined)">
               <br /><br />
-              <!--Image-->
-              <div style="margin-left: 38%; padding-bottom: 50px;">
+             
+              <h1 style="margin-left:42.5%;color: #0e1a3c; margin-bottom: -70px;"><b>Course Preview</b></h1>
+              <br>
+             
+              <div class='embed-container'>
+                <iframe [src]="test.Preview | VimeoUrl" frameborder='0' webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+              </div>
+              <br>
+               <!--Image-->
+               <div style="margin-left: 38%; padding-bottom: 50px;">
                 <mat-label style="color: #0e1a3c; padding-left: 7%"
                   >Course Image</mat-label
                 >
@@ -200,7 +208,7 @@ class="example-full-width" appearance="legacy" style="width:85.5%;padding-left: 
     <form class="navbar-form">
       <mat-form-field appearance="outline" color="white" style="width: 100%; border-color: white !important; color: #ffffff; padding-top: 1%;">
         <mat-label style=" color: #ffffff; background-color: transparent; border-bottom: none; font-size: 15px; width: 100%;">Search Sections</mat-label>
-        <input type="text" style="border-color: #5090d000;" matInput name="searchDept" (keydown.enter)="doFilter($event)" placeholder="Ex. Angular Course">
+        <input type="text" style="border-color: #5090d000;" matInput name="searchDept" (keydown.enter)="doFilter($event)" placeholder="Ex. Section 1">
         <mat-icon class="search" style="float: right; margin-top: -22px;">search</mat-icon>
       </mat-form-field>
     </form>
@@ -294,4 +302,5 @@ class="example-full-width" appearance="legacy" style="width:85.5%;padding-left: 
       </mat-tab>
     </mat-tab-group>
    </mat-card>
+   <script src="https://player.vimeo.com/api/player.js"></script>
 </div>

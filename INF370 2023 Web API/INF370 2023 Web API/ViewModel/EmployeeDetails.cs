@@ -32,6 +32,7 @@ namespace INF370_2023_Web_API.ViewModel
     public class CourseDetails
     {
         public int CourseID { get; set; }
+        public string Preview { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public byte[] Image { get; set; }

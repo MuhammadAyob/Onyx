@@ -25,6 +25,7 @@ Course:any;
 CourseID:any;
 message!:'';
 announcement!:Announcement;
+isLoading!:boolean;
 
 constructor( 
   public router: Router,
@@ -66,6 +67,7 @@ constructor(
 
     dialogReference.afterClosed().subscribe((result) => {
       if (result == true) {
+        this.isLoading=true;
         this.service.SendAnnouncement(this.announcement).subscribe(
           (result:any) => {
             console.log(result);
@@ -80,11 +82,13 @@ constructor(
                         duration: 3000,
                       }
               );
+              this.isLoading=false;
               this.router.navigate(['admin/read-courses']);
             }
 
             else if(result.Status===404)
             {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {
@@ -101,6 +105,7 @@ constructor(
 
             else
             {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {
@@ -129,10 +134,10 @@ constructor(
       this.dialog.open(InputDialogComponent, {
         data: {
           dialogTitle: "Input Error",
-          dialogMessage: "Correct Errors"
+          dialogMessage: "Correct Errors on highlighted fields"
         },
-        width: '50vw',
-        height: '30vh',
+        width: '25vw',
+        height: '27vh',
       });
     } else {
       const title = 'Confirm Announcement';

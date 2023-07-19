@@ -22,11 +22,12 @@ import { Section } from 'src/app/Models/section.model';
 export class MaintainSectionComponent implements OnInit {
 nameFormControl = new FormControl('', [Validators.required]);
 descFormControl = new FormControl('', [Validators.required]);
-
+isLoading!:boolean;
 courseID!:number;
 section!:Section;
 storageCourse:any;
 storageSection:any;
+gettingSection:boolean=true;
 
 constructor(
   public router: Router,
@@ -51,6 +52,7 @@ ngOnInit(): void {
 getSection(){
   this.serviceS.MaintainSection(this.storageSection.SectionID).subscribe((res)=>{
     this.section=res as Section;
+    this.gettingSection=false;
   })
 }
 
@@ -68,10 +70,7 @@ onBack()
   this.router.navigate(['admin/view-section']);
 }
 
-onArrowBack()
-{
-this.location.back();
-}
+
 
 validateFormControls(): boolean {
   if (
@@ -89,8 +88,8 @@ onSubmit() {
   if (isInvalid == true) {
     this.dialog.open(InputDialogComponent, {
       data: {
-        dialogTitle: 'Maintain error',
-        dialogMessage: 'Correct errors',
+        dialogTitle: 'Input Error',
+        dialogMessage: 'Correct Errors on highlighted fields',
         operation: 'ok',
       },
       width: '25vw',
@@ -98,8 +97,8 @@ onSubmit() {
     });
   } else
   {
-    const title = 'Confirm Update Phase';
-    const message = 'Are you sure you want to update the phase?';
+    const title = 'Confirm Update Section';
+    const message = 'Are you sure you want to update the Section?';
     this.showDialog(title, message);
   }
 }
@@ -111,11 +110,13 @@ showDialog(title: string, message: string): void {
       dialogMessage: message,
       operation: 'add',
     },
-    width: '25vw',
+    width: '50vw',
+    height:'30vh'
   });
 
   dialogReference.afterClosed().subscribe((result) => {
     if (result == true) {
+      this.isLoading=true;
       this.serviceS.UpdateSection(this.section.SectionID, this.section).subscribe((res:any) => 
       {
           if(res.Status===200)
@@ -129,24 +130,29 @@ showDialog(title: string, message: string): void {
                       duration: 3000,
                     }
             );
+            sessionStorage.removeItem('Section');
+            sessionStorage['Section'] = JSON.stringify(this.section);
             this.router.navigate(['admin/view-section']);
           }
           else if(res.Status===404)
           {
+            this.isLoading=false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {
                 data: {
-                  dialogTitle: 'Section Name exists under course',
+                  dialogTitle: 'Section Name Exists under this course',
                   dialogMessage: 'Enter a different section name',
                   operation: 'ok',
                 },
-                width: '25vw',
+                width: '50vw',
+                height:'30vh'
               }
             );
           }
           else if(res.Status===400)
           {
+            this.isLoading=false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {
@@ -155,12 +161,14 @@ showDialog(title: string, message: string): void {
                   dialogMessage: 'Please ensure the data is in the correct format',
                   operation: 'ok',
                 },
-                width: '25vw',
+                width: '50vw',
+                height:'30vh'
               }
             );
           }
           else
           {
+            this.isLoading=false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {
@@ -169,7 +177,8 @@ showDialog(title: string, message: string): void {
                   dialogMessage: 'Internal server error, please try again',
                   operation: 'ok',
                 },
-                width: '25vw',
+                width: '50vw',
+                height:'30vh'
               }
             );
           }

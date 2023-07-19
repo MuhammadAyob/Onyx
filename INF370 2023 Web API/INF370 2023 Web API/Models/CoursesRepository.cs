@@ -36,7 +36,13 @@ namespace INF370_2023_Web_API.Models
             
             try
             {
-                if(await CourseNameExists(course.Name))
+                var pExists = await db.Courses.Where(x => x.Preview == course.Preview).FirstOrDefaultAsync();
+                if (pExists != null)
+                {
+                    return new { Status = 100, Message = "Preview exists" };
+                }
+
+                if (await CourseNameExists(course.Name))
                 {
                     return new { Status = 404, Message = "Course Exists" };
                 }
@@ -48,6 +54,7 @@ namespace INF370_2023_Web_API.Models
                 _course.Image = course.Image;
                 _course.CategoryID = course.CategoryID;
                 _course.Active = course.Active;
+                _course.Preview = course.Preview;
 
                 db.Courses.Add(_course);
                 await db.SaveChangesAsync();
@@ -148,6 +155,7 @@ namespace INF370_2023_Web_API.Models
                 obj.Description = course.Description;
                 obj.Image = course.Image;
                 obj.CategoryID = course.CategoryID;
+                obj.Preview = course.Preview;
                 obj.Active = course.Active;
 
                 // RETRIEVE COURSE PRICE
@@ -197,6 +205,7 @@ namespace INF370_2023_Web_API.Models
                     obj.Description = course.Description;
                     obj.Image = course.Image;
                     obj.CategoryID = course.CategoryID;
+                    obj.Preview = course.Preview;
                     obj.Active = course.Active;
 
                     // RETRIEVE COURSE PRICE
@@ -239,11 +248,19 @@ namespace INF370_2023_Web_API.Models
         {
             try
             {
+                var pExists = await db.Courses.Where(x => x.Preview == course.Preview && x.CourseID != id).FirstOrDefaultAsync();
+                if (pExists != null)
+                {
+                    return new { Status = 100, Message = "Preview exists" };
+                }
+
                 var test = await db.Courses.Where(x => x.Name == course.Name && x.CourseID != id).FirstOrDefaultAsync();
                 if (test != null)
                 {
                     return new { Status = 404, Message = "Course Name in use" };
                 }
+
+               
 
                 else
                 {
@@ -254,6 +271,7 @@ namespace INF370_2023_Web_API.Models
                     cour.Image = course.Image;
                     cour.CategoryID = course.CategoryID;
                     cour.Active = course.Active;
+                    cour.Preview = course.Preview;
 
                     db.Entry(cour).State = EntityState.Modified;
                     await db.SaveChangesAsync();

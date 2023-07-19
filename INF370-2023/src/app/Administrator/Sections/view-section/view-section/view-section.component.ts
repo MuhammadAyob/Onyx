@@ -114,7 +114,8 @@ onDeleteSection() {
 
   
   const dialogReference = this.dialog.open(ConfirmDialogComponent, {
-    width: '25vw',
+    width: '50vw',
+    height:'30vh',
     data: {
       dialogTitle: 'Confirm Delete Section',
       operation: 'delete',
@@ -147,7 +148,8 @@ onDeleteSection() {
               dialogMessage: 'Cannot delete as Lessons are attached to this section, please remove all subsequent lessons and children components first.',
               operation: 'ok',
             },
-            width: '25vw',
+            width: '50vw',
+            height:'36vh'
           });
         }
       }

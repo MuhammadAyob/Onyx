@@ -7,7 +7,7 @@
       <Diagram DiagramId="b57861c8e0384a1d92366af1e54a7e21" Name="Diagram1" ZoomLevel="94">
         <EntityTypeShape EntityType="Model.Application" Width="1.5" PointX="11.25" PointY="8.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.AuditLog" Width="1.5" PointX="3" PointY="24.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.CartCourse" Width="1.5" PointX="16.5" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.CartCourse" Width="1.5" PointX="17.125" PointY="12.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Contact" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Course" Width="1.5" PointX="6" PointY="12.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.CourseAssistant" Width="1.5" PointX="8.25" PointY="8.5" IsExpanded="true" />

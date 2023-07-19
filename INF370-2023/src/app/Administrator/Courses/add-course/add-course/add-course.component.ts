@@ -31,10 +31,10 @@ nameFormControl = new FormControl('', [Validators.required]);
 descriptionFormControl = new FormControl('', [Validators.required]);
 imageFormControl = new FormControl('', [Validators.required]);
 categoryFormControl = new FormControl('', [Validators.required]);
-priceFormControl = new FormControl('', [Validators.required,Validators.required,Validators.pattern('^[1-9][0-9]*(\.[0-9]+)?$')]);
+priceFormControl = new FormControl('', [Validators.required,Validators.pattern('^(?!0(?:\\.0+)?$)(?:\\d+)?(?:\\.\\d+)?$')]);
 assistantsFormControl = new FormControl('', [Validators.required]);
 activeFormControl = new FormControl('',[Validators.required]);
-
+previewFormControl = new FormControl('',[Validators.required, Validators.pattern('^[0-9]+$')]);
 course!: CourseDetails;
 coursePrice!:CoursePrice;
 SelectedCategoryID!: number;
@@ -43,6 +43,7 @@ SelectedEmployees!:number[];
 categoryList!:CourseCategory[];
 employeeList!:EmployeeListForCourses[];
 dataImage:any;
+isLoading!:boolean;
 
 constructor(
   public router: Router,
@@ -63,7 +64,6 @@ constructor(
 
   getCategoriesList(){
     this.catService.GetCategories().subscribe((res)=>{
-    console.log(res)
     this.categoryList = res as CourseCategory[];
     })
   }
@@ -71,7 +71,6 @@ constructor(
   getEmployeesList(){
     this.cService.GetEmployeeList().subscribe((res)=>{
     this.employeeList = res as EmployeeListForCourses[];
-     console.log(this.employeeList);
     })
   }
 
@@ -84,8 +83,17 @@ constructor(
       Active: '',
       Price:0,
       CourseAssistants:null,
-      CategoryID:0
+      CategoryID:0,
+      Preview:''
     };
+  }
+
+  selectCategory($event:any) {
+    this.course.CategoryID = $event;
+  }
+  
+  selectActive($event:any) {
+    this.course.Active = $event;
   }
 
   onSubmit() {
@@ -94,14 +102,14 @@ constructor(
       this.dialog.open(InputDialogComponent, {
         data: {
           dialogTitle: "Input Error",
-          dialogMessage: "Correct Errors"
+          dialogMessage: "Correct Errors on highlighted fields"
         },
-        width: '25vw',
-        height: '27vh',
+        width: '40vw',
+        height: '30vh',
       });
     } else {
-      const title = 'Confirm New Package';
-      const message = 'Are you sure you want to add the new package?';
+      const title = 'Confirm New Course';
+      const message = 'Are you sure you want to add the new Course?';
       this.showDialog(title, message);
     }
   }
@@ -114,7 +122,10 @@ constructor(
       this.priceFormControl.hasError('required')== false &&
       this.categoryFormControl.hasError('required')==false &&
       this.assistantsFormControl.hasError('required')==false &&
-  this.activeFormControl.hasError('required')==false
+      this.activeFormControl.hasError('required') == false &&
+      this.previewFormControl.hasError('required') == false &&
+      this.previewFormControl.hasError('pattern') == false && 
+      this.imageFormControl.hasError('required') == false
 
 
     ){
@@ -136,12 +147,13 @@ constructor(
         dialogMessage: message,
         operation: 'add',
       },
-      height: '27vh',
-      width: '25vw',
+      height: '30vh',
+      width: '50vw',
     });
 
     dialogReference.afterClosed().subscribe((result) => {
       if (result == true) {
+        this.isLoading=true;
         this.cService.AddCourse(this.course).subscribe(
           (result:any) => {
             console.log(result);
@@ -156,11 +168,29 @@ constructor(
                         duration: 3000,
                       }
               );
+              this.isLoading=false;
               this.router.navigate(['admin/read-courses']);
               this.refreshForm();
+              
+            }
+            else if(result.Status === 100)
+            {
+              this.isLoading=false;
+              const dialogReference = this.dialog.open(
+                ExistsDialogComponent,
+                {
+                  data: {
+                    dialogTitle: 'Preview Exists',
+                    dialogMessage: 'The preview belongs to an existing course',
+                    operation: 'ok',
+                  },
+                  width: '50vw',
+                  height:'30vh'
+                }
+              );
             }
             else if(result.Status===400)
-            {
+            { this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {
@@ -169,12 +199,14 @@ constructor(
                     dialogMessage: 'Please ensure data is in proper format',
                     operation: 'ok',
                   },
-                  width: '25vw',
+                  width: '50vw',
+                  height:'30vh'
                 }
               );
             }
             else if(result.Status===401)
             {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {
@@ -183,12 +215,14 @@ constructor(
                     dialogMessage: 'Ensure the price is rounded off to 2 decimal places with a "." seperating the whole number',
                     operation: 'ok',
                   },
-                  width: '25vw',
+                  width: '50vw',
+                  height:'30vh'
                 }
               );
             }
             else if(result.Status===404)
             {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {
@@ -197,11 +231,13 @@ constructor(
                     dialogMessage: 'Enter a new course name',
                     operation: 'ok',
                   },
-                  width: '25vw',
+                  width: '50vw',
+                  height:'30vh'
                 }
               );
             }
             else{
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {
@@ -210,7 +246,8 @@ constructor(
                     dialogMessage:'Internal server error, please try again',
                     operation: 'ok',
                   },
-                  width: '25vw',
+                  width: '50vw',
+                  height:'30vh'
                 }
               );
             }
