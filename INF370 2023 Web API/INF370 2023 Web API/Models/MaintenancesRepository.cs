@@ -60,26 +60,17 @@ namespace INF370_2023_Web_API.Models
                     string name = _name.Name;
                     string surname = _name.Surname;
 
-                    ///
-
-                    string phone = _name.Phone;
-                    string cnumber = phone.Substring(1);
-                    string Ncode = "+27";
-                    string finalPhone = Ncode + cnumber;
-
-                    /////
+                   
 
                     string emailID = _name.Email;
-                    string maintenanceRequest = mReq.Description;
                     dynamic dateLogged = mReq.DateLogged;
                     string subjectFor = "Confirmed";
 
 
                     //Send Email
-                    await SendMaintenanceEmail(emailID, name, surname, maintenanceRequest, subjectFor, dateLogged);
+                    await SendMaintenanceEmail(emailID, name, surname, mReq, subjectFor, dateLogged);
 
-                    //Send SMS
-                    // SendMaintenanceSMS(finalPhone, maintenanceRequest, name, surname, subjectFor, dateLogged);
+                   
                 }
 
                 else
@@ -88,14 +79,7 @@ namespace INF370_2023_Web_API.Models
                     string name = _sName.Name;
                     string surname = _sName.Surname;
                    
-                    ///
-
-                    string phone = _sName.Phone;
-                    string cnumber = phone.Substring(1);
-                    string Ncode = "+27";
-                    string finalPhone = Ncode + cnumber;
-
-                    /////
+                  
 
                     string emailID = _sName.Email;
                     string maintenanceRequest = mReq.Description;
@@ -104,10 +88,9 @@ namespace INF370_2023_Web_API.Models
 
 
                     //Send Email
-                    await SendMaintenanceEmail(emailID, name, surname, maintenanceRequest, subjectFor, dateLogged);
+                    await SendMaintenanceEmail(emailID, name, surname, mReq, subjectFor, dateLogged);
 
-                    //Send SMS
-                     //SendMaintenanceSMS(finalPhone, maintenanceRequest, name, surname, subjectFor, dateLogged);
+                   
                 }
 
 
@@ -138,26 +121,16 @@ namespace INF370_2023_Web_API.Models
                     string name = _name.Name;
                     string surname = _name.Surname;
 
-                    ///
-                   
-                    string phone = _name.Phone;
-                    string cnumber = phone.Substring(1);
-                    string Ncode = "+27";
-                    string finalPhone = Ncode + cnumber;
-
-                    /////
 
                     string emailID = _name.Email;
-                    string maintenanceRequest = mReq.Description;
+                  
                     dynamic dateLogged = mReq.DateLogged;
                     string subjectFor = "Discarded";
 
 
                     //Send Email
-                    await SendMaintenanceEmail(emailID, name, surname, maintenanceRequest, subjectFor, dateLogged);
+                    await SendMaintenanceEmail(emailID, name, surname, mReq, subjectFor, dateLogged);
 
-                    //Send SMS
-                    // SendMaintenanceSMS(finalPhone, maintenanceRequest, name, surname, subjectFor, dateLogged);
                 }
 
                 else
@@ -166,26 +139,18 @@ namespace INF370_2023_Web_API.Models
                     string name = _sName.Name;
                     string surname = _sName.Surname;
                    
-                    ///
-
-                    string phone = _sName.Phone;
-                    string cnumber = phone.Substring(1);
-                    string Ncode = "+27";
-                    string finalPhone = Ncode + cnumber;
-
-                    /////
+                   
 
                     string emailID = _sName.Email;
-                    string maintenanceRequest = mReq.Description;
+                   
                     dynamic dateLogged = mReq.DateLogged;
                     string subjectFor = "Discarded";
 
 
                     //Send Email
-                    await SendMaintenanceEmail(emailID, name, surname, maintenanceRequest, subjectFor, dateLogged);
+                    await SendMaintenanceEmail(emailID, name, surname, mReq, subjectFor, dateLogged);
 
-                    //Send SMS
-                    //SendMaintenanceSMS(finalPhone, maintenanceRequest, name, surname, subjectFor, dateLogged);
+                
                 }
 
                 return new { Status = 200, Message = "Maintenance Request discarded" };
@@ -310,85 +275,7 @@ namespace INF370_2023_Web_API.Models
             }
         }
 
-        public async Task<object> MaintenanceReviewed(int id)
-        {
-            try
-            {
-                var mReq = await db.Maintenances.FindAsync(id);
-                mReq.MaintenanceStatusID = 2;
-
-                db.Entry(mReq).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                var _name = await db.Employees.Where(x=> x.UserID==mReq.UserID).FirstOrDefaultAsync();
-               
-                
-               
-                if (_name != null)
-                {
-                     string name = _name.Name;
-                     string surname = _name.Surname;
-
-                    ///
-
-                    string phone = _name.Phone;
-                    string cnumber = phone.Substring(1);
-                    string Ncode = "+27";
-                    string finalPhone = Ncode + cnumber;
-
-                    /////
-
-                    string emailID = _name.Email;
-                     string maintenanceRequest = mReq.Description;
-                     dynamic dateLogged = mReq.DateLogged;
-                     string subjectFor = "Reviewed";
-
-
-                    //Send Email
-                    await SendMaintenanceEmail(emailID, name, surname, maintenanceRequest, subjectFor, dateLogged);
-
-                    //Send SMS
-                  //  SendMaintenanceSMS(finalPhone, maintenanceRequest, name, surname, subjectFor, dateLogged);
-                }
-
-                else
-                {
-                    var _sName = await db.Students.Where(x=>x.UserID == mReq.UserID).FirstOrDefaultAsync();
-                    string name = _sName.Name;
-                    string surname = _sName.Surname;
-                    ///
-
-                    string phone = _sName.Phone;
-                    string cnumber = phone.Substring(1);
-                    string Ncode = "+27";
-                    string finalPhone = Ncode + cnumber;
-
-                    /////
-
-                    string emailID = _sName.Email;
-                    string maintenanceRequest = mReq.Description;
-                    dynamic dateLogged = mReq.DateLogged;
-                    string subjectFor = "Reviewed";
-
-
-                    //Send Email
-                    await SendMaintenanceEmail(emailID, name, surname, maintenanceRequest, subjectFor, dateLogged);
-
-                    //Send SMS
-                   // SendMaintenanceSMS(finalPhone, maintenanceRequest, name, surname, subjectFor, dateLogged);
-                }
-                
        
-                return new { Status = 200, Message = "Maintenance Request reviewed" };
-
-                
-            }
-
-            catch (Exception e)
-            {
-                return e.ToString();
-            }
-        }
-
         public async Task<object> UpdateMaintenanceRequest(int id, Maintenance maintenance)
         {
             try
@@ -411,10 +298,10 @@ namespace INF370_2023_Web_API.Models
         
         // email stuff
 
-        private async Task SendMaintenanceEmail(string emailID, string name, string surname, string maintenanceRequest, string subjectFor, dynamic dateLogged)
+        private async Task SendMaintenanceEmail(string emailID, string name, string surname, Maintenance maintenanceRequest, string subjectFor, dynamic dateLogged)
         {
-            var fromEmailAccount = "muhammad.ayob7@gmail.com";
-            var fromEmailAccountPassword = "wkguzejivsgpirle";
+            var fromEmailAccount = "dseiqueries@gmail.com";
+            var fromEmailAccountPassword = "epqshwdnwmokortk";
 
             var fromAddress = new MailAddress(fromEmailAccount);
             var toAddress = new MailAddress(emailID);
@@ -422,34 +309,38 @@ namespace INF370_2023_Web_API.Models
             var subject = "";
             var message = "";
 
-            if (subjectFor == "Reviewed")
-            {
-                subject = "Your Maintenance Request is under investigation.";
-                message = "Dear" + " " + name + " " + surname
-                + "<br> Thank you for submitting an official Maintenance Request, namely:" + " "+maintenanceRequest+""+",logged on:"+dateLogged+"."
-                +"<br>We would like to inform you that our administrative and technical teams have officially reviewed your request and are currently investigating the issue. We urge that you regularly check on your email inbox, SMS inbox, or the 'Maintenance Requests' tab, located on the side-navigation bar of your user portal tab, to track the outcome of your logged maintenance request/s."
-                + "<br>For further assistance or enquiries, please contact us at" + " " + fromAddress
-                + "<br> Sincerely, The Darus-Salaam Centre Team.";
-            }
+          
 
-            else if(subjectFor == "Confirmed")
+            if(subjectFor == "Confirmed")
             {
                 subject = "Your Maintenance Request has been resolved.";
-                message = "Dear" + "" + name + "" + surname
-                + "<br> We are pleased to inform you that your Maintenance Request, namely:" + " " + maintenanceRequest + "" + ", logged on:" + dateLogged + ", has been resolved."
-                + "<br>Thank you for taking the time and consideration to help improve the quality of the presentation and user experience of the system. We urge you to log in to your user profile to verify that the issue has been adequately resolved to your desired expectations or if it requires further enhancements by logging a new maintenance request."
-                + "<br>For further assistance or enquiries, please contact us at" + "" + fromAddress
-                + "<br> Sincerely, The Darus-Salaam Centre Team.";
+                message = "Dear" + " " + name + " " + surname
+                + "<br> <br> We are pleased to inform you that your Maintenance Request has been resolved!"
+                + "<br> <br>"
+                + "Brief summary of your maintenance query details: " + "<br>" + 
+                "Date Logged:" + " " + maintenanceRequest.DateLogged.ToString("dd/MM/yyyy") + "<br>" + 
+                "Issue:" + " " + maintenanceRequest.Description + "<br>"
+
+                + "<br>Thank you for taking the time and consideration to help improve the quality of the presentation and user experience of the system. " +
+                "<br> We urge you to log in to your user profile to verify that the issue has been adequately resolved to your desired expectations or if it requires further enhancements by logging a new maintenance request."
+                + "<br> <br> For further assistance or enquiries, please contact us at dseiqueries@gmail.com"
+                + "<br/> <br> Sincerely, The Onyx Team" +
+                "<br/><h5>Powered by Onyx</h5>";
             }
 
             else
             {
                 subject = "Your Maintenance Request has been discarded.";
-                message = "Dear" + "" + name + "" + surname
-                + "<br> We regret to inform you that your Maintenance Request, namely:" + " " + maintenanceRequest + "" + ", logged on:" + dateLogged + ", has been discarded."
-                + "<br>Thank you for taking the time and consideration to help improve the quality of the presentation and user experience of the system. However, after thorough investigation our administrative and technical teams have decided on terminating the investigation. The request was deemed as unwarranted, with no significant underlying issue at hand."
-                + "<br>If you feel that this was a mistake, or require further assistance, please contact us at" + "" + fromAddress
-                + "<br> Sincerely, The Darus-Salaam Centre Team.";
+                message = "Dear" + " " + name + " " + surname
+                + "<br> <br> We regret to inform you that your Maintenance Request has been discarded!"
+                + "<br> <br>"
+                + "Brief summary of your maintenance query details: " + "<br>" +
+                "Date Logged:" + " " + maintenanceRequest.DateLogged.ToString("dd/MM/yyyy") + "<br>" +
+                "Issue:" + " " + maintenanceRequest.Description + "<br>"
+                + "<br>Thank you for taking the time and consideration to help improve the quality of the presentation and user experience of the system. <br> However, after thorough investigation our administrative team have decided on terminating the investigation. The request was deemed as unwarranted, with no significant underlying issue at hand."
+                + "<br> <br> If you feel that this was a mistake, or require further assistance, please contact us at dseiqueries@gmail.com" +
+                 "<br/> <br> Sincerely, The Onyx Team" +
+                 "<br/><h5>Powered by Onyx</h5>";
             }
 
 

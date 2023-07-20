@@ -36,7 +36,7 @@ locationFormControl = new FormControl('', [Validators.required, Validators.patte
 
 maintenance: any;
 maintenanceList!: Maintenance[];
-
+isLoading!:boolean;
 maintenanceTypeList!: MaintenanceType[];
 
 maintenancePriorityList!: MaintenancePriority[];
@@ -97,7 +97,7 @@ constructor(
       this.dialog.open(InputDialogComponent, {
         data: {
           dialogTitle: "Error",
-          dialogMessage: "Correct input errors"
+          dialogMessage: "Correct input errors on highlighted fields"
         },
         width: '25vw',
         height: '27vh',
@@ -134,8 +134,8 @@ constructor(
         dialogPopupMessage: popupMessage,
         operation: 'add',
       }, //^captured department info here for validation
-      height: '27vh',
-      width: '25vw',
+      height: '30vh',
+      width: '50vw',
     });
 
    
@@ -154,6 +154,7 @@ constructor(
         newMaintenance.DateResolved=this.maintenance.DateResolved;
         newMaintenance.Image=this.maintenance.Image;
 
+        this.isLoading=true;
         this.service
           .UpdateMaintenanceRequest(newMaintenance.MaintenanceID, newMaintenance)
           .subscribe(
@@ -162,7 +163,7 @@ constructor(
               if(result.Status === 200)
               {
                 this.snack.open(
-                  'Request resolved!',
+                  'Request updated!',
                         'OK',
                         {
                           horizontalPosition: 'center',
@@ -170,11 +171,14 @@ constructor(
                           duration: 3000,
                         }
                 );
+                this.isLoading=false;
                 this.router.navigate(['admin/read-maintenance-requests']);
               }
 
               else if(result.Status === 404)
               {
+
+                this.isLoading=false;
                 const dialogReference = this.dialog.open(
                   ExistsDialogComponent,
                   {
@@ -183,11 +187,13 @@ constructor(
                       dialogMessage: 'Invalid data, please ensure data is in the correct format',
                       operation: 'ok',
                     },
-                    width: '25vw',
+                    height: '30vh',
+                    width: '50vw',
                   }
                 );
               }
               else{
+                this.isLoading=false;
                 const dialogReference = this.dialog.open(
                   ExistsDialogComponent,
                   {
@@ -196,7 +202,8 @@ constructor(
                       dialogMessage: 'Internal server error, please try again',
                       operation: 'ok',
                     },
-                    width: '25vw',
+                    height: '30vh',
+                    width: '50vw',
                   }
                 );
               }

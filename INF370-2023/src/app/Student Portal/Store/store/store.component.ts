@@ -42,6 +42,7 @@ noData = this.dataSource.connect().pipe(map(data=>data.length===0));
 @ViewChild(MatPaginator) paginator!: MatPaginator;
 @ViewChild(MatSort) sort!:MatSort;
   
+isLoading:boolean=true;
 courselist!:any[];
 categoryList!:CourseCategory[];
 StudentID: any;
@@ -62,7 +63,6 @@ constructor(
 
 ngOnInit(): void {
 this.StudentID = sessionStorage.getItem('StudentID');
-console.log('getting');
 this.refreshList();
 this.GetCategories();
 this.GetVAT();
@@ -79,6 +79,7 @@ GetVAT(){
   this.VATService.GetCurrentVAT().subscribe((result)=>{
   this.VAT = result as any;
   sessionStorage['CurrentVAT'] = JSON.stringify(this.VAT)
+  this.isLoading=false;
   })
 }
 
@@ -135,11 +136,9 @@ refreshList() {
 GetCategories(){
   this.catService.GetCategories().subscribe((result)=>{
     this.categoryList = result as CourseCategory[];
-    console.log(this.categoryList);
   })
 }
  onView(obj:any){
-  console.log(obj);
   sessionStorage['course-structure'] = JSON.stringify(obj)
   this.router.navigate(['student/view-course-structure']);
  }

@@ -121,8 +121,8 @@ onArrowBack() {
 }
 
 onDelete(id:number) {
-  const title = 'Confirm Delete Category';
-  const message = 'Are you sure you want to delete the qualification?';
+  const title = 'Confirm Discard Maintenance';
+  const message = 'Are you sure you want to discard the Maintenance?';
   
   const dialogReference = this.dialog.open(ConfirmDialogComponent, {
     data: {
@@ -131,12 +131,13 @@ onDelete(id:number) {
       operation: 'delete',
       qualificationData: this.maintenance,
     }, //^captured department info here for validation
-    height: '27vh',
-    width: '25vw',
+    height: '30vh',
+    width: '50vw',
   });
 
   dialogReference.afterClosed().subscribe((result) => {
     if (result == true) {
+      this.isLoading=true;
       this.service.DeleteMaintenaceRequest(id).subscribe(
         (result:any) => {
           console.log(result);
@@ -151,18 +152,21 @@ onDelete(id:number) {
                       duration: 3000,
                     }
             );
+            this.isLoading=false;
             this.refreshList();
           }
           else
           {
+            this.isLoading=false;
             this.dialog.open(InputDialogComponent, {
-              height: '27vh',
-              width: '25vw',
+              height: '30vh',
+              width: '50vw',
               data: {
-                dialogTitle: 'Error',
-                dialogMessage:'Internal server error. Please try again'
+                dialogTitle: 'Email Error',
+                dialogMessage:'Maintenance status has been updated in DB. However, due to no internet connection, the email failed to send'
               },
             });
+            this.refreshList();
           }
         }
       );

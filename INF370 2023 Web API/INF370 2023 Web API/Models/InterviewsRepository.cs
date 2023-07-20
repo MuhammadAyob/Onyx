@@ -498,7 +498,7 @@ namespace INF370_2023_Web_API.Models
             var toAddress = new MailAddress(emailID);
 
             var subject = "Job Application: Interview Attendance";
-            var message = "Dear " + name + " " + surname + "<br/><br/This email hereby confirms your attendance of your interview and that the QR Code was scanned." +
+            var message = "Dear " + name + " " + surname + "<br/><br>This email hereby confirms your attendance of your interview and that the QR Code was scanned." +
                      "<br/>"
                      + "<br>"
                      + "Interview details:" +

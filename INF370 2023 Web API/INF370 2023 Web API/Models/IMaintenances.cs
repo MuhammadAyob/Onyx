@@ -19,8 +19,6 @@ namespace INF370_2023_Web_API.Models
 
         Task<object> DeleteMaintenanceRequest(int id);
 
-        Task<object> MaintenanceReviewed(int id);
-
         Task<object> GetMaintenance(int id);
 
         Task<object> AddMaintenanceRequest([FromBody] Maintenance maintenance);

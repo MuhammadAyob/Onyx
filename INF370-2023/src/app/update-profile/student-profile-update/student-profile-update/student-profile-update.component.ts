@@ -33,12 +33,13 @@ emailReqFormControl = new FormControl('', [
 ]);
 phoneFormControl = new FormControl('', [
     Validators.required,
-    Validators.pattern('[0-9]{10}'),
+    Validators.pattern('^0[1-9]\\d{8}$'),
 ]);
 
 student!:Student;
 hide:boolean=true;
 titleList!:Titles[];
+isLoading!:boolean;
 
 constructor(
   public router: Router,
@@ -68,17 +69,13 @@ getTitleList(){
 onStudentProfile(){
   this.serviceX.getStudentName(sessionStorage.getItem('StudentID')).subscribe((result:any) => {
     this.student = result as any;
-    console.log(this.student);
   });
 }
 
 onBack() {
-  this.location.back();
+  this.router.navigate(['home/student-home']);
 }
 
-onArrowBack() {
-  this.location.back();
-}
 
 validateFormControls(): boolean {
   if (
@@ -100,7 +97,7 @@ onSubmit() {
     this.dialog.open(InputDialogComponent, {
       data: {
         dialogTitle: "Input Error",
-        dialogMessage: "Correct Errors"
+        dialogMessage: "Correct Errors on highlighted fields"
       },
       width: '25vw',
       height: '27vh',
@@ -111,17 +108,19 @@ onSubmit() {
           dialogTitle: 'Update Profile',
           dialogMessage: 'Are you sure you want to update your details?',
         },
-        width: '25vw',
+        width: '50vw',
+        height:'30vh'
       });
 
       dialogReference.afterClosed().subscribe((result) => {
         if (result == true) {
+          this.isLoading=true;
           this.service.UpdateStudentProfile(this.student.StudentID, this.student).subscribe((result:any) => 
         {
           if(result.Status===200)
           {
             this.snack.open(
-              'Employee updated successfully!',
+              'Your profile was updated successfully!',
                     'OK',
                     {
                       horizontalPosition: 'center',
@@ -129,10 +128,12 @@ onSubmit() {
                       duration: 3000,
                     }
             );
-            this.location.back();
+           this.isLoading=false;
+           this.router.navigate(['home/student-home']);
           }
           else if(result.Status===400)
           {
+            this.isLoading=false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {
@@ -142,12 +143,14 @@ onSubmit() {
                     'Please ensure data is in the correct format',
                   operation: 'ok',
                 },
-                width: '25vw',
+                width: '50vw',
+                height:'30vh'
               }
             );
           }
           else if(result.Status === 404)
           {
+            this.isLoading=false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {
@@ -157,12 +160,14 @@ onSubmit() {
                     'Please enter a different email',
                   operation: 'ok',
                 },
-                width: '25vw',
+                width: '50vw',
+                height:'30vh'
               }
             );
           }
           else if(result.Status === 405)
           {
+            this.isLoading=false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {
@@ -171,12 +176,14 @@ onSubmit() {
                   dialogMessage:'Please enter a different Phone Number.',
                   operation: 'ok',
                 },
-                width: '25vw',
+                width: '50vw',
+                height:'30vh'
               }
             );
           }
           else 
           {
+            this.isLoading=false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {
@@ -186,7 +193,8 @@ onSubmit() {
                     'Internal server error. Please try again',
                   operation: 'ok',
                 },
-                width: '25vw',
+                width: '50vw',
+                height:'30vh'
               }
             );
           }

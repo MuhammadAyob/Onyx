@@ -36,6 +36,7 @@ maintenance!: Maintenance;
 maintenanceTypeList!: MaintenanceType[];
 maintenancePriorityList!: MaintenancePriority[];
 currentDate!: Date;
+isLoading!:boolean;
 
 constructor( 
   public router: Router,
@@ -123,11 +124,13 @@ showDialog(title: string, message: string): void {
       operation: 'add',
       skillData: this.maintenance,
     },
-    width: '25vw',
+    width: '50vw',
+    height:'30vh'
   });
 
   dialogReference.afterClosed().subscribe((result) => {
     if (result == true) {
+      this.isLoading=true;
       this.service.AddMaintenance(this.maintenance).subscribe(
         (result:any) => {
           console.log(result);
@@ -154,11 +157,12 @@ showDialog(title: string, message: string): void {
                      // console.log('3')
                       this.router.navigate(['home/student-home']);
                     }
-                   
+                   this.isLoading=false;
                     this.refreshForm();        
           }
           else if(result.Status === 404)
           {
+            this.isLoading=false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {
@@ -167,12 +171,14 @@ showDialog(title: string, message: string): void {
                   dialogMessage: 'Data is invalid, please ensure data is in the correct format',
                   operation: 'ok',
                 },
-                width: '25vw',
+                width: '50vw',
+                height:'30vh'
               }
             );
           }
           else if(result.Status === 600)
           {
+            this.isLoading=false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {
@@ -181,11 +187,13 @@ showDialog(title: string, message: string): void {
                   dialogMessage: 'Please ensure all dropdowns are selected',
                   operation: 'ok',
                 },
-                width: '25vw',
+                width: '50vw',
+                height:'30vh'
               }
             );
           }
           else{
+            this.isLoading=false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {
@@ -194,7 +202,8 @@ showDialog(title: string, message: string): void {
                   dialogMessage: 'Internal server error. Please try again',
                   operation: 'ok',
                 },
-                width: '25vw',
+                width: '50vw',
+                height:'30vh'
               }
             );
           }
@@ -216,7 +225,7 @@ onSubmit() {
     this.dialog.open(InputDialogComponent, {
       data: {
         dialogTitle: "Input Error",
-        dialogMessage: "Correct Errors"
+        dialogMessage: "Correct Errors on highlighted fields"
       },
       width: '25vw',
       height: '27vh',

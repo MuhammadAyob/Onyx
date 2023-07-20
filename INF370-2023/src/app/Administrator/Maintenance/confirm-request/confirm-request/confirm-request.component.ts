@@ -24,6 +24,7 @@ export class ConfirmRequestComponent implements OnInit {
   maintainTypeName!: string;
   check: boolean = true;
   dataimage: any;
+  isLoading!:boolean;
 
   constructor(
     public router: Router,
@@ -41,55 +42,9 @@ export class ConfirmRequestComponent implements OnInit {
     this.dataimage = this.currentMaintenance.Image;
     this.maintainTypeName = this.currentMaintenance.MaintenanceType;
     this.maintainPriorityName = this.currentMaintenance.MaintenancePriority;
-    //this.MaintainViewed();
-
-    if(this.currentMaintenance.MaintenanceStatusID == 1 || this.currentMaintenance.MaintenanceStatusID == 2 )
-    {
-      this.check = true;
-    }
-    else{
-      this.check = false;
-    }
-
-   
-
   }
 
-  MaintainViewed(){
-    if(this.currentMaintenance.MaintenanceStatusID == 1)
-    {
-      this.service.MaintenanceReviewed(this.currentMaintenance.MaintenanceID).subscribe((res:any) => {
-        console.log(res);
-        if(res.Status === 200)
-        {
-          this.snack.open(
-            'Request reviewed, user will be notified shortly!',
-                  'OK',
-                  {
-                    horizontalPosition: 'center',
-                    verticalPosition: 'bottom',
-                    duration: 3000,
-                  }
-          );
-        }
-        else 
-        {
-          this.snack.open(
-            'Internal server error',
-                  'OK',
-                  {
-                    horizontalPosition: 'center',
-                    verticalPosition: 'bottom',
-                    duration: 3000,
-                  }
-          );
-        }
-      })
-    }
-    else{
-      console.log('nvm');
-    }
-  }
+ 
   onBack() {
     this.location.back();
   }
@@ -103,8 +58,8 @@ export class ConfirmRequestComponent implements OnInit {
     const dialogReference = this.dialog.open(
       ConfirmDialogComponent,
       {
-        height: '27vh',
-        width: '30vw',
+        height: '30vh',
+        width: '50vw',
         data: {
           dialogTitle: 'Confirm maintenance request ',
           operation: 'add',
@@ -115,6 +70,7 @@ export class ConfirmRequestComponent implements OnInit {
     );
     dialogReference.afterClosed().subscribe((result) => {
       if (result == true) {
+        this.isLoading=true;
         this.service.ConfirmMaintenanceRequest(this.currentMaintenance.MaintenanceID).subscribe((res:any) => {
         console.log(res);
         if(res.Status === 200)
@@ -128,21 +84,25 @@ export class ConfirmRequestComponent implements OnInit {
                     duration: 3000,
                   }
           );
+          this.isLoading=false;
           this.router.navigate(['admin/read-maintenance-requests']);
         }
         else
         {
+          this.isLoading=false;
           const dialogReference = this.dialog.open(
             ExistsDialogComponent,
             {
               data: {
-                dialogTitle: 'Error',
-                dialogMessage: 'Internal server error. Please try again',
+                dialogTitle: 'Email Error',
+                dialogMessage: 'Maintenance status has been updated in DB. However, due to no internet connection, the email failed to send',
                 operation: 'ok',
               },
-              width: '25vw',
+              height: '30vh',
+              width: '50vw',
             }
           );
+          this.router.navigate(['admin/read-maintenance-requests']);
         }
         });
       }

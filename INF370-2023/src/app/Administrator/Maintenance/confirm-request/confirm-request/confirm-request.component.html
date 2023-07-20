@@ -186,7 +186,7 @@ style="width: 95%;">
   
             <div class="form-group" style="padding-right: 40%"></div>
           </div>
-  
+          <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
           <div class="button-container">
             <button id="cancel" class="btn" (click)="onBack()">Cancel</button>
             <button id="confirm" class="btn" (click)="onSubmit()">Confirm</button>

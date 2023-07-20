@@ -35,6 +35,7 @@ noData = this.dataSource.connect().pipe(map(data=>data.length===0));
   invoicelist!:any[];
   invoice:any;
   StudentID:any
+  isLoading:boolean=true;
 
   constructor(
     private dialog:MatDialog,
@@ -49,7 +50,6 @@ noData = this.dataSource.connect().pipe(map(data=>data.length===0));
 
 ngOnInit(): void {
 this.StudentID = sessionStorage.getItem('StudentID');
-console.log('getting');
 this.refreshList();
 }
 
@@ -77,6 +77,7 @@ this.refreshList();
   refreshList() {
     this.service.GetInvoices(this.StudentID).subscribe((result) => {
       this.dataSource.data = result as any[];
+      this.isLoading=false;
     });
   }
 

@@ -30,7 +30,7 @@ export class AdminProfileUpdateComponent implements OnInit {
   ]);
   phoneFormControl = new FormControl('', [
     Validators.required,
-    Validators.pattern('[0-9]{10}'),
+    Validators.pattern('^0[1-9]\\d{8}$'),
   ]);
   idFormControl = new FormControl('', [
     Validators.required,

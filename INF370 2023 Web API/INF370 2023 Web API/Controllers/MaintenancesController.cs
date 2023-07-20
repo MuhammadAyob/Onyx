@@ -66,12 +66,6 @@ namespace INF370_2023_Web_API.Controllers
             return await _maintenanceRepo.DeleteMaintenanceRequest(id);
         }
 
-        [HttpPut]
-        [Route("api/MaintenanceReviewed/{id}")]
-        public async Task<object> MaintenanceReviewed(int id)
-        {
-            return await _maintenanceRepo.MaintenanceReviewed(id);
-        }
 
         [HttpGet]
         [Route("api/GetMaintenance/{id}")]
