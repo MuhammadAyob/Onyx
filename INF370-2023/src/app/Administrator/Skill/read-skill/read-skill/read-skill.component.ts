@@ -107,8 +107,8 @@ export class ReadSkillComponent implements OnInit {
     const dialogReference = this.dialog.open(
           ConfirmDialogComponent,
           {
-            height: '27vh',
-            width: '25vw',
+            height: '30vh',
+            width: '50vw',
             data: {
               dialogTitle: title,
               operation: 'delete',
@@ -138,8 +138,8 @@ export class ReadSkillComponent implements OnInit {
                 this.dialog.open(
                   InputDialogComponent,
                   {
-                    height: '27vh',
-                    width: '25vw',
+                    height: '30vh',
+                    width: '50vw',
                     data: {
                       dialogTitle: "Delete Skill",
                       dialogMessage: "Skill cannot be deleted as it is in use in other parts of the system."
@@ -153,8 +153,8 @@ export class ReadSkillComponent implements OnInit {
                 this.dialog.open(
                   InputDialogComponent,
                   {
-                    height: '27vh',
-                    width: '25vw',
+                    height: '30vh',
+                    width: '50vw',
                     data: {
                       dialogTitle: "Error",
                       dialogMessage: "Internal server error, please try again."

@@ -25,6 +25,8 @@ export class MaintainSkillComponent implements OnInit {
   nameFormControl = new FormControl('', [Validators.required]);
   descFormControl = new FormControl('', [Validators.required]);
 
+  isLoading!:boolean;
+
   skill: any;
   skillList!: Skill[];
   skillTypeList!: SkillType[];
@@ -70,7 +72,7 @@ export class MaintainSkillComponent implements OnInit {
       this.dialog.open(InputDialogComponent, {
         data: {
           dialogTitle: "Input Error",
-          dialogMessage: "Correct Errors"
+          dialogMessage: "Correct Errors on highlighted fields"
         },
         width: '25vw',
         height: '27vh',
@@ -80,15 +82,16 @@ export class MaintainSkillComponent implements OnInit {
     const dialogReference = this.dialog.open(ConfirmDialogComponent, {
       data: {
         dialogTitle: 'Confirm Edit skill',
-        dialogMessage: 'Are you sure you want to save changes the skill?',
+        dialogMessage: 'Are you sure you want to save changes to the skill?',
         operation: 'add',
       },
-      height: '27vh',
-      width: '25vw',
+      height: '30vh',
+      width: '50vw',
     });
 
     dialogReference.afterClosed().subscribe((result) => {
       if (result == true) {
+        this.isLoading=true;
         this.service.UpdateSkill(this.skill.SkillID, NewSkill).subscribe((res:any) =>{
           if(res.Status===200)
           {
@@ -100,25 +103,29 @@ export class MaintainSkillComponent implements OnInit {
                       verticalPosition: 'bottom',
                       duration: 3000,
                     });
+                    this.isLoading=false;
                     this.router.navigate(['admin/read-skill']);
           }
           else if(res.Status===400)
           {
+            this.isLoading=false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {
                 data: {
                   dialogTitle: 'Skill Exists',
-                  dialogMessage: 'Enter a new skill name',
+                  dialogMessage: 'Enter a new skill name with/or a different skill type',
                   operation: 'ok',
                 },
-                width: '25vw',
+                height: '30vh',
+                width: '50vw',
               }
             );
           }
 
           else
           {
+            this.isLoading=false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {
@@ -127,7 +134,8 @@ export class MaintainSkillComponent implements OnInit {
                   dialogMessage: 'Internal server error, please try again',
                   operation: 'ok',
                 },
-                width: '25vw',
+                height: '30vh',
+                width: '50vw',
               }
             );
           }

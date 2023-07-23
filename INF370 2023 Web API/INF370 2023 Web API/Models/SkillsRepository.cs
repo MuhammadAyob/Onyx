@@ -150,7 +150,7 @@ namespace INF370_2023_Web_API.Models
         {
             try
             {
-                var sk = await db.Skills.Where(x => x.SkillName == skill.SkillName && x.SkillID != id).FirstOrDefaultAsync();
+                var sk = await db.Skills.Where(x => x.SkillName == skill.SkillName && x.SkillTypeID == skill.SkillTypeID && x.SkillID != id).FirstOrDefaultAsync();
                 if (sk != null)
                 {
                     return new { Status = 400, Message = "Skill exists" };

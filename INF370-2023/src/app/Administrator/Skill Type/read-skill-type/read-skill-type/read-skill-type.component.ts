@@ -127,16 +127,16 @@ isLoading:boolean=true;
                 this.refreshList();
               }
 
-              else if(res.Status===501)
+              else if(res.Status===500)
               {
                 this.dialog.open(
                   InputDialogComponent,
                   {
-                    height: '27vh',
-                    width: '25vw',
+                    height: '30vh',
+                    width: '50vw',
                     data: {
-                      dialogTitle: "Delete Skill",
-                      dialogMessage: "Skill cannot be deleted as it is in use in other parts of the system."
+                      dialogTitle: "Delete Skill Type",
+                      dialogMessage: "Skill Type cannot be deleted as it is in use in other parts of the system."
                     },
                   }
                 );
@@ -147,8 +147,8 @@ isLoading:boolean=true;
                 this.dialog.open(
                   InputDialogComponent,
                   {
-                    height: '27vh',
-                    width: '25vw',
+                    height: '30vh',
+                    width: '50vw',
                     data: {
                       dialogTitle: "Error",
                       dialogMessage: "Internal server error, please try again."

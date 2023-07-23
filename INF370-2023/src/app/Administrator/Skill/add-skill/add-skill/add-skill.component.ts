@@ -23,9 +23,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class AddSkillComponent implements OnInit {
   nameFormControl = new FormControl('', [Validators.required]);
   descFormControl = new FormControl('', [Validators.required]);
-
+  typeFormControl = new FormControl('', [Validators.required]);
   skill! : Skill;
-
+  isLoading!:boolean;
   skillTypeList!: SkillType[];
 
   constructor(
@@ -69,10 +69,10 @@ export class AddSkillComponent implements OnInit {
       this.dialog.open(InputDialogComponent, {
         data: {
           dialogTitle: "Input Error",
-          dialogMessage: "Correct Errors"
+          dialogMessage: "Correct Errors on highlighted fields"
         },
-        width: '50vw',
-        height: '30vh',
+        width: '25vw',
+        height: '27vh',
       });
     } else {
     const dialogReference = this.dialog.open(ConfirmDialogComponent, {
@@ -88,6 +88,7 @@ export class AddSkillComponent implements OnInit {
 
     dialogReference.afterClosed().subscribe((result) => {
       if (result == true) {
+        this.isLoading=true;
         this.service.AddSkill(this.skill).subscribe(
           (result:any) => {
             if(result.Status === 200)
@@ -100,12 +101,13 @@ export class AddSkillComponent implements OnInit {
                         verticalPosition: 'bottom',
                         duration: 3000,
                       });
-              this.skill = result as Skill;
+              this.isLoading=false;
               this.refreshForm();
               this.router.navigate(['admin/read-skill']);
             }
             else if(result.Status===404)
             {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {
@@ -114,28 +116,32 @@ export class AddSkillComponent implements OnInit {
                     dialogMessage: 'Invalid data',
                     operation: 'ok',
                   },
-                  width: '25vw',
+                  height: '30vh',
+                  width: '50vw',
                 }
               );
             }
 
             else if(result.Status===405)
             {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {
                   data: {
                     dialogTitle: 'Skill Exists',
-                    dialogMessage: 'Enter a new skill name',
+                    dialogMessage: 'Enter a new skill name with/or a different skill type',
                     operation: 'ok',
                   },
-                  width: '25vw',
+                  height: '30vh',
+                  width: '50vw',
                 }
               );
             }
 
             else
             {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {
@@ -144,7 +150,8 @@ export class AddSkillComponent implements OnInit {
                     dialogMessage: 'Internal server error, please try again',
                     operation: 'ok',
                   },
-                  width: '25vw',
+                  height: '30vh',
+                  width: '50vw',
                 }
               );
             }
@@ -158,7 +165,8 @@ export class AddSkillComponent implements OnInit {
   validateFormControls(): boolean {
     if (
       this.descFormControl.hasError('required') == false &&
-      this.nameFormControl.hasError('required') == false
+      this.nameFormControl.hasError('required') == false && 
+      this.typeFormControl.hasError('required') == false
     )
     {return(false)}
     else

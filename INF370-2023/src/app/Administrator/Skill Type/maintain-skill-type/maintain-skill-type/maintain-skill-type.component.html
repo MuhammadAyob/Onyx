@@ -26,6 +26,7 @@
                   name="SkillTypeName"
                   [(ngModel)]="skillType.SkillTypeName"
                   style="color: #0e1a3c"
+                  placeholder="Ex. Expert"
                   required
                 />
                 <mat-error *ngIf="nameFormControl.hasError('required')">
@@ -50,7 +51,7 @@
                   cols="90"
                   name="SkillTypeDesc"
                   [(ngModel)]="skillType.TypeDescription"
-                  placeholder="Ex. The Flying Man"
+                  placeholder="Ex. This type is an expert of a skill"
                   required
                 ></textarea>
                 <mat-error *ngIf="descFormControl.hasError('required')">
@@ -60,6 +61,7 @@
             </div>
             <div class="form-group" style="padding-right: 40%"></div>
           </div>
+          <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
           <div class="button-container">
             <button id="cancel" class="btn" (click)="onBack()">Cancel</button>
             <button id="confirm" class="btn" (click)="onSubmit()">Confirm</button>

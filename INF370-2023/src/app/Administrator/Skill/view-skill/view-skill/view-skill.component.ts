@@ -60,7 +60,7 @@ export class ViewSkillComponent implements OnInit {
         );
         dialogReference.afterClosed().subscribe((result) => {
           if (result == true) {
-            this.service.DeleteSkill(this.test.skillID).subscribe((res:any) => 
+            this.service.DeleteSkill(this.test.SkillID).subscribe((res:any) => 
             {
               if(res.Status===200)
               {
@@ -80,8 +80,8 @@ export class ViewSkillComponent implements OnInit {
                 this.dialog.open(
                   InputDialogComponent,
                   {
-                    height: '27vh',
-                    width: '25vw',
+                    height: '30vh',
+                    width: '50vw',
                     data: {
                       dialogTitle: "Delete Skill",
                       dialogMessage: "Skill cannot be deleted as it is in use in other parts of the system."
@@ -95,8 +95,8 @@ export class ViewSkillComponent implements OnInit {
                 this.dialog.open(
                   InputDialogComponent,
                   {
-                    height: '27vh',
-                    width: '25vw',
+                    height: '30vh',
+                    width: '50vw',
                     data: {
                       dialogTitle: "Error",
                       dialogMessage: "Internal server error, please try again."

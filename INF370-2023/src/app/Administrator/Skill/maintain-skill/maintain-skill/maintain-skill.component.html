@@ -11,7 +11,14 @@
         <form>
           <br />
           <br />
-          <div class="form-group">
+          <div *ngIf="(skillTypeList == null || undefined)"
+          style="
+         display: flex;
+         align-items: center;
+         justify-content: center;">
+           <mat-spinner ></mat-spinner>
+         </div>
+          <div class="form-group" *ngIf="!(skillTypeList == null || undefined)">
             <div style="padding: 0% 2.5% 0% 2%; min-width: 100%">
               <mat-form-field 
               class="example-full-width" 
@@ -26,6 +33,7 @@
                   name="SkillName"
                   [(ngModel)]="skill.SkillName"
                   style="color: #0e1a3c"
+                  placeholder="Ex. Angular"
                   required
                 />
                 <mat-error *ngIf="nameFormControl.hasError('required')">
@@ -50,7 +58,7 @@
                   cols="90"
                   name="SkillDesc"
                   [(ngModel)]="skill.Description"
-                  placeholder="Ex. The Flying Man"
+                  placeholder="Ex. This skill shows competency in..."
                   required
                 ></textarea>
                 <mat-error *ngIf="descFormControl.hasError('required')">
@@ -77,7 +85,8 @@
             </div>
             <div class="form-group" style="padding-right: 40%"></div>
           </div>
-          <div class="button-container">
+          <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+          <div class="button-container" *ngIf="!(skillTypeList == null || undefined)">
             <button id="cancel" class="btn" (click)="onBack()">Cancel</button>
             <button id="confirm" class="btn" (click)="onSubmit()">Confirm</button>
         </div>

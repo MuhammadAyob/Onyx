@@ -26,6 +26,7 @@ export class MaintainSkillTypeComponent implements OnInit {
 
   skillType!: SkillType;
   skillTypeList!: SkillType[];
+  isLoading!:boolean;
 
   public dataSource = new MatTableDataSource<SkillType>();
   
@@ -37,7 +38,7 @@ export class MaintainSkillTypeComponent implements OnInit {
     private titleservice: Title,
     public toastr: ToastrService,
     private snack: MatSnackBar
-  ) { this.titleservice.setTitle('SkillTypes');}
+  ) { this.titleservice.setTitle('Skill Type');}
 
   ngOnInit(): void {
     this.skillType = JSON.parse(sessionStorage['skillType']);
@@ -59,7 +60,7 @@ export class MaintainSkillTypeComponent implements OnInit {
       this.dialog.open(InputDialogComponent, {
         data: {
           dialogTitle: "Input Error",
-          dialogMessage: "Correct Errors"
+          dialogMessage: "Correct Errors on highlighted fields"
         },
         width: '25vw',
         height: '27vh',
@@ -77,12 +78,13 @@ export class MaintainSkillTypeComponent implements OnInit {
         dialogTitle: title,
         dialogMessage: message
       },
-      height: '27vh',
-      width: '25vw',
+      height: '30vh',
+      width: '50vw',
     });
 
     dialogReference.afterClosed().subscribe((result) => {
       if (result == true) {
+        this.isLoading=true;
         this.service
           .UpdateSkillType(this.skillType.SkillTypeID, this.skillType)
           .subscribe((result:any) => {
@@ -93,10 +95,12 @@ export class MaintainSkillTypeComponent implements OnInit {
                   verticalPosition: 'bottom',
                   duration: 3000,
                 });
+                this.isLoading=false;
                 this.router.navigate(['admin/read-skill-type']);
             } 
             else if(result.Status===404)
             {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {
@@ -105,12 +109,14 @@ export class MaintainSkillTypeComponent implements OnInit {
                     dialogMessage: 'Enter a new skill type name',
                     operation: 'ok',
                   },
-                  width: '25vw',
+                  height: '30vh',
+                  width: '50vw',
                 }
               );
             }
             else
             {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {
@@ -119,7 +125,8 @@ export class MaintainSkillTypeComponent implements OnInit {
                     dialogMessage: 'Internal server error, please try again.',
                     operation: 'ok',
                   },
-                  width: '25vw',
+                  height: '30vh',
+                  width: '50vw',
                 }
               );
             }

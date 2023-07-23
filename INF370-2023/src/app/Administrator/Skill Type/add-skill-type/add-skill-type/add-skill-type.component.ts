@@ -24,6 +24,9 @@ export class AddSkillTypeComponent implements OnInit {
   descFormControl = new FormControl('', [Validators.required]);
 
   skillType!: SkillType;
+
+  isLoading!:boolean;
+
   constructor(
     public router: Router,
     private location: Location,
@@ -32,7 +35,7 @@ export class AddSkillTypeComponent implements OnInit {
     public toastr: ToastrService,
     private snack: MatSnackBar,
     private titleservice: Title
-  ) { this.titleservice.setTitle('SkillType');}
+  ) { this.titleservice.setTitle('Skill Type');}
 
   ngOnInit(): void {
     this.refreshForm();
@@ -52,7 +55,7 @@ export class AddSkillTypeComponent implements OnInit {
       this.dialog.open(InputDialogComponent, {
         data: {
           dialogTitle: "Input Error",
-          dialogMessage: "Correct Errors"
+          dialogMessage: "Correct Errors on highlighted fields"
         },
         width: '25vw',
         height: '27vh',
@@ -89,12 +92,13 @@ export class AddSkillTypeComponent implements OnInit {
         operation: 'add',
         skillTypeData: this.skillType,
       }, //^captured department info here for validation
-      height: '27vh',
-      width: '25vw',
+      height: '30vh',
+      width: '50vw',
     });
 
     dialogReference.afterClosed().subscribe((result) => {
       if (result == true) {
+        this.isLoading=true;
         this.service.AddSkillType(this.skillType).subscribe(
           (result:any) => {
             if(result.Status===200)
@@ -107,12 +111,14 @@ export class AddSkillTypeComponent implements OnInit {
                         verticalPosition: 'bottom',
                         duration: 3000,
                       });
+                      this.isLoading=false;
                       this.refreshForm();
                       this.router.navigate(['admin/read-skill-type']);
             }
 
             else if(result.Status===404)
             {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {
@@ -121,13 +127,15 @@ export class AddSkillTypeComponent implements OnInit {
                     dialogMessage: 'Invalid data post, please ensure data is in correct format',
                     operation: 'ok',
                   },
-                  width: '25vw',
+                  height: '30vh',
+                  width: '50vw',
                 }
               );
             }
 
             else if(result.Status===400)
             {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {
@@ -136,13 +144,15 @@ export class AddSkillTypeComponent implements OnInit {
                     dialogMessage: 'Skill Type exists, please enter a different skill type.',
                     operation: 'ok',
                   },
-                  width: '25vw',
+                  height: '30vh',
+                  width: '50vw',
                 }
               );
             }
 
             else
             {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {
@@ -151,7 +161,8 @@ export class AddSkillTypeComponent implements OnInit {
                     dialogMessage: 'Internal server error, please try again.',
                     operation: 'ok',
                   },
-                  width: '25vw',
+                  height: '30vh',
+                  width: '50vw',
                 }
               );
             }
