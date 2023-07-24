@@ -56,7 +56,6 @@ constructor(
   public refreshList(){
     this.service.GetActiveJobs().subscribe((result)=>{
       this.jobOpportunityList = result as JobOpportunities[];
-      console.log(result);
     })
   }
 

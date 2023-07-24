@@ -6,6 +6,7 @@ import { BarcodeFormat } from '@zxing/library';
 import { Location, Time } from '@angular/common';
 import { InterviewService } from 'src/app/Services/interview.service';
 import { ReadInterviewSlotsComponent } from 'src/app/Administrator/Interview-Slots/read-interview-slots/read-interview-slots/read-interview-slots.component';
+import { ExistsDialogComponent } from '../../exists-dialog/exists-dialog/exists-dialog.component';
 
 @Component({
   selector: 'app-scan-dialog',
@@ -18,6 +19,8 @@ allowedFormats = [ BarcodeFormat.QR_CODE, BarcodeFormat.EAN_13, BarcodeFormat.CO
 scanner!: ZXingScannerComponent;
 slot:any;
 code!:string;
+isLoading!:boolean;
+
 constructor(public dialogRef:MatDialogRef<ScanDialogComponent>,
 @Inject(MAT_DIALOG_DATA) public data:any,private snack:MatSnackBar,private service:InterviewService,private dialog:MatDialog) 
 { }
@@ -39,12 +42,16 @@ if (result === this.code) {
         {
           horizontalPosition: 'center',
           verticalPosition: 'bottom',
-          duration: 1000,
+          duration: 5000,
         });
-        this.Ok();
+
+  this.isLoading=true;
   this.service.ScanQRCode(this.slot.InterviewSlotID).subscribe((res:any)=>{
   if(res.Status === 200)
   {
+    this.Ok();
+    this.isLoading=false;
+    
     this.snack.open(
       'Attendance email to interviewee has been sent!',
             'OK',
@@ -56,9 +63,22 @@ if (result === this.code) {
             location.reload();
            // this.data.refreshList();
   }
+  else{
+    this.isLoading=false;
+    const dialogReference = this.dialog.open(ExistsDialogComponent, {
+      data: {
+        dialogTitle: 'Error',
+        dialogMessage: 'Failed to send attendance email. Please try again.',
+        operation: 'ok',
+      },
+      width: '50vw',
+      height:'30vh'
+    });
+  }
 })
 
   } else {
+    
     this.snack.open(
       'QR Code invalid or does not match interview code!',
             'OK',

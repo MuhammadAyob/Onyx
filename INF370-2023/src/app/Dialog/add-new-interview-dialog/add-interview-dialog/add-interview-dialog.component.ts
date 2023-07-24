@@ -47,6 +47,8 @@ export class AddInterviewDialogComponent implements OnInit {
 
   transformedDate: any;
 
+  isLoading!:boolean;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialog: MatDialog,
@@ -103,10 +105,10 @@ export class AddInterviewDialogComponent implements OnInit {
       this.dialog.open(InputDialogComponent, {
         data: {
           dialogTitle: 'Input Error',
-          dialogMessage: 'Correct Errors',
+          dialogMessage: 'Correct Errors on highlighted fields',
         },
-        width: '50vw',
-        height: '30vh',
+        width: '25vw',
+        height: '27vh',
       });
     }else {
       const title = 'Confirm New Interview Slot';
@@ -133,13 +135,16 @@ export class AddInterviewDialogComponent implements OnInit {
 
     dialogReference.afterClosed().subscribe((result) => {
       if (result == true) {
+        this.isLoading=true;
         this.service.AddSlot(this.InterviewDetails).subscribe(
           (result:any) => {
             console.log(result);
             if(result.Status === 200)
             {
               //this.InterviewDetails = result as InterviewDetails;
+             
               this.refreshForm();
+              this.isLoading=false;
               location.reload();
               this.snack.open(
                 'Interview Slot added successfully!',
@@ -154,6 +159,7 @@ export class AddInterviewDialogComponent implements OnInit {
 
             }
             else if(result.Status === 250){
+              this.isLoading=false;
               this.dialog.open(
                 InputDialogComponent,
                 {
@@ -167,6 +173,7 @@ export class AddInterviewDialogComponent implements OnInit {
               );
             }
             else if(result.Status === 251){
+              this.isLoading=false;
               this.dialog.open(
                 InputDialogComponent,
                 {
@@ -180,6 +187,7 @@ export class AddInterviewDialogComponent implements OnInit {
               );
             }
             else if(result.Status === 300){
+              this.isLoading=false;
               this.dialog.open(
                 InputDialogComponent,
                 {
@@ -193,6 +201,7 @@ export class AddInterviewDialogComponent implements OnInit {
               );
             }
             else if(result.Status === 350){
+              this.isLoading=false;
               this.dialog.open(
                 InputDialogComponent,
                 {
@@ -206,6 +215,7 @@ export class AddInterviewDialogComponent implements OnInit {
               );
             }
             else if(result.Status === 404){
+              this.isLoading=false;
               this.dialog.open(
                 InputDialogComponent,
                 {
@@ -219,6 +229,7 @@ export class AddInterviewDialogComponent implements OnInit {
               );
             }
             else{
+              this.isLoading=false;
               this.dialog.open(
                 InputDialogComponent,
                 {

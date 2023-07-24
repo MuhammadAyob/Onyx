@@ -219,7 +219,7 @@ isLoading:boolean=true;
     const dialogRef = this.dialog.open(AddInterviewDialogComponent, {
       data,
       height: '60vh',
-      width: '70vw',
+      width: '53vw',
     });
   }
 
@@ -292,13 +292,14 @@ isLoading:boolean=true;
     dialogReference.afterClosed().subscribe((result) => {
       if (result == true) {
 
-   
+      this.isLoading=true;
       //console.log(id);
       this.service.DeleteSlot(obj.InterviewSlotID).subscribe((res:any) => {
         console.log(res);
         if(res.Status === 200)
         {
           this.refreshList();
+          this.isLoading=false;
          //this.ngOnInit();
           this._snackBar.open(
             'Interview Slot Deleted successfully!',
@@ -311,6 +312,7 @@ isLoading:boolean=true;
         }
         else
         {
+          this.isLoading=false;
           this.dialog.open(
             InputDialogComponent,
             {

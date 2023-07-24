@@ -1,5 +1,13 @@
+<div *ngIf="isLoading"
+style="
+display: flex;
+align-items: center;
+justify-content: center;">
+ <mat-spinner ></mat-spinner>
+</div>
 
+<div  *ngIf="!isLoading">
+    <zxing-scanner style="width: 100vw; height:100vh" #scanner [formats]="allowedFormats" (scanSuccess)="onScanSuccess($event)"></zxing-scanner>
+</div>
 
-
-<zxing-scanner style="width: 100vw; height:100vh" #scanner [formats]="allowedFormats" (scanSuccess)="onScanSuccess($event)"></zxing-scanner>
 

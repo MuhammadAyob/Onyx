@@ -35,6 +35,8 @@ workTypeFormControl = new FormControl('', [Validators.required]);
 
 //JobOpportunity!:JobOpportunity;
 
+isLoading!:boolean;
+
 test:any;
 todayDate:any;
 testDate:any;
@@ -95,10 +97,10 @@ onSubmit() {
     this.dialog.open(InputDialogComponent, {
       data: {
         dialogTitle: 'Input Error',
-        dialogMessage: 'Correct Errors',
+        dialogMessage: 'Correct Errors on highlighted fields',
       },
-      width: '50vw',
-      height: '30vh',
+      width: '25vw',
+      height: '27vh',
     });
   } else {
     if (isInvalidDate == true) {
@@ -137,6 +139,7 @@ showDialog(title: string, message: string): void {
 
   dialogReference.afterClosed().subscribe((result) => {
     if (result == true) {
+      this.isLoading=true;
       let job = new JobOpportunity();
       job.JobOppID = this.test.JobOppID;
       job.JobOppTitle = this.test.JobOppTitle;
@@ -166,10 +169,12 @@ showDialog(title: string, message: string): void {
                     duration: 3000,
                   }
           );
+           this.isLoading=false;
            this.router.navigate(['admin/read-jobs']);
         }
         else if(result.Status === 400)
         {
+          this.isLoading=false;
           const dialogReference = this.dialog.open(
             ExistsDialogComponent,
             {
@@ -185,6 +190,7 @@ showDialog(title: string, message: string): void {
         }
         else if(result.Status === 404)
         {
+          this.isLoading=false;
           const dialogReference = this.dialog.open(
             ExistsDialogComponent,
             {
@@ -200,6 +206,7 @@ showDialog(title: string, message: string): void {
         }
         else if(result.Status === 600)
         {
+          this.isLoading=false;
           const dialogReference = this.dialog.open(
             ExistsDialogComponent,
             {
@@ -215,6 +222,7 @@ showDialog(title: string, message: string): void {
         }
         else if(result.Status === 601 )
         {
+          this.isLoading=false;
           const dialogReference = this.dialog.open(
             ExistsDialogComponent,
             {
@@ -229,6 +237,7 @@ showDialog(title: string, message: string): void {
           );
         }
         else{
+          this.isLoading=false;
           const dialogReference = this.dialog.open(
             ExistsDialogComponent,
             {

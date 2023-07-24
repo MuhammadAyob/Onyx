@@ -41,6 +41,8 @@ export class AddJobComponent implements OnInit {
 
  WorkTypeList!:WorkType[];
 
+ isLoading!:boolean;
+
 constructor(public router: Router,
   private location: Location,
   private titleservice: Title,
@@ -112,10 +114,10 @@ this.WorkTypeList = result as WorkType[];
       this.dialog.open(InputDialogComponent, {
         data: {
           dialogTitle: 'Input Error',
-          dialogMessage: 'Correct Errors',
+          dialogMessage: 'Correct Errors on highlighted fields',
         },
-        width: '50vw',
-        height: '30vh',
+        width: '25vw',
+        height: '27vh',
       });
     } else {
       if (isInvalidDate == true) {
@@ -153,6 +155,7 @@ this.WorkTypeList = result as WorkType[];
 
     dialogReference.afterClosed().subscribe((result) => {
       if (result == true) {
+        this.isLoading=true;
         var actualDate = new Date(this.JobOpportunity.JobOppDeadline);
         actualDate.setMinutes(
           actualDate.getMinutes() + 1440 + actualDate.getTimezoneOffset()
@@ -172,10 +175,12 @@ this.WorkTypeList = result as WorkType[];
                       duration: 3000,
                     }
             );
+             this.isLoading=false;
              this.router.navigate(['admin/read-jobs']);
           }
           else if(result.Status === 400)
           {
+            this.isLoading=false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {
@@ -191,6 +196,7 @@ this.WorkTypeList = result as WorkType[];
           }
           else if(result.Status === 404)
           {
+            this.isLoading=false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {
@@ -205,6 +211,7 @@ this.WorkTypeList = result as WorkType[];
             );
           }
           else{
+            this.isLoading=false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {

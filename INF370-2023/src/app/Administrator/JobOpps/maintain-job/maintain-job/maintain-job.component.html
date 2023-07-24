@@ -12,7 +12,14 @@
    
          <mat-card-content class="matContent">
            <form>
-             <div class="form-group">
+            <div *ngIf="(WorkTypeList == null || undefined)"
+            style="
+           display: flex;
+           align-items: center;
+           justify-content: center;">
+             <mat-spinner ></mat-spinner>
+           </div>
+             <div class="form-group" *ngIf="!(WorkTypeList == null || undefined)">
                <br /><br />
                <div style="padding: 0% 2.5% 0% 2%; min-width: 100%">
    
@@ -31,7 +38,7 @@
                      [formControl]="titleFormControl"
                      name="DeptName"
                      [(ngModel)]="test.JobOppTitle"
-                     ngModelOptions="{standalone:true}"
+                    
                      placeholder="Ex. Python Tutor"
                      required
                    />
@@ -57,7 +64,7 @@
                    cols="90"
                    name="QualificationDesc"
                    [(ngModel)]="test.JobOppDescription"  
-                   ngModelOptions="{standalone:true}"
+                 
                    placeholder="Ex. As a python tutor, you will be expected to..."
                    required
                  ></textarea>
@@ -83,7 +90,7 @@
                  cols="90"
                  name="QualificationDesc"
                  [(ngModel)]="test.JobOppRequirements"  
-                 ngModelOptions="{standalone:true}"
+                
                  placeholder="Ex. BSc Computer Science Degree and 2 years of Python development experience"
                  required
                ></textarea>
@@ -150,7 +157,8 @@
    
                <div class="form-group" style="padding-right: 40%"></div>
              </div>
-             <div class="button-container">
+             <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+             <div class="button-container" *ngIf="!(WorkTypeList == null || undefined)">
                <button id="cancel" class="btn" (click)="onBack()">Cancel</button>
                <button id="confirm" class="btn" (click)="onSubmit()">Confirm</button>
            </div>

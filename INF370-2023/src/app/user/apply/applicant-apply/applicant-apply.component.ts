@@ -104,10 +104,10 @@ export class ApplicantApplyComponent implements OnInit {
       this.dialog.open(InputDialogComponent, {
         data: {
           dialogTitle: "Input Error",
-          dialogMessage: "Correct Errors"
+          dialogMessage: "Correct Errors on highlighted fields"
         },
-        width: '50vw',
-        height: '30vh',
+        width: '25vw',
+        height: '27vh',
       });
     } else {
       const title = 'Confirm New Application';

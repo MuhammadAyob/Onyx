@@ -193,6 +193,7 @@ export class ReadShortlistComponent implements OnInit {
 
     dialogReference.afterClosed().subscribe((result) => {
       if (result == true) {
+        this.isLoading=true;
         this.service.OfferEmployment(obj.ApplicationID).subscribe((result:any) => {
        console.log(result);
        if(result.Status===200)
@@ -206,9 +207,11 @@ export class ReadShortlistComponent implements OnInit {
                   duration: 3000,
                 });
         this.refreshList();
+        this.isLoading=false;
        }
        else if(result.Status === 300)
        {
+        this.isLoading=false;
         this.dialog.open(
           InputDialogComponent,
           {
@@ -223,6 +226,7 @@ export class ReadShortlistComponent implements OnInit {
        }
        else if(result.Status === 400)
        {
+        this.isLoading=false;
         this.dialog.open(
           InputDialogComponent,
           {
@@ -237,6 +241,7 @@ export class ReadShortlistComponent implements OnInit {
        }
        else
        {
+        this.isLoading=false;
         this.dialog.open(
           InputDialogComponent,
           {

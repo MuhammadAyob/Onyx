@@ -22,7 +22,7 @@ import { saveAs } from 'file-saver';
   styleUrls: ['./view-application.component.scss']
 })
 export class ViewApplicationComponent implements OnInit {
-
+  isLoading!:boolean;
   application!: Application;
   id: any;
   pdfSrc:any;
@@ -44,7 +44,7 @@ export class ViewApplicationComponent implements OnInit {
     this.dataImage = this.application.Image;
     this.pdfSrc = 'data:image/pdf;base64,' + this.application.CV;
   
-    console.log(this.id);
+    
   }
 
   downloadPDF() {
@@ -90,7 +90,7 @@ export class ViewApplicationComponent implements OnInit {
 
     dialogReference.afterClosed().subscribe((result) => {
       if (result == true) {
-        //this.isLoading  = true;
+        this.isLoading  = true;
         this.service.RejectApplicant(this.id).subscribe(
           (result:any) => {
             if(result.Status === 200)
@@ -104,12 +104,12 @@ export class ViewApplicationComponent implements OnInit {
                         duration: 3000,
                       }
               );
-              this.router.navigate([
-                'admin/read-applications',
-              ]);
+              this.isLoading  = false;
+              this.router.navigate(['admin/read-applications']);
             }
             else
             {
+              this.isLoading  = false;
               const dialogReference = this.dialog.open(ExistsDialogComponent, {
                 data: {
                   dialogTitle: 'Error',
@@ -141,6 +141,7 @@ export class ViewApplicationComponent implements OnInit {
 
     dialogReference.afterClosed().subscribe((result) => {
       if (result == true) {
+        this.isLoading  = true;
         this.service.AddShortList(this.id).subscribe(
           (result:any) => {
             if(result.Status === 200)
@@ -154,10 +155,12 @@ export class ViewApplicationComponent implements OnInit {
                         duration: 3000,
                       }
               );
+              this.isLoading=false;
               this.router.navigate(['admin/read-applications']);
             }
            else
            {
+            this.isLoading  = false;
             const dialogReference = this.dialog.open(ExistsDialogComponent, {
               data: {
                 dialogTitle: 'Error',

@@ -60,22 +60,17 @@ export class MaintainSlotComponent implements OnInit {
   }
 
   onSubmit() {
-    
-    this.interviewSlot.InterviewDate = this.datePipe.transform(
-      this.interviewSlot.InterviewDate,
-      'yyyy/MM/dd'
-    );
-console.log(this.interviewSlot);
+   
     const isInvalidDate = this.validateDate();
     const isInvalid = this.validateFormControls();
     if (isInvalid == true) {
       this.dialog.open(InputDialogComponent, {
         data: {
           dialogTitle: 'Input Error',
-          dialogMessage: 'Correct Errors',
+          dialogMessage: 'Correct Errors on highlighted fields',
         },
-        width: '50vw',
-        height: '30vh',
+        width: '25vw',
+        height: '27vh',
       });
     } else {
       if (isInvalidDate == true) {
@@ -111,19 +106,21 @@ console.log(this.interviewSlot);
 
     dialogReference.afterClosed().subscribe((result) => {
       if (result == true) {
+        this.isLoading=true;
         let interview = new InterviewDetails();
          interview.ApplicationID = this.interviewSlot.ApplicationID;
          interview.InterviewDate = this.interviewSlot.InterviewDate;
          interview.StartTime=this.interviewSlot.StartTime;
          interview.EndTime=this.interviewSlot.EndTime;
          interview.InterviewSlotID = this.interviewSlot.InterviewSlotID;
+         var actualDate = new Date(this.interviewSlot.InterviewDate);
+         actualDate.setMinutes(
+           actualDate.getMinutes() + 1440 + actualDate.getTimezoneOffset()
+         );
+   
+      interview.InterviewDate = actualDate;
 
-         //var actualDate = new Date(this.interviewSlot.InterviewDate);
-     // actualDate.setMinutes(
-       // actualDate.getMinutes() + 1440 + actualDate.getTimezoneOffset()
-      //);
-
-      //interview.InterviewDate = actualDate;
+       
 
         this.service
           .UpdateSlot(
@@ -144,9 +141,11 @@ console.log(this.interviewSlot);
                         verticalPosition: 'bottom',
                         duration: 3000,
                       });
+                this.isLoading=false;
                 this.router.navigate(['admin/read-interview-slots']);
               }
               else if(result.Status === 250){
+                this.isLoading=false;
                 this.dialog.open(
                   InputDialogComponent,
                   {
@@ -160,6 +159,7 @@ console.log(this.interviewSlot);
                 );
               }
               else if(result.Status === 251){
+                this.isLoading=false;
                 this.dialog.open(
                   InputDialogComponent,
                   {
@@ -173,6 +173,7 @@ console.log(this.interviewSlot);
                 );
               }
               else if(result.Status === 300){
+                this.isLoading=false;
                 this.dialog.open(
                   InputDialogComponent,
                   {
@@ -186,6 +187,7 @@ console.log(this.interviewSlot);
                 );
               }
               else if(result.Status === 350){
+                this.isLoading=false;
                 this.dialog.open(
                   InputDialogComponent,
                   {
@@ -199,6 +201,7 @@ console.log(this.interviewSlot);
                 );
               }
               else if(result.Status === 404){
+                this.isLoading=false;
                 this.dialog.open(
                   InputDialogComponent,
                   {
@@ -212,6 +215,7 @@ console.log(this.interviewSlot);
                 );
               }
               else{
+                this.isLoading=false;
                 this.dialog.open(
                   InputDialogComponent,
                   {
@@ -248,7 +252,9 @@ console.log(this.interviewSlot);
     this.todayDate = new Date();
     this.todayDate = this.datePipe.transform(this.todayDate, 'yyyy/MM/dd');
 
-    if (this.interviewSlot.InterviewDate >= this.todayDate) {
+    var blah :any;
+    blah = this.datePipe.transform(this.interviewSlot.InterviewDate, 'yyyy/MM/dd');
+    if (blah >= this.todayDate) {
       return false;
     } else {
       return true;
