@@ -103,8 +103,8 @@
                      [formControl]="nameFormControl"
                   name="EmployeeName"
                   [(ngModel)]="employee.Employee.Name"
-                     ngModelOptions="{standalone:true}"
-                     placeholder="Ex. Peter Pan"
+                    
+                     placeholder="Ex. John"
                      required
                    />
                    <mat-error *ngIf="nameFormControl.hasError('required')">
@@ -134,7 +134,7 @@
                      [formControl]="surnameFormControl"
                      name="EmployeeSurname"
                      [(ngModel)]="employee.Employee.Surname"
-                     placeholder="Ex. Pan"
+                     placeholder="Ex. Doe"
                      required
                    />
                    <mat-error *ngIf="surnameFormControl.hasError('required')">
@@ -153,19 +153,22 @@
                  style="width: 95%;"
    
                >
-                    <mat-label style="color:#0e1a3c"> Enter Email</mat-label>
+                    <mat-label style="color:#0e1a3c">Enter Employee Email</mat-label>
                    <input
                      type="text"
                      matInput
                      [formControl]="emailFormControl"
                      name="EmployeeEmail"
                      [(ngModel)]="employee.Employee.Email"
-                     placeholder="Ex. Pan"
+                     placeholder="Ex. xyz@gmail.com"
                      required
                    />
                    <mat-error *ngIf="emailFormControl.hasError('required')">
-                     Employee Email is <strong>required</strong>
-                   </mat-error>
+                    Employee Email is <strong>required</strong>
+                  </mat-error>
+                  <mat-error *ngIf="emailFormControl.hasError('email')">
+                   Employee Email is <strong>invalid</strong>
+                 </mat-error>
                  </mat-form-field>
 <br>
 <br>
@@ -176,7 +179,7 @@
    
                >
                     <mat-label style="color: #0e1a3c">
-                     Enter Phone number</mat-label
+                     Enter Employee Phone number</mat-label
                    >
                    <input
                      type="text"
@@ -184,15 +187,15 @@
                      [formControl]="phoneFormControl"
                      name="EmployeePhoneNumber"
                      [(ngModel)]="employee.Employee.Phone"
-                     placeholder="Ex. Pan"
+                     placeholder="Ex. 0835577120"
                      required
                    />
                    <mat-error *ngIf="phoneFormControl.hasError('required')">
-                     Employee Phone Number is <strong>required</strong>
-                   </mat-error>
-                   <mat-error *ngIf="idFormControl.hasError('pattern')">
-                     Enter <strong>Valid</strong> phone Number
-                   </mat-error>
+                    Employee Phone Number is <strong>required</strong>
+                  </mat-error>
+                  <mat-error *ngIf="phoneFormControl.hasError('pattern')">
+                    Enter <strong>Valid</strong> Phone Number
+                  </mat-error>
                  </mat-form-field>
                  <br>
                  <br>
@@ -203,14 +206,14 @@
                  style="width: 95%;"
    
                >
-                    <mat-label style="color:#0e1a3c"> Enter ID Number</mat-label>
+                    <mat-label style="color:#0e1a3c"> Enter Employee RSA ID Number</mat-label>
                    <input
                      type="text"
                      matInput
                      [formControl]="idFormControl"
                      name="EmployeeIDNumber"
                      [(ngModel)]="employee.Employee.RSAIDNumber"
-                     placeholder="Ex. Pan"
+                     placeholder="Ex. 0104305678081"
                      required
                    />
                    <mat-error *ngIf="idFormControl.hasError('required')">
@@ -239,7 +242,7 @@
                    [formControl]="biographyFormControl"
                    [(ngModel)]="employee.Employee.Biography"
                    name="MaintainDesc"
-                   placeholder="Add Employee Button not working; Screen Not Displaying"
+                   placeholder="I am well versed individual in ..."
                    required
                  ></textarea>
                  <mat-error *ngIf="biographyFormControl.hasError('required')">
@@ -377,6 +380,7 @@
                <div class="form-group" style="padding-right: 40%"></div>
              </div>
              <br>
+             <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
              <br>
              <div class="button-container"  *ngIf="!(titleList == null || undefined || titleList.length == 0)">
                <button id="cancel" class="btn" (click)="onBack()">Cancel</button>

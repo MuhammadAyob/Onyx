@@ -1,122 +1,198 @@
-<div style="padding-left: 10%; padding-right: 10%">
-    <mat-card class="matCard">
-      <mat-tab-group dynamicHeight style='position: sticky;'>
-        <mat-tab label="Update Request Details" sticky='true'>
-          <mat-card-header class="cardHeader" style="padding-bottom: 1%;">
-            <mat-card-title-group style="padding-right: 80%">
-              <mat-card-title style="font-weight: 500"
-                >Update Request</mat-card-title
-              >
-            </mat-card-title-group>
-          </mat-card-header>
+
+<div style="padding-left: 3em; padding-right: 3em; padding-top: 9em;height:100vh;background-image: url('../../assets/gradient.gif');background-repeat: no-repeat;background-size: 100% 25%;">
+  <mat-card class="matCard">
+    <mat-tab-group>
+      <mat-tab label="Request Details" class="applicant" style="color: #0e1a3c;">
+        <br>
+        <mat-card-header class="cardHeader" style="padding-bottom: 1%;text-align: center">
+          <mat-card-title-group style="margin: 0 auto;">
+            <mat-card-title style="font-weight: 500">Update Request: {{test.UpdateSubject}}</mat-card-title>
+          </mat-card-title-group>
   
-          <mat-card-content class="matContent">
-            <form>
-              <div class="form-group">
-                <br />
-                <div style="padding: 0% 2.5% 0% 2%; float: left;">
-  
-                <mat-form-field 
-                appearance="outline" 
-                style="width: 30vw;"
-                >
-                  <mat-label style="color: #5090d0">Employee </mat-label>
-                  <input
-                    readonly
-                    type="text"
-                    matInput
-                    name="employee"
-                    value="{{ test.EmployeeName }} {{ test.EmployeeSurname }}"
-                    style="color: #5090d0"
-                  />
-                </mat-form-field>
-                </div>
-  
-                <div style="float: left; padding-left: 2%;">
-                <mat-form-field 
-                appearance="outline"             
-                style="width: 30vw;"
-                >
-                  <mat-label style="color: #5090d0">Update Subject</mat-label>
-                  <input
-                    readonly
-                    type="text"
-                    matInput
-                    name="updateName"
-                    value="{{ test.UpdateSubject }}"
-                    style="color: #5090d0"
-                  />
-                </mat-form-field>
-                </div>
-  
-                <div style="padding: 0% 2.5% 0% 2%; float: left;">
-  
-                <mat-form-field appearance="outline" style="width: 63vw;">
-                  <mat-label style="color: #5090d0">Update Description</mat-label>
-                  <textarea
-                    readonly
-                    matInput
-                    rows="5"
-                    cols="90"
-                    name="updateDesc"
-                    value="{{ test.UpdateDesc }}"
-                    style="color: #5090d0"
-                  ></textarea>
-                </mat-form-field>
-                </div>
-  
-              </div>
-  
-              <button
-                type="button"
-                (click)="onReject()"
-                class="btn"
-                style="
-                  color: white;
-                  background-color: red;
-                  margin-left: 66%;
-                  padding-left: 5%;
-                  padding-right: 5%;
-                "
-              >
-                Reject
-              </button>
+        
+        </mat-card-header>
+
+        <mat-card-content class="matContent">
+          <!--Project Details-->
+          <form>
+            <br>
+            <br>
+            <div class="form-group">
+              <mat-label style="color: #0e1a3c">Update Request Subject</mat-label>
+              <mat-form-field
+      
+              class="example-full-width" appearance="legacy" style="width: 95%;"
+      >
+      
+      <input
+      readonly
+      type="text"
+      matInput
+      name="updateName"
+      value="{{ test.UpdateSubject}}"
+      required
+     
+    />
+      </mat-form-field>
+   <br>
+   <br>            
+   <mat-label style="color: #0e1a3c">
+    Update Request Description</mat-label
+  >
+
+  <br />
+  <mat-form-field
+    class="example-full-width"
+    appearance="legacy"
+    style="width: 95%;"
+  >
+
+    <textarea
+      readonly
+      matInput
+      rows="5"
+      cols="90"
+      name="SkillDesc"
+      value="{{ test.UpdateDesc}}"
+     
+      style="color: #0e1a3c"></textarea>
+  </mat-form-field>
+   <br>
+   <br>
+                
+              <mat-label style="color:#0e1a3c">Employee Full Name</mat-label>
+                    <mat-form-field
+                    
+                    class="example-full-width" appearance="legacy" style="width: 95%;"
+      
+                  >
+                      
+                       <input
+                       readonly
+                       type="text"
+                       matInput
+                       name="ProjectName"
+                       value="{{ test.EmployeeName }} {{ test.EmployeeSurname }}"
+                       required
+                    
+                     />
+                    </mat-form-field>
+                    <br>
+                    <br>
+                  
+            <mat-label style="color: #0e1a3c">Employee ID Number</mat-label>
+                    <mat-form-field
+            
+                    class="example-full-width" appearance="legacy" style="width: 95%;"
+            >
+            
+            <input
+            readonly
+            type="text"
+            matInput
+            name="updateRSAID"
+            value="{{ test.RSAIDNumber}}"
+            required
+           
+          />
+            </mat-form-field>
+            <br>
+            <br>
+            <mat-label style="color: #0e1a3c">Employee Email</mat-label>
+            <mat-form-field
+    
+            class="example-full-width" appearance="legacy" style="width: 95%;"
+    >
+    
+    <input
+    readonly
+    type="text"
+    matInput
+    name="updateEmaie"
+    value="{{ test.Email}}"
+    required
+   
+  />
+    </mat-form-field>
+    <br>
+    <br>
+    <mat-label style="color: #0e1a3c">Employee Phone</mat-label>
+    <mat-form-field
+
+    class="example-full-width" appearance="legacy" style="width: 95%;"
+>
+
+<input
+readonly
+type="text"
+matInput
+name="updatePhone"
+value="{{ test.Phone}}"
+required
+
+/>
+</mat-form-field>
+
+                          
+                    
+                          
+                        
               
-              <button
-                type="button"
-                (click)="onAccept()"
-                class="btn"
-                style="
-                  color: white;
-                  background-color: #5090d0;
-                  margin-left: 2%;
-                  padding-left: 5%;
-                  padding-right: 5%;
-                "
-              >
-                Accept
-              </button> 
-            </form>
-          </mat-card-content>
-        </mat-tab>
-        <mat-tab label="Update Request Proof">
-          <mat-card-header class="cardHeader" style="padding-bottom: 1%">
-            <mat-card-title-group style="padding-right: 80%">
-              <mat-card-title style="font-weight: 500"
-                >Update Request Proof</mat-card-title
-              >
-            </mat-card-title-group>
-          </mat-card-header>
+              
   
-            <pdf-viewer
-              [src]="pdfSrc"
-              [autoresize]="true"
-              [original-size]="true"
-              [fit-to-page]="true"
-              [render-text]="false"
-            ></pdf-viewer>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card>
-  </div>
-  
+        
+<br>
+
+<div class="form-group" style="padding-right: 40%"></div>
+</div>
+<div class="button-container">
+  <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+  <button id="cancel" class="btn" (click)="onReject()">Reject </button>
+  <button id="view" class="btn" (click)="onBack()">View All</button>
+  <button id="confirm" class="btn" (click)="onAccept()">Accept</button>
+   </div>
+          </form>
+        </mat-card-content>
+      </mat-tab>
+      
+ <mat-tab label="Proof PDF">
+  <mat-card-header class="cardHeader" style="padding-bottom: 1%;text-align: center">
+      <mat-card-title-group style="margin: 0 auto;">
+        <mat-card-title style="font-weight: 500">{{test.EmployeeName}}'s Uploaded Proof</mat-card-title>
+      </mat-card-title-group>
+
+    
+    </mat-card-header>
+  <mat-card-content class="matContent">
+      
+        
+          <pdf-viewer
+          [src]="pdfSrc"
+          
+          [rotation]="0"
+          [original-size]="false"
+          [show-all]="true"
+          [fit-to-page]="false"
+          [zoom]="0.85"
+          [zoom-scale]="'page-width'"
+          [stick-to-page]="false"
+          [render-text]="true"
+          [external-link-target]="'blank'"
+          [autoresize]="true"
+          [show-borders]="true"
+          style="width: 80%; height: 600px; margin:0 auto"
+        ></pdf-viewer>
+
+          <div class="form-group" style="padding-right: 40%"></div>
+     
+        <div class="button-container">
+          <button id="view2" class="btn" (click)="downloadPDF()">Download</button>
+          
+      </div>
+      
+    </mat-card-content>
+
+ </mat-tab>
+    </mat-tab-group>
+   </mat-card>
+</div>

@@ -4,16 +4,16 @@
   <div>
     <mat-card class="matCard" style="border-radius: 34px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8), 0 1px 3px rgba(0, 0, 0, 0.8);">
       <mat-card-header class="cardHeader" style="padding-bottom: 1%;text-align: center">
-        <mat-card-title-group style="margin-left: 40.2%;">
+        <mat-card-title-group style="margin:0 auto;">
           <mat-card-title style="font-weight: 500; "
             >{{test.Employee.Name}} {{test.Employee.Surname}}</mat-card-title
           >
         </mat-card-title-group>
   
-        <button mat-icon-button style="color: rgb(255, 255, 255); margin-left: 40%;margin-top: 0px;" (click)="onEdit()">
+        <button mat-icon-button style="color: rgb(255, 255, 255);margin-top: -10px;" (click)="onEdit()">
           <mat-icon>edit</mat-icon>
         </button>
-        <button mat-icon-button style="margin-top: 0px;" (click)="onDelete()">
+        <button mat-icon-button style="margin-top: -10px;" (click)="onDelete()">
           <mat-icon>delete</mat-icon>
         </button>
       </mat-card-header>
@@ -100,7 +100,7 @@
             <br />
             <br />
 
-            <label style="color: #0e1a3c">Email</label>
+            <label style="color: #0e1a3c">Employee Email</label>
 
             <br />
             <mat-form-field class="example-full-width" appearance="legacy" style="width: 95%;">
@@ -117,7 +117,7 @@
             <br />
             <br />
 
-            <label style="color: #0e1a3c">Phone Number</label>
+            <label style="color: #0e1a3c">Employee Phone Number</label>
 
             <br />
             <mat-form-field class="example-full-width" appearance="legacy" style="width: 95%;">
@@ -134,7 +134,7 @@
             <br />
             <br />
 
-            <label style="color: #0e1a3c">ID Number</label>
+            <label style="color: #0e1a3c">Employee RSA ID Number</label>
 
             <br />
             <mat-form-field class="example-full-width" appearance="legacy" style="width: 95%;">
@@ -154,7 +154,7 @@
             
   
               <mat-label style="color: #0e1a3c">
-                Biography</mat-label
+                Employee Biography</mat-label
               >
   
               <br />
@@ -211,15 +211,15 @@
               <br />
               <br />
 
-              <label style="color: #0e1a3c">Qualifications</label>
+              <label style="color: #0e1a3c">Skills</label>
 
-             
+             <br>
               <mat-form-field class="example-full-width" appearance="legacy" style="width: 95%;">
                 <input
                   readonly
                   type="text"
                   matInput
-                  name="Qualification"
+                  name="Qualion"
                   required
                   style="color: #0e1a3c"
                 />

@@ -23,10 +23,11 @@ namespace INF370_2023_Web_API.Models
             this.db = database;
         }
 
-        public async Task<object> AcceptUpdateRequest(int id, UpdateRequest updateRequest)
+        public async Task<object> AcceptUpdateRequest(int id)
         {
             try
             {
+                var updateRequest = await db.UpdateRequests.Where(x => x.UpdateRequestID == id).FirstOrDefaultAsync();
                 updateRequest.UpdateRequestStatusID = 2;
                 db.Entry(updateRequest).State = EntityState.Modified;
 
@@ -37,7 +38,7 @@ namespace INF370_2023_Web_API.Models
                 db.Configuration.ProxyCreationEnabled = false;
                 var emp = await db.Employees.Where(z => z.EmployeeID == updateRequest.EmployeeID).FirstOrDefaultAsync();
 
-                string email = emp.Email;
+                
                 string name = emp.Name;
                 string surname = emp.Surname;
                 string subject = updateRequest.UpdateSubject;
@@ -51,8 +52,6 @@ namespace INF370_2023_Web_API.Models
                 //// 
                 string subjectFor = "Accepted";
 
-                // Send Email
-                await SendRequestEmail(email, name, surname, subject,subjectFor);
 
                
                
@@ -62,9 +61,9 @@ namespace INF370_2023_Web_API.Models
                 return new { Status = 200, Message = "Update request approved" };
             }
 
-            catch (Exception)
+            catch (Exception ex)
             {
-                return new { Status = 500, Message = "Internal server error, please try again" };
+                return ex.ToString();
             }
         }
 
@@ -107,6 +106,9 @@ namespace INF370_2023_Web_API.Models
                             EmployeeID = s.Employee.EmployeeID,
                             EmployeeName = s.Employee.Name,
                             EmployeeSurname = s.Employee.Surname,
+                            Email = s.Employee.Email,
+                            RSAIDNumber = s.Employee.RSAIDNumber,
+                            Phone = s.Employee.Phone,
                             Proof = s.Proof
                         })
                         .FirstOrDefaultAsync();
@@ -139,10 +141,11 @@ namespace INF370_2023_Web_API.Models
             }
         }
 
-        public async Task<object> RejectUpdateRequest(int id, UpdateRequest updateRequest)
+        public async Task<object> RejectUpdateRequest(int id)
         {
             try
             {
+                var updateRequest = await db.UpdateRequests.Where(x => x.UpdateRequestID == id).FirstOrDefaultAsync();
                 updateRequest.UpdateRequestStatusID = 3;
                 db.Entry(updateRequest).State = EntityState.Modified;
 
@@ -151,7 +154,7 @@ namespace INF370_2023_Web_API.Models
                 db.Configuration.ProxyCreationEnabled = false;
                 var emp = await db.Employees.Where(z => z.EmployeeID == updateRequest.EmployeeID).FirstOrDefaultAsync();
 
-                string email = emp.Email;
+               
                 string name = emp.Name;
                 string surname = emp.Surname;
                 string subject = updateRequest.UpdateSubject;
@@ -165,8 +168,7 @@ namespace INF370_2023_Web_API.Models
                 //// 
                 string subjectFor = "Rejected";
 
-                // Send Email
-                await SendRequestEmail(email, name, surname, subject, subjectFor);
+              
 
 
 
@@ -176,63 +178,13 @@ namespace INF370_2023_Web_API.Models
                 return new { Status = 200, Message = "Update request rejected" };
             }
 
-            catch (Exception)
+            catch (Exception ex)
             {
-                return new { Status = 500, Message = "Internal server error, please try again" };
+                return ex.ToString();
             }
         }
 
-        //email stuff
-
-        private async Task SendRequestEmail(string emailID, string name, string surname, string requestSubject,string subjectFor)
-        {
-            var fromEmailAccount = "muhammad.ayob7@gmail.com";
-            var fromEmailAccountPassword = "wkguzejivsgpirle";
-
-            var fromAddress = new MailAddress(fromEmailAccount);
-            var toAddress = new MailAddress(emailID);
-
-            var subject = "Update Request Approved";
-            var message="";
-            
-            if (subjectFor == "Accepted")
-            {
-                message = "Dear" + "" + name + "" + surname
-                + "<br> We are pleased to inform you that your Update Request:" + requestSubject + "" + ", has been approved and we will immediately begin the process of updating your technical competencies list. Please check your assigned skills and qualifications, in due course, located on the home page of your user profile or navigate to the Skills and Qualifications tab via the sidebar navigation."
-                + "<br>For further assistance or enquiries, please contact us at" + "" + fromAddress
-                + "<br> Sincerely, The Darus-Salaam Centre Team";
-            }
-
-            else
-            {
-                message = "Dear" + "" + name + "" + surname
-                + "<br> We regret to inform you that your Update Request:" + requestSubject + "" + ", has been declined. After thorough investigation, your request did not fulfill the requirements or pre-requisites needed to obtain a new set of technical competencies."
-                + "<br>If you feel that this was a mistake, or require further assistance , please contact us at" + "" + fromAddress
-                + "<br> Sincerely, The Darus-Salaam Centre Team";
-            }
-
-
-
-
-            using (var compiledMessage = new MailMessage(fromAddress, toAddress))
-            {
-                compiledMessage.Subject = subject;
-                compiledMessage.Body = string.Format(message);
-                compiledMessage.IsBodyHtml = true;
-
-
-                using (var smtp = new SmtpClient())
-                {
-                    smtp.Host = "smtp.gmail.com"; // for example: smtp.gmail.com
-                    smtp.Port = 587;
-                    smtp.EnableSsl = true;
-                    smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-                    smtp.UseDefaultCredentials = false;
-                    smtp.Credentials = new NetworkCredential(fromEmailAccount, fromEmailAccountPassword); // your own provided email and password
-                    await smtp.SendMailAsync(compiledMessage);
-                }
-            }
-        }
+        
 
        
 
@@ -244,17 +196,20 @@ namespace INF370_2023_Web_API.Models
             {
                 //twilio credentials
 
-                const string accountSid = "AC86ac80700460374988d1b9e208fc290f";
-                const string authToken = "063fc594e78443ee272824189d5243f5";
+                const string accountSid = "ACce735a999eed34233b872fcbd44fdfa3";
+                const string authToken = "22a0833e1b796dca2555d9e8a742eae2";
 
                 //Initialize the twilio client
 
                 TwilioClient.Init(accountSid, authToken);
 
+
+                string message = $"Dear {name} {surname},\nWe are pleased to inform you that your update request regarding '{updateSubject}' has been approved.\n\nTo view the reflected changes on your skills/qualifications, kindly log in to the Course Correspondent Mobile App.\n\nSincerely,\nThe Darus-Salaam Team";
+
                 MessageResource.Create(
-                    from: new PhoneNumber("+19042986677"), // From number, must be an SMS-enabled Twilio number
+                    from: new PhoneNumber("+27600692615"), // From number, must be an SMS-enabled Twilio number
                     to: new PhoneNumber(phone), // To number, if using Sandbox see note above
-                    body: $"Dear" + "" + name + "" + surname + "" + ", your update request:"+updateSubject+""+"has been approved. Sincerely, the Darus-Salaam Team"
+                    body:message
                     ); // Message content
 
                
@@ -264,17 +219,19 @@ namespace INF370_2023_Web_API.Models
             {
                 //twilio credentials
 
-                const string accountSid = "AC86ac80700460374988d1b9e208fc290f";
-                const string authToken = "063fc594e78443ee272824189d5243f5";
+                const string accountSid = "ACce735a999eed34233b872fcbd44fdfa3";
+                const string authToken = "22a0833e1b796dca2555d9e8a742eae2";
 
                 //Initialize the twilio client
 
                 TwilioClient.Init(accountSid, authToken);
 
+                string message = $"Dear {name} {surname},\nWe regret to inform you that your update request regarding '{updateSubject}' has been unfortunately rejected.\n\nAfter careful review, the uploaded proof provided was deemed insufficient to verify the obtainment of the skill/qualification. We sincerely value your commitment to improving your skills and encourage you to resubmit the update request with a clearly outlined proof of your achievement.\n\nThank you for your understanding and cooperation.\n\nSincerely,\nThe Darus-Salaam Team";
+
                 MessageResource.Create(
-                    from: new PhoneNumber("+19042986677"), // From number, must be an SMS-enabled Twilio number
+                    from: new PhoneNumber("+27600692615"), // From number, must be an SMS-enabled Twilio number
                     to: new PhoneNumber(phone), // To number, if using Sandbox see note above
-                    body: $"Dear" + " " + name + " " + surname + ", your update request:" + " " + updateSubject + " " + "has been rejected. Sincerely, the Darus-Salaam team."
+                    body: message
                     ); // Message content
             }
 

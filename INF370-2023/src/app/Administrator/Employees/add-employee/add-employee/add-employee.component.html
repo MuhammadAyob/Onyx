@@ -12,14 +12,14 @@
    
          <mat-card-content class="matContent">
            <form>
-            <div *ngIf="(titleList == null || undefined || titleList.length == 0)"
+            <div *ngIf="(titleList == null || undefined)"
             style="
            display: flex;
            align-items: center;
            justify-content: center;">
              <mat-spinner ></mat-spinner>
            </div>
-             <div class="form-group"  *ngIf="!(titleList == null || undefined || titleList.length == 0)">
+             <div class="form-group"  *ngIf="!(titleList == null || undefined)">
                <br /><br />
                <div style="padding: 0% 2.5% 0% 2%; min-width: 100%">
    
@@ -51,6 +51,7 @@
                   </mat-form-field>
                   <br>
                   <br>
+                  
 
                   <mat-form-field
                   class="example-full-width"
@@ -61,9 +62,9 @@
                 >
                      <mat-label style="color: #0e1a3c">Select Title</mat-label>
                     <mat-select
+                     (valueChange)="selectTitle($event)"
                       name="TitleID"
                       [formControl]="titleFormControl"
-                      [(ngModel)]="employee.Employee.TitleID"
                       placeholder="Doctor"
                       required
                     >
@@ -78,6 +79,8 @@
                       Title is <strong>required</strong>
                     </mat-error>
                   </mat-form-field>
+<br>
+<br>
 <br>
 <br>
                  <mat-form-field
@@ -95,8 +98,8 @@
                      [formControl]="nameFormControl"
                   name="EmployeeName"
                   [(ngModel)]="employee.Employee.Name"
-                     ngModelOptions="{standalone:true}"
-                     placeholder="Ex. Peter Pan"
+                    
+                     placeholder="Ex. John"
                      required
                    />
                    <mat-error *ngIf="nameFormControl.hasError('required')">
@@ -126,7 +129,7 @@
                      [formControl]="surnameFormControl"
                      name="EmployeeSurname"
                      [(ngModel)]="employee.Employee.Surname"
-                     placeholder="Ex. Pan"
+                     placeholder="Ex. Doe"
                      required
                    />
                    <mat-error *ngIf="surnameFormControl.hasError('required')">
@@ -145,19 +148,22 @@
                  style="width: 95%;"
    
                >
-                    <mat-label style="color:#0e1a3c"> Enter Email</mat-label>
+                    <mat-label style="color:#0e1a3c"> Enter Employee Email</mat-label>
                    <input
                      type="text"
                      matInput
                      [formControl]="emailFormControl"
                      name="EmployeeEmail"
                      [(ngModel)]="employee.Employee.Email"
-                     placeholder="Ex. Pan"
+                     placeholder="Ex. xyz@gmail.com"
                      required
                    />
                    <mat-error *ngIf="emailFormControl.hasError('required')">
-                     Employee Email is <strong>required</strong>
-                   </mat-error>
+                    Employee Email is <strong>required</strong>
+                  </mat-error>
+                  <mat-error *ngIf="emailFormControl.hasError('email')">
+                   Employee Email is <strong>invalid</strong>
+                 </mat-error>
                  </mat-form-field>
 <br>
 <br>
@@ -168,7 +174,7 @@
    
                >
                     <mat-label style="color: #0e1a3c">
-                     Enter Phone number</mat-label
+                     Enter Employee Phone number</mat-label
                    >
                    <input
                      type="text"
@@ -176,15 +182,15 @@
                      [formControl]="phoneFormControl"
                      name="EmployeePhoneNumber"
                      [(ngModel)]="employee.Employee.Phone"
-                     placeholder="Ex. Pan"
+                     placeholder="Ex. 0835577120"
                      required
                    />
                    <mat-error *ngIf="phoneFormControl.hasError('required')">
-                     Employee Phone Number is <strong>required</strong>
-                   </mat-error>
-                   <mat-error *ngIf="idFormControl.hasError('pattern')">
-                     Enter <strong>Valid</strong> phone Number
-                   </mat-error>
+                    Employee Phone Number is <strong>required</strong>
+                  </mat-error>
+                  <mat-error *ngIf="phoneFormControl.hasError('pattern')">
+                    Enter <strong>Valid</strong> Phone Number
+                  </mat-error>
                  </mat-form-field>
                  <br>
                  <br>
@@ -195,22 +201,22 @@
                  style="width: 95%;"
    
                >
-                    <mat-label style="color:#0e1a3c"> Enter ID Number</mat-label>
+                    <mat-label style="color:#0e1a3c"> Enter Employee RSA ID Number</mat-label>
                    <input
                      type="text"
                      matInput
                      [formControl]="idFormControl"
                      name="EmployeeIDNumber"
                      [(ngModel)]="employee.Employee.RSAIDNumber"
-                     placeholder="Ex. Pan"
+                     placeholder="Ex. 0104305678081"
                      required
                    />
                    <mat-error *ngIf="idFormControl.hasError('required')">
-                     Employee ID Number is <strong>required</strong>
-                   </mat-error>
-                   <mat-error *ngIf="idFormControl.hasError('pattern')">
-                     Enter <strong>Valid</strong> ID Number
-                   </mat-error>
+                    Employee ID Number is <strong>required</strong>
+                  </mat-error>
+                  <mat-error *ngIf="idFormControl.hasError('pattern')">
+                    Enter <strong>Valid</strong> ID Number
+                  </mat-error>
                  </mat-form-field>
                  <br>
                  <br>
@@ -231,7 +237,7 @@
                    [formControl]="biographyFormControl"
                    [(ngModel)]="employee.Employee.Biography"
                    name="MaintainDesc"
-                   placeholder="Add Employee Button not working; Screen Not Displaying"
+                   placeholder="I am well versed individual in ..."
                    required
                  ></textarea>
                  <mat-error *ngIf="biographyFormControl.hasError('required')">
@@ -253,11 +259,11 @@
       
                   >
                        <mat-label style="color:#0e1a3c">Select Department</mat-label>
-                      <mat-select
+                       <mat-select
+                       (valueChange)="selectDepartment($event)"
                         name="DeptID"
                         placeholder="Favorite food"
                         [formControl]="deptFormControl"
-                        [(ngModel)]="employee.Employee.DepartmentID"
                         required
                       >
                         <mat-option
@@ -310,23 +316,23 @@
 
             >
                  <mat-label style="color: #0e1a3c">Select User Role</mat-label>
-                <mat-select
-                  name="UserRoleID"
-                  placeholder="Favorite food"
-                  [(ngModel)]="employee.Employee.UserRoleID"
-                  [formControl]="userroleFormControl"
-                  required
-                >
-                  <mat-option
-                    *ngFor="let userrole of userRoleList"
-                    [value]="userrole.UserRoleID"
-                  >
-                    {{ userrole.RoleName }}
-                  </mat-option>
-                </mat-select>
-                <mat-error *ngIf="userroleFormControl.hasError('required')">
-                  User Role selection is <strong>required</strong>
-                </mat-error>
+                 <mat-select
+                 (valueChange)="selectUserRole($event)"
+                 name="UserRoleID"
+                 placeholder="Favorite food"
+                 [formControl]="userroleFormControl"
+                 required
+               >
+                 <mat-option
+                   *ngFor="let userrole of userRoleList"
+                   [value]="userrole.UserRoleID"
+                 >
+                   {{ userrole.RoleName }}
+                 </mat-option>
+               </mat-select>
+               <mat-error *ngIf="userroleFormControl.hasError('required')">
+                 User Role selection is <strong>required</strong>
+               </mat-error>
               </mat-form-field>
                   </div>
                   
@@ -369,8 +375,9 @@
                <div class="form-group" style="padding-right: 40%"></div>
              </div>
              <br>
+             <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
              <br>
-             <div class="button-container" *ngIf="!(titleList == null || undefined || titleList.length == 0)">
+             <div class="button-container" *ngIf="!(titleList == null || undefined)">
                <button id="cancel" class="btn" (click)="onBack()">Cancel</button>
                <button id="confirm" class="btn" (click)="onSubmit()">Confirm</button>
            </div>

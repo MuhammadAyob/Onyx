@@ -113,15 +113,15 @@ this.isLoading=false;
   onDelete() {
     this.id = this.test.Employee.EmployeeID;
 
-    const title = 'Confirm Delete Employee ';
-    const popupMessage = 'Employee was deleted successfully';
-    const message = 'Are you sure you want to delete the Employee?';
+    const title = 'Confirm Deactivate Employee ';
+    const popupMessage = 'Employee was deactiavted successfully';
+    const message = 'Are you sure you want to deactivate the Employee?';
 
     const dialogReference = this.dialog.open(
       ConfirmDialogComponent,
       {
-        height: '27vh',
-        width: '25vw',
+        height: '30vh',
+        width: '50vw',
         data: {
           dialogTitle: title,
           operation: 'delete',
@@ -155,7 +155,8 @@ this.isLoading=false;
                 dialogMessage: 'This is the last activated administrator, please ensure there are a minimum of 2 admins.',
                 operation: 'ok',
               },
-              width: '25vw',
+              height: '30vh',
+              width: '50vw',
             });
           }
           else if(res.Status===400)
@@ -166,7 +167,8 @@ this.isLoading=false;
                 dialogMessage: 'Invalid data',
                 operation: 'ok',
               },
-              width: '25vw',
+              height: '30vh',
+              width: '50vw',
             });
           }
           else
@@ -177,7 +179,8 @@ this.isLoading=false;
                 dialogMessage: 'Internal server error, please try again',
                 operation: 'ok',
               },
-              width: '25vw',
+              height: '30vh',
+              width: '50vw',
             });
           }
         });

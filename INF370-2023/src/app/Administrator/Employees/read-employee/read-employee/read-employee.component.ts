@@ -136,15 +136,15 @@ export class ReadEmployeeComponent implements OnInit {
   }
 
   onDelete(id:number) {
-    const title = 'Confirm Delete Employee';
-    const popupMessage = 'Employee was deleted successfully';
-    const message = 'Are you sure you want to delete the Employee?';
+    const title = 'Confirm deactivate Employee';
+    const popupMessage = 'Employee was deactivated successfully';
+    const message = 'Are you sure you want to deactivate the Employee?';
 
     const dialogReference = this.dialog.open(
       ConfirmDialogComponent,
       {
-        height: '27vh',
-        width: '25vw',
+        height: '30vh',
+        width: '50vw',
         data: {
           dialogTitle: title,
           operation: 'delete',
@@ -178,7 +178,8 @@ export class ReadEmployeeComponent implements OnInit {
                 dialogMessage: 'This is the last activated administrator, please ensure there are a minimum of 2 admins.',
                 operation: 'ok',
               },
-              width: '25vw',
+              height: '30vh',
+              width: '50vw',
             });
           }
           else if(res.Status===400)
@@ -189,7 +190,8 @@ export class ReadEmployeeComponent implements OnInit {
                 dialogMessage: 'Invalid data',
                 operation: 'ok',
               },
-              width: '25vw',
+              height: '30vh',
+              width: '50vw',
             });
           }
           else
@@ -200,7 +202,8 @@ export class ReadEmployeeComponent implements OnInit {
                 dialogMessage: 'Internal server error, please try again',
                 operation: 'ok',
               },
-              width: '25vw',
+              height: '30vh',
+              width: '50vw',
             });
           }
         });

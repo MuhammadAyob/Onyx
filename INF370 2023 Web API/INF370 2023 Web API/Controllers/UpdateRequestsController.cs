@@ -27,16 +27,16 @@ namespace INF370_2023_Web_API.Controllers
 
         [HttpPut]
         [Route("api/AcceptUpdateRequest/{id}")]
-        public async Task<object> AcceptUpdateRequest(int id, UpdateRequest updateRequest)
+        public async Task<object> AcceptUpdateRequest(int id)
         {
-            return await _updateRequestsRepo.AcceptUpdateRequest(id, updateRequest);
+            return await _updateRequestsRepo.AcceptUpdateRequest(id);
         }
 
         [HttpPut]
         [Route("api/RejectUpdateRequest/{id}")]
-        public async Task<object> RejectUpdateRequest(int id, UpdateRequest updateRequest)
+        public async Task<object> RejectUpdateRequest(int id)
         {
-            return await _updateRequestsRepo.RejectUpdateRequest(id, updateRequest);
+            return await _updateRequestsRepo.RejectUpdateRequest(id);
         }
 
         [HttpPost]

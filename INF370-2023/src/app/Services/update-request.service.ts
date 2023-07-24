@@ -20,12 +20,12 @@ export class UpdateRequestService {
     return this.http.get(environment.WebAPI + 'GetUpdateRequestDetails', this.httpOptions);
   }
 
-  AcceptUpdateRequest(id:number, obj:any){
-    return this.http.put(environment.WebAPI + 'AcceptUpdateRequest/' + id, obj, this.httpOptions);
+  AcceptUpdateRequest(id:number){
+    return this.http.put(environment.WebAPI + 'AcceptUpdateRequest/' + id, this.httpOptions);
   }
 
-  RejectUpdateRequest(id:number, obj:any){
-    return this.http.put(environment.WebAPI + 'RejectUpdateRequest/' + id, obj, this.httpOptions);
+  RejectUpdateRequest(id:number){
+    return this.http.put(environment.WebAPI + 'RejectUpdateRequest/' + id, this.httpOptions);
   }
 
   AddUpdateRequest(obj:any){

@@ -70,6 +70,8 @@ export class AcceptApplicantComponent implements OnInit {
   shortList!:Shortlist
   change!:boolean;
 
+  isLoading!:boolean;
+
   constructor(
     public router: Router,
     private dialog: MatDialog,
@@ -208,11 +210,11 @@ onSubmit() {
       this.dialog.open(InputDialogComponent, {
         data: {
           dialogTitle: 'Input Error',
-          dialogMessage: 'Correct errors',
+          dialogMessage: 'Correct errors on highlighted fields',
           operation: 'ok',
         },
-        width: '50vw',
-        height: '30vh',
+        width: '25vw',
+        height: '27vh',
       });
     } 
     else
@@ -236,6 +238,7 @@ showDialog(title: string, message: string): void {
 
   dialogReference.afterClosed().subscribe((result) => {
     if (result == true) {
+      this.isLoading=true;
       this.employee.Employee.EmployeeID = 0;
       this.service.AddEmployee(this.employee).subscribe(
         (result:any) => {
@@ -252,6 +255,7 @@ showDialog(title: string, message: string): void {
                   }
           );
           this.refreshForm();
+          this.isLoading=false;
           this.router.navigate(['admin/read-employees']);
           this.shortService.AcceptShortlistedCandidate(this.shortList.ApplicationID).subscribe(
             (result:any)=>
@@ -266,6 +270,7 @@ else{
         }
         else if(result.Status==600)
         {
+          this.isLoading=false;
           const dialogReference = this.dialog.open(ExistsDialogComponent, {
             data: {
               dialogTitle: 'Error',
@@ -278,6 +283,7 @@ else{
         }
         else if(result.Status===400)
         {
+          this.isLoading=false;
           const dialogReference = this.dialog.open(ExistsDialogComponent, {
             data: {
               dialogTitle: 'Error',
@@ -290,10 +296,11 @@ else{
         }    
         else if(result.Status===401)
         {
+          this.isLoading=false;
           const dialogReference = this.dialog.open(ExistsDialogComponent, {
             data: {
-              dialogTitle: 'ID Number Exists',
-              dialogMessage: 'Employee ID Number exists, enter a unique ID Number',
+              dialogTitle: 'RSA ID Number Exists',
+              dialogMessage: 'ID Number is attached to another user of the system, enter a unique RSA ID Number',
               operation: 'ok',
             },
             width: '50vw',
@@ -302,6 +309,7 @@ else{
         }
         else if(result.Status===402)
         {
+          this.isLoading=false;
           const dialogReference = this.dialog.open(ExistsDialogComponent, {
             data: {
               dialogTitle: 'Phone number Exists',
@@ -314,10 +322,11 @@ else{
         }
         else if(result.Status===403)
         {
+          this.isLoading=false;
           const dialogReference = this.dialog.open(ExistsDialogComponent, {
             data: {
               dialogTitle: 'Email Exists',
-              dialogMessage: 'Employee Email exists',
+              dialogMessage: 'Email is attached to another user of the system, enter a different email',
               operation: 'ok',
             },
             width: '50vw',
@@ -326,6 +335,7 @@ else{
         }
         else
         {
+          this.isLoading=false;
           const dialogReference = this.dialog.open(ExistsDialogComponent, {
             data: {
               dialogTitle: 'Error',

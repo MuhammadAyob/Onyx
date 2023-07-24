@@ -13,9 +13,9 @@ namespace INF370_2023_Web_API.Models
 
         Task<object> GetUserUpdateRequestDetails(int id);
 
-        Task<object> AcceptUpdateRequest(int id, UpdateRequest updateRequest);
+        Task<object> AcceptUpdateRequest(int id);
 
-        Task<object> RejectUpdateRequest(int id, UpdateRequest updateRequest);
+        Task<object> RejectUpdateRequest(int id);
 
         Task<object> AddUpdateRequest([FromBody] UpdateRequest updateRequest);
     }

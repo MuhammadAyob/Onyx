@@ -28,6 +28,8 @@ export class ViewShortlistComponent implements OnInit {
   pdfSrc:any;
   dataImage:any;
 
+  isLoading!:boolean;
+
   constructor(
     public router: Router,
     private location: Location,
@@ -45,7 +47,7 @@ export class ViewShortlistComponent implements OnInit {
     this.dataImage = this.shortlist.Image;
     this.pdfSrc = 'data:image/pdf;base64,' + this.shortlist.CV;
   
-    console.log(this.id);
+   
   }
 
   downloadPDF() {
@@ -117,7 +119,7 @@ export class ViewShortlistComponent implements OnInit {
 
     dialogReference.afterClosed().subscribe((result) => {
       if (result == true) {
-        //this.isLoading  = true;
+        this.isLoading  = true;
         this.service.RejectShortlistedCandidate(this.id).subscribe(
           (result:any) => {
             if(result.Status === 200)
@@ -131,12 +133,12 @@ export class ViewShortlistComponent implements OnInit {
                         duration: 3000,
                       }
               );
-              this.router.navigate([
-                'admin/read-shortlist',
-              ]);
+              this.isLoading  = false;
+              this.router.navigate(['admin/read-shortlist']);
             }
             else if(result.Status === 400)
             {
+              this.isLoading  = false;
               const dialogReference = this.dialog.open(ExistsDialogComponent, {
                 data: {
                   dialogTitle: 'Error',
@@ -149,6 +151,7 @@ export class ViewShortlistComponent implements OnInit {
             }
             else
             {
+              this.isLoading  = false;
               const dialogReference = this.dialog.open(ExistsDialogComponent, {
                 data: {
                   dialogTitle: 'Error',

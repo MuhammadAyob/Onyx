@@ -12,7 +12,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ExistsDialogComponent } from 'src/app/Dialog/exists-dialog/exists-dialog/exists-dialog.component';
-
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-maintain-update-request',
@@ -34,6 +34,8 @@ export class MaintainUpdateRequestComponent implements OnInit {
     private toastr: ToastrService) 
     {this.titleservice.setTitle('Update Request'); }
 
+  isLoading!:boolean;
+
   ngOnInit(): void {
     this.test = JSON.parse( sessionStorage['UpdateRequest'] );
     this.id = this.test.UpdateRequestID;
@@ -48,16 +50,29 @@ export class MaintainUpdateRequestComponent implements OnInit {
     this.location.back();
   }
 
+  downloadPDF() {
+    const pdfBase64 = this.pdfSrc.split(',')[1];
+    const byteCharacters = atob(pdfBase64);
+    const byteNumbers = new Array(byteCharacters.length);
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+    const byteArray = new Uint8Array(byteNumbers);
+    const blob = new Blob([byteArray], { type: 'application/pdf' });
+
+    saveAs(blob, 'Proof.pdf');
+  }
+
   onAccept() {
-    const title = 'Accept Update Skill ';
+    const title = 'Accept Update Request?';
     const popupMessage = 'Request accepted successfully';
-    const message = 'Are you sure you want to accept the update request?';
+    const message = 'Are you sure you want to mark the update request as approved?';
 
     const dialogReference = this.dialog.open(
       ConfirmDialogComponent,
       {
-        height: '27vh',
-        width: '25vw',
+        height: '30vh',
+        width: '50vw',
         data: {
           dialogTitle: title,
           operation: 'delete',
@@ -69,8 +84,9 @@ export class MaintainUpdateRequestComponent implements OnInit {
     );
     dialogReference.afterClosed().subscribe((result) => {
       if (result == true) {
-        this.service.AcceptUpdateRequest(this.id, this.test).subscribe((res:any) => {
-        console.log(res);
+        this.isLoading=true;
+        this.service.AcceptUpdateRequest(this.id).subscribe((res:any) => {
+      
         if(res.Status === 200)
         {
           this.snack.open(
@@ -79,12 +95,14 @@ export class MaintainUpdateRequestComponent implements OnInit {
                   {
                     horizontalPosition: 'center',
                     verticalPosition: 'bottom',
-                    duration: 1000,
+                    duration: 10000,
                   });
+                  this.isLoading=false;
                   this.router.navigate(['admin/read-update-requests']);
         }
         else
         {
+          this.isLoading=false;
           const dialogReference = this.dialog.open(
             ExistsDialogComponent,
             {
@@ -93,7 +111,8 @@ export class MaintainUpdateRequestComponent implements OnInit {
                 dialogMessage: 'Internal server error, please try again',
                 operation: 'ok',
               },
-              width: '25vw',
+              height: '30vh',
+              width: '50vw',
             }
           );
         } 
@@ -104,14 +123,14 @@ export class MaintainUpdateRequestComponent implements OnInit {
   }
 
   onReject() {
-    const title = 'Reject Update Skill ';
-    const message = 'Are you sure you want to reject the update request?';
+    const title = 'Reject Update Request ';
+    const message = 'Are you sure you want to mark the update request as rejected?';
 
     const dialogReference = this.dialog.open(
       ConfirmDialogComponent,
       {
-        height: '27vh',
-        width: '25vw',
+        height: '30vh',
+        width: '50vw',
         data: {
           dialogTitle: title,
           operation: 'delete',
@@ -121,23 +140,25 @@ export class MaintainUpdateRequestComponent implements OnInit {
     );
     dialogReference.afterClosed().subscribe((result) => {
       if (result == true) {
-        console.log(this.id);
-        this.service.RejectUpdateRequest(this.id, this.test).subscribe((res:any) => {
+        this.isLoading=true;
+        this.service.RejectUpdateRequest(this.id).subscribe((res:any) => {
         console.log(res);
         if(res.Status === 200)
         {
           this.snack.open(
-            'Request approved successfully!',
+            'Request rejected successfully.',
                   'OK',
                   {
                     horizontalPosition: 'center',
                     verticalPosition: 'bottom',
-                    duration: 1000,
+                    duration: 5000,
                   });
+                  this.isLoading=false;
                   this.router.navigate(['admin/read-update-requests']);
         }
         else
         {
+          this.isLoading=false;
           const dialogReference = this.dialog.open(
             ExistsDialogComponent,
             {
@@ -146,7 +167,8 @@ export class MaintainUpdateRequestComponent implements OnInit {
                 dialogMessage: 'Internal server error, please try again',
                 operation: 'ok',
               },
-              width: '25vw',
+              height: '30vh',
+              width: '50vw',
             }
           );
         }

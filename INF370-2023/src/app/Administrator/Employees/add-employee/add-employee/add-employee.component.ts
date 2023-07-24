@@ -39,7 +39,7 @@ export class AddEmployeeComponent implements OnInit {
   ]);
   phoneFormControl = new FormControl('', [
     Validators.required,
-    Validators.pattern('[0-9]{10}'),
+    Validators.pattern('^0[1-9]\\d{8}$'),
   ]);
   idFormControl = new FormControl('', [
     Validators.required,
@@ -65,7 +65,8 @@ export class AddEmployeeComponent implements OnInit {
   userRoleList!: UserRole[];
   titleList!:Titles[];
   dataImage:any;
-  isLoading:boolean=true;
+  isLoading!:boolean;
+
   constructor( public router: Router,
     private dialog: MatDialog,
     public formbuilder: FormBuilder,
@@ -142,8 +143,16 @@ getQualificationList() {
   });
 }
 
-onArrowBack(): void {
-  this.location.back();
+selectTitle($event:any) {
+  this.employee.Employee.TitleID = $event;
+}
+
+selectDepartment($event:any) {
+  this.employee.Employee.DepartmentID = $event;
+}
+
+selectUserRole($event:any){
+  this.employee.Employee.UserRoleID=$event;
 }
 
 onBack() {
@@ -161,12 +170,11 @@ validateFormControls(): boolean {
     this.phoneFormControl.hasError('required') == false &&
     this.phoneFormControl.hasError('pattern') == false &&
     this.idFormControl.hasError('required') == false &&
+    this.idFormControl.hasError('pattern') == false &&
     this.deptFormControl.hasError('required') == false &&
     this.userroleFormControl.hasError('required') == false &&
-    this.idFormControl.hasError('required') == false &&
     this.skillFormControl.hasError('required') == false &&
     this.qualificationFormControl.hasError('required') == false &&
-    this.idFormControl.hasError('pattern') == false &&
     this.titleFormControl.hasError('required')==false &&
     this.biographyFormControl.hasError('required')==false &&
     this.imageFormControl.hasError('required') == false 
@@ -184,8 +192,8 @@ onSubmit() {
     if (isInvalid == true) {
       this.dialog.open(InputDialogComponent, {
         data: {
-          dialogTitle: 'Add error',
-          dialogMessage: 'Correct errors as displayed and ensure the dropdown/s are selected',
+          dialogTitle: 'Input error',
+          dialogMessage: 'Correct errors on highlighted fields',
           operation: 'ok',
         },
         width: '25vw',
@@ -207,12 +215,13 @@ showDialog(title: string, message: string): void {
       dialogMessage: message,
       operation: 'add',
     },
-    height: '27vh',
-    width: '25vw',
+    height: '30vh',
+    width: '50vw',
   });
 
   dialogReference.afterClosed().subscribe((result) => {
     if (result == true) {
+      this.isLoading=true;
       this.employee.Employee.EmployeeID = 0;
       this.service.AddEmployee(this.employee).subscribe(
         (result:any) => {
@@ -228,73 +237,87 @@ showDialog(title: string, message: string): void {
                     duration: 3000,
                   }
           );
-          this.router.navigate(['admin/read-employees']);
           this.refreshForm();
+          this.isLoading=false;
+          this.router.navigate(['admin/read-employees']);
+         
         }
         else if(result.Status==600)
         {
+          this.isLoading=false;
           const dialogReference = this.dialog.open(ExistsDialogComponent, {
             data: {
               dialogTitle: 'Error',
               dialogMessage: 'One or more of the following dropdowns are missing: Title, Department or User Role',
               operation: 'ok',
             },
-            width: '25vw',
+            height: '30vh',
+            width: '50vw',
           });
         }
         else if(result.Status===400)
         {
+          this.isLoading=false;
           const dialogReference = this.dialog.open(ExistsDialogComponent, {
             data: {
               dialogTitle: 'Error',
               dialogMessage: 'Invalid data post',
               operation: 'ok',
             },
-            width: '25vw',
+            height: '30vh',
+            width: '50vw',
           });
         }    
         else if(result.Status===401)
         {
+          this.isLoading=false;
           const dialogReference = this.dialog.open(ExistsDialogComponent, {
             data: {
               dialogTitle: 'ID Number Exists',
-              dialogMessage: 'Employee ID Number exists, enter a unique ID Number',
+              dialogMessage: 'Employee ID Number is attached to another employee of the system, enter a different ID Number',
               operation: 'ok',
             },
-            width: '25vw',
+            height: '30vh',
+            width: '50vw',
           });
         }
         else if(result.Status===402)
         {
+          this.isLoading=false;
           const dialogReference = this.dialog.open(ExistsDialogComponent, {
             data: {
               dialogTitle: 'Phone number Exists',
               dialogMessage: 'Phone number is attached to another user of the system, enter a different number',
               operation: 'ok',
             },
-            width: '25vw',
+            height: '30vh',
+            width: '50vw',
           });
         }
         else if(result.Status===403)
         {
+          this.isLoading=false;
           const dialogReference = this.dialog.open(ExistsDialogComponent, {
             data: {
               dialogTitle: 'Email Exists',
               dialogMessage: 'Employee Email exists',
               operation: 'ok',
             },
-            width: '25vw',
+            height: '30vh',
+            width: '50vw',
           });
         }
         else
         {
+          this.isLoading=false;
           const dialogReference = this.dialog.open(ExistsDialogComponent, {
             data: {
               dialogTitle: 'Error',
               dialogMessage: 'Internal server error',
               operation: 'ok',
             },
-            width: '25vw',
+            height: '30vh',
+            width: '50vw',
           });
         }
         });

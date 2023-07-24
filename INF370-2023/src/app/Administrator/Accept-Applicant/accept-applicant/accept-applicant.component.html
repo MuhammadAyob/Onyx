@@ -12,7 +12,14 @@
    
          <mat-card-content class="matContent">
            <form>
-             <div class="form-group">
+            <div *ngIf="(titleList == null || undefined)"
+            style="
+           display: flex;
+           align-items: center;
+           justify-content: center;">
+             <mat-spinner ></mat-spinner>
+           </div>
+             <div class="form-group" *ngIf="!(titleList == null || undefined)">
                <br /><br />
                <div style="padding: 0% 2.5% 0% 2%; min-width: 100%">
    
@@ -100,8 +107,8 @@
                      [formControl]="nameFormControl"
                   name="EmployeeName"
                   [(ngModel)]="employee.Employee.Name"
-                     ngModelOptions="{standalone:true}"
-                     placeholder="Ex. Peter Pan"
+                    
+                     placeholder="Ex. John"
                      required
                    />
                    <mat-error *ngIf="nameFormControl.hasError('required')">
@@ -131,7 +138,7 @@
                      [formControl]="surnameFormControl"
                      name="EmployeeSurname"
                      [(ngModel)]="employee.Employee.Surname"
-                     placeholder="Ex. Pan"
+                     placeholder="Ex. Doe"
                      required
                    />
                    <mat-error *ngIf="surnameFormControl.hasError('required')">
@@ -157,7 +164,7 @@
                      [formControl]="emailFormControl"
                      name="EmployeeEmail"
                      [(ngModel)]="employee.Employee.Email"
-                     placeholder="Ex. Pan"
+                     placeholder="Ex. xyz@gmail.com"
                      required
                    />
                    <mat-error *ngIf="emailFormControl.hasError('required')">
@@ -184,7 +191,7 @@
                      [formControl]="phoneFormControl"
                      name="EmployeePhoneNumber"
                      [(ngModel)]="employee.Employee.Phone"
-                     placeholder="Ex. Pan"
+                     placeholder="Ex. 0835577120"
                      required
                    />
                    <mat-error *ngIf="phoneFormControl.hasError('required')">
@@ -210,7 +217,7 @@
                      [formControl]="idFormControl"
                      name="EmployeeIDNumber"
                      [(ngModel)]="employee.Employee.RSAIDNumber"
-                     placeholder="Ex. Pan"
+                     placeholder="Ex. 0104305678081"
                      required
                    />
                    <mat-error *ngIf="idFormControl.hasError('required')">
@@ -239,7 +246,7 @@
                    [formControl]="biographyFormControl"
                    [(ngModel)]="employee.Employee.Biography"
                    name="MaintainDesc"
-                   placeholder="Add Employee Button not working; Screen Not Displaying"
+                   placeholder="I am well versed individual in ..."
                    required
                  ></textarea>
                  <mat-error *ngIf="biographyFormControl.hasError('required')">
@@ -377,8 +384,9 @@
                <div class="form-group" style="padding-right: 40%"></div>
              </div>
              <br>
+             <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
              <br>
-             <div class="button-container">
+             <div class="button-container" *ngIf="!(titleList == null || undefined)">
                <button id="cancel" class="btn" (click)="onBack()">Cancel</button>
                <button id="confirm" class="btn" (click)="onSubmit()">Confirm</button>
            </div>

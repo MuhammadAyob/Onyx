@@ -39,7 +39,7 @@ export class MaintainEmployeeComponent implements OnInit {
   ]);
   phoneFormControl = new FormControl('', [
     Validators.required,
-    Validators.pattern('[0-9]{10}'),
+    Validators.pattern('^0[1-9]\\d{8}$'),
   ]);
   idFormControl = new FormControl('', [
     Validators.required,
@@ -61,7 +61,7 @@ export class MaintainEmployeeComponent implements OnInit {
   userRoleList!: UserRole[];
   titleList!:Titles[];
   dataImage:any;
-  
+  isLoading!:boolean;
   change!:boolean;
 
   constructor(
@@ -125,22 +125,22 @@ export class MaintainEmployeeComponent implements OnInit {
    validateFormControls(): boolean {
     if (
       this.nameFormControl.hasError('required') == false &&
-      this.nameFormControl.hasError('pattern') == false &&
-      this.surnameFormControl.hasError('required') == false &&
-      this.surnameFormControl.hasError('pattern') == false &&
-      this.emailFormControl.hasError('required') == false &&
-      this.emailFormControl.hasError('email') == false &&
-      this.phoneFormControl.hasError('required') == false &&
-      this.phoneFormControl.hasError('pattern') == false &&
-      this.idFormControl.hasError('required') == false &&
-      this.deptFormControl.hasError('required') == false &&
-      this.userroleFormControl.hasError('required') == false &&
-      this.idFormControl.hasError('required') == false &&
-      this.skillFormControl.hasError('required') == false &&
-      this.qualificationFormControl.hasError('required') == false &&
-      this.idFormControl.hasError('pattern') == false &&
-      this.titleFormControl.hasError('required')==false &&
-      this.biographyFormControl.hasError('required')==false 
+    this.nameFormControl.hasError('pattern') == false &&
+    this.surnameFormControl.hasError('required') == false &&
+    this.surnameFormControl.hasError('pattern') == false &&
+    this.emailFormControl.hasError('required') == false &&
+    this.emailFormControl.hasError('email') == false &&
+    this.phoneFormControl.hasError('required') == false &&
+    this.phoneFormControl.hasError('pattern') == false &&
+    this.idFormControl.hasError('required') == false &&
+    this.idFormControl.hasError('pattern') == false &&
+    this.deptFormControl.hasError('required') == false &&
+    this.userroleFormControl.hasError('required') == false &&
+    this.skillFormControl.hasError('required') == false &&
+    this.qualificationFormControl.hasError('required') == false &&
+    this.titleFormControl.hasError('required')==false &&
+    this.biographyFormControl.hasError('required')==false
+
     ) {
       return false;
     } else {
@@ -175,8 +175,8 @@ export class MaintainEmployeeComponent implements OnInit {
     if (isInvalid == true) {
       this.dialog.open(InputDialogComponent, {
         data: {
-          dialogTitle: 'Maintain error',
-          dialogMessage: 'Correct errors',
+          dialogTitle: 'Input error',
+          dialogMessage: 'Correct errors on highlighted fields',
           operation: 'ok',
         },
         width: '25vw',
@@ -186,17 +186,18 @@ export class MaintainEmployeeComponent implements OnInit {
     const dialogReference = this.dialog.open(ConfirmDialogComponent, {
       data: {
         dialogTitle: 'Confirm Edit employee',
-        dialogMessage: 'Are you sure you want to save changes the employee?',
+        dialogMessage: 'Are you sure you want to save changes to the employee?',
         dialogPopupMessage: 'Employee changes successful!',
         operation: 'add'
       }, //^captured department info here for validation
-      height: '27vh',
-      width: '25vw',
+      height: '30vh',
+      width: '50vw',
     });
 
     dialogReference.afterClosed().subscribe((result) => {
 
       if (result == true) {
+        this.isLoading=true;
         this.service
           .UpdateEmployee(this.employee.Employee.EmployeeID, this.employee)
           .subscribe(
@@ -213,10 +214,12 @@ export class MaintainEmployeeComponent implements OnInit {
                           duration: 3000,
                         }
                 );
+                this.isLoading=false;
                 this.router.navigate(['admin/read-employees']);
               }
               else if(result.Status===400)
               {
+                this.isLoading=false;
                 const dialogReference = this.dialog.open(
                   ExistsDialogComponent,
                   {
@@ -225,54 +228,62 @@ export class MaintainEmployeeComponent implements OnInit {
                       dialogMessage: 'Invalid data',
                       operation: 'ok',
                     },
-                    width: '25vw',
+                    height: '30vh',
+                    width: '50vw',
                   }
                 );
               }
              else if(result.Status===401)
              {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {
                   data: {
-                    dialogTitle: 'ID in use',
-                    dialogMessage: 'Enter a different ID',
+                    dialogTitle: 'RSA ID Number Exists',
+                    dialogMessage: 'ID Number is attached to another user of the system, enter a unique RSA ID Number',
                     operation: 'ok',
                   },
-                  width: '25vw',
+                  height: '30vh',
+                  width: '50vw',
                 }
               );
              }
              else if(result.Status===402)
              {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {
                   data: {
-                    dialogTitle: 'Phone Exists',
-                    dialogMessage: 'Enter a different phone number',
+                    dialogTitle: 'Phone number Exists',
+                    dialogMessage: 'Phone number is attached to another user of the system, enter a different number',
                     operation: 'ok',
                   },
-                  width: '25vw',
+                  height: '30vh',
+                  width: '50vw',
                 }
               );
              }
              else if(result.Status===403)
              {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {
                   data: {
-                    dialogTitle: 'Email in use',
-                    dialogMessage: 'Enter a different email address',
+                    dialogTitle: 'Email Exists',
+                    dialogMessage: 'Email is attached to another user of the system, enter a different email',
                     operation: 'ok',
                   },
-                  width: '25vw',
+                  height: '30vh',
+                  width: '50vw',
                 }
               );
              }
              else
              {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {
@@ -281,7 +292,8 @@ export class MaintainEmployeeComponent implements OnInit {
                     dialogMessage: 'Internal server error, please try again.',
                     operation: 'ok',
                   },
-                  width: '25vw',
+                  height: '30vh',
+                  width: '50vw',
                 }
               );
              }
