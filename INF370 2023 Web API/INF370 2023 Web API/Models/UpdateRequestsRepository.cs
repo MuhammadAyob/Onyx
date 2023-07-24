@@ -165,7 +165,6 @@ namespace INF370_2023_Web_API.Models
                 string Ncode = "+27";
                 string finalPhone = Ncode + cnumber;
 
-                //// 
                 string subjectFor = "Rejected";
 
               
