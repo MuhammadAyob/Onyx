@@ -427,8 +427,8 @@ namespace INF370_2023_Web_API.Models
             var toAddress = new MailAddress(emailID);
 
             var subject = "Job Application: Interview Termination";
-            var message = "Dear " + name + " " + surname + "<br/><br/> This email serves to inform you that your allocated interview slot" +
-                    "<br/>on: " + date + " " + " <br> between: " + startTime + " " + "-"+" "+endTime + " " + "<br> Attended:" + interview.Attended +"<br> Date Attended:" +interview.DateAttended + " <br> has been terminated. " + 
+            var message = "Dear " + name + " " + surname + "<br/><br/> This email serves to inform you that your allocated interview slot has been terminated:" +
+                    "<br/> Date:" + date + " " + " <br> between: " + startTime + " " + "-"+" "+endTime + " " + "<br> Attended:" + interview.Attended +"<br> Date Attended:" +interview.DateAttended  + 
                     "<br>" +
                   "<br/> Please check your inbox for future updates/invites on your application" + "<br><br>" + " P.S. If the interview date, relative to the above given details, has already been attended, you can ignore this email as this is an automated email. We are doing some clearing up on our side!" +
                     "<br/><br/> If you require any further assistance please contact us at dseiqueries@gmail.com" +
