@@ -344,7 +344,7 @@ namespace INF370_2023_Web_API.Models
             {
                 db.Configuration.ProxyCreationEnabled = false;
                 
-                //Check if course is attached to any sections
+                //Check if course is attached to any sectionsss
 
                 var any = await db.Sections.Where(x => x.CourseID == id).CountAsync();
                 var purch = await db.CartCourses.Where(x => x.CourseID == id).FirstOrDefaultAsync();
