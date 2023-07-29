@@ -347,14 +347,23 @@ namespace INF370_2023_Web_API.Models
                 //Check if course is attached to any sections
 
                 var any = await db.Sections.Where(x => x.CourseID == id).CountAsync();
-               
-                if(any > 0)
+                var purch = await db.CartCourses.Where(x => x.CourseID == id).FirstOrDefaultAsync();
+
+                if (purch != null)
+                {
+                    return new { Status = 501, Message = "FK Constraint" };
+                }
+
+                if (any > 0)
                 {
                     return new { Status = 400, Message = "Sections are attached to this course" };
                 }
 
+               
+
                 else
                 {
+
                     db.Configuration.ProxyCreationEnabled = false;
 
                     Course course = await db.Courses.FindAsync(id);

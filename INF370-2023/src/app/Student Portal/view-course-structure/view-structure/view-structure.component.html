@@ -70,7 +70,10 @@
     
     </mat-card-header>
   <mat-card-content class="matContent">
-      
+    <div *ngIf="courseDetails?.Sections?.length === 0" style="text-align: center; padding: 1em;">
+      <p style="font-weight: 500; font-size: 18px;">No course content yet! Come back soon</p>
+    </div>
+
         <br>
     <div class="container">
       <div style="margin-left: 42%; padding-bottom: 50px;">

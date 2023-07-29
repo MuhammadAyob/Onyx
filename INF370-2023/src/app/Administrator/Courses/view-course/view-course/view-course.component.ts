@@ -127,7 +127,7 @@ constructor( private dialog: MatDialog,
               );
               this.router.navigate(['admin/read-courses']);
             }
-            else if(res.Status===400)
+            else if(res.Status===501)
             {
               const dialogReference = this.dialog.open(ExistsDialogComponent, {
                 data: {

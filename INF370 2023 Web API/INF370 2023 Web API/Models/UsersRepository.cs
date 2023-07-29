@@ -612,6 +612,8 @@ namespace INF370_2023_Web_API.Models
                 db.Entry(user).State = EntityState.Modified;
                 await db.SaveChangesAsync();
 
+                await SendEmailReactivated(user.Username);
+
                 return new {Status=200, Message="User successfully reactivated." };
             }
             catch (Exception)
@@ -620,6 +622,44 @@ namespace INF370_2023_Web_API.Models
                 Error.Status = 404;
                 Error.Message = "Internal server error, please try again";
                 return Error;
+            }
+        }
+
+        private async Task SendEmailReactivated(string emailID)
+        {
+            var fromEmailAccount = "dseiqueries@gmail.com";
+            var fromEmailAccountPassword = "epqshwdnwmokortk";
+
+            var fromAddress = new MailAddress(fromEmailAccount);
+            var toAddress = new MailAddress(emailID);
+
+            var subject = "Re-activation of account";
+            var message = "Dear Onyx System User,"
+                + "<br> This email serves to inform you of the re-activation of your user account. You will now be able to Login to your account."
+                + "<br>"
+                + "<br> For further assistance, please contact us at dseiqueries@gmail.com" +
+                "<br> <br> Sincerely, The Onyx Team" +
+                "<br/><h5>Powered by Onyx</h5>";
+
+
+
+            using (var compiledMessage = new MailMessage(fromAddress, toAddress))
+            {
+                compiledMessage.Subject = subject;
+                compiledMessage.Body = string.Format(message);
+                compiledMessage.IsBodyHtml = true;
+
+
+                using (var smtp = new SmtpClient())
+                {
+                    smtp.Host = "smtp.gmail.com"; // for example: smtp.gmail.com
+                    smtp.Port = 587;
+                    smtp.EnableSsl = true;
+                    smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                    smtp.UseDefaultCredentials = false;
+                    smtp.Credentials = new NetworkCredential(fromEmailAccount, fromEmailAccountPassword); // your own provided email and password
+                    await smtp.SendMailAsync(compiledMessage);
+                }
             }
         }
 

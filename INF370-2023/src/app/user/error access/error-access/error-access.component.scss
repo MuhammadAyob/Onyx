@@ -108,20 +108,33 @@ body {
   
   
   .btnLanding{
-      background-color: #ffffff; 
-      color: #5090D0;
-      min-width: 150px;
-      border: 3px solid #5090D0;
-      padding: 0.5% 0 0.5% 0;
-      border-radius: 2% 2% 2% 2%;
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 50px;
+    
+    font-family: MontserratMedium;
+    font-size: 16px;
+    color: white;
+    padding: 10px 25px 10px 25px;
     }
     
     .btnLanding:hover{
-      text-decoration: none;
-      color: #ffffff;
-      background-color: #5090D0;
-      transition: ease 0.3s;
+        background-color: white;
+        color: #00efd1;
+        transition-duration: 500ms;
     }
+
+    #confirm
+{
+   
+    font-family: Montserrat;
+    background-color:  #19274b;;
+}
+
+#confirm:hover
+{
+color: #19274b;
+background-color: white;
+}
   
   @-webkit-keyframes smallmove {
       0% { top: 10px; left: 45%; opacity: 1; }

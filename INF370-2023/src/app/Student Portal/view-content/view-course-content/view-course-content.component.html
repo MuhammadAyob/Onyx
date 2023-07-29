@@ -6,91 +6,118 @@
           <br>
           <mat-card-header class="cardHeader" style="padding-bottom: 1%;text-align: center">
             <mat-card-title-group style="margin: 0 auto;">
-              <mat-card-title style="font-weight: 500">Current Lesson -> {{LessonName}}</mat-card-title>
+              <mat-card-title style="font-weight: 500" *ngIf="(courseDetails == null || undefined)"> Loading...</mat-card-title>
+              <div *ngIf="!(courseDetails == null || undefined)">
+                <mat-card-title style="font-weight: 500" *ngIf="!(courseDetails?.Sections?.length === 0)"> Current Lesson -> {{LessonName}}</mat-card-title>
+                <mat-card-title style="font-weight: 500" *ngIf="courseDetails?.Sections?.length === 0">  This course is empty</mat-card-title>
+              </div>
             </mat-card-title-group>
     
           
           </mat-card-header>
+          <div *ngIf="courseDetails == null || undefined"
+          style="
+         display: flex;
+         align-items: center;
+         justify-content: center;">
+           <mat-spinner ></mat-spinner>
+         </div>
+
+         <div *ngIf="courseDetails?.Sections?.length === 0" style="text-align: center; padding: 1em;">
+          <p style="font-weight: 500; font-size: 18px;">No course content present.</p>
+        </div>
+
+        <div *ngIf="!(courseDetails == null || undefined)">
+<div *ngIf="!(courseDetails?.Sections?.length === 0)">
+  <mat-card-content class="matContent">
+          
+    <!--Image-->
+    <br>
+    <br>
+    <!--Image-->
+    <h1 style="margin-left:43.5%;color: #0e1a3c; margin-bottom: -70px;"><b>Lesson Video</b></h1>
+    <br>
+   
+    <div class='embed-container'>
+      <iframe [src]="VideoID | VimeoUrl" frameborder='0' webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+    </div>
+    <br>
+    <br>
   
-          <mat-card-content class="matContent">
-              <!--Image-->
-              <br>
-              <br>
-              <!--Image-->
-              <h1 style="margin-left:43.5%;color: #0e1a3c; margin-bottom: -70px;"><b>Lesson Video</b></h1>
-              <br>
-             
-              <div class='embed-container'>
-                <iframe [src]="VideoID | VimeoUrl" frameborder='0' webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+  <!--Project Details-->
+  <form>
+      <div class="container">
+          <mat-accordion class="accordion">
+            <mat-expansion-panel class="shadow-panel" *ngFor="let section of courseDetails?.Sections">
+              <mat-expansion-panel-header>
+                <mat-panel-title class="title center-align">
+                  <b><u>{{ section.SectionName }}</u></b>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <mat-panel-description class="desc center-align">
+                {{ section.SectionDescription }}
+              </mat-panel-description>
+              <h2 class="lessons-header">Hover over and click on a lesson name to switch the player to the desired content</h2>
+              <div *ngIf="!(section.Lessons?.length)" style="text-align: center; padding: 1em;">
+                No lessons in this section.
               </div>
-              <br>
-              <br>
-            
-            <!--Project Details-->
-            <form>
-                <div class="container">
-                    <mat-accordion class="accordion">
-                      <mat-expansion-panel class="shadow-panel" *ngFor="let section of courseDetails?.Sections">
-                        <mat-expansion-panel-header>
-                          <mat-panel-title class="title center-align">
-                            <b><u>{{ section.SectionName }}</u></b>
-                          </mat-panel-title>
-                        </mat-expansion-panel-header>
-                        <mat-panel-description class="desc center-align">
-                          {{ section.SectionDescription }}
-                        </mat-panel-description>
-                        <h2 class="lessons-header">Hover over and click on a lesson name to switch the player to the desired content</h2>
-                        <div class="lessons-container">
-                          <div class="lesson-card" [class.active]="lesson.LessonID === activeLessonId" *ngFor="let lesson of section.Lessons">
-                            <mat-card>
-                              <mat-card-content>
-                                <div class="lesson-info">
-                                  <div class="lesson-name">
-                                   <p (click)="changeVideo(lesson)">{{ lesson.LessonName }}</p> 
-                                  </div>
-                                  <p class="lesson-description">{{ lesson.LessonDescription }}</p>
-                                </div>
-                                <div class="lesson-resources" *ngIf="lesson.LessonResources?.length">
-                                  <h4>Lesson Resources:</h4>
-                                  <ul>
-                                    <li *ngFor="let resource of lesson.LessonResources">
-                                      <div class="resource">
-                                        <span>{{ resource.ResourceName }}</span>
-                                        <button (click)="downloadResource(resource)" mat-icon-button class="download-button" matTooltip="Download">
-                                          <mat-icon>cloud_upload</mat-icon>
-                                        </button>
-                                      </div>
-                                    </li>
-                                  </ul>
-                                </div>
-                                <div class="no-resources" *ngIf="!lesson.LessonResources || lesson.LessonResources.length === 0">
-                                  No lesson resources attached.
-                                </div>
-                              </mat-card-content>
-                            </mat-card>
-                            <div class="lesson-divider"></div>
-                          </div>
+              <div class="lessons-container">
+                <div class="lesson-card" [class.active]="lesson.LessonID === activeLessonId" *ngFor="let lesson of section.Lessons">
+                  <mat-card>
+                    <mat-card-content>
+                      <div class="lesson-info">
+                        <div class="lesson-name">
+                         <p (click)="changeVideo(lesson)">{{ lesson.LessonName }}</p> 
                         </div>
-                      </mat-expansion-panel>
-                    </mat-accordion>
-                  </div>
-                  
-                  
-                  
-                  
-                  
-  <div class="button-container">
-    <button style=" 
-    border: 2px solid rgb(0, 0, 0);
-    border-radius: 50px;
-    font-family: Montserrat;
-    font-size: 16px;
-    color: white;
-    padding: 10px 25px 10px 25px;"
-    id="cancel" class="btn" (click)="onBack()">Back</button>
-     </div>
-            </form>
-          </mat-card-content>
+                        <p class="lesson-description">{{ lesson.LessonDescription }}</p>
+                      </div>
+                     
+                      <div class="lesson-resources" *ngIf="lesson.LessonResources?.length">
+                        <h4>Lesson Resources:</h4>
+                        <ul>
+                          <li *ngFor="let resource of lesson.LessonResources">
+                            <div class="resource">
+                              <span>{{ resource.ResourceName }}</span>
+                              <button (click)="downloadResource(resource)" mat-icon-button class="download-button" matTooltip="Download">
+                                <mat-icon>cloud_upload</mat-icon>
+                              </button>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="no-resources" *ngIf="!lesson.LessonResources || lesson.LessonResources.length === 0">
+                        No lesson resources attached.
+                      </div>
+                    </mat-card-content>
+                  </mat-card>
+                  <div class="lesson-divider"></div>
+                </div>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+        
+        
+        
+        
+        
+<div class="button-container">
+<button style=" 
+border: 2px solid rgb(0, 0, 0);
+border-radius: 50px;
+font-family: Montserrat;
+font-size: 16px;
+color: white;
+padding: 10px 25px 10px 25px;"
+id="cancel" class="btn" (click)="onBack()">Back</button>
+</div>
+  </form>
+</mat-card-content>
+</div>
+         
+         
+        </div>
+      
         </mat-tab>
         <mat-tab label="Course Assistants">
           <br>
@@ -155,7 +182,9 @@
               
                 <br>
             <div class="container">
-             
+              <div *ngIf="faqList == null" class="no-records" style="text-align: center; padding-top: 4em; font-size: larger;">
+                No FAQ records exist as of now!
+              </div>
               <mat-accordion class="accordion">
                 <mat-expansion-panel *ngFor="let faq of faqList">
                   <mat-expansion-panel-header>

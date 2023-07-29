@@ -155,6 +155,7 @@ export class ReadEmployeeComponent implements OnInit {
     );
     dialogReference.afterClosed().subscribe((result) => {
       if (result == true) {
+        this.isLoading=true;
         this.service.DeleteEmployee(id).subscribe((res:any) => 
         {console.log(res)
           if(res.Status===200)
@@ -168,10 +169,13 @@ export class ReadEmployeeComponent implements OnInit {
                       duration: 3000,
                     }
             );
+            
             this.refreshList();
+            this.isLoading=false;
           }
           else if(res.Status===404)
           {
+            this.isLoading=false;
             const dialogReference = this.dialog.open(ExistsDialogComponent, {
               data: {
                 dialogTitle: 'Error',
@@ -184,6 +188,7 @@ export class ReadEmployeeComponent implements OnInit {
           }
           else if(res.Status===400)
           {
+            this.isLoading=false;
             const dialogReference = this.dialog.open(ExistsDialogComponent, {
               data: {
                 dialogTitle: 'Error',
@@ -194,8 +199,22 @@ export class ReadEmployeeComponent implements OnInit {
               width: '50vw',
             });
           }
+          else if(res.Status === 900)
+          {
+            this.isLoading=false;
+            const dialogReference = this.dialog.open(ExistsDialogComponent, {
+              data: {
+                dialogTitle: 'Error',
+                dialogMessage: 'Employee is attached to one more courses as a correspondent. PLease re-attach new Course Correspondents before proceeding',
+                operation: 'ok',
+              },
+              height: '40vh',
+              width: '55vw',
+            });
+          }
           else
           {
+            this.isLoading=false;
             const dialogReference = this.dialog.open(ExistsDialogComponent, {
               data: {
                 dialogTitle: 'Error',

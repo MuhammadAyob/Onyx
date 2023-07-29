@@ -126,10 +126,11 @@ namespace INF370_2023_Web_API.Models
                 string surname = applicant.Surname;
                 string email = applicant.Email;
                 string date = interview.InterviewDate.ToString("dd/MM/yyyy");
+                //string dateAttended = interview.DateAttended.ToString("dd/MM/yyyy");
                 string startTime = Convert.ToString(interview.StartTime);
                 string endTime = Convert.ToString(interview.EndTime);
 
-                await SendCancelled(email, name, surname, startTime, endTime, date);
+                await SendCancelled(email, name, surname, startTime, endTime, date, interview);
                 return new { Status = 200, Message = "Interview Cancelled" };
             }
 
@@ -324,7 +325,7 @@ namespace INF370_2023_Web_API.Models
             var toAddress = new MailAddress(emailID);
 
             var subject = "Job Application: Interview Invitation";
-            var message = "Dear " + name + " " + surname + "<br/><br/>We are pleased to inform you that you have made it to the interview round/s process! Therefore, we would like to invite you for an interview." +
+            var message = "Dear " + name + " " + surname + "<br/><br/>We would like to invite you for an interview." +
                      "<br/>" 
                      +"<br>"
                      + "Below are your invitation details:" +
@@ -415,8 +416,10 @@ namespace INF370_2023_Web_API.Models
             }
         }
 
-        private async Task SendCancelled(string emailID, string name, string surname, dynamic startTime, dynamic endTime, dynamic date)
+        private async Task SendCancelled(string emailID, string name, string surname, dynamic startTime, dynamic endTime, dynamic date, InterviewSlot interview)
         {
+            
+
             var fromEmailAccount = "dseiqueries@gmail.com";
             var fromEmailAccountPassword = "epqshwdnwmokortk";
 
@@ -425,9 +428,9 @@ namespace INF370_2023_Web_API.Models
 
             var subject = "Job Application: Interview Termination";
             var message = "Dear " + name + " " + surname + "<br/><br/> This email serves to inform you that your allocated interview slot" +
-                    "<br/>on: " + date + " " + " between: " + startTime + " " + "-"+" "+endTime + " " + " has been terminated. " + 
+                    "<br/>on: " + date + " " + " <br> between: " + startTime + " " + "-"+" "+endTime + " " + "<br> Attended:" + interview.Attended +"<br> Date Attended:" +interview.DateAttended + " <br> has been terminated. " + 
                     "<br>" +
-                  "<br/> Please check your inbox for future updates/invites on your application" + "<br>" + " P.S. If the interview date, relative to the above given details, has already been surpassed or attended, you can ignore this email." +
+                  "<br/> Please check your inbox for future updates/invites on your application" + "<br><br>" + " P.S. If the interview date, relative to the above given details, has already been attended, you can ignore this email as this is an automated email. We are doing some clearing up on our side!" +
                     "<br/><br/> If you require any further assistance please contact us at dseiqueries@gmail.com" +
                     "<br/> Sincerely, The Onyx Team" +
                     "<br/><h5>Powered by Onyx</h5>";

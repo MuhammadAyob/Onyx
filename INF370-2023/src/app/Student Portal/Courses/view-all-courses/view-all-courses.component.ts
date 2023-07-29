@@ -37,6 +37,8 @@ courseList!:any[];
 StudentID:any;
 course:any;
 
+isLoading:boolean=true;
+
 constructor(
   private dialog:MatDialog,
   public router:Router,
@@ -76,6 +78,7 @@ public doFilter = (event: Event) => {
 refreshList() {
   this.service.GetEnrolledCourses(this.StudentID).subscribe((result) => {
     this.dataSource.data = result as any[];
+    this.isLoading=false;
   });
 }
 

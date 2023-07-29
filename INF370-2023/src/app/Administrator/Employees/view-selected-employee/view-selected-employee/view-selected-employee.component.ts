@@ -27,7 +27,7 @@ export class ViewSelectedEmployeeComponent implements OnInit {
   test!: EmployeeDetails;
   employeeList!: EmployeeDetails[];
   id: any;
-  titleName!:string;
+  titleName:any;
   deptName!: string;
   EmployeeSkillList!: any[];
   EmployeeQualificationList!: any[];
@@ -132,6 +132,7 @@ this.isLoading=false;
     );
     dialogReference.afterClosed().subscribe((result) => {
       if (result == true) {
+        this.titleName=null || undefined;
         this.service.DeleteEmployee(this.id).subscribe((res:any) => 
         {
           if(res.Status===200)
@@ -145,10 +146,13 @@ this.isLoading=false;
                       duration: 3000,
                     }
             );
+
             this.router.navigate(['admin/read-employees'])
+            this.titleName='';
           }
           else if(res.Status===404)
           {
+            this.titleName='';
             const dialogReference = this.dialog.open(ExistsDialogComponent, {
               data: {
                 dialogTitle: 'Error',
@@ -161,6 +165,7 @@ this.isLoading=false;
           }
           else if(res.Status===400)
           {
+            this.titleName='';
             const dialogReference = this.dialog.open(ExistsDialogComponent, {
               data: {
                 dialogTitle: 'Error',
@@ -173,6 +178,7 @@ this.isLoading=false;
           }
           else
           {
+            this.titleName='';
             const dialogReference = this.dialog.open(ExistsDialogComponent, {
               data: {
                 dialogTitle: 'Error',

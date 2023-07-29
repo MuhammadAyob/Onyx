@@ -28,7 +28,9 @@
         <mat-card-content style="padding-top: 1em;">
 
           <div class="table-hover table-container mat-elevation-z8">
-            <table mat-table matSort [dataSource]="dataSource"  class="mat-elevation-z8" id="DeptTable">
+            <table 
+            *ngIf="!isLoading"
+            mat-table matSort [dataSource]="dataSource"  class="mat-elevation-z8" id="DeptTable">
                      <!--  Image Column -->
         <ng-container matColumnDef="Image">
             <th mat-header-cell mat-sort-header *matHeaderCellDef style="color: #ffffff;">Course Image</th>
@@ -64,9 +66,18 @@
               <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 
             </table>
-            <div *ngIf="noData | async" class="no-records" style="text-align: center; padding-top: 4em; font-size: larger;">
-              No records found, please try again.
+            <div *ngIf="isLoading" 
+            style="
+            display: flex;
+            align-items: center;
+            justify-content: center;">
+              <mat-spinner ></mat-spinner>
             </div>
+            <div *ngIf="!isLoading">
+              <div *ngIf="noData | async" class="no-records" style="text-align: center; padding-top: 4em; font-size: larger;">
+                No records retrieved!
+              </div>
+             </div>
           </div>
 
         </mat-card-content>

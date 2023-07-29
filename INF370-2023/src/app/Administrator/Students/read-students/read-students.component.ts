@@ -38,6 +38,7 @@ export class ReadStudentsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!:MatSort;
 
+  isDeleting!:boolean;
   studentlist!:StudentDetails[];
 
   constructor( 
@@ -100,6 +101,7 @@ export class ReadStudentsComponent implements OnInit {
         );
         dialogReference.afterClosed().subscribe((result) => {
           if (result == true) {
+            this.isLoading=true;
             this.service.DeleteStudent(obj.StudentID).subscribe((res:any) => 
             {
               if(res.Status===200)
@@ -113,12 +115,14 @@ export class ReadStudentsComponent implements OnInit {
                           duration: 3000,
                         });
                 this.refreshList();
+                this.isLoading=false;
               }
 
             
 
               else
               {
+                this.isLoading=false;
                 this.dialog.open(
                   InputDialogComponent,
                   {

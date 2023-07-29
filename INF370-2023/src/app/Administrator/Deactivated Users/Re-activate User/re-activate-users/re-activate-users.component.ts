@@ -91,6 +91,7 @@ onView(id:number) {
   });
   dialogReference.afterClosed().subscribe((result) => {
     if (result == true) {
+      this.isLoading=true;
       this.service.ReactivateUser(id).subscribe((res:any) => {
         if(res.Status===200)
         {
@@ -104,9 +105,11 @@ onView(id:number) {
                   }
           );
           this.refreshList();
+          this.isLoading=false;
         }
         else
         {
+          this.isLoading=false;
           const dialogReference = this.dialog.open(
             ExistsDialogComponent,
             {
