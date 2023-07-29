@@ -291,7 +291,7 @@ namespace INF370_2023_Web_API.Models
                 string startTime = Convert.ToString(interview.StartTime);
                 string endTime = Convert.ToString(interview.EndTime);
 
-                // Send Invite
+                // Send invite
                 await SendUpdatedInvite(email, name, surname, date, startTime, endTime, qrCode);
 
                 return new { Status = 200, Message = "Slot updated" };
