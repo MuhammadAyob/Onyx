@@ -1,0 +1,19 @@
+<div *ngFor="let categoryData of reportData">
+    <h2>{{ categoryData.Category }}</h2>
+    <table>
+      <tr>
+        <th>Course</th>
+        <th>Number of Courses Sold</th>
+        <th>Total Revenue</th>
+      </tr>
+      <tr *ngFor="let item of categoryData.Courses">
+        <td>{{ item.Course }}</td>
+        <td>{{ item.NumberofCoursesSold }}</td>
+        <td>{{ item.TotalRevenue | currency }}</td>
+      </tr>
+      <tr>
+        <td colspan="3">Total Revenue for {{ categoryData.Category }}: {{ categoryData.CategoryTotal | currency }}</td>
+      </tr>
+    </table>
+  </div>
+  

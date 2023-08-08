@@ -1,0 +1,84 @@
+.report-paramaters {
+    margin: 32px 0;
+  }
+  
+  .report-paramater-form {
+    display: flex;
+    justify-content: center;
+    margin-right: 288px;
+  }
+  
+  .report-paramater-label {
+    font-size: 1.1rem;
+    color: #5090d0;
+    margin-top: 16px;
+    margin-right: 16px;
+    margin-left: 16px;
+  }
+  
+  .report-paramater-input-field {
+    width: 288px;
+    margin-right: 16px;
+  }
+  
+  .report-paramater-button {
+    height: 58px;
+    width: 90px;
+    margin-top: 4.8px;
+    margin-left: 16px;
+  }
+  
+  .report-paramater-button:nth-last-child(2) {
+    margin-left: 32px;
+  }
+  
+  .chart {
+    width: 800px;
+    height: 350px;
+  }
+  
+  .chart-wrapper {
+    padding: 4em;
+    .chart {
+      background-color: #faf9f9;
+      width: 90%;
+      height: 76vh;
+    }
+  }
+  
+  .center-img {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  img {
+    width: 100px;
+    height: 100px;
+  }
+  
+  $borderColor: #3e3e3e;
+  td:nth-child(odd) {
+    width: 180px;
+    font-weight: 600;
+  }
+  
+  .tables {
+    margin: 32px;
+  
+    table {
+      width: 100%;
+  
+      tbody {
+        tr {
+          border: 2px solid $borderColor;
+          td {
+            border: 2px solid $borderColor;
+            padding: 16px;
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+  

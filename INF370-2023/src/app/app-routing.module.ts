@@ -122,6 +122,13 @@ import { ScanCodeComponent } from './Administrator/Interview-Slots/scan-code/sca
 import { ContactUsComponent } from './contact/contact-us/contact-us.component';
 import { FaqfileAddComponent } from './Administrator/FAQ/upload-json/faqfile-add/faqfile-add.component';
 import { ViewCourseContentComponent } from './Student Portal/view-content/view-course-content/view-course-content.component';
+import { CourseTrendReportComponent } from './Administrator/Reports/course-sales-trend/course-trend-report/course-trend-report.component';
+import { RevenueReportComponent } from './Administrator/Reports/revenue/revenue-report/revenue-report.component';
+import { MaintenanceReportComponent } from './Administrator/Reports/maintenance-report/maintenance-report/maintenance-report.component';
+import { CoursePerformanceComponent } from './Administrator/Reports/course-performance/course-performance/course-performance.component';
+import { EmployeeSkillReportComponent } from './Administrator/Reports/employee-skill/employee-skill-report/employee-skill-report.component';
+import { ContactReportComponent } from './Administrator/Reports/contacts/contact-report/contact-report.component';
+import { SalesReportComponent } from './Administrator/Reports/sales/sales-report/sales-report.component';
 
 
 const routes: Routes = [
@@ -483,6 +490,41 @@ component:MaintainRatingComponent,
 canActivate:[AuthGuardGuard,StudentGuard]
 },
 
+// reports
+
+{
+  path:'admin/reports/course-sales-trend-report',
+  component:CourseTrendReportComponent
+},
+
+{
+path:'admin/reports/revenue-report',
+component:RevenueReportComponent
+},
+
+{
+path:'admin/reports/maintenance-report',
+component:MaintenanceReportComponent
+},
+
+{
+path:'admin/reports/course-performance-report',
+component:CoursePerformanceComponent
+},
+{
+path:'admin/reports/employee-skill-report',
+component:EmployeeSkillReportComponent
+},
+
+{
+path:'admin/reports/contact-report',
+component:ContactReportComponent
+},
+
+{
+path:'admin/reports/sales-report',
+component:SalesReportComponent
+},
 
 // admin skill and skill type
 {

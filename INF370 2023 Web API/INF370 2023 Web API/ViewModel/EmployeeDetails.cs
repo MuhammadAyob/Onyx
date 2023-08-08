@@ -91,4 +91,10 @@ namespace INF370_2023_Web_API.ViewModel
         public int CourseID { get; set; }
         public string Message { get; set; }
     }
+
+    public class Revenue
+    {
+        public DateTime startDate { get; set; }
+        public DateTime endDate { get; set; }
+    }
 }

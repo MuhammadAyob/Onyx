@@ -1,0 +1,26 @@
+<div>
+    <h2>Select Date Range:</h2>
+    <input type="date" [(ngModel)]="startDate">
+    <input type="date" [(ngModel)]="endDate">
+    <button (click)="FetchReportData()">Generate Report</button>
+  </div>
+  
+  <div *ngFor="let yearData of reportData">
+    <h2>Year: {{ yearData.Year }}</h2>
+    <table>
+      <tr>
+        <th>Course</th>
+        <th>Number of Courses Sold</th>
+        <th>Total Revenue</th>
+      </tr>
+      <tr *ngFor="let item of yearData.Courses">
+        <td>{{ item.Course }}</td>
+        <td>{{ item.NumberofCoursesSold }}</td>
+        <td>{{ item.TotalRevenue | currency }}</td>
+      </tr>
+      <tr>
+        <td colspan="3">Total Revenue for {{ yearData.Year }}: {{ yearData.YearTotal | currency }}</td>
+      </tr>
+    </table>
+  </div>
+  

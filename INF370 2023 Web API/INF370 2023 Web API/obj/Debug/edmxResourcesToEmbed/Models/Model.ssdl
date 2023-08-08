@@ -68,6 +68,7 @@
     <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Query" Type="varchar(max)" Nullable="false" />
+    <Property Name="Date" Type="date" Nullable="false" />
   </EntityType>
   <EntityType Name="Course">
     <Key>
@@ -185,7 +186,7 @@
     <Property Name="InterviewCode" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="EndTime" Type="time" Precision="7" Nullable="false" />
     <Property Name="Attended" Type="varchar" MaxLength="50" />
-    <Property Name="DateAttended" Type="date" />
+    <Property Name="DateAttended" Type="datetime" />
   </EntityType>
   <EntityType Name="JobOpportunity">
     <Key>

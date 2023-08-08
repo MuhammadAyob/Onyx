@@ -32,16 +32,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Contacts">
-      <EntityTypeMapping TypeName="Model.Contact">
-        <MappingFragment StoreEntitySet="Contact">
-          <ScalarProperty Name="ContactID" ColumnName="ContactID" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Query" ColumnName="Query" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Courses">
       <EntityTypeMapping TypeName="Model.Course">
         <MappingFragment StoreEntitySet="Course">
@@ -457,6 +447,17 @@
           <ScalarProperty Name="InterviewDate" ColumnName="InterviewDate" />
           <ScalarProperty Name="ShortListID" ColumnName="ShortListID" />
           <ScalarProperty Name="InterviewSlotID" ColumnName="InterviewSlotID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Contacts">
+      <EntityTypeMapping TypeName="Model.Contact">
+        <MappingFragment StoreEntitySet="Contact">
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Query" ColumnName="Query" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="ContactID" ColumnName="ContactID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

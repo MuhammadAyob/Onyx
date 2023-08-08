@@ -698,6 +698,7 @@ namespace INF370_2023_Web_API.Models
                 contact.Email = body.Email;
                 contact.Name = body.Name;
                 contact.Query = body.Query;
+                contact.Date = DateTime.Today;
 
                 db.Contacts.Add(contact);
                 await db.SaveChangesAsync();

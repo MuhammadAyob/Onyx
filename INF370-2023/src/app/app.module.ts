@@ -146,6 +146,14 @@ import { ContactUsComponent } from './contact/contact-us/contact-us.component';
 import { FaqfileAddComponent } from './Administrator/FAQ/upload-json/faqfile-add/faqfile-add.component';
 import { ViewCourseContentComponent } from './Student Portal/view-content/view-course-content/view-course-content.component';
 import { YtPipePipe } from './yt-pipe.pipe';
+import { CourseTrendReportComponent } from './Administrator/Reports/course-sales-trend/course-trend-report/course-trend-report.component';
+import { RevenueReportComponent } from './Administrator/Reports/revenue/revenue-report/revenue-report.component';
+import { MaintenanceReportComponent } from './Administrator/Reports/maintenance-report/maintenance-report/maintenance-report.component';
+import { NgChartsModule } from 'ng2-charts';
+import { CoursePerformanceComponent } from './Administrator/Reports/course-performance/course-performance/course-performance.component';
+import { EmployeeSkillReportComponent } from './Administrator/Reports/employee-skill/employee-skill-report/employee-skill-report.component';
+import { ContactReportComponent } from './Administrator/Reports/contacts/contact-report/contact-report.component';
+import { SalesReportComponent } from './Administrator/Reports/sales/sales-report/sales-report.component';
 //import { CalendarDialogComponent } from './Dialog/calendar-dialog/calendar-dialog/calendar-dialog.component';
 //import { ServiceWorkerModule } from '@angular/service-worker';
 
@@ -291,6 +299,13 @@ export function momentAdapterFactory() {
     FaqfileAddComponent,
     ViewCourseContentComponent,
     YtPipePipe,
+    CourseTrendReportComponent,
+    RevenueReportComponent,
+    MaintenanceReportComponent,
+    CoursePerformanceComponent,
+    EmployeeSkillReportComponent,
+    ContactReportComponent,
+    SalesReportComponent,
 
     
   ],
@@ -304,6 +319,7 @@ export function momentAdapterFactory() {
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    NgChartsModule,
     PdfViewerModule,  
     ToastrModule.forRoot(),
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: momentAdapterFactory }),

@@ -1,0 +1,27 @@
+<div>
+    <h2>Select Date Range:</h2>
+    <input type="date" [(ngModel)]="startDate">
+    <input type="date" [(ngModel)]="endDate">
+    <button (click)="FetchReportData()">Generate Report</button>
+  </div>
+  
+  <div *ngIf="show">
+    
+    <table>
+      <tr>
+        <th>Date</th>
+        <th>CartID</th>
+        <th>Student</th>
+        <th>Total</th>
+      </tr>
+      <tr *ngFor="let e of SalesData">
+        <td>{{ e.Date | date:'MM/dd/yyyy' }}</td>
+        <td>{{ e.CartID }}</td>
+        <td>{{ e.Student }}</td>
+        <td>R{{ e.Total }}</td>
+      </tr>
+    </table>
+  <p>Grand Total: R{{GrandTotal}}</p>
+  
+  </div>
+  

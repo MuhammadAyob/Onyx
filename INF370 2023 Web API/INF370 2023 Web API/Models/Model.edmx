@@ -73,6 +73,7 @@
           <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Query" Type="varchar(max)" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="Course">
           <Key>
@@ -190,7 +191,7 @@
           <Property Name="InterviewCode" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="EndTime" Type="time" Precision="7" Nullable="false" />
           <Property Name="Attended" Type="varchar" MaxLength="50" />
-          <Property Name="DateAttended" Type="date" />
+          <Property Name="DateAttended" Type="datetime" />
         </EntityType>
         <EntityType Name="JobOpportunity">
           <Key>
@@ -1157,15 +1158,6 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
           <NavigationProperty Name="Course" Relationship="Self.FK_CartCourse_Course" FromRole="CartCourse" ToRole="Course" />
           <NavigationProperty Name="Cart" Relationship="Model.FK_CartCourse_Cart" FromRole="CartCourse" ToRole="Cart" />
         </EntityType>
-        <EntityType Name="Contact">
-          <Key>
-            <PropertyRef Name="ContactID" />
-          </Key>
-          <Property Name="ContactID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Query" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
         <EntityType Name="Course">
           <Key>
             <PropertyRef Name="CourseID" />
@@ -1871,7 +1863,6 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
           <EntitySet Name="Applications" EntityType="Self.Application" />
           <EntitySet Name="AuditLogs" EntityType="Self.AuditLog" />
           <EntitySet Name="CartCourses" EntityType="Self.CartCourse" />
-          <EntitySet Name="Contacts" EntityType="Self.Contact" />
           <EntitySet Name="Courses" EntityType="Self.Course" />
           <EntitySet Name="CourseAssistants" EntityType="Self.CourseAssistant" />
           <EntitySet Name="CourseCategories" EntityType="Self.CourseCategory" />
@@ -2073,6 +2064,7 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
             <End Role="ShortList" EntitySet="ShortLists" />
             <End Role="InterviewSlot" EntitySet="InterviewSlots" />
           </AssociationSet>
+          <EntitySet Name="Contacts" EntityType="Model.Contact" />
         </EntityContainer>
         <EntityType Name="OTPTimer">
           <Key>
@@ -2291,7 +2283,7 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
           <Property Name="InterviewCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="EndTime" Type="Time" Nullable="false" Precision="7" />
           <Property Name="Attended" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DateAttended" Type="DateTime" Precision="0" />
+          <Property Name="DateAttended" Type="DateTime" Precision="3" />
           <NavigationProperty Name="ShortList" Relationship="Model.FK_InterviewSlot_ShortList" FromRole="InterviewSlot" ToRole="ShortList" />
         </EntityType>
         <Association Name="FK_InterviewSlot_ShortList">
@@ -2306,6 +2298,16 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="ContactID" />
+          </Key>
+          <Property Name="ContactID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Query" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2340,16 +2342,6 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
                 <ScalarProperty Name="CartID" ColumnName="CartID" />
                 <ScalarProperty Name="CourseID" ColumnName="CourseID" />
                 <ScalarProperty Name="PriceAtTimeOfPurchase" ColumnName="PriceAtTimeOfPurchase" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Contacts">
-            <EntityTypeMapping TypeName="Model.Contact">
-              <MappingFragment StoreEntitySet="Contact">
-                <ScalarProperty Name="ContactID" ColumnName="ContactID" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Query" ColumnName="Query" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2768,6 +2760,17 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
                 <ScalarProperty Name="InterviewDate" ColumnName="InterviewDate" />
                 <ScalarProperty Name="ShortListID" ColumnName="ShortListID" />
                 <ScalarProperty Name="InterviewSlotID" ColumnName="InterviewSlotID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contacts">
+            <EntityTypeMapping TypeName="Model.Contact">
+              <MappingFragment StoreEntitySet="Contact">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Query" ColumnName="Query" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ContactID" ColumnName="ContactID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

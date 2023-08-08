@@ -1,0 +1,40 @@
+<div>
+    <h2>Select Course:</h2>
+    <mat-select (valueChange)="selectCourse($event)" required>
+        <mat-option
+          *ngFor="let item of courses"
+          [value]="item.CourseID"
+        >
+          {{ item.Name }}
+        </mat-option>
+      </mat-select>
+  </div>
+  <button (click)="onCourseSelected()">Generate</button>
+  
+  <div>
+    
+    <table>
+      <tr>
+        <th>Date</th>
+        <th>Student</th>
+        <th>Rating</th>
+        <th>Comment</th>
+      </tr>
+      <tr *ngFor="let rating of courseRatings">
+        <td>{{ rating.Date | date:'MM/dd/yyyy' }}</td>
+        <td>{{ rating.Name }} {{rating.Surname}}</td>
+        <td>{{ rating.Rating }}</td>
+        <td>{{ rating.Comment }}</td>
+      </tr>
+    </table>
+  
+    <div *ngIf="showGraph">
+        <canvas 
+        baseChart
+        [data]="barChartData"
+        [type]="barChartType"
+        [options]="barChartOptions">
+      </canvas>
+    </div>
+  </div>
+  

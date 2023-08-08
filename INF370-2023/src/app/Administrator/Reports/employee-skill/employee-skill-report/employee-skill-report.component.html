@@ -1,0 +1,33 @@
+<div>
+    <h2>Select Skill:</h2>
+    <mat-select (valueChange)="selectSkill($event)" required>
+        <mat-option
+          *ngFor="let item of skills"
+          [value]="item.SkillID"
+        >
+          {{ item.Skill }}
+        </mat-option>
+      </mat-select>
+  </div>
+  <button (click)="onSkillSelected()">Generate</button>
+  
+  <div>
+    
+    <table>
+      <tr>
+        <th>Full Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>RSA ID Number</th>
+      </tr>
+      <tr *ngFor="let e of employeeList">
+        <td>{{ e.Name }} {{e.Surname}}</td>
+        <td>{{ e.Email }}</td>
+        <td>{{ e.Phone }}</td>
+        <td>{{ e.RSAIDNumber }}</td>
+      </tr>
+    </table>
+  
+  
+  </div>
+  

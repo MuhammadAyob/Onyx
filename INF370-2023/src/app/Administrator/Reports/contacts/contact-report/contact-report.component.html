@@ -1,0 +1,27 @@
+<div>
+    <h2>Select Date Range:</h2>
+    <input type="date" [(ngModel)]="startDate">
+    <input type="date" [(ngModel)]="endDate">
+    <button (click)="FetchReportData()">Generate Report</button>
+  </div>
+  
+  <div>
+    
+    <table>
+      <tr>
+        <th>Date</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Query</th>
+      </tr>
+      <tr *ngFor="let e of reportData">
+        <td>{{ e.Date | date:'MM/dd/yyyy' }}</td>
+        <td>{{ e.Name }}</td>
+        <td>{{ e.Email }}</td>
+        <td>{{ e.Query }}</td>
+      </tr>
+    </table>
+  
+  
+  </div>
+  

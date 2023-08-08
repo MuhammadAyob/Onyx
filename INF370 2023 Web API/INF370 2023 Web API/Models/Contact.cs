@@ -18,5 +18,6 @@ namespace INF370_2023_Web_API.Models
         public string Email { get; set; }
         public string Name { get; set; }
         public string Query { get; set; }
+        public System.DateTime Date { get; set; }
     }
 }

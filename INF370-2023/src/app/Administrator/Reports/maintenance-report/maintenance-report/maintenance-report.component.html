@@ -1,0 +1,130 @@
+<div class="report-paramaters">
+    <form class="report-paramater-form" [formGroup]="range">
+      <label class="report-paramater-label">Start Date: </label>
+      <mat-form-field
+        class="report-paramater-input-field"
+        color="primary"
+        appearance="outline"
+      >
+        <input formControlName="startDate" matInput [matDatepicker]="startDate" />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="startDate"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #startDate color="primary"></mat-datepicker>
+      </mat-form-field>
+  
+      <label class="report-paramater-label">End Date: </label>
+      <mat-form-field
+        class="report-paramater-input-field"
+        color="primary"
+        appearance="outline"
+      >
+        <input matInput formControlName="endDate" [matDatepicker]="endDate" />
+        <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+        <mat-datepicker #endDate color="primary"></mat-datepicker>
+      </mat-form-field>
+  
+      <button
+        mat-flat-button
+        type="submit"
+        color="primary"
+        class="report-paramater-button"
+        [disabled]="range.invalid"
+        (click)="FetchData()"
+      >
+        Generate
+      </button>
+  
+      <button
+        color="primary"
+        class="report-paramater-button"
+        mat-flat-button
+        [disabled]="!showGraph"
+        (click)="downloadMaintainanceReportPDF()"
+      >
+        PDF
+        <mat-icon>insert_drive_file</mat-icon>
+      </button>
+    </form>
+  </div>
+  
+  <div *ngIf="showGraph" class="chart-wrapper" id="htmlData">
+    <div class="chart-wrapper" style="width: 150px; height:150px">
+      <div class="chart" style="display: block;">
+        <canvas 
+        baseChart
+        [data]="TypesPieChart"
+        [type]="pieChartType"
+        [options]="pieChartOptions">
+      </canvas>
+      </div>
+    </div>
+    <br>
+    <br>
+  <div style="margin-bottom: 5em;">
+  
+  </div>
+    <div
+      class="tables"
+      *ngFor="let maintenance of maintenanceData; let i = index"
+    >
+      <table id="table-{{ i }}">
+        <tbody>
+          <tr>
+            <td>Maintenance Status</td>
+            <td>{{ maintenance.Status }}</td>
+            <td>Maintenance Type</td>
+            <td>{{ maintenance.MaintenanceType }}</td>
+          </tr>
+  
+        
+  
+          <tr>
+            <td>Logged Date</td>
+            <td>{{ maintenance.LoggedDate | date: "dd MMM yyyy" }}</td>
+            <td>Resolved Date</td>
+            <td>{{ maintenance.ResolvedDate | date: "dd MMM yyyy" }}</td>
+          </tr>
+  
+          <tr>
+            <td>Priority</td>
+            <td>{{ maintenance.Priority }}</td>
+            <td>Location</td>
+            <td>{{ maintenance.Location }}</td>
+           
+          </tr>
+  
+          <tr>
+            <td>Logged By</td>
+            <td colspan="3">{{ maintenance.LoggedBy }}</td>
+            
+          </tr>
+  
+          
+
+          <tr>
+            <td>Description</td>
+            <td colspan="3">{{ maintenance.Description }}</td>
+          </tr>
+
+          <tr>
+            <td>Image</td>
+            <td rowspan="3">
+              <div class="center-img">
+                <img
+                  src="{{ 'data:image/png;base64,' + maintenance.Image }}"
+                  width="300px; height;300px"
+                  alt="Maintenance Issue pic"
+                />
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br />
+      <br />
+      <br>
+    </div>
+  </div>
+  
