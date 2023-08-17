@@ -30,8 +30,12 @@ import { Router } from '@angular/router';
   providers: [DatePipe]
 })
 export class MaintenanceReportComponent implements OnInit {
-  //dialog: any;
+  displayedColumns: string[] = [
+    'Name',
+    'Total',
+  ];
 
+  fetched:boolean=false;
   constructor(
     private service:ReportsService, 
     private formBuilder: FormBuilder,
@@ -137,7 +141,7 @@ export class MaintenanceReportComponent implements OnInit {
 
   startDate: Date | any;
   endDate: Date | any;
-
+  chartData:any;
   public dataSource = new MatTableDataSource<any>();
   noData = this.dataSource.connect().pipe(map(data=>data.length===0));
  
@@ -150,6 +154,7 @@ export class MaintenanceReportComponent implements OnInit {
   FetchData(){
     this.isLoading=true;
     this.showGraph=false;
+    this.fetched=false;
     //const parameters = this.setupDateParameters();
     this.TypesPieChart.datasets[0].data = [];
     this.TypesPieChart.labels = [];
@@ -164,13 +169,16 @@ export class MaintenanceReportComponent implements OnInit {
       });
 
       this.maintenanceData = data.TableData;
-      this.dataSource.data = data.TableData;
+      this.dataSource.data = data.ChartData;
+
 
       this.TypesPieChart;
       this.pieChartOptions;
       this.pieChartType;
       this.chart?.update();
+      this.isLoading=false;
       this.showGraph=true;
+      this.fetched=true;
     })
   }
 

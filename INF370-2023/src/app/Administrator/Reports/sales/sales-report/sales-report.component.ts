@@ -41,6 +41,7 @@ export class SalesReportComponent implements OnInit {
   SalesData: any[] = [];
   GrandTotal:any;
   show:boolean=false;
+  fetched:boolean=false;
   //show:boolean=false;
   constructor( 
     private titleservice:Title,
@@ -56,6 +57,7 @@ export class SalesReportComponent implements OnInit {
   FetchReportData(){
     this.isLoading=true;
     this.show=false;
+    this.fetched=false;
     let revenue = new Revenue();
     revenue.startDate = this.startDate;
     revenue.endDate = this.endDate;
@@ -66,6 +68,7 @@ export class SalesReportComponent implements OnInit {
       this.GrandTotal = data.GrandTotal;
       this.isLoading=false;
       this.show=true;
+      this.fetched=true;
     })
   }
 

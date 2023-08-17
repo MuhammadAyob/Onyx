@@ -1,40 +1,137 @@
-<div>
-    <h2>Select Course:</h2>
-    <mat-select (valueChange)="selectCourse($event)" required>
-        <mat-option
-          *ngFor="let item of courses"
-          [value]="item.CourseID"
-        >
-          {{ item.Name }}
-        </mat-option>
-      </mat-select>
-  </div>
-  <button (click)="onCourseSelected()">Generate</button>
-  
-  <div>
+
+<div style="padding-left: 2em; padding-right: 2em; padding-top: 9em;height:100vh;background-image: url('../../assets/gradient.gif');background-repeat: no-repeat;background-size: 100% 25%;">
+  <!-- Mat Card Form for Read Departments -->
+ 
+
+
+<div class="container-fluid">
+  <form>
+    <mat-card class="matCard">
+     
+      <mat-card-header class="cardHeader" style="margin-bottom: -15px; text-align: center">
+          <mat-card-title-group style="margin:0 auto">
+            <mat-card-title style="font-weight: 500; "
+              >Select a course to proceed</mat-card-title
+            >
+          </mat-card-title-group>
+         
+        </mat-card-header>
+        <br>
+        <br>
+        <div *ngIf="(courses == null || undefined)"
+        style="
+       display: flex;
+       align-items: center;
+       justify-content: center;">
+         <mat-spinner ></mat-spinner>
+       </div>
+        <div *ngIf="!(courses == null || undefined)">
+          <div class="chips-container" style="display: flex; flex-direction: column; align-items: center;">
+            <mat-form-field appearance="legacy">
+              <mat-label style="color: #0e1a3c">Select Course</mat-label>
+              <mat-select (valueChange)="selectCourse($event)" [formControl]="skillFormControl" required>
+                <mat-option *ngFor="let item of courses" [value]="item.CourseID">
+                  {{ item.Name }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="skillFormControl.hasError('required')">
+                Skill Selection is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+            
+            <div style="display: flex; gap: 16px; margin-top: 16px;">
+              
+              <button id="confirm" class="btn" (click)="onSubmit()">Generate</button>
+              <button id="confirm" class="btn">Download PDF</button>
+              
+            </div>
+          </div>
+          <br>
+          <mat-card-content style="padding-top: 1em;">
+            <div *ngIf="isLoading" 
+            style="
+            display: flex;
+            align-items: center;
+            justify-content: center;">
+              <mat-spinner ></mat-spinner>
+            </div>
+            <div *ngIf="fetched">
+              <h1 style="margin:0 auto; color: #0e1a3c;"><b>Selected Course: {{getSelectedCourseName()}} - Performance Report</b></h1>
+              <div class="table-hover table-container mat-elevation-z8">
+                <table *ngIf="!isLoading" mat-table matSort [dataSource]="dataSource"  class="mat-elevation-z8" id="DeptTable">
+                  <!-- Department ID Column -->
+      
+                  <ng-container matColumnDef="Date">
+                    <th mat-header-cell *matHeaderCellDef style="color: #ffffff;">Date</th>
+                    <td mat-cell *matCellDef="let e">
+                      {{ e.Date | date:'MM/dd/yyyy'}}
+                    </td>
+                  </ng-container>
+      
+                  <!-- Department Name Column -->
+                  <ng-container matColumnDef="Student">
+                    <th mat-header-cell *matHeaderCellDef style="color: #ffffff;">Student</th>
+                    <td mat-cell *matCellDef="let e">
+                      {{ e.Name }} {{e.Surname}}
+                    </td>
+                  </ng-container>
+      
+                  <ng-container matColumnDef="Rating">
+                    <th mat-header-cell *matHeaderCellDef style="color: #ffffff;">Rating</th>
+                    <td mat-cell *matCellDef="let e">
+                      {{ e.Rating}}
+                    </td>
+                  </ng-container>
+      
+                  <ng-container matColumnDef="Comment">
+                    <th mat-header-cell *matHeaderCellDef style="color: #ffffff;">Comment</th>
+                    <td mat-cell *matCellDef="let e">
+                      {{ e.Comment}}
+                    </td>
+                  </ng-container>
+      
+               
+      
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      
+                </table>
+                <div *ngIf="!isLoading">
+                  <div *ngIf="noData | async" class="no-records" style="text-align: center; padding-top: 4em; font-size: larger;">
+                    No records retrieved!
+                  </div>
+                  <br>
+                  <br>
+                 </div>
+                <br>
+                <div *ngIf="showGraph">
+                  <canvas 
+                  baseChart
+                  [data]="barChartData"
+                  [type]="barChartType"
+                  [options]="barChartOptions">
+                </canvas>
+              </div>
+              <br>
+            
+              
+              </div>
+            </div>
+           
+            <br>
+            <div class="button-container">
+              <button id="view2" class="btn" (click)="back()">View all Reports</button>
+              
+          </div>
+          </mat-card-content>
+        </div>
+      <br>
+      <br>
     
-    <table>
-      <tr>
-        <th>Date</th>
-        <th>Student</th>
-        <th>Rating</th>
-        <th>Comment</th>
-      </tr>
-      <tr *ngFor="let rating of courseRatings">
-        <td>{{ rating.Date | date:'MM/dd/yyyy' }}</td>
-        <td>{{ rating.Name }} {{rating.Surname}}</td>
-        <td>{{ rating.Rating }}</td>
-        <td>{{ rating.Comment }}</td>
-      </tr>
-    </table>
-  
-    <div *ngIf="showGraph">
-        <canvas 
-        baseChart
-        [data]="barChartData"
-        [type]="barChartType"
-        [options]="barChartOptions">
-      </canvas>
-    </div>
+     
+    </mat-card>
+  </form>
   </div>
-  
+  <br />
+</div>
+

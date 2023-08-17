@@ -32,18 +32,11 @@
     margin-left: 32px;
   }
   
-  .chart {
-    width: 800px;
-    height: 350px;
-  }
+  
   
   .chart-wrapper {
     padding: 4em;
-    .chart {
-      background-color: #faf9f9;
-      width: 90%;
-      height: 76vh;
-    }
+    margin-left: 10%;
   }
   
   .center-img {
@@ -53,8 +46,8 @@
   }
   
   img {
-    width: 100px;
-    height: 100px;
+    width: 300px;
+    height: 300px;
   }
   
   $borderColor: #3e3e3e;

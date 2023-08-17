@@ -30,7 +30,7 @@ export class ContactReportComponent implements OnInit {
   isLoading!:boolean;
   startFormControl = new FormControl('', [Validators.required]);
   endFormControl = new FormControl('', [Validators.required]);
-
+  fetched:boolean=false;
   startDate: Date | any;
   endDate: Date | any;
 
@@ -55,6 +55,7 @@ export class ContactReportComponent implements OnInit {
   }
 
   FetchReportData(){
+    this.fetched=false;
     this.isLoading=true;
     let revenue = new Revenue();
     revenue.startDate = this.startDate;
@@ -64,6 +65,7 @@ export class ContactReportComponent implements OnInit {
     this.service.GetContacts(revenue).subscribe((data)=>{
       this.dataSource.data = data as any;
       this.isLoading=false;
+      this.fetched=true;
     })
   }
 

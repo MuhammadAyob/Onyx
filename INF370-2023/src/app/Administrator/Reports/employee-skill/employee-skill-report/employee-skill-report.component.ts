@@ -31,7 +31,7 @@ export class EmployeeSkillReportComponent implements OnInit {
   public dataSource = new MatTableDataSource<any>();
   noData = this.dataSource.connect().pipe(map(data=>data.length===0));
   isLoading!:boolean;
-    
+  fetched:boolean=false;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!:MatSort;
   skills!: any[];
@@ -83,10 +83,12 @@ export class EmployeeSkillReportComponent implements OnInit {
   }
 
   onSkillSelected(){
+    this.fetched=false;
    this.isLoading=true;
       this.service.GetEmployeesWithSkill(this.selectedSkillId!).subscribe((data:any)=>{
         this.dataSource.data = data as any[];
         this.isLoading=false;
+        this.fetched=true;
         
       })
     
