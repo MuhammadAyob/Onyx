@@ -1,19 +1,113 @@
-<div *ngFor="let categoryData of reportData">
-    <h2>{{ categoryData.Category }}</h2>
-    <table>
-      <tr>
-        <th>Course</th>
-        <th>Number of Courses Sold</th>
-        <th>Total Revenue</th>
-      </tr>
-      <tr *ngFor="let item of categoryData.Courses">
-        <td>{{ item.Course }}</td>
-        <td>{{ item.NumberofCoursesSold }}</td>
-        <td>{{ item.TotalRevenue | currency }}</td>
-      </tr>
-      <tr>
-        <td colspan="3">Total Revenue for {{ categoryData.Category }}: {{ categoryData.CategoryTotal | currency }}</td>
-      </tr>
-    </table>
+<div style="padding-left: 2em; padding-right: 2em; padding-top: 9em; height: 100vh; background-image: url('../../assets/gradient.gif'); background-repeat: no-repeat; background-size: 100% 25%;">
+  <!-- Mat Card Form for New Report -->
+  <div class="container-fluid">
+    <form>
+      <mat-card class="matCard">
+        <mat-card-header class="cardHeader" style="margin-bottom: -15px; text-align: center">
+          <mat-card-title-group style="margin: 0 auto">
+            <mat-card-title style="font-weight: 500;">Course Sales Trend Report</mat-card-title>
+          </mat-card-title-group>
+        </mat-card-header>
+        <br>
+        <br>
+        <div>
+      
+          <mat-card-content style="padding-top: 1em;">
+            <div *ngIf="isLoading" 
+            style="
+            display: flex;
+            align-items: center;
+            justify-content: center;">
+              <mat-spinner ></mat-spinner>
+            </div>
+            <div *ngIf="!isLoading">   
+              <div *ngFor="let categoryData of reportData">
+                <h1 style="margin-left: 0%; color: #0e1a3c;"><b><u>Category: {{ categoryData.Category }}</u></b></h1>
+                <br>
+                <div class="table-hover table-container mat-elevation-z8">
+                  <table mat-table [dataSource]="categoryData.Courses" class="mat-elevation-z8">
+                    <!-- Course Column -->
+                    <ng-container matColumnDef="Course">
+                      <th mat-header-cell *matHeaderCellDef style="color: #ffffff;">Course</th>
+                      <td mat-cell *matCellDef="let item">{{ item.Course }}</td>
+                    </ng-container>
+                    <!-- Number Sold Column -->
+                    <ng-container matColumnDef="NumberSold">
+                      <th mat-header-cell *matHeaderCellDef style="color: #ffffff;">Number of Courses Sold</th>
+                      <td mat-cell *matCellDef="let item">{{ item.NumberofCoursesSold }}</td>
+                    </ng-container>
+                    <!-- Total Revenue Column -->
+                    <ng-container matColumnDef="TotalRevenue">
+                      <th mat-header-cell *matHeaderCellDef style="color: #ffffff;">Total Revenue</th>
+                      <td mat-cell *matCellDef="let item">R{{ item.TotalRevenue }}</td>
+                    </ng-container>
+                    <!-- Define the columns you need here -->
+                    
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+                  </table>
+                </div>
+                <br>
+                <div class="vat-section" style="text-align: center;">
+                  <mat-list style="width: 70%; margin: 0 auto;">
+                    <mat-list-item>
+                      <div style="text-align: left; flex-grow: 1;">
+                        <span style="font-size: 20px;"><b>Total Revenue for {{ categoryData.Category }}:</b></span>
+                      </div>
+                      <div style="text-align: right;">
+                        <span style="font-size: 24px;">R{{ categoryData.CategoryTotal }}</span>
+                      </div>
+                      <mat-divider></mat-divider>
+                    </mat-list-item>
+                  </mat-list>
+                  <br>
+                  <br>
+                  <!-- ... Your existing code ... -->
+
+<!-- ... Your existing code ... -->
+
+                </div>
+              </div>
+              <br>
+              <br>
+              <div *ngIf="show">
+                <h1 style="margin-left: 45%; color: #0e1a3c;"><b>All Time Totals:</b></h1>
+                <div class="vat-section" style="text-align: center;">
+                  <mat-list style="width: 70%; margin: 0 auto;">
+                    <mat-list-item>
+                      <div style="text-align: left; flex-grow: 1;">
+                        <span style="font-size: 20px;"><b>Total Number of Courses Sold (All Time):</b></span>
+                      </div>
+                      <div style="text-align: right;">
+                        <span style="font-size: 24px;">{{ calculateTotalCoursesSoldAllTime() }}</span>
+                      </div>
+                      <mat-divider></mat-divider>
+                    </mat-list-item>
+                    <mat-list-item>
+                      <div style="text-align: left; flex-grow: 1;">
+                        <span style="font-size: 20px;"><b>Total Revenue (All Time):</b></span>
+                      </div>
+                      <div style="text-align: right;">
+                        <span style="font-size: 24px;">R{{ calculateTotalRevenueAllTime() }}</span>
+                      </div>
+                      <mat-divider></mat-divider>
+                    </mat-list-item>
+                  </mat-list>
+                  <br>
+                </div>
+              </div>
+            </div>
+            <br>
+            <div style="margin-left:35%;display: flex; gap: 16px; margin-top: 16px;">
+              <button  id="confirm" class="btn" (click)="back()">View all Reports</button>
+              <button [disabled]="!show" id="confirm" class="btn">Download PDF</button>
+            </div>
+          </mat-card-content>
+        </div>
+        <br>
+        <br>
+      </mat-card>
+    </form>
   </div>
-  
+  <br />
+</div>

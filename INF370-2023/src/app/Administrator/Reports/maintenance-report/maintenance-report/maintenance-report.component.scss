@@ -82,3 +82,259 @@
     }
   }
   
+
+  .cardButton {
+    float: right;
+    }
+    
+    
+    .bigDiv{
+      background: linear-gradient(90deg, #0e1a3c, #b0c7fc);
+      background-size: 400% 400%;
+      //animation: AnimationName 30s ease infinite;
+      display: flex;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+      
+    }
+    
+    @keyframes AnimationName {
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+    
+    .leftSearch{
+      padding: 0.5% 2% 0.5% 2%;
+      width: 100%;
+      float: left;
+      
+      border-color: white;
+     
+      
+    }
+    
+    
+    
+    ::ng-deep .mat-form-field-outline {
+      border-color: white;
+    }
+    
+    ::ng-deep .mat-form-field-label {
+      color: white;
+    }
+    
+    
+    
+    .rightSearch{
+      width: 20%;
+      float: right;
+      background-color: transparent;
+      padding: 1% 3% 0.5% 2%;
+      
+    }
+    
+    .cardHeader{
+      background: linear-gradient( #0e1a3c, #b0c7fc);
+      background-size: 400% 400%;
+     // animation: AnimationName 30s ease infinite;
+      padding-top: 2%;
+      color: white;
+      width: 100%;
+      border-top-left-radius: 34px;
+      border-top-right-radius: 34px;
+      margin-bottom: 0px;
+    }
+    
+    ::ng-deep mat-icon {
+     background-color: transparent;
+     border-style: none;
+    }
+    .mat-icon-button:hover {
+      cursor:crosshair;
+      background-color: #920f4c;
+      color: #920f4c;
+    }
+    
+    .btn:hover
+    {
+        background-color: rgba(255, 24, 24, 0.11);
+        color: #b0c7fc;
+        transition-duration: 500ms;
+    }
+    
+    
+    table{
+      width: 100%;
+    }
+    
+    .table-container{
+      overflow: auto;
+      //height: 315px;
+    }
+    
+    .table-container::-webkit-scrollbar{
+      display: none;
+    }
+    .mat-form-field-outline {
+      color: white !important;
+    }
+    .egg {
+      color: white !important;
+    }
+    
+    
+    .matCard{
+      border-style:solid;
+      border-color: #ffffff;
+      border-radius: 15px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8), 0 1px 3px rgba(0, 0, 0, 0.8);
+    }
+    
+    th.mat-header-cell {
+      background-color: #920f4c;
+    }
+    
+    .mat-paginator {
+      background: linear-gradient(90deg, #0e1a3c, #b0c7fc);
+      background-size: 400% 400%;
+     // animation: AnimationName 30s ease infinite;
+      border-bottom-left-radius: 34px;
+      border-bottom-right-radius: 34px;
+      margin-top: -14px;
+      
+      
+      
+    }
+    
+    .mat-card-content {
+      padding-bottom: 0;
+    }
+    
+.btn
+{
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 50px;
+    
+    font-family: MontserratMedium;
+    font-size: 16px;
+    color: white;
+    padding: 10px 25px 10px 25px;
+}
+
+.btn:hover
+{
+    background-color: white;
+    color: #00efd1;
+    transition-duration: 500ms;
+}
+
+.button-container
+{
+    margin-top: 20px;
+    width: 100%;
+    
+}
+#cancel
+{
+    margin-left: 10px;
+    font-family: Montserrat;
+    background-color: #920f4c;
+}
+
+#view2
+{
+    margin-left:43%;
+    //float: right;
+    font-family: Montserrat;
+    background-color:  #920f4c;;
+}
+
+#view2:hover
+{
+color: #920f4c;
+background-color: white;
+}
+
+
+#cancel:hover{
+    color: red;
+    background-color: white;
+}
+
+#confirm
+{
+    margin-right: 10px;
+    float: right;
+    font-family: Montserrat;
+    background-color:  #19274b;;
+}
+
+#confirm:hover
+{
+color: #19274b;
+background-color: white;
+}
+    
+    
+    
+    @keyframes AnimationName {
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+    
+    .mat-form-field ::placeholder {
+      color: white;
+    }
+    ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+      color: rgba(255, 255, 255, 0);
+      border-width: 1.5px;
+      border-style: solid;
+      border-radius: 20px;
+      
+    
+    }
+    
+    .report-paramaters {
+      margin: 32px 0;
+    }
+    
+    .report-paramater-form {
+      display: flex;
+      justify-content: center;
+      margin-right: 288px;
+    }
+    
+    .report-paramater-label {
+      font-size: 1.1rem;
+      color: #19274b;
+      margin-top: 16px;
+      margin-right: 16px;
+      margin-left: 16px;
+    }
+    
+    .report-paramater-input-field {
+      width: 288px;
+      margin-right: 16px;
+    }
+    
+    .report-paramater-button {
+      height: 58px;
+      width: 90px;
+      margin-top: 4.8px;
+      margin-left: 16px;
+    }
+    
+    .report-paramater-button:nth-last-child(2) {
+      margin-left: 32px;
+    }
+    
+    
+    ::ng-deep .mat-form-field:focus-within .mat-form-field-outline {
+      outline: none;
+      border-color: rgba(255, 0, 0, 0);
+      box-shadow: none;
+    }
+    
+    

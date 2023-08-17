@@ -1,0 +1,71 @@
+
+<div style="padding-left: 2em; padding-right: 2em; padding-top: 9em;height:100vh;background-image: url('../../assets/gradient.gif');background-repeat: no-repeat;background-size: 100% 25%;">
+    <!-- Mat Card Form for Read Departments -->
+   
+
+
+ <div class="container-fluid">
+      <mat-card class="matCard">
+        <mat-card-header class="cardHeader" style="margin-bottom: -34px;;text-align: center">
+            <mat-card-title-group style="margin:0 auto">
+              <mat-card-title style="font-weight: 500; "
+                >Select a report to view</mat-card-title
+              >
+            </mat-card-title-group>
+           
+          </mat-card-header>
+
+        <br>
+
+       
+
+        <mat-card-content style="padding-top: 1em;">
+
+          <div class="table-hover table-container mat-elevation-z8">
+            <table mat-table matSort [dataSource]="dataSource"  class="mat-elevation-z8" id="DeptTable">
+              <!-- Department ID Column -->
+
+            
+              <!-- Department Name Column -->
+              <ng-container matColumnDef="name">
+                <th mat-header-cell mat-sort-header *matHeaderCellDef style="color: #ffffff;" >Report Name</th>
+                <td mat-cell *matCellDef="let report">
+                  {{ report.name }}
+                </td>
+              </ng-container>
+                <!-- Description Column -->
+                <ng-container matColumnDef="description">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef style="color: #ffffff;" >Report Description</th>
+                  <td mat-cell *matCellDef="let report">
+                    {{ report.description }}
+                  </td>
+                </ng-container>
+
+               <!-- View Column -->
+               <ng-container matColumnDef="view">
+                <th mat-header-cell *matHeaderCellDef style="text-align: center; color: #ffffff;">
+                  View
+                </th>
+                <td mat-cell *matCellDef="let department" style="text-align: center;">
+                  <button type="button" class="btn btn-default btn-lg" style="
+                  background-color:transparent;border-style: none;" (click)="onRoute(department)">
+                    <mat-icon aria-hidden="false" aria-label="View Department">reply</mat-icon>
+                  </button>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+            </table>
+           
+           
+          </div>
+
+        </mat-card-content>
+      
+      </mat-card>
+    </div>
+    <br />
+  </div>
+

@@ -1,33 +1,123 @@
-<div>
-    <h2>Select Skill:</h2>
-    <mat-select (valueChange)="selectSkill($event)" required>
-        <mat-option
-          *ngFor="let item of skills"
-          [value]="item.SkillID"
-        >
-          {{ item.Skill }}
-        </mat-option>
-      </mat-select>
-  </div>
-  <button (click)="onSkillSelected()">Generate</button>
-  
-  <div>
+
+<div style="padding-left: 2em; padding-right: 2em; padding-top: 9em;height:100vh;background-image: url('../../assets/gradient.gif');background-repeat: no-repeat;background-size: 100% 25%;">
+  <!-- Mat Card Form for Read Departments -->
+ 
+
+
+<div class="container-fluid">
+  <form>
+    <mat-card class="matCard">
+     
+      <mat-card-header class="cardHeader" style="margin-bottom: -15px; text-align: center">
+          <mat-card-title-group style="margin:0 auto">
+            <mat-card-title style="font-weight: 500; "
+              >Select a skill to proceed</mat-card-title
+            >
+          </mat-card-title-group>
+         
+        </mat-card-header>
+        <br>
+        <br>
+        <div *ngIf="(skills == null || undefined)"
+        style="
+       display: flex;
+       align-items: center;
+       justify-content: center;">
+         <mat-spinner ></mat-spinner>
+       </div>
+        <div *ngIf="!(skills == null || undefined)">
+          <div class="chips-container" style="display: flex; flex-direction: column; align-items: center;">
+            <mat-form-field appearance="legacy">
+              <mat-label style="color: #0e1a3c">Select Skill</mat-label>
+              <mat-select (valueChange)="selectSkill($event)" [formControl]="skillFormControl" required>
+                <mat-option *ngFor="let item of skills" [value]="item.SkillID">
+                  {{ item.Skill }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="skillFormControl.hasError('required')">
+                Skill Selection is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+            
+            <div style="display: flex; gap: 16px; margin-top: 16px;">
+              
+              <button id="confirm" class="btn" (click)="onSubmit()">Generate</button>
+              <button id="confirm" class="btn">Download PDF</button>
+              <button id="confirm" class="btn">Export to Excel</button>
+            </div>
+          </div>
+          <br>
+          <mat-card-content style="padding-top: 1em;">
     
-    <table>
-      <tr>
-        <th>Full Name</th>
-        <th>Email</th>
-        <th>Phone</th>
-        <th>RSA ID Number</th>
-      </tr>
-      <tr *ngFor="let e of employeeList">
-        <td>{{ e.Name }} {{e.Surname}}</td>
-        <td>{{ e.Email }}</td>
-        <td>{{ e.Phone }}</td>
-        <td>{{ e.RSAIDNumber }}</td>
-      </tr>
-    </table>
-  
-  
+           
+            <div class="table-hover table-container mat-elevation-z8">
+              <table *ngIf="!isLoading" mat-table matSort [dataSource]="dataSource"  class="mat-elevation-z8" id="DeptTable">
+                <!-- Department ID Column -->
+    
+                <ng-container matColumnDef="Name">
+                  <th mat-header-cell *matHeaderCellDef style="color: #ffffff;">Full Name</th>
+                  <td mat-cell *matCellDef="let e">
+                    {{ e.Name}} {{e.Surname}}
+                  </td>
+                </ng-container>
+    
+                <!-- Department Name Column -->
+                <ng-container matColumnDef="Email">
+                  <th mat-header-cell *matHeaderCellDef style="color: #ffffff;">Email</th>
+                  <td mat-cell *matCellDef="let e">
+                    {{ e.Email}}
+                  </td>
+                </ng-container>
+    
+                <ng-container matColumnDef="RSAIDNumber">
+                  <th mat-header-cell *matHeaderCellDef style="color: #ffffff;">RSA ID Number</th>
+                  <td mat-cell *matCellDef="let e">
+                    {{ e.RSAIDNumber}}
+                  </td>
+                </ng-container>
+    
+                <ng-container matColumnDef="Phone">
+                  <th mat-header-cell *matHeaderCellDef style="color: #ffffff;">Phone Number</th>
+                  <td mat-cell *matCellDef="let e">
+                    {{ e.Phone}}
+                  </td>
+                </ng-container>
+    
+             
+    
+                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    
+              </table>
+              <div *ngIf="isLoading" 
+              style="
+              display: flex;
+              align-items: center;
+              justify-content: center;">
+                <mat-spinner ></mat-spinner>
+              </div>
+              <div *ngIf="!isLoading">
+                <div *ngIf="noData | async" class="no-records" style="text-align: center; padding-top: 4em; font-size: larger;">
+                  No records retrieved!
+                </div>
+                <br>
+                <br>
+               </div>
+            </div>
+            <br>
+            <div class="button-container">
+              <button id="view2" class="btn" (click)="back()">View all Reports</button>
+              
+          </div>
+          </mat-card-content>
+        </div>
+      <br>
+      <br>
+    
+     
+    </mat-card>
+  </form>
   </div>
-  
+  <br />
+</div>
+

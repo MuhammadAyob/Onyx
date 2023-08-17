@@ -14,6 +14,14 @@ import html2canvas from 'html2canvas';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { ReportsService } from 'src/app/Services/reports.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { map } from 'rxjs';
+import { MatSort } from '@angular/material/sort';
+import { InputDialogComponent } from 'src/app/Dialog/input-dialog/input-dialog/input-dialog.component';
+import { Dialog } from '@angular/cdk/dialog';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-maintenance-report',
@@ -22,12 +30,15 @@ import { ReportsService } from 'src/app/Services/reports.service';
   providers: [DatePipe]
 })
 export class MaintenanceReportComponent implements OnInit {
+  //dialog: any;
 
   constructor(
     private service:ReportsService, 
     private formBuilder: FormBuilder,
     private datePipe: DatePipe,
-    private titleService: Title) { this.titleService.setTitle('Maintainance Report'); }
+    private titleService: Title,
+    private dialog:MatDialog,
+    private router:Router) { this.titleService.setTitle('Maintainance Report'); }
 
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
  
@@ -55,7 +66,64 @@ export class MaintenanceReportComponent implements OnInit {
   };
  
   
+  back(){
+    this.router.navigate(['admin/reports'])
+  }
 
+  onSubmit() {
+    //console.log(this.startDate)
+    const isInvalid = this.validateFormControls();
+    const isInvalidRange = this.validateDate();
+    if (isInvalid == true) {
+      this.dialog.open(InputDialogComponent, {
+        data: {
+          dialogTitle: "Input Error",
+          dialogMessage: "Correct errors on highlighted fields"
+        },
+        width: '25vw',
+        height: '27vh',
+      });
+    } 
+
+    else if(isInvalidRange == true)
+    {
+      this.dialog.open(InputDialogComponent, {
+        data: {
+          dialogTitle: "Date Range Error",
+          dialogMessage: "The start date cannot be greater than the end date!"
+        },
+        width: '27vw',
+        height: '29vh',
+      });
+    }
+  else 
+  {
+   this.FetchData();
+  }
+  }
+
+  validateDate(): boolean {
+    if (this.startDate && this.endDate) {
+      const formattedStartDate = this.datePipe.transform(this.startDate, 'yyyy/MM/dd');
+      const formattedEndDate = this.datePipe.transform(this.endDate, 'yyyy/MM/dd');
+
+      if (formattedStartDate! > formattedEndDate!) {
+        return true;
+      }
+    }
+    
+    return false;
+  }
+
+  validateFormControls(): boolean {
+    if (
+      this.startFormControl.hasError('required') == false &&
+      this.endFormControl.hasError('required') == false
+    )
+    {return(false)}
+    else
+    {return(true)}
+  }
   
 
   public chartHovered({ event, active }: { event: ChartEvent, active: {}[] }): void {
@@ -63,17 +131,32 @@ export class MaintenanceReportComponent implements OnInit {
   }
 
 
-  range = new FormGroup({
-    startDate: new FormControl(),
-    endDate: new FormControl(),
-  });
+  isLoading!:boolean;
+  startFormControl = new FormControl('', [Validators.required]);
+  endFormControl = new FormControl('', [Validators.required]);
+
+  startDate: Date | any;
+  endDate: Date | any;
+
+  public dataSource = new MatTableDataSource<any>();
+  noData = this.dataSource.connect().pipe(map(data=>data.length===0));
+ 
+    
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!:MatSort;
+
+  reportData: any[] = [];
 
   FetchData(){
+    this.isLoading=true;
     this.showGraph=false;
-    const parameters = this.setupDateParameters();
+    //const parameters = this.setupDateParameters();
     this.TypesPieChart.datasets[0].data = [];
     this.TypesPieChart.labels = [];
-    this.service.GetMaintenanceReportData(parameters).subscribe((data:any)=>{
+    let revenue = new Revenue();
+    revenue.startDate = this.startDate;
+    revenue.endDate = this.endDate;
+    this.service.GetMaintenanceReportData(revenue).subscribe((data:any)=>{
       data.ChartData.forEach((element: any) => {
         
         this.TypesPieChart.datasets[0].data.push(element.Total);
@@ -81,6 +164,7 @@ export class MaintenanceReportComponent implements OnInit {
       });
 
       this.maintenanceData = data.TableData;
+      this.dataSource.data = data.TableData;
 
       this.TypesPieChart;
       this.pieChartOptions;
@@ -90,32 +174,13 @@ export class MaintenanceReportComponent implements OnInit {
     })
   }
 
-  initializeForm(): void {
-    this.range = this.formBuilder.group({
-      startDate: [null, [Validators.required]],
-      endDate: [null, [Validators.required]],
-    });
-  }
 
-  formartDate(date: any): string {
-    return this.datePipe.transform(date, 'yyyy/MM/dd')!;
-  }
 
-  setupDateParameters() {
-    
-    const UI_StartDate = this.range.get('startDate')!.value;
-    const UI_EndDate = this.range.get('endDate')!.value;
-
-    const parameters: Revenue = {
-      startDate: this.formartDate(UI_StartDate),
-      endDate: this.formartDate(UI_EndDate),
-    };
-    return parameters;
-  }
+ 
 
 
   ngOnInit(): void {
-    this.initializeForm();
+    
   }
 
   downloadMaintainanceReportPDF() {
