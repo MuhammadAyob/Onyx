@@ -61,10 +61,16 @@ export class SalesReportComponent implements OnInit {
     this.isLoading=true;
     this.show=false;
     this.fetched=false;
-    let revenue = new Revenue();
-    revenue.startDate = this.startDate;
-    revenue.endDate = this.endDate;
-   
+    
+    var SD:any;
+  var ED:any;
+
+  SD = this.datePipe.transform(this.startDate, 'yyyy/MM/dd');
+  ED = this.datePipe.transform(this.endDate, 'yyyy/MM/dd');
+
+  let revenue = new Revenue();
+  revenue.startDate = SD;
+  revenue.endDate = ED;
    
     this.service.GetSales(revenue).subscribe((data:any)=>{
       this.dataSource.data = data.SalesData;

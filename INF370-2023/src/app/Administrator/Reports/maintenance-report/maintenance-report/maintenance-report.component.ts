@@ -162,9 +162,17 @@ export class MaintenanceReportComponent implements OnInit {
     //const parameters = this.setupDateParameters();
     this.TypesPieChart.datasets[0].data = [];
     this.TypesPieChart.labels = [];
+
+    var SD:any;
+    var ED:any;
+
+    SD = this.datePipe.transform(this.startDate, 'yyyy/MM/dd');
+    ED = this.datePipe.transform(this.endDate, 'yyyy/MM/dd');
+
     let revenue = new Revenue();
-    revenue.startDate = this.startDate;
-    revenue.endDate = this.endDate;
+    revenue.startDate = SD;
+    revenue.endDate = ED;
+   
     this.service.GetMaintenanceReportData(revenue).subscribe((data:any)=>{
       data.ChartData.forEach((element: any) => {
         

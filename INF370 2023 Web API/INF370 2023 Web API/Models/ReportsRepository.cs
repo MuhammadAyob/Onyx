@@ -73,30 +73,32 @@ namespace INF370_2023_Web_API.Models
         public async Task<Object> MaintenanceReport(Revenue revenue)
         {
             var maintainanceGroups = await db.Maintenances
-                .Include(e => e.User)
-                .Include(mt => mt.MaintenanceType)
-                .Include(mp => mp.MaintenancePriority)
-                .Include(ms => ms.MaintenanceStatu)
-                .Where(
-                    m => m.MaintenanceType.MaintenanceTypeID == m.MaintenanceTypeID &&
-                    m.MaintenancePriority.MaintenancePriorityID == m.MaintenancePriorityID &&
-                    m.MaintenanceStatu.MaintenanceStatusID == m.MaintenanceStatusID
-                )
-                .Select(x => new
-                {
+    .Include(e => e.User)
+    .Include(mt => mt.MaintenanceType)
+    .Include(mp => mp.MaintenancePriority)
+    .Include(ms => ms.MaintenanceStatu)
+    .Where(
+        m => m.MaintenanceType.MaintenanceTypeID == m.MaintenanceTypeID &&
+        m.MaintenancePriority.MaintenancePriorityID == m.MaintenancePriorityID &&
+        m.MaintenanceStatu.MaintenanceStatusID == m.MaintenanceStatusID
+    )
+    .Select(x => new
+    {
+        MaintenanceType = x.MaintenanceType.Type,
+        Description = x.Description,
+        LoggedDate = x.DateLogged,
+        ResolvedDate = x.DateResolved,
+        Priority = x.MaintenancePriority.Priority,
+        LoggedBy = x.User.Username,
+        Status = x.MaintenanceStatu.Status,
+        Location = x.Location,
+        Image = x.Image,
+    })
+    .Where(x =>
+        DbFunctions.TruncateTime(x.LoggedDate) >= DbFunctions.TruncateTime(revenue.startDate) &&
+        DbFunctions.TruncateTime(x.LoggedDate) <= DbFunctions.TruncateTime(revenue.endDate))
+    .ToListAsync<dynamic>();
 
-                    MaintenanceType = x.MaintenanceType.Type,
-                    Description = x.Description,
-                    LoggedDate = x.DateLogged,
-                    ResolvedDate = x.DateResolved,
-                    Priority = x.MaintenancePriority.Priority,
-                    LoggedBy = x.User.Username,
-                    Status = x.MaintenanceStatu.Status,
-                    Location = x.Location,
-                    Image = x.Image,
-                })
-                .Where(x => x.LoggedDate >= revenue.startDate && x.LoggedDate <= revenue.endDate)
-                .ToListAsync<dynamic>();
 
             dynamic reportData = new ExpandoObject();
             reportData.ChartData = GetChartData(maintainanceGroups);
@@ -120,18 +122,20 @@ namespace INF370_2023_Web_API.Models
             try
             {
                 var reportData = await db.CartCourses
-                    .Join(db.Courses, cc => cc.CourseID, c => c.CourseID, (cc, c) => new { cc, c })
-                    .Join(db.Carts, joined => joined.cc.CartID, cart => cart.CartID, (joined, cart) => new { joined.cc, joined.c, cart })
-                    .Where(joined => joined.cart.Date >= revenue.startDate && joined.cart.Date <= revenue.endDate)
-                    .GroupBy(joined => new { joined.cart.Date.Year, joined.c.Name })
-                    .Select(group => new
-                    {
-                        Year = group.Key.Year,
-                        Course = group.Key.Name,
-                        NumberofCoursesSold = group.Count(),
-                        TotalRevenue = group.Sum(joined => joined.cc.PriceAtTimeOfPurchase)
-                    })
-                    .ToListAsync();
+    .Join(db.Courses, cc => cc.CourseID, c => c.CourseID, (cc, c) => new { cc, c })
+    .Join(db.Carts, joined => joined.cc.CartID, cart => cart.CartID, (joined, cart) => new { joined.cc, joined.c, cart })
+    .Where(joined =>
+        DbFunctions.TruncateTime(joined.cart.Date) >= DbFunctions.TruncateTime(revenue.startDate) &&
+        DbFunctions.TruncateTime(joined.cart.Date) <= DbFunctions.TruncateTime(revenue.endDate))
+    .GroupBy(joined => new { joined.cart.Date.Year, joined.c.Name })
+    .Select(group => new
+    {
+        Year = group.Key.Year,
+        Course = group.Key.Name,
+        NumberofCoursesSold = group.Count(),
+        TotalRevenue = group.Sum(joined => joined.cc.PriceAtTimeOfPurchase)
+    })
+    .ToListAsync();
 
                 var result = reportData.GroupBy(data => data.Year)
                     .Select(yearGroup => new
@@ -143,6 +147,7 @@ namespace INF370_2023_Web_API.Models
                     .ToList();
 
                 return result;
+
             }
             catch (Exception ex)
             {
@@ -253,15 +258,17 @@ namespace INF370_2023_Web_API.Models
         public async Task<object> GetSales(Revenue revenue)
         {
             var salesData = await db.Carts
-            .Where(cart => cart.Date >= revenue.startDate && cart.Date <= revenue.endDate)
-            .Select(cart => new
-            {
-                Date = cart.Date,
-                CartID = cart.CartID,
-                Student = cart.Student.Name + " " + cart.Student.Surname,
-                Total = cart.Total
-            })
-            .ToListAsync();
+    .Where(cart =>
+        DbFunctions.TruncateTime(cart.Date) >= DbFunctions.TruncateTime(revenue.startDate) &&
+        DbFunctions.TruncateTime(cart.Date) <= DbFunctions.TruncateTime(revenue.endDate))
+    .Select(cart => new
+    {
+        Date = cart.Date,
+        CartID = cart.CartID,
+        Student = cart.Student.Name + " " + cart.Student.Surname,
+        Total = cart.Total
+    })
+    .ToListAsync();
 
             var grandTotal = salesData.Sum(cart => cart.Total);
 
@@ -272,6 +279,7 @@ namespace INF370_2023_Web_API.Models
             };
 
             return result;
+
         }
     }
 }

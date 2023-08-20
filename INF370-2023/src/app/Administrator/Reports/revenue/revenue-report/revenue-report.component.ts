@@ -121,9 +121,16 @@ FetchReportData(){
   this.isLoading=true;
   this.show=false;
   this.fetched=false;
+  
+  var SD:any;
+  var ED:any;
+
+  SD = this.datePipe.transform(this.startDate, 'yyyy/MM/dd');
+  ED = this.datePipe.transform(this.endDate, 'yyyy/MM/dd');
+
   let revenue = new Revenue();
-  revenue.startDate = this.startDate;
-  revenue.endDate = this.endDate;
+  revenue.startDate = SD;
+  revenue.endDate = ED;
  
  
   this.service.RevenueReport(revenue).subscribe((data)=>{

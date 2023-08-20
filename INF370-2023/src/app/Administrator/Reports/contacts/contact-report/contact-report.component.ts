@@ -61,9 +61,16 @@ export class ContactReportComponent implements OnInit {
   FetchReportData(){
     this.fetched=false;
     this.isLoading=true;
+
+    var SD:any;
+    var ED:any;
+
+    SD = this.datePipe.transform(this.startDate, 'yyyy/MM/dd');
+    ED = this.datePipe.transform(this.endDate, 'yyyy/MM/dd');
+
     let revenue = new Revenue();
-    revenue.startDate = this.startDate;
-    revenue.endDate = this.endDate;
+    revenue.startDate = SD;
+    revenue.endDate = ED;
    
    
     this.service.GetContacts(revenue).subscribe((data)=>{
@@ -78,7 +85,7 @@ export class ContactReportComponent implements OnInit {
   }
 
   onSubmit() {
-    //console.log(this.startDate)
+    
     const isInvalid = this.validateFormControls();
     const isInvalidRange = this.validateDate();
     if (isInvalid == true) {
