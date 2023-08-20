@@ -36,6 +36,8 @@ export class MaintenanceReportComponent implements OnInit {
   ];
 
   fetched:boolean=false;
+  date = new Date()
+  
   constructor(
     private service:ReportsService, 
     private formBuilder: FormBuilder,
@@ -128,6 +130,8 @@ export class MaintenanceReportComponent implements OnInit {
     else
     {return(true)}
   }
+
+ 
   
 
   public chartHovered({ event, active }: { event: ChartEvent, active: {}[] }): void {

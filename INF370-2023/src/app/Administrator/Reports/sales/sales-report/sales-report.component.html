@@ -43,8 +43,7 @@
             
             <div style="display: flex; gap: 16px; margin-top: 16px;">
               <button id="confirm" class="btn" (click)="onSubmit()">Generate</button>
-              <button id="confirm" class="btn">Download PDF</button>
-              <button id="confirm" class="btn">Export to Excel</button>
+              <button [disabled]="!fetched" id="confirm" class="btn" (click)="downloadMaintainanceReportPDF()">Download PDF</button>
             </div>
           </div>
           
@@ -57,7 +56,27 @@
             justify-content: center;">
               <mat-spinner ></mat-spinner>
             </div>
-           <div *ngIf="fetched">
+           <div id="htmlData" *ngIf="fetched">
+            <mat-card-header class="cardHeader" style="margin-bottom: -15px; text-align: center">
+              <mat-card-title-group style="margin:0 auto">
+                <mat-card-title style="font-weight: 500; "
+                  >
+                  <img
+                  style="height:75px; width: 60px;"
+                  src="../../assets/Images/DSLogo.png"
+                /></mat-card-title
+                >
+                <mat-card-title style="font-weight: 500; "
+                  >Onyx Purchase Transactions List Report</mat-card-title
+                >
+                <mat-card-title style="font-weight: 500; "
+                >Generated on: {{date | date:'MM/dd/yyyy'}}</mat-card-title
+              >
+              </mat-card-title-group>
+             
+            </mat-card-header>
+            <br>
+            <br>
             <div class="table-hover table-container mat-elevation-z8">
               <table *ngIf="!isLoading" mat-table matSort [dataSource]="dataSource"  class="mat-elevation-z8" id="DeptTable">
                 <!-- Department ID Column -->

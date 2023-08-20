@@ -31,7 +31,7 @@
             
             <div style="display: flex; gap: 16px; margin-top: 16px;">
               <button  id="confirm" class="btn" (click)="onSubmit()">Generate</button>
-              <button [disabled]="!show" id="confirm" class="btn">Download PDF</button>
+              <button [disabled]="!fetched" id="confirm" class="btn" (click)="downloadMaintainanceReportPDF()">Download PDF</button>
             </div>
           </div>
           <br>
@@ -44,7 +44,27 @@
               <mat-spinner ></mat-spinner>
             </div>
 
-            <div *ngIf="!isLoading">   
+            <div id="htmlData" *ngIf="fetched">   
+              <mat-card-header class="cardHeader" style="margin-bottom: -15px; text-align: center">
+                <mat-card-title-group style="margin:0 auto">
+                  <mat-card-title style="font-weight: 500; "
+                    >
+                    <img
+                    style="height:75px; width: 60px;"
+                    src="../../assets/Images/DSLogo.png"
+                  /></mat-card-title
+                  >
+                  <mat-card-title style="font-weight: 500; "
+                    >Onyx Revenue Report</mat-card-title
+                  >
+                  <mat-card-title style="font-weight: 500; "
+                  >Generated on: {{date | date:'MM/dd/yyyy'}}</mat-card-title
+                >
+                </mat-card-title-group>
+               
+              </mat-card-header>
+              <br>
+              <br>
               <div *ngFor="let yearData of reportData">
                 <h1 style="margin-left: 45%; color: #0e1a3c;"><b>Year: {{ yearData.Year }}</b></h1>
                   <br>

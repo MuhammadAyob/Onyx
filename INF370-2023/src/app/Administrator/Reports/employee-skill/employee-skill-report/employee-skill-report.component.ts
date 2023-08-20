@@ -12,6 +12,8 @@ import { FormControl, Validators } from '@angular/forms';
 import { InputDialogComponent } from 'src/app/Dialog/input-dialog/input-dialog/input-dialog.component';
 import { Dialog } from '@angular/cdk/dialog';
 import { MatDialog } from '@angular/material/dialog';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-employee-skill-report',
@@ -37,6 +39,8 @@ export class EmployeeSkillReportComponent implements OnInit {
   skills!: any[];
   selectedSkillId: number | null = null;
   employeeList: any[] = [];
+  date = new Date()
+  isDownloading:boolean=false;
 
   constructor(private service:ReportsService, private dialog:MatDialog, private router:Router, private titleservice:Title) 
   {this.titleservice.setTitle('Employee Skill Report'); }
@@ -105,6 +109,61 @@ export class EmployeeSkillReportComponent implements OnInit {
   getSelectedSkill(): string | undefined {
     const selectedSkill = this.skills.find(skill => skill.SkillID === this.selectedSkillId);
     return selectedSkill ? selectedSkill.Skill : undefined;
+  }
+
+  downloadMaintainanceReportPDF() {
+    this.isDownloading=true;
+    var Data = document.getElementById('htmlData')!;
+
+    html2canvas(Data).then(function (canvas) {
+      canvas.getContext('2d');
+
+      var PdfWidth = canvas.width;
+      var pdfHeight = canvas.height;
+      const top_left_margin = 15;
+      var PDF_Width = PdfWidth + top_left_margin * 2;
+
+      var PDF_Height = PDF_Width * 1.5 + top_left_margin * 2;
+      var pages = Math.ceil(pdfHeight / PDF_Height) - 1;
+
+      var contentDataURL = canvas.toDataURL('image/jpeg', 1.0);
+      var PDF = new jsPDF('p', 'pt', [PDF_Width, PDF_Height]);
+
+      var imageWidth = PdfWidth;
+      var imageHeight = pdfHeight;
+
+
+      PDF.addImage(
+        contentDataURL,
+        'JPG',
+        top_left_margin,
+        top_left_margin,
+        imageWidth,
+        imageHeight
+      );
+      for (var i = 1; i <= pages; i++) {
+        PDF.addPage([PDF_Width, PDF_Height]);
+        PDF.addImage(
+          contentDataURL,
+          'JPG',
+          top_left_margin,
+          -(PDF_Height * i) + top_left_margin * 4,
+          imageWidth,
+          imageHeight
+        );
+      }
+
+      const reportDate = new Date()
+        .toJSON()
+        .slice(0, 10)
+        .split('-')
+        .reverse()
+        .join('-');
+
+      PDF.save(`Onyx-Skill-Report-${reportDate}.pdf`);
+     
+    });
+    this.isDownloading=false;
   }
 
 }

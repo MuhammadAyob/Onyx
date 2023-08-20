@@ -63,18 +63,29 @@
               </div>
               <div *ngIf="!(noData | async)">
                 <div *ngIf="showGraph" class="chart-wrapper" id="htmlData">
-                  <h1 style="margin:0 auto; color: #0e1a3c;"><b>Number of occurrences per maintenance type:</b></h1>
-                  <div class="chart-wrapper" style="width: 550px; height:550px">
-                    <div class="chart" style="display: block;">
-                      <canvas 
-                      baseChart
-                      [data]="TypesPieChart"
-                      [type]="pieChartType"
-                      [options]="pieChartOptions">
-                    </canvas>
-                    </div>
-                  </div>
+                  <mat-card-header class="cardHeader" style="margin-bottom: -15px; text-align: center">
+                    <mat-card-title-group style="margin: 0 auto">
+                      <mat-card-title-group style="margin:0 auto">
+                        <mat-card-title style="font-weight: 500; "
+                          >
+                          <img
+                          style="height:75px; width: 60px;"
+                          src="../../assets/Images/DSLogo.png"
+                        /></mat-card-title
+                        >
+                        <mat-card-title style="font-weight: 500; "
+                          >Onyx Maintenance Report</mat-card-title
+                        >
+                        <mat-card-title style="font-weight: 500; "
+                        >Generated on: {{date | date:'MM/dd/yyyy'}}</mat-card-title
+                      >
+                      </mat-card-title-group>
+                    </mat-card-title-group>
+                  </mat-card-header>
                   <br>
+                  <br>
+                  <h1 style="margin:0 auto; color: #0e1a3c;"><b>Number of occurrences per maintenance type:</b></h1>
+                
                   <div class="table-hover table-container mat-elevation-z8">
                     <table *ngIf="!isLoading" mat-table matSort [dataSource]="dataSource"  class="mat-elevation-z8" id="DeptTable">
                      

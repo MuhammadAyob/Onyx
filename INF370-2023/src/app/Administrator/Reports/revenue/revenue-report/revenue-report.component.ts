@@ -11,6 +11,8 @@ import { DatePipe } from '@angular/common';
 import { InputDialogComponent } from 'src/app/Dialog/input-dialog/input-dialog/input-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 
 @Component({
@@ -27,6 +29,7 @@ export class RevenueReportComponent implements OnInit {
     'SubTotal',
   ];
   isLoading!:boolean;
+  fetched:boolean=false;
   startFormControl = new FormControl('', [Validators.required]);
   endFormControl = new FormControl('', [Validators.required]);
 
@@ -42,6 +45,7 @@ export class RevenueReportComponent implements OnInit {
   SalesData: any[] = [];
   GrandTotal:any;
   show:boolean=false;
+date=new Date()
 
 constructor(
   private titleservice:Title,
@@ -56,11 +60,67 @@ ngOnInit(): void {
  
 }
 
+downloadMaintainanceReportPDF() {
+  //this.isDownloading=true;
+  var Data = document.getElementById('htmlData')!;
+
+  html2canvas(Data).then(function (canvas) {
+    canvas.getContext('2d');
+
+    var PdfWidth = canvas.width;
+    var pdfHeight = canvas.height;
+    const top_left_margin = 15;
+    var PDF_Width = PdfWidth + top_left_margin * 2;
+
+    var PDF_Height = PDF_Width * 1.5 + top_left_margin * 2;
+    var pages = Math.ceil(pdfHeight / PDF_Height) - 1;
+
+    var contentDataURL = canvas.toDataURL('image/jpeg', 1.0);
+    var PDF = new jsPDF('p', 'pt', [PDF_Width, PDF_Height]);
+
+    var imageWidth = PdfWidth;
+    var imageHeight = pdfHeight;
+
+
+    PDF.addImage(
+      contentDataURL,
+      'JPG',
+      top_left_margin,
+      top_left_margin,
+      imageWidth,
+      imageHeight
+    );
+    for (var i = 1; i <= pages; i++) {
+      PDF.addPage([PDF_Width, PDF_Height]);
+      PDF.addImage(
+        contentDataURL,
+        'JPG',
+        top_left_margin,
+        -(PDF_Height * i) + top_left_margin * 4,
+        imageWidth,
+        imageHeight
+      );
+    }
+
+    const reportDate = new Date()
+      .toJSON()
+      .slice(0, 10)
+      .split('-')
+      .reverse()
+      .join('-');
+
+    PDF.save(`Onyx-Revenue-Report-${reportDate}.pdf`);
+   
+  });
+  //this.isDownloading=false;
+}
+
 
 
 FetchReportData(){
   this.isLoading=true;
   this.show=false;
+  this.fetched=false;
   let revenue = new Revenue();
   revenue.startDate = this.startDate;
   revenue.endDate = this.endDate;
@@ -72,6 +132,7 @@ FetchReportData(){
     this.isLoading=false;
     this.calculateSelectedPeriodTotal();
     this.show=true;
+    this.fetched=true;
   })
 }
 

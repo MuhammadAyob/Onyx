@@ -42,9 +42,11 @@
             <div style="display: flex; gap: 16px; margin-top: 16px;">
               
               <button id="confirm" class="btn" (click)="onSubmit()">Generate</button>
-              <button id="confirm" class="btn">Download PDF</button>
-              <button id="confirm" class="btn">Export to Excel</button>
+              <button [disabled]="!fetched" id="confirm" class="btn" (click)="downloadMaintainanceReportPDF()">Download PDF</button>
+             <!--<button id="confirm" class="btn">Export to Excel</button>--> 
             </div>
+            <mat-progress-bar *ngIf="isDownloading" mode="indeterminate"></mat-progress-bar>
+
           </div>
           <br>
           <mat-card-content style="padding-top: 1em;">
@@ -55,7 +57,27 @@
             justify-content: center;">
               <mat-spinner ></mat-spinner>
             </div>
-    <div *ngIf="fetched">
+    <div id="htmlData" *ngIf="fetched">
+      <mat-card-header class="cardHeader" style="margin-bottom: -15px; text-align: center">
+        <mat-card-title-group style="margin:0 auto">
+          <mat-card-title style="font-weight: 500; "
+            >
+            <img
+            style="height:75px; width: 60px;"
+            src="../../assets/Images/DSLogo.png"
+          /></mat-card-title
+          >
+          <mat-card-title style="font-weight: 500; "
+            >Onyx Employee Skill Report</mat-card-title
+          >
+          <mat-card-title style="font-weight: 500; "
+          >Generated on: {{date | date:'MM/dd/yyyy'}}</mat-card-title
+        >
+        </mat-card-title-group>
+       
+      </mat-card-header>
+      <br>
+      <br>
       <h1 style="margin:0 auto; color: #0e1a3c;"><b>Employees with Selected Skill: {{getSelectedSkill()}}</b></h1>
       <div class="table-hover table-container mat-elevation-z8">
         <table *ngIf="!isLoading" mat-table matSort [dataSource]="dataSource"  class="mat-elevation-z8" id="DeptTable">
