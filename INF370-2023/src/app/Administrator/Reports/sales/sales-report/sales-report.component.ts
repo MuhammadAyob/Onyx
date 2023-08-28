@@ -13,6 +13,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import * as xlsx from 'xlsx';
 
 @Component({
   selector: 'app-sales-report',
@@ -194,5 +195,64 @@ export class SalesReportComponent implements OnInit {
     });
     //this.isDownloading=false;
   }
+
+  downloadExcel(): void {
+    const data: any[] = this.dataSource.data;
+  
+    const ws = xlsx.utils.json_to_sheet(data);
+  
+    // Loop through the columns to set the column width and protect specific columns
+    const colWidths = [
+      { wpx: 150 }, // Date column
+      { wpx: 150 }, // CartID column
+      { wpx: 200 }, // Student column
+      { wpx: 100 }, // Total column 
+    ];
+    ws['!cols'] = colWidths;
+  
+    // Get the cell range that contains data
+    const cellRange = ws['!ref'];
+    const [startCell, endCell] = cellRange!.split(':');
+    const startColIndex = xlsx.utils.decode_col(startCell);
+    const endColIndex = xlsx.utils.decode_col(endCell);
+  
+    // Define the protected column indices
+    const protectedColumnIndices = [0, 1, 2, 3]; // Date, CartID, Student, Total
+  
+    // Loop through the rows and columns to protect specific columns
+    for (let r = 1; r <= data.length; r++) {
+      for (let c = startColIndex; c <= endColIndex; c++) {
+        if (!protectedColumnIndices.includes(c)) {
+          const cellAddress = xlsx.utils.encode_cell({ r, c });
+          ws[cellAddress] = { ...ws[cellAddress], ...{ locked: false } };
+        }
+      }
+    }
+  
+    // Apply protection to the worksheet
+    ws['!protect'] = {
+      password: 'hello',
+      selectLockedCells: true,
+      selectUnlockedCells: true,
+    };
+  
+    const wb = xlsx.utils.book_new();
+    xlsx.utils.book_append_sheet(wb, ws, 'Sheet1');
+  
+    const excelBuffer = xlsx.write(wb, { bookType: 'xlsx', type: 'buffer' });
+    const blob = new Blob([excelBuffer], {
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    });
+  
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'onyx_sales_data.xlsx';
+    a.click();
+    window.URL.revokeObjectURL(url);
+  }
+  
+  
+  
 
 }

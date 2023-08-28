@@ -15,6 +15,10 @@ import { ConfirmDialogComponent } from 'src/app/Dialog/confirm-dialog/confirm-di
 import { InputDialogComponent } from 'src/app/Dialog/input-dialog/input-dialog/input-dialog.component';
 import { ExistsDialogComponent } from 'src/app/Dialog/exists-dialog/exists-dialog/exists-dialog.component';
 import { SearchDialogComponent } from 'src/app/Dialog/search-dialog/search-dialog/search-dialog.component';
+import * as xlsx from 'xlsx';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-read-faq',
@@ -38,8 +42,9 @@ export class ReadFaqComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
 
 faqlist!: FAQ[];
-  faq!: FAQ;
-isLoading:boolean =true;
+faq!: FAQ;
+isLoading:boolean = true;
+
   constructor(
     private dialog: MatDialog,
     public router: Router,
@@ -47,7 +52,9 @@ isLoading:boolean =true;
     private service: FAQService,
     public toaster: ToastrService,
     private _snackBar: MatSnackBar,
-    private titleservice: Title
+    private titleservice: Title,
+    private aService:AuditLogService,
+    private security:SecurityService
   ) { this.titleservice.setTitle('FAQ');}
 
   ngOnInit(): void {
@@ -105,7 +112,7 @@ isLoading:boolean =true;
     this.router.navigate(['admin/view-faq']);
   }
 
-  onDelete(id: number) {
+  onDelete(obj: any) {
     const title = 'Confirm Delete FAQ';
     const message = 'Are you sure you want to delete the FAQ?';
     
@@ -114,7 +121,7 @@ isLoading:boolean =true;
         dialogTitle: title,
         dialogMessage: message,
         operation: 'delete',
-        qualificationData: id,
+        //qualificationData: id,
       }, //^captured department info here for validation
       height: '30vh',
       width: '50vw',
@@ -122,7 +129,7 @@ isLoading:boolean =true;
 
     dialogReference.afterClosed().subscribe((result) => {
       if (result == true) {
-        this.service.DeleteFAQ(id).subscribe(
+        this.service.DeleteFAQ(obj.ID).subscribe(
           (result:any) => {
             if(result.Status===200)
             {
@@ -136,6 +143,16 @@ isLoading:boolean =true;
                       }
               );
               this.refreshList();
+              
+              let audit = new AuditLog();
+              audit.AuditLogID = 0;
+              audit.UserID = this.security.User.UserID;
+              audit.AuditName = 'Delete FAQ';
+              audit.Description = 'Employee, ' + this.security.User.Username + ', deleted the FAQ: ' + obj.Question
+              audit.Date = '';
+
+          this.aService.AddAudit(audit).subscribe((data) => {
+          })
             }
 
             else if(result.Status===501)
@@ -171,6 +188,48 @@ isLoading:boolean =true;
 
   onArrowBack(): void {
     this.location.back();
+  }
+
+  downloadExcel(): void {
+    const data: FAQ[] = this.dataSource.data;
+
+    // Select only "Question" and "Answer" properties for export
+    const selectedData = data.map(item => {
+      return { Question: item.Question, Answer: item.Answer };
+    });
+
+    const ws = xlsx.utils.json_to_sheet(selectedData);
+    const wb = xlsx.utils.book_new();
+    xlsx.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    const excelBuffer = xlsx.write(wb, { bookType: 'xlsx', type: 'buffer' });
+    const blob = new Blob([excelBuffer], {
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    });
+
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'faq_export.xlsx';
+    a.click();
+    window.URL.revokeObjectURL(url);
+  }
+
+  downloadJSON(): void {
+    const selectedData = this.dataSource.data.map(item => {
+      return { Question: item.Question, Answer: item.Answer };
+    });
+
+    const jsonBlob = new Blob([JSON.stringify(selectedData)], {
+      type: 'application/json'
+    });
+
+    const url = window.URL.createObjectURL(jsonBlob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'faq_data.json';
+    a.click();
+    window.URL.revokeObjectURL(url);
   }
 
 }

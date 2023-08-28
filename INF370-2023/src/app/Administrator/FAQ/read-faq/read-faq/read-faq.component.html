@@ -2,7 +2,7 @@
   <!-- Mat Card Form for Read Departments -->
   <div class="container-fluid">
     <mat-card class="matCard">
-      <div class="bigDiv" style="margin-bottom: -37px;">
+      <div class="bigDiv" style="margin-bottom: 0px;">
         <div class="leftSearch">
           <form class="navbar-form">
             <mat-form-field appearance="outline" color="white" style="width: 100%; border-color: white !important; color: #ffffff; padding-top: 1%;">
@@ -19,8 +19,13 @@
           </div>
       </div>
 
-      <br />
-
+      <br>
+        <div class="chips-container" *ngIf="!isLoading">
+            <mat-chip-list aria-label="Fish selection">
+                <mat-chip (click)="downloadExcel()" >Open in Excel</mat-chip>
+                <mat-chip (click)="downloadJSON()" >Export as JSON file</mat-chip>
+            </mat-chip-list>
+          </div>
       
 
       <mat-card-content style="padding-top: 1em">
@@ -140,7 +145,7 @@
                   class="btn btn-default btn-lg"
                   style="
                 background-color:transparent;border-style: none;" 
-                  (click)="onDelete(faq.ID)"
+                  (click)="onDelete(faq)"
                 >
                   <mat-icon
                     aria-hidden="false"

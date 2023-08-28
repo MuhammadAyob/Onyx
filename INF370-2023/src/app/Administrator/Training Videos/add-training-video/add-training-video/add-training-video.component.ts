@@ -14,6 +14,9 @@ import { InstructionalVideoService } from 'src/app/Services/instructional-video.
 import { ConfirmDialogComponent } from 'src/app/Dialog/confirm-dialog/confirm-dialog/confirm-dialog.component';
 import { InputDialogComponent } from 'src/app/Dialog/input-dialog/input-dialog/input-dialog.component';
 import { ExistsDialogComponent } from 'src/app/Dialog/exists-dialog/exists-dialog/exists-dialog.component';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { SecurityService } from 'src/app/Services/security.service';
 
 export interface DialogData {
   dialogMessage: string;
@@ -43,6 +46,8 @@ export class AddTrainingVideoComponent implements OnInit {
     private service: InstructionalVideoService,
     public toastr: ToastrService,
     private snack: MatSnackBar,
+    private security:SecurityService,
+    private aService:AuditLogService
   ) { this.titleservice.setTitle('Instructional Videos');}
 
   ngOnInit(): void {
@@ -85,16 +90,16 @@ export class AddTrainingVideoComponent implements OnInit {
       this.dialog.open(InputDialogComponent, {
         data: {
           dialogTitle: "Input Error",
-          dialogMessage: "Correct Errors"
+          dialogMessage: "Correct Errors on highlighted fields"
         },
-        width: '35vw',
+        width: '25vw',
         height: '27vh',
       });
     } else {
       
       
-      const title = 'Confirm New Informative Video';
-      const message = 'Are you sure you want to add the new informative video?';
+      const title = 'Confirm New Instructional Video';
+      const message = 'Are you sure you want to add the new instructional video?';
       this.showDialog(title, message);
     }
   }
@@ -126,9 +131,22 @@ export class AddTrainingVideoComponent implements OnInit {
                         duration: 3000,
                       }
               );
-                this.instructionalVideo = result as InstructionalVideo;
-                this.refreshForm();
+                
                 this.router.navigate(['admin/read-instructional-videos']);
+
+                // Audit Log 
+
+                let audit = new AuditLog();
+                audit.AuditLogID = 0;
+                audit.UserID = this.security.User.UserID;
+                audit.AuditName = 'Add Instructional Video';
+                audit.Description = 'Employee, ' + this.security.User.Username + ', added a new Instructional Video: ' + this.instructionalVideo.VideoName
+                audit.Date = '';
+    
+                this.aService.AddAudit(audit).subscribe((data) => {
+                  //console.log(data);
+                  this.refreshForm();
+                })
             }
             else if(result.Status===400)
             {

@@ -14,6 +14,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { JobOppStatu } from 'src/app/Models/JobOppStatu.model';
 import { WorkType } from 'src/app/Models/WorkType.model';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-maintain-job',
@@ -52,7 +55,10 @@ isChecked:any;
     private service: JobOppService,
     public toaster: ToastrService,
     private datePipe: DatePipe,
-    private snack:MatSnackBar) {  this.titleservice.setTitle('Job Opportunity');}
+    private snack:MatSnackBar,
+    private aService:AuditLogService,
+    private security:SecurityService) 
+    { this.titleservice.setTitle('Job Opportunity');}
 
   ngOnInit(): void {
     this.test = JSON.parse(sessionStorage['jobOpportunity']);
@@ -146,12 +152,9 @@ showDialog(title: string, message: string): void {
       job.JobOppDescription = this.test.JobOppDescription;
       job.JobOppRequirements=this.test.JobOppRequirements;
 
-      var actualDate = new Date(this.test.JobOppDeadline);
-      actualDate.setMinutes(
-        actualDate.getMinutes() + 1440 + actualDate.getTimezoneOffset()
-      );
+     
 
-      job.JobOppDeadline = actualDate;
+      job.JobOppDeadline = this.datePipe.transform(this.test.JobOppDeadline, 'yyyy/MM/dd');
   
       job.JobOppStatusID = this.test.JobOppStatusID;
       job.WorkTypeID=this.test.WorkTypeID;
@@ -171,6 +174,20 @@ showDialog(title: string, message: string): void {
           );
            this.isLoading=false;
            this.router.navigate(['admin/read-jobs']);
+
+           // Audit Log 
+
+           let audit = new AuditLog();
+           audit.AuditLogID = 0;
+           audit.UserID = this.security.User.UserID;
+           audit.AuditName = 'Update Job Opportunity';
+           audit.Description = 'Employee, ' + this.security.User.Username + ', updated the Job Opportunity: ' + job.JobOppTitle
+           audit.Date = '';
+
+           this.aService.AddAudit(audit).subscribe((data) => {
+             //console.log(data);
+             //this.refreshForm();
+           })
         }
         else if(result.Status === 400)
         {

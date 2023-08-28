@@ -8,6 +8,9 @@ import { ConfirmDialogComponent } from 'src/app/Dialog/confirm-dialog/confirm-di
 import { MatDialog } from '@angular/material/dialog';
 import { InputDialogComponent } from 'src/app/Dialog/input-dialog/input-dialog/input-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-view-skill-type',
@@ -25,7 +28,9 @@ export class ViewSkillTypeComponent implements OnInit {
     private service: SkillTypeService,
     private dialog: MatDialog,
     private titleservice: Title,
-    private snack:MatSnackBar) 
+    private snack:MatSnackBar,
+    private aService:AuditLogService,
+    private security:SecurityService) 
     { this.titleservice.setTitle('Skill Type');}
 
   ngOnInit(): void {
@@ -81,7 +86,17 @@ onDelete() {
                         verticalPosition: 'bottom',
                         duration: 3000,
                       });
-              this.router.navigate(['admin/read-skill-type']);        
+              this.router.navigate(['admin/read-skill-type']);      
+
+              let audit = new AuditLog();
+              audit.AuditLogID = 0;
+              audit.UserID = this.security.User.UserID;
+              audit.AuditName = 'Delete Skill Type';
+              audit.Description = 'Employee, ' + this.security.User.Username + ', deleted the Skill Type: ' + this.test.SkillTypeName
+              audit.Date = '';
+
+              this.aService.AddAudit(audit).subscribe((data) => {
+              })
             }
 
             else if(res.Status===500)

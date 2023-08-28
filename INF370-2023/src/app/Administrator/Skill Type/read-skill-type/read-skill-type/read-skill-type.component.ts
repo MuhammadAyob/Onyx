@@ -14,6 +14,9 @@ import { map } from 'rxjs/operators';
 import { ConfirmDialogComponent } from 'src/app/Dialog/confirm-dialog/confirm-dialog/confirm-dialog.component';
 import { MatSort } from '@angular/material/sort';
 import { InputDialogComponent } from 'src/app/Dialog/input-dialog/input-dialog/input-dialog.component';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-read-skill-type',
@@ -47,7 +50,9 @@ isLoading:boolean=true;
     private service: SkillTypeService,
     public toaster: ToastrService,
     private _snackBar: MatSnackBar,
-    private titleservice: Title) 
+    private titleservice: Title,
+    private aService:AuditLogService,
+    private security:SecurityService) 
     {
       this.titleservice.setTitle('Skill Type');
     }
@@ -125,6 +130,17 @@ isLoading:boolean=true;
                           duration: 3000,
                         });
                 this.refreshList();
+               
+              let audit = new AuditLog();
+              audit.AuditLogID = 0;
+              audit.UserID = this.security.User.UserID;
+              audit.AuditName = 'Delete Skill Type';
+              audit.Description = 'Employee, ' + this.security.User.Username + ', deleted the Skill Type: ' + obj.SkillTypeName
+              audit.Date = '';
+
+              this.aService.AddAudit(audit).subscribe((data) => {
+              })
+
               }
 
               else if(res.Status===500)

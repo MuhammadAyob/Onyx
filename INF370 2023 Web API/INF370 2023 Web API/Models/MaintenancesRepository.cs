@@ -243,29 +243,39 @@ namespace INF370_2023_Web_API.Models
         {
             try
             {
+                var student = await db.Students.Where(x => x.StudentID == id).FirstOrDefaultAsync();
+                
                 List<dynamic> listMaintenanceReqs = new List<dynamic>();
 
                 List<Maintenance> maintenanceReqs = 
                     await
                     db.Maintenances
-                    .Where(x=>x.UserID==id && (x.MaintenanceStatusID==1 || x.MaintenanceStatusID==2) )
+                    .Where(x=>x.UserID== student.UserID && (x.MaintenanceStatusID==1 || x.MaintenanceStatusID==2) )
                     .ToListAsync();
 
                 foreach (Maintenance maintenanceReq in maintenanceReqs)
                 {
                     
-                        dynamic obj = new ExpandoObject();
-                        obj.MaintenanceID = maintenanceReq.MaintenanceID;
-                        obj.Description = maintenanceReq.Description;
-                        obj.Date = maintenanceReq.DateLogged.ToShortDateString();
-                        obj.Location = maintenanceReq.Location;
-                        obj.MaintenanceType = maintenanceReq.MaintenanceType.Type;
-                        obj.MaintenanceStatus = maintenanceReq.MaintenanceStatu.Status;
-                        obj.MaintenancePriority = maintenanceReq.MaintenancePriority.Priority;
-                        listMaintenanceReqs.Add(obj);
+                    dynamic obj = new ExpandoObject();
+                    obj.MaintenanceID = maintenanceReq.MaintenanceID;
+                    obj.UserID = maintenanceReq.UserID;
+                    obj.Username = maintenanceReq.User.Username;
+                    obj.MaintenanceTypeID = maintenanceReq.MaintenanceTypeID;
+                    obj.MaintenanceType = maintenanceReq.MaintenanceType.Type;
+                    obj.MaintenanceStatusID = maintenanceReq.MaintenanceStatusID;
+                    obj.MaintenanceStatus = maintenanceReq.MaintenanceStatu.Status;
+                    obj.MaintenancePriorityID = maintenanceReq.MaintenancePriorityID;
+                    obj.MaintenancePriority = maintenanceReq.MaintenancePriority.Priority;
+                    obj.Description = maintenanceReq.Description;
+                    obj.Location = maintenanceReq.Location;
+                    obj.DateLogged = maintenanceReq.DateLogged.ToShortDateString();
+                    obj.DateResolved = maintenanceReq.DateResolved;
+                    obj.Image = maintenanceReq.Image;
+                    listMaintenanceReqs.Add(obj);
                     
 
                 }
+
                 return listMaintenanceReqs;
             }
 

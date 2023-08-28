@@ -48,7 +48,7 @@ constructor(
 
 ngOnInit(): void {
   this.cartItems = this.cartService.getCartItems();
-  this.VAT = JSON.parse( sessionStorage['CurrentVAT'] );
+  this.VAT = JSON.parse(sessionStorage['CurrentVAT'] );
   this.StudentID = sessionStorage.getItem('StudentID');
 }
 

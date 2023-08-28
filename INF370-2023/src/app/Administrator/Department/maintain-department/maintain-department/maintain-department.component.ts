@@ -14,6 +14,10 @@ import { Title } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { SecurityService } from 'src/app/Services/security.service';
+
 
 @Component({
   selector: 'app-maintain-department',
@@ -35,7 +39,9 @@ public dataSource = new MatTableDataSource<Department>();
     private service:DepartmentService,
     private titleservice:Title,
     public toastr: ToastrService,
-    private snack:MatSnackBar
+    private snack:MatSnackBar,
+    private aService:AuditLogService,
+    private security:SecurityService
   ) { this.titleservice.setTitle('Departments')}
 
   ngOnInit(): void {
@@ -57,7 +63,7 @@ public dataSource = new MatTableDataSource<Department>();
       this.dialog.open(InputDialogComponent, {
         data: {
           dialogTitle: "Input Error",
-          dialogMessage: "Correct Errors"
+          dialogMessage: "Correct errors on highlighted fields"
         },
         width: '25vw',
         height: '27vh',
@@ -100,6 +106,16 @@ public dataSource = new MatTableDataSource<Department>();
                       }
               );
               this.router.navigate(['admin/read-department']);
+              
+              let audit = new AuditLog();
+              audit.AuditLogID = 0;
+              audit.UserID = this.security.User.UserID;
+              audit.AuditName = 'Update Department';
+              audit.Description = 'Employee, ' + this.security.User.Username + ', updated the Department: ' + this.department.DepartmentName
+              audit.Date = '';
+
+          this.aService.AddAudit(audit).subscribe((data) => {
+          })
 
             } 
             else if(result.Status===400)

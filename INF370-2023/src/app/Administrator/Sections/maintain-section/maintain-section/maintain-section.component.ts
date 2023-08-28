@@ -13,6 +13,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { InputDialogComponent } from 'src/app/Dialog/input-dialog/input-dialog/input-dialog.component';
 import { ConfirmDialogComponent } from 'src/app/Dialog/confirm-dialog/confirm-dialog/confirm-dialog.component';
 import { Section } from 'src/app/Models/section.model';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-maintain-section',
@@ -37,7 +40,9 @@ constructor(
   private service: CourseService,
   private dialog: MatDialog,
   private snack: MatSnackBar,
-  private toastr: ToastrService
+  private toastr: ToastrService,
+  private aService:AuditLogService,
+  private security:SecurityService
 ) { this.titleservice.setTitle('Section'); }
 
 
@@ -133,6 +138,18 @@ showDialog(title: string, message: string): void {
             sessionStorage.removeItem('Section');
             sessionStorage['Section'] = JSON.stringify(this.section);
             this.router.navigate(['admin/view-section']);
+
+            let audit = new AuditLog();
+            audit.AuditLogID = 0;
+            audit.UserID = this.security.User.UserID;
+            audit.AuditName = 'Update Section';
+            audit.Description = 'Employee, ' + this.security.User.Username + ', updated the Section: ' + this.section.SectionName  + ', belonging to the Course: ' + this.storageCourse.Name
+            audit.Date = '';
+
+            this.aService.AddAudit(audit).subscribe((data) => {
+              //console.log(data);
+              //this.refreshForm();
+            })
           }
           else if(res.Status===404)
           {

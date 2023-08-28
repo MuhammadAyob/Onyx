@@ -16,7 +16,9 @@ import { InputDialogComponent } from 'src/app/Dialog/input-dialog/input-dialog/i
 import { MatTableDataSource } from '@angular/material/table';
 import { map } from 'rxjs/operators';
 import { MatPaginator } from '@angular/material/paginator';
-
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-maintain-lesson',
@@ -43,7 +45,9 @@ constructor(
   private serviceL: LessonService,
   private snack:MatSnackBar,
   public toastr: ToastrService,
-  private titleservice: Title
+  private titleservice: Title,
+  private aService:AuditLogService,
+  private security:SecurityService
 ) { this.titleservice.setTitle('Lesson');}
 
 ngOnInit(): void {
@@ -137,6 +141,18 @@ showDialog(title: string, message: string): void {
           sessionStorage.removeItem('Lesson');
           sessionStorage['Lesson'] = JSON.stringify(this.lesson);
           this.router.navigate(['admin/view-lesson']);
+
+          let audit = new AuditLog();
+          audit.AuditLogID = 0;
+          audit.UserID = this.security.User.UserID;
+          audit.AuditName = 'Update Lesson';
+          audit.Description = 'Employee, ' + this.security.User.Username + ', updated the Lesson: ' + this.lesson.LessonName  + ', within the section: ' + this.storageSection.SectionName + ', in the course: ' + this.storageCourse.Name
+          audit.Date = '';
+
+          this.aService.AddAudit(audit).subscribe((data) => {
+            //console.log(data);
+            //this.refreshForm();
+          })
         }
         
         else if(result.Status===100)

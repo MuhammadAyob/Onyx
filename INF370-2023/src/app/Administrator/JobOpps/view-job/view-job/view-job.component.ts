@@ -10,6 +10,9 @@ import { JobOpportunity } from 'src/app/Models/JobOpp.model';
 import { JobOppService } from 'src/app/Services/job-opp.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { InputDialogComponent } from 'src/app/Dialog/input-dialog/input-dialog/input-dialog.component';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-view-job',
@@ -24,7 +27,9 @@ export class ViewJobComponent implements OnInit {
     private service: JobOppService,
     private dialog: MatDialog,
     private toastr : ToastrService,
-    private snack:MatSnackBar) 
+    private snack:MatSnackBar,
+    private aService:AuditLogService,
+    private security:SecurityService) 
     { this.titleservice.setTitle('Job Opportunity');}
 
   ngOnInit(): void {
@@ -42,8 +47,8 @@ export class ViewJobComponent implements OnInit {
   onDelete() {
     //this.id = this.test.JobOppID;
 
-    const title = 'Confirm Disable Job Opportunity ';
-    const popupMessage = 'Job Opportunity was disbaled successfully';
+    const title = 'Confirm Permanently Disable Job Opportunity ';
+    const popupMessage = 'Job Opportunity was disabled successfully';
     const message = 'Are you sure you want to disable the Job Opportunity?';
 
     const dialogReference = this.dialog.open(
@@ -73,7 +78,21 @@ export class ViewJobComponent implements OnInit {
                       verticalPosition: 'bottom',
                       duration: 3000,
                     });
-            this.router.navigate(['admin/read-jobs']);       
+            this.router.navigate(['admin/read-jobs']);     
+            
+             // Audit Log 
+
+           let audit = new AuditLog();
+           audit.AuditLogID = 0;
+           audit.UserID = this.security.User.UserID;
+           audit.AuditName = 'Delete Job Opportunity';
+           audit.Description = 'Employee, ' + this.security.User.Username + ', permanently disabled the Job Opportunity: ' + this.test.JobOppTitle
+           audit.Date = '';
+
+           this.aService.AddAudit(audit).subscribe((data) => {
+             //console.log(data);
+             //this.refreshForm();
+           })
           }
           else
           {

@@ -12,6 +12,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Qualification } from 'src/app/Models/qualification.model';
 import { QualificationService } from 'src/app/Services/qualification.service';
 import { ToastrService } from 'ngx-toastr';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-add-qualification',
@@ -31,7 +34,9 @@ export class AddQualificationComponent implements OnInit {
     private service: QualificationService,
     public toastr: ToastrService,
     private snack: MatSnackBar,
-    private titleservice: Title
+    private titleservice: Title,
+    private aService:AuditLogService,
+    private security:SecurityService
   ) { this.titleservice.setTitle('Qualification'); }
 
   ngOnInit(): void {
@@ -52,10 +57,10 @@ export class AddQualificationComponent implements OnInit {
       this.dialog.open(InputDialogComponent, {
         data: {
           dialogTitle: "Input Error",
-          dialogMessage: "Correct Errors"
+          dialogMessage: "Correct errors on Highlighted fields"
         },
-        width: '50vw',
-        height: '30vh',
+        width: '25vw',
+        height: '27vh',
       });
     } else {
       const title = 'Confirm New qualification';
@@ -108,9 +113,21 @@ export class AddQualificationComponent implements OnInit {
                         duration: 3000,
                       }
               );
-              this.qualification = result as Qualification;
-              this.refreshForm();
+              //this.qualification = result as Qualification;
+              //this.refreshForm();
               this.router.navigate(['admin/read-qualification']);
+
+              let audit = new AuditLog();
+              audit.AuditLogID = 0;
+              audit.UserID = this.security.User.UserID;
+              audit.AuditName = 'Add Qualification';
+              audit.Description = 'Employee, ' + this.security.User.Username + ', added a new Qualification: ' + this.qualification.QualificationName
+              audit.Date = '';
+  
+              this.aService.AddAudit(audit).subscribe((data) => {
+                //console.log(data);
+                this.refreshForm();
+              })
             }
 
             else if(result.Status===403)

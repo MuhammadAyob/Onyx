@@ -1,5 +1,5 @@
 import { Component,VERSION,ElementRef, OnInit,ViewChild } from '@angular/core';
-import {FormGroup, FormBuilder,Validators, FormControl} from '@angular/forms';
+import { FormGroup, FormBuilder,Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
@@ -12,6 +12,9 @@ import { ExistsDialogComponent } from 'src/app/Dialog/exists-dialog/exists-dialo
 import { Title } from '@angular/platform-browser';
 import { LessonResource } from 'src/app/Models/LessonResource.model';
 import { LessonResourceService } from 'src/app/Services/lesson-resource.service';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-maintain-resource',
@@ -29,15 +32,25 @@ private service: LessonResourceService,
 private dialog: MatDialog,
 public toaster: ToastrService,
 private snack: MatSnackBar,
-private titleservice: Title) { this.titleservice.setTitle('Lesson Resource');}
+private titleservice: Title,
+private aService:AuditLogService,
+private security:SecurityService) 
+{ this.titleservice.setTitle('Lesson Resource');}
 
 test!: LessonResource;
 resourceFile: string = "";
 fileAttr = ' ';
 storageLessonResource:any;
+storageLesson:any;
+storageSection:any;
+storageCourse:any;
 isLoading!:boolean;
+
 ngOnInit(): void {
   this.storageLessonResource=JSON.parse(sessionStorage['LessonResource']);
+  this.storageLesson=JSON.parse(sessionStorage['Lesson']);
+  this.storageSection=JSON.parse(sessionStorage['Section']);
+  this.storageCourse=JSON.parse(sessionStorage['Course']);
   this.refreshForm();
 }
 
@@ -122,8 +135,20 @@ showDialog(title: string, message: string): void {
           obj.ResourceName = this.test.ResourceName;
           sessionStorage.removeItem('LessonResource');
           sessionStorage['LessonResource'] = JSON.stringify(this.test);
-          this.refreshForm();
+          //this.refreshForm();
           this.router.navigate(['admin/view-resource']);
+
+          let audit = new AuditLog();
+          audit.AuditLogID = 0;
+          audit.UserID = this.security.User.UserID;
+          audit.AuditName = 'Update Lesson Resource';
+          audit.Description = 'Employee, ' + this.security.User.Username + ', updated resource: ' + this.test.ResourceName  + ', within the lesson: ' + this.storageLesson.LessonName + ', under the section: ' + this.storageSection.SectionName + ', in the course: ' + this.storageCourse.Name
+          audit.Date = '';
+
+          this.aService.AddAudit(audit).subscribe((data) => {
+            //console.log(data);
+            this.refreshForm();
+          })
         }
         else if(result.Status===100)
         {

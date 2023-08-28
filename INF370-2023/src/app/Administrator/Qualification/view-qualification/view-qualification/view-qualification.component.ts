@@ -8,6 +8,9 @@ import { QualificationService } from 'src/app/Services/qualification.service';
 import { ConfirmDialogComponent } from 'src/app/Dialog/confirm-dialog/confirm-dialog/confirm-dialog.component';
 import { InputDialogComponent } from 'src/app/Dialog/input-dialog/input-dialog/input-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-view-qualification',
@@ -24,7 +27,9 @@ export class ViewQualificationComponent implements OnInit {
     private service: QualificationService,
     private dialog: MatDialog,
     private snack: MatSnackBar,
-    private titleservice: Title
+    private titleservice: Title,
+    private aService:AuditLogService,
+    private security:SecurityService
   ) {this.titleservice.setTitle('Qualifications');}
 
   ngOnInit(): void {
@@ -48,7 +53,7 @@ onEdit() {
 }
 
 onDelete() {
-  const title = 'Confirm Delete qualification';
+  const title = 'Confirm Delete Qualification';
   const message = 'Are you sure you want to delete the qualification?';
   
   const dialogReference = this.dialog.open(ConfirmDialogComponent, {
@@ -78,6 +83,15 @@ onDelete() {
             );
             this.refreshList();
             this.router.navigate(['admin/read-qualification']);
+            let audit = new AuditLog();
+            audit.AuditLogID = 0;
+            audit.UserID = this.security.User.UserID;
+            audit.AuditName = 'Delete Qualification';
+            audit.Description = 'Employee, ' + this.security.User.Username + ', deleted the Qualification: ' + this.test.QualificationName
+            audit.Date = '';
+
+           this.aService.AddAudit(audit).subscribe((data) => {
+           })
 
           }
 

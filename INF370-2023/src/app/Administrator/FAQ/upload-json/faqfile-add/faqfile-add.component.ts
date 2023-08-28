@@ -9,6 +9,10 @@ import { Title } from '@angular/platform-browser';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { SecurityService } from 'src/app/Services/security.service';
+
 @Component({
   selector: 'app-faqfile-add',
   templateUrl: './faqfile-add.component.html',
@@ -26,7 +30,9 @@ constructor(
   private dialog: MatDialog,
   private service: FAQService,
   private _snack:MatSnackBar,
-  private titleservice: Title) 
+  private titleservice: Title,
+  private aService:AuditLogService,
+  private security:SecurityService) 
   { this.titleservice.setTitle('FAQ');}
   
 fileAttr = ' ';
@@ -213,6 +219,15 @@ showDialog(title: string, message: string): void {
                     }
             );
             this.router.navigate(['admin/read-faq']);
+            let audit = new AuditLog();
+            audit.AuditLogID = 0;
+            audit.UserID = this.security.User.UserID;
+            audit.AuditName = ' Overwrite all FAQs';
+            audit.Description = 'Employee, ' + this.security.User.Username + ', uploaded a JSON file to overwrite all FAQ records in the database.'
+            audit.Date = '';
+
+            this.aService.AddAudit(audit).subscribe((data) => {
+            })
           }
 
           else if(result.Status===404)

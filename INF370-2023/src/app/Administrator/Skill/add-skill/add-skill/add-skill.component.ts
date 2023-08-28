@@ -14,6 +14,9 @@ import { ConfirmDialogComponent } from 'src/app/Dialog/confirm-dialog/confirm-di
 import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-add-skill',
@@ -37,6 +40,8 @@ export class AddSkillComponent implements OnInit {
     private dialog: MatDialog,
     public toastr: ToastrService,
     private snack: MatSnackBar,
+    private aService:AuditLogService,
+    private security:SecurityService
   ) { this.titleservice.setTitle('Skills');}
 
   ngOnInit(): void {
@@ -102,8 +107,23 @@ export class AddSkillComponent implements OnInit {
                         duration: 3000,
                       });
               this.isLoading=false;
-              this.refreshForm();
+              //this.refreshForm();
               this.router.navigate(['admin/read-skill']);
+
+              // Audit Log 
+
+              let audit = new AuditLog();
+              audit.AuditLogID = 0;
+              audit.UserID = this.security.User.UserID;
+              audit.AuditName = 'Add Skill';
+              audit.Description = 'Employee, ' + this.security.User.Username + ', added a new Skill: ' + this.skill.SkillName + ', with description: ' + this.skill.Description
+              audit.Date = '';
+  
+              this.aService.AddAudit(audit).subscribe((data) => {
+                //console.log(data);
+                this.refreshForm();
+              })
+
             }
             else if(result.Status===404)
             {

@@ -26,8 +26,8 @@ export class ViewStructureComponent implements OnInit {
 panelOpenState = false;
 courseDetails:any;
 course:any
-faqList!:FAQ[];
-ratings:any;
+faqList!:any[];
+ratings!:any[];
 
 notRetrieved = true;
 NumberOfRatings:any
@@ -74,7 +74,7 @@ onBack(){
 
 GetFAQ(){
 this.FAQService.GetFAQs().subscribe((result)=>{
-  this.faqList = result as FAQ[];
+  this.faqList = result as any[];
 })
 }
 

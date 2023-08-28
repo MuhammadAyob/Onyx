@@ -24,6 +24,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { TitleService } from 'src/app/Services/title.service';
 import { Titles } from 'src/app/Models/title.model'; 
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-add-employee',
@@ -79,6 +82,8 @@ export class AddEmployeeComponent implements OnInit {
     private serviceQ: QualificationService,
     private serviceu: UserRoleService,
     private snack:MatSnackBar,
+    private aService:AuditLogService,
+    private security:SecurityService,
     private toastr: ToastrService) { this.titleservice.setTitle('Employees');}
 
   ngOnInit(): void {
@@ -237,9 +242,21 @@ showDialog(title: string, message: string): void {
                     duration: 3000,
                   }
           );
-          this.refreshForm();
+          //this.refreshForm();
           this.isLoading=false;
           this.router.navigate(['admin/read-employees']);
+
+          let audit = new AuditLog();
+          audit.AuditLogID = 0;
+          audit.UserID = this.security.User.UserID;
+          audit.AuditName = 'Add Employee';
+          audit.Description = 'Employee, ' + this.security.User.Username + ', added new employee: ' + this.employee.Employee.Name + ' ' + this.employee.Employee.Surname + ' - ' + this.employee.Employee.RSAIDNumber
+          audit.Date = '';
+
+          this.aService.AddAudit(audit).subscribe((data) => {
+            //console.log(data);
+            this.refreshForm();
+          })
          
         }
         else if(result.Status==600)

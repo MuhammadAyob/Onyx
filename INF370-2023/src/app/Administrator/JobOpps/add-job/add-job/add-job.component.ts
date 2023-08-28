@@ -14,6 +14,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { JobOppStatu } from 'src/app/Models/JobOppStatu.model';
 import { WorkType } from 'src/app/Models/WorkType.model';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-add-job',
@@ -43,6 +46,8 @@ export class AddJobComponent implements OnInit {
 
  isLoading!:boolean;
 
+ ActuallDate:any;
+
 constructor(public router: Router,
   private location: Location,
   private titleservice: Title,
@@ -50,7 +55,10 @@ constructor(public router: Router,
   private service: JobOppService,
   public toaster: ToastrService,
   private datePipe: DatePipe,
-  private snack:MatSnackBar) { this.titleservice.setTitle('Job Opportunity');}
+  private snack:MatSnackBar,
+  private aService:AuditLogService,
+  private security:SecurityService) 
+  { this.titleservice.setTitle('Job Opportunity');}
 
   ngOnInit(): void {
     this.refreshForm();
@@ -83,7 +91,7 @@ this.WorkTypeList = result as WorkType[];
     this.todayDate = this.datePipe.transform(this.todayDate, 'yyyy/MM/dd');
     var blah :any;
 
-    blah = this.datePipe.transform(this.JobOpportunity.JobOppDeadline, 'yyyy/MM/dd');
+    blah = this.datePipe.transform(this.ActuallDate, 'yyyy/MM/dd');
 
     if (blah >= this.todayDate) {
       return false;
@@ -156,11 +164,9 @@ this.WorkTypeList = result as WorkType[];
     dialogReference.afterClosed().subscribe((result) => {
       if (result == true) {
         this.isLoading=true;
-        var actualDate = new Date(this.JobOpportunity.JobOppDeadline);
-        actualDate.setMinutes(
-          actualDate.getMinutes() + 1440 + actualDate.getTimezoneOffset()
-        );
-        this.JobOpportunity.JobOppDeadline = actualDate;
+
+        this.JobOpportunity.JobOppDeadline = this.datePipe.transform(this.ActuallDate, 'yyyy/MM/dd');
+        
         this.service.AddJob(this.JobOpportunity).subscribe(
           (result:any) => {
            console.log(result);
@@ -177,6 +183,19 @@ this.WorkTypeList = result as WorkType[];
             );
              this.isLoading=false;
              this.router.navigate(['admin/read-jobs']);
+              // Audit Log 
+
+              let audit = new AuditLog();
+              audit.AuditLogID = 0;
+              audit.UserID = this.security.User.UserID;
+              audit.AuditName = 'Add Job Opportunity';
+              audit.Description = 'Employee, ' + this.security.User.Username + ', added a new Job Opportunity: ' + this.JobOpportunity.JobOppTitle
+              audit.Date = '';
+  
+              this.aService.AddAudit(audit).subscribe((data) => {
+                //console.log(data);
+                //this.refreshForm();
+              })
           }
           else if(result.Status === 400)
           {

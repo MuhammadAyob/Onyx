@@ -14,6 +14,9 @@ import { ConfirmDialogComponent } from 'src/app/Dialog/confirm-dialog/confirm-di
 import { InputDialogComponent } from 'src/app/Dialog/input-dialog/input-dialog/input-dialog.component';
 import { ExistsDialogComponent } from 'src/app/Dialog/exists-dialog/exists-dialog/exists-dialog.component';
 import { SearchDialogComponent } from 'src/app/Dialog/search-dialog/search-dialog/search-dialog.component';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-maintain-user-role',
@@ -35,7 +38,9 @@ export class MaintainUserRoleComponent implements OnInit {
     private service: UserRoleService,
     private titleservice: Title,
     public toastr: ToastrService,
-    private snack: MatSnackBar
+    private snack: MatSnackBar,
+    private security:SecurityService,
+    private aService:AuditLogService
   ) { this.titleservice.setTitle('User Role');}
 
   ngOnInit(): void {
@@ -58,7 +63,7 @@ export class MaintainUserRoleComponent implements OnInit {
       this.dialog.open(InputDialogComponent, {
         data: {
           dialogTitle: "Input Error",
-          dialogMessage: "Correct Errors"
+          dialogMessage: "Correct Errors on highlighted fields"
         },
         width: '25vw',
         height: '27vh',
@@ -91,6 +96,19 @@ export class MaintainUserRoleComponent implements OnInit {
               }
               this.router.navigate(['admin/read-user-role'])
               this.isLoading=false;
+
+                // Audit Log 
+
+                let audit = new AuditLog();
+                audit.AuditLogID = 0;
+                audit.UserID = this.security.User.UserID;
+                audit.AuditName = 'Update User Role';
+                audit.Description = 'Employee, ' + this.security.User.Username + ', updated the user role ID: ' + this.userRole.UserRoleID
+                audit.Date = '';
+    
+                this.aService.AddAudit(audit).subscribe((data) => {
+                  //console.log(data);
+                })
             } 
             else if(result.Status===404)
             {

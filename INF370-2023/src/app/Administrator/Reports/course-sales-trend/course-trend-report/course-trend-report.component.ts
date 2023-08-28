@@ -86,7 +86,7 @@ calculateTotalRevenueAllTime(): number {
   let totalRevenue = 0.00;
   for (const yearData of this.reportData) {
     for (const item of yearData.Courses) {
-      totalRevenue += yearData.CategoryTotal;
+      totalRevenue += item.TotalRevenue;
     }
     //totalRevenue += yearData.TotalRevenue;
   }

@@ -14,6 +14,9 @@ import { SearchDialogComponent } from 'src/app/Dialog/search-dialog/search-dialo
 import { map } from 'rxjs/operators';
 import { RatingsService } from 'src/app/Services/ratings.service';
 import { InputDialogComponent } from 'src/app/Dialog/input-dialog/input-dialog/input-dialog.component';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-read-ratings',
@@ -51,7 +54,9 @@ constructor(
   private rService:RatingsService,
   public toaster:ToastrService,
   private _snackBar:MatSnackBar,
-  private titleservice:Title
+  private titleservice:Title,
+  private aService:AuditLogService,
+  private security:SecurityService
 ) { this.titleservice.setTitle('Ratings');}
 
   
@@ -129,6 +134,18 @@ onDelete(obj:any) {
                         duration: 3000,
                       });
               this.refreshList();
+
+              let audit = new AuditLog();
+              audit.AuditLogID = 0;
+              audit.UserID = this.security.User.UserID;
+              audit.AuditName = 'Delete Course Rating';
+              audit.Description = 'Student, ' + this.security.User.Username + ', deleted their ' + obj.Rating + ' star course rating for Course: ' + obj.Name 
+              audit.Date = '';
+  
+              this.aService.AddAudit(audit).subscribe((data) => {
+                //console.log(data);
+                //this.refreshForm();
+              })
             }
 
             else

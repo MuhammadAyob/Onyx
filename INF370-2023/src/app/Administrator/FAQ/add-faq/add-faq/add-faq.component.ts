@@ -12,6 +12,9 @@ import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-add-faq',
@@ -31,7 +34,9 @@ faq!:FAQ;
     private service: FAQService,
     public toastr: ToastrService,
     private titleservice: Title,
-    private snack:MatSnackBar
+    private snack:MatSnackBar,
+    private aService:AuditLogService,
+    private security:SecurityService
   ) { this.titleservice.setTitle('Add FAQ');}
 
   ngOnInit(): void {
@@ -113,6 +118,19 @@ faq!:FAQ;
                         duration: 3000,
                       });
                       this.router.navigate(['admin/read-faq']);
+                       // Audit Log 
+
+                let audit = new AuditLog();
+                audit.AuditLogID = 0;
+                audit.UserID = this.security.User.UserID;
+                audit.AuditName = 'Add FAQ';
+                audit.Description = 'Employee, ' + this.security.User.Username + ', added a new FAQ: ' + this.faq.Question
+                audit.Date = '';
+    
+                this.aService.AddAudit(audit).subscribe((data) => {
+                  //console.log(data);
+                  this.refreshForm();
+                })
             }
             else if(result.Status===400)
             {

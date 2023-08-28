@@ -14,6 +14,9 @@ import { SearchDialogComponent } from 'src/app/Dialog/search-dialog/search-dialo
 import { DisabledUsersService } from 'src/app/Services/disabled-users.service';
 import { User } from 'src/app/Models/user.model';
 import { ExistsDialogComponent } from 'src/app/Dialog/exists-dialog/exists-dialog/exists-dialog.component';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-re-activate-users',
@@ -38,7 +41,9 @@ constructor(
   private service: DisabledUsersService,
   public toaster: ToastrService,
   private snack: MatSnackBar,
-  private dialog: MatDialog
+  private dialog: MatDialog,
+  private aService:AuditLogService,
+  private security:SecurityService
 ) { this.titleservice.setTitle('Reactivate Users');}
 
 ngOnInit(): void {
@@ -71,7 +76,7 @@ refreshList() {
   });
 }
 
-onView(id:number) {
+onView(obj:any) {
 
   const title = 'Confirm Reactivate User';
   const popupMessage = 'User was successfully Reactivated';
@@ -92,7 +97,7 @@ onView(id:number) {
   dialogReference.afterClosed().subscribe((result) => {
     if (result == true) {
       this.isLoading=true;
-      this.service.ReactivateUser(id).subscribe((res:any) => {
+      this.service.ReactivateUser(obj.UserID).subscribe((res:any) => {
         if(res.Status===200)
         {
           this.snack.open(
@@ -106,6 +111,19 @@ onView(id:number) {
           );
           this.refreshList();
           this.isLoading=false;
+
+              // Audit Log 
+
+              let audit = new AuditLog();
+              audit.AuditLogID = 0;
+              audit.UserID = this.security.User.UserID;
+              audit.AuditName = 'Reactivate User';
+              audit.Description = 'Employee, ' + this.security.User.Username + ', reactivated the user: ' + obj.Username + ' - ' + obj.UserRole.RoleName
+              audit.Date = '';
+  
+              this.aService.AddAudit(audit).subscribe((data) => {
+                //console.log(data);
+              })
         }
         else
         {

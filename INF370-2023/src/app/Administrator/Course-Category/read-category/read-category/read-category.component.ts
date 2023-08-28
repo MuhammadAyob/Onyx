@@ -16,6 +16,10 @@ import { ConfirmDialogComponent } from 'src/app/Dialog/confirm-dialog/confirm-di
 import { MatSort } from '@angular/material/sort';
 import { InputDialogComponent } from 'src/app/Dialog/input-dialog/input-dialog/input-dialog.component';
 import { EmployeeListForCourses } from 'src/app/Models/employee.model';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { SecurityService } from 'src/app/Services/security.service';
+
 @Component({
   selector: 'app-read-category',
   templateUrl: './read-category.component.html',
@@ -47,7 +51,9 @@ constructor(
   public toaster: ToastrService,
   private _snackBar: MatSnackBar,
   private titleservice: Title,
-  private cService:CourseService
+  private cService:CourseService,
+  private aService:AuditLogService,
+  private security:SecurityService
 ) {this.titleservice.setTitle('Course Category');}
 
 ngOnInit(): void {
@@ -108,7 +114,7 @@ onArrowBack(): void {
   this.location.back();
 }
 
-onDelete(id:number) {
+onDelete(obj:any) {
   const title = 'Confirm Delete Category';
   const message = 'Are you sure you want to delete the Category?';
   
@@ -125,7 +131,7 @@ onDelete(id:number) {
 
   dialogReference.afterClosed().subscribe((result) => {
     if (result == true) {
-      this.service.DeleteCategory(id).subscribe(
+      this.service.DeleteCategory(obj.CategoryID).subscribe(
         (result:any) => {
           if(result.Status===200)
           {
@@ -139,6 +145,16 @@ onDelete(id:number) {
                     }
             );
             this.refreshList();
+
+            let audit = new AuditLog();
+              audit.AuditLogID = 0;
+              audit.UserID = this.security.User.UserID;
+              audit.AuditName = 'Delete Course Category';
+              audit.Description = 'Employee, ' + this.security.User.Username + ', deleted the Course Category: ' + obj.Category
+              audit.Date = '';
+
+             this.aService.AddAudit(audit).subscribe((data) => {
+             })
           }
           else
           {

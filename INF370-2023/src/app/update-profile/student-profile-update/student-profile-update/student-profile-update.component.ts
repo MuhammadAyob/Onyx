@@ -17,6 +17,8 @@ import { StudentService } from 'src/app/Services/student.service';
 import { TitleService } from 'src/app/Services/title.service';
 import { SecurityService } from 'src/app/Services/security.service';
 import { Titles } from 'src/app/Models/title.model';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
 
 @Component({
   selector: 'app-student-profile-update',
@@ -52,7 +54,8 @@ constructor(
   private serviceT:TitleService,
   private serviceS:StudentService,
   private serviceX: SecurityService,
-  private snack:MatSnackBar
+  private snack:MatSnackBar,
+  private aService:AuditLogService
 ) { this.titleservice.setTitle('Your Profile');}
 
 ngOnInit(): void {
@@ -130,6 +133,20 @@ onSubmit() {
             );
            this.isLoading=false;
            this.router.navigate(['home/student-home']);
+
+               // Audit Log 
+
+               let audit = new AuditLog();
+               audit.AuditLogID = 0;
+               audit.UserID = this.serviceX.User.UserID;
+               audit.AuditName = 'Update Profile';
+               audit.Description = 'Student, ' + this.student.Email + ', updated their user profile.'
+               audit.Date = '';
+   
+               this.aService.AddAudit(audit).subscribe((data) => {
+                 //console.log(data);
+               })
+               
           }
           else if(result.Status===400)
           {

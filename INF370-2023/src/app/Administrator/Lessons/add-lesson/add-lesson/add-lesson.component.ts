@@ -17,6 +17,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { map } from 'rxjs/operators';
 import { MatPaginator } from '@angular/material/paginator';
 import { SearchDialogComponent } from 'src/app/Dialog/search-dialog/search-dialog/search-dialog.component';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-add-lesson',
@@ -54,7 +57,9 @@ constructor(
   private snack:MatSnackBar,
   public toastr: ToastrService,
   private titleservice: Title,
-  public formbuilder: FormBuilder
+  public formbuilder: FormBuilder,
+  private aService:AuditLogService,
+  private security:SecurityService
 ) { this.titleservice.setTitle('Lesson');}
 
   ngOnInit(): void {
@@ -152,8 +157,19 @@ showDialog(title: string, message: string): void {
                   }
           );
           this.isLoading=false;
-          this.refreshForm();
+          //this.refreshForm();
           this.router.navigate(['admin/view-section']);
+          let audit = new AuditLog();
+          audit.AuditLogID = 0;
+          audit.UserID = this.security.User.UserID;
+          audit.AuditName = 'Add Lesson';
+          audit.Description = 'Employee, ' + this.security.User.Username + ', added a new Lesson: ' + this.lesson.LessonName  + ', to the section: ' + this.storageSection.SectionName + ', in the course: ' + this.storageCourse.Name
+          audit.Date = '';
+
+          this.aService.AddAudit(audit).subscribe((data) => {
+            //console.log(data);
+            this.refreshForm();
+          })
         }
 
         else if(result.Status===100)

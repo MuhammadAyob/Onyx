@@ -14,7 +14,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Qualification } from 'src/app/Models/qualification.model';
 import { QualificationService } from 'src/app/Services/qualification.service';
 import { MatTableDataSource } from '@angular/material/table';
-
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-maintain-qualification',
@@ -36,7 +38,9 @@ export class MaintainQualificationComponent implements OnInit {
     private service: QualificationService,
     private titleservice: Title,
     public toastr: ToastrService,
-    private snack: MatSnackBar
+    private snack: MatSnackBar,
+    private aService:AuditLogService,
+    private security:SecurityService
   ) { this.titleservice.setTitle('Qualifications');}
 
   ngOnInit(): void {
@@ -59,10 +63,10 @@ onSubmit() {
     this.dialog.open(InputDialogComponent, {
       data: {
         dialogTitle: "Input Error",
-        dialogMessage: "Correct Errors"
+        dialogMessage: "Correct errors on highlighted fields"
       },
-      width: '50vw',
-      height: '30vh',
+      width: '25vw',
+      height: '27vh',
     });
   } else {
     const title = 'Confirm Edit Qualification';
@@ -104,6 +108,16 @@ showDialog(title: string, message: string): void {
             this.router.navigate([
               'admin/read-qualification',
             ]);
+
+            let audit = new AuditLog();
+            audit.AuditLogID = 0;
+            audit.UserID = this.security.User.UserID;
+            audit.AuditName = 'Update Qualification';
+            audit.Description = 'Employee, ' + this.security.User.Username + ', updated the Qualification: ' + this.qualification.QualificationName
+            audit.Date = '';
+
+        this.aService.AddAudit(audit).subscribe((data) => {
+        })
           } 
 
           else if(result.Status===404)

@@ -50,29 +50,35 @@ namespace INF370_2023_Web_API.Models
             }
         }
 
-        public async Task<object> GetCoursesToRate(int id)
+        public async Task<object> GetCoursesToRate(int studentId)
         {
             try
             {
                 db.Configuration.ProxyCreationEnabled = false;
-                var unratedCourses = await db.Courses
-                    .Where(course => !db.CourseRatings
-                    .Any(rating => rating.CourseID == course.CourseID && rating.StudentID == id))
-                    .Select(course => new
+
+                var coursesToRate = await db.Courses
+                    .Join(db.StudentCourses,
+                        course => course.CourseID,
+                        studentCourse => studentCourse.CourseID,
+                        (course, studentCourse) => new { Course = course, StudentCourse = studentCourse })
+                    .Where(joinResult => joinResult.StudentCourse.StudentID == studentId)
+                    .Where(joinResult => !db.CourseRatings
+                        .Any(rating => rating.CourseID == joinResult.Course.CourseID && rating.StudentID == studentId))
+                    .Select(joinResult => new
                     {
-                        CourseID = course.CourseID,
-                        Name = course.Name
+                        CourseID = joinResult.Course.CourseID,
+                        Name = joinResult.Course.Name
                     })
                     .ToListAsync();
 
-                return unratedCourses;
-
+                return coursesToRate;
             }
             catch (Exception)
             {
                 return new { Status = 500, Message = "Internal server error. Please try again" };
             }
         }
+
 
         public async Task<object> UpdateRating(int id, CourseReview rating)
         {

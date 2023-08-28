@@ -16,6 +16,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { map } from 'rxjs/operators';
 import { MatSort } from '@angular/material/sort';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-read-employee',
@@ -51,6 +54,8 @@ export class ReadEmployeeComponent implements OnInit {
     public toaster: ToastrService,
     private titleservice: Title,
     private snack:MatSnackBar,
+    private aService:AuditLogService,
+    private security:SecurityService
   ) {  this.titleservice.setTitle('Employees');}
 
   ngOnInit(): void {
@@ -135,7 +140,7 @@ export class ReadEmployeeComponent implements OnInit {
     );
   }
 
-  onDelete(id:number) {
+  onDelete(obj:any) {
     const title = 'Confirm deactivate Employee';
     const popupMessage = 'Employee was deactivated successfully';
     const message = 'Are you sure you want to deactivate the Employee?';
@@ -156,7 +161,7 @@ export class ReadEmployeeComponent implements OnInit {
     dialogReference.afterClosed().subscribe((result) => {
       if (result == true) {
         this.isLoading=true;
-        this.service.DeleteEmployee(id).subscribe((res:any) => 
+        this.service.DeleteEmployee(obj.EmployeeID).subscribe((res:any) => 
         {console.log(res)
           if(res.Status===200)
           {
@@ -172,6 +177,18 @@ export class ReadEmployeeComponent implements OnInit {
             
             this.refreshList();
             this.isLoading=false;
+
+            let audit = new AuditLog();
+            audit.AuditLogID = 0;
+            audit.UserID = this.security.User.UserID;
+            audit.AuditName = 'Deactivate Employee';
+            audit.Description = 'Employee, ' + this.security.User.Username + ', deactivated the employee: ' + obj.Name + ' ' + obj.Surname + ' - ' + obj.Email
+            audit.Date = '';
+  
+            this.aService.AddAudit(audit).subscribe((data) => {
+              //console.log(data);
+              //this.refreshForm();
+            })
           }
           else if(res.Status===404)
           {

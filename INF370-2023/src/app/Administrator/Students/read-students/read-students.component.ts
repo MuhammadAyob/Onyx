@@ -15,6 +15,9 @@ import { InputDialogComponent } from 'src/app/Dialog/input-dialog/input-dialog/i
 import { SearchDialogComponent } from 'src/app/Dialog/search-dialog/search-dialog/search-dialog.component';
 import { ExistsDialogComponent } from 'src/app/Dialog/exists-dialog/exists-dialog/exists-dialog.component';
 import { map } from 'rxjs/operators';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-read-students',
@@ -48,7 +51,9 @@ export class ReadStudentsComponent implements OnInit {
     private service:StudentService,
     public toaster:ToastrService,
     private _snackBar:MatSnackBar,
-    private titleservice:Title) 
+    private titleservice:Title,
+    private aService:AuditLogService,
+    private security:SecurityService) 
     { this.titleservice.setTitle('Students');}
 
   ngOnInit(): void {
@@ -116,6 +121,18 @@ export class ReadStudentsComponent implements OnInit {
                         });
                 this.refreshList();
                 this.isLoading=false;
+
+                let audit = new AuditLog();
+                audit.AuditLogID = 0;
+                audit.UserID = this.security.User.UserID;
+                audit.AuditName = 'Maintain Student';
+                audit.Description = 'Employee, ' + this.security.User.Username + ', deactivated the student: ' + obj.Name + ' ' + obj.Surname + ' - ' + obj.Email
+                audit.Date = '';
+      
+                this.aService.AddAudit(audit).subscribe((data) => {
+                  //console.log(data);
+                  //this.refreshForm();
+                })
               }
 
             

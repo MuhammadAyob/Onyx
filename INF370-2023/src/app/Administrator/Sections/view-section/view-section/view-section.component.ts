@@ -18,6 +18,9 @@ import { ExistsDialogComponent } from 'src/app/Dialog/exists-dialog/exists-dialo
 import { HttpErrorResponse } from '@angular/common/http';
 import { InputDialogComponent } from 'src/app/Dialog/input-dialog/input-dialog/input-dialog.component';
 import { SearchDialogComponent } from 'src/app/Dialog/search-dialog/search-dialog/search-dialog.component';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-view-section',
@@ -35,7 +38,9 @@ constructor(
   private snack:MatSnackBar,
   public toaster: ToastrService,
   private titleservice: Title,
-  private toastr: ToastrService
+  private toastr: ToastrService,
+  private aService:AuditLogService,
+  private security:SecurityService
 ) { this.titleservice.setTitle('View Section');}
 
 test!:Section;
@@ -139,6 +144,18 @@ onDeleteSection() {
                   }
           );
           this.router.navigate(['admin/view-course']);
+
+          let audit = new AuditLog();
+            audit.AuditLogID = 0;
+            audit.UserID = this.security.User.UserID;
+            audit.AuditName = 'Delete Section';
+            audit.Description = 'Employee, ' + this.security.User.Username + ', deleted the Section: ' + this.test.SectionName  + ', belonging to the Course: ' + this.course.Name
+            audit.Date = '';
+
+            this.aService.AddAudit(audit).subscribe((data) => {
+              //console.log(data);
+              //this.refreshForm();
+            })
         }
         else
         {

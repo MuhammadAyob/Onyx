@@ -70,9 +70,7 @@
     
     </mat-card-header>
   <mat-card-content class="matContent">
-    <div *ngIf="courseDetails?.Sections?.length === 0" style="text-align: center; padding: 1em;">
-      <p style="font-weight: 500; font-size: 18px;">No course content yet! Come back soon</p>
-    </div>
+    
 
         <br>
     <div class="container">
@@ -87,6 +85,19 @@
           </div>
         </div>
       </div>
+
+      <div *ngIf="courseDetails == null || undefined"
+      style="
+     display: flex;
+     align-items: center;
+     justify-content: center;">
+       <mat-spinner ></mat-spinner>
+     </div>
+
+      <div *ngIf="courseDetails?.Sections?.length === 0" style="text-align: center; padding: 1em;">
+        <p style="font-weight: 500; font-size: 18px;">No course content preview yet! Come back soon for updates.</p>
+      </div>
+
       <mat-accordion class="accordion">
         <mat-expansion-panel *ngFor="let section of courseDetails?.Sections">
           <mat-expansion-panel-header>
@@ -105,6 +116,9 @@
             <br>
             {{ lesson.LessonDescription }}
           </p>
+          <div *ngIf="!(section.Lessons?.length)" style="text-align: center; padding: 1em;">
+            No lessons in this section.
+          </div>
         </mat-expansion-panel>
       </mat-accordion>
     </div>
@@ -129,6 +143,18 @@
       
         <br>
     <div class="container">
+
+      <div *ngIf="faqList == null || undefined"
+      style="
+     display: flex;
+     align-items: center;
+     justify-content: center;">
+       <mat-spinner ></mat-spinner>
+     </div>
+
+     <div *ngIf="faqList?.length === 0" style="text-align: center; padding: 1em;">
+      <p style="font-weight: 500; font-size: 18px;">No FAQ's as of now. Come back soon for details.</p>
+    </div>
      
       <mat-accordion class="accordion">
         <mat-expansion-panel *ngFor="let faq of faqList">
@@ -163,6 +189,18 @@
   <mat-card-content class="matContent">
       
         <br>
+
+        <div *ngIf="ratings == null || undefined"
+        style="
+       display: flex;
+       align-items: center;
+       justify-content: center;">
+         <mat-spinner ></mat-spinner>
+       </div>
+  
+       <div *ngIf="ratings?.length === 0" style="text-align: center; padding: 1em;">
+        <p style="font-weight: 500; font-size: 18px;">No reviews available yet from enrolled course participants!</p>
+      </div>
    
         <mat-list>
           <mat-list-item *ngFor="let rating of ratings">
@@ -180,15 +218,7 @@
           </mat-list-item>
         </mat-list>
 
-        <div *ngIf="notRetrieved">
-          No reviews available yet!
-        </div>
-        
-        
     
-    
-    
-
           <div class="form-group" style="padding-right: 40%"></div>
      
     

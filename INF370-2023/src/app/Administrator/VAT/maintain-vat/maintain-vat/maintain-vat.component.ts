@@ -14,16 +14,22 @@ import { Title } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { SecurityService } from 'src/app/Services/security.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-maintain-vat',
   templateUrl: './maintain-vat.component.html',
-  styleUrls: ['./maintain-vat.component.scss']
+  styleUrls: ['./maintain-vat.component.scss'],
+  providers:[DatePipe]
 })
 export class MaintainVATComponent implements OnInit {
 
 vatFormControl = new FormControl('', [Validators.required,Validators.min(0),Validators.max(100)]);
 vat!:VAT;
+test:any;
 isLoading:boolean=false;
 constructor( 
   public router: Router,
@@ -32,11 +38,15 @@ constructor(
   private service: VATService,
   public toastr: ToastrService,
   private _snack:MatSnackBar,
-  private titleservice: Title
+  private titleservice: Title,
+  private aService:AuditLogService,
+  private security:SecurityService,
+  private datePipe:DatePipe
 ) { this.titleservice.setTitle('VAT');}
 
 ngOnInit(): void {
   this.vat=JSON.parse(sessionStorage['VAT']);
+  this.test=JSON.parse(sessionStorage['VAT']);
 }
 
 onBack() {
@@ -54,10 +64,10 @@ onSubmit() {
     this.dialog.open(InputDialogComponent, {
       data: {
         dialogTitle: "Input Error",
-        dialogMessage: "Correct Errors"
+        dialogMessage: "Correct errors on Highlighted fields"
       },
-      width: '50vw',
-      height: '30vh',
+      width: '27vw',
+      height: '2vh',
     });
   } else {
     const title = 'Confirm Edit VAT';
@@ -108,7 +118,18 @@ showDialog(title: string, message: string): void {
             );
             this.isLoading=false;
             this.router.navigate(['admin/read-vat']);
-          }
+            let audit = new AuditLog();
+
+            audit.AuditLogID = 0;
+            audit.UserID = this.security.User.UserID;
+            audit.AuditName = 'Update VAT';
+            audit.Description = 'Employee, ' + this.security.User.Username + ', updated the VAT value of ' + this.datePipe.transform(this.vat.VatDate, 'yyyy/MM/dd') + ' from: ' + this.test.VatAmount + '% to ' + this.vat.VatAmount +'%'
+            audit.Date = '';
+
+        this.aService.AddAudit(audit).subscribe((data) => {
+        })
+          
+      }
 
           else if(result.Status===404)
           {

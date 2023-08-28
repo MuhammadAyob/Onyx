@@ -15,7 +15,9 @@ import { InputDialogComponent } from 'src/app/Dialog/input-dialog/input-dialog/i
 import { SearchDialogComponent } from 'src/app/Dialog/search-dialog/search-dialog/search-dialog.component';
 import { ExistsDialogComponent } from 'src/app/Dialog/exists-dialog/exists-dialog/exists-dialog.component';
 import {map} from 'rxjs/operators';
-
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-read-department',
@@ -50,7 +52,9 @@ isLoading:boolean=true;
     private service:DepartmentService,
     public toaster:ToastrService,
     private _snackBar:MatSnackBar,
-    private titleservice:Title
+    private titleservice:Title,
+    private aService:AuditLogService,
+    private security:SecurityService
   ) { this.titleservice.setTitle('Departments');}
 
   ngOnInit(): void {
@@ -142,6 +146,16 @@ isLoading:boolean=true;
                           duration: 3000,
                         });
                 this.refreshList();
+
+              let audit = new AuditLog();
+              audit.AuditLogID = 0;
+              audit.UserID = this.security.User.UserID;
+              audit.AuditName = 'Delete Department';
+              audit.Description = 'Employee, ' + this.security.User.Username + ', deleted the Department: ' + obj.DepartmentName
+              audit.Date = '';
+
+             this.aService.AddAudit(audit).subscribe((data) => {
+             })
               }
 
               else if(res.Status===501)

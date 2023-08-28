@@ -155,6 +155,9 @@ import { EmployeeSkillReportComponent } from './Administrator/Reports/employee-s
 import { ContactReportComponent } from './Administrator/Reports/contacts/contact-report/contact-report.component';
 import { SalesReportComponent } from './Administrator/Reports/sales/sales-report/sales-report.component';
 import { ReportHomeComponent } from './Administrator/Reports/report-home/report-home.component';
+import { ReadMcComponent } from './Student Portal/maintenance-student/read-mc/read-mc/read-mc.component';
+import { ViewMcComponent } from './Student Portal/maintenance-student/view-mc/view-mc/view-mc.component';
+import { ViewSTermsComponent } from './Student Portal/terms-view/view-s-terms/view-s-terms.component';
 //import { CalendarDialogComponent } from './Dialog/calendar-dialog/calendar-dialog/calendar-dialog.component';
 //import { ServiceWorkerModule } from '@angular/service-worker';
 
@@ -308,6 +311,9 @@ export function momentAdapterFactory() {
     ContactReportComponent,
     SalesReportComponent,
     ReportHomeComponent,
+    ReadMcComponent,
+    ViewMcComponent,
+    ViewSTermsComponent,
 
     
   ],

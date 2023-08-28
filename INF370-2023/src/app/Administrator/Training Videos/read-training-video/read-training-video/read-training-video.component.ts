@@ -16,6 +16,9 @@ import { SearchDialogComponent } from 'src/app/Dialog/search-dialog/search-dialo
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { VimeoUrlPipe } from 'src/app/vimeo.pipe';
 import { VideoPipePipe } from 'src/app/searchvideo.pipe';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-read-training-video',
@@ -26,7 +29,7 @@ export class ReadTrainingVideoComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   instructionalVideo!: InstructionalVideo;
   instructionalVideoList!: InstructionalVideo[];
-isLoading:boolean=true;
+  isLoading:boolean=true;
   holderList!: InstructionalVideo[];
 
   initialPage = 0;
@@ -50,7 +53,9 @@ isLoading:boolean=true;
     private service: InstructionalVideoService,
     private dialog: MatDialog,
     private toastr: ToastrService ,
-    private snack:MatSnackBar
+    private snack:MatSnackBar,
+    private aService:AuditLogService,
+    private security:SecurityService
   ) { this.titleservice.setTitle('Instructional Videos');}
 
   ngOnInit(): void {
@@ -102,7 +107,7 @@ isLoading:boolean=true;
     ]);
   }
 
-  onDelete(id:number) {
+  onDelete(obj:any) {
     const title = 'Confirm Delete Video';
     const message = 'Are you sure you want to delete the Video?';
 
@@ -117,7 +122,7 @@ isLoading:boolean=true;
     });
     dialogReference.afterClosed().subscribe((result) => {
       if (result == true) {
-        this.service.DeleteInstructionalVideo(id).subscribe((res:any) => {
+        this.service.DeleteInstructionalVideo(obj.VideoID).subscribe((res:any) => {
           if(res.Status===200)
           {
             this.snack.open(
@@ -129,6 +134,20 @@ isLoading:boolean=true;
                       duration: 3000,
                     });
                     this.refreshList();
+
+                    // Audit Log 
+
+                let audit = new AuditLog();
+                audit.AuditLogID = 0;
+                audit.UserID = this.security.User.UserID;
+                audit.AuditName = 'Delete Instructional Video';
+                audit.Description = 'Employee, ' + this.security.User.Username + ', deleted the Instructional Video: ' + obj.VideoName
+                audit.Date = '';
+    
+                this.aService.AddAudit(audit).subscribe((data) => {
+                  //console.log(data);
+                 
+                })
           }
           else
           {

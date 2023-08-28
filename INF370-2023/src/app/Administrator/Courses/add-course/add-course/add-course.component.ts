@@ -18,7 +18,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmDialogComponent } from 'src/app/Dialog/confirm-dialog/confirm-dialog/confirm-dialog.component';
 import { InputDialogComponent } from 'src/app/Dialog/input-dialog/input-dialog/input-dialog.component';
 import { ExistsDialogComponent } from 'src/app/Dialog/exists-dialog/exists-dialog/exists-dialog.component';
-
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-add-course',
@@ -53,7 +55,9 @@ constructor(
   public toastr: ToastrService,
   private cService: CourseService,
   private catService: CourseCategoryService,
-  private snack:MatSnackBar
+  private snack:MatSnackBar,
+  private aService:AuditLogService,
+  private security:SecurityService
 ) { this.titleservice.setTitle('Courses');}
 
   ngOnInit(): void {
@@ -170,7 +174,18 @@ constructor(
               );
               this.isLoading=false;
               this.router.navigate(['admin/read-courses']);
-              this.refreshForm();
+
+              let audit = new AuditLog();
+              audit.AuditLogID = 0;
+              audit.UserID = this.security.User.UserID;
+              audit.AuditName = 'Add Course';
+              audit.Description = 'Employee, ' + this.security.User.Username + ', added a new Course: ' + this.course.Name
+              audit.Date = '';
+  
+              this.aService.AddAudit(audit).subscribe((data) => {
+                //console.log(data);
+                this.refreshForm();
+              })
               
             }
             else if(result.Status === 100)

@@ -16,6 +16,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { map } from 'rxjs/operators';
 import { MatPaginator } from '@angular/material/paginator';
 import { SearchDialogComponent } from 'src/app/Dialog/search-dialog/search-dialog/search-dialog.component';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-maintain-terms',
@@ -35,7 +38,9 @@ private service: TermsService,
 private dialog: MatDialog,
 public toaster: ToastrService,
 private snack: MatSnackBar,
-private titleservice: Title
+private titleservice: Title,
+private aService:AuditLogService,
+private security:SecurityService
 ) { this.titleservice.setTitle('Terms and Conditions');}
 
 test!: TermsAndCondition;
@@ -64,10 +69,10 @@ onSubmit() {
      this.dialog.open(InputDialogComponent, {
        data: {
          dialogTitle: "Input Error",
-         dialogMessage: "Correct Errors"
+         dialogMessage: "Correct errors on Highlighted fields"
        },
-       width: '50vw',
-       height: '30vh',
+       width: '27vw',
+       height: '29vh',
      });
    } else {
      const title = 'Confirm Edit T&Cs';
@@ -120,6 +125,18 @@ onSubmit() {
            //this.refreshForm();
            this.router.navigate(['admin/read-terms']);
            this.isLoading=false;
+
+           let audit = new AuditLog();
+
+           audit.AuditLogID = 0;
+           audit.UserID = this.security.User.UserID;
+           audit.AuditName = 'Configure Terms & Conditions File';
+           audit.Description = 'Employee, ' + this.security.User.Username + ', configured the Terms and Conditions File.'
+           audit.Date = '';
+
+          this.aService.AddAudit(audit).subscribe((data) => {
+          })
+          
          }
       
          else

@@ -7,6 +7,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { ExistsDialogComponent } from 'src/app/Dialog/exists-dialog/exists-dialog/exists-dialog.component';
 import { CartDetails } from 'src/app/Models/CartDetails.model';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { SecurityService } from 'src/app/Services/security.service';
+
 @Component({
   selector: 'app-payment-success',
   templateUrl: './payment-success.component.html',
@@ -26,7 +30,9 @@ constructor(
     private titleservice: Title,
     private service:PaymentService,
     private snack:MatSnackBar,
-    private dialog: MatDialog,) 
+    private dialog: MatDialog,
+    private aService:AuditLogService,
+    private security:SecurityService) 
     { this.titleservice.setTitle('Payment succesful');}
 
   ngOnInit(): void {
@@ -72,6 +78,19 @@ details.Total = this.grandTotal;
                   }
           );
            sessionStorage.removeItem('cart');
+
+           let audit = new AuditLog();
+           audit.AuditLogID = 0;
+           audit.UserID = this.security.User.UserID;
+           audit.AuditName = 'Checkout';
+           audit.Description = 'Student, ' + this.security.User.Username + ', completed transaction: #' +  this.payfastNumber + ' for a Grand Total of: R' + this.grandTotal;
+           audit.Date = '';
+ 
+           this.aService.AddAudit(audit).subscribe((data) => {
+             //console.log(data);
+             //this.refreshForm();
+           })
+           
         }
         else{
           const dialogReference = this.dialog.open(

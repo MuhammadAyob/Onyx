@@ -9,6 +9,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { InputDialogComponent } from 'src/app/Dialog/input-dialog/input-dialog/input-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { SecurityService } from 'src/app/Services/security.service';
+
 @Component({
   selector: 'app-view-skill',
   templateUrl: './view-skill.component.html',
@@ -26,7 +30,9 @@ export class ViewSkillComponent implements OnInit {
     private dialog: MatDialog,
     private titleservice: Title,
     private snack:MatSnackBar,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private aService:AuditLogService,
+    private security:SecurityService
   ) { this.titleservice.setTitle('Skill');}
 
   ngOnInit(): void {
@@ -72,7 +78,16 @@ export class ViewSkillComponent implements OnInit {
                           verticalPosition: 'bottom',
                           duration: 3000,
                         });
-                this.router.navigate(['admin/read-skill']);        
+                this.router.navigate(['admin/read-skill']);   
+                let audit = new AuditLog();
+                audit.AuditLogID = 0;
+                audit.UserID = this.security.User.UserID;
+                audit.AuditName = 'Delete Skill';
+                audit.Description = 'Employee, ' + this.security.User.Username + ', deleted the Skill: ' + this.test.SkillName + ' - ' + this.test.skillTypeName
+                audit.Date = '';
+  
+            this.aService.AddAudit(audit).subscribe((data) => {
+            })            
               }
 
               else if(res.Status===501)

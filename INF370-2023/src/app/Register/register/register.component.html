@@ -22,8 +22,19 @@
     <!-- image preview -->
   
   <form>
-
+    <div *ngIf="(titleList == null || undefined)"
+    style="
+   display: flex;
+   align-items: center;
+   justify-content: center;">
+     <mat-spinner ></mat-spinner>
+   </div>
 <br>
+<div *ngIf="!(titleList == null || undefined)">
+
+
+
+
 <mat-form-field class="full-width" appearance="fill" style="font-family: Montserrat; color: white;">
   <mat-label  style="font-family: Montserrat;">Select Title</mat-label>
   <mat-select class="white-text" (valueChange)="selectTitle($event)" [formControl]="titleFormControl" required>
@@ -88,7 +99,7 @@
                     [formControl]="phoneFormControl"
                     name="ClientPhone"
                     [(ngModel)]="student.Phone"
-                    placeholder="Ex. Pan"
+                    placeholder="Ex. 0822255566"
                     required
                   />
                   <mat-error *ngIf="phoneFormControl.hasError('required')">
@@ -107,7 +118,7 @@
   [formControl]="emailFormControl"
   name="ClientEmail"
   [(ngModel)]="student.Email"
-  placeholder="Ex. Pan"
+  placeholder="Ex. xyz@gmail.com"
   required
 />
 <mat-error *ngIf="emailFormControl.hasError('required')">
@@ -191,8 +202,9 @@ matSuffix
         <button id="cancel" class="btn" (click)="onBack()">Back</button>
         <button id="confirm" class="btn" (click)="onSubmit()">Submit</button>
     </div>
+  </div>
 </form>
-      
+
     </div>
   </div>
 

@@ -13,6 +13,8 @@ import { ToastrService } from 'ngx-toastr';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ExistsDialogComponent } from 'src/app/Dialog/exists-dialog/exists-dialog/exists-dialog.component';
 import { saveAs } from 'file-saver';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { AuditLog } from 'src/app/Models/audit.model';
 
 @Component({
   selector: 'app-maintain-update-request',
@@ -31,7 +33,8 @@ export class MaintainUpdateRequestComponent implements OnInit {
     private titleservice: Title,
     private security: SecurityService,
     private snack:MatSnackBar,
-    private toastr: ToastrService) 
+    private toastr: ToastrService,
+    private aService:AuditLogService) 
     {this.titleservice.setTitle('Update Request'); }
 
   isLoading!:boolean;
@@ -99,6 +102,20 @@ export class MaintainUpdateRequestComponent implements OnInit {
                   });
                   this.isLoading=false;
                   this.router.navigate(['admin/read-update-requests']);
+
+                  // Audit
+
+                  let audit = new AuditLog();
+                  audit.AuditLogID = 0;
+                  audit.UserID = this.security.User.UserID;
+                  audit.AuditName = 'Finalize Technical Competency Update';
+                  audit.Description = 'Employee, ' + this.security.User.Username + ', accepted Update Request: ' + this.test.UpdateSubject + ' of employee: ' + this.test.EmployeeName + ' ' + this.test.EmployeeSurname + ' - ' + this.test.RSAIDNumber
+                  audit.Date = '';
+      
+                  this.aService.AddAudit(audit).subscribe((data) => {
+                    //console.log(data);
+                    //this.refreshForm();
+                  })
         }
         else
         {
@@ -155,6 +172,20 @@ export class MaintainUpdateRequestComponent implements OnInit {
                   });
                   this.isLoading=false;
                   this.router.navigate(['admin/read-update-requests']);
+
+                   // Audit
+
+                   let audit = new AuditLog();
+                   audit.AuditLogID = 0;
+                   audit.UserID = this.security.User.UserID;
+                   audit.AuditName = 'Finalize Technical Competency Update';
+                   audit.Description = 'Employee, ' + this.security.User.Username + ', rejected Update Request: ' + this.test.UpdateSubject + ' of employee: ' + this.test.EmployeeName + ' ' + this.test.EmployeeSurname + ' - ' + this.test.RSAIDNumber
+                   audit.Date = '';
+       
+                   this.aService.AddAudit(audit).subscribe((data) => {
+                     //console.log(data);
+                     //this.refreshForm();
+                   })
         }
         else
         {

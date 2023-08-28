@@ -15,6 +15,9 @@ import { InputDialogComponent } from 'src/app/Dialog/input-dialog/input-dialog/i
 import { ConfirmDialogComponent } from 'src/app/Dialog/confirm-dialog/confirm-dialog/confirm-dialog.component';
 import { InstructionalVideoService } from 'src/app/Services/instructional-video.service';
 import { InstructionalVideo } from 'src/app/Models/training-video.model';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { SecurityService } from 'src/app/Services/security.service';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
 
 @Component({
   selector: 'app-maintain-training-video',
@@ -43,7 +46,9 @@ export class MaintainTrainingVideoComponent implements OnInit {
     public toastr: ToastrService,
     private snack: MatSnackBar,
     private dialog: MatDialog,
-    private service: InstructionalVideoService
+    private service: InstructionalVideoService,
+    private aService:AuditLogService,
+    private security:SecurityService
    ) { this.titleservice.setTitle('Instructional Videos');}
 
   ngOnInit(): void {
@@ -108,9 +113,23 @@ export class MaintainTrainingVideoComponent implements OnInit {
                           verticalPosition: 'bottom',
                           duration: 3000,
                         });
-                        this.instructionalVideo = result as InstructionalVideo;
+                       // this.instructionalVideo = result as InstructionalVideo;
                         this.refreshList();
                         this.router.navigate(['admin/read-instructional-videos']);
+
+                         // Audit Log 
+
+                let audit = new AuditLog();
+                audit.AuditLogID = 0;
+                audit.UserID = this.security.User.UserID;
+                audit.AuditName = 'Update Instructional Video';
+                audit.Description = 'Employee, ' + this.security.User.Username + ', updated the Instructional Video: ' + this.instructionalVideo.VideoName
+                audit.Date = '';
+    
+                this.aService.AddAudit(audit).subscribe((data) => {
+                  //console.log(data);
+                 
+                })
               }
               else if(result.Status===404)
               {

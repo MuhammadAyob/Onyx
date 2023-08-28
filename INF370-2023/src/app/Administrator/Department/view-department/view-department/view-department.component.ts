@@ -9,6 +9,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { Location } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { InputDialogComponent } from 'src/app/Dialog/input-dialog/input-dialog/input-dialog.component';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { SecurityService } from 'src/app/Services/security.service';
+
 
 @Component({
   selector: 'app-view-department',
@@ -26,7 +30,9 @@ constructor(
     private dialog:MatDialog,
     private titleservice:Title,
     private location:Location,
-    private snack:MatSnackBar
+    private snack:MatSnackBar,
+    private aService:AuditLogService,
+    private security:SecurityService
   ) {
     this.titleservice.setTitle('Departments');
    }
@@ -84,7 +90,16 @@ constructor(
                           verticalPosition: 'bottom',
                           duration: 3000,
                         });
-                this.router.navigate(['admin/read-department']);        
+                this.router.navigate(['admin/read-department']);     
+                let audit = new AuditLog();
+                audit.AuditLogID = 0;
+                audit.UserID = this.security.User.UserID;
+                audit.AuditName = 'Delete Department';
+                audit.Description = 'Employee, ' + this.security.User.Username + ', deleted the Department: ' + this.test.DepartmentName
+                audit.Date = '';
+  
+               this.aService.AddAudit(audit).subscribe((data) => {
+               })   
               }
 
               else if(res.Status===501)

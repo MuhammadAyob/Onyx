@@ -16,6 +16,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { map } from 'rxjs/operators';
 import { MatPaginator } from '@angular/material/paginator';
 import { SearchDialogComponent } from 'src/app/Dialog/search-dialog/search-dialog/search-dialog.component';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-add-resource',
@@ -36,13 +39,17 @@ private service: LessonResourceService,
 private dialog: MatDialog,
 public toaster: ToastrService,
 private snack: MatSnackBar,
-private titleservice: Title) 
+private titleservice: Title,
+private aService:AuditLogService,
+private security:SecurityService) 
 { this.titleservice.setTitle('Lesson Resource');}
 
 test!: LessonResource;
 resourceFile: string = "";
 fileAttr = ' ';
 storageLesson:any;
+storageSection:any;
+storageCourse:any;
 
 ResourceDisplayedColumns: string[] = [
   'name',
@@ -55,6 +62,8 @@ noData = this.ResourceDataSource.connect().pipe(map((data) => data.length === 0)
 
 ngOnInit(): void {
   this.storageLesson=JSON.parse(sessionStorage['Lesson']);
+  this.storageSection=JSON.parse(sessionStorage['Section']);
+  this.storageCourse=JSON.parse(sessionStorage['Course']);
   this.refreshForm();
   this.refreshList();
 }
@@ -160,9 +169,21 @@ showDialog(title: string, message: string): void {
                     duration: 3000,
                   }
           );
-          this.refreshForm();
+          //this.refreshForm();
           this.isLoading=false;
           this.router.navigate(['admin/view-lesson']);
+
+          let audit = new AuditLog();
+          audit.AuditLogID = 0;
+          audit.UserID = this.security.User.UserID;
+          audit.AuditName = 'Add Lesson Resource';
+          audit.Description = 'Employee, ' + this.security.User.Username + ', added a new Resource: ' + this.test.ResourceName  + ', to the lesson: ' + this.storageLesson.LessonName + ', under the section: ' + this.storageSection.SectionName + ', in the course: ' + this.storageCourse.Name
+          audit.Date = '';
+
+          this.aService.AddAudit(audit).subscribe((data) => {
+            //console.log(data);
+            this.refreshForm();
+          })
         }
         else if(result.Status===100)
         {

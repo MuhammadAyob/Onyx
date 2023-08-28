@@ -12,6 +12,9 @@ import { Rating } from 'src/app/Models/rating.model';
 import { RatingsService } from 'src/app/Services/ratings.service';
 import { ToastrService } from 'ngx-toastr';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-maintain-rating',
@@ -33,7 +36,9 @@ constructor(
   private service: RatingsService,
   public toastr: ToastrService,
   private _snack:MatSnackBar,
-  private titleservice: Title) 
+  private titleservice: Title,
+  private aService:AuditLogService,
+  private security:SecurityService) 
   {this.titleservice.setTitle('Ratings'); }
 
   ngOnInit(): void {
@@ -106,6 +111,18 @@ rate(star: number) {
               );
               this.isLoading=false;
               this.router.navigate(['student/read-ratings']);
+
+              let audit = new AuditLog();
+              audit.AuditLogID = 0;
+              audit.UserID = this.security.User.UserID;
+              audit.AuditName = 'Update Course Rating';
+              audit.Description = 'Student, ' + this.security.User.Username + ', changed their mind and gave a ' + this.rating.Rating + ' star course rating to Course: ' + this.rating.Name 
+              audit.Date = '';
+  
+              this.aService.AddAudit(audit).subscribe((data) => {
+                //console.log(data);
+                //this.refreshForm();
+              })
 
             } 
           

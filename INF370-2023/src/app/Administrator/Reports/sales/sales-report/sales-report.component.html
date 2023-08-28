@@ -44,6 +44,7 @@
             <div style="display: flex; gap: 16px; margin-top: 16px;">
               <button id="confirm" class="btn" (click)="onSubmit()">Generate</button>
               <button [disabled]="!fetched" id="confirm" class="btn" (click)="downloadMaintainanceReportPDF()">Download PDF</button>
+              <button [disabled]="!fetched" id="confirm" class="btn" (click)="downloadExcel()">Export to Excel</button>
             </div>
           </div>
           

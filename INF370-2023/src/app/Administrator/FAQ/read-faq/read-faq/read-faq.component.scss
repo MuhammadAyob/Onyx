@@ -29,7 +29,10 @@
     
   }
   
-  
+  .chips-container {
+    display: flex;
+    margin: 0 auto;
+  }
   
   ::ng-deep .mat-form-field-outline {
     border-color: white;

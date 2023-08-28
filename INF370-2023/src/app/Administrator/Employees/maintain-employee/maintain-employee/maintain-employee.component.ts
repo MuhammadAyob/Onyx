@@ -24,6 +24,10 @@ import { UserRole } from 'src/app/Models/UserRole.model';
 import { UserRoleService } from 'src/app/Services/user-role.service';
 import { Titles } from 'src/app/Models/title.model';
 import { TitleService } from 'src/app/Services/title.service';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { SecurityService } from 'src/app/Services/security.service';
+
 
 @Component({
   selector: 'app-maintain-employee',
@@ -77,7 +81,9 @@ export class MaintainEmployeeComponent implements OnInit {
     private serviceU: UserRoleService,
     private toastr: ToastrService,
     private serviceT:TitleService,
-    private snack:MatSnackBar
+    private snack:MatSnackBar,
+    private aService:AuditLogService,
+    private security:SecurityService
   ) { this.titleservice.setTitle('Employees');}
 
   ngOnInit(): void {
@@ -216,6 +222,17 @@ export class MaintainEmployeeComponent implements OnInit {
                 );
                 this.isLoading=false;
                 this.router.navigate(['admin/read-employees']);
+                let audit = new AuditLog();
+                audit.AuditLogID = 0;
+                audit.UserID = this.security.User.UserID;
+                audit.AuditName = 'Update Employee';
+                audit.Description = 'Employee, ' + this.security.User.Username + ', updated the employee: ' + this.employee.Employee.Name + ' ' + this.employee.Employee.Surname + ' - ' + this.employee.Employee.RSAIDNumber
+                audit.Date = '';
+      
+                this.aService.AddAudit(audit).subscribe((data) => {
+                  //console.log(data);
+                  //this.refreshForm();
+                })
               }
               else if(result.Status===400)
               {

@@ -11,6 +11,9 @@ import { Location } from '@angular/common';
 import { ExistsDialogComponent } from 'src/app/Dialog/exists-dialog/exists-dialog/exists-dialog.component';
 import { InputDialogComponent } from 'src/app/Dialog/input-dialog/input-dialog/input-dialog.component';
 import { Announcement } from 'src/app/Models/announcement.model';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-send-announcement',
@@ -34,7 +37,9 @@ constructor(
   private dialog: MatDialog,
   public toastr: ToastrService,
   private service: CourseService,
-  private snack:MatSnackBar) 
+  private snack:MatSnackBar,
+  private aService:AuditLogService,
+  private security:SecurityService) 
   { this.titleservice.setTitle('Courses'); }
 
   ngOnInit(): void {
@@ -84,6 +89,17 @@ constructor(
               );
               this.isLoading=false;
               this.router.navigate(['admin/read-courses']);
+              let audit = new AuditLog();
+              audit.AuditLogID = 0;
+              audit.UserID = this.security.User.UserID;
+              audit.AuditName = 'Send Course Announcement';
+              audit.Description = 'Employee, ' + this.security.User.Username + ', sent an announcement to the Course: ' + this.Course.Name
+              audit.Date = '';
+  
+              this.aService.AddAudit(audit).subscribe((data) => {
+                //console.log(data);
+                //this.refreshForm();
+              })
             }
 
             else if(result.Status===404)

@@ -130,6 +130,9 @@ import { EmployeeSkillReportComponent } from './Administrator/Reports/employee-s
 import { ContactReportComponent } from './Administrator/Reports/contacts/contact-report/contact-report.component';
 import { SalesReportComponent } from './Administrator/Reports/sales/sales-report/sales-report.component';
 import { ReportHomeComponent } from './Administrator/Reports/report-home/report-home.component';
+import { ReadMcComponent } from './Student Portal/maintenance-student/read-mc/read-mc/read-mc.component';
+import { ViewMcComponent } from './Student Portal/maintenance-student/view-mc/view-mc/view-mc.component';
+import { ViewSTermsComponent } from './Student Portal/terms-view/view-s-terms/view-s-terms.component';
 
 
 const routes: Routes = [
@@ -835,6 +838,23 @@ component:ReadUserRoleComponent
   path:'home/student-home',
   component:SudentHomeComponent,
   canActivate:[AuthGuardGuard,StudentGuard]
+},
+
+{
+path:'student/read-queries',
+component:ReadMcComponent,
+canActivate:[AuthGuardGuard,StudentGuard]
+},
+
+{
+path:'student/view-query',
+component:ViewMcComponent,
+canActivate:[AuthGuardGuard,StudentGuard]
+},
+
+{
+  path:'student/view-terms',
+  component:ViewSTermsComponent
 },
 
 //Employee sub-system

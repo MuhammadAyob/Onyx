@@ -13,6 +13,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-maintain-skill-type',
@@ -37,7 +40,9 @@ export class MaintainSkillTypeComponent implements OnInit {
     private service: SkillTypeService,
     private titleservice: Title,
     public toastr: ToastrService,
-    private snack: MatSnackBar
+    private snack: MatSnackBar ,
+    private aService:AuditLogService,
+    private security:SecurityService
   ) { this.titleservice.setTitle('Skill Type');}
 
   ngOnInit(): void {
@@ -97,6 +102,15 @@ export class MaintainSkillTypeComponent implements OnInit {
                 });
                 this.isLoading=false;
                 this.router.navigate(['admin/read-skill-type']);
+                let audit = new AuditLog();
+                audit.AuditLogID = 0;
+                audit.UserID = this.security.User.UserID;
+                audit.AuditName = 'Update Skill Type';
+                audit.Description = 'Employee, ' + this.security.User.Username + ', updated the Skill Type: ' + this.skillType.SkillTypeName
+                audit.Date = '';
+
+            this.aService.AddAudit(audit).subscribe((data) => {
+            })
             } 
             else if(result.Status===404)
             {

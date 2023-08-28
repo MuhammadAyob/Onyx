@@ -15,11 +15,16 @@ import { ConfirmDialogComponent } from 'src/app/Dialog/confirm-dialog/confirm-di
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { InputDialogComponent } from 'src/app/Dialog/input-dialog/input-dialog/input-dialog.component';
 import { ExistsDialogComponent } from 'src/app/Dialog/exists-dialog/exists-dialog/exists-dialog.component';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { SecurityService } from 'src/app/Services/security.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-read-vat',
   templateUrl: './read-vat.component.html',
-  styleUrls: ['./read-vat.component.scss']
+  styleUrls: ['./read-vat.component.scss'],
+  providers:[DatePipe]
 })
 export class ReadVATComponent implements OnInit {
   displayedColumns: string[] = 
@@ -51,7 +56,10 @@ export class ReadVATComponent implements OnInit {
     private service: VATService,
     public toaster: ToastrService,
     private dialog: MatDialog,
-    private snack:MatSnackBar
+    private snack:MatSnackBar,
+    private aService:AuditLogService,
+    private security:SecurityService,
+    private datePipe:DatePipe
   ) {this.titleservice.setTitle('VAT');  }
 
   ngOnInit(): void {
@@ -143,6 +151,18 @@ export class ReadVATComponent implements OnInit {
                       }
               );
               this.refreshList();
+
+              let audit = new AuditLog();
+
+              audit.AuditLogID = 0;
+              audit.UserID = this.security.User.UserID;
+              audit.AuditName = 'Delete VAT';
+              audit.Description = 'Employee, ' + this.security.User.Username + ', deleted the VAT value of ' + this.datePipe.transform(obj.VatDate, 'yyyy/MM/dd')  + ' : ' + obj.VatAmount + '%'
+              audit.Date = '';
+  
+             this.aService.AddAudit(audit).subscribe((data) => {
+             })
+
             }
             else if(result.Status===404)
             {

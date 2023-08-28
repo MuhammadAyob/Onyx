@@ -17,7 +17,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { map } from 'rxjs/operators';
 import { SearchDialogComponent } from 'src/app/Dialog/search-dialog/search-dialog/search-dialog.component';
-
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-add-section',
@@ -52,7 +54,9 @@ constructor(
   private service: CourseService,
   private dialog: MatDialog,
   public toaster: ToastrService,
-  private toastr: ToastrService
+  private toastr: ToastrService,
+  private aService:AuditLogService,
+  private security:SecurityService
 
 ) {this.titleservice.setTitle('Section'); }
 
@@ -163,8 +167,20 @@ onSubmit() {
                       }
               );
               this.isLoading=false;
-              this.refreshList();
+              //this.refreshList();
               this.router.navigate(['admin/view-course']);
+              let audit = new AuditLog();
+              audit.AuditLogID = 0;
+              audit.UserID = this.security.User.UserID;
+              audit.AuditName = 'Add Section';
+              audit.Description = 'Employee, ' + this.security.User.Username + ', added a new Section: ' + this.section.SectionName  + ', to the Course: ' + this.storageCourse.Name
+              audit.Date = '';
+  
+              this.aService.AddAudit(audit).subscribe((data) => {
+                //console.log(data);
+                //this.refreshForm();
+              })
+
             }
             else if(result.Status===400)
             {

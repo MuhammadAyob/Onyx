@@ -14,6 +14,9 @@ import { Title } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-maintain-otp',
@@ -23,7 +26,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class MaintainOTPComponent implements OnInit {
 
 OTPFormControl = new FormControl('',[Validators.required, Validators.min(1), Validators.pattern('^[0-9][0-9]*$')]);
-
+test:any;
 OTPTimer!:OTPTimer;
 isLoading:boolean=false;
 constructor(
@@ -33,12 +36,15 @@ constructor(
   private service:OTPService,
   private titleservice:Title,
   public toastr: ToastrService,
-  private snack:MatSnackBar
+  private snack:MatSnackBar,
+  private aService:AuditLogService,
+  private security:SecurityService
 ) {this.titleservice.setTitle('OTP'); }
 
 
 ngOnInit(): void {
-  this.OTPTimer=JSON.parse(sessionStorage['OTPTimer'])
+  this.OTPTimer = JSON.parse(sessionStorage['OTPTimer'])
+  this.test = JSON.parse(sessionStorage['OTPTimer']);
 }
 
 onBack(): void {
@@ -51,10 +57,10 @@ onSubmit() {
     this.dialog.open(InputDialogComponent, {
       data: {
         dialogTitle: "Input Error",
-        dialogMessage: "Correct Errors"
+        dialogMessage: "Correct errors on highlighted fields"
       },
-      width: '50vw',
-      height: '30vh',
+      width: '27vw',
+      height: '29vh',
     });
   } else {
     const title = 'Confirm Edit OTP Timer';
@@ -97,6 +103,16 @@ showDialog(title: string, message: string, popupMessage: string): void {
             );
             this.router.navigate(['admin/read-otp-timer']);
             this.isLoading = false;
+            let audit = new AuditLog();
+
+              audit.AuditLogID = 0;
+              audit.UserID = this.security.User.UserID;
+              audit.AuditName = 'Configure OTP Timer';
+              audit.Description = 'Employee, ' + this.security.User.Username + ', edited the minutes till expiry from: ' + this.test.MinutesUntilExpiry + ' minutes to ' + this.OTPTimer.MinutesUntilExpiry + ' minutes.'
+              audit.Date = '';
+
+          this.aService.AddAudit(audit).subscribe((data) => {
+          })       
 
           }
           else

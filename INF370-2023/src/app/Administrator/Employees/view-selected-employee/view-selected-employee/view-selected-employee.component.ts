@@ -17,6 +17,10 @@ import { UserRole } from 'src/app/Models/UserRole.model';
 import { Titles } from 'src/app/Models/title.model';
 import { TitleService } from 'src/app/Services/title.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { SecurityService } from 'src/app/Services/security.service';
+
 
 @Component({
   selector: 'app-view-selected-employee',
@@ -43,7 +47,9 @@ export class ViewSelectedEmployeeComponent implements OnInit {
     private serviceT:TitleService,
     private dialog: MatDialog,
     private titleservice: Title,
-    private snack:MatSnackBar
+    private snack:MatSnackBar,
+    private aService:AuditLogService,
+    private security:SecurityService
   ) { this.titleservice.setTitle('Employee');}
 
   ngOnInit(): void {
@@ -149,6 +155,17 @@ this.isLoading=false;
 
             this.router.navigate(['admin/read-employees'])
             this.titleName='';
+            let audit = new AuditLog();
+            audit.AuditLogID = 0;
+            audit.UserID = this.security.User.UserID;
+            audit.AuditName = 'Deactivate Employee';
+            audit.Description = 'Employee, ' + this.security.User.Username + ', deactivated the employee: ' + this.test.Employee.Name + ' ' + this.test.Employee.Surname + ' - ' + this.test.Employee.Email
+            audit.Date = '';
+  
+            this.aService.AddAudit(audit).subscribe((data) => {
+              //console.log(data);
+              //this.refreshForm();
+            })
           }
           else if(res.Status===404)
           {

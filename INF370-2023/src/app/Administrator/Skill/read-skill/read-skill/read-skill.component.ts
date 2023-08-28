@@ -14,6 +14,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { map } from 'rxjs/operators';
 import { MatSort } from '@angular/material/sort';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-read-skill',
@@ -49,7 +52,9 @@ export class ReadSkillComponent implements OnInit {
     private service: SkillService,
     public toastr: ToastrService,
     private snack: MatSnackBar,
-    private titleservice: Title
+    private titleservice: Title,
+    private aService:AuditLogService,
+    private security:SecurityService
   ) { this.titleservice.setTitle('Skills');}
 
   ngOnInit(): void {
@@ -131,6 +136,15 @@ export class ReadSkillComponent implements OnInit {
                           duration: 3000,
                         });
                 this.refreshList();
+                let audit = new AuditLog();
+              audit.AuditLogID = 0;
+              audit.UserID = this.security.User.UserID;
+              audit.AuditName = 'Delete Skill';
+              audit.Description = 'Employee, ' + this.security.User.Username + ', deleted the Skill: ' + obj.SkillName + ' - ' + obj.skillTypeName
+              audit.Date = '';
+
+          this.aService.AddAudit(audit).subscribe((data) => {
+          })
               }
 
               else if(res.Status===501)

@@ -14,6 +14,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { CourseCategory } from 'src/app/Models/CourseCategory.model';
 import { CourseCategoryService } from 'src/app/Services/course-category.service';
 import { MatTableDataSource } from '@angular/material/table';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-maintain-category',
@@ -35,7 +38,10 @@ constructor(
   private service: CourseCategoryService,
   private titleservice: Title,
   public toastr: ToastrService,
-  private snack: MatSnackBar
+  private snack: MatSnackBar,
+  private aService:AuditLogService,
+  private security:SecurityService
+
 ) { this.titleservice.setTitle('Course Category');}
 
 ngOnInit(): void {
@@ -107,6 +113,18 @@ showDialog(title: string, message: string): void {
             this.router.navigate([
               'admin/read-categories',
             ]);
+
+            let audit = new AuditLog();
+            audit.AuditLogID = 0;
+            audit.UserID = this.security.User.UserID;
+            audit.AuditName = 'Update Course Category';
+            audit.Description = 'Employee, ' + this.security.User.Username + ', updated the Course Category: ' + this.category.Category
+            audit.Date = '';
+
+            this.aService.AddAudit(audit).subscribe((data) => {
+              //console.log(data);
+              //this.refreshForm();
+            })
           } 
 
           else if(result.Status===400)

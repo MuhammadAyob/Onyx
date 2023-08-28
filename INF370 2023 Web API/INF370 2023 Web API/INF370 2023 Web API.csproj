@@ -215,6 +215,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ApplicantsController.cs" />
     <Compile Include="Controllers\ApplicationsController.cs" />
+    <Compile Include="Controllers\AuditLogController.cs" />
     <Compile Include="Controllers\CourseCategoryController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\DepartmentsController.cs" />
@@ -262,6 +263,7 @@
     <Compile Include="Models\AuditLog.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AuditRepository.cs" />
     <Compile Include="Models\Cart.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -308,6 +310,7 @@
     <Compile Include="Models\FAQRepository.cs" />
     <Compile Include="Models\IApplicants.cs" />
     <Compile Include="Models\IApplications.cs" />
+    <Compile Include="Models\IAuditLogs.cs" />
     <Compile Include="Models\ICourseCategory.cs" />
     <Compile Include="Models\ICourses.cs" />
     <Compile Include="Models\IDepartments.cs" />

@@ -12,7 +12,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
 import { FormControl, Validators } from '@angular/forms';
-
+import { AuditLog } from 'src/app/Models/audit.model';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-add-skill-type',
@@ -34,7 +36,9 @@ export class AddSkillTypeComponent implements OnInit {
     private service: SkillTypeService,
     public toastr: ToastrService,
     private snack: MatSnackBar,
-    private titleservice: Title
+    private titleservice: Title,
+    private aService:AuditLogService,
+    private security:SecurityService
   ) { this.titleservice.setTitle('Skill Type');}
 
   ngOnInit(): void {
@@ -112,8 +116,21 @@ export class AddSkillTypeComponent implements OnInit {
                         duration: 3000,
                       });
                       this.isLoading=false;
-                      this.refreshForm();
+                      
                       this.router.navigate(['admin/read-skill-type']);
+                       // Audit Log 
+
+              let audit = new AuditLog();
+              audit.AuditLogID = 0;
+              audit.UserID = this.security.User.UserID;
+              audit.AuditName = 'Add Skill Type';
+              audit.Description = 'Employee, ' + this.security.User.Username + ', added a new Skill Type: ' + this.skillType.SkillTypeName
+              audit.Date = '';
+  
+              this.aService.AddAudit(audit).subscribe((data) => {
+                //console.log(data);
+                this.refreshForm();
+              })
             }
 
             else if(result.Status===404)

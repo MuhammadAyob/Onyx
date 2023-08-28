@@ -113,15 +113,8 @@ export class MaintainSlotComponent implements OnInit {
          interview.StartTime=this.interviewSlot.StartTime;
          interview.EndTime=this.interviewSlot.EndTime;
          interview.InterviewSlotID = this.interviewSlot.InterviewSlotID;
-         var actualDate = new Date(this.interviewSlot.InterviewDate);
-         actualDate.setMinutes(
-           actualDate.getMinutes() + 1440 + actualDate.getTimezoneOffset()
-         );
-   
-      interview.InterviewDate = actualDate;
-
-       
-
+         interview.InterviewDate = this.datePipe.transform(this.interviewSlot.InterviewDate, 'yyyy/MM/dd');
+         
         this.service
           .UpdateSlot(
             interview.InterviewSlotID,

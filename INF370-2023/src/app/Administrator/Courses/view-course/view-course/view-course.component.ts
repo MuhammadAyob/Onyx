@@ -17,6 +17,9 @@ import { ExistsDialogComponent } from 'src/app/Dialog/exists-dialog/exists-dialo
 import { SectionService } from 'src/app/Services/section.service';
 import { EmployeeListForCourses } from 'src/app/Models/employee.model';
 import { SearchDialogComponent } from 'src/app/Dialog/search-dialog/search-dialog/search-dialog.component';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-view-course',
@@ -52,7 +55,9 @@ constructor( private dialog: MatDialog,
   private _snackBar: MatSnackBar,
   private titleservice: Title,
   private toastr: ToastrService,
-  private sectionService:SectionService
+  private sectionService:SectionService,
+  private aService:AuditLogService,
+  private security:SecurityService
   ) 
   { this.titleservice.setTitle('Course');}
 
@@ -126,6 +131,16 @@ constructor( private dialog: MatDialog,
                       }
               );
               this.router.navigate(['admin/read-courses']);
+              
+              let audit = new AuditLog();
+                audit.AuditLogID = 0;
+                audit.UserID = this.security.User.UserID;
+                audit.AuditName = 'Delete Course';
+                audit.Description = 'Employee, ' + this.security.User.Username + ', deleted the Course: ' + this.test.Name
+                audit.Date = '';
+  
+               this.aService.AddAudit(audit).subscribe((data) => {
+               })   
             }
             else if(res.Status===501)
             {

@@ -9,6 +9,9 @@ import { FAQ } from 'src/app/Models/faq.model';
 import { Title } from '@angular/platform-browser';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { InputDialogComponent } from 'src/app/Dialog/input-dialog/input-dialog/input-dialog.component';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-view-faq',
@@ -26,7 +29,9 @@ export class ViewFaqComponent implements OnInit {
     private service: FAQService,
     private dialog: MatDialog,
     private titleservice: Title,
-    private snack:MatSnackBar
+    private snack:MatSnackBar,
+    private aService:AuditLogService,
+    private security:SecurityService
   ) { this.titleservice.setTitle('FAQ')}
 
   ngOnInit(): void {
@@ -81,7 +86,17 @@ export class ViewFaqComponent implements OnInit {
                           verticalPosition: 'bottom',
                           duration: 3000,
                         });
-                this.router.navigate(['admin/read-faq']);        
+                this.router.navigate(['admin/read-faq']); 
+                
+              let audit = new AuditLog();
+              audit.AuditLogID = 0;
+              audit.UserID = this.security.User.UserID;
+              audit.AuditName = 'Delete FAQ';
+              audit.Description = 'Employee, ' + this.security.User.Username + ', deleted the FAQ: ' + this.test.Question
+              audit.Date = '';
+
+          this.aService.AddAudit(audit).subscribe((data) => {
+          })       
               }
 
               else if(res.Status===500)

@@ -7,13 +7,17 @@ import { User } from 'src/app/Models/user.model';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 import { ExistsDialogComponent } from 'src/app/Dialog/exists-dialog/exists-dialog/exists-dialog.component';
+import { DatePipe } from '@angular/common';
 import { timer } from 'rxjs';
 import { InputDialogComponent } from 'src/app/Dialog/input-dialog/input-dialog/input-dialog.component';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  providers:[DatePipe]
 })
 export class LoginComponent implements OnInit {
   hide: boolean = true;
@@ -34,6 +38,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService,
     private dialog: MatDialog,
+    private aService:AuditLogService,
+    private datePipe:DatePipe
   ) { }
 
   ngOnInit(): void {
@@ -99,6 +105,19 @@ export class LoginComponent implements OnInit {
             sessionStorage.setItem('EmployeeID', JSON.stringify(result));
             this.isLoading = false;
             this.router.navigateByUrl('home/admin-home');
+
+             // Audit Log 
+
+             let audit = new AuditLog();
+             audit.AuditLogID = 0;
+             audit.UserID = this.security.User.UserID;
+             audit.AuditName = 'Login';
+             audit.Description = 'User, ' + this.security.User.Username + ', logged into the system.'
+             audit.Date = this.datePipe.transform(new Date(), 'yyyy/MM/dd');
+ 
+             this.aService.AddAudit(audit).subscribe((data) => {
+               console.log(data);
+             })
             
           });
   
@@ -109,6 +128,19 @@ export class LoginComponent implements OnInit {
             sessionStorage.setItem('EmployeeID', JSON.stringify(result));
             this.isLoading = false;
             this.router.navigateByUrl('home/employee-home');
+
+              // Audit Log 
+
+              let audit = new AuditLog();
+              audit.AuditLogID = 0;
+              audit.UserID = this.security.User.UserID;
+              audit.AuditName = 'Login';
+              audit.Description = 'User ' + this.security.User.Username + ' logged into the system.'
+              audit.Date = this.datePipe.transform(new Date(), 'yyyy/MM/dd');
+  
+              this.aService.AddAudit(audit).subscribe((data) => {
+                console.log(data);
+              })
           });
   
       }
@@ -118,9 +150,23 @@ export class LoginComponent implements OnInit {
             sessionStorage.setItem('StudentID', JSON.stringify(result));
             this.isLoading = false;
             this.router.navigateByUrl('home/student-home');
+
+             // Audit Log 
+
+             let audit = new AuditLog();
+             audit.AuditLogID = 0;
+             audit.UserID = this.security.User.UserID;
+             audit.AuditName = 'Login';
+             audit.Description = 'User ' + this.security.User.Username + ' logged into the system.'
+             audit.Date = this.datePipe.transform(new Date(), 'yyyy/MM/dd');
+ 
+             this.aService.AddAudit(audit).subscribe((data) => {
+               console.log(data);
+             })
           });
   
       }
+      
    }, (error: HttpErrorResponse) => {
     if (error.error.Message == "Your Account is Disabled") {
       this.isLoading = false;

@@ -97,4 +97,6 @@ namespace INF370_2023_Web_API.ViewModel
         public DateTime startDate { get; set; }
         public DateTime endDate { get; set; }
     }
+
+    
 }

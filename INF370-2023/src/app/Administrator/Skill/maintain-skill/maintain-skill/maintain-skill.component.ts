@@ -15,6 +15,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-maintain-skill',
@@ -38,7 +41,9 @@ export class MaintainSkillComponent implements OnInit {
     private service: SkillService,
     private dialog: MatDialog,
     public toastr: ToastrService,
-    private snack: MatSnackBar
+    private snack: MatSnackBar,
+    private aService:AuditLogService,
+    private security:SecurityService
   ) { this.titleservice.setTitle('Skills');}
 
   ngOnInit(): void {
@@ -105,6 +110,15 @@ export class MaintainSkillComponent implements OnInit {
                     });
                     this.isLoading=false;
                     this.router.navigate(['admin/read-skill']);
+                    let audit = new AuditLog();
+                audit.AuditLogID = 0;
+                audit.UserID = this.security.User.UserID;
+                audit.AuditName = 'Update Skill';
+                audit.Description = 'Employee, ' + this.security.User.Username + ', updated the Skill: ' + NewSkill.SkillName + ' - ' + this.skill.skillTypeName
+                audit.Date = '';
+
+            this.aService.AddAudit(audit).subscribe((data) => {
+            })
           }
           else if(res.Status===400)
           {

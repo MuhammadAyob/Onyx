@@ -12,6 +12,9 @@ import { Rating } from 'src/app/Models/rating.model';
 import { RatingsService } from 'src/app/Services/ratings.service';
 import { ToastrService } from 'ngx-toastr';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-add-rating',
@@ -36,7 +39,9 @@ constructor(
     private service: RatingsService,
     public toastr: ToastrService,
     private _snack:MatSnackBar,
-    private titleservice: Title) 
+    private titleservice: Title,
+    private aService:AuditLogService,
+    private security:SecurityService) 
     { this.titleservice.setTitle('Ratings');}
 
 ngOnInit(): void {
@@ -122,6 +127,18 @@ showDialog(title: string, message: string): void {
             );
             this.isLoading=false;
             this.router.navigate(['student/read-ratings']);
+
+            let audit = new AuditLog();
+              audit.AuditLogID = 0;
+              audit.UserID = this.security.User.UserID;
+              audit.AuditName = 'Add Course Rating';
+              audit.Description = 'Student, ' + this.security.User.Username + ', added a new ' + this.rating.Rating + ' star course rating to CourseID: ' + this.rating.CourseID 
+              audit.Date = '';
+  
+              this.aService.AddAudit(audit).subscribe((data) => {
+                //console.log(data);
+                //this.refreshForm();
+              })
           }
           else
           {

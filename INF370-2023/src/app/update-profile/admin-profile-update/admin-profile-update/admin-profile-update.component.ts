@@ -15,6 +15,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { EmployeeService } from 'src/app/Services/employee.service';
 import { TitleService } from 'src/app/Services/title.service';
 import { Titles } from 'src/app/Models/title.model';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-admin-profile-update',
@@ -59,7 +62,9 @@ export class AdminProfileUpdateComponent implements OnInit {
     private serviceUpdate: UpdateProfileService,
     private toastr: ToastrService,
     private serviceE:EmployeeService,
-    private serviceT:TitleService
+    private serviceT:TitleService,
+    private aService:AuditLogService,
+    private security:SecurityService
   ) { this.titleservice.setTitle('Your Profile'); }
 
   ngOnInit(): void {
@@ -124,8 +129,8 @@ export class AdminProfileUpdateComponent implements OnInit {
     if (isInvalid == true) {
       this.dialog.open(InputDialogComponent, {
         data: {
-          dialogTitle: 'Maintain error',
-          dialogMessage: 'Correct errors',
+          dialogTitle: 'Inout Error',
+          dialogMessage: 'Correct errors on highlighted fields',
           operation: 'ok',
         },
         width: '25vw',
@@ -138,7 +143,8 @@ export class AdminProfileUpdateComponent implements OnInit {
             dialogTitle: 'Update Profile',
             dialogMessage: 'Are you sure you want to update your details?',
           },
-          width: '25vw',
+          width: '50vw',
+          height:'30vh'
         });
 
         dialogReference.afterClosed().subscribe((result) => {
@@ -159,6 +165,19 @@ export class AdminProfileUpdateComponent implements OnInit {
                 );
                 this.isLoading=false;
                 this.router.navigate(['home/admin-home']);
+
+                 // Audit Log 
+
+             let audit = new AuditLog();
+             audit.AuditLogID = 0;
+             audit.UserID = this.security.User.UserID;
+             audit.AuditName = 'Update Profile';
+             audit.Description = 'Employee, ' + this.employee.Email + ', updated their user profile.'
+             audit.Date = '';
+ 
+             this.aService.AddAudit(audit).subscribe((data) => {
+               //console.log(data);
+             })
               }
 
               else if(result.Status === 400)

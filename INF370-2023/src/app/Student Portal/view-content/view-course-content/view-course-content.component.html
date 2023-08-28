@@ -8,8 +8,9 @@
             <mat-card-title-group style="margin: 0 auto;">
               <mat-card-title style="font-weight: 500" *ngIf="(courseDetails == null || undefined)"> Loading...</mat-card-title>
               <div *ngIf="!(courseDetails == null || undefined)">
-                <mat-card-title style="font-weight: 500" *ngIf="!(courseDetails?.Sections?.length === 0)"> Current Lesson -> {{LessonName}}</mat-card-title>
+                <mat-card-title style="font-weight: 500" *ngIf="!(courseDetails?.Sections?.length === 0) && VideoID != null"> Current Lesson -> {{LessonName}}</mat-card-title>
                 <mat-card-title style="font-weight: 500" *ngIf="courseDetails?.Sections?.length === 0">  This course is empty</mat-card-title>
+                <mat-card-title style="font-weight: 500" *ngIf="!(courseDetails?.Sections?.length === 0) && VideoID == null">  This course is empty</mat-card-title>
               </div>
             </mat-card-title-group>
     
@@ -24,25 +25,34 @@
          </div>
 
          <div *ngIf="courseDetails?.Sections?.length === 0" style="text-align: center; padding: 1em;">
-          <p style="font-weight: 500; font-size: 18px;">No course content present.</p>
+          <p style="font-weight: 500; font-size: 18px;">No course lessons available. Come back soon after our team has uploaded lessons!</p>
         </div>
+
+       
 
         <div *ngIf="!(courseDetails == null || undefined)">
 <div *ngIf="!(courseDetails?.Sections?.length === 0)">
   <mat-card-content class="matContent">
+
+    <div *ngIf="VideoID == null" style="text-align: center; padding: 1em;">
+      <p style="font-weight: 500; font-size: 18px;">No course lessons available. Come back soon after our team has uploaded lessons!</p>
+    </div>
           
     <!--Image-->
     <br>
     <br>
     <!--Image-->
-    <h1 style="margin-left:43.5%;color: #0e1a3c; margin-bottom: -70px;"><b>Lesson Video</b></h1>
-    <br>
-   
-    <div class='embed-container'>
-      <iframe [src]="VideoID | VimeoUrl" frameborder='0' webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+    <div *ngIf="!(VideoID == null)">
+      <h1 style="margin-left:43.5%;color: #0e1a3c; margin-bottom: -70px;"><b>Lesson Video</b></h1>
+      <br>
+     
+      <div class='embed-container'>
+        <iframe [src]="VideoID | VimeoUrl" frameborder='0' webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+      </div>
+      <br>
+      <br>
     </div>
-    <br>
-    <br>
+   
   
   <!--Project Details-->
   <form>
@@ -131,7 +141,14 @@ id="cancel" class="btn" (click)="onBack()">Back</button>
           <mat-card-content class="matContent">
               
                 <br>
-           
+                <div *ngIf="empList == null || undefined"
+                style="
+               display: flex;
+               align-items: center;
+               justify-content: center;">
+                 <mat-spinner ></mat-spinner>
+               </div>
+
                 <mat-list>
                   <mat-list-item *ngFor="let emp of empList">
                     
@@ -182,9 +199,17 @@ id="cancel" class="btn" (click)="onBack()">Back</button>
               
                 <br>
             <div class="container">
-              <div *ngIf="faqList == null" class="no-records" style="text-align: center; padding-top: 4em; font-size: larger;">
-                No FAQ records exist as of now!
-              </div>
+              <div *ngIf="faqList == null || undefined"
+              style="
+             display: flex;
+             align-items: center;
+             justify-content: center;">
+               <mat-spinner ></mat-spinner>
+             </div>
+        
+             <div *ngIf="faqList?.length === 0" style="text-align: center; padding: 1em;">
+              <p style="font-weight: 500; font-size: 18px;">No FAQ's as of now. Come back soon for details.</p>
+            </div>
               <mat-accordion class="accordion">
                 <mat-expansion-panel *ngFor="let faq of faqList">
                   <mat-expansion-panel-header>

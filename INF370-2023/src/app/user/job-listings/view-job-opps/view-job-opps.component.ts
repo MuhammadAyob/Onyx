@@ -36,7 +36,7 @@ constructor(
 
   ngOnInit(): void {
     this.expiredJobs();
-    this.refreshList();
+    //this.refreshList();
   }
 
   expiredJobs(){
@@ -44,10 +44,12 @@ constructor(
       if(result.Status === 200)
       {
         console.log('success');
+        this.refreshList();
       }
       else
       {
         console.log('fail');
+        this.refreshList();
       }
       
     })

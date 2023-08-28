@@ -14,6 +14,9 @@ import { LessonResource } from 'src/app/Models/LessonResource.model';
 import { LessonResourceService } from 'src/app/Services/lesson-resource.service';
 import { PdfViewerComponent } from 'ng2-pdf-viewer';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-view-resource',
@@ -30,15 +33,24 @@ private service: LessonResourceService,
 private dialog: MatDialog,
 public toaster: ToastrService,
 private snack: MatSnackBar,
-private titleservice: Title) 
+private titleservice: Title,
+private aService:AuditLogService,
+private security:SecurityService) 
 { this.titleservice.setTitle('Lesson Resource');}
 
 storageResource:any;
 resource:any;
 pdfSrc:any;
 isLoading:boolean=true;
+storageLesson:any;
+storageSection:any;
+storageCourse:any;
+
 ngOnInit(): void {
   this.storageResource=JSON.parse(sessionStorage['LessonResource']);
+  this.storageLesson=JSON.parse(sessionStorage['Lesson']);
+  this.storageSection=JSON.parse(sessionStorage['Section']);
+  this.storageCourse=JSON.parse(sessionStorage['Course']);
   this.getResource();
 
 }
@@ -95,6 +107,18 @@ onDelete() {
                     }
             );
             this.router.navigate(['admin/view-lesson']);
+
+          let audit = new AuditLog();
+          audit.AuditLogID = 0;
+          audit.UserID = this.security.User.UserID;
+          audit.AuditName = 'Delete Lesson Resource';
+          audit.Description = 'Employee, ' + this.security.User.Username + ', deleted resource: ' + this.resource.ResourceName  + ', within the lesson: ' + this.storageLesson.LessonName + ', under the section: ' + this.storageSection.SectionName + ', in the course: ' + this.storageCourse.Name
+          audit.Date = '';
+
+          this.aService.AddAudit(audit).subscribe((data) => {
+            //console.log(data);
+            //this.refreshForm();
+          })
           }
           else
           {

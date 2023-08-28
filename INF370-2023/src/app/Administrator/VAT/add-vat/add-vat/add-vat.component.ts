@@ -14,6 +14,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { VAT } from 'src/app/Models/vat.model';
 import { VATService } from 'src/app/Services/vat.service';
 import { MatDialog } from '@angular/material/dialog';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-add-vat',
@@ -34,7 +37,9 @@ constructor(
   private service: VATService,
   public toastr: ToastrService,
   private _snack:MatSnackBar,
-  private titleservice: Title
+  private titleservice: Title,
+  private aService:AuditLogService,
+  private security:SecurityService
 ) { this.titleservice.setTitle('VAT');}
 
 ngOnInit(): void {
@@ -125,6 +130,17 @@ showDialog(title: string, message: string): void {
             );
             this.router.navigate(['admin/read-vat']);
             this.isLoading=false;
+            let audit = new AuditLog();
+
+              audit.AuditLogID = 0;
+              audit.UserID = this.security.User.UserID;
+              audit.AuditName = 'Add VAT';
+              audit.Description = 'Employee, ' + this.security.User.Username + ', added new VAT value: ' + this.vat.VatAmount + '%'
+              audit.Date = '';
+
+          this.aService.AddAudit(audit).subscribe((data) => {
+          })       
+
           }
 
           else if(result.Status===404)

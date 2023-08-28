@@ -17,6 +17,9 @@ import { LessonResource } from 'src/app/Models/LessonResource.model';
 import { MatPaginator } from '@angular/material/paginator';
 import { map } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-view-lesson',
@@ -48,7 +51,9 @@ constructor(
     private dialog: MatDialog,
     private titleservice: Title,
     private toastr: ToastrService,
-    private snack:MatSnackBar
+    private snack:MatSnackBar,
+    private aService:AuditLogService,
+    private security:SecurityService
 ) {this.titleservice.setTitle('Lesson');}
 
 
@@ -143,6 +148,18 @@ const dialogReference = this.dialog.open(
                   }
           );
           this.router.navigate(['admin/view-section']);
+
+          let audit = new AuditLog();
+          audit.AuditLogID = 0;
+          audit.UserID = this.security.User.UserID;
+          audit.AuditName = 'Delete Lesson';
+          audit.Description = 'Employee, ' + this.security.User.Username + ', deleted the Lesson: ' + this.test.LessonName  + ', within the section: ' + this.section.SectionName + ', in the course: ' + this.course.Name
+          audit.Date = '';
+
+          this.aService.AddAudit(audit).subscribe((data) => {
+            //console.log(data);
+            //this.refreshForm();
+          })
         }
         else
         {
