@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { timer } from 'rxjs';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-admin-home',
@@ -6,10 +8,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-home.component.scss']
 })
 export class AdminHomeComponent implements OnInit {
-
-  constructor() { }
+  dateTime!: Date;
+  constructor( 
+    private titleservice:Title,
+    ) 
+    {  this.titleservice.setTitle('Home');}
 
   ngOnInit(): void {
+
+    timer(0, 1000).subscribe(() => {
+      this.dateTime = new Date();
+    })
   }
 
 }

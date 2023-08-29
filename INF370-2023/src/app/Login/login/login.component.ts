@@ -12,6 +12,7 @@ import { timer } from 'rxjs';
 import { InputDialogComponent } from 'src/app/Dialog/input-dialog/input-dialog/input-dialog.component';
 import { AuditLog } from 'src/app/Models/audit.model';
 import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-login',
@@ -39,8 +40,9 @@ export class LoginComponent implements OnInit {
     private toastr: ToastrService,
     private dialog: MatDialog,
     private aService:AuditLogService,
-    private datePipe:DatePipe
-  ) { }
+    private datePipe:DatePipe,
+    private titleservice:Title
+  ) { this.titleservice.setTitle('Login'); }
 
   ngOnInit(): void {
     const delay = (ms:number) => new Promise(res => setTimeout(res, ms));

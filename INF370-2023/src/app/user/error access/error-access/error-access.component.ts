@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { SecurityService } from 'src/app/Services/security.service';
-
+import { Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-error-access',
   templateUrl: './error-access.component.html',
@@ -12,7 +12,9 @@ export class ErrorAccessComponent implements OnInit {
 
   constructor(public router:Router,
     private location:Location,
-    private security:SecurityService) { }
+    private security:SecurityService,
+    private titleservice:Title) 
+    { this.titleservice.setTitle('Error');}
 
   ngOnInit(): void {
    

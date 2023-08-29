@@ -133,6 +133,7 @@ import { ReportHomeComponent } from './Administrator/Reports/report-home/report-
 import { ReadMcComponent } from './Student Portal/maintenance-student/read-mc/read-mc/read-mc.component';
 import { ViewMcComponent } from './Student Portal/maintenance-student/view-mc/view-mc/view-mc.component';
 import { ViewSTermsComponent } from './Student Portal/terms-view/view-s-terms/view-s-terms.component';
+import { AboutUsComponent } from './about-us/about-us/about-us.component';
 
 
 const routes: Routes = [
@@ -163,6 +164,11 @@ canActivate:[AuthGuardGuard,AdminGuard]
 path:'student/update-profile',
 component:StudentProfileUpdateComponent,
 canActivate:[AuthGuardGuard,StudentGuard]
+},
+
+{
+path:'about',
+component:AboutUsComponent
 },
 
 {

@@ -1,0 +1,57 @@
+<!-- PARTICLE SYSTEM -->
+<div class="page-bg"></div>
+<div class="animation-wrapper">
+  <div class="particle particle-1"></div>
+  <div class="particle particle-2"></div>
+  <div class="particle particle-3"></div>
+  <div class="particle particle-4"></div>
+</div>
+
+
+<div class="jobsDiv" *ngIf="!(dataList == null || undefined)">
+ 
+
+  <div>
+      <b class="heading">
+          History of Pretoria North Muslim Educational Institute
+      </b>
+    </div>
+  <mat-tab-group [@.disabled]="true">
+      <mat-tab *ngFor="let data of dataList">
+          <ng-template mat-tab-label>
+              <h1 >{{data.period}} 
+                 
+              </h1>
+          </ng-template>
+          <div class="tabContent">
+              
+                <div class="tabDescr">
+                  <h1 class="tabDescrTitle" style="font-size: 30px;">
+                     <u>{{data.period}}</u> 
+                  </h1>
+                  <p style="font-size: 25px;">
+                      {{data.description}}
+                  </p>
+                </div>
+<br>
+<br>
+                <mat-dialog-actions class="buttonsDiv">
+                    <button id="cancel" mat-raised-button (click)="onBack()" class="btn">Go back to Home </button>
+                   
+                </mat-dialog-actions>
+
+            
+
+          </div>
+        </mat-tab>
+  </mat-tab-group>
+  
+</div>
+<div *ngIf="(dataList == null || undefined)"
+style="
+display: flex;
+align-items: center;
+justify-content: center;">
+ <mat-spinner ></mat-spinner>
+</div>
+

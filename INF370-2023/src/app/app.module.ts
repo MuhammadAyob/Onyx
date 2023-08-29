@@ -159,6 +159,7 @@ import { ReadMcComponent } from './Student Portal/maintenance-student/read-mc/re
 import { ViewMcComponent } from './Student Portal/maintenance-student/view-mc/view-mc/view-mc.component';
 import { ViewSTermsComponent } from './Student Portal/terms-view/view-s-terms/view-s-terms.component';
 import { AuditLogComponent } from './Administrator/Audit/audit-log/audit-log.component';
+import { AboutUsComponent } from './about-us/about-us/about-us.component';
 //import { CalendarDialogComponent } from './Dialog/calendar-dialog/calendar-dialog/calendar-dialog.component';
 //import { ServiceWorkerModule } from '@angular/service-worker';
 
@@ -316,6 +317,7 @@ export function momentAdapterFactory() {
     ViewMcComponent,
     ViewSTermsComponent,
     AuditLogComponent,
+    AboutUsComponent,
 
     
   ],

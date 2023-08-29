@@ -584,96 +584,7 @@
             />
           </svg>
         </div>
-        <mat-nav-list style="font-family:'MriyaGrotesk';" dense>
-          <mat-list-item
-
-            style="color: white;font: montserrat;font-size: 16px; "
-            routerLink="/home/employee-home"
-            ><mat-icon style="margin-right: 12px;" >home</mat-icon>Home</mat-list-item
-          >
-          <mat-list-item
-
-            style="color: white;font: montserrat;font-size: 16px; "
-            routerLink="/home/employee-home"
-            ><mat-icon style="margin-right: 12px;" >videocam</mat-icon>Instructional Videos</mat-list-item
-          >
-          <mat-list-item
-
-            style="color: white;font: montserrat;font-size: 16px; "
-            routerLink="/home/employee-home"
-            ><mat-icon style="margin-right: 12px;" >collections_bookmark</mat-icon>Assigned Courses</mat-list-item
-          >
-
-          <mat-list-item
-
-          style="color: white;font: montserrat;font-size: 16px; "
-          routerLink="/home/employee-home"
-          ><mat-icon style="margin-right: 12px;" >receipt</mat-icon>Submitted Queries </mat-list-item
-        >
-
-          <mat-expansion-panel
-          [class.mat-elevation-z0]="true"
-          dense
-          style="
-            
-            background-color: #920f4c;
-            color: white;
-            
-          "
-        >
-          <mat-expansion-panel-header style="color: white; background-color: #920f4c;font-size: 16px;margin-left: -8px;">
-            <mat-icon style="margin-right: 12px;">track_changes</mat-icon>Skills & Qualifications
-          </mat-expansion-panel-header>
-          <mat-nav-list dense style="color: white;background-color: #920f4c;">
-
-            <a
-            mat-list-item
-            routerLink="/employee/request-update"
-            style="color: white; font-size: 14px;"
-            ><mat-icon style="margin-right: 8px;">update</mat-icon> Request Update</a
-          >
-            <a
-              mat-list-item
-              routerLink="/employee/request-update"
-              style="color: white; font-size: 14px;"
-              ><mat-icon style="margin-right: 8px;">list</mat-icon> Requests</a
-            >
-           
-          </mat-nav-list>
-        </mat-expansion-panel>
-
-          <br>
-          <br>
-          <br>
-          <br>
-          <br>
-          <br>
-          <br>
-          <br>
-          <br>
-          <br>
-          <br>
-          
-          <div style="margin-right: 4%">
-            <svg height="5" width="200">
-              <line
-                x1="0"
-                y1="0"
-                x2="200"
-                y2="0"
-                style="stroke: rgb(255, 255, 255); stroke-width: 2"
-              />
-            </svg>
-          </div>
-          <mat-list-item
-        
-          style="color: white;font: montserrat;font-size: 14px; "
-          routerLink="/home/employee-home"
-          ><mat-icon style="margin-right: 12px;" >attach_file</mat-icon> Terms & Conditions</mat-list-item
-        >
-       
-      
-        </mat-nav-list>
+     
       </mat-sidenav>
       <mat-sidenav-content>
         <mat-toolbar class="bg" style="color: #ffffff;box-shadow:0px 2px 4px rgba(0, 0, 0, 0.75);z-index: 2;position: relative;;">
@@ -706,17 +617,7 @@
               ><mat-icon>keyboard_arrow_down</mat-icon>
             </button>
             <mat-menu class="customize" #accountMenu [overlapTrigger]="false" yPosition="below">
-              <button mat-menu-item style="background-color: #920f4c;color: #ffffff;" routerLink="/employee/update-profile">
-                <mat-icon style="color: #ffffff;">person</mat-icon><span>My Account</span>
-              </button>
-              <button mat-menu-item style="background-color: #920f4c;">
-                <a
-                  style="color: rgb(255, 255, 255);"
-                  target="_blank"
-                  href="../assets/WebHelp/index.html"
-                  ><mat-icon style="color: #ffffff;">help</mat-icon><span>Help</span></a
-                >
-              </button>
+             
               <mat-divider></mat-divider>
               <button mat-menu-item style="background-color: #920f4c;color: #ffffff;" (click)="onLogout()">
                 <mat-icon style="color: #ffffff;">exit_to_app</mat-icon>Logout
