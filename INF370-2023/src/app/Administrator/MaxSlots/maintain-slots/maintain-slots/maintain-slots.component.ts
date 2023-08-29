@@ -13,6 +13,9 @@ import { Title } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-maintain-slots',
@@ -23,16 +26,21 @@ export class MaintainSlotsComponent implements OnInit {
   SlotsFormControl = new FormControl('',[Validators.required, Validators.min(1), Validators.pattern('^[0-9][0-9]*$')]);
   isLoading:boolean=false;
   MaxSlotsPerDay!:MaxSlotsPerDay;
+  test:any;
   constructor(public router:Router,
     private location:Location,
     private dialog:MatDialog,
     private service:MaxslotsService,
     private titleservice:Title,
     public toastr: ToastrService,
-    private snack:MatSnackBar) { this.titleservice.setTitle('Max Slots Per Day');}
+    private snack:MatSnackBar,
+    private aService:AuditLogService,
+    private security:SecurityService) 
+    { this.titleservice.setTitle('Max Slots Per Day');}
 
   ngOnInit(): void {
     this.MaxSlotsPerDay=JSON.parse(sessionStorage['MaxSlotsPerDay'])
+    this.test=JSON.parse(sessionStorage['MaxSlotsPerDay'])
   }
 
   onBack(): void {
@@ -91,6 +99,18 @@ export class MaintainSlotsComponent implements OnInit {
               );
               this.router.navigate(['admin/read-max-slots']);
               this.isLoading=false;
+
+              let audit = new AuditLog();
+
+              audit.AuditLogID = 0;
+              audit.UserID = this.security.User.UserID;
+              audit.AuditName = 'Configure Max Slots Per Day';
+              audit.Description = 'Employee, ' + this.security.User.Username + ', edited the Max Slots per day from: ' + this.test.NumberOfSlots + ' slots to ' + this.MaxSlotsPerDay.NumberOfSlots + ' slots.'
+              audit.Date = '';
+
+          this.aService.AddAudit(audit).subscribe((data) => {
+          })       
+
   
             }
             else

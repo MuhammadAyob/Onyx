@@ -14,6 +14,9 @@ import { Location } from '@angular/common';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
 import { OnDestroy } from '@angular/core';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -57,7 +60,9 @@ export class UserProfileComponent implements OnInit {
     private navCtrl: NavController,
     private serviceUpdate: UpdateProfileService,
     private serviceE:EmployeeService,
-    private serviceT:TitleService) 
+    private serviceT:TitleService,
+    private aService:AuditLogService,
+    private security:SecurityService) 
   {this.titleservice.setTitle('Your Profile'); }
 
 ngOnInit(): void {
@@ -131,6 +136,18 @@ async onSubmit() {
               console.log(result);
               if(result.Status === 200)
               {
+                let audit = new AuditLog();
+                        audit.AuditLogID = 0;
+                        audit.UserID = this.security.User.UserID;
+                        audit.AuditName = 'Update user Profile';
+                        audit.Description = 'Employee, ' + this.security.User.Username + ', updated their user profile'
+                        audit.Date = '';
+            
+                        this.aService.AddAudit(audit).subscribe((data) => {
+                          //console.log(data);
+                          //this.refreshForm();
+                        })
+                        
                 const alert = await this.alertController.create({
                   header: 'Success!',
                   message: 'Your Profile was updated',
@@ -143,6 +160,8 @@ async onSubmit() {
                         sessionStorage['employee'] = JSON.stringify(this.employee);
                         this.fileAttr = '';
                         this.isLoading = false;
+
+                        
                         window.location.reload();
                       }
                     }

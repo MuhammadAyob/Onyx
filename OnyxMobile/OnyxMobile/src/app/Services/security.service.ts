@@ -50,7 +50,7 @@ getUserName(){
 
 Logout(){
   sessionStorage.clear();
-  this.router.navigateByUrl('/login');
+  this.router.navigateByUrl('/test-login');
   this.User = new User();
 }
 

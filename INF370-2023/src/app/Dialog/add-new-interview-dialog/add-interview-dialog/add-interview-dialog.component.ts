@@ -27,6 +27,9 @@ import * as moment from 'moment';
 import { DatePipe } from '@angular/common';
 import { FormControl, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-add-interview-dialog',
@@ -57,7 +60,9 @@ export class AddInterviewDialogComponent implements OnInit {
     private service: InterviewService,
     public toastr: ToastrService,
     public router: Router,
-    private snack:MatSnackBar
+    private snack:MatSnackBar,
+    private aService:AuditLogService,
+    private security:SecurityService
   ) {}
 
   ngOnInit(){
@@ -142,7 +147,17 @@ export class AddInterviewDialogComponent implements OnInit {
             if(result.Status === 200)
             {
               //this.InterviewDetails = result as InterviewDetails;
-             
+              let audit = new AuditLog();
+              audit.AuditLogID = 0;
+              audit.UserID = this.security.User.UserID;
+              audit.AuditName = 'Add Interview Slot';
+              audit.Description = 'Employee, ' + this.security.User.Username + ', added a new interview slot with details: ' + this.InterviewDetails.InterviewDate + ' ' + this.InterviewDetails.StartTime + ' - ' + this.InterviewDetails.EndTime
+              audit.Date = '';
+  
+              this.aService.AddAudit(audit).subscribe((data) => {
+                //console.log(data);
+                //this.refreshForm();
+              })
               this.refreshForm();
               this.isLoading=false;
               location.reload();

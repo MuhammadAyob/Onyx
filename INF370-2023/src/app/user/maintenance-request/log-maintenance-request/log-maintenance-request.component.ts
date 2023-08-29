@@ -19,6 +19,8 @@ import { MaintenanceTypeService } from 'src/app/Services/maintenance-type.servic
 import { MaintenancePriority } from 'src/app/Models/maintenance-priority.model';
 import { MaintenancePriorityService } from 'src/app/Services/maintenance-priority.service';
 import { MatDialog } from '@angular/material/dialog';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
 
 @Component({
   selector: 'app-log-maintenance-request',
@@ -49,7 +51,8 @@ constructor(
   private service: MaintenanceService,
   private serviced: MaintenanceTypeService,
   private serviceP: MaintenancePriorityService,
-  private security: SecurityService
+  private security: SecurityService,
+  private aService:AuditLogService
   ) {this.titleservice.setTitle('Maintenance'); }
 
 ngOnInit(): void {
@@ -158,7 +161,19 @@ showDialog(title: string, message: string): void {
                       this.router.navigate(['home/student-home']);
                     }
                    this.isLoading=false;
-                    this.refreshForm();        
+                  //this.refreshForm();   
+                  
+                  let audit = new AuditLog();
+              audit.AuditLogID = 0;
+              audit.UserID = this.security.User.UserID;
+              audit.AuditName = 'Log Maintenance Query';
+              audit.Description = 'User, ' + this.security.User.Username + ', logged new Maintenance: ' + this.maintenance.Description
+              audit.Date = '';
+  
+              this.aService.AddAudit(audit).subscribe((data) => {
+                //console.log(data);
+                this.refreshForm();
+              })
           }
           else if(result.Status === 404)
           {

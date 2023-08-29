@@ -26,6 +26,9 @@ import { Titles } from 'src/app/Models/title.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Shortlist } from 'src/app/Models/shortlist.model';
 import { ShortlistService } from 'src/app/Services/shortlist.service';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-accept-applicant',
@@ -86,7 +89,9 @@ export class AcceptApplicantComponent implements OnInit {
     private serviceu: UserRoleService,
     private shortService:ShortlistService,
     private snack:MatSnackBar,
-    private toastr: ToastrService) 
+    private toastr: ToastrService,
+    private aService:AuditLogService,
+    private security:SecurityService) 
     { this.titleservice.setTitle('Accept Applicant');}
 
   ngOnInit(): void {
@@ -262,6 +267,17 @@ showDialog(title: string, message: string): void {
             {
 if(result.Status === 200){
   console.log('application done')
+  let audit = new AuditLog();
+        audit.AuditLogID = 0;
+        audit.UserID = this.security.User.UserID;
+        audit.AuditName = 'Accept Applicant';
+        audit.Description = 'Employee, ' + this.security.User.Username + ', accepted the applicant: ' + this.employee.Employee.Name + ' ' + this.employee.Employee.Surname + ' - ' + this.employee.Employee.RSAIDNumber + ' for the Job: ' + this.shortList.JobOpp
+        audit.Date = '';
+
+        this.aService.AddAudit(audit).subscribe((data) => {
+          //console.log(data);
+          //this.refreshForm();
+        })
 }
 else{
   console.log('app not over')

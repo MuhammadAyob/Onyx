@@ -29,6 +29,9 @@ import { DatePipe } from '@angular/common';
 import { FormControl, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AddInterviewDialogComponent } from 'src/app/Dialog/add-new-interview-dialog/add-interview-dialog/add-interview-dialog.component';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { SecurityService } from 'src/app/Services/security.service';
 
 const colors: any = {
   red: {
@@ -64,7 +67,7 @@ export class ReadInterviewSlotsComponent implements OnInit {
   ];
 
   public dataSource = new MatTableDataSource<any>();
-isLoading:boolean=true;
+  isLoading:boolean=true;
   noData = this.dataSource.connect().pipe(map((data) => data.length === 0));
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -89,7 +92,9 @@ isLoading:boolean=true;
     private service: InterviewService,
     public toaster: ToastrService,
     private _snackBar: MatSnackBar,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private aService:AuditLogService,
+    private security:SecurityService
   ) { this.titleservice.setTitle('Interview Slots');
   this.yesterday.setDate(28);}
 
@@ -309,6 +314,18 @@ isLoading:boolean=true;
                     verticalPosition: 'bottom',
                     duration: 3000,
                   });
+
+                  let audit = new AuditLog();
+                  audit.AuditLogID = 0;
+                  audit.UserID = this.security.User.UserID;
+                  audit.AuditName = 'Delete Interview Slot';
+                  audit.Description = 'Employee, ' + this.security.User.Username + ', deleted the allocated interview slot for: ' + obj.Name + ' ' + obj.Surname + ' - ' + obj.JobOpp
+                  audit.Date = '';
+      
+                  this.aService.AddAudit(audit).subscribe((data) => {
+                    //console.log(data);
+                    //this.refreshForm();
+                  })
         }
         else
         {

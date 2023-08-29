@@ -13,6 +13,9 @@ import { MaintenanceType } from 'src/app/Models/maintenance-type.model';
 import { MaintenanceTypeService } from 'src/app/Services/maintenance-type.service';
 import { ToastrService } from 'ngx-toastr';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { SecurityService } from 'src/app/Services/security.service';
 
 export interface DialogData {
   dialogMessage: string;
@@ -34,11 +37,13 @@ constructor(
     private service: MaintenanceTypeService,
     public toastr: ToastrService,
     private _snack:MatSnackBar,
-    private titleservice: Title
-) { this.titleservice.setTitle('Maintenance Type');}
+    private titleservice: Title,
+    private aService:AuditLogService,
+    private security:SecurityService) 
+  { this.titleservice.setTitle('Maintenance Type');}
 
 
-/////
+
   ngOnInit(): void {
     this.refreshForm();
   }
@@ -56,7 +61,7 @@ constructor(
       this.dialog.open(InputDialogComponent, {
         data: {
           dialogTitle: "Input Error",
-          dialogMessage: "Correct Errors"
+          dialogMessage: "Correct errors on Highlighted fields"
         },
         width: '25vw',
         height: '27vh',
@@ -114,6 +119,17 @@ constructor(
                       }
               );
               this.router.navigate(['admin/read-maintenance-types']);
+              let audit = new AuditLog();
+              audit.AuditLogID = 0;
+              audit.UserID = this.security.User.UserID;
+              audit.AuditName = 'Add Maintenance Type';
+              audit.Description = 'Employee, ' + this.security.User.Username + ', added a new Maintenance Type: ' + this.type.Type
+              audit.Date = '';
+  
+              this.aService.AddAudit(audit).subscribe((data) => {
+                //console.log(data);
+                //this.refreshForm();
+              })
             }
 
             else if(result.Status===404)

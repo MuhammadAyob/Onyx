@@ -14,6 +14,9 @@ import { Title } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-maintain-priority',
@@ -35,7 +38,9 @@ constructor(
   private service:MaintenancePriorityService,
   private titleservice:Title,
   public toastr: ToastrService,
-  private snack:MatSnackBar
+  private snack:MatSnackBar,
+  private aService:AuditLogService,
+  private security:SecurityService
 ) {this.titleservice.setTitle('Maintenance Priority'); }
 
 ngOnInit(): void {
@@ -101,6 +106,15 @@ showDialog(title: string, message: string, popupMessage: string): void {
                     }
             );
             this.router.navigate(['admin/read-maintenance-priorities']);
+            let audit = new AuditLog();
+            audit.AuditLogID = 0;
+            audit.UserID = this.security.User.UserID;
+            audit.AuditName = 'Update Maintenance Priority';
+            audit.Description = 'Employee, ' + this.security.User.Username + ', updated the Maintenance Priority: ' + this.priority.Priority
+            audit.Date = '';
+
+        this.aService.AddAudit(audit).subscribe((data) => {
+        })
 
           } 
           else if(result.Status===400)

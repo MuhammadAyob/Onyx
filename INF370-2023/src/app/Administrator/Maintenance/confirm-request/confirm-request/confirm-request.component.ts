@@ -11,6 +11,8 @@ import { MaintenanceService } from 'src/app/Services/maintenance.service';
 import { ToastrService } from 'ngx-toastr';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ExistsDialogComponent } from 'src/app/Dialog/exists-dialog/exists-dialog/exists-dialog.component';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
 
 @Component({
   selector: 'app-confirm-request',
@@ -34,7 +36,8 @@ export class ConfirmRequestComponent implements OnInit {
     private titleservice: Title,
     private security: SecurityService,
     private toastr: ToastrService,
-    private snack:MatSnackBar
+    private snack:MatSnackBar,
+    private aService:AuditLogService
   ) { this.titleservice.setTitle('Maintenance'); }
 
   ngOnInit(): void {
@@ -86,6 +89,17 @@ export class ConfirmRequestComponent implements OnInit {
           );
           this.isLoading=false;
           this.router.navigate(['admin/read-maintenance-requests']);
+          let audit = new AuditLog();
+              audit.AuditLogID = 0;
+              audit.UserID = this.security.User.UserID;
+              audit.AuditName = 'Confirm Maintenance Query';
+              audit.Description = 'Employee, ' + this.security.User.Username + ', confirmed Maintenance Request: ' + this.currentMaintenance.Description
+              audit.Date = '';
+  
+              this.aService.AddAudit(audit).subscribe((data) => {
+                //console.log(data);
+                //this.refreshForm();
+              })
         }
         else
         {

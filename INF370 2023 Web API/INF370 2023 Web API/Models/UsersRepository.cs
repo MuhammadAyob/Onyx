@@ -92,6 +92,16 @@ namespace INF370_2023_Web_API.Models
                         db.Students.Add(stud);
                         await db.SaveChangesAsync();
 
+                        AuditLog audit = new AuditLog();
+                        audit.AuditLogID = 0;
+                        audit.AuditName = "Register Student";
+                        audit.Date = DateTime.Now;
+                        audit.Description = "User, " + student.Email + ", got registered";
+                        audit.UserID = newuserid.UserID;
+
+                        db.AuditLogs.Add(audit);
+                        await db.SaveChangesAsync();
+
                         //Commit
 
                         transaction.Commit();
@@ -1048,8 +1058,19 @@ namespace INF370_2023_Web_API.Models
                                 dc.Configuration.ValidateOnSaveEnabled = false;
                                 dc.SaveChanges();
 
+
                                 transaction.Commit();
-                                
+
+                                AuditLog audit = new AuditLog();
+
+                                audit.AuditLogID = 0;
+                                audit.AuditName = "Reset Password";
+                                audit.Date = DateTime.Now;
+                                audit.Description = "User, " + user.Username + ", reset their password";
+                                audit.UserID = user.UserID;
+                                db.AuditLogs.Add(audit);
+                                await db.SaveChangesAsync();
+
                                 return new { Status = 200, Message = "Password reset successfully" };
                             }
                             

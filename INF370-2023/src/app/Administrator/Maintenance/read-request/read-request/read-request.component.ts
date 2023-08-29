@@ -14,6 +14,9 @@ import { SearchDialogComponent } from 'src/app/Dialog/search-dialog/search-dialo
 import { ConfirmDialogComponent } from 'src/app/Dialog/confirm-dialog/confirm-dialog/confirm-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { InputDialogComponent } from 'src/app/Dialog/input-dialog/input-dialog/input-dialog.component';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-read-request',
@@ -53,7 +56,9 @@ constructor(
   private service: MaintenanceService,
   public toaster: ToastrService,
   private dialog: MatDialog,
-  private snack:MatSnackBar
+  private snack:MatSnackBar,
+  private aService:AuditLogService,
+  private security:SecurityService
 ) {this.titleservice.setTitle('Maintenance'); }
 
 ngOnInit(): void {
@@ -120,7 +125,7 @@ onArrowBack() {
   this.location.back();
 }
 
-onDelete(id:number) {
+onDelete(obj:any) {
   const title = 'Confirm Discard Maintenance';
   const message = 'Are you sure you want to discard the Maintenance?';
   
@@ -138,7 +143,7 @@ onDelete(id:number) {
   dialogReference.afterClosed().subscribe((result) => {
     if (result == true) {
       this.isLoading=true;
-      this.service.DeleteMaintenaceRequest(id).subscribe(
+      this.service.DeleteMaintenaceRequest(obj.MaintenanceID).subscribe(
         (result:any) => {
           console.log(result);
           if(result.Status===200)
@@ -154,6 +159,18 @@ onDelete(id:number) {
             );
             this.isLoading=false;
             this.refreshList();
+
+            let audit = new AuditLog();
+              audit.AuditLogID = 0;
+              audit.UserID = this.security.User.UserID;
+              audit.AuditName = 'Discard Maintenance Query';
+              audit.Description = 'Employee, ' + this.security.User.Username + ', discarded Maintenance Request: ' + obj.Description
+              audit.Date = '';
+  
+              this.aService.AddAudit(audit).subscribe((data) => {
+                //console.log(data);
+                //this.refreshForm();
+              })
           }
           else
           {

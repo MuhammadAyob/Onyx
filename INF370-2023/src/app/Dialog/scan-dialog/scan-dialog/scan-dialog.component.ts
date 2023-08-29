@@ -7,6 +7,9 @@ import { Location, Time } from '@angular/common';
 import { InterviewService } from 'src/app/Services/interview.service';
 import { ReadInterviewSlotsComponent } from 'src/app/Administrator/Interview-Slots/read-interview-slots/read-interview-slots/read-interview-slots.component';
 import { ExistsDialogComponent } from '../../exists-dialog/exists-dialog/exists-dialog.component';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-scan-dialog',
@@ -22,7 +25,9 @@ code!:string;
 isLoading!:boolean;
 
 constructor(public dialogRef:MatDialogRef<ScanDialogComponent>,
-@Inject(MAT_DIALOG_DATA) public data:any,private snack:MatSnackBar,private service:InterviewService,private dialog:MatDialog) 
+@Inject(MAT_DIALOG_DATA) public data:any,private snack:MatSnackBar,private service:InterviewService,private dialog:MatDialog,
+private aService:AuditLogService,
+private security:SecurityService) 
 { }
 
 ngOnInit(): void {
@@ -60,6 +65,19 @@ if (result === this.code) {
               verticalPosition: 'bottom',
               duration: 8000,
             });
+
+            let audit = new AuditLog();
+              audit.AuditLogID = 0;
+              audit.UserID = this.security.User.UserID;
+              audit.AuditName = 'Scan QR Code';
+              audit.Description = 'Employee, ' + this.security.User.Username + ', scanned a QR Code belonging to the allocated slot for: ' + this.slot.Name + ' ' + this.slot.Surname + ' - ' + this.slot.JobOpp
+              audit.Date = '';
+  
+              this.aService.AddAudit(audit).subscribe((data) => {
+                //console.log(data);
+                //this.refreshForm();
+              })
+
             location.reload();
            // this.data.refreshList();
   }

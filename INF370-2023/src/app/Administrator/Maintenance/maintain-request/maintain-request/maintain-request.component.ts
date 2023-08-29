@@ -21,6 +21,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { MaintenancePriorityService } from 'src/app/Services/maintenance-priority.service';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
 
 @Component({
   selector: 'app-maintain-request',
@@ -53,7 +55,8 @@ constructor(
   private serviced: MaintenanceTypeService,
   private serviceP: MaintenancePriorityService,
   private security: SecurityService,
-  private titleservice: Title
+  private titleservice: Title,
+  private aService:AuditLogService
 ) { this.titleservice.setTitle('Maintenance'); }
 
   ngOnInit(): void {
@@ -173,6 +176,18 @@ constructor(
                 );
                 this.isLoading=false;
                 this.router.navigate(['admin/read-maintenance-requests']);
+
+                let audit = new AuditLog();
+                audit.AuditLogID = 0;
+                audit.UserID = this.security.User.UserID;
+                audit.AuditName = 'Maintain Maintenance Query';
+                audit.Description = 'Employee, ' + this.security.User.Username + ', maintained Maintenance Request: ' + newMaintenance.Description
+                audit.Date = '';
+    
+                this.aService.AddAudit(audit).subscribe((data) => {
+                  //console.log(data);
+                  //this.refreshForm();
+                })
               }
 
               else if(result.Status === 404)

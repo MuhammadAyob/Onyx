@@ -14,6 +14,9 @@ import { Title } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-maintain-maintenance-type',
@@ -35,7 +38,9 @@ constructor(
     private service:MaintenanceTypeService,
     private titleservice:Title,
     public toastr: ToastrService,
-    private snack:MatSnackBar
+    private snack:MatSnackBar,
+    private aService:AuditLogService,
+    private security:SecurityService
 ) {this.titleservice.setTitle('Maintenance Type'); }
 
   ngOnInit(): void {
@@ -58,7 +63,7 @@ constructor(
       this.dialog.open(InputDialogComponent, {
         data: {
           dialogTitle: "Input Error",
-          dialogMessage: "Correct Errors"
+          dialogMessage: "Correct errors on Highlighted fields"
         },
         width: '25vw',
         height: '27vh',
@@ -101,6 +106,15 @@ constructor(
                       }
               );
               this.router.navigate(['admin/read-maintenance-types']);
+              let audit = new AuditLog();
+            audit.AuditLogID = 0;
+            audit.UserID = this.security.User.UserID;
+            audit.AuditName = 'Update Maintenance Type';
+            audit.Description = 'Employee, ' + this.security.User.Username + ', updated the Maintenance Priority: ' + this.type.Type
+            audit.Date = '';
+
+        this.aService.AddAudit(audit).subscribe((data) => {
+        })
 
             } 
             else if(result.Status===404)

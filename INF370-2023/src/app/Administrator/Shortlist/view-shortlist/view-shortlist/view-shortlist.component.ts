@@ -14,6 +14,9 @@ import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
 import { saveAs } from 'file-saver';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-view-shortlist',
@@ -38,7 +41,9 @@ export class ViewShortlistComponent implements OnInit {
     private snack: MatSnackBar,
     public toaster: ToastrService,
     private dialog: MatDialog, 
-    private sanitizer: DomSanitizer) 
+    private sanitizer: DomSanitizer,
+    private aService:AuditLogService,
+    private security:SecurityService) 
     { this.titleservice.setTitle('Shortlisted Applicant');}
 
   ngOnInit(): void {
@@ -135,6 +140,18 @@ export class ViewShortlistComponent implements OnInit {
               );
               this.isLoading  = false;
               this.router.navigate(['admin/read-shortlist']);
+
+              let audit = new AuditLog();
+              audit.AuditLogID = 0;
+              audit.UserID = this.security.User.UserID;
+              audit.AuditName = 'Reject Shortlisted Candidate';
+              audit.Description = 'Employee, ' + this.security.User.Username + ', rejected shortlisted candidate: ' + this.shortlist.Name + ' ' + this.shortlist.Surname + ' - ' + this.shortlist.RSAIDNumber + ' for the Job: ' + this.shortlist.JobOpp
+              audit.Date = '';
+  
+              this.aService.AddAudit(audit).subscribe((data) => {
+                //console.log(data);
+                //this.refreshForm();
+              })
             }
             else if(result.Status === 400)
             {

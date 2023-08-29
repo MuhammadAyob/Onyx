@@ -14,7 +14,9 @@ import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
 import { saveAs } from 'file-saver';
-
+import { AuditLog } from 'src/app/Models/audit.model';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-view-application',
@@ -35,7 +37,9 @@ export class ViewApplicationComponent implements OnInit {
     private snack: MatSnackBar,
     public toaster: ToastrService,
     private dialog: MatDialog, 
-    private sanitizer: DomSanitizer) 
+    private sanitizer: DomSanitizer,
+    private aService:AuditLogService,
+    private security:SecurityService) 
     { this.titleservice.setTitle('Applicant');}
 
   ngOnInit(): void {
@@ -106,6 +110,18 @@ export class ViewApplicationComponent implements OnInit {
               );
               this.isLoading  = false;
               this.router.navigate(['admin/read-applications']);
+
+              let audit = new AuditLog();
+              audit.AuditLogID = 0;
+              audit.UserID = this.security.User.UserID;
+              audit.AuditName = 'Reject Applicant';
+              audit.Description = 'Employee, ' + this.security.User.Username + ', rejected applicant: ' + this.application.Name + ' ' + this.application.Surname + ' - ' + this.application.RSAIDNumber + ' for the Job: ' + this.application.JobOpp
+              audit.Date = '';
+  
+              this.aService.AddAudit(audit).subscribe((data) => {
+                //console.log(data);
+                //this.refreshForm();
+              })
             }
             else
             {
@@ -157,6 +173,18 @@ export class ViewApplicationComponent implements OnInit {
               );
               this.isLoading=false;
               this.router.navigate(['admin/read-applications']);
+
+              let audit = new AuditLog();
+              audit.AuditLogID = 0;
+              audit.UserID = this.security.User.UserID;
+              audit.AuditName = 'Add to Shortlist';
+              audit.Description = 'Employee, ' + this.security.User.Username + ', added applicant to the shortlist: ' + this.application.Name + ' ' + this.application.Surname + ' - ' + this.application.RSAIDNumber + ' for the Job: ' + this.application.JobOpp
+              audit.Date = '';
+  
+              this.aService.AddAudit(audit).subscribe((data) => {
+                //console.log(data);
+                //this.refreshForm();
+              })
             }
            else
            {

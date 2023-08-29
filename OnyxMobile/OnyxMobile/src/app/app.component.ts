@@ -45,7 +45,7 @@ export class AppComponent {
   ];
 
 
-  nonMenuRoutes: string[] = ['/welcome', '/home', '/login','/reset-password','/enter-otp','/test-login','/otppage','/reset'];
+  nonMenuRoutes: string[] = ['/welcome', '/home', '/login','/reset-password','/enter-otp','/test-login','/otppage','/reset','/about','/'];
 
   showMenu: boolean = false;
 

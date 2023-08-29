@@ -15,6 +15,9 @@ import { Shortlist } from 'src/app/Models/shortlist.model';
 import { ShortlistService } from 'src/app/Services/shortlist.service';
 import { MatSort } from '@angular/material/sort';
 import { InputDialogComponent } from 'src/app/Dialog/input-dialog/input-dialog/input-dialog.component';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-read-shortlist',
@@ -51,6 +54,8 @@ export class ReadShortlistComponent implements OnInit {
     public toaster: ToastrService,
     private _snackBar: MatSnackBar,
     private dialog: MatDialog,
+    private aService:AuditLogService,
+    private security:SecurityService
   ) { this.titleservice.setTitle('Shortlist');}
 
   ngOnInit(): void {
@@ -125,6 +130,19 @@ export class ReadShortlistComponent implements OnInit {
                   duration: 3000,
                 });
         this.refreshList();
+
+        let audit = new AuditLog();
+        audit.AuditLogID = 0;
+        audit.UserID = this.security.User.UserID;
+        audit.AuditName = 'Remove from Shortlist';
+        audit.Description = 'Employee, ' + this.security.User.Username + ', removed an applicant from the shortlist: ' + obj.Name + ' ' + obj.Surname + ' - ' + obj.RSAIDNumber + ' for the Job: ' + obj.JobOpp
+        audit.Date = '';
+
+        this.aService.AddAudit(audit).subscribe((data) => {
+          //console.log(data);
+          //this.refreshForm();
+        })
+
        }
        else if(result.Status === 300)
        {
@@ -199,7 +217,7 @@ export class ReadShortlistComponent implements OnInit {
        if(result.Status===200)
        {
         this._snackBar.open(
-          'Employee contract has been sent to candidate!',
+          'Employment contract has been sent to candidate!',
                 'OK',
                 {
                   horizontalPosition: 'center',
@@ -208,6 +226,19 @@ export class ReadShortlistComponent implements OnInit {
                 });
         this.refreshList();
         this.isLoading=false;
+
+        let audit = new AuditLog();
+        audit.AuditLogID = 0;
+        audit.UserID = this.security.User.UserID;
+        audit.AuditName = 'Offer Employment';
+        audit.Description = 'Employee, ' + this.security.User.Username + ', offered employment to the applicant: ' + obj.Name + ' ' + obj.Surname + ' - ' + obj.RSAIDNumber + ' for the Job: ' + obj.JobOpp
+        audit.Date = '';
+
+        this.aService.AddAudit(audit).subscribe((data) => {
+          //console.log(data);
+          //this.refreshForm();
+        })
+
        }
        else if(result.Status === 300)
        {

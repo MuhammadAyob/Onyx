@@ -13,6 +13,9 @@ import { MaintenancePriority } from 'src/app/Models/maintenance-priority.model';
 import { MaintenancePriorityService } from 'src/app/Services/maintenance-priority.service';
 import { ToastrService } from 'ngx-toastr';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { SecurityService } from 'src/app/Services/security.service';
 
 export interface DialogData {
   dialogMessage: string;
@@ -34,7 +37,9 @@ constructor(
   private service: MaintenancePriorityService,
   public toastr: ToastrService,
   private _snack:MatSnackBar,
-  private titleservice: Title
+  private titleservice: Title,
+  private aService:AuditLogService,
+  private security:SecurityService
 ) { this.titleservice.setTitle('Maintenance Priority');}
 
 ngOnInit(): void {
@@ -113,6 +118,17 @@ showDialog(title: string, message: string): void {
                     }
             );
             this.router.navigate(['admin/read-maintenance-priorities']);
+            let audit = new AuditLog();
+              audit.AuditLogID = 0;
+              audit.UserID = this.security.User.UserID;
+              audit.AuditName = 'Add Maintenance Priority';
+              audit.Description = 'Employee, ' + this.security.User.Username + ', added a new Maintenance Priority: ' + this.priority.Priority
+              audit.Date = '';
+  
+              this.aService.AddAudit(audit).subscribe((data) => {
+                //console.log(data);
+                //this.refreshForm();
+              })
           }
 
           else if(result.Status===404)

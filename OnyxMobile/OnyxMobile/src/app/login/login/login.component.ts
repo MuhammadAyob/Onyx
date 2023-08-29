@@ -6,6 +6,8 @@ import { User } from 'src/app/Models/user.model';
 import { SecurityService } from 'src/app/Services/security.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
 
 @Component({
   selector: 'app-login',
@@ -30,7 +32,8 @@ constructor(
   private security: SecurityService,
   private router: Router,
   private alertController: AlertController,
-  public navCtrl: NavController) 
+  public navCtrl: NavController,
+  private aService:AuditLogService) 
 
   {this.titleservice.setTitle('Login'); }
 
@@ -127,6 +130,18 @@ this.PasswordFormControl.reset();
             sessionStorage.setItem('EmployeeID', JSON.stringify(result));
             this.isLoading = false;
             this.router.navigateByUrl('/employee-home');
+             // Audit Log 
+
+             let audit = new AuditLog();
+             audit.AuditLogID = 0;
+             audit.UserID = this.security.User.UserID;
+             audit.AuditName = 'Login';
+             audit.Description = 'User, ' + this.security.User.Username + ', logged into the Mobile App.'
+             audit.Date = '';
+ 
+             this.aService.AddAudit(audit).subscribe((data) => {
+               //console.log(data);
+             })
           });
   
       }

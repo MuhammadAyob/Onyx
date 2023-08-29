@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 import { UpdateRequestService } from 'src/app/Services/update-request.service';
 import { AlertController } from '@ionic/angular';
 import { Title } from '@angular/platform-browser';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-request-update',
@@ -24,7 +27,9 @@ export class RequestUpdateComponent  implements OnInit {
     public router: Router,
     private service: UpdateRequestService,
     private alertController: AlertController,
-    private titleservice: Title) 
+    private titleservice: Title,
+    private aService:AuditLogService,
+    private security:SecurityService) 
     { this.titleservice.setTitle('Skill/Qualification Update');}
 
     ngOnInit(): void {
@@ -103,6 +108,19 @@ export class RequestUpdateComponent  implements OnInit {
                    console.log(result);
                    if(result.Status === 200)
                    {
+                     // Audit Log 
+
+             let audit = new AuditLog();
+             audit.AuditLogID = 0;
+             audit.UserID = this.security.User.UserID;
+             audit.AuditName = 'Request Technical Competency Update';
+             audit.Description = 'Employee, ' + this.security.User.Username + ', requested a technical update: ' + this.updateRequest.UpdateSubject
+             audit.Date = '';
+ 
+             this.aService.AddAudit(audit).subscribe((data) => {
+               //console.log(data);
+             })
+             
                     const alert = await this.alertController.create({
                       header: 'Success!',
                       message: 'Your Update Request was captured',
@@ -112,6 +130,7 @@ export class RequestUpdateComponent  implements OnInit {
                           text: "OK",
                           handler: async () => {
                             this.fileAttr = '';
+                           
                             this.isLoading = false;
                             this.refreshObject();
                             window.location.reload();

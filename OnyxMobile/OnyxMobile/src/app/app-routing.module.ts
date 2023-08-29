@@ -10,7 +10,7 @@ import { EnterOtpComponent } from './enter-otp/enter-otp/enter-otp.component';
 import { VideosComponent } from './Employee/Videos/videos/videos.component';
 import { RequestUpdateComponent } from './Employee/request-update/request-update/request-update.component';
 import { ViewRequestComponent } from './Employee/view-requests/view-request/view-request.component';
-
+import { AboutComponent } from './about/about/about.component';
 const routes: Routes = [
  
   {
@@ -22,6 +22,11 @@ const routes: Routes = [
   {
    path:'home',
    component:FirstPageComponent
+  },
+
+  {
+path:'about',
+component:AboutComponent
   },
 
   {

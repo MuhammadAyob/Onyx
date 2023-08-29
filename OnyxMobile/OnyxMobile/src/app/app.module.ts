@@ -22,6 +22,7 @@ import { SkillsPipe } from './skills.pipe';
 import { QualificationsPipe } from './qualifications.pipe';
 import { ViewRequestComponent } from './Employee/view-requests/view-request/view-request.component';
 import { RequestUpdateComponent } from './Employee/request-update/request-update/request-update.component';
+import { AboutComponent } from './about/about/about.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { UpdatePipe } from './update.pipe';
 import { PdfModalComponent } from './pdf-modal/pdf-modal/pdf-modal.component';
@@ -32,6 +33,7 @@ import { YtPipePipe } from './yt-pipe.pipe';
   [AppComponent,
   LoginComponent,
   FirstPageComponent,
+  AboutComponent,
   EmployeeHomeComponent,
   UserProfileComponent,
   ResetPasswordComponent,

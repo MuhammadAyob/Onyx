@@ -14,6 +14,9 @@ import { ConfirmDialogComponent } from 'src/app/Dialog/confirm-dialog/confirm-di
 import { InputDialogComponent } from 'src/app/Dialog/input-dialog/input-dialog/input-dialog.component';
 import { ExistsDialogComponent } from 'src/app/Dialog/exists-dialog/exists-dialog/exists-dialog.component';
 import { DatePipe } from '@angular/common';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { SecurityService } from 'src/app/Services/security.service';
 
 @Component({
   selector: 'app-maintain-slot',
@@ -43,7 +46,9 @@ export class MaintainSlotComponent implements OnInit {
     public toaster: ToastrService,
     private datePipe: DatePipe,
     private snack:MatSnackBar,
-    private service: InterviewService) 
+    private service: InterviewService,
+    private aService:AuditLogService,
+    private security:SecurityService) 
     { this.titleservice.setTitle('Interview Slot');}
 
   ngOnInit(): void {
@@ -136,6 +141,18 @@ export class MaintainSlotComponent implements OnInit {
                       });
                 this.isLoading=false;
                 this.router.navigate(['admin/read-interview-slots']);
+
+                let audit = new AuditLog();
+                audit.AuditLogID = 0;
+                audit.UserID = this.security.User.UserID;
+                audit.AuditName = 'Update Interview Slot';
+                audit.Description = 'Employee, ' + this.security.User.Username + ', updated the allocated interview slot for: ' + this.interviewSlot.Name + ' ' + this.interviewSlot.Surname + ' - ' + this.interviewSlot.JobOpp
+                audit.Date = '';
+    
+                this.aService.AddAudit(audit).subscribe((data) => {
+                  //console.log(data);
+                  //this.refreshForm();
+                })
               }
               else if(result.Status === 250){
                 this.isLoading=false;
