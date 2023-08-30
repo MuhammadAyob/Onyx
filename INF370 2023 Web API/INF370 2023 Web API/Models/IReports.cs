@@ -19,5 +19,6 @@ namespace INF370_2023_Web_API.Models
         Task<object> GetEmployeesWithSkill(int id);
         Task<object> GetContacts(Revenue revenue);
         Task<object> GetSales(Revenue revenue);
+        Task<object> GetDashboardData();
     }
 }

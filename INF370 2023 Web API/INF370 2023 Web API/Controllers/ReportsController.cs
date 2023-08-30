@@ -82,5 +82,12 @@ namespace INF370_2023_Web_API.Controllers
         {
             return await _reportRepo.GetSales(revenue);
         }
+
+        [HttpGet]
+        [Route("api/GetDashboardData")]
+        public async Task<object> GetDashboardData()
+        {
+            return await _reportRepo.GetDashboardData();
+        }
     }
 }

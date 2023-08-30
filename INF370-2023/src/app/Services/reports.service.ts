@@ -52,4 +52,8 @@ GetSales(obj:any){
   return this.http.post(environment.WebAPI + 'GetSales', obj, this.httpOptions);
 }
 
+GetDashboardData(){
+  return this.http.get(environment.WebAPI + 'GetDashboardData', this.httpOptions);
+}
+
 }

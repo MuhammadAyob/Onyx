@@ -281,5 +281,98 @@ namespace INF370_2023_Web_API.Models
             return result;
 
         }
+
+        public async Task<object> GetDashboardData()
+        {
+            try
+            {
+                // Create a dynamic list to hold various types of values
+
+                List<dynamic> mixedList = new List<dynamic>();
+                dynamic obj = new ExpandoObject();
+
+                db.Configuration.ProxyCreationEnabled = false;
+
+                var AE = await db.Employees.CountAsync(x => x.Deleted == "False");
+                
+                var AC = await db.Courses.CountAsync(x => x.Active == "True");
+               
+                var AS = await db.Students.CountAsync(x => x.Deleted == "False");
+               
+                var PM = await db.Maintenances.CountAsync(x => x.MaintenanceStatusID == 1);
+               
+                var AJ = await db.JobOpportunities.CountAsync(x => x.JobOppStatusID == 1);
+               
+                var PA = await db.Applications.CountAsync(x => x.ApplicationStatusID == 1);
+               
+                //
+
+                DateTime today = DateTime.Today;
+                DateTime sevenDaysAgo = today.AddDays(-7);
+
+                //
+
+                var CQ = await db.Contacts.CountAsync(c => c.Date >= sevenDaysAgo && c.Date <= today);
+
+                ////
+
+                var maintenanceTypeCounts = await db.Maintenances
+                .GroupBy(m => m.MaintenanceType.Type) // Group by MaintenanceType
+                .Select(group => new
+                {
+                    MaintenanceType = group.Key,
+                    Count = group.Count()
+                })
+                .ToListAsync();
+
+                ////
+
+                var revenuePerYear = await db.Carts
+               .GroupBy(cart => cart.Date.Year) // Group by year
+               .Select(group => new
+               {
+                   Year = group.Key,
+                   Revenue = group.Sum(cart => cart.Total)
+               })
+               .ToListAsync();
+
+                /////
+
+                var UpdateRequests = await db.UpdateRequests.Where(s => s.UpdateRequestID == 1)
+                        .Include(s => s.Employee)
+                        .Select(s => new
+                        {
+                            EmployeeName = s.Employee.Name,
+                            EmployeeSurname = s.Employee.Surname,
+                            UpdateSubject = s.UpdateSubject,
+
+                        })
+                        .ToListAsync();
+
+                ////
+
+                obj.ActiveEmployees = AE;
+                obj.ActiveCourses = AC;
+                obj.ActiveStudents = AS;
+                obj.PendingM = PM;
+                obj.ActiveJobs = AJ;
+                obj.PendingApplicants = PA;
+                obj.ContactQ = CQ;
+                obj.UpdateRequests = UpdateRequests;
+                obj.maintenanceTypeCounts = maintenanceTypeCounts;
+                obj.revenuePerYear = revenuePerYear;
+
+                mixedList.Add(obj);
+                
+                return mixedList;
+
+               
+            }
+
+            catch(Exception ex)
+            {
+                return ex.ToString();
+            }
+        }
     }
 }
