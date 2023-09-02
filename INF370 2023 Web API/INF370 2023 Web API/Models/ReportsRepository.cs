@@ -286,6 +286,7 @@ namespace INF370_2023_Web_API.Models
         {
             try
             {
+               
                 // Create a dynamic list to hold various types of values
 
                 List<dynamic> mixedList = new List<dynamic>();

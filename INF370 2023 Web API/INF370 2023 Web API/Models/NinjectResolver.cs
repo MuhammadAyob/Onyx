@@ -91,6 +91,7 @@ namespace INF370_2023_Web_API.Models
             kernel.Bind<IRatings>().To<RatingRepository>().InSingletonScope();
             kernel.Bind<IReports>().To<ReportsRepository>().InSingletonScope();
             kernel.Bind<IAuditLogs>().To<AuditRepository>().InSingletonScope();
+            kernel.Bind<IStoredProcedures>().To<StoredProceduresRepository>().InSingletonScope();
 
             return kernel;
         }

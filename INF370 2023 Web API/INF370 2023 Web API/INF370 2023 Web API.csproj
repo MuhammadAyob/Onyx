@@ -239,6 +239,7 @@
     <Compile Include="Controllers\ShortlistController.cs" />
     <Compile Include="Controllers\SkillsController.cs" />
     <Compile Include="Controllers\SkillTypesController.cs" />
+    <Compile Include="Controllers\StoredProceduresController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Controllers\TermsAndConditionsController.cs" />
     <Compile Include="Controllers\TitlesController.cs" />
@@ -342,6 +343,7 @@
     <Compile Include="Models\IShortList.cs" />
     <Compile Include="Models\ISkills.cs" />
     <Compile Include="Models\ISkillTypes.cs" />
+    <Compile Include="Models\IStoredProcedures.cs" />
     <Compile Include="Models\IStudents.cs" />
     <Compile Include="Models\ITerms.cs" />
     <Compile Include="Models\IUpdateRequests.cs" />
@@ -428,6 +430,7 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SkillTypesRepository.cs" />
+    <Compile Include="Models\StoredProceduresRepository.cs" />
     <Compile Include="Models\Student.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

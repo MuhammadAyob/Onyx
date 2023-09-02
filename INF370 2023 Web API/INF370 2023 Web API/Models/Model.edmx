@@ -905,6 +905,31 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="GetContacts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StartDate" Type="date" Mode="In" />
+          <Parameter Name="EndDate" Type="date" Mode="In" />
+        </Function>
+        <Function Name="GetCoursePerformance" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CourseID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetCourses" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetDashboardData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetEmployeesWithSkill" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SkillID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetMaintenance" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MaintenanceID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetMaintenanceList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetRevenueReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StartDate" Type="date" Mode="In" />
+          <Parameter Name="EndDate" Type="date" Mode="In" />
+        </Function>
+        <Function Name="GetSales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StartDate" Type="date" Mode="In" />
+          <Parameter Name="EndDate" Type="date" Mode="In" />
+        </Function>
+        <Function Name="GetSkillsWithTypes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="Applicant" EntityType="Self.Applicant" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Application" EntityType="Self.Application" Schema="dbo" store:Type="Tables" />
@@ -2065,6 +2090,31 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
             <End Role="InterviewSlot" EntitySet="InterviewSlots" />
           </AssociationSet>
           <EntitySet Name="Contacts" EntityType="Model.Contact" />
+          <FunctionImport Name="GetContacts">
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetCoursePerformance">
+          <Parameter Name="CourseID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetCourses" />
+          <FunctionImport Name="GetDashboardData" />
+          <FunctionImport Name="GetEmployeesWithSkill">
+          <Parameter Name="SkillID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetRevenueReport">
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetSales">
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetSkillsWithTypes" />
+          <FunctionImport Name="GetMaintenance">
+            <Parameter Name="MaintenanceID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetMaintenanceList" />
         </EntityContainer>
         <EntityType Name="OTPTimer">
           <Key>
@@ -2774,6 +2824,16 @@ warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key de
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetContacts" FunctionName="Model.Store.GetContacts" />
+          <FunctionImportMapping FunctionImportName="GetCoursePerformance" FunctionName="Model.Store.GetCoursePerformance" />
+          <FunctionImportMapping FunctionImportName="GetCourses" FunctionName="Model.Store.GetCourses" />
+          <FunctionImportMapping FunctionImportName="GetDashboardData" FunctionName="Model.Store.GetDashboardData" />
+          <FunctionImportMapping FunctionImportName="GetEmployeesWithSkill" FunctionName="Model.Store.GetEmployeesWithSkill" />
+          <FunctionImportMapping FunctionImportName="GetRevenueReport" FunctionName="Model.Store.GetRevenueReport" />
+          <FunctionImportMapping FunctionImportName="GetSales" FunctionName="Model.Store.GetSales" />
+          <FunctionImportMapping FunctionImportName="GetSkillsWithTypes" FunctionName="Model.Store.GetSkillsWithTypes" />
+          <FunctionImportMapping FunctionImportName="GetMaintenance" FunctionName="Model.Store.GetMaintenance" />
+          <FunctionImportMapping FunctionImportName="GetMaintenanceList" FunctionName="Model.Store.GetMaintenanceList" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

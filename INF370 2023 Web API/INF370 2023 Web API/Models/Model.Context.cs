@@ -12,6 +12,8 @@ namespace INF370_2023_Web_API.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class Entities : DbContext
     {
@@ -70,5 +72,91 @@ namespace INF370_2023_Web_API.Models
         public virtual DbSet<Cart> Carts { get; set; }
         public virtual DbSet<InterviewSlot> InterviewSlots { get; set; }
         public virtual DbSet<Contact> Contacts { get; set; }
+    
+        public virtual int GetContacts(Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
+        {
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("StartDate", startDate) :
+                new ObjectParameter("StartDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetContacts", startDateParameter, endDateParameter);
+        }
+    
+        public virtual int GetCoursePerformance(Nullable<int> courseID)
+        {
+            var courseIDParameter = courseID.HasValue ?
+                new ObjectParameter("CourseID", courseID) :
+                new ObjectParameter("CourseID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetCoursePerformance", courseIDParameter);
+        }
+    
+        public virtual int GetCourses()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetCourses");
+        }
+    
+        public virtual int GetDashboardData()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetDashboardData");
+        }
+    
+        public virtual int GetEmployeesWithSkill(Nullable<int> skillID)
+        {
+            var skillIDParameter = skillID.HasValue ?
+                new ObjectParameter("SkillID", skillID) :
+                new ObjectParameter("SkillID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetEmployeesWithSkill", skillIDParameter);
+        }
+    
+        public virtual int GetRevenueReport(Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
+        {
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("StartDate", startDate) :
+                new ObjectParameter("StartDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetRevenueReport", startDateParameter, endDateParameter);
+        }
+    
+        public virtual int GetSales(Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
+        {
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("StartDate", startDate) :
+                new ObjectParameter("StartDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetSales", startDateParameter, endDateParameter);
+        }
+    
+        public virtual int GetSkillsWithTypes()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetSkillsWithTypes");
+        }
+    
+        public virtual int GetMaintenance(Nullable<int> maintenanceID)
+        {
+            var maintenanceIDParameter = maintenanceID.HasValue ?
+                new ObjectParameter("MaintenanceID", maintenanceID) :
+                new ObjectParameter("MaintenanceID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetMaintenance", maintenanceIDParameter);
+        }
+    
+        public virtual int GetMaintenanceList()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetMaintenanceList");
+        }
     }
 }
