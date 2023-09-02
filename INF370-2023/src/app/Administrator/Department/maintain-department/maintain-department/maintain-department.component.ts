@@ -30,7 +30,7 @@ descFormControl = new FormControl('',[Validators.required]);
 
 department!:Department;
 departmentlist!:Department[];
-
+isLoading:boolean=false;
 public dataSource = new MatTableDataSource<Department>();
   constructor(
     public router:Router,
@@ -91,6 +91,7 @@ public dataSource = new MatTableDataSource<Department>();
 
     dialogReference.afterClosed().subscribe((result) => {
       if (result == true) {
+        this.isLoading=true;
         this.service
           .UpdateDepartment(this.department.DepartmentID, this.department)
           .subscribe((result:any) => {
@@ -105,6 +106,7 @@ public dataSource = new MatTableDataSource<Department>();
                         duration: 3000,
                       }
               );
+              this.isLoading=false;
               this.router.navigate(['admin/read-department']);
               
               let audit = new AuditLog();
@@ -120,6 +122,7 @@ public dataSource = new MatTableDataSource<Department>();
             } 
             else if(result.Status===400)
             {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {
@@ -136,6 +139,7 @@ public dataSource = new MatTableDataSource<Department>();
 
             else if(result.Status===401)
             {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {
@@ -152,6 +156,7 @@ public dataSource = new MatTableDataSource<Department>();
 
             else
             {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {

@@ -28,7 +28,7 @@ nameFormControl = new FormControl('',[Validators.required]);
 
 priority!:MaintenancePriority;
 prioritylist!:MaintenancePriority[];
-  
+isLoading:boolean=false;
 public dataSource = new MatTableDataSource<MaintenancePriority>();
 
 constructor(
@@ -63,10 +63,10 @@ onSubmit() {
     this.dialog.open(InputDialogComponent, {
       data: {
         dialogTitle: "Input Error",
-        dialogMessage: "Correct Errors"
+        dialogMessage: "Correct errors on highlighted fields"
       },
-      width: '50vw',
-      height: '30vh',
+      width: '27vw',
+      height: '29vh',
     });
   } else {
     const title = 'Confirm Edit Priority';
@@ -91,11 +91,13 @@ showDialog(title: string, message: string, popupMessage: string): void {
 
   dialogReference.afterClosed().subscribe((result) => {
     if (result == true) {
+      this.isLoading=true;
       this.service
         .UpdatePriority(this.priority.MaintenancePriorityID, this.priority)
         .subscribe((result:any) => {
           if (result.Status === 200) 
           {
+            this.isLoading=false;
             this.snack.open(
               'Maintenance Priority updated successfully!',
                     'OK',
@@ -119,6 +121,7 @@ showDialog(title: string, message: string, popupMessage: string): void {
           } 
           else if(result.Status===400)
           {
+            this.isLoading=false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {
@@ -135,6 +138,7 @@ showDialog(title: string, message: string, popupMessage: string): void {
 
           else if(result.Status===404)
           {
+            this.isLoading=false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {
@@ -151,6 +155,7 @@ showDialog(title: string, message: string, popupMessage: string): void {
 
           else
           {
+            this.isLoading=false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {

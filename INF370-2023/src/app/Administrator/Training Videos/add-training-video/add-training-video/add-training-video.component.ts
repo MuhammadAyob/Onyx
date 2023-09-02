@@ -33,7 +33,7 @@ export class AddTrainingVideoComponent implements OnInit {
   videoFormControl = new FormControl('', [Validators.required]);
 
   instructionalVideo!: InstructionalVideo;
-
+  isLoading:boolean=false;
   VideoLink!: string;
   id: any;
 
@@ -118,6 +118,7 @@ export class AddTrainingVideoComponent implements OnInit {
 
     dialogReference.afterClosed().subscribe((result) => {
       if (result == true) {
+        this.isLoading=true;
         this.service.AddInstructionalVideo(this.instructionalVideo).subscribe(
           (result:any) => {
             if(result.Status===200)
@@ -132,6 +133,7 @@ export class AddTrainingVideoComponent implements OnInit {
                       }
               );
                 
+                this.isLoading=false;
                 this.router.navigate(['admin/read-instructional-videos']);
 
                 // Audit Log 
@@ -150,6 +152,7 @@ export class AddTrainingVideoComponent implements OnInit {
             }
             else if(result.Status===400)
             {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {
@@ -165,6 +168,7 @@ export class AddTrainingVideoComponent implements OnInit {
             }
             else if(result.Status===404)
             {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {
@@ -180,6 +184,7 @@ export class AddTrainingVideoComponent implements OnInit {
             }
             else if(result.Status===600)
             {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {
@@ -195,6 +200,7 @@ export class AddTrainingVideoComponent implements OnInit {
             }
             else
             {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {

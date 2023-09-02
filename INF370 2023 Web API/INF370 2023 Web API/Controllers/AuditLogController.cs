@@ -1,4 +1,5 @@
 ﻿using INF370_2023_Web_API.Models;
+using INF370_2023_Web_API.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,13 @@ namespace INF370_2023_Web_API.Controllers
         public async Task<object> AddAudit(AuditLog audit)
         {
             return await _auditRepo.AddAudit(audit);
+        }
+
+        [HttpPost]
+        [Route("api/GetAudits")]
+        public async Task<object> GetAudits(Revenue revenue)
+        {
+            return await _auditRepo.GetAudits(revenue);
         }
     }
 }

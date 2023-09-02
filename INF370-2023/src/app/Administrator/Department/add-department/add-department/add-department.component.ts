@@ -30,6 +30,7 @@ export class AddDepartmentComponent implements OnInit {
   nameFormControl = new FormControl('', [Validators.required]);
   descFormControl = new FormControl('', [Validators.required]);
   department!:Department;
+  isLoading:boolean=false;
 
   constructor(
     public router: Router,
@@ -61,10 +62,10 @@ export class AddDepartmentComponent implements OnInit {
       this.dialog.open(InputDialogComponent, {
         data: {
           dialogTitle: "Input Error",
-          dialogMessage: "Correct Errors"
+          dialogMessage: "Correct errors on Highlighted fields"
         },
-        width: '50vw',
-        height: '30vh',
+        width: '27vw',
+        height: '29vh',
       });
     } else {
       const title = 'Confirm New Department';
@@ -105,6 +106,7 @@ export class AddDepartmentComponent implements OnInit {
 
     dialogReference.afterClosed().subscribe((result) => {
       if (result == true) {
+        this.isLoading=true;
         this.service.AddDepartment(this.department).subscribe(
           (result:any) => {
             console.log(result);
@@ -119,6 +121,7 @@ export class AddDepartmentComponent implements OnInit {
                         duration: 3000,
                       }
               );
+              this.isLoading=false;
               this.router.navigate(['admin/read-department']);
               let audit = new AuditLog();
               audit.AuditLogID = 0;
@@ -135,6 +138,7 @@ export class AddDepartmentComponent implements OnInit {
 
             else if(result.Status===400)
             {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {
@@ -151,6 +155,7 @@ export class AddDepartmentComponent implements OnInit {
 
             else if(result.Status===401)
             {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {
@@ -167,6 +172,7 @@ export class AddDepartmentComponent implements OnInit {
 
             else
             {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {

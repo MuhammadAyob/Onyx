@@ -29,6 +29,7 @@ export interface DialogData {
 export class AddPriorityComponent implements OnInit {
 nameFormControl = new FormControl('', [Validators.required]);
 priority!:MaintenancePriority;
+isLoading:boolean=false;
 
 constructor(
   public router: Router,
@@ -60,7 +61,7 @@ onSubmit() {
     this.dialog.open(InputDialogComponent, {
       data: {
         dialogTitle: "Input Error",
-        dialogMessage: "Correct Errors"
+        dialogMessage: "Correct errors on highlighted fields"
       },
       width: '25vw',
       height: '27vh',
@@ -103,11 +104,13 @@ showDialog(title: string, message: string): void {
 
   dialogReference.afterClosed().subscribe((result) => {
     if (result == true) {
+      this.isLoading=true;
       this.service.AddPriority(this.priority).subscribe(
         (result:any) => {
           console.log(result);
           if(result.Status===200)
           {
+            this.isLoading=false;
             this._snack.open(
               'Maintenance Priority added successfully!',
                     'OK',
@@ -133,6 +136,7 @@ showDialog(title: string, message: string): void {
 
           else if(result.Status===404)
           {
+            this.isLoading=false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {
@@ -148,6 +152,7 @@ showDialog(title: string, message: string): void {
 
           else if(result.Status===400)
           {
+            this.isLoading=false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {
@@ -164,6 +169,7 @@ showDialog(title: string, message: string): void {
 
           else
           {
+            this.isLoading=false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {

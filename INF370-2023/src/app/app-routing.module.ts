@@ -134,6 +134,7 @@ import { ReadMcComponent } from './Student Portal/maintenance-student/read-mc/re
 import { ViewMcComponent } from './Student Portal/maintenance-student/view-mc/view-mc/view-mc.component';
 import { ViewSTermsComponent } from './Student Portal/terms-view/view-s-terms/view-s-terms.component';
 import { AboutUsComponent } from './about-us/about-us/about-us.component';
+import { AuditLogComponent } from './Administrator/Audit/audit-log/audit-log.component';
 
 
 const routes: Routes = [
@@ -208,6 +209,11 @@ canActivate:[AuthGuardGuard,AdminGuard]
 path:'admin/confirm-maintenance-request',
 component:ConfirmRequestComponent,
 canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+path:'admin/audit-log',
+component:AuditLogComponent
 },
 
 {

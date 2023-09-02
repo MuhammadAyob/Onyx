@@ -29,6 +29,7 @@ export interface DialogData {
 export class AddMaintenanceTypeComponent implements OnInit {
 nameFormControl = new FormControl('', [Validators.required]);
 type!:MaintenanceType;
+isLoading:boolean=false;
 
 constructor(
   public router: Router,
@@ -104,11 +105,13 @@ constructor(
 
     dialogReference.afterClosed().subscribe((result) => {
       if (result == true) {
+        this.isLoading=true;
         this.service.AddType(this.type).subscribe(
           (result:any) => {
             console.log(result);
             if(result.Status===200)
             {
+              this.isLoading=false;
               this._snack.open(
                 'Maintenance Type added successfully!',
                       'OK',
@@ -134,6 +137,7 @@ constructor(
 
             else if(result.Status===404)
             {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {
@@ -150,6 +154,7 @@ constructor(
 
             else if(result.Status===400)
             {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {
@@ -166,6 +171,7 @@ constructor(
 
             else
             {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {
@@ -174,7 +180,8 @@ constructor(
                     dialogMessage: 'Can not establish connection. Please try again',
                     operation: 'ok',
                   },
-                  width: '25vw',
+                  width: '50vw',
+                  height:'30vh'
                 }
               );
             }

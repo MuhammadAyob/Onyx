@@ -26,7 +26,7 @@ export class AddQualificationComponent implements OnInit {
   descFormControl = new FormControl('', [Validators.required]);
 
   qualification!:Qualification;
-  
+  isLoading:boolean=false;
   constructor(
     public router: Router,
     private location: Location,
@@ -100,6 +100,7 @@ export class AddQualificationComponent implements OnInit {
 
     dialogReference.afterClosed().subscribe((result) => {
       if (result == true) {
+        this.isLoading=true;
         this.service.AddQualification(this.qualification).subscribe(
           (result:any) => {
             if(result.Status===200)
@@ -115,6 +116,7 @@ export class AddQualificationComponent implements OnInit {
               );
               //this.qualification = result as Qualification;
               //this.refreshForm();
+              this.isLoading=false;
               this.router.navigate(['admin/read-qualification']);
 
               let audit = new AuditLog();
@@ -132,6 +134,7 @@ export class AddQualificationComponent implements OnInit {
 
             else if(result.Status===403)
             {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {
@@ -148,6 +151,7 @@ export class AddQualificationComponent implements OnInit {
 
             else if(result.Status===404)
             {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {
@@ -164,6 +168,7 @@ export class AddQualificationComponent implements OnInit {
 
             else
             {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {

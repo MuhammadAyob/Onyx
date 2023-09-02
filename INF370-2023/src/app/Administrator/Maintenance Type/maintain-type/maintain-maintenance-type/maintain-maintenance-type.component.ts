@@ -28,6 +28,7 @@ nameFormControl = new FormControl('',[Validators.required]);
 
 type!:MaintenanceType;
 typelist!:MaintenanceType[];
+isLoading:boolean=false;
 
 public dataSource = new MatTableDataSource<MaintenanceType>();
 
@@ -91,11 +92,13 @@ constructor(
 
     dialogReference.afterClosed().subscribe((result) => {
       if (result == true) {
+        this.isLoading=true;
         this.service
           .UpdateType(this.type.MaintenanceTypeID, this.type)
           .subscribe((result:any) => {
             if (result.Status === 200) 
             {
+              this.isLoading=false;
               this.snack.open(
                 'Maintenance Type updated successfully!',
                       'OK',
@@ -119,6 +122,7 @@ constructor(
             } 
             else if(result.Status===404)
             {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {
@@ -135,6 +139,7 @@ constructor(
 
             else if(result.Status===401)
             {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {
@@ -151,6 +156,7 @@ constructor(
 
             else
             {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {

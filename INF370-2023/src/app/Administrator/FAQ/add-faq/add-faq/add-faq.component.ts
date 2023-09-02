@@ -26,6 +26,7 @@ export class AddFaqComponent implements OnInit {
   answerFormControl = new FormControl('', [Validators.required]);
 
 faq!:FAQ;
+isLoading:boolean=false;
 
   constructor(
     public router: Router,
@@ -57,7 +58,7 @@ faq!:FAQ;
       this.dialog.open(InputDialogComponent, {
         data: {
           dialogTitle: "Input Error",
-          dialogMessage: "Correct Errors"
+          dialogMessage: "Correct errors on Highlighted fields"
         },
         width: '25vw',
         height: '27vh',
@@ -105,6 +106,7 @@ faq!:FAQ;
 
     dialogReference.afterClosed().subscribe((result) => {
       if (result == true) {
+        this.isLoading=true;
         this.service.AddFAQ(this.faq).subscribe(
           (result:any) => {
             if(result.Status===200)
@@ -118,6 +120,7 @@ faq!:FAQ;
                         duration: 3000,
                       });
                       this.router.navigate(['admin/read-faq']);
+                      this.isLoading=false;
                        // Audit Log 
 
                 let audit = new AuditLog();
@@ -134,6 +137,7 @@ faq!:FAQ;
             }
             else if(result.Status===400)
             {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {
@@ -142,12 +146,14 @@ faq!:FAQ;
                     dialogMessage: 'Invalid data format, please correct',
                     operation: 'ok',
                   },
-                  width: '25vw',
+                  width: '50vw',
+                  height:'30vh'
                 }
               );
             }
             else if(result.Status===404)
             {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {
@@ -163,6 +169,7 @@ faq!:FAQ;
             }
             else
             {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {
@@ -171,7 +178,8 @@ faq!:FAQ;
                     dialogMessage: 'Internal server error, please try again',
                     operation: 'ok',
                   },
-                  width: '25vw',
+                  width: '50vw',
+                  height:'30vh'
                 }
               );
             }

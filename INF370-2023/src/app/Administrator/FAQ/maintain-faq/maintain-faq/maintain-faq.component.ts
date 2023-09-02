@@ -28,8 +28,9 @@ export class MaintainFaqComponent implements OnInit {
   answerFormControl = new FormControl('', [Validators.required]);
 
   faq!: FAQ;
- faqlist!: FAQ[];
+  faqlist!: FAQ[];
   public dataSource = new MatTableDataSource<FAQ>();
+  isLoading:boolean=false;
 
   constructor(
     public router: Router,
@@ -63,7 +64,7 @@ export class MaintainFaqComponent implements OnInit {
       this.dialog.open(InputDialogComponent, {
         data: {
           dialogTitle: "Input Error",
-          dialogMessage: "Correct Errors"
+          dialogMessage: "Correct errors on Highlighted fields"
         },
         width: '25vw',
         height: '27vh',
@@ -91,6 +92,7 @@ export class MaintainFaqComponent implements OnInit {
 
     dialogReference.afterClosed().subscribe((result) => {
       if (result == true) {
+        this.isLoading=true;
         this.service
           .UpdateFAQ(this.faq.ID, this.faq)
           .subscribe((result:any) => {
@@ -101,6 +103,7 @@ export class MaintainFaqComponent implements OnInit {
                   verticalPosition: 'bottom',
                   duration: 3000,
                 });
+                this.isLoading=false;
                 this.router.navigate(['admin/read-faq'])
 
                 let audit = new AuditLog();
@@ -115,6 +118,7 @@ export class MaintainFaqComponent implements OnInit {
             }
             else if(result.Status===404)
             {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {
@@ -130,6 +134,7 @@ export class MaintainFaqComponent implements OnInit {
             }
             else
             {
+              this.isLoading=false;
               const dialogReference = this.dialog.open(
                 ExistsDialogComponent,
                 {

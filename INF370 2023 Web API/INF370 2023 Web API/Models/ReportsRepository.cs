@@ -309,7 +309,7 @@ namespace INF370_2023_Web_API.Models
 
                 DateTime today = DateTime.Today;
                 DateTime sevenDaysAgo = today.AddDays(-7);
-
+                DateTime monthAgo = today.AddDays(-31);
                 //
 
                 var CQ = await db.Contacts.CountAsync(c => c.Date >= sevenDaysAgo && c.Date <= today);
@@ -317,6 +317,9 @@ namespace INF370_2023_Web_API.Models
                 ////
 
                 var maintenanceTypeCounts = await db.Maintenances
+                .Where(x =>
+                           DbFunctions.TruncateTime(x.DateLogged) >= monthAgo &&
+                           DbFunctions.TruncateTime(x.DateLogged) <= (today))
                 .GroupBy(m => m.MaintenanceType.Type) // Group by MaintenanceType
                 .Select(group => new
                 {
@@ -338,7 +341,7 @@ namespace INF370_2023_Web_API.Models
 
                 /////
 
-                var UpdateRequests = await db.UpdateRequests.Where(s => s.UpdateRequestID == 1)
+                var UpdateRequests = await db.UpdateRequests.Where(s => s.UpdateRequestStatusID == 1)
                         .Include(s => s.Employee)
                         .Select(s => new
                         {

@@ -33,7 +33,7 @@ export class MaintainTrainingVideoComponent implements OnInit {
 
   instructionalVideo!: InstructionalVideo;
   instructionalVideoList!: InstructionalVideo[];
-
+  isLoading:boolean=false;
   public dataSource = new MatTableDataSource<InstructionalVideo>();
 
    id : any;
@@ -72,10 +72,10 @@ export class MaintainTrainingVideoComponent implements OnInit {
       this.dialog.open(InputDialogComponent, {
         data: {
           dialogTitle: "Input Error",
-          dialogMessage: "Correct Errors"
+          dialogMessage: "Correct errors on Highlighted fields"
         },
-        width: '50vw',
-        height: '30vh',
+        width: '27vw',
+        height: '29vh',
       });
     } else {
       const title = 'Confirm Edit Video';
@@ -99,6 +99,7 @@ export class MaintainTrainingVideoComponent implements OnInit {
 
     dialogReference.afterClosed().subscribe((result) => {
       if (result == true) {
+        this.isLoading=true;
         this.service
           .UpdateInstructionalVideo(this.instructionalVideo.VideoID, this.instructionalVideo)
           .subscribe(
@@ -115,6 +116,7 @@ export class MaintainTrainingVideoComponent implements OnInit {
                         });
                        // this.instructionalVideo = result as InstructionalVideo;
                         this.refreshList();
+                        this.isLoading=false;
                         this.router.navigate(['admin/read-instructional-videos']);
 
                          // Audit Log 
@@ -133,6 +135,7 @@ export class MaintainTrainingVideoComponent implements OnInit {
               }
               else if(result.Status===404)
               {
+                this.isLoading=false;
                 const dialogReference = this.dialog.open(
                   ExistsDialogComponent,
                   {
@@ -148,6 +151,7 @@ export class MaintainTrainingVideoComponent implements OnInit {
               }
               else if(result.Status===400)
               {
+                this.isLoading=false;
                 const dialogReference = this.dialog.open(
                   ExistsDialogComponent,
                   {
@@ -164,11 +168,12 @@ export class MaintainTrainingVideoComponent implements OnInit {
 
               else if(result.Status===600)
               {
+                this.isLoading=false;
                 const dialogReference = this.dialog.open(
                   ExistsDialogComponent,
                   {
                     data: {
-                      dialogTitle: 'InstructionalVideo Link Exists',
+                      dialogTitle: 'Instructional Video Link Exists',
                       dialogMessage: 'Enter a new video link',
                       operation: 'ok',
                     },
@@ -179,6 +184,7 @@ export class MaintainTrainingVideoComponent implements OnInit {
               }
 
               else{
+                this.isLoading=false;
                 const dialogReference = this.dialog.open(
                   ExistsDialogComponent,
                   {

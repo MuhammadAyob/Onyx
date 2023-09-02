@@ -20,4 +20,8 @@ AddAudit(obj:any){
   return this.http.post(environment.WebAPI + 'AddAudit', obj, this.httpOptions)
 }
 
+GetAudits(obj:any){
+  return this.http.post(environment.WebAPI + 'GetAudits', obj, this.httpOptions);
+}
+
 }
