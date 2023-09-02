@@ -461,5 +461,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GetContacts" FunctionName="Model.Store.GetContacts" />
+    <FunctionImportMapping FunctionImportName="GetCoursePerformance" FunctionName="Model.Store.GetCoursePerformance" />
+    <FunctionImportMapping FunctionImportName="GetCourses" FunctionName="Model.Store.GetCourses" />
+    <FunctionImportMapping FunctionImportName="GetDashboardData" FunctionName="Model.Store.GetDashboardData" />
+    <FunctionImportMapping FunctionImportName="GetEmployeesWithSkill" FunctionName="Model.Store.GetEmployeesWithSkill" />
+    <FunctionImportMapping FunctionImportName="GetRevenueReport" FunctionName="Model.Store.GetRevenueReport" />
+    <FunctionImportMapping FunctionImportName="GetSales" FunctionName="Model.Store.GetSales" />
+    <FunctionImportMapping FunctionImportName="GetSkillsWithTypes" FunctionName="Model.Store.GetSkillsWithTypes" />
+    <FunctionImportMapping FunctionImportName="GetMaintenance" FunctionName="Model.Store.GetMaintenance" />
+    <FunctionImportMapping FunctionImportName="GetMaintenanceList" FunctionName="Model.Store.GetMaintenanceList" />
   </EntityContainerMapping>
 </Mapping>

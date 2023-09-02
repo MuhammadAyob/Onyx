@@ -177,7 +177,7 @@ export class MaintainSlotComponent implements OnInit {
                     width: '50vw',
                     data: {
                       dialogTitle: "Error",
-                      dialogMessage: "Ensure that start and end times make sense i.e the start time is not greater than or equal to the end time"
+                      dialogMessage: "Ensure that start time is not greater than or equal to the end time"
                     },
                   }
                 );
@@ -205,7 +205,7 @@ export class MaintainSlotComponent implements OnInit {
                     width: '50vw',
                     data: {
                       dialogTitle: "Overlap Error",
-                      dialogMessage: "The slot overlaps/intersectswith another slot on the specified date. Please enter a different start and/or end time"
+                      dialogMessage: "The slot overlaps/intersects with another slot on the specified date. Please enter a different start and/or end time"
                     },
                   }
                 );

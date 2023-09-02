@@ -37,6 +37,7 @@ export class MaintenanceReportComponent implements OnInit {
 
   fetched:boolean=false;
   date = new Date()
+  revenue = new Revenue();
   
   constructor(
     private service:ReportsService, 
@@ -169,11 +170,11 @@ export class MaintenanceReportComponent implements OnInit {
     SD = this.datePipe.transform(this.startDate, 'yyyy/MM/dd');
     ED = this.datePipe.transform(this.endDate, 'yyyy/MM/dd');
 
-    let revenue = new Revenue();
-    revenue.startDate = SD;
-    revenue.endDate = ED;
+    //let revenue = new Revenue();
+    this.revenue.startDate = SD;
+    this.revenue.endDate = ED;
    
-    this.service.GetMaintenanceReportData(revenue).subscribe((data:any)=>{
+    this.service.GetMaintenanceReportData(this.revenue).subscribe((data:any)=>{
       data.ChartData.forEach((element: any) => {
         
         this.TypesPieChart.datasets[0].data.push(element.Total);

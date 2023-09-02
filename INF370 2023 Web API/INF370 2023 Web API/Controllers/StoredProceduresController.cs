@@ -19,42 +19,42 @@ namespace INF370_2023_Web_API.Controllers
         }
 
         [HttpGet]
-        [Route("api/GetContacts")]
+        [Route("api/GetContacts2")]
         public object GetContacts(Revenue revenue)
         {
             return _storedRepo.GetContacts(revenue);
         }
 
         [HttpGet]
-        [Route("api/GetCoursePerformanceReport")]
+        [Route("api/GetCoursePerformanceReport2")]
         public object GetCoursePerformanceReport(int id)
         {
             return _storedRepo.GetCoursePerformanceReport(id);
         }
 
         [HttpGet]
-        [Route("api/GetCourses")]
+        [Route("api/GetCourses2")]
         public object GetCourses()
         {
             return _storedRepo.GetCourses();
         }
 
         [HttpGet]
-        [Route("api/GetDashboardData")]
+        [Route("api/GetDashboardData2")]
         public object GetDashboardData()
         {
             return _storedRepo.GetDashboardData();
         }
 
         [HttpGet]
-        [Route("api/GetEmployeesWithSkills/{id}")]
+        [Route("api/GetEmployeesWithSkills2/{id}")]
         public object GetEmployeesWithSkills(int id)
         {
             return _storedRepo.GetEmployeesWithSkills(id);
         }
 
         [HttpGet]
-        [Route("api/GetMaintenance/{id}")]
+        [Route("api/GetMaintenance2/{id}")]
         public object GetMaintenance(int maintenanceId)
         {
             return _storedRepo.GetMaintenance(maintenanceId);
@@ -62,28 +62,28 @@ namespace INF370_2023_Web_API.Controllers
 
 
         [HttpGet]
-        [Route("api/GetMaintenanceList")]
+        [Route("api/GetMaintenanceList2")]
         public object GetMaintenanceList()
         {
             return _storedRepo.GetMaintenanceList();
         }
 
         [HttpGet]
-        [Route("api/GetSales")]
+        [Route("api/GetSales2")]
         public object GetSales(Revenue revenue)
         {
             return _storedRepo.GetSales(revenue);
         }
 
         [HttpGet]
-        [Route("api/GetSkillsWithTypes")]
+        [Route("api/GetSkillsWithTypes2")]
         public object GetSkillsWithTypes()
         {
             return _storedRepo.GetSkillsWithTypes();
         }
 
         [HttpGet]
-        [Route("api/RevenueReport")]
+        [Route("api/RevenueReport2")]
         public object RevenueReport(Revenue revenue)
         {
             return _storedRepo.RevenueReport(revenue);

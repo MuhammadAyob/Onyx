@@ -942,6 +942,31 @@
       <End Role="InterviewSlot" EntitySet="InterviewSlots" />
     </AssociationSet>
     <EntitySet Name="Contacts" EntityType="Model.Contact" />
+    <FunctionImport Name="GetContacts">
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="GetCoursePerformance">
+      <Parameter Name="CourseID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetCourses" />
+    <FunctionImport Name="GetDashboardData" />
+    <FunctionImport Name="GetEmployeesWithSkill">
+      <Parameter Name="SkillID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetRevenueReport">
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="GetSales">
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="GetSkillsWithTypes" />
+    <FunctionImport Name="GetMaintenance">
+      <Parameter Name="MaintenanceID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetMaintenanceList" />
   </EntityContainer>
   <EntityType Name="OTPTimer">
     <Key>

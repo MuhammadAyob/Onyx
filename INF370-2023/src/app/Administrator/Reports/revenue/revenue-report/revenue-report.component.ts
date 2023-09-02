@@ -46,7 +46,7 @@ export class RevenueReportComponent implements OnInit {
   GrandTotal:any;
   show:boolean=false;
 date=new Date()
-
+revenue = new Revenue();
 constructor(
   private titleservice:Title,
     private service:ReportsService,
@@ -128,12 +128,12 @@ FetchReportData(){
   SD = this.datePipe.transform(this.startDate, 'yyyy/MM/dd');
   ED = this.datePipe.transform(this.endDate, 'yyyy/MM/dd');
 
-  let revenue = new Revenue();
-  revenue.startDate = SD;
-  revenue.endDate = ED;
+  //let revenue = new Revenue();
+  this.revenue.startDate = SD;
+  this.revenue.endDate = ED;
  
  
-  this.service.RevenueReport(revenue).subscribe((data)=>{
+  this.service.RevenueReport(this.revenue).subscribe((data)=>{
     this.dataSource.data = data as any;
     this.reportData = data as any;
     this.isLoading=false;

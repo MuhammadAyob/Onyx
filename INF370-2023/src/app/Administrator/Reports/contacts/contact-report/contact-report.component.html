@@ -78,7 +78,7 @@
       </mat-card-header>
       <br>
       <br>
-      <h1 style="margin:0 auto; color: #0e1a3c;"><b>Contact Queries between: {{startDate | date:'MM/dd/yyyy'}} - {{endDate | date:'MM/dd/yyyy'}}</b></h1>
+      <h1 style="margin:0 auto; color: #0e1a3c;"><b>Contact Queries between: {{ revenue.startDate | date:'MM/dd/yyyy'}} - {{revenue.endDate | date:'MM/dd/yyyy'}}</b></h1>
       <div class="table-hover table-container mat-elevation-z8">
         <table *ngIf="!isLoading" mat-table matSort [dataSource]="dataSource"  class="mat-elevation-z8" id="DeptTable">
           <!-- Department ID Column -->

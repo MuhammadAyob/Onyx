@@ -164,12 +164,12 @@ export class ApplicantApplyComponent implements OnInit {
             if(result.Status === 200)
             {
               this.snack.open(
-                'Application submitted successfully!',
+                'Application submitted successfully! Check email inbox for updates.',
                       'OK',
                       {
                         horizontalPosition: 'center',
                         verticalPosition: 'bottom',
-                        duration: 3000,
+                        duration: 6000,
                       }
               );
               this.refreshForm();
@@ -192,7 +192,7 @@ export class ApplicantApplyComponent implements OnInit {
               const dialogReference = this.dialog.open(ExistsDialogComponent, {
                 data: {
                   dialogTitle: 'Error',
-                  dialogMessage: 'You cannot apply for multiple opportunities at once. Please wait while we process your exisiting application ',
+                  dialogMessage: 'You cannot apply for multiple opportunities at once. Please wait while we process your existing application ',
                   operation: 'ok',
                 },
                 width: '50vw',
@@ -215,8 +215,8 @@ export class ApplicantApplyComponent implements OnInit {
             {
               const dialogReference = this.dialog.open(ExistsDialogComponent, {
                 data: {
-                  dialogTitle: 'Error',
-                  dialogMessage: 'Invalid data format ',
+                  dialogTitle: 'Invalid PDF',
+                  dialogMessage: 'The PDF could not be read. Please re-upload A different PDF',
                   operation: 'ok',
                 },
                 width: '50vw',
@@ -232,7 +232,7 @@ export class ApplicantApplyComponent implements OnInit {
                   operation: 'ok',
                 },
                 width: '50vw',
-                height:'30vh'
+                height:'33vh'
               });
             }
             else if(result.Status === 406)

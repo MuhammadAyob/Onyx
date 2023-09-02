@@ -103,6 +103,7 @@ export class EmployeeSkillReportComponent implements OnInit {
   
   selectSkill($event:any) {
     this.selectedSkillId = $event;
+    this.fetched=false;
   }
 
   // Helper method to get the course name based on the selectedCourseId

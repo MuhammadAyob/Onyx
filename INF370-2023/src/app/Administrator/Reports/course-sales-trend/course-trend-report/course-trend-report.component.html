@@ -71,7 +71,7 @@
                           <span style="font-size: 20px;"><b>Total Revenue for {{ categoryData.Category }}:</b></span>
                         </div>
                         <div style="text-align: right;">
-                          <span style="font-size: 24px;">R{{ categoryData.CategoryTotal }}</span>
+                          <span style="font-size: 24px;">R{{ categoryData.CategoryTotal | number : '1.2-2'}}</span>
                         </div>
                         <mat-divider></mat-divider>
                       </mat-list-item>
@@ -104,7 +104,7 @@
                           <span style="font-size: 20px;"><b>Total Revenue (All Time):</b></span>
                         </div>
                         <div style="text-align: right;">
-                          <span style="font-size: 24px;">R{{ calculateTotalRevenueAllTime() }}</span>
+                          <span style="font-size: 24px;">R{{ calculateTotalRevenueAllTime() | number : '1.2-2' }}</span>
                         </div>
                         <mat-divider></mat-divider>
                       </mat-list-item>

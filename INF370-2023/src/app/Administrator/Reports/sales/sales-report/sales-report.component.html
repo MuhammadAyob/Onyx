@@ -134,7 +134,7 @@
             </div>
             <br>
             <div *ngIf="show">
-              <h1 style="margin-left:35%;color: #0e1a3c;"><b>Purchase Transactions List Summary: {{startDate | date:'MM/dd/yyyy'}} - {{endDate | date:'MM/dd/yyyy'}}</b></h1>
+              <h1 style="margin-left:35%;color: #0e1a3c;"><b>Purchase Transactions List Summary: {{revenue.startDate | date:'MM/dd/yyyy'}} - {{revenue.endDate | date:'MM/dd/yyyy'}}</b></h1>
               <br>
                <!-- VAT calculations and total -->
                <div class="vat-section" style="text-align: center;">
@@ -144,7 +144,7 @@
                         <span style="font-size: 20px;"><b>Grand Total:</b></span>
                       </div>
                       <div style="text-align: right;">
-                        <span style="font-size: 24px;">R{{ GrandTotal }}</span>
+                        <span style="font-size: 24px;">R{{ GrandTotal | number : '1.2-2'}}</span>
                       </div>
                     <mat-divider></mat-divider>
                   </mat-list-item>

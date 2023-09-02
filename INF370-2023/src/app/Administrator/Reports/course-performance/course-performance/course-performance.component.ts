@@ -29,6 +29,7 @@ displayedColumns: string[] = [
     'Comment',
 ];
   
+  average!:number;
   public dataSource = new MatTableDataSource<any>();
   noData = this.dataSource.connect().pipe(map(data=>data.length===0));
   isLoading!:boolean;
@@ -113,6 +114,7 @@ legend:{display:false},
         this.barChartType;
         this.barChartOptions;
         this.barChartData;
+        this.average = this.calculateAverageRating(data.Ratings);
         this.chart?.update();
         this.isLoading=false;
         this.showGraph=true;
@@ -123,10 +125,22 @@ legend:{display:false},
    
     
   }
-  
+
+  calculateAverageRating(ratings: any[]): number {
+    if (ratings.length === 0) {
+        return 0; // Handle case when no ratings are available
+    }
+
+    const totalRating = ratings.reduce((sum, rating) => sum + rating.Rating, 0);
+    const averageRating = totalRating / ratings.length;
+    return averageRating;
+}
+
   date = new Date()
+
   selectCourse($event:any) {
     this.selectedCourseId = $event;
+    this.fetched=false;
   }
 
   // Helper method to get the course name based on the selectedCourseId

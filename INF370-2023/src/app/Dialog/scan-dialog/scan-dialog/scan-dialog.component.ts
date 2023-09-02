@@ -54,8 +54,14 @@ if (result === this.code) {
   this.service.ScanQRCode(this.slot.InterviewSlotID).subscribe((res:any)=>{
   if(res.Status === 200)
   {
-    this.Ok();
-    this.isLoading=false;
+    let audit = new AuditLog();
+    audit.AuditLogID = 0;
+    audit.UserID = this.security.User.UserID;
+    audit.AuditName = 'Scan QR Code';
+    audit.Description = 'Employee, ' + this.security.User.Username + ', scanned a QR Code belonging to the allocated slot for: ' + this.slot.Name + ' ' + this.slot.Surname + ' - ' + this.slot.JobOpp
+    audit.Date = '';
+
+    this.aService.AddAudit(audit).subscribe((data) => {
     
     this.snack.open(
       'Attendance email to interviewee has been sent!',
@@ -66,20 +72,11 @@ if (result === this.code) {
               duration: 8000,
             });
 
-            let audit = new AuditLog();
-              audit.AuditLogID = 0;
-              audit.UserID = this.security.User.UserID;
-              audit.AuditName = 'Scan QR Code';
-              audit.Description = 'Employee, ' + this.security.User.Username + ', scanned a QR Code belonging to the allocated slot for: ' + this.slot.Name + ' ' + this.slot.Surname + ' - ' + this.slot.JobOpp
-              audit.Date = '';
-  
-              this.aService.AddAudit(audit).subscribe((data) => {
-                //console.log(data);
-                //this.refreshForm();
-              })
-
             location.reload();
-           // this.data.refreshList();
+            this.Ok();
+            this.isLoading=false;
+    })
+         
   }
   else{
     this.isLoading=false;
@@ -95,7 +92,9 @@ if (result === this.code) {
   }
 })
 
-  } else {
+  } 
+  
+  else {
     
     this.snack.open(
       'QR Code invalid or does not match interview code!',

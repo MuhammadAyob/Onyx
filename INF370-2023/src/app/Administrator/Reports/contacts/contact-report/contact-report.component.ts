@@ -29,6 +29,8 @@ export class ContactReportComponent implements OnInit {
     'Query',
   ];
 
+  revenue = new Revenue();
+
   isLoading!:boolean;
   startFormControl = new FormControl('', [Validators.required]);
   endFormControl = new FormControl('', [Validators.required]);
@@ -68,12 +70,12 @@ export class ContactReportComponent implements OnInit {
     SD = this.datePipe.transform(this.startDate, 'yyyy/MM/dd');
     ED = this.datePipe.transform(this.endDate, 'yyyy/MM/dd');
 
-    let revenue = new Revenue();
-    revenue.startDate = SD;
-    revenue.endDate = ED;
+    //let revenue = new Revenue();
+    this.revenue.startDate = SD;
+    this.revenue.endDate = ED;
    
    
-    this.service.GetContacts(revenue).subscribe((data)=>{
+    this.service.GetContacts(this.revenue).subscribe((data)=>{
       this.dataSource.data = data as any;
       this.isLoading=false;
       this.fetched=true;

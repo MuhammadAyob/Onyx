@@ -155,20 +155,19 @@ export class AddInterviewDialogComponent implements OnInit {
               audit.Date = '';
   
               this.aService.AddAudit(audit).subscribe((data) => {
-                //console.log(data);
-                //this.refreshForm();
+                this.refreshForm();
+                this.isLoading=false;
+                location.reload();
+                this.snack.open(
+                  'Interview Slot added successfully!',
+                        'OK',
+                        {
+                          horizontalPosition: 'center',
+                          verticalPosition: 'bottom',
+                          duration: 3000,
+                        });
               })
-              this.refreshForm();
-              this.isLoading=false;
-              location.reload();
-              this.snack.open(
-                'Interview Slot added successfully!',
-                      'OK',
-                      {
-                        horizontalPosition: 'center',
-                        verticalPosition: 'bottom',
-                        duration: 3000,
-                      });
+              
                      
 
 
@@ -196,7 +195,7 @@ export class AddInterviewDialogComponent implements OnInit {
                   width: '50vw',
                   data: {
                     dialogTitle: "Error",
-                    dialogMessage: "Ensure that start and end times make sense i.e the start time is not greater than the end time"
+                    dialogMessage: "Ensure that the start time is not greater than the end time"
                   },
                 }
               );
@@ -224,7 +223,7 @@ export class AddInterviewDialogComponent implements OnInit {
                   width: '50vw',
                   data: {
                     dialogTitle: "Overlap Error",
-                    dialogMessage: "The slot overlaps/intersectswith another slot on the specified date. Please enter a different start and/or end time"
+                    dialogMessage: "The slot overlaps/intersects with another slot on the specified date. Please enter a different start and/or end time"
                   },
                 }
               );

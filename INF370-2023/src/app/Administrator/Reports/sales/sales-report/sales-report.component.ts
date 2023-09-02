@@ -34,6 +34,7 @@ export class SalesReportComponent implements OnInit {
 
   startDate: Date | any;
   endDate: Date | any;
+  revenue = new Revenue();
 
   public dataSource = new MatTableDataSource<any>();
   noData = this.dataSource.connect().pipe(map(data=>data.length===0));
@@ -63,17 +64,17 @@ export class SalesReportComponent implements OnInit {
     this.show=false;
     this.fetched=false;
     
-    var SD:any;
+  var SD:any;
   var ED:any;
 
   SD = this.datePipe.transform(this.startDate, 'yyyy/MM/dd');
   ED = this.datePipe.transform(this.endDate, 'yyyy/MM/dd');
 
-  let revenue = new Revenue();
-  revenue.startDate = SD;
-  revenue.endDate = ED;
+  //let revenue = new Revenue();
+  this.revenue.startDate = SD;
+  this.revenue.endDate = ED;
    
-    this.service.GetSales(revenue).subscribe((data:any)=>{
+    this.service.GetSales(this.revenue).subscribe((data:any)=>{
       this.dataSource.data = data.SalesData;
       this.GrandTotal = data.GrandTotal;
       this.isLoading=false;

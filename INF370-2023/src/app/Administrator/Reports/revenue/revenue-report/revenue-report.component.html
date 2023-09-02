@@ -99,7 +99,7 @@
                       <span style="font-size: 20px;"><b>Grand Total for {{ yearData.Year }}:</b></span>
                     </div>
                     <div style="text-align: right;">
-                      <span style="font-size: 24px;">R{{ yearData.YearTotal }}</span>
+                      <span style="font-size: 24px;">R{{ yearData.YearTotal  | number : '1.2-2' }}</span>
                     </div>
                     <mat-divider></mat-divider>
                   </mat-list-item>
@@ -110,7 +110,7 @@
             <br>
             <br>
             <div *ngIf="show">
-              <h1 style="margin-left: 35%; color: #0e1a3c;"><b>Total Revenue for {{startDate | date:'MM/dd/yyyy'}} - {{endDate | date:'MM/dd/yyyy'}}:</b></h1>
+              <h1 style="margin-left: 35%; color: #0e1a3c;"><b>Total Revenue for {{revenue.startDate | date:'MM/dd/yyyy'}} - {{revenue.endDate | date:'MM/dd/yyyy'}}:</b></h1>
               <div class="vat-section" style="text-align: center;">
                 <mat-list style="width: 70%; margin: 0 auto;">
                   <mat-list-item>
@@ -118,7 +118,7 @@
                       <span style="font-size: 20px;"><b>Grand Total for Selected Period:</b></span>
                     </div>
                     <div style="text-align: right;">
-                      <span style="font-size: 24px;">R{{ calculateSelectedPeriodTotal() }}</span>
+                      <span style="font-size: 24px;">R{{ calculateSelectedPeriodTotal()  | number : '1.2-2' }}</span>
                     </div>
                     <mat-divider></mat-divider>
                   </mat-list-item>
