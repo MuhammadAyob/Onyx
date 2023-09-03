@@ -18,6 +18,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class ReadOTPComponent implements OnInit {
 
 OTPTimer:any;
+fetched:boolean=false;
 
 constructor(
   public router:Router,
@@ -36,6 +37,7 @@ GetOTP(){
   this.service.GetOTPTimer().subscribe((result) => {
     this.OTPTimer = result as any;
     sessionStorage['OTPTimer'] = JSON.stringify(result);
+    this.fetched = true;
   });
 
 }

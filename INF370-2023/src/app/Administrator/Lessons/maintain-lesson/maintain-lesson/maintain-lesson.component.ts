@@ -97,8 +97,8 @@ onSubmit() {
         dialogTitle: "Input Error",
         dialogMessage: "Correct Errors on highlighted fields"
       },
-      width: '25vw',
-      height: '27vh',
+      width: '27vw',
+      height: '29vh',
     });
   } 
   else 

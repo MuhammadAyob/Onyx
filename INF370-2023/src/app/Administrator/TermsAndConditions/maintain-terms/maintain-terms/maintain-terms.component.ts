@@ -110,7 +110,7 @@ onSubmit() {
       this.isLoading=true;
        this.service.UpdateTerms(this.test.ID, this.test).subscribe((result:any)=>
        {
-         console.log(result)
+         //console.log(result)
          if(result.Status===200)
          {
            this.snack.open(
@@ -146,8 +146,8 @@ onSubmit() {
              ExistsDialogComponent,
              {
                data: {
-                 dialogTitle: 'Error',
-                 dialogMessage: 'Internal server error, please try again',
+                 dialogTitle: 'Invalid PDF',
+                 dialogMessage: 'The PDF could not be read. Please upload a different file',
                  operation: 'ok',
                },
                width: '50vw',

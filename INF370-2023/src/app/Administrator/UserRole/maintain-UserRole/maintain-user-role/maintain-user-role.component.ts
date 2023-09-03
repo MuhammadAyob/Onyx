@@ -84,7 +84,7 @@ export class MaintainUserRoleComponent implements OnInit {
         this.service
           .MaintainUserRole(this.userRole.UserRoleID, this.userRole)
           .subscribe((result:any) => {
-            console.log(result);
+            //console.log(result);
             if (result.Status === 200) 
             {
               {

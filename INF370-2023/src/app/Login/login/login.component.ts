@@ -81,10 +81,10 @@ export class LoginComponent implements OnInit {
       this.dialog.open(InputDialogComponent, {
         data: {
           dialogTitle: "Input Error",
-          dialogMessage: "Correct Errors"
+          dialogMessage: "Correct Errors on highlighted fields"
         },
-        width: '50vw',
-        height: '30vh',
+        width: '27vw',
+        height: '29vh',
       });
     } else {
      //this.isLoading = true;
@@ -118,7 +118,7 @@ export class LoginComponent implements OnInit {
              audit.Date = this.datePipe.transform(new Date(), 'yyyy/MM/dd');
  
              this.aService.AddAudit(audit).subscribe((data) => {
-               console.log(data);
+               //console.log(data);
              })
             
           });

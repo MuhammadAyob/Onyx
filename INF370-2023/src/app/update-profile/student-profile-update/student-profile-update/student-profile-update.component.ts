@@ -94,7 +94,7 @@ validateFormControls(): boolean {
 }
 
 onSubmit() {
-  console.log(this.student);
+//console.log(this.student);
   const isInvalid = this.validateFormControls();
   if (isInvalid == true) {
     this.dialog.open(InputDialogComponent, {

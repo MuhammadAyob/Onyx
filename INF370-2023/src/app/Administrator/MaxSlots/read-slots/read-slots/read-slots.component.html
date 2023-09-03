@@ -10,7 +10,7 @@
             >
           </mat-card-title-group>
     
-          <button mat-icon-button style="color: rgb(255, 255, 255); margin-left: 40%;margin-top: -10px;" (click)="onEdit()">
+          <button [disabled]="!fetched" mat-icon-button style="color: rgb(255, 255, 255); margin-left: 40%;margin-top: -10px;" (click)="onEdit()">
             <mat-icon>edit</mat-icon>
           </button>
          

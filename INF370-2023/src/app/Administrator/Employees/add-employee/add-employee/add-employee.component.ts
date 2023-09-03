@@ -294,7 +294,7 @@ showDialog(title: string, message: string): void {
               dialogMessage: 'Employee ID Number is attached to another employee of the system, enter a different ID Number',
               operation: 'ok',
             },
-            height: '30vh',
+            height: '35vh',
             width: '50vw',
           });
         }
@@ -307,7 +307,7 @@ showDialog(title: string, message: string): void {
               dialogMessage: 'Phone number is attached to another user of the system, enter a different number',
               operation: 'ok',
             },
-            height: '30vh',
+            height: '35vh',
             width: '50vw',
           });
         }
@@ -320,7 +320,7 @@ showDialog(title: string, message: string): void {
               dialogMessage: 'Employee Email exists',
               operation: 'ok',
             },
-            height: '30vh',
+            height: '35vh',
             width: '50vw',
           });
         }
@@ -359,7 +359,7 @@ uploadFileEvt(imgFile: any) {
       image.src = e.target.result;
       image.onload = (rs) => {
         let imgBase64Path = e.target.result;
-        console.log(imgBase64Path);
+        //console.log(imgBase64Path);
         this.dataImage = imgBase64Path;
       };
     };

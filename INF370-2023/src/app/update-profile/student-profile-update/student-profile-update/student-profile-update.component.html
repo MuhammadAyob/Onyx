@@ -70,8 +70,11 @@
                  required
                />
                <mat-error *ngIf="nameFormControl.hasError('required')">
-                 Student Name is <strong>required</strong>
+                Name is <strong>required</strong>
                </mat-error>
+               <mat-error *ngIf="nameFormControl.hasError('pattern')">
+                Name must contain only<strong> alpha</strong> characters
+              </mat-error>
                </mat-form-field>
                <br>
                <br>
@@ -96,6 +99,9 @@
              />
              <mat-error *ngIf="surnameFormControl.hasError('required')">
               Surname is <strong>required</strong>
+             </mat-error>
+             <mat-error *ngIf="surnameFormControl.hasError('pattern')">
+              Surname must only contain <strong>alpha</strong> characters
              </mat-error>
              </mat-form-field>
 <br>
@@ -140,7 +146,7 @@ matInput
 [formControl]="emailReqFormControl"
 name="ClientEmail"
 [(ngModel)]="student.Email"
-placeholder="DwightSchrute@dundermifflin.com"
+placeholder="dwightSchrute@dundermifflin.com"
 required
 />
 <mat-error *ngIf="emailReqFormControl.hasError('required')">

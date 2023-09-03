@@ -50,7 +50,7 @@ AverageRating:any
 
 ngOnInit(): void {
 this.course = JSON.parse( sessionStorage['course-structure'] );
-console.log(this.course);
+//console.log(this.course);
 this.getStructure();
 this.GetFAQ();
 this.GetRatings();

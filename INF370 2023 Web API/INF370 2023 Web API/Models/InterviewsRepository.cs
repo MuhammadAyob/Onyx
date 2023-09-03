@@ -505,7 +505,7 @@ namespace INF370_2023_Web_API.Models
                      "<br/>"
                      + "<br>"
                      + "Interview details:" +
-                    "<br/><br/>" + "Date: " + slot.InterviewDate +
+                    "<br/><br/>" + "Date: " + slot.InterviewDate.Date +
                     "<br/>" + "Time: " + slot.StartTime + " " + "-" + " " + slot.EndTime +
                     "<br/>" + "Date Attended: " + slot.DateAttended +
                    "<br/><br/>Please keep this email safe as a form of proof of attendance. " +

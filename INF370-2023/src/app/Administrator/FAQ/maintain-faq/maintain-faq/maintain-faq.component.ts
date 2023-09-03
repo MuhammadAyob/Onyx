@@ -143,7 +143,8 @@ export class MaintainFaqComponent implements OnInit {
                     dialogMessage: 'Internal server error, please try again',
                     operation: 'ok',
                   },
-                  width: '25vw',
+                  width: '50vw',
+                  height:'30vh'
                 }
               );
             }

@@ -189,7 +189,8 @@ export class AdminProfileUpdateComponent implements OnInit {
                     dialogMessage: 'Invalid data, please ensure data is correctly formatted',
                     operation: 'ok',
                   },
-                  width: '25vw',
+                  width: '50vw',
+                  height:'30vh'
                 });
               }
 
@@ -202,7 +203,8 @@ export class AdminProfileUpdateComponent implements OnInit {
                     dialogMessage: 'Email is in use, please enter a different email',
                     operation: 'ok',
                   },
-                  width: '25vw',
+                  width: '50vw',
+                  height:'30vh'
                 });
               }
               else if(result.Status === 405)
@@ -214,7 +216,8 @@ export class AdminProfileUpdateComponent implements OnInit {
                     dialogMessage: 'ID number in use, please enter a different ID Number',
                     operation: 'ok',
                   },
-                  width: '25vw',
+                  width: '50vw',
+                  height:'30vh'
                 });
               }
 
@@ -227,7 +230,8 @@ export class AdminProfileUpdateComponent implements OnInit {
                     dialogMessage: 'Phone number is in use, please enter a different phone number',
                     operation: 'ok',
                   },
-                  width: '25vw',
+                  width: '50vw',
+                  height:'30vh'
                 });
               }
               else
@@ -239,7 +243,8 @@ export class AdminProfileUpdateComponent implements OnInit {
                     dialogMessage: 'Internal server error, please try again',
                     operation: 'ok',
                   },
-                  width: '25vw',
+                  width: '50vw',
+                  height:'30vh'
                 });
               }
             }

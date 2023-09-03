@@ -70,7 +70,7 @@ public doFilter = (event: Event) => {
 
 refreshList() {
   this.service.GetDisabledUsers().subscribe((result) => {
-    console.log(result)
+    //console.log(result)
     this.dataSource.data = result as any[];
     this.isLoading=false;
   });

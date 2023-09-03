@@ -83,7 +83,7 @@ export class AuditLogComponent implements OnInit {
    
    
     this.service.GetAudits(revenue).subscribe((data)=>{
-      console.log(data)
+      //console.log(data)
       this.dataSource.data = data as any;
       this.isLoading=false;
       this.fetched=true;

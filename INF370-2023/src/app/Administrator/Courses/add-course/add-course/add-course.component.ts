@@ -108,8 +108,8 @@ constructor(
           dialogTitle: "Input Error",
           dialogMessage: "Correct Errors on highlighted fields"
         },
-        width: '40vw',
-        height: '30vh',
+        width: '27vw',
+        height: '29vh',
       });
     } else {
       const title = 'Confirm New Course';
@@ -290,7 +290,7 @@ uploadFileEvt(imgFile: any) {
       image.src = e.target.result;
       image.onload = (rs) => {
         let imgBase64Path = e.target.result;
-        console.log(imgBase64Path);
+        //console.log(imgBase64Path);
         this.dataImage = imgBase64Path;
       };
     };

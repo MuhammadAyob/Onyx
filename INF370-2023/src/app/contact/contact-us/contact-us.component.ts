@@ -57,10 +57,10 @@ onSubmit() {
     this.dialog.open(InputDialogComponent, {
       data: {
         dialogTitle: "Input Error",
-        dialogMessage: "Correct Errors"
+        dialogMessage: "Correct errors on highlighted fields"
       },
-      width: '50vw',
-      height: '30vh',
+      width: '27vw',
+      height: '29vh',
     });
   } else {
     const title = 'Confirm Query';
@@ -105,7 +105,7 @@ showDialog(title: string, message: string): void {
         (result:any) => 
         {
           this.isLoading = false;
-          console.log(result);
+          //console.log(result);
           if(result.Status === 200)
           {
             this.snack.open(
@@ -114,7 +114,7 @@ showDialog(title: string, message: string): void {
                     {
                       horizontalPosition: 'center',
                       verticalPosition: 'bottom',
-                      duration: 3000,
+                      duration: 5000,
                     }
             );
             this.refreshForm();

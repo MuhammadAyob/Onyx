@@ -17,6 +17,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class ReadSlotsComponent implements OnInit {
 
 MaxSlotsPerDay!:MaxSlotsPerDay;
+fetched:boolean=false;
 
 constructor(
   public router:Router,
@@ -34,6 +35,7 @@ constructor(
     this.service.GetMaxSlots().subscribe((result) => {
       this.MaxSlotsPerDay = result as any;
       sessionStorage['MaxSlotsPerDay'] = JSON.stringify(result);
+      this.fetched=true;
     });
   
   }

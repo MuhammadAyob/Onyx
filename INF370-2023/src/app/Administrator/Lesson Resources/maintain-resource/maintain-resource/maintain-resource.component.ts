@@ -115,7 +115,7 @@ showDialog(title: string, message: string): void {
       this.isLoading=true;
       this.service.UpdateLessonResource(this.test.ResourceID, this.test).subscribe((result:any)=>
       {
-        console.log(result)
+        //console.log(result)
         if(result.Status===200)
         {
           this.isLoading=false;
@@ -173,8 +173,8 @@ showDialog(title: string, message: string): void {
             ExistsDialogComponent,
             {
               data: {
-                dialogTitle: 'Error',
-                dialogMessage: 'Invalid data, ensure data is in the correct format',
+                dialogTitle: 'Invalid PDF',
+                dialogMessage: 'The PDF could not be read. Please upload a different PDF.',
                 operation: 'ok',
               },
               width: '50vw',
@@ -205,8 +205,8 @@ showDialog(title: string, message: string): void {
             ExistsDialogComponent,
             {
               data: {
-                dialogTitle: 'Error',
-                dialogMessage: 'Internal server error, please try again',
+                dialogTitle: 'Invalid PDF',
+                dialogMessage: 'The PDF could not be read. Please upload a different PDF.',
                 operation: 'ok',
               },
               width: '50vw',

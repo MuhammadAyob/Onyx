@@ -108,7 +108,7 @@ refreshList() {
 onSubmit() {
  this.resourceFile = this.resourceFile.slice(28);
   this.test.ResourceFile = this.resourceFile;
-  console.log(this.test);
+  //console.log(this.test);
 
 const isInvalid = this.validateFormControls();
 
@@ -118,8 +118,8 @@ const isInvalid = this.validateFormControls();
         dialogTitle: "Input Error",
         dialogMessage: "Correct Errors on highlighted fields"
       },
-      width: '25vw',
-      height: '28vh',
+      width: '27vw',
+      height: '29vh',
     });
   } else {
     const title = 'Confirm New Lesson Resource';
@@ -208,8 +208,8 @@ showDialog(title: string, message: string): void {
             ExistsDialogComponent,
             {
               data: {
-                dialogTitle: 'Error',
-                dialogMessage: 'Invalid data, ensure data is in the correct format',
+                dialogTitle: 'Invalid PDF',
+                dialogMessage: 'The PDF could not be read. Please upload a different PDF.',
                 operation: 'ok',
               },
               width: '50vw',

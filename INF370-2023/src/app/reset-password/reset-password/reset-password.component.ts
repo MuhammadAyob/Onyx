@@ -71,10 +71,10 @@ onReset(form: any) {
     this.dialog.open(InputDialogComponent, {
       data: {
         dialogTitle: "Input Error",
-        dialogMessage: "Correct Errors"
+        dialogMessage: "Correct errors on highlighted fields"
       },
-      width: '50vw',
-      height: '30vh',
+      width: '27vw',
+      height: '29vh',
     });
   } else {
     const dialogReference = this.dialog.open(ConfirmDialogComponent, {
@@ -98,7 +98,7 @@ onReset(form: any) {
     
           this.Reset(form);
          
-        }, 2000);
+        }, 1000);
       }
     });
   }

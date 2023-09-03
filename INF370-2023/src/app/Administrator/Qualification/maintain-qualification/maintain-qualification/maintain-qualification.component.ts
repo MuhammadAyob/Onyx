@@ -29,6 +29,8 @@ export class MaintainQualificationComponent implements OnInit {
 
   qualification!: Qualification;
   qualificationList!: Qualification[];
+  
+  isLoading:boolean=false;
 
   public dataSource = new MatTableDataSource<Qualification>();
   constructor(
@@ -88,6 +90,7 @@ showDialog(title: string, message: string): void {
 
   dialogReference.afterClosed().subscribe((result) => {
     if (result == true) {
+      this.isLoading=true;
       this.service
         .UpdateQualification(
           this.qualification.QualificationID,
@@ -105,6 +108,7 @@ showDialog(title: string, message: string): void {
                 duration: 3000,
               }
             );
+            this.isLoading=false;
             this.router.navigate([
               'admin/read-qualification',
             ]);
@@ -122,6 +126,7 @@ showDialog(title: string, message: string): void {
 
           else if(result.Status===404)
           {
+            this.isLoading=false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {
@@ -138,6 +143,7 @@ showDialog(title: string, message: string): void {
 
           else if(result.Status===403)
           {
+            this.isLoading=false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {
@@ -154,6 +160,7 @@ showDialog(title: string, message: string): void {
 
           else
           {
+            this.isLoading=false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {

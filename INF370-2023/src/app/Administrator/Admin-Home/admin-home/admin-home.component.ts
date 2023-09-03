@@ -70,7 +70,7 @@ export class AdminHomeComponent implements OnInit {
 
   GetData(){
     this.service.GetDashboardData().subscribe((data:any)=>{
-      console.log(data);
+      //console.log(data);
       this.ActiveCourses = data[0].ActiveCourses;
       this.ActiveEmployees = data[0].ActiveEmployees;
       this.ActiveJobs = data[0].ActiveJobs;

@@ -24,6 +24,7 @@ export class FaqfileAddComponent implements OnInit {
   invalidJSONStructure!:boolean;
   isError!:boolean;
 
+  isLoading:boolean=false;
 constructor( 
   public router: Router,
   private location: Location,
@@ -204,6 +205,7 @@ showDialog(title: string, message: string): void {
 
   dialogReference.afterClosed().subscribe((result) => {
     if (result == true) {
+      this.isLoading=true;
       this.service.OverrideFAQs(this.faqData).subscribe(
         (result:any) => {
           console.log(result);
@@ -218,6 +220,7 @@ showDialog(title: string, message: string): void {
                       duration: 3000,
                     }
             );
+            this.isLoading=false;
             this.router.navigate(['admin/read-faq']);
             let audit = new AuditLog();
             audit.AuditLogID = 0;
@@ -232,6 +235,7 @@ showDialog(title: string, message: string): void {
 
           else if(result.Status===404)
           {
+            this.isLoading=false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {
@@ -249,6 +253,7 @@ showDialog(title: string, message: string): void {
 
           else
           {
+            this.isLoading=false;
             const dialogReference = this.dialog.open(
               ExistsDialogComponent,
               {
