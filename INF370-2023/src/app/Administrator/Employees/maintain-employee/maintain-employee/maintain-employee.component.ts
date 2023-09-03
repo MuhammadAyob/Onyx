@@ -234,6 +234,22 @@ export class MaintainEmployeeComponent implements OnInit {
                   //this.refreshForm();
                 })
               }
+              else if(result.Status === 330)
+              {
+                this.isLoading=false;
+                const dialogReference = this.dialog.open(
+                  ExistsDialogComponent,
+                  {
+                    data: {
+                      dialogTitle: 'Error',
+                      dialogMessage: 'You cannot change the user role of the last active admin. Please ensure there is more than one admin active.',
+                      operation: 'ok',
+                    },
+                    height: '30vh',
+                    width: '50vw',
+                  }
+                );
+              }
               else if(result.Status===400)
               {
                 this.isLoading=false;

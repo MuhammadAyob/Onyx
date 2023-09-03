@@ -147,8 +147,8 @@ export class RequestUpdateComponent  implements OnInit {
                    { 
                     this.isLoading = false;
                     const alert = await this.alertController.create({
-                      header: 'Error',
-                      message: 'Invalid data, please ensure data is correctly formatted',
+                      header: 'Invalid PDF',
+                      message: 'The PDF could not be read. Please upload a different file.',
                       buttons: ['OK'],
                     });
                 

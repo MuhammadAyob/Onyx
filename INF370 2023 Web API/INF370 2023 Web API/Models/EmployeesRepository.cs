@@ -404,6 +404,18 @@ namespace INF370_2023_Web_API.Models
                 bool _phone =  await db.Employees.CountAsync(x => x.Phone == employee.Employee.Phone && x.EmployeeID!=id) > 0 || await db.Students.CountAsync(x => x.Phone == employee.Employee.Phone) > 0;
                 var _email = await db.Users.Where(x => x.Username == employee.Employee.Email && x.UserID != employee.Employee.UserID).FirstOrDefaultAsync();
 
+                var test = await db.Employees.FindAsync(id);
+                var RoleCheck = await db.Users.FindAsync(test.UserID);
+
+                if(RoleCheck.UserRoleID != employee.Employee.UserRoleID)
+                {
+                    var activeAdmins = await db.Users.CountAsync(x => x.UserRoleID == 1 && x.Activity == "True");
+                    if (activeAdmins < 2 && RoleCheck.UserRoleID == 1)
+                    {
+                        return new { Status = 330, Message = "Last active admin" };
+                    }
+                }
+
                 if (_id != null)
                 {
                     return new

@@ -125,7 +125,7 @@ export class MaintainUpdateRequestComponent implements OnInit {
             {
               data: {
                 dialogTitle: 'Error',
-                dialogMessage: 'Internal server error, please try again',
+                dialogMessage: 'Internal server error, failed to send sms',
                 operation: 'ok',
               },
               height: '30vh',
@@ -195,7 +195,7 @@ export class MaintainUpdateRequestComponent implements OnInit {
             {
               data: {
                 dialogTitle: 'Error',
-                dialogMessage: 'Internal server error, please try again',
+                dialogMessage: 'Internal server error, failed to send sms',
                 operation: 'ok',
               },
               height: '30vh',

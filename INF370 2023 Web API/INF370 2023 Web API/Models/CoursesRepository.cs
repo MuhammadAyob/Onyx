@@ -419,7 +419,8 @@ namespace INF370_2023_Web_API.Models
             {
                 db.Configuration.ProxyCreationEnabled = false;
                
-                var obj = await db.Employees.Select(x => new
+                var obj = await db.Employees.Where(z=>z.Deleted == "False")
+                    .Select(x => new
                 {
                     EmployeeID = x.EmployeeID,
                     Name = x.Name,
