@@ -720,34 +720,39 @@ namespace INF370_2023_Web_API.Models
             
                 try
                 {
-                    var courseDetails = await db.Courses.Where(c => c.CourseID == id)
-                        .Select(c => new
-                        {
-                            CourseID = c.CourseID,
-                            CourseName = c.Name,
-                            Sections = c.Sections.Select(s => new
-                            {
-                                SectionID = s.SectionID,
-                                SectionName = s.SectionName,
-                                SectionDescription = s.SectionDescription,
-                                Lessons = s.Lessons.Select(l => new
-                                {
-                                    LessonID = l.LessonID,
-                                    LessonName = l.LessonName,
-                                    LessonDescription = l.LessonDescription,
-                                    VideoID =l.VideoID,
-                                    LessonResources = l.LessonResources.Select(r => new
-                                    {
-                                        ResourceID = r.ResourceID,
-                                        ResourceName = r.ResourceName,
-                                        ResourceFile = r.ResourceFile
-                                    })
-                                })
-                            })
-                        })
-                        .FirstOrDefaultAsync();
+                 
+                 var courseDetails = await db.Courses.Where(c => c.CourseID == id)
+                   .Select(c => new
+                   {
+                       CourseID = c.CourseID,
+                       CourseName = c.Name,
+                       Sections = c.Sections.Select(s => new
+                       {
+                           CourseID = s.CourseID,
+                           SectionID = s.SectionID,
+                           SectionName = s.SectionName,
+                           SectionDescription = s.SectionDescription,
+                           Lessons = s.Lessons.Select(l => new
+                           {
+                               LessonID = l.LessonID,
+                               SectionID = l.SectionID,
+                               LessonName = l.LessonName,
+                               LessonDescription = l.LessonDescription,
+                               VideoID = l.VideoID,
+                               LessonResources = l.LessonResources.Select(r => new
+                               {
+                                   ResourceID = r.ResourceID,
+                                   LessonID = r.LessonID,
+                                   ResourceName = r.ResourceName,
+                                   ResourceFile = r.ResourceFile
+                               })
+                           })
+                       })
+                   })
+                   .FirstOrDefaultAsync();
 
-                    return courseDetails;
+                return courseDetails; 
+
                 }
                 catch (Exception)
                 {

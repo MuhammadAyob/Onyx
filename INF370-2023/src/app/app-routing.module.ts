@@ -135,6 +135,7 @@ import { ViewMcComponent } from './Student Portal/maintenance-student/view-mc/vi
 import { ViewSTermsComponent } from './Student Portal/terms-view/view-s-terms/view-s-terms.component';
 import { AboutUsComponent } from './about-us/about-us/about-us.component';
 import { AuditLogComponent } from './Administrator/Audit/audit-log/audit-log.component';
+import { HelpPdfComponent } from './help-pdf/help-pdf.component';
 
 
 const routes: Routes = [
@@ -170,6 +171,11 @@ canActivate:[AuthGuardGuard,StudentGuard]
 {
 path:'about',
 component:AboutUsComponent
+},
+
+{
+path:'help',
+component:HelpPdfComponent
 },
 
 {

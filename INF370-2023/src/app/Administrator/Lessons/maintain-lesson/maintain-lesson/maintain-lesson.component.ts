@@ -53,7 +53,6 @@ constructor(
 ngOnInit(): void {
   this.storageCourse=JSON.parse(sessionStorage['Course']);
   this.storageLesson=JSON.parse(sessionStorage['Lesson']);
-  this.storageSection=JSON.parse(sessionStorage['Section']);
   this.GetLesson();
 
 }
@@ -84,10 +83,7 @@ onBack()
   this.router.navigate(['admin/view-lesson']);
 }
 
-onArrowBack()
-{
-  this.location.back();
-}
+
 
 onSubmit() {
   const isInvalid = this.validateFormControls();
@@ -146,7 +142,7 @@ showDialog(title: string, message: string): void {
           audit.AuditLogID = 0;
           audit.UserID = this.security.User.UserID;
           audit.AuditName = 'Update Lesson';
-          audit.Description = 'Employee, ' + this.security.User.Username + ', updated the Lesson: ' + this.lesson.LessonName  + ', within the section: ' + this.storageSection.SectionName + ', in the course: ' + this.storageCourse.Name
+          audit.Description = 'Employee, ' + this.security.User.Username + ', updated the Lesson: ' + this.lesson.LessonName + ', in the course: ' + this.storageCourse.Name
           audit.Date = '';
 
           this.aService.AddAudit(audit).subscribe((data) => {

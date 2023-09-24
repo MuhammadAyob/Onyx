@@ -48,8 +48,6 @@ storageCourse:any;
 
 ngOnInit(): void {
   this.storageResource=JSON.parse(sessionStorage['LessonResource']);
-  this.storageLesson=JSON.parse(sessionStorage['Lesson']);
-  this.storageSection=JSON.parse(sessionStorage['Section']);
   this.storageCourse=JSON.parse(sessionStorage['Course']);
   this.getResource();
 
@@ -57,7 +55,7 @@ ngOnInit(): void {
 
 getResource(){
 this.service.MaintainLessonResource(this.storageResource.ResourceID).subscribe((result)=>{
-console.log(result);
+//console.log(result);
 this.resource = result as any;
 this.pdfSrc = 'data:image/pdf;base64,' + this.resource.ResourceFile;
 this.isLoading=false;
@@ -66,7 +64,7 @@ this.isLoading=false;
 
 onBack()
 {
-  this.router.navigate(['admin/view-lesson']);
+  this.router.navigate(['admin/view-course']);
 }
 
 onEdit()
@@ -94,7 +92,7 @@ onDelete() {
       if (result == true) {
         this.service.DeleteLessonResource(this.resource.ResourceID).subscribe((res:any) => 
         {
-          console.log(res);
+          //console.log(res);
           if(res.Status===200)
           {
             this.snack.open(
@@ -106,13 +104,13 @@ onDelete() {
                       duration: 3000,
                     }
             );
-            this.router.navigate(['admin/view-lesson']);
+            this.router.navigate(['admin/view-course']);
 
           let audit = new AuditLog();
           audit.AuditLogID = 0;
           audit.UserID = this.security.User.UserID;
           audit.AuditName = 'Delete Lesson Resource';
-          audit.Description = 'Employee, ' + this.security.User.Username + ', deleted resource: ' + this.resource.ResourceName  + ', within the lesson: ' + this.storageLesson.LessonName + ', under the section: ' + this.storageSection.SectionName + ', in the course: ' + this.storageCourse.Name
+          audit.Description = 'Employee, ' + this.security.User.Username + ', deleted resource: ' + this.resource.ResourceName + ', in the course: ' + this.storageCourse.Name
           audit.Date = '';
 
           this.aService.AddAudit(audit).subscribe((data) => {

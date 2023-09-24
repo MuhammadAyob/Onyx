@@ -48,8 +48,6 @@ isLoading!:boolean;
 
 ngOnInit(): void {
   this.storageLessonResource=JSON.parse(sessionStorage['LessonResource']);
-  this.storageLesson=JSON.parse(sessionStorage['Lesson']);
-  this.storageSection=JSON.parse(sessionStorage['Section']);
   this.storageCourse=JSON.parse(sessionStorage['Course']);
   this.refreshForm();
 }
@@ -66,7 +64,7 @@ refreshForm() {
 onSubmit() {
   this.resourceFile = this.resourceFile.slice(28);
   this.test.ResourceFile = this.resourceFile;
-  console.log(this.test);
+  //console.log(this.test);
 
 const isInvalid = this.validateFormControls();
 
@@ -129,12 +127,13 @@ showDialog(title: string, message: string): void {
                   }
           );
 
-          let obj = {LessonID:0, ResourceID:0, ResourceName:''};
+          let obj = {LessonID:0, ResourceID:0, ResourceName:'', ResourceFile:''};
           obj.LessonID = this.test.LessonID;
           obj.ResourceID = this.test.ResourceID;
           obj.ResourceName = this.test.ResourceName;
+          obj.ResourceFile = '';
           sessionStorage.removeItem('LessonResource');
-          sessionStorage['LessonResource'] = JSON.stringify(this.test);
+          sessionStorage['LessonResource'] = JSON.stringify(obj);
           //this.refreshForm();
           this.router.navigate(['admin/view-resource']);
 
@@ -142,7 +141,7 @@ showDialog(title: string, message: string): void {
           audit.AuditLogID = 0;
           audit.UserID = this.security.User.UserID;
           audit.AuditName = 'Update Lesson Resource';
-          audit.Description = 'Employee, ' + this.security.User.Username + ', updated resource: ' + this.test.ResourceName  + ', within the lesson: ' + this.storageLesson.LessonName + ', under the section: ' + this.storageSection.SectionName + ', in the course: ' + this.storageCourse.Name
+          audit.Description = 'Employee, ' + this.security.User.Username + ', updated resource: ' + this.test.ResourceName  + ', in the course: ' + this.storageCourse.Name
           audit.Date = '';
 
           this.aService.AddAudit(audit).subscribe((data) => {

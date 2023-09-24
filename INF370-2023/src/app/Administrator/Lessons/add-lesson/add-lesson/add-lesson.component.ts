@@ -109,12 +109,10 @@ this.lesson = {
 
 onBack()
 {
-  this.router.navigate(['admin/view-section']);
+  this.router.navigate(['admin/view-course']);
 }
 
-onArrowBack(){
-  this.location.back();
-  }
+
 
 validateFormControls(): boolean {
   if (
@@ -158,7 +156,7 @@ showDialog(title: string, message: string): void {
           );
           this.isLoading=false;
           //this.refreshForm();
-          this.router.navigate(['admin/view-section']);
+          this.router.navigate(['admin/view-course']);
           let audit = new AuditLog();
           audit.AuditLogID = 0;
           audit.UserID = this.security.User.UserID;

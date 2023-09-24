@@ -62,7 +62,6 @@ noData = this.ResourceDataSource.connect().pipe(map((data) => data.length === 0)
 
 ngOnInit(): void {
   this.storageLesson=JSON.parse(sessionStorage['Lesson']);
-  this.storageSection=JSON.parse(sessionStorage['Section']);
   this.storageCourse=JSON.parse(sessionStorage['Course']);
   this.refreshForm();
   this.refreshList();
@@ -137,7 +136,7 @@ else{return true}
 }
 
 onBack() {
-  this.router.navigate(['admin/view-lesson']);
+  this.router.navigate(['admin/view-course']);
 }
 
 showDialog(title: string, message: string): void {
@@ -171,13 +170,13 @@ showDialog(title: string, message: string): void {
           );
           //this.refreshForm();
           this.isLoading=false;
-          this.router.navigate(['admin/view-lesson']);
+          this.router.navigate(['admin/view-course']);
 
           let audit = new AuditLog();
           audit.AuditLogID = 0;
           audit.UserID = this.security.User.UserID;
           audit.AuditName = 'Add Lesson Resource';
-          audit.Description = 'Employee, ' + this.security.User.Username + ', added a new Resource: ' + this.test.ResourceName  + ', to the lesson: ' + this.storageLesson.LessonName + ', under the section: ' + this.storageSection.SectionName + ', in the course: ' + this.storageCourse.Name
+          audit.Description = 'Employee, ' + this.security.User.Username + ', added a new Resource: ' + this.test.ResourceName  + ', to the lesson: ' + this.storageLesson.LessonName + ', in the course: ' + this.storageCourse.Name
           audit.Date = '';
 
           this.aService.AddAudit(audit).subscribe((data) => {

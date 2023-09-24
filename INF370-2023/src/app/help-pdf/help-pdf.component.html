@@ -1,0 +1,67 @@
+
+
+<mat-drawer-container class="example-container">
+    <mat-drawer [mode]="mobile ? 'push' : 'side'" #drawer [opened]="!mobile">
+     
+  
+    
+  
+      <div>
+        <ul *ngFor="let item of outline" class="outline-list">
+          <li>
+            <a (click)="navigateTo(item.dest)">
+              {{ item.title }}
+            </a>
+  
+            <ul *ngFor="let child of item.items">
+              <li>
+                <a (click)="navigateTo(child.dest)">
+                  {{ child.title }}
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+  
+      <div class="mb">
+        <mat-form-field class="full-width">
+          <mat-label>Search</mat-label>
+          <input #queryInp matInput id="pdfQueryInput" type="text" placeholder="Search..." [value]="pdfQuery"
+            (input)="searchQueryChanged($any($event.target).value)" (keyup.enter)="searchQueryChanged(queryInp.value)">
+          <mat-hint>Search in entire pdf</mat-hint>
+        </mat-form-field>
+      </div>
+  
+      <div *ngIf="!isLoaded && !error && progressData" id="progress">
+        <div class="bg">
+          <div class="bar" [style.width]="progressData.loaded / progressData.total * 100 + '%'"></div>
+        </div>
+        <span>{{ getInt(progressData.loaded / progressData.total * 100) }}%</span>
+      </div>
+    </mat-drawer>
+  
+  
+    <mat-drawer-content>
+      <pdf-viewer [src]="pdfSrc"
+                  [(page)]= "page"
+                  [rotation]="rotation"
+                  [original-size]="originalSize"
+                  [show-all]="showAll"
+                  [fit-to-page]="fitToPage"
+                  (after-load-complete)="afterLoadComplete($event)"
+                  [zoom]="zoom"
+                  
+                  [stick-to-page]="stickToPage"
+                  [render-text]="renderText"
+                  [external-link-target]="'blank'"
+                  [autoresize]="autoresize"
+                  
+                  (on-progress)="onProgress($event)"
+                 
+                  (pages-initialized)="pageInitialized($event)"
+                  (pageChange)="pageChange($event)"
+                  [show-borders]="false"
+      ></pdf-viewer>
+    </mat-drawer-content>
+  </mat-drawer-container>

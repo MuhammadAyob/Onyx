@@ -41,7 +41,7 @@ constructor(
   private toastr: ToastrService,
   private aService:AuditLogService,
   private security:SecurityService
-) { this.titleservice.setTitle('View Section');}
+) { this.titleservice.setTitle('Section');}
 
 test!:Section;
 course!:any
@@ -62,7 +62,7 @@ noData = this.LessonDataSource.connect().pipe(map((data) => data.length === 0));
 ngOnInit(): void {
   this.course=JSON.parse(sessionStorage['Course']);
   this.test = JSON.parse(sessionStorage['Section']);
-  this.refreshList();
+ // this.refreshList();
 
 }
 

@@ -12,6 +12,18 @@ div{
     font-family: Montserrat;
 }
 
+#chatbotbutton {
+	position: fixed;
+	right: 2vw;
+	bottom: 2vh;
+  }
+  
+  #chatbot {
+	position: fixed;
+	right: 2vw;
+	bottom: 7vh;
+  }
+
 matIcon{
     padding: 20px 2px 2px 2px;
 }

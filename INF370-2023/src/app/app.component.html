@@ -527,9 +527,9 @@
               </button>
               <button mat-menu-item style="background-color: #920f4c;">
                 <a
-                  style="color: rgb(255, 255, 255);"
-                  target="_blank"
-                  href="../assets/WebHelp/index.html"
+                style="color: rgb(255, 255, 255);"
+                [routerLink]="['/help']" 
+                target="_blank"
                   ><mat-icon style="color: #ffffff;">help</mat-icon><span>Help</span></a
                 >
               </button>
@@ -540,6 +540,19 @@
             </mat-menu>
           </div>
         </mat-toolbar>
+        <div>
+          <button
+            mat-fab
+            style="background-color: #920f4c;z-index: 1000 "
+            (click)="onBot()"
+            id="chatbotbutton"
+          >
+            <mat-icon> chat</mat-icon>
+          </button>
+          <div id="chatbot" *ngIf="help" style="z-index: 1000">
+            <app-chatbot></app-chatbot>
+          </div>
+        </div>
         <router-outlet></router-outlet>
        </mat-sidenav-content>
     </mat-sidenav-container>

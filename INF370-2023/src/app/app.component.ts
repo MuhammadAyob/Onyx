@@ -59,7 +59,8 @@ export class AppComponent {
           e.url === '/enter-otp' ||
           e.url === '/reset-password' ||
           e.url === '/contact' ||
-          e.url === '/about'
+          e.url === '/about' ||
+          e.url === '/help'
         ) {
           this.flag = true;
         } else {

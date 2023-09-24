@@ -1,3 +1,147 @@
+.container {
+  padding: 20px;
+}
+
+.center-align {
+  text-align: center;
+  flex-grow: 1;
+  margin-left:45%
+}
+
+
+.accordion {
+  width: 100%;
+}
+
+.shadow-panel {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8), 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.desc {
+  font-size: 17.8px;
+  margin-bottom: 20px;
+}
+
+.lessons-header {
+  text-align: center;
+  font-weight: bold;
+  font-size: 15px;
+  margin-bottom: -0.3%;
+  //font-style: italic;
+}
+
+.lessons-container {
+  margin-top: 20px;
+}
+
+.lesson-card {
+  margin-bottom: 20px;
+}
+
+.lesson-card mat-card {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8), 0 1px 3px rgba(0, 0, 0, 0.8);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.lesson-info {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.lesson-name {
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  transition: text-decoration 0.3s ease-in-out;
+}
+
+.lesson-name:hover {
+  text-decoration: underline;
+}
+
+.lesson-description {
+  font-size: 15.5px;
+  margin-top: 10px;
+}
+
+.lesson-resources {
+  margin-top: 10px;
+}
+
+.no-resources {
+  margin-top: 10px;
+}
+
+.lesson-divider {
+  border-top: 1px solid #ccc;
+  margin-top: 20px;
+}
+
+.resource-button {
+  display: inline-block;
+  padding: 5px 10px;
+  margin-right: 5px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.resource-button:hover {
+  background-color: #0056b3;
+}
+
+.resource-button i {
+  margin-left: 5px;
+  vertical-align: middle;
+}
+
+
+
+
+   
+    
+  
+  .clickable {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .clickable:hover{
+    color:red($color: #000000)
+  }
+  .lesson-card.active mat-card {
+    background-color: #ffdf85; /* Set your desired highlight color */
+  }
+  
+  
+  .icon-display {
+    transform: scale(0.8);
+    margin-bottom: -7px;
+  }
+  
+  .title{
+    font-family: 'Montserrat';
+    font-size:20px;
+  }
+  
+  .desc{
+    font-family: 'Montserrat';
+    font-size: medium;
+  }
+
+
 .cardButton {
   float: right;
   }
@@ -222,3 +366,17 @@
       width: 100%;
       
   }
+  .button-container2
+  {
+      margin-top: 20px;
+      width: 100%;
+      display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: -8px; /* Adjust this value to align the button with the title vertically */
+  
+  gap: 8px; /* Adjust this value to control the spacing between the buttons */
+      
+  }
+
+  

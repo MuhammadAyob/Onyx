@@ -59,9 +59,8 @@ constructor(
 
 ngOnInit(): void {
 this.test=JSON.parse(sessionStorage['Lesson']);
-this.section=JSON.parse(sessionStorage['Section']);
 this.course=JSON.parse(sessionStorage['Course']);
-this.refreshList();
+//this.refreshList();
 }
 
 refreshList() {
@@ -82,7 +81,7 @@ onViewLessonResource(obj:any) {
 
 onBack()
 {
-  this.router.navigate(['admin/view-section']);
+  this.router.navigate(['admin/view-course']);
 }
 
 ngAfterViewInit() {
@@ -111,10 +110,7 @@ onEdit()
 this.router.navigate(['admin/maintain-lesson']);
 }
 
-onArrowBack()
-{
-  this.location.back();
-}
+
 
 onDelete() {
 const title = 'Confirm Delete Lesson ';
@@ -147,13 +143,13 @@ const dialogReference = this.dialog.open(
                     duration: 3000,
                   }
           );
-          this.router.navigate(['admin/view-section']);
+          this.router.navigate(['admin/view-course']);
 
           let audit = new AuditLog();
           audit.AuditLogID = 0;
           audit.UserID = this.security.User.UserID;
           audit.AuditName = 'Delete Lesson';
-          audit.Description = 'Employee, ' + this.security.User.Username + ', deleted the Lesson: ' + this.test.LessonName  + ', within the section: ' + this.section.SectionName + ', in the course: ' + this.course.Name
+          audit.Description = 'Employee, ' + this.security.User.Username + ', deleted the Lesson: ' + this.test.LessonName + ', in the course: ' + this.course.Name
           audit.Date = '';
 
           this.aService.AddAudit(audit).subscribe((data) => {
