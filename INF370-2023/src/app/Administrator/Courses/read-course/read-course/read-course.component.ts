@@ -24,7 +24,6 @@ export class ReadCourseComponent implements OnInit {
 course!:CourseDetails;
 
 displayedColumns: string[] = [
-  'Image',
   'CourseName',
   'Price',
   'Active',

@@ -195,42 +195,6 @@ style="width: 95%;"
 <br>
 
 
-<mat-form-field
-class="example-full-width"
-appearance="legacy"
-style="width: 95%;"
-
->
-   <mat-label style="color: #0e1a3c">Select Course Activity</mat-label>
-  <mat-select
-  (valueChange)="selectActive($event)"
-    [formControl]="activeFormControl"
-    required
-  >
-    <mat-option
-      value="True"
-      required
-    >
-     True
-    </mat-option>
-    <mat-option
-    value="False"
-    required
-  >
-   False
-  </mat-option>
-  </mat-select>
-  <mat-error *ngIf="activeFormControl.hasError('required')">
-    Activity is <strong>required</strong>
-  </mat-error>
-</mat-form-field>
-
-
- 
-
-
-<br>
-<br>
 
 <mat-form-field
               class="example-full-width"

@@ -162,6 +162,9 @@ import { AuditLogComponent } from './Administrator/Audit/audit-log/audit-log.com
 import { AboutUsComponent } from './about-us/about-us/about-us.component';
 import { ChatbotComponent } from './chatbot/chatbot.component';
 import { HelpPdfComponent } from './help-pdf/help-pdf.component';
+import { CoursePipe } from './course.pipe';
+import { LessonsearchPipe } from './lessonsearch.pipe';
+import { ResourcesearchPipe } from './resourcesearch.pipe';
 //import { CalendarDialogComponent } from './Dialog/calendar-dialog/calendar-dialog/calendar-dialog.component';
 //import { ServiceWorkerModule } from '@angular/service-worker';
 
@@ -322,6 +325,9 @@ export function momentAdapterFactory() {
     AboutUsComponent,
     ChatbotComponent,
     HelpPdfComponent,
+    CoursePipe,
+    LessonsearchPipe,
+    ResourcesearchPipe,
 
     
   ],

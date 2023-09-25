@@ -84,7 +84,7 @@ constructor(
       Name: '',
       Description: '',
       Image: '',
-      Active: '',
+      Active: 'False',
       Price:0,
       CourseAssistants:null,
       CategoryID:0,
@@ -126,7 +126,6 @@ constructor(
       this.priceFormControl.hasError('required')== false &&
       this.categoryFormControl.hasError('required')==false &&
       this.assistantsFormControl.hasError('required')==false &&
-      this.activeFormControl.hasError('required') == false &&
       this.previewFormControl.hasError('required') == false &&
       this.previewFormControl.hasError('pattern') == false && 
       this.imageFormControl.hasError('required') == false

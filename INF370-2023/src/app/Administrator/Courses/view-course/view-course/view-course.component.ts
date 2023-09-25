@@ -25,6 +25,8 @@ import { LessonService } from 'src/app/Services/lesson.service';
 import { LessonResource } from 'src/app/Models/LessonResource.model';
 import { LessonResourceService } from 'src/app/Services/lesson-resource.service';
 
+import { CourseOverview } from 'src/app/Models/course-overview.model';
+
 @Component({
   selector: 'app-view-course',
   templateUrl: './view-course.component.html',
@@ -38,7 +40,7 @@ employeeList! : any[];
 category!:any;
 
 panelOpenState = false;
-courseDetails:any;
+courseDetails: any;
 course:any
 ratings:any;
 LessonName:any;
@@ -46,7 +48,7 @@ VideoID:any;
 notRetrieved = true;
 isLoading!:boolean;
 
-
+search!: string;
 
 
 public dataSource = new MatTableDataSource<any>();
@@ -85,6 +87,9 @@ constructor( private dialog: MatDialog,
     this.dataSource.paginator = this.paginator;
     this.refreshList();
   }
+
+
+  
 
   getCategory(){
     this.service.GetCategory(this.test.CategoryID).subscribe((result)=>{
@@ -128,6 +133,7 @@ ngOnInit(): void {
   getStructure(){
     this.isLoading = true;
     this.service.GetCourseView(this.test.CourseID).subscribe((result)=>{
+      console.log(result)
       this.courseDetails = result as any;
       this.isLoading=false;
     })
@@ -388,15 +394,15 @@ ngOnInit(): void {
   }
 
   public doFilter = (event:Event) => {
-    this.dataSource.filter = (event.target as HTMLInputElement).value.trim().toLocaleLowerCase();
-     if (this.dataSource.filteredData.length === 0) {
+    this.courseDetails.filter = (event.target as HTMLInputElement).value.trim().toLocaleLowerCase();
+     if (this.courseDetails.filteredData == null || undefined) {
 
       const dialogReference = this.dialog.open(SearchDialogComponent, {
 
       });
       dialogReference.afterClosed().subscribe((result) => {
         if (result == true) {
-         this.refreshList();
+         //this.refreshList();
         }
       });
     }
@@ -407,6 +413,8 @@ ngOnInit(): void {
     sessionStorage['cou'] = JSON.stringify(this.test);
     this.router.navigate(['admin/add-section']);
   }
+
+
 
   onViewSection(obj:any)
   {
