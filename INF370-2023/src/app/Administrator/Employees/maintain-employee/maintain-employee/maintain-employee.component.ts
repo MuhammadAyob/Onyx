@@ -220,6 +220,7 @@ export class MaintainEmployeeComponent implements OnInit {
                           duration: 3000,
                         }
                 );
+                sessionStorage.removeItem('employee');
                 this.isLoading=false;
                 this.router.navigate(['admin/read-employees']);
                 let audit = new AuditLog();
@@ -339,12 +340,10 @@ export class MaintainEmployeeComponent implements OnInit {
   }
 }
 
-onArrowBack(): void {
-  this.location.back();
-}
+
 
 onBack() {
-  this.location.back();
+  this.router.navigate(['admin/view-selected-employee'])
 }
 
 @ViewChild('fileInput') fileInput!: ElementRef;

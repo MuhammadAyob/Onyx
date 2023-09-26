@@ -570,7 +570,7 @@ namespace INF370_2023_Web_API.Models
                 toAddUser.UserID = 0;
                 toAddUser.Username = employee.Employee.Email;
                 Random random = new Random();
-                string _pass = ("DarusSalaam" + random.Next(5000, 10001));
+                string _pass = ("DarusSalaam" + random.Next(5000, 9999));
                 toAddUser.Password = GenerateHash(ApplySomeSalt(_pass));
                 toAddUser.GUID = null;
                 toAddUser.Activity = "True";
@@ -692,6 +692,83 @@ namespace INF370_2023_Web_API.Models
                 return ID;
             }
             catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
+
+        public async Task<object> ViewEmployeeDetails(int id)
+        {
+            try
+            {
+                dynamic obj = new ExpandoObject();
+
+                db.Configuration.ProxyCreationEnabled = false;
+                var emp = await db.Employees.Where(x => x.EmployeeID == id).FirstOrDefaultAsync();
+
+                Department department = await db.Departments.Where(x => x.DepartmentID == emp.DepartmentID).FirstOrDefaultAsync();
+                obj.DepartmentName = department.DepartmentName;
+
+                var _title =  await db.Titles.Where(x => x.TitleID == emp.TitleID).FirstOrDefaultAsync();
+                obj.TitleName = _title.TitleName;
+
+                var user = await db.Users.Where(x => x.UserID == emp.UserID).FirstOrDefaultAsync();
+                var role = await db.UserRoles.Where(x => x.UserRoleID == user.UserRoleID).FirstOrDefaultAsync();
+
+                obj.RoleName = role.RoleName;
+
+                List<dynamic> listEmployeeSkills = new List<dynamic>();
+                List<EmployeeSkill> skills = await db.EmployeeSkills.Where(s => s.EmployeeID == id).ToListAsync();
+
+                foreach (EmployeeSkill skill in skills)
+                {
+                    dynamic _obj = new ExpandoObject();
+                    Skill EmployeeSkill = await db.Skills.Where(s => s.SkillID == skill.SkillID).FirstOrDefaultAsync();
+                    _obj.SkillID = EmployeeSkill.SkillID;
+                    _obj.SkillName = EmployeeSkill.SkillName;
+                    _obj.SkillDescription = EmployeeSkill.Description;
+                    SkillType skillType = await db.SkillTypes.Where(s => s.SkillTypeID == EmployeeSkill.SkillTypeID).FirstOrDefaultAsync();
+                    _obj.SkillTypeName = skillType.SkillTypeName;
+
+                    listEmployeeSkills.Add(_obj);
+                }
+
+                obj.listEmployeeSkills = listEmployeeSkills;
+
+                List<dynamic> listEmployeeQualifications = new List<dynamic>();
+                List<EmployeeQualification> qualifications = await db.EmployeeQualifications.Where(s => s.EmployeeID == id).ToListAsync();
+
+                foreach (EmployeeQualification qualification in qualifications)
+                {
+                    dynamic __obj = new ExpandoObject();
+                    Qualification EmployeeQualification = await db.Qualifications.Where(s => s.QualificationID == qualification.QualificationID).FirstOrDefaultAsync();
+                    __obj.QualificationID = EmployeeQualification.QualificationID;
+                    __obj.QualificationName = EmployeeQualification.QualificationName;
+                    __obj.QualificationDescription = EmployeeQualification.Description; ;
+
+                    listEmployeeQualifications.Add(__obj);
+                }
+
+                obj.listEmployeeQualifications = listEmployeeQualifications;
+
+                List<dynamic> listEmployeeCourses = new List<dynamic>();
+                List<CourseAssistant> courses = await db.CourseAssistants.Where(s => s.EmployeeID == id).ToListAsync();
+
+                foreach (CourseAssistant course in courses)
+                {
+                    dynamic oobj = new ExpandoObject();
+                    Course CourseAssistant = await db.Courses.Where(s => s.CourseID == course.CourseID).FirstOrDefaultAsync();
+                    oobj.CourseID = CourseAssistant.CourseID;
+                    oobj.CourseName = CourseAssistant.Name; ;
+                   
+
+                    listEmployeeCourses.Add(oobj);
+                }
+
+                obj.listEmployeeCourses = listEmployeeCourses;
+                return obj;
+            }
+            catch(Exception e)
             {
                 return e.ToString();
             }

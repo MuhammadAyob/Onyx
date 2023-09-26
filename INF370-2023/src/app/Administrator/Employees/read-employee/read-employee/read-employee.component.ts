@@ -29,7 +29,6 @@ export class ReadEmployeeComponent implements OnInit {
   test!: EmployeeDetails;
 
   displayedColumns: string[] = [
-    'Image',
     'Name',
     'Surname',
     'view',

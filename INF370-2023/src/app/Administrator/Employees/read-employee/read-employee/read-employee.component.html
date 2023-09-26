@@ -31,13 +31,7 @@
             class="mat-elevation-z8"
           >
 
-          <!-- Employee Image Column -->
-          <ng-container matColumnDef="Image">
-             <th mat-header-cell mat-sort-header *matHeaderCellDef style="color: #ffffff;">Employee Image</th>
-            <td mat-cell *matCellDef="let employee">
-           <img src="{{'data:image/png;base64,' + employee.Image}}" style= "border-radius:150px ;height: 100px;width:100px;">
-             </td>
-             </ng-container>
+         
             <!-- Employee Name Column -->
             <ng-container matColumnDef="Name">
               <th mat-header-cell mat-sort-header *matHeaderCellDef style="color: #ffffff;">Employee Name</th>
@@ -74,7 +68,7 @@
                   (click)="onView(employee.EmployeeID)"
                 >
                   <mat-icon aria-hidden="false" aria-label="View Employee"
-                    >reply</mat-icon
+                    >remove_red_eye</mat-icon
                   >
                 </button>
               </td>

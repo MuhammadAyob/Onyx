@@ -250,7 +250,26 @@
               </mat-form-field>
               <br />
               <br />
+              <label style="color: #0e1a3c">Courses Assigned to:</label>
 
+             
+              <mat-form-field class="example-full-width" appearance="legacy" style="width: 95%;">
+                <input
+                  readonly
+                  type="text"
+                  matInput
+                  name="CoursesAssigned"
+                  required
+                  style="color: #0e1a3c"
+                />
+                <mat-list *ngFor="let item of EmployeeCourseList">
+                  <mat-list-item style="color: #0e1a3c;">
+                    {{ item.CourseName }}
+                  </mat-list-item>
+                </mat-list>
+              </mat-form-field>
+              <br>
+              <br>
             </div>
   
             

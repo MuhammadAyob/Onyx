@@ -33,7 +33,7 @@
             mat-table matSort [dataSource]="dataSource"  class="mat-elevation-z8" id="DeptTable">
                      <!--  Image Column -->
         <ng-container matColumnDef="Image">
-            <th mat-header-cell mat-sort-header *matHeaderCellDef style="color: #ffffff;">Course Image</th>
+            <th mat-header-cell mat-sort-header *matHeaderCellDef style="color: #ffffff;">Course Icon</th>
            <td mat-cell *matCellDef="let course">
           <img src="{{'data:image/png;base64,' + course.Image}}" style="border-radius: 150px; height: 100px;width:100px;">
             </td>

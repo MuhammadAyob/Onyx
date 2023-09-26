@@ -34,6 +34,7 @@ export class ViewSelectedEmployeeComponent implements OnInit {
   titleName:any;
   deptName!: string;
   EmployeeSkillList!: any[];
+  EmployeeCourseList!:any[];
   EmployeeQualificationList!: any[];
   roleName!: string;
   dataImage:any;
@@ -55,14 +56,23 @@ export class ViewSelectedEmployeeComponent implements OnInit {
   ngOnInit(): void {
 
     this.test = JSON.parse( sessionStorage['employee'] );
-    this.getDeptName();
-    this.getEmployeeSkillList();
-    this.getEmployeeQualificationList();
-    this.getUserRole();
-    this.getTitleName();
     this.dataImage = this.test.Employee.Image;
+    this.ViewEmployeeDetails();
   }
 
+  ViewEmployeeDetails()
+  {
+    this.service.ViewEmployeeDetails(this.test.Employee.EmployeeID).subscribe((result:any)=>{
+      
+      this.deptName = result.DepartmentName;
+      this.titleName = result.TitleName;
+      this.roleName = result.RoleName;
+      this.EmployeeSkillList = result.listEmployeeSkills as any[];
+      this.EmployeeQualificationList = result.listEmployeeQualifications as any[];
+      this.EmployeeCourseList = result.listEmployeeCourses as any[];
+
+    })
+  }
 
   getDeptName(){
     this.serviceD.GetDepartmentID(this.test.Employee.DepartmentID).subscribe((result) =>{
@@ -104,13 +114,11 @@ this.isLoading=false;
   }
 
   onBack() {
-    this.location.back();
+   sessionStorage.removeItem('employee');
+   this.router.navigate(['admin/read-employees'])
   }
 
-  onArrowBack() {
-    this.location.back();
-  }
-
+ 
   onEdit() {
     this.test;
     this.router.navigate(['admin/maintain-employee']);

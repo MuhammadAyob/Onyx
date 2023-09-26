@@ -37,6 +37,7 @@ constructor(
 
   ngOnInit(): void {
     this.StudentID = sessionStorage.getItem('StudentID');
+    sessionStorage.removeItem('course-structure');
     this.payfastNumber = JSON.parse(sessionStorage.getItem('payfastNumber')!);
     this.grandTotal = JSON.parse(sessionStorage.getItem('grandtotal')!);
     this.cartObject = JSON.parse(sessionStorage.getItem('cart')!);

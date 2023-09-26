@@ -61,7 +61,7 @@
                 [type]="hide ? 'password' : 'text'"
                 name="Password"           
                 matInput
-                placeholder="Password must be minimum 6 characters and maximum 16 characters"
+                placeholder="Ensure minimum 6 characters, max 16, at least one uppercase, lowercase, a number"
                 minlength="6"
                 [(ngModel)]="formData.Password"
                 required
@@ -87,9 +87,13 @@ matSuffix
 <mat-error *ngIf="passwordFormControl.hasError('maxlength')">
   Password must have a maxiumum of <strong>16</strong> characters
 </mat-error>
+<mat-error *ngIf="passwordFormControl.hasError('pattern')">
+  Password must have at least <strong>1 upper case, 1 lower case and a number</strong>
+</mat-error>
 </mat-form-field>
 <br>
 <br>
+
 <mat-form-field class="full-width" appearance="fill" style="font-family: Montserrat;">
   <mat-label  style="font-family: Montserrat;">Confirm Password</mat-label>
   <input
@@ -97,7 +101,7 @@ matSuffix
   [type]="hide ? 'password' : 'text'"
   matInput
   name="confirmPassword"            
-  placeholder="Confirm Password must be minimum 6 characters and maximum 16 characters"
+  placeholder="Ensure minimum 6 characters, max 16, at least one uppercase, lowercase, a number"
   minlength="6"
   [(ngModel)]="confirmPassword"
   required
@@ -122,6 +126,9 @@ matSuffix
 </mat-error>
 <mat-error *ngIf="confirmPasswordFormControl.hasError('maxlength')">
   Password must have a maxiumum of <strong>16</strong> characters
+</mat-error>
+<mat-error *ngIf="confirmPasswordFormControl.hasError('pattern')">
+  Password must have at least <strong>1 upper case, 1 lower case and a number</strong>
 </mat-error>
 </mat-form-field>
 <br>

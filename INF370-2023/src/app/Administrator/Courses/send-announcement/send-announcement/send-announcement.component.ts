@@ -55,6 +55,7 @@ constructor(
     };
   }
   onBack() {
+    sessionStorage.removeItem('Course');
     this.router.navigate(['admin/read-courses']);
   }
 
@@ -87,6 +88,7 @@ constructor(
                         duration: 3000,
                       }
               );
+              sessionStorage.removeItem('Course');
               this.isLoading=false;
               this.router.navigate(['admin/read-courses']);
               let audit = new AuditLog();

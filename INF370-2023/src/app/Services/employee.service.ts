@@ -38,6 +38,11 @@ httpOptions = {
     return this.http.get(environment.WebAPI + 'GetEmployeeSkills/' + id, this.httpOptions);
   }
 
+  ViewEmployeeDetails(id:number)
+  {
+    return this.http.get(environment.WebAPI + 'ViewEmployeeDetails/' + id, this.httpOptions);
+  }
+
   GetEmployeeQualifications(id:number)
   {
     return this.http.get(environment.WebAPI + 'GetEmployeeQualifications/' + id, this.httpOptions);

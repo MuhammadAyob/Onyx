@@ -46,12 +46,14 @@ ngOnInit(): void {
 }
 
 onBack() {
-  this.location.back();
+  sessionStorage.removeItem('MaintenanceRequest');
+  this.router.navigate(['student/read-queries']);
 }
 
 
 onArrowBack() {
-  this.location.back();
+  sessionStorage.removeItem('MaintenanceRequest');
+  this.router.navigate(['student/read-queries']);
 }
 
 

@@ -15,6 +15,7 @@ export class CancelPaymentComponent implements OnInit {
     { this.titleservice.setTitle('Payment cancelled');}
 
   ngOnInit(): void {
+    sessionStorage.removeItem('course-structure');
   }
 
   Back(){

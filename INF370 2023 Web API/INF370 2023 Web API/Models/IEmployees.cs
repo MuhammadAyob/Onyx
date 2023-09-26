@@ -27,5 +27,7 @@ namespace INF370_2023_Web_API.Models
         Task<object> AddEmployee([FromBody] EmployeeViewModel employee);
 
         Task<object> GetEmployeeID(int id);
+
+        Task<object> ViewEmployeeDetails(int id);
     }
 }

@@ -78,8 +78,7 @@ ngAfterViewInit(){
 GetVAT(){
   this.VATService.GetCurrentVAT().subscribe((result)=>{
   this.VAT = result as any;
-  sessionStorage['CurrentVAT'] = JSON.stringify(this.VAT)
-  this.isLoading=false;
+  sessionStorage['CurrentVAT'] = JSON.stringify(this.VAT);
   })
 }
 
@@ -130,6 +129,7 @@ public onChipFilter(chipValue: string) {
 refreshList() {
   this.service.ViewStore(this.StudentID).subscribe((result) => {
     this.dataSource.data = result as any[];
+    this.isLoading=false;
   });
 }
 

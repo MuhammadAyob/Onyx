@@ -453,6 +453,7 @@ ngOnInit(): void {
 
   
   onBack(){
+    sessionStorage.removeItem('Course');
     this.router.navigate(['admin/read-courses']);
   }
 

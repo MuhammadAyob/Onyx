@@ -50,7 +50,7 @@
                  
         <!--  Image Column -->
         <ng-container matColumnDef="Image">
-            <th mat-header-cell mat-sort-header *matHeaderCellDef style="color: #ffffff;">Course Image</th>
+            <th mat-header-cell mat-sort-header *matHeaderCellDef style="color: #ffffff;">Course Icon</th>
            <td mat-cell *matCellDef="let course">
           <img src="{{'data:image/png;base64,' + course.Image}}" style="border-radius: 150px; height: 100px;width:100px;">
             </td>
@@ -84,7 +84,7 @@
                 <td mat-cell *matCellDef="let course" style="text-align: center;">
                   <button type="button" class="btn btn-default btn-lg" style="
                   background-color:transparent;border-style: none;" (click)="onView(course)">
-                    <mat-icon aria-hidden="false" aria-label="View Department">reply</mat-icon>
+                    <mat-icon aria-hidden="false" aria-label="View Department">remove_red_eye</mat-icon>
                   </button>
                 </td>
               </ng-container>

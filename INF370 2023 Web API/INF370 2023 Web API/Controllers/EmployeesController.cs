@@ -38,6 +38,13 @@ namespace INF370_2023_Web_API.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("api/ViewEmployeeDetails/{id}")]
+        public async Task<object> ViewEmployeeDetails(int id)
+        {
+            return await _employeeRepo.ViewEmployeeDetails(id);
+        }
+
         [HttpPost]
         [Route("api/AddEmployee")]
         public async Task<object> AddEmployee([FromBody] EmployeeViewModel employee)

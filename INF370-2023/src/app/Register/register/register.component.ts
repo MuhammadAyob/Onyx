@@ -42,12 +42,14 @@ phoneFormControl = new FormControl('', [
 passwordFormControl = new FormControl('', [
   Validators.required,
   Validators.minLength(6),
-  Validators.maxLength(16)
+  Validators.maxLength(16),
+  Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$')
 ]);
 confirmPasswordFormControl = new FormControl('', [
   Validators.required,
   Validators.minLength(6),
-  Validators.maxLength(16)
+  Validators.maxLength(16),
+  Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$')
 ]);
 titleFormControl = new FormControl('', [Validators.required]);
 
@@ -154,9 +156,11 @@ validateFormControls(): boolean {
     this.passwordFormControl.hasError('required') == false &&
     this.passwordFormControl.hasError('minlength') == false &&
     this.passwordFormControl.hasError('maxlength') == false &&
+    this.passwordFormControl.hasError('pattern') == false &&
     this.confirmPasswordFormControl.hasError('required') == false &&
     this.confirmPasswordFormControl.hasError('minlength') == false &&
-    this.confirmPasswordFormControl.hasError('maxlength') == false
+    this.confirmPasswordFormControl.hasError('maxlength') == false &&
+    this.confirmPasswordFormControl.hasError('pattern') == false
   ) {
     return false;
   } else {
