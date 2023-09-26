@@ -128,6 +128,9 @@ export class AppComponent {
     return this.cartService.getCartCount();
   }
   
+  GetHelp(){
+    localStorage.setItem('pageNumber', '1');
+  }
 
   public findName() {
     if (this.security.isLoggedIn) {

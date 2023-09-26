@@ -3,7 +3,22 @@
 <mat-drawer-container class="example-container">
     <mat-drawer [mode]="mobile ? 'push' : 'side'" #drawer [opened]="!mobile">
      
+      <div *ngIf="stickToPage && showAll || !showAll" class="mb">
+        <button (click)="incrementPage(-1)" mat-button type="button">
+          Previous
+        </button>
   
+        <mat-form-field class="page-number">
+          <input min="1" max="184" matInput type="number" placeholder="Page" [(ngModel)]="page" pattern="-?[0-9]*(\.[0-9]+)?">
+          <mat-error>Input is not a number!</mat-error>
+        </mat-form-field>
+  
+        <span *ngIf="pdf">of {{ pdf.numPages }}</span>
+        <button (click)="incrementPage(1)" mat-button type="button">
+          Next
+        </button>
+      </div>
+
       <div class="mb">
         <mat-form-field class="full-width">
           <mat-label>Search</mat-label>
@@ -44,14 +59,14 @@
   
     <mat-drawer-content>
       <pdf-viewer [src]="pdfSrc"
-                  [(page)]= "page"
+                  [page]= "page"
                   [rotation]="rotation"
                   [original-size]="originalSize"
-                  [show-all]="showAll"
+                  [show-all]="false"
                   [fit-to-page]="fitToPage"
                   (after-load-complete)="afterLoadComplete($event)"
                   [zoom]="zoom"
-                  
+                  [zoom-scale]="'page-fit'"
                   [stick-to-page]="stickToPage"
                   [render-text]="renderText"
                   [external-link-target]="'blank'"

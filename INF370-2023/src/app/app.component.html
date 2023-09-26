@@ -342,7 +342,7 @@
               <button mat-menu-item style="background-color: #920f4c;color: #ffffff;" routerLink="/admin/update-profile">
                 <mat-icon style="color: #ffffff;">person</mat-icon><span>My Account</span>
               </button>
-              <button mat-menu-item style="background-color: #920f4c;">
+              <button (click)="GetHelp()" mat-menu-item style="background-color: #920f4c;">
                 <a
                 style="color: rgb(255, 255, 255);"
                 [routerLink]="['/help']" 

@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { PDFDocumentProxy, PdfViewerComponent ,PDFSource,PDFProgressData} from 'ng2-pdf-viewer';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-help-pdf',
@@ -7,9 +8,9 @@ import { PDFDocumentProxy, PdfViewerComponent ,PDFSource,PDFProgressData} from '
   styleUrls: ['./help-pdf.component.scss']
 })
 export class HelpPdfComponent implements OnInit {
-  pdfSrc: string = '../../assets/Manual.pdf';
+  pdfSrc!: string;
   error: any;
-  page = 1;
+  page:any;
   rotation = 0;
   zoom = 1.0;
   zoomScale = 'page-width';
@@ -19,7 +20,7 @@ export class HelpPdfComponent implements OnInit {
   progressData!: PDFProgressData;
   isLoaded = false;
   stickToPage = false;
-  showAll = true;
+  showAll = false;
   autoresize = true;
   fitToPage = false;
   outline!: any[];
@@ -33,11 +34,16 @@ export class HelpPdfComponent implements OnInit {
   constructor() { }
 
    ngOnInit() {
-    
+    this.pdfSrc= '../../assets/Manual.pdf';
+    this.page = localStorage.getItem('pageNumber');
+    //console.log(this.page)
     if (window.screen.width <= 768) {
       this.mobile = true;
     }
   }
+
+
+
 
 
 
@@ -47,7 +53,7 @@ export class HelpPdfComponent implements OnInit {
 
 
   incrementPage(amount: number) {
-    this.page += amount;
+    this.page = (parseInt(this.page) + amount).toString();
   }
 
   incrementZoom(amount: number) {
@@ -81,10 +87,12 @@ export class HelpPdfComponent implements OnInit {
    */
   afterLoadComplete(pdf: PDFDocumentProxy) {
     this.pdf = pdf;
-
     this.loadOutline();
-    //this.incrementPage(2);
+  
+    
   }
+
+  
 
   /**
    * Get outline
@@ -126,14 +134,19 @@ export class HelpPdfComponent implements OnInit {
    */
   navigateTo(destination: any) {
     this.pdfComponent.pdfLinkService.goToDestination(destination);
+
+    // Listen to the pageChange event to update this.page
+  this.pdfComponent.pageChange.subscribe((newPage: number) => {
+    this.page = newPage.toString();
+  });
   }
 
   /**
    * Scroll view
    */
-  scrollToPage() {
+  scrollToPage(page:number) {
     this.pdfComponent.pdfViewer.scrollPageIntoView({
-      pageNumber: 3
+      pageNumber: page
     });
   }
 
@@ -174,6 +187,11 @@ export class HelpPdfComponent implements OnInit {
       phraseSearch: true,
       // findPrevious: undefined,
     });
+
+     // Listen to the pageChange event to update this.page
+  this.pdfComponent.pageChange.subscribe((newPage: number) => {
+    this.page = newPage.toString();
+  });
   }
 
 }
