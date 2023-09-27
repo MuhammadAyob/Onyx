@@ -51,6 +51,11 @@ ngOnInit(): void {
  this.refreshForm();
 }
 
+GetHelp(){
+  localStorage.removeItem('pageNumber');
+  localStorage.setItem('pageNumber', '30');
+}
+
 refreshForm() {
   this.test = {
     ID:1,

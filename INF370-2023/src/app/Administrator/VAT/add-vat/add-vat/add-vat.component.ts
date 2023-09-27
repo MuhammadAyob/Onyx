@@ -47,6 +47,10 @@ ngOnInit(): void {
  
 }
 
+GetHelp(){
+  localStorage.removeItem('pageNumber');
+  localStorage.setItem('pageNumber', '24');
+}
 
 setDateLogged(){
   this.currentDate = new Date();

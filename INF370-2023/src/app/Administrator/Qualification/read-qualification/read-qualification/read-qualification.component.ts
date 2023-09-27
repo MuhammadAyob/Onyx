@@ -37,7 +37,7 @@ export class ReadQualificationComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-isLoading:boolean=true;
+  isLoading:boolean=true;
   qualificationList!: Qualification[];
 
   qualification!: Qualification;
@@ -55,6 +55,11 @@ isLoading:boolean=true;
 
   ngOnInit(): void {
     this.refreshList();
+  }
+
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '52');
   }
 
   ngAfterViewInit() {

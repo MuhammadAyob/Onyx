@@ -48,10 +48,15 @@ export class AddTrainingVideoComponent implements OnInit {
     private snack: MatSnackBar,
     private security:SecurityService,
     private aService:AuditLogService
-  ) { this.titleservice.setTitle('Instructional Videos');}
+  ) { this.titleservice.setTitle('Videos');}
 
   ngOnInit(): void {
     this.refreshForm();
+  }
+
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '13');
   }
 
   refreshForm(){

@@ -5,12 +5,16 @@
     <mat-card class="matCard" style="border-radius: 34px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8), 0 1px 3px rgba(0, 0, 0, 0.8);">
       <mat-card-header class="cardHeader" style="padding-bottom: 1%;text-align: center">
         <mat-card-title-group style="margin-left: 40%;">
-          <mat-card-title style="font-weight: 500; "
-            >View Query</mat-card-title
-          >
+          <mat-card-title style="font-weight: 500; ">View Query</mat-card-title>
         </mat-card-title-group>
-  
-     
+        <button mat-icon-button  matTooltip="Help" style="color: rgb(255, 255, 255); margin-left: 30%;margin-top: 0px;" (click)="GetHelp()">
+          <a
+           
+            [routerLink]="['/help']" 
+            target="_blank"
+              ><mat-icon style="color: #ffffff;">help</mat-icon></a
+            >
+        </button>
       </mat-card-header>
   
       <mat-card-content class="matContent">
@@ -188,7 +192,7 @@ style="width: 95%;">
           </div>
           <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
           <div class="button-container">
-            <button id="cancel" class="btn" (click)="onBack()">Cancel</button>
+            <button id="cancel" class="btn" (click)="onBack()">Back</button>
             <button id="confirm" class="btn" (click)="onSubmit()">Confirm</button>
         </div>
         </form>

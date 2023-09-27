@@ -57,8 +57,13 @@ constructor(
 { this.titleservice.setTitle('Revenue Report');}
 
 ngOnInit(): void {
- 
 }
+
+GetHelp(){
+  localStorage.removeItem('pageNumber');
+  localStorage.setItem('pageNumber', '176');
+}
+
 
 downloadMaintainanceReportPDF() {
   //this.isDownloading=true;

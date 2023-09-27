@@ -56,10 +56,15 @@ export class ReadTrainingVideoComponent implements OnInit {
     private snack:MatSnackBar,
     private aService:AuditLogService,
     private security:SecurityService
-  ) { this.titleservice.setTitle('Instructional Videos');}
+  ) { this.titleservice.setTitle('Videos');}
 
   ngOnInit(): void {
     this.refreshList();
+  }
+
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '100');
   }
 
   nextPage(){

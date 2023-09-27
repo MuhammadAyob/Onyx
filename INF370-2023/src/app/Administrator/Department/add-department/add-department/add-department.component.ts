@@ -48,6 +48,11 @@ export class AddDepartmentComponent implements OnInit {
     this.refreshForm();
   }
 
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '40');
+  }
+
   refreshForm() {
     this.department = {
       DepartmentID: 0,

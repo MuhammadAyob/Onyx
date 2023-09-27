@@ -65,6 +65,11 @@ ngOnInit(): void {
   this.refreshList();
 }
 
+GetHelp(){
+  localStorage.removeItem('pageNumber');
+  localStorage.setItem('pageNumber', '150');
+}
+
 refreshList() {
   this.service.GetMaintenanceList().subscribe((result) => {
     this.displayList= result as any[];

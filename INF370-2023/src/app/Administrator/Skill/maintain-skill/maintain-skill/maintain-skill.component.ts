@@ -51,6 +51,11 @@ export class MaintainSkillComponent implements OnInit {
     this.getTypeList();
   }
 
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '45');
+  }
+
   getTypeList() {
     this.serviceT.GetSkillTypes().subscribe((result) => {
       this.skillTypeList = result as SkillType[];

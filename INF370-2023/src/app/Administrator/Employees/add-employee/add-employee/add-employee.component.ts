@@ -95,6 +95,11 @@ export class AddEmployeeComponent implements OnInit {
     this.refreshForm();
   }
 
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '34');
+  }
+
   refreshForm() {
     this.employee = {
       Employee: {

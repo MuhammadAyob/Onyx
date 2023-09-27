@@ -44,6 +44,11 @@ ngOnInit(): void {
   this.refreshForm();
 }
 
+GetHelp(){
+  localStorage.removeItem('pageNumber');
+  localStorage.setItem('pageNumber', '65');
+}
+
 refreshForm() {
   this.category = {
     CategoryID: 0,

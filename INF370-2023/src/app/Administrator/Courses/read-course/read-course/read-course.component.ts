@@ -39,6 +39,11 @@ noData = this.dataSource.connect().pipe(map((data) => data.length === 0));
 
 displayList!: CourseDetails[];
 
+GetHelp(){
+  localStorage.removeItem('pageNumber');
+  localStorage.setItem('pageNumber', '61');
+}
+
 constructor(
   private dialog: MatDialog,
   public router: Router,

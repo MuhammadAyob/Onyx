@@ -41,6 +41,12 @@ export class ReadUserRoleComponent implements OnInit {
 
   userRole!: UserRole;
 
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '10');
+  }
+
+
   constructor(
     public router: Router,
     private location: Location,

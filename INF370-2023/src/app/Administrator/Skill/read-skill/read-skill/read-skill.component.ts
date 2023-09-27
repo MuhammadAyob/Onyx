@@ -61,6 +61,11 @@ export class ReadSkillComponent implements OnInit {
     this.refreshList();
   }
 
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '44');
+  }
+
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;

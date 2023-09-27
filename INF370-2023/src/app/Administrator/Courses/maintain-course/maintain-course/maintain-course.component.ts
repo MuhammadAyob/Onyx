@@ -72,6 +72,11 @@ this.getEmployeesList();
 
 }
 
+GetHelp(){
+  localStorage.removeItem('pageNumber');
+  localStorage.setItem('pageNumber', '62');
+}
+
 getCategoriesList(){
   this.catService.GetCategories().subscribe((res)=>{
   this.categoryList = res as CourseCategory[];

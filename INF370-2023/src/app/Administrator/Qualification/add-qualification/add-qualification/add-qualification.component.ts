@@ -43,6 +43,11 @@ export class AddQualificationComponent implements OnInit {
     this.refreshForm();
   }
 
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '51');
+  }
+
   refreshForm() {
     this.qualification = {
       QualificationID: 0,

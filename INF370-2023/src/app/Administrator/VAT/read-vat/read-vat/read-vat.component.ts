@@ -65,6 +65,11 @@ export class ReadVATComponent implements OnInit {
   ngOnInit(): void {
     this.refreshList();
   }
+
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '26');
+  }
   
   refreshList() {
     this.service.GetVATAmounts().subscribe((result) => {

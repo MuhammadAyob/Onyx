@@ -138,6 +138,18 @@
       border-top-right-radius: 34px;
       margin-bottom: 0px;
     }
+
+    .cardHeader2{
+      background: linear-gradient( #0e1a3c, #b0c7fc);
+      background-size: 400% 400%;
+     // animation: AnimationName 30s ease infinite;
+      padding-top: 2%;
+      color: white;
+      width: 100%;
+      border-top-left-radius: 100px;
+      border-top-right-radius: 100px;
+      margin-bottom: 0px;
+    }
     
     ::ng-deep mat-icon {
      background-color: transparent;

@@ -34,7 +34,7 @@ export class ReadUpdateRequestsComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-isLoading:boolean=true;
+  isLoading:boolean=true;
   displayList!: string[];
 
   constructor(
@@ -50,6 +50,12 @@ isLoading:boolean=true;
   ngOnInit(): void {
     this.refreshList();
   }
+
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '55');
+  }
+
   refreshList() {
     this.service.GetUpdateRequestDetails().subscribe((result) => {
       this.dataSource.data = result as any[];

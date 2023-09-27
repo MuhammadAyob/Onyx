@@ -49,6 +49,11 @@ export class MaintainSkillTypeComponent implements OnInit {
     this.skillType = JSON.parse(sessionStorage['skillType']);
   }
 
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '49');
+  }
+
   onBack(): void {
     this.location.back();
   }

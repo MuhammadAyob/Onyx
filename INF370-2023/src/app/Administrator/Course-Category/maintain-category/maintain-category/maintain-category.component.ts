@@ -48,6 +48,11 @@ ngOnInit(): void {
   this.category = JSON.parse( sessionStorage['CourseCategory'] );
 }
 
+GetHelp(){
+  localStorage.removeItem('pageNumber');
+  localStorage.setItem('pageNumber', '68');
+}
+
 onBack(): void {
   this.router.navigate([
     'admin/read-categories',

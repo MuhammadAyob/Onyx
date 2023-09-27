@@ -60,6 +60,11 @@ export class ContactReportComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '173');
+  }
+
   FetchReportData(){
     this.fetched=false;
     this.isLoading=true;

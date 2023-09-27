@@ -89,6 +89,11 @@ legend:{display:false},
     this.fetchCourses();
   }
 
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '180');
+  }
+
   fetchCourses(){
     this.service.GetReportCourses().subscribe((data:any)=>{
       this.courses=data as any[];

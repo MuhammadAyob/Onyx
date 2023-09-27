@@ -59,6 +59,11 @@ export class SalesReportComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '169');
+  }
+
   FetchReportData(){
     this.isLoading=true;
     this.show=false;

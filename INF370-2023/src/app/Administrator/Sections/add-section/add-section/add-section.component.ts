@@ -65,7 +65,12 @@ ngOnInit(): void {
   this.courseID = this.storageCourse.CourseID;
   this.refreshList();
   this.refreshForm();
-  }
+}
+
+GetHelp(){
+  localStorage.removeItem('pageNumber');
+  localStorage.setItem('pageNumber', '70');
+}
 
   ngAfterViewInit() {
 

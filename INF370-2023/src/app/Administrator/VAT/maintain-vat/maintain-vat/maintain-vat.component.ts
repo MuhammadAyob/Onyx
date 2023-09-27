@@ -49,6 +49,11 @@ ngOnInit(): void {
   this.test=JSON.parse(sessionStorage['VAT']);
 }
 
+GetHelp(){
+  localStorage.removeItem('pageNumber');
+  localStorage.setItem('pageNumber', '28');
+}
+
 onBack() {
   this.router.navigate(['admin/read-vat']);
 }

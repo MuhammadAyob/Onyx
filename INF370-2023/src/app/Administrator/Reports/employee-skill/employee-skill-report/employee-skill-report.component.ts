@@ -49,6 +49,11 @@ export class EmployeeSkillReportComponent implements OnInit {
     this.fetchSkills();
   }
 
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '167');
+  }
+
   fetchSkills(){
     this.service.GetSkillsWithTypes().subscribe((data:any)=>{
       this.skills=data as any[];

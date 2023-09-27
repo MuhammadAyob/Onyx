@@ -34,7 +34,6 @@ ngOnInit(): void {
 GetFile(){
   this.service.GetTerms().subscribe((result) => {
   this.Terms = result as any;
-  sessionStorage['Terms'] = JSON.stringify(result);
   this.pdfSrc = 'data:image/pdf;base64,' + this.Terms.TCFile;
 });
 }

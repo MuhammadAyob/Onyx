@@ -61,6 +61,11 @@ isLoading:boolean=true;
     this.refreshList();
   }
 
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '41');
+  }
+
   ngAfterViewInit(){
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;

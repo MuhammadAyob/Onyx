@@ -4,13 +4,13 @@
     <div>
       <mat-card class="matCard" style="border-radius: 34px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8), 0 1px 3px rgba(0, 0, 0, 0.8);">
         <mat-card-header class="cardHeader" style="padding-bottom: 1%;text-align: center">
-          <mat-card-title-group  style="margin:0 auto;">
+          <mat-card-title-group  style="margin-left: 40.5%;">
             <mat-card-title style="font-weight: 500; "
-              >View Max Slots Per Day Value</mat-card-title
+              >View Max Slots</mat-card-title
             >
           </mat-card-title-group>
     
-          <button [disabled]="!fetched" mat-icon-button style="color: rgb(255, 255, 255); margin-left: 40%;margin-top: -10px;" (click)="onEdit()">
+          <button mat-icon-button style="color: rgb(255, 255, 255); margin-left: 40%;margin-top: -10px;" [disabled]="!fetched" (click)="onEdit()">
             <mat-icon>edit</mat-icon>
           </button>
          

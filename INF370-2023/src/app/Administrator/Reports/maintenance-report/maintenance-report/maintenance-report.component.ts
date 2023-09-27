@@ -77,6 +77,11 @@ export class MaintenanceReportComponent implements OnInit {
     this.router.navigate(['admin/reports'])
   }
 
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '178');
+  }
+
   onSubmit() {
     //console.log(this.startDate)
     const isInvalid = this.validateFormControls();

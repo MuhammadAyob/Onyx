@@ -50,6 +50,11 @@ ngOnInit(): void {
     this.refreshList();
 }
 
+GetHelp(){
+  localStorage.removeItem('pageNumber');
+  localStorage.setItem('pageNumber', '5');
+}
+
 ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;

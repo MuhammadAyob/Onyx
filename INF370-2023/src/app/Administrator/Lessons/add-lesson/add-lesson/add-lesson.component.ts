@@ -69,6 +69,11 @@ constructor(
     this.refreshForm();
   }
 
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '75');
+  }
+
   ngAfterViewInit() {
 
     this.LessonDataSource.paginator = this.paginator;

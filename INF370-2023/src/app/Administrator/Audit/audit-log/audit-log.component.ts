@@ -61,6 +61,12 @@ export class AuditLogComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '33');
+  }
+
   ngAfterViewInit(){
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;

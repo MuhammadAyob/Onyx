@@ -66,6 +66,11 @@ constructor(
     this.getEmployeesList();
   }
 
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '59');
+  }
+
   getCategoriesList(){
     this.catService.GetCategories().subscribe((res)=>{
     this.categoryList = res as CourseCategory[];

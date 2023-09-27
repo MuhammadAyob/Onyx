@@ -8,8 +8,15 @@
         <mat-card-title-group style="margin-left: 40%;">
           <mat-card-title style="font-weight: 500; ">New FAQ</mat-card-title>
         </mat-card-title-group>
-        <button mat-icon-button  matTooltip="Overwrite FAQ records" style="color: rgb(255, 255, 255); margin-left: 40%;margin-top: -10px;" (click)="onBulkAdd()">
+        <button mat-icon-button  matTooltip="Overwrite FAQ records" style="color: rgb(255, 255, 255); margin-left: 30%;margin-top: -10px;" (click)="onBulkAdd()">
           <mat-icon>attach_file</mat-icon>
+        </button>
+        <button mat-icon-button  matTooltip="Help" style="color: rgb(255, 255, 255);margin-top: -3px;" (click)="GetHelp()">
+          <a
+           
+            [routerLink]="['/help']" 
+            target="_blank"
+              ><mat-icon style="color: #ffffff;">help</mat-icon></a>
         </button>
       </mat-card-header>
 

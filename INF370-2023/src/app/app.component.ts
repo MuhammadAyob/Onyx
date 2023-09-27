@@ -129,6 +129,7 @@ export class AppComponent {
   }
   
   GetHelp(){
+    localStorage.removeItem('pageNumber');
     localStorage.setItem('pageNumber', '1');
   }
 

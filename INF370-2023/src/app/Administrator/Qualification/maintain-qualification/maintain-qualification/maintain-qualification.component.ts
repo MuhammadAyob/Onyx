@@ -47,7 +47,12 @@ export class MaintainQualificationComponent implements OnInit {
 
   ngOnInit(): void {
     this.qualification = JSON.parse( sessionStorage['qualification'] );
- }
+  }
+
+ GetHelp(){
+  localStorage.removeItem('pageNumber');
+  localStorage.setItem('pageNumber', '53');
+}
 
  onBack(): void {
   this.location.back();

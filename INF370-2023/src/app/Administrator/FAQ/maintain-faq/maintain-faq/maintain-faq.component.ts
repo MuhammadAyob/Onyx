@@ -52,6 +52,11 @@ export class MaintainFaqComponent implements OnInit {
     this.location.back();
   }
 
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '20');
+  }
+
   refreshList() {
     this.service.GetFAQs().subscribe((result) => {
       this.dataSource.data = result as FAQ[];

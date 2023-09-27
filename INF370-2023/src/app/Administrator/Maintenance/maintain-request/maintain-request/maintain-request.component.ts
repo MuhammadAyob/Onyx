@@ -31,10 +31,10 @@ import { AuditLogService } from 'src/app/Services/audit-log.service';
 })
 export class MaintainRequestComponent implements OnInit {
 
-descFormControl = new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]);
+descFormControl = new FormControl('', []);
 priorityFormControl = new FormControl('', [Validators.required]);
 typeFormControl = new FormControl('', [Validators.required]);
-locationFormControl = new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]);
+locationFormControl = new FormControl('', []);
 
 maintenance: any;
 maintenanceList!: Maintenance[];
@@ -64,6 +64,12 @@ constructor(
     this.getMaintenanceTypeList();
     this.getMaintenancePriorityList();
   }
+
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '152');
+  }
+
   getMaintenanceTypeList() {
     this.serviced.GetTypes().subscribe((result:any) => {
       this.maintenanceTypeList = result as MaintenanceType[];
@@ -85,16 +91,15 @@ constructor(
   }
 
   onBack() {
+    sessionStorage.removeItem('MaintenanceRequest');
     this.location.back();
   }
 
-  onArrowBack() {
-    this.location.back();
-  }
+ 
 
 
   onSubmit() {
-    console.log(this.maintenance);
+    //console.log(this.maintenance);
     const isInvalid = this.validateFormControls();
     if (isInvalid == true) {
       this.dialog.open(InputDialogComponent, {
@@ -116,12 +121,9 @@ constructor(
   validateFormControls(): boolean {
 
     if (
-      this.descFormControl.hasError('required') == false &&
-      this.descFormControl.hasError('pattern') == false &&
+      
       this.typeFormControl.hasError('required') == false &&
-      this.priorityFormControl.hasError('required')== false &&
-      this.locationFormControl.hasError('pattern') == false &&
-      this.locationFormControl.hasError('required')== false
+      this.priorityFormControl.hasError('required')== false 
 
     )
     {return false}
@@ -175,6 +177,7 @@ constructor(
                         }
                 );
                 this.isLoading=false;
+                sessionStorage.removeItem('MaintenanceRequest');
                 this.router.navigate(['admin/read-maintenance-requests']);
 
                 let audit = new AuditLog();

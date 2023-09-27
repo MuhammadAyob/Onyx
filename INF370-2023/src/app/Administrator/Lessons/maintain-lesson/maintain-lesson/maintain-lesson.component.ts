@@ -57,6 +57,11 @@ ngOnInit(): void {
 
 }
 
+GetHelp(){
+  localStorage.removeItem('pageNumber');
+  localStorage.setItem('pageNumber', '79');
+}
+
 GetLesson(){
 this.serviceL.MaintainLesson(this.storageLesson.LessonID).subscribe((result)=>{
 this.lesson=result as Lesson;

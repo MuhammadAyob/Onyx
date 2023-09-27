@@ -51,6 +51,11 @@ export class MaintainUserRoleComponent implements OnInit {
     this.location.back();
   }
 
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '11');
+  }
+
   refreshList() {
     this.service.GetUserRoles().subscribe((result) => {
       this.dataSource.data = result as UserRole[];

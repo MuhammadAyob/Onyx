@@ -41,6 +41,10 @@ constructor(
   private security:SecurityService
 ) {this.titleservice.setTitle('OTP'); }
 
+GetHelp(){
+  localStorage.removeItem('pageNumber');
+  localStorage.setItem('pageNumber', '22');
+}
 
 ngOnInit(): void {
   this.OTPTimer = JSON.parse(sessionStorage['OTPTimer'])

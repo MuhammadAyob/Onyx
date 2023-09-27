@@ -52,6 +52,11 @@ isLoading:boolean=false;
     };
   }
 
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '17');
+  }
+
   onSubmit() {
     const isInvalid = this.validateFormControls();
     if (isInvalid == true) {

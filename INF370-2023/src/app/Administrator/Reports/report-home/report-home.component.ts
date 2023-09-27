@@ -21,6 +21,11 @@ constructor(private router:Router, private title:Title) {this.title.setTitle('Re
 ngOnInit(): void {
 }
 
+GetHelp(){
+  localStorage.removeItem('pageNumber');
+  localStorage.setItem('pageNumber', '167');
+}
+
 onRoute(obj:any){
   if(obj.id == 1)
   {

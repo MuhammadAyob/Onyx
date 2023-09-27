@@ -48,6 +48,11 @@ public dataSource = new MatTableDataSource<Department>();
     this.department=JSON.parse(sessionStorage['department'])
   }
 
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '42');
+  }
+
   onBack(): void {
     this.location.back();
   }

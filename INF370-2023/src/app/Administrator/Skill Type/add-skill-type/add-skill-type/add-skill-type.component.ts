@@ -45,6 +45,11 @@ export class AddSkillTypeComponent implements OnInit {
     this.refreshForm();
   }
 
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '46');
+  }
+
   refreshForm() {
     this.skillType = {
       SkillTypeID: 0,

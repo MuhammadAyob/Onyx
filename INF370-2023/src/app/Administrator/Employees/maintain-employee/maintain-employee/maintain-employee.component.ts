@@ -98,6 +98,11 @@ export class MaintainEmployeeComponent implements OnInit {
 
   }
 
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '38');
+  }
+
   getDepartmentList() {
     this.serviced.GetDepartments().subscribe((result) => {
       this.departmentList = result as Department[];

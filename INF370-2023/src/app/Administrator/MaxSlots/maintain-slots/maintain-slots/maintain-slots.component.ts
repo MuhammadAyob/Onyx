@@ -43,6 +43,11 @@ export class MaintainSlotsComponent implements OnInit {
     this.test=JSON.parse(sessionStorage['MaxSlotsPerDay'])
   }
 
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '145');
+  }
+
   onBack(): void {
     this.router.navigate(['admin/read-max-slots'])
   }

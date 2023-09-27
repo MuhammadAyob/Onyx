@@ -54,6 +54,11 @@ ngOnInit(): void {
   this.getSection();
 }
 
+GetHelp(){
+  localStorage.removeItem('pageNumber');
+  localStorage.setItem('pageNumber', '74');
+}
+
 getSection(){
   this.serviceS.MaintainSection(this.storageSection.SectionID).subscribe((res)=>{
     this.section=res as Section;

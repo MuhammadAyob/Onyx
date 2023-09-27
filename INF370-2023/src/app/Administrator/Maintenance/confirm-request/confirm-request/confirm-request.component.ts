@@ -47,15 +47,18 @@ export class ConfirmRequestComponent implements OnInit {
     this.maintainPriorityName = this.currentMaintenance.MaintenancePriority;
   }
 
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '154');
+  }
+
  
   onBack() {
+    sessionStorage.removeItem('MaintenanceRequest');
     this.location.back();
   }
 
 
-  onArrowBack() {
-    this.location.back();
-  }
 
   onSubmit() {
     const dialogReference = this.dialog.open(
@@ -88,6 +91,7 @@ export class ConfirmRequestComponent implements OnInit {
                   }
           );
           this.isLoading=false;
+          sessionStorage.removeItem('MaintenanceRequest');
           this.router.navigate(['admin/read-maintenance-requests']);
           let audit = new AuditLog();
               audit.AuditLogID = 0;

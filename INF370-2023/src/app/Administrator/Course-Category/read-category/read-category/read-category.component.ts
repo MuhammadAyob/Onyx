@@ -58,7 +58,11 @@ constructor(
 
 ngOnInit(): void {
   this.refreshList();
- 
+}
+
+GetHelp(){
+  localStorage.removeItem('pageNumber');
+  localStorage.setItem('pageNumber', '67');
 }
 
 ngAfterViewInit() {

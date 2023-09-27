@@ -46,12 +46,16 @@ export class MaintainUpdateRequestComponent implements OnInit {
   }
 
   onBack() {
+    sessionStorage.removeItem('UpdateRequest');
     this.location.back();
   }
 
-  onArrowBack() {
-    this.location.back();
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '56');
   }
+
+
 
   downloadPDF() {
     const pdfBase64 = this.pdfSrc.split(',')[1];
@@ -101,6 +105,7 @@ export class MaintainUpdateRequestComponent implements OnInit {
                     duration: 10000,
                   });
                   this.isLoading=false;
+                  sessionStorage.removeItem('UpdateRequest');
                   this.router.navigate(['admin/read-update-requests']);
 
                   // Audit
@@ -171,6 +176,7 @@ export class MaintainUpdateRequestComponent implements OnInit {
                     duration: 5000,
                   });
                   this.isLoading=false;
+                  sessionStorage.removeItem('UpdateRequest');
                   this.router.navigate(['admin/read-update-requests']);
 
                    // Audit

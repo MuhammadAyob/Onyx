@@ -49,10 +49,15 @@ export class MaintainTrainingVideoComponent implements OnInit {
     private service: InstructionalVideoService,
     private aService:AuditLogService,
     private security:SecurityService
-   ) { this.titleservice.setTitle('Instructional Videos');}
+   ) { this.titleservice.setTitle('Videos');}
 
   ngOnInit(): void {
     this.instructionalVideo = JSON.parse( sessionStorage['instructionalVideo'] );
+  }
+
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '14');
   }
 
   onBack() {

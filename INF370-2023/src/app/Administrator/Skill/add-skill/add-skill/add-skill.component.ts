@@ -49,6 +49,11 @@ export class AddSkillComponent implements OnInit {
     this.getTypeList();
   }
 
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '43');
+  }
+
   getTypeList() {
     this.serviceT.GetSkillTypes().subscribe((result) => {
       this.skillTypeList = result as SkillType[];

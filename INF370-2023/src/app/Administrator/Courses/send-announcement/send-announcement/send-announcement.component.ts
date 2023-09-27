@@ -48,6 +48,11 @@ constructor(
   this.announcement.CourseID = this.Course.CourseID;
   }
 
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '86');
+  }
+
   refreshForm() {
     this.announcement = {
       CourseID: 0,

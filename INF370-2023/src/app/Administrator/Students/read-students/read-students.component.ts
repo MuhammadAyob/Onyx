@@ -66,6 +66,11 @@ export class ReadStudentsComponent implements OnInit {
     this.refreshList();
   }
 
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '103');
+  }
+
   public doFilter = (event: Event) => {
     this.dataSource.filter = (event.target as HTMLInputElement).value.trim().toLocaleLowerCase();
      if (this.dataSource.filteredData.length === 0) {
