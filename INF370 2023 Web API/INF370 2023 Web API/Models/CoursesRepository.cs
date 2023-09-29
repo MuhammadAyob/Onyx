@@ -777,7 +777,7 @@ namespace INF370_2023_Web_API.Models
                         {
                             CourseID = c.CourseID,
                             Name = c.Name,
-                            Image = c.Image,
+                            //Image = c.Image,
                             Description = c.Description,
                             FirstLesson = c.Sections
                                 .SelectMany(s => s.Lessons)
@@ -788,7 +788,7 @@ namespace INF370_2023_Web_API.Models
                     {
                         ec.CourseID,
                         ec.Name,
-                        ec.Image,
+                        //ec.Image,
                         ec.Description,
                         LessonName = ec.FirstLesson.LessonName,
                         VideoID = ec.FirstLesson.VideoID
@@ -797,6 +797,61 @@ namespace INF370_2023_Web_API.Models
 
                 return enrolledCourses;
 
+            }
+
+            catch (Exception)
+            {
+                return new { Status = 500, Message = "Internal server error, please try again" };
+            }
+        }
+
+        public async Task<object> GetAllStoreDetails(int studentID)
+        {
+            try
+            {
+                dynamic obj = new ExpandoObject();
+                db.Configuration.ProxyCreationEnabled = false;
+
+                var Categories = await db.CourseCategories.ToListAsync();
+                obj.Categories = Categories;
+
+                var courses = await db.Courses
+   .Join(db.CourseCategories,
+       course => course.CategoryID,
+       category => category.CategoryID,
+       (course, category) => new { Course = course, Category = category })
+   .GroupJoin(db.CoursePrices,
+       courseCategory => courseCategory.Course.CourseID,
+       prices => prices.CourseID,
+       (courseCategory, prices) => new { Course = courseCategory.Course, Category = courseCategory.Category, Prices = prices })
+   .SelectMany(
+       courseGroup => courseGroup.Prices.OrderByDescending(price => price.Date).Take(1),
+       (courseGroup, price) => new { Course = courseGroup.Course, Category = courseGroup.Category, Price = price })
+   .Where(c => c.Course.Active == "True" &&
+               !db.StudentCourses.Any(sc => sc.CourseID == c.Course.CourseID && sc.StudentID == studentID))
+   .Select(c => new
+   {
+       CourseID = c.Course.CourseID,
+       Name = c.Course.Name,
+       Description = c.Course.Description,
+       Image = c.Course.Image,
+       CategoryID = c.Category.CategoryID,
+       Preview = c.Course.Preview,
+       Category = c.Category.Category,
+       Price = c.Price.Price
+   })
+   .ToListAsync();
+
+                obj.Courses = courses;
+
+                var VAT = await db.VATs.OrderByDescending(z => z.VatDate).Select(x => new
+                {
+                    VAT = x.VatAmount
+                }).FirstOrDefaultAsync();
+
+                obj.VAT = VAT;
+
+                return obj;
             }
 
             catch (Exception)

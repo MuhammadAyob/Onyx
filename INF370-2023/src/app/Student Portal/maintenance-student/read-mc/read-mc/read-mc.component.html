@@ -84,7 +84,7 @@
                   *matCellDef="let maintenance"
                   
                 >
-                  {{ maintenance.DateLogged | date: "dd MMM yyyy" }}
+                  {{ maintenance.DateLogged | date: "yyyy/MM/dd" }}
                 </td>
               </ng-container>
   
@@ -129,7 +129,7 @@
                     (click)="onView(maintenance)"
                   >
                     <mat-icon aria-hidden="false" aria-label="Confirm Maintenance"
-                      >reply</mat-icon
+                      >remove_red_eye</mat-icon
                     >
                   </button>
                 </td>

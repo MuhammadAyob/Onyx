@@ -42,5 +42,7 @@ namespace INF370_2023_Web_API.Models
         Task<object> GetCourseView(int id);
 
         Task<object> GetEnrolledCourses(int id);
+
+        Task<object> GetAllStoreDetails(int studentID);
     }
 }

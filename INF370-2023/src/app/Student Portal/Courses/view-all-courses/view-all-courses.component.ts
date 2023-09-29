@@ -22,7 +22,6 @@ import { map } from 'rxjs/operators';
 })
 export class ViewAllCoursesComponent implements OnInit {
 displayedColumns: string[] = [
-    'Image',
     'Name',
     'view'
 ];

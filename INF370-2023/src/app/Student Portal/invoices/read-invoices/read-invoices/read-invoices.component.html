@@ -11,7 +11,7 @@
             <form class="navbar-form">
               <mat-form-field appearance="outline" color="white" style="width: 100%; border-color: white !important; color: #ffffff; padding-top: 1%;">
                 <mat-label style=" color: #ffffff; background-color: transparent; border-bottom: none; font-size: 15px; width: 100%;">Search Invoices</mat-label>
-                <input type="text" style="border-color: #5090d000;" matInput name="searchDept" (keydown.enter)="doFilter($event)" placeholder="yyyy MM DD">
+                <input type="text" style="border-color: #5090d000;" matInput name="searchDept" (keydown.enter)="doFilter($event)" placeholder="yyyy-MM-DD">
                 <mat-icon class="search" style="float: right; margin-top: -22px;">search</mat-icon>
               </mat-form-field>
             </form>
@@ -45,7 +45,7 @@
               <ng-container matColumnDef="Date">
                 <th mat-header-cell mat-sort-header *matHeaderCellDef style="color: #ffffff;" >Date</th>
                 <td mat-cell *matCellDef="let invoice">
-                  {{ invoice.Date | date: "dd MMM yyyy"}}
+                  {{ invoice.Date | date: "yyyy-MM-dd"}}
                 </td>
               </ng-container>
 

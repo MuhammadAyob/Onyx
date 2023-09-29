@@ -128,7 +128,7 @@
                   <br>
                   <br>
                  </div>
-                 <h1 style="margin:0 auto; color: #0e1a3c;"><b>Average Course Rating: {{average}} / 5 stars</b></h1>
+                 <h1 style="margin:0 auto; color: #0e1a3c;"><b>Average Course Rating: {{average | number : '1.2-2'}} / 5 stars</b></h1>
                 <br>
                 <div *ngIf="showGraph">
                   <canvas 

@@ -84,4 +84,8 @@ GetEnrolledCourses(id:number){
   return this.http.get(environment.WebAPI + 'GetEnrolledCourses/' + id, this.httpOptions);
 }
 
+GetAllStoreDetails(studentID:number){
+  return this.http.get(environment.WebAPI + 'GetAllStoreDetails/' + studentID, this.httpOptions);
+}
+
 }

@@ -183,9 +183,9 @@ namespace INF370_2023_Web_API.Models
                 return InterviewSlots;
 
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return new { Status = 500, Message = "Internal server error, please try again" };
+                return e.ToString();
             }
         }
 

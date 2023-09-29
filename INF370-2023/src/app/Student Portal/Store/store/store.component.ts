@@ -64,8 +64,8 @@ constructor(
 ngOnInit(): void {
 this.StudentID = sessionStorage.getItem('StudentID');
 this.refreshList();
-this.GetCategories();
-this.GetVAT();
+//this.GetCategories();
+//this.GetVAT();
 }
 
 GetHelp(){
@@ -77,7 +77,7 @@ ngAfterViewInit(){
   this.dataSource.paginator = this.paginator;
   this.dataSource.sort = this.sort;
   this.refreshList();
-  this.GetCategories();
+  //this.GetCategories();
 }
 
 GetVAT(){
@@ -132,8 +132,12 @@ public onChipFilter(chipValue: string) {
 
 
 refreshList() {
-  this.service.ViewStore(this.StudentID).subscribe((result) => {
-    this.dataSource.data = result as any[];
+  this.service.GetAllStoreDetails(this.StudentID).subscribe((result:any) => {
+    //console.log(result);
+    this.dataSource.data = result.Courses as any[];
+    this.categoryList = result.Categories as CourseCategory[];
+    this.VAT = result.VAT as any;
+    sessionStorage['CurrentVAT'] = JSON.stringify(this.VAT);
     this.isLoading=false;
   });
 }

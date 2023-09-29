@@ -272,6 +272,7 @@ export class ReadInterviewSlotsComponent implements OnInit {
 
   refreshList() {
     this.service.GetSlots().subscribe((result) => {
+      
       this.dataSource.data = result as any;
       this.isLoading=false;
     });

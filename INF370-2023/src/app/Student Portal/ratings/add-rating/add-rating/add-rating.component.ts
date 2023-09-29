@@ -182,7 +182,7 @@ onSubmit() {
         dialogMessage: "Correct Errors on Highlighted fields"
       },
       width: '27vw',
-      height: '25vh',
+      height: '29vh',
     });
   } else {
     const title = 'Confirm New Rating';

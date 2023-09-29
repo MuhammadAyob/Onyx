@@ -125,7 +125,7 @@ export class AdminHomeComponent implements OnInit {
       x: {},
       y: {
         min: 0,
-        suggestedMax:10000
+        suggestedMax:20000
       },
     },
     plugins: {

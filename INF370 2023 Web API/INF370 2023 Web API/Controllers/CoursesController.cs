@@ -133,6 +133,14 @@ namespace INF370_2023_Web_API.Controllers
         }
 
         [HttpGet]
+        [Route("api/GetAllStoreDetails/{studentID}")]
+        public async Task<object> GetAllStoreDetails(int studentID)
+        {
+            return await _courseRepo.GetAllStoreDetails(studentID);
+        }
+
+
+        [HttpGet]
         [Route("api/ViewCourseStructure/{id}")]
         public async Task<object> ViewCourseStructure(int id)
         {

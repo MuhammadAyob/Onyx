@@ -49,7 +49,7 @@
               <ng-container matColumnDef="InterviewDate">
                 <th mat-header-cell mat-sort-header *matHeaderCellDef style="color: #ffffff;" >Date</th>
                 <td mat-cell *matCellDef="let slot">
-                  {{ slot.InterviewDate | date: "dd MMM yyyy" }}
+                  {{ slot.InterviewDate | date: "yyyy-MM-dd" }}
                 </td>
               </ng-container>
 
