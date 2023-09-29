@@ -19,8 +19,17 @@
 
           <div fxFlex></div>
           <div fxLayoutAlign="center center" style="margin-top: 25px;padding-right: 10px;" >
-            <button type="button" mat-mini-fab style="float: right; background-color: #920f4c;" class="btn btn-default btn-lg" (click)="addNew()">
-              <mat-icon aria-hidden="false" aria-label="Add FAQ" style="color: white; ">add</mat-icon></button>
+            <button type="button" mat-mini-fab style="float: left; background-color: #920f4c; margin-right:40px" class="btn btn-default btn-lg" (click)="addNew()">
+              <mat-icon aria-hidden="false" aria-label="Add FAQ" style="color: white; ">add</mat-icon>
+            </button>
+            <button matTooltip="Help" type="button" mat-mini-fab style="float: right; background-color: #920f4c;margin-top:-39px" class="btn btn-default btn-lg" (click)="GetHelp()">
+              <a
+              style="color: rgb(255, 255, 255);"
+              [routerLink]="['/help']" 
+              target="_blank"
+                ><mat-icon style="color: #ffffff;">help</mat-icon></a
+              >
+            </button>
             </div>
         </div>
         

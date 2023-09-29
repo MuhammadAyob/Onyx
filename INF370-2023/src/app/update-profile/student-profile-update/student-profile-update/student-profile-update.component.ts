@@ -63,6 +63,11 @@ ngOnInit(): void {
   this.getTitleList();
 }
 
+GetHelp(){
+  localStorage.removeItem('pageNumber');
+  localStorage.setItem('pageNumber', '4');
+}
+
 getTitleList(){
   this.serviceT.GetTitles().subscribe((result)=>{
     this.titleList=result as Titles[];

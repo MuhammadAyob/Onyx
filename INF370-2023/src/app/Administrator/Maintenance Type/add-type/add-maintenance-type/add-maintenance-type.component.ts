@@ -49,6 +49,11 @@ constructor(
     this.refreshForm();
   }
 
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '157');
+  }
+
   refreshForm() {
     this.type = {
       MaintenanceTypeID: 0,

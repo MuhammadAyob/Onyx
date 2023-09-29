@@ -19,9 +19,18 @@
 
           <div fxFlex></div>
           <div fxLayoutAlign="center center" style="margin-top: 25px;padding-right: 10px;" >
-            <button type="button" mat-mini-fab style="float: right; background-color: #920f4c;" class="blom" (click)="calender()">
-              <mat-icon aria-hidden="false" aria-label="Add FAQ" style="color: white; ">calendar_today</mat-icon></button>
-            </div>
+            <button type="button" mat-mini-fab style="float: left; background-color: #920f4c; margin-right:40px" class="blom" (click)="calender()">
+              <mat-icon aria-hidden="false" aria-label="Add FAQ" style="color: white; ">calendar_today</mat-icon>
+            </button>
+            <button matTooltip="Help" type="button" mat-mini-fab style="float: right; background-color: #920f4c;margin-top:-39px" class="blom" (click)="GetHelp()">
+              <a
+              style="color: rgb(255, 255, 255);"
+              [routerLink]="['/help']" 
+              target="_blank"
+                ><mat-icon style="color: #ffffff;">help</mat-icon></a
+              >
+            </button>
+          </div>
         </div>
         
 

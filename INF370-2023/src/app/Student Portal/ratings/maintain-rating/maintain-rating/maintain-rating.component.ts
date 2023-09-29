@@ -50,6 +50,11 @@ constructor(
     this.location.back();
   }
 
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '9');
+  }
+
 
 stars: number[] = [1, 2, 3, 4, 5];
 

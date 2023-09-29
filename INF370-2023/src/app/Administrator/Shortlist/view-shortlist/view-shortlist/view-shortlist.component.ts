@@ -51,8 +51,11 @@ export class ViewShortlistComponent implements OnInit {
     this.id = this.shortlist.ApplicationID;
     this.dataImage = this.shortlist.Image;
     this.pdfSrc = 'data:image/pdf;base64,' + this.shortlist.CV;
-  
-   
+  }
+
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '141');
   }
 
   downloadPDF() {
@@ -69,6 +72,7 @@ export class ViewShortlistComponent implements OnInit {
   }
 
   onBack() {
+    sessionStorage.removeItem('shortlist');
     this.location.back();
   }
 
@@ -139,6 +143,7 @@ export class ViewShortlistComponent implements OnInit {
                       }
               );
               this.isLoading  = false;
+              sessionStorage.removeItem('shortlist');
               this.router.navigate(['admin/read-shortlist']);
 
               let audit = new AuditLog();

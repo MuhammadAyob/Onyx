@@ -65,6 +65,11 @@ constructor(public router: Router,
     this.getTypes();
   }
 
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '116');
+  }
+
   refreshForm(){
     this.JobOpportunity = {
       JobOppID:0,

@@ -74,6 +74,11 @@ export class AdminProfileUpdateComponent implements OnInit {
     
   }
 
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '4');
+  }
+
   onEmployeeProfile() {
     this.serviceE.GetEmployeeName(sessionStorage.getItem('EmployeeID')).subscribe((result:any) => {
       this.employee = result as any;

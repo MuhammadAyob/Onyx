@@ -61,6 +61,11 @@ ngOnInit(): void {
   this.getMaintenancePriorityList();
 }
 
+GetHelp(){
+  localStorage.removeItem('pageNumber');
+  localStorage.setItem('pageNumber', '30');
+}
+
 getMaintenanceTypeList() {
   this.serviced.GetTypes().subscribe((result) => {
     this.maintenanceTypeList = result as MaintenanceType[];

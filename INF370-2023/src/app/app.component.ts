@@ -60,7 +60,8 @@ export class AppComponent {
           e.url === '/reset-password' ||
           e.url === '/contact' ||
           e.url === '/about' ||
-          e.url === '/help'
+          e.url === '/help' ||
+          e.url === '/_help'
         ) {
           this.flag = true;
         } else {

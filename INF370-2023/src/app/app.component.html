@@ -525,10 +525,10 @@
               <button mat-menu-item style="background-color: #920f4c;color: #ffffff;" routerLink="/student/update-profile">
                 <mat-icon style="color: #ffffff;">person</mat-icon><span>My Account</span>
               </button>
-              <button mat-menu-item style="background-color: #920f4c;">
+              <button (click)="GetHelp()" mat-menu-item style="background-color: #920f4c;">
                 <a
                 style="color: rgb(255, 255, 255);"
-                [routerLink]="['/help']" 
+                [routerLink]="['/_help']" 
                 target="_blank"
                   ><mat-icon style="color: #ffffff;">help</mat-icon><span>Help</span></a
                 >

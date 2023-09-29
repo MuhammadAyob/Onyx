@@ -103,6 +103,11 @@ export class ReadInterviewSlotsComponent implements OnInit {
     //this.populateCalendarInitially();
   }
 
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '133');
+  }
+
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;

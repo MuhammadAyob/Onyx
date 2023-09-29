@@ -48,6 +48,11 @@ constructor(
     this.type=JSON.parse(sessionStorage['MaintenanceType'])
   }
 
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '160');
+  }
+
   onBack(): void {
     this.location.back();
   }

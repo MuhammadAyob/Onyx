@@ -51,6 +51,11 @@ export class ViewApplicationComponent implements OnInit {
     
   }
 
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '126');
+  }
+
   downloadPDF() {
     const pdfBase64 = this.pdfSrc.split(',')[1];
     const byteCharacters = atob(pdfBase64);
@@ -64,6 +69,7 @@ export class ViewApplicationComponent implements OnInit {
     saveAs(blob, 'ApplicationCV.pdf');
   }
   onBack() {
+    sessionStorage.removeItem('application');
     this.location.back();
   }
 
@@ -109,6 +115,7 @@ export class ViewApplicationComponent implements OnInit {
                       }
               );
               this.isLoading  = false;
+              sessionStorage.removeItem('application');
               this.router.navigate(['admin/read-applications']);
 
               let audit = new AuditLog();
@@ -172,6 +179,7 @@ export class ViewApplicationComponent implements OnInit {
                       }
               );
               this.isLoading=false;
+              sessionStorage.removeItem('application');
               this.router.navigate(['admin/read-applications']);
 
               let audit = new AuditLog();

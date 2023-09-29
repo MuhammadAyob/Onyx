@@ -51,6 +51,11 @@ onBack(): void {
     this.location.back();
 }
 
+GetHelp(){
+  localStorage.removeItem('pageNumber');
+  localStorage.setItem('pageNumber', '165');
+}
+
 refreshList() {
   this.service.GetPriorities().subscribe((result) => {
     this.dataSource.data = result as MaintenancePriority[];

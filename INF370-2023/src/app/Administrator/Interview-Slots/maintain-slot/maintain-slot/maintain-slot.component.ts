@@ -60,6 +60,11 @@ export class MaintainSlotComponent implements OnInit {
     //this.InterviewDetails.InterviewSlotID = this.interviewSlot.InterviewSlotID;
   }
 
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '135');
+  }
+
   onBack() {
     this.router.navigate(['admin/read-interview-slots']);
   }

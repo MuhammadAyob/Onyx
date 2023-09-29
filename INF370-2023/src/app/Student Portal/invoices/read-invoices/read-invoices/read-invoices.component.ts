@@ -53,6 +53,11 @@ this.StudentID = sessionStorage.getItem('StudentID');
 this.refreshList();
 }
 
+GetHelp(){
+  localStorage.removeItem('pageNumber');
+  localStorage.setItem('pageNumber', '24');
+}
+
   ngAfterViewInit(){
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;

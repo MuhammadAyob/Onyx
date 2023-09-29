@@ -167,6 +167,7 @@ getQualificationList() {
 }
 
 onBack() {
+  sessionStorage.removeItem('shortlist');
   this.location.back();
 }
 
@@ -261,6 +262,7 @@ showDialog(title: string, message: string): void {
           );
           this.refreshForm();
           this.isLoading=false;
+          
           this.router.navigate(['admin/read-employees']);
           this.shortService.AcceptShortlistedCandidate(this.shortList.ApplicationID).subscribe(
             (result:any)=>
@@ -275,6 +277,7 @@ if(result.Status === 200){
         audit.Date = '';
 
         this.aService.AddAudit(audit).subscribe((data) => {
+          sessionStorage.removeItem('shortlist');
           //console.log(data);
           //this.refreshForm();
         })

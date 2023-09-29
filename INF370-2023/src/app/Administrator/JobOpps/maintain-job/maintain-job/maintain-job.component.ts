@@ -66,6 +66,11 @@ isChecked:any;
 
   }
 
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '119');
+  }
+
   getTypes(){
     this.service.GetWorkTypes().subscribe((result)=>{
     this.WorkTypeList = result as WorkType[]; 

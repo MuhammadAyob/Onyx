@@ -50,6 +50,11 @@ this.refreshForm();
 this.GetCoursesToRate();
 }
 
+GetHelp(){
+  localStorage.removeItem('pageNumber');
+  localStorage.setItem('pageNumber', '7');
+}
+
 sRating: number = 1;
 stars: number[] = [1, 2, 3, 4, 5];
 

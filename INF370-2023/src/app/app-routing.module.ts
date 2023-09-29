@@ -136,6 +136,7 @@ import { ViewSTermsComponent } from './Student Portal/terms-view/view-s-terms/vi
 import { AboutUsComponent } from './about-us/about-us/about-us.component';
 import { AuditLogComponent } from './Administrator/Audit/audit-log/audit-log.component';
 import { HelpPdfComponent } from './help-pdf/help-pdf.component';
+import { StudentHelpComponent } from './student-help/student-help.component';
 
 
 const routes: Routes = [
@@ -176,6 +177,11 @@ component:AboutUsComponent
 {
 path:'help',
 component:HelpPdfComponent
+},
+
+{
+path:'_help',
+component:StudentHelpComponent
 },
 
 {

@@ -47,6 +47,11 @@ ngOnInit(): void {
   this.refreshForm();
 }
 
+GetHelp(){
+  localStorage.removeItem('pageNumber');
+  localStorage.setItem('pageNumber', '161');
+}
+
 refreshForm() {
   this.priority = {
     MaintenancePriorityID: 0,

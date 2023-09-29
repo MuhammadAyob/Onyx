@@ -52,6 +52,10 @@ ngOnInit(): void {
   this.StudentID = sessionStorage.getItem('StudentID');
 }
 
+GetHelp(){
+  localStorage.removeItem('pageNumber');
+  localStorage.setItem('pageNumber', '23');
+}
 
 
 removeFromCart(item: any): void {
@@ -77,7 +81,8 @@ getTotalAmount(): number {
   for (const item of this.cartItems) {
     total += item.Price;
   }
-  return total;
+  // Use the toFixed method to round total to 2 decimal places and convert it back to a number
+  return parseFloat(total.toFixed(2));
 }
 
 getVatExclusive(): number {

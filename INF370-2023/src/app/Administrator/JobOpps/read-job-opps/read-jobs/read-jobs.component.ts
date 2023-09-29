@@ -32,7 +32,7 @@ export class ReadJobsComponent implements OnInit {
   public dataSource = new MatTableDataSource<JobOpportunity>();
 
   noData = this.dataSource.connect().pipe(map((data) => data.length === 0));
-isLoading:boolean=true;
+  isLoading:boolean=true;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -51,6 +51,11 @@ isLoading:boolean=true;
   ngOnInit(): void {
     this.expiredJobs();
     this.refreshList();
+  }
+
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '118');
   }
 
   ngAfterViewInit() {

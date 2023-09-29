@@ -71,6 +71,11 @@ export class AddInterviewDialogComponent implements OnInit {
     this.transformDate();
   }
 
+  GetHelp(){
+    localStorage.removeItem('pageNumber');
+    localStorage.setItem('pageNumber', '131');
+  }
+
   transformDate(){
     this.transformedDate = this.datePipe.transform(this.data.date, 'yyyy-MM-dd');
     this.InterviewDetails.InterviewDate = this.transformedDate;
@@ -104,7 +109,7 @@ export class AddInterviewDialogComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.InterviewDetails);
+    //console.log(this.InterviewDetails);
     const isInvalid = this.validateFormControls();
     if (isInvalid == true) {
       this.dialog.open(InputDialogComponent, {

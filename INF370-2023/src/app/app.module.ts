@@ -165,6 +165,7 @@ import { HelpPdfComponent } from './help-pdf/help-pdf.component';
 import { CoursePipe } from './course.pipe';
 import { LessonsearchPipe } from './lessonsearch.pipe';
 import { ResourcesearchPipe } from './resourcesearch.pipe';
+import { StudentHelpComponent } from './student-help/student-help.component';
 //import { CalendarDialogComponent } from './Dialog/calendar-dialog/calendar-dialog/calendar-dialog.component';
 //import { ServiceWorkerModule } from '@angular/service-worker';
 
@@ -328,6 +329,7 @@ export function momentAdapterFactory() {
     CoursePipe,
     LessonsearchPipe,
     ResourcesearchPipe,
+    StudentHelpComponent,
 
     
   ],
