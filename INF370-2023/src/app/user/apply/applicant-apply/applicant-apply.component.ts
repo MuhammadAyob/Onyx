@@ -61,6 +61,10 @@ export class ApplicantApplyComponent implements OnInit {
   fileAttribute = ' ';
   dataImage:any;
   isLoading = false;  
+
+  invalidFormat!:boolean;
+  invalidImageFormat!:boolean;
+
   constructor(private fb: FormBuilder,
     public router: Router,
     private location: Location,
@@ -97,10 +101,32 @@ export class ApplicantApplyComponent implements OnInit {
   onSubmit() {
     this.resourceFile = this.resourceFile.slice(28);
     this.test.CV = this.resourceFile;
-    console.log(this.test);
+    //console.log(this.test);
     const isInvalid = this.validateFormControls();
 
-    if (isInvalid == true) {
+    if(this.invalidImageFormat == true){
+      this.dialog.open(InputDialogComponent, {
+        data: {
+          dialogTitle: "File Error",
+          dialogMessage: "Please upload Image Files only"
+        },
+        width: '27vw',
+        height: '29vh',
+      });
+     }
+
+    else if(this.invalidFormat == true){
+      this.dialog.open(InputDialogComponent, {
+        data: {
+          dialogTitle: "File Error",
+          dialogMessage: "Please upload PDF only"
+        },
+        width: '27vw',
+        height: '29vh',
+      });
+     }
+
+    else if (isInvalid == true) {
       this.dialog.open(InputDialogComponent, {
         data: {
           dialogTitle: "Input Error",
@@ -276,10 +302,15 @@ onBack() {
 fileAttr = ' ';
 
 uploadFileEvt(imgFile: any) {
+  this.invalidImageFormat = false;
   if (imgFile.target.files && imgFile.target.files[0]) {
     this.fileAttr = '';
     Array.from(imgFile.target.files as FileList).forEach((file: File) => {
       this.fileAttr += file.name + ' - ';
+       // Check the file type (MIME type)
+    if (!file.type.startsWith('image/')) {
+      this.invalidImageFormat = true;
+    }
     });
 
     // HTML5 FileReader API
@@ -308,11 +339,17 @@ uploadFileEvt(imgFile: any) {
     }
 }
 
-uploadPDFFileEvt(dataFile:any) 
-   {
+uploadPDFFileEvt(dataFile:any) {
+     this.invalidFormat = false;
      this.fileAttribute = '';
      Array.from(dataFile.target.files as FileList).forEach((file: File) => {
        this.fileAttribute += file.name + ' - ';
+
+        // Check the file type (MIME type)
+      if (file.type !== 'application/pdf') 
+      {
+      this.invalidFormat = true;
+      }
      });
  
     //this.test.ResourceName=this.fileAttr;

@@ -30,8 +30,10 @@ constructor(
 { this.titleservice.setTitle('Enter OTP');}
 
 OTPFormControl = new FormControl('', [Validators.required, Validators.pattern('^[1-9][0-9]*$')]);
-passwordFormControl = new FormControl('', [Validators.required,Validators.maxLength(16) ,Validators.minLength(6)],);
-confirmPasswordFormControl = new FormControl('', [Validators.required, Validators.maxLength(16),Validators.minLength(6)],);
+passwordFormControl = new FormControl('', [Validators.required,Validators.maxLength(16) ,Validators.minLength(6),
+Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$')]);
+confirmPasswordFormControl = new FormControl('', [Validators.required, Validators.maxLength(16),Validators.minLength(6),
+Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$')]);
 
 ngOnInit():void {
   this.otpForm();
@@ -51,9 +53,9 @@ otpForm() {
 }
 
 validateFormControls(): boolean {  
-  const isValidPassword = this.passwordFormControl.hasError('required') || this.passwordFormControl.hasError('minlength') || this.passwordFormControl.hasError('maxlength')
+  const isValidPassword = this.passwordFormControl.hasError('required') || this.passwordFormControl.hasError('minlength') || this.passwordFormControl.hasError('maxlength') || this.passwordFormControl.hasError('pattern')
   const isValidOTP = this.OTPFormControl.hasError('required') || this.OTPFormControl.hasError('pattern')
-  const isValidConfirmPassword = this.confirmPasswordFormControl.hasError('required') || this.confirmPasswordFormControl.hasError('minlength') || this.confirmPasswordFormControl.hasError('maxlength')
+  const isValidConfirmPassword = this.confirmPasswordFormControl.hasError('required') || this.confirmPasswordFormControl.hasError('minlength') || this.confirmPasswordFormControl.hasError('maxlength') || this.confirmPasswordFormControl.hasError('pattern')
   const isMatch: boolean = this.formData.Password === this.confirmPassword;
   if (
     isValidPassword == false &&

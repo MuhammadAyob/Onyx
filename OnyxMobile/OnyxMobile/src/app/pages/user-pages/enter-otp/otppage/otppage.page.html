@@ -96,12 +96,9 @@
                 <mat-error *ngIf="passwordFormControl.hasError('required')" style="color: red;">
                 Password is <strong>required</strong>
                </mat-error>
-               <mat-error *ngIf="passwordFormControl.hasError('minlength')" style="color: red;">
-                 Password must be minimum 6 and maximum 16 characters.
-                </mat-error>
-                <mat-error *ngIf="passwordFormControl.hasError('maxlength')" style="color: red;">
-                 Password must be minimum 6 and maximum 16 characters.
-                </mat-error>
+               <mat-error *ngIf="passwordFormControl.hasError('pattern')">
+                Password must be between 6-16 characters, with at least one uppercase, a lowercase and a number.
+              </mat-error>
               </mat-form-field>
               <br>
               <br>
@@ -144,11 +141,8 @@
               <mat-error *ngIf="confirmPasswordFormControl.hasError('required')" style="color: red;">
                 Confirm password is <strong>required</strong>
               </mat-error>
-              <mat-error *ngIf="confirmPasswordFormControl.hasError('minlength')" style="color: red;">
-                Password must have a minimum of <strong>6</strong> characters
-              </mat-error>
-              <mat-error *ngIf="confirmPasswordFormControl.hasError('maxlength')" style="color: red;">
-                Password must have a maxiumum of <strong>16</strong> characters
+              <mat-error *ngIf="confirmPasswordFormControl.hasError('pattern')">
+                Password must be between 6-16 characters, with at least one uppercase, a lowercase and a number.
               </mat-error>
             </mat-form-field>             
              

@@ -22,6 +22,7 @@ export class RequestUpdateComponent  implements OnInit {
   updateFile: string = '';
   fileAttr = ' ';
   isLoading:boolean=false;
+  invalidFormat!:boolean;
 
   constructor(
     public router: Router,
@@ -48,9 +49,16 @@ export class RequestUpdateComponent  implements OnInit {
     }
 
     uploadFileEvt(dataFile:any) {
+      this.invalidFormat = false;
       this.fileAttr = '';
       Array.from(dataFile.target.files as FileList).forEach((file: File) => {
         this.fileAttr += file.name + ' - ';
+
+         // Check the file type (MIME type)
+      if (file.type !== 'application/pdf') 
+      {
+      this.invalidFormat = true;
+      }
       });
   
       var fileUpload = dataFile.target.files[0];
@@ -75,7 +83,17 @@ export class RequestUpdateComponent  implements OnInit {
   
     async onSubmit() {
       const isInvalid = this.validateFormControls();
-      if (isInvalid == true) {
+      if(this.invalidFormat == true){
+        const alert = await this.alertController.create({
+          header: 'File Error',
+          message: 'Please upload PDF only!',
+          buttons: ['OK'],
+        });
+    
+        await alert.present();
+       }
+
+      else if (isInvalid == true) {
         const alert = await this.alertController.create({
           header: 'Input Error',
           message: 'Correct the highlighted errors on the fields!',

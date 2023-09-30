@@ -116,14 +116,14 @@
                         <i (click)="onUR()" style="background-color: #920f4c; cursor: pointer;" class="fa fa-usd" aria-hidden="true"></i>
         
                     </div>
-                      <table *ngFor="let item of UpdateRequests">
+                      <table>
                         <tr>
                         <th>Name</th>
                         <th>Surname</th>
                         <th>Subject</th>
                         </tr>
         
-                         <tr>
+                         <tr *ngFor="let item of UpdateRequests">
                         <td role="listitem">{{item.EmployeeName}}</td>
                         <td role="listitem">{{item.EmployeeSurname}} </td>
                         <td role="listitem">{{item.UpdateSubject}}</td>

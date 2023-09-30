@@ -133,7 +133,7 @@ ngOnInit(): void {
   getStructure(){
     this.isLoading = true;
     this.service.GetCourseView(this.test.CourseID).subscribe((result)=>{
-      console.log(result)
+     //console.log(result)
       this.courseDetails = result as any;
       this.isLoading=false;
     })
@@ -323,7 +323,7 @@ ngOnInit(): void {
 
   onDeleteCourse()
   {
-    console.log(this.test)
+    //console.log(this.test)
       const dialogReference = this.dialog.open(
         ConfirmDialogComponent,
         {
@@ -410,7 +410,7 @@ ngOnInit(): void {
 
   addNewSection()
   {
-    sessionStorage['cou'] = JSON.stringify(this.test);
+    //sessionStorage['cou'] = JSON.stringify(this.test);
     this.router.navigate(['admin/add-section']);
   }
 

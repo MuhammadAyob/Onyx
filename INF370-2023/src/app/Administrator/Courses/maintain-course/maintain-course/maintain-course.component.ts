@@ -48,6 +48,7 @@ dataImage:any;
 isLoading!:boolean;
 change!:boolean;
 isChecked:any;
+invalidFormat!:boolean;
 
 constructor(
   public router: Router,
@@ -109,7 +110,19 @@ selectActive($event:any) {
 
 onSubmit() {
   const isInvalid = this.validateFormControls();
-  if (isInvalid == true) {
+
+  if(this.invalidFormat == true){
+    this.dialog.open(InputDialogComponent, {
+      data: {
+        dialogTitle: "File Error",
+        dialogMessage: "Please upload Image Files only"
+      },
+      width: '27vw',
+      height: '29vh',
+    });
+   }
+
+  else if (isInvalid == true) {
     this.dialog.open(InputDialogComponent, {
       data: {
         dialogTitle: "Input Error",
@@ -177,6 +190,7 @@ showDialog(title: string, message: string): void {
                       duration: 3000,
                     }
             );
+            this.course.Price = parseFloat(this.course.Price.toFixed(2));
             sessionStorage.removeItem('Course');
             sessionStorage['Course'] = JSON.stringify(this.course);
            
@@ -298,10 +312,15 @@ showDialog(title: string, message: string): void {
 fileAttr = ' ';
 
 uploadFileEvt(imgFile: any) {
+  this.invalidFormat = false;
   if (imgFile.target.files && imgFile.target.files[0]) {
     this.fileAttr = '';
     Array.from(imgFile.target.files as FileList).forEach((file: File) => {
       this.fileAttr += file.name + ' - ';
+       // Check the file type (MIME type)
+    if (!file.type.startsWith('image/')) {
+      this.invalidFormat = true;
+    }
     });
 
     // HTML5 FileReader API

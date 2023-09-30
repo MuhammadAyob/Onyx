@@ -10,11 +10,11 @@
           >
         </mat-card-title-group>
   <div style="float: right;">
-    <button mat-icon-button style="color: rgb(255, 255, 255);margin-top: -10px;" (click)="onEdit()">
+    <button [disabled]="isLoading" mat-icon-button style="color: rgb(255, 255, 255);margin-top: -10px;" (click)="onEdit()">
       <mat-icon>edit</mat-icon>
     </button>
    
-    <button mat-icon-button  style="color: rgb(255, 255, 255);margin-top: -10px;" (click)="onDelete()">
+    <button [disabled]="isLoading" mat-icon-button  style="color: rgb(255, 255, 255);margin-top: -10px;" (click)="onDelete()">
       <mat-icon>delete</mat-icon>
     </button>
   </div>

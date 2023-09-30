@@ -51,6 +51,7 @@ export class AdminProfileUpdateComponent implements OnInit {
   employeeID!:any;
   isLoading:boolean=false;
   change!:boolean;
+  invalidFormat!:boolean;
 
   constructor(
     public router: Router,
@@ -129,9 +130,20 @@ export class AdminProfileUpdateComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.employee);
+    //console.log(this.employee);
     const isInvalid = this.validateFormControls();
-    if (isInvalid == true) {
+    if(this.invalidFormat == true){
+      this.dialog.open(InputDialogComponent, {
+        data: {
+          dialogTitle: "File Error",
+          dialogMessage: "Please upload Image Files only"
+        },
+        width: '27vw',
+        height: '29vh',
+      });
+     }
+
+    else if (isInvalid == true) {
       this.dialog.open(InputDialogComponent, {
         data: {
           dialogTitle: 'Inout Error',
@@ -156,7 +168,7 @@ export class AdminProfileUpdateComponent implements OnInit {
           if (result == true) {
             this.isLoading=true;
             this.serviceUpdate.UpdateEmployeeProfile(this.employee.EmployeeID, this.employee).subscribe((result:any) => {
-              console.log(result);
+              //console.log(result);
               if(result.Status === 200)
               {
                 this.snack.open(
@@ -264,10 +276,16 @@ export class AdminProfileUpdateComponent implements OnInit {
 fileAttr = ' ';
 
 uploadFileEvt(imgFile: any) {
+  this.invalidFormat = false;
   if (imgFile.target.files && imgFile.target.files[0]) {
     this.fileAttr = '';
     Array.from(imgFile.target.files as FileList).forEach((file: File) => {
       this.fileAttr += file.name + ' - ';
+       // Check the file type (MIME type)
+    if (!file.type.startsWith('image/')) {
+      this.invalidFormat = true;
+    }
+
     });
 
     // HTML5 FileReader API

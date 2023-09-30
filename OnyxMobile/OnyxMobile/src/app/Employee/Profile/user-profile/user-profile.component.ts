@@ -51,6 +51,8 @@ export class UserProfileComponent implements OnInit {
 
   change!:boolean;
   isLoading:boolean = false;
+  invalidFormat!:boolean;
+
   constructor(
     public router: Router,
     private alertController: AlertController,
@@ -106,9 +108,20 @@ onBack() {
 } 
 
 async onSubmit() {
-  console.log(this.employee);
+  //console.log(this.employee);
   const isInvalid = this.validateFormControls();
-  if (isInvalid == true) {
+
+  if(this.invalidFormat == true){
+    const alert = await this.alertController.create({
+      header: 'File Error',
+      message: 'Please upload Image Files only',
+      buttons: ['OK'],
+    });
+
+    await alert.present();
+   }
+
+  else if (isInvalid == true) {
 
     const alert = await this.alertController.create({
       header: 'Input Error',
@@ -253,10 +266,15 @@ async onSubmit() {
 fileAttr = ' ';
 
 uploadFileEvt(imgFile: any) {
+  this.invalidFormat = false;
   if (imgFile.target.files && imgFile.target.files[0]) {
     this.fileAttr = '';
     Array.from(imgFile.target.files as FileList).forEach((file: File) => {
       this.fileAttr += file.name + ' - ';
+        // Check the file type (MIME type)
+    if (!file.type.startsWith('image/')) {
+      this.invalidFormat = true;
+    }
     });
 
     // HTML5 FileReader API

@@ -99,6 +99,9 @@
                  <mat-error *ngIf="PasswordFormControl.hasError('maxlength')" style="color: red;">
                   Password must be minimum 6 and maximum 16 characters.
                  </mat-error>
+                 <mat-error *ngIf="PasswordFormControl.hasError('pattern')" style="color: red;">
+                  Password must contain at least one upper, lowercase and a number.
+                 </mat-error>
                </mat-form-field>
                <br>
                <br>

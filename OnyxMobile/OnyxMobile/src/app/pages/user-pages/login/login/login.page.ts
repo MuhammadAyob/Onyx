@@ -24,7 +24,8 @@ export class LoginPage implements OnInit {
   emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     
   UsernameFormControl = new FormControl('', [Validators.required, Validators.email]);
-  PasswordFormControl = new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(16)]);
+  PasswordFormControl = new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(16),
+  Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$')]);
   
   constructor(
     private titleservice: Title,
@@ -76,7 +77,8 @@ export class LoginPage implements OnInit {
         this.UsernameFormControl.hasError('email') == false &&
         this.PasswordFormControl.hasError('required') == false &&
         this.PasswordFormControl.hasError('minlength') == false &&
-        this.PasswordFormControl.hasError('maxlength') == false
+        this.PasswordFormControl.hasError('maxlength') == false &&
+        this.PasswordFormControl.hasError('pattern') == false
       )
       {return false}
       else

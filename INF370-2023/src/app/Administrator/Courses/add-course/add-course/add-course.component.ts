@@ -46,6 +46,7 @@ categoryList!:CourseCategory[];
 employeeList!:EmployeeListForCourses[];
 dataImage:any;
 isLoading!:boolean;
+invalidFormat!:boolean;
 
 constructor(
   public router: Router,
@@ -107,7 +108,19 @@ constructor(
 
   onSubmit() {
     const isInvalid = this.validateFormControls();
-    if (isInvalid == true) {
+
+    if(this.invalidFormat == true){
+      this.dialog.open(InputDialogComponent, {
+        data: {
+          dialogTitle: "File Error",
+          dialogMessage: "Please upload Image Files only"
+        },
+        width: '27vw',
+        height: '29vh',
+      });
+     }
+
+    else if (isInvalid == true) {
       this.dialog.open(InputDialogComponent, {
         data: {
           dialogTitle: "Input Error",
@@ -281,10 +294,15 @@ constructor(
 fileAttr = ' ';
 
 uploadFileEvt(imgFile: any) {
+  this.invalidFormat = false;
   if (imgFile.target.files && imgFile.target.files[0]) {
     this.fileAttr = '';
     Array.from(imgFile.target.files as FileList).forEach((file: File) => {
       this.fileAttr += file.name + ' - ';
+       // Check the file type (MIME type)
+    if (!file.type.startsWith('image/')) {
+      this.invalidFormat = true;
+    }
     });
 
     // HTML5 FileReader API

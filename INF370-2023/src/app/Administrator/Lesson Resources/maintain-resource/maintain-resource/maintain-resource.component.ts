@@ -45,6 +45,7 @@ storageLesson:any;
 storageSection:any;
 storageCourse:any;
 isLoading!:boolean;
+invalidFormat!:boolean;
 
 ngOnInit(): void {
   this.storageLessonResource=JSON.parse(sessionStorage['LessonResource']);
@@ -73,7 +74,18 @@ onSubmit() {
 
 const isInvalid = this.validateFormControls();
 
-  if (isInvalid == true) {
+if(this.invalidFormat == true){
+  this.dialog.open(InputDialogComponent, {
+    data: {
+      dialogTitle: "File Error",
+      dialogMessage: "Please upload PDF only"
+    },
+    width: '27vw',
+    height: '29vh',
+  });
+ }
+
+  else if (isInvalid == true) {
     this.dialog.open(InputDialogComponent, {
       data: {
         dialogTitle: "Input Error",
@@ -225,9 +237,16 @@ showDialog(title: string, message: string): void {
 
 uploadFileEvt(dataFile:any) 
   {
+    this.invalidFormat = false;
     this.fileAttr = '';
     Array.from(dataFile.target.files as FileList).forEach((file: File) => {
       this.fileAttr += file.name + ' - ';
+
+       // Check the file type (MIME type)
+       if (file.type !== 'application/pdf') 
+       {
+       this.invalidFormat = true;
+       }
     });
 
    this.test.ResourceName=this.fileAttr;
