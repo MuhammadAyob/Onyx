@@ -1,0 +1,851 @@
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/INF370 2023 Web API.dll.config
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/INF370 2023 Web API.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/INF370 2023 Web API.pdb
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/csc.exe
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/csc.exe.config
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/csc.rsp
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/csi.exe
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/csi.exe.config
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/csi.rsp
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/Microsoft.Build.Tasks.CodeAnalysis.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/Microsoft.CodeAnalysis.CSharp.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/Microsoft.CodeAnalysis.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/Microsoft.CodeAnalysis.Scripting.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/Microsoft.CodeAnalysis.VisualBasic.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/Microsoft.CSharp.Core.targets
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/Microsoft.DiaSymReader.Native.amd64.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/Microsoft.DiaSymReader.Native.x86.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/Microsoft.Managed.Core.targets
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/Microsoft.VisualBasic.Core.targets
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/Microsoft.Win32.Primitives.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.AppContext.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Collections.Immutable.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Console.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Diagnostics.DiagnosticSource.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Diagnostics.FileVersionInfo.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Diagnostics.StackTrace.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Globalization.Calendars.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.IO.Compression.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.IO.Compression.ZipFile.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.IO.FileSystem.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.IO.FileSystem.Primitives.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Net.Http.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Net.Sockets.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Reflection.Metadata.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Runtime.InteropServices.RuntimeInformation.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Security.Cryptography.Algorithms.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Security.Cryptography.Encoding.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Security.Cryptography.Primitives.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Security.Cryptography.X509Certificates.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Text.Encoding.CodePages.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Threading.Tasks.Extensions.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.ValueTuple.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Xml.ReaderWriter.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Xml.XmlDocument.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Xml.XPath.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Xml.XPath.XDocument.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/vbc.exe
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/vbc.exe.config
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/vbc.rsp
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/VBCSCompiler.exe
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/VBCSCompiler.exe.config
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/EntityFramework.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/EntityFramework.SqlServer.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/Newtonsoft.Json.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/System.Net.Http.Formatting.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/System.Web.Cors.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/System.Web.Http.Cors.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/System.Web.Http.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/System.Web.Http.WebHost.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/EntityFramework.xml
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/EntityFramework.SqlServer.xml
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/System.Net.Http.Formatting.xml
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/System.Web.Http.xml
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/System.Web.Http.Cors.xml
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/Newtonsoft.Json.xml
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/System.Web.Http.WebHost.xml
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/obj/Debug/INF370 2023 Web API.csproj.CoreCompileInputs.cache
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/obj/Debug/INF370 2023 Web API.csproj.CopyComplete
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/obj/Debug/INF370 2023 Web API.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/obj/Debug/INF370 2023 Web API.pdb
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.AspNetCore.Http.Abstractions.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.AspNetCore.Http.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.AspNetCore.Http.Features.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.AspNetCore.WebUtilities.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.Extensions.ObjectPool.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.Extensions.Options.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.Extensions.Primitives.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.Net.Http.Headers.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/System.Buffers.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/System.ComponentModel.Annotations.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/System.Memory.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/System.Numerics.Vectors.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/System.Runtime.CompilerServices.Unsafe.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/System.Text.Encodings.Web.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.AspNetCore.Http.xml
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.AspNetCore.Http.Abstractions.xml
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.AspNetCore.Http.Features.xml
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.AspNetCore.WebUtilities.xml
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.Extensions.DependencyInjection.Abstractions.xml
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.Extensions.ObjectPool.xml
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.Extensions.Options.xml
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.Extensions.Primitives.xml
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.Net.Http.Headers.xml
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/System.Buffers.xml
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/System.Memory.xml
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/System.Numerics.Vectors.xml
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/System.Runtime.CompilerServices.Unsafe.xml
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/System.Text.Encodings.Web.xml
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/Ninject.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/Ninject.Extensions.ChildKernel.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/WebApiContrib.IoC.Ninject.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/Ninject.xml
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/Ninject.Extensions.ChildKernel.xml
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.IdentityModel.Logging.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.IdentityModel.Tokens.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/System.IdentityModel.Tokens.Jwt.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/Twilio.dll
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.IdentityModel.Tokens.xml
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/System.IdentityModel.Tokens.Jwt.xml
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/bin/Twilio.xml
+C:/Users/muhammadayob/source/repos/INF370 2023 Web API/INF370 2023 Web API/obj/Debug/INF370 2023 Web API.csproj.AssemblyReference.cache
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/INF370 2023 Web API.dll.config
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/INF370 2023 Web API.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/INF370 2023 Web API.pdb
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/csc.exe
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/csc.exe.config
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/csc.rsp
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/csi.exe
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/csi.exe.config
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/csi.rsp
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/Microsoft.Build.Tasks.CodeAnalysis.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/Microsoft.CodeAnalysis.CSharp.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/Microsoft.CodeAnalysis.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/Microsoft.CodeAnalysis.Scripting.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/Microsoft.CodeAnalysis.VisualBasic.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/Microsoft.CSharp.Core.targets
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/Microsoft.DiaSymReader.Native.amd64.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/Microsoft.DiaSymReader.Native.x86.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/Microsoft.Managed.Core.targets
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/Microsoft.VisualBasic.Core.targets
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/Microsoft.Win32.Primitives.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.AppContext.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Collections.Immutable.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Console.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Diagnostics.DiagnosticSource.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Diagnostics.FileVersionInfo.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Diagnostics.StackTrace.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Globalization.Calendars.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.IO.Compression.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.IO.Compression.ZipFile.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.IO.FileSystem.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.IO.FileSystem.Primitives.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Net.Http.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Net.Sockets.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Reflection.Metadata.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Runtime.InteropServices.RuntimeInformation.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Security.Cryptography.Algorithms.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Security.Cryptography.Encoding.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Security.Cryptography.Primitives.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Security.Cryptography.X509Certificates.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Text.Encoding.CodePages.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Threading.Tasks.Extensions.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.ValueTuple.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Xml.ReaderWriter.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Xml.XmlDocument.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Xml.XPath.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Xml.XPath.XDocument.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/vbc.exe
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/vbc.exe.config
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/vbc.rsp
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/VBCSCompiler.exe
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/VBCSCompiler.exe.config
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/EntityFramework.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/EntityFramework.SqlServer.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.AspNetCore.Http.Abstractions.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.AspNetCore.Http.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.AspNetCore.Http.Features.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.AspNetCore.WebUtilities.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.Extensions.ObjectPool.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.Extensions.Options.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.Extensions.Primitives.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.IdentityModel.Logging.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.IdentityModel.Tokens.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.Net.Http.Headers.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/Newtonsoft.Json.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/Ninject.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/Ninject.Extensions.ChildKernel.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/System.Buffers.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/System.ComponentModel.Annotations.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/System.IdentityModel.Tokens.Jwt.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/System.Memory.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/System.Net.Http.Formatting.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/System.Numerics.Vectors.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/System.Runtime.CompilerServices.Unsafe.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/System.Text.Encodings.Web.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/System.Web.Cors.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/System.Web.Http.Cors.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/System.Web.Http.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/System.Web.Http.WebHost.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/Twilio.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/WebApiContrib.IoC.Ninject.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/EntityFramework.xml
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/EntityFramework.SqlServer.xml
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.AspNetCore.Http.xml
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.AspNetCore.Http.Abstractions.xml
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.AspNetCore.Http.Features.xml
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.AspNetCore.WebUtilities.xml
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.Extensions.DependencyInjection.Abstractions.xml
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.Extensions.ObjectPool.xml
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.Extensions.Options.xml
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.Extensions.Primitives.xml
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.IdentityModel.Tokens.xml
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.Net.Http.Headers.xml
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/Newtonsoft.Json.xml
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/Ninject.xml
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/Ninject.Extensions.ChildKernel.xml
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/System.Buffers.xml
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/System.IdentityModel.Tokens.Jwt.xml
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/System.Memory.xml
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/System.Net.Http.Formatting.xml
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/System.Numerics.Vectors.xml
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/System.Runtime.CompilerServices.Unsafe.xml
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/System.Text.Encodings.Web.xml
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/System.Web.Http.xml
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/System.Web.Http.Cors.xml
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/System.Web.Http.WebHost.xml
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/Twilio.xml
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/obj/Debug/INF370 2023 Web API.csproj.CoreCompileInputs.cache
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/obj/Debug/INF370 2023 Web API.csproj.CopyComplete
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/obj/Debug/INF370 2023 Web API.dll
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/obj/Debug/INF370 2023 Web API.pdb
+C:/Users/nabee/Downloads/INF370 2023 Web API/INF370 2023 Web API/INF370 2023 Web API/obj/Debug/INF370 2023 Web API.csproj.AssemblyReference.cache
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/INF370 2023 Web API.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/INF370 2023 Web API.pdb
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/csc.exe
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/csc.exe.config
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/csc.rsp
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/csi.exe
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/csi.exe.config
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/csi.rsp
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/Microsoft.Build.Tasks.CodeAnalysis.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/Microsoft.CodeAnalysis.CSharp.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/Microsoft.CodeAnalysis.CSharp.Scripting.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/Microsoft.CodeAnalysis.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/Microsoft.CodeAnalysis.Scripting.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/Microsoft.CodeAnalysis.VisualBasic.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/Microsoft.CSharp.Core.targets
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/Microsoft.DiaSymReader.Native.amd64.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/Microsoft.DiaSymReader.Native.x86.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/Microsoft.Managed.Core.targets
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/Microsoft.VisualBasic.Core.targets
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/Microsoft.Win32.Primitives.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.AppContext.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Collections.Immutable.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Console.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Diagnostics.DiagnosticSource.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Diagnostics.FileVersionInfo.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Diagnostics.StackTrace.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Globalization.Calendars.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.IO.Compression.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.IO.Compression.ZipFile.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.IO.FileSystem.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.IO.FileSystem.Primitives.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Net.Http.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Net.Sockets.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Reflection.Metadata.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Runtime.InteropServices.RuntimeInformation.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Security.Cryptography.Algorithms.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Security.Cryptography.Encoding.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Security.Cryptography.Primitives.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Security.Cryptography.X509Certificates.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Text.Encoding.CodePages.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Threading.Tasks.Extensions.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.ValueTuple.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Xml.ReaderWriter.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Xml.XmlDocument.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Xml.XPath.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/System.Xml.XPath.XDocument.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/vbc.exe
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/vbc.exe.config
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/vbc.rsp
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/VBCSCompiler.exe
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/roslyn/VBCSCompiler.exe.config
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/EntityFramework.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/EntityFramework.SqlServer.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.AspNetCore.Http.Abstractions.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.AspNetCore.Http.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.AspNetCore.Http.Features.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.AspNetCore.WebUtilities.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.Extensions.DependencyInjection.Abstractions.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.Extensions.ObjectPool.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.Extensions.Options.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.Extensions.Primitives.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.IdentityModel.Logging.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.IdentityModel.Tokens.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.Net.Http.Headers.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/Newtonsoft.Json.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/Ninject.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/Ninject.Extensions.ChildKernel.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/System.Buffers.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/System.ComponentModel.Annotations.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/System.IdentityModel.Tokens.Jwt.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/System.Memory.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/System.Net.Http.Formatting.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/System.Numerics.Vectors.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/System.Runtime.CompilerServices.Unsafe.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/System.Text.Encodings.Web.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/System.Web.Cors.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/System.Web.Http.Cors.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/System.Web.Http.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/System.Web.Http.WebHost.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/Twilio.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/WebApiContrib.IoC.Ninject.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/EntityFramework.xml
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/EntityFramework.SqlServer.xml
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.AspNetCore.Http.xml
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.AspNetCore.Http.Abstractions.xml
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.AspNetCore.Http.Features.xml
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.AspNetCore.WebUtilities.xml
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.Extensions.DependencyInjection.Abstractions.xml
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.Extensions.ObjectPool.xml
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.Extensions.Options.xml
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.Extensions.Primitives.xml
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.IdentityModel.Tokens.xml
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.Net.Http.Headers.xml
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/Newtonsoft.Json.xml
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/Ninject.xml
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/Ninject.Extensions.ChildKernel.xml
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/System.Buffers.xml
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/System.IdentityModel.Tokens.Jwt.xml
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/System.Memory.xml
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/System.Net.Http.Formatting.xml
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/System.Numerics.Vectors.xml
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/System.Runtime.CompilerServices.Unsafe.xml
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/System.Text.Encodings.Web.xml
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/System.Web.Http.xml
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/System.Web.Http.Cors.xml
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/System.Web.Http.WebHost.xml
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/Twilio.xml
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/obj/Debug/INF370 2023 Web API.csproj.AssemblyReference.cache
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/obj/Debug/INF370 2023 Web API.csproj.CoreCompileInputs.cache
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/obj/Debug/INF370 2023 Web API.csproj.CopyComplete
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/obj/Debug/INF370 2023 Web API.dll
+/Users/blaquex/Documents/Code/u19236931_HW04/370development-team-10/INF370 2023 Web API/INF370 2023 Web API/obj/Debug/INF370 2023 Web API.pdb
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\INF370 2023 Web API.dll.config
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\INF370 2023 Web API.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\INF370 2023 Web API.pdb
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\csc.exe
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\csc.exe.config
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\csc.rsp
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\csi.exe
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\csi.exe.config
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\csi.rsp
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.Win32.Primitives.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.AppContext.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Console.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Diagnostics.DiagnosticSource.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Globalization.Calendars.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.IO.Compression.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.IO.Compression.ZipFile.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Net.Http.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Net.Sockets.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Runtime.InteropServices.RuntimeInformation.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Threading.Tasks.Extensions.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.ValueTuple.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Xml.XmlDocument.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Xml.XPath.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\vbc.exe
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\vbc.exe.config
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\vbc.rsp
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\VBCSCompiler.exe
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\EntityFramework.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\EntityFramework.SqlServer.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.AspNetCore.Http.Abstractions.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.AspNetCore.Http.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.AspNetCore.Http.Features.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.AspNetCore.WebUtilities.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.Extensions.ObjectPool.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.Extensions.Options.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.Extensions.Primitives.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.IdentityModel.Logging.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.IdentityModel.Tokens.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.Net.Http.Headers.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Newtonsoft.Json.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Ninject.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Ninject.Extensions.ChildKernel.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Buffers.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.ComponentModel.Annotations.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Memory.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Net.Http.Formatting.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Numerics.Vectors.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Text.Encodings.Web.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Web.Cors.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Web.Http.Cors.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Web.Http.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Web.Http.WebHost.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Twilio.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\WebApiContrib.IoC.Ninject.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\EntityFramework.xml
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\EntityFramework.SqlServer.xml
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.AspNetCore.Http.xml
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.AspNetCore.Http.Abstractions.xml
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.AspNetCore.Http.Features.xml
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.AspNetCore.WebUtilities.xml
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.Extensions.DependencyInjection.Abstractions.xml
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.Extensions.ObjectPool.xml
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.Extensions.Options.xml
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.Extensions.Primitives.xml
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.IdentityModel.Tokens.xml
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.Net.Http.Headers.xml
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Newtonsoft.Json.xml
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Ninject.xml
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Ninject.Extensions.ChildKernel.xml
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Buffers.xml
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.IdentityModel.Tokens.Jwt.xml
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Memory.xml
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Net.Http.Formatting.xml
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Numerics.Vectors.xml
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Text.Encodings.Web.xml
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Web.Http.xml
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Web.Http.Cors.xml
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Web.Http.WebHost.xml
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Twilio.xml
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\obj\Debug\INF370 2023 Web API.csproj.AssemblyReference.cache
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\obj\Debug\INF370 2023 Web API.csproj.CoreCompileInputs.cache
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\obj\Debug\INF370 2023 Web API.csproj.CopyComplete
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\obj\Debug\INF370 2023 Web API.dll
+C:\Users\mofaiz7\Documents\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\obj\Debug\INF370 2023 Web API.pdb
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\INF370 2023 Web API.dll.config
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\INF370 2023 Web API.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\INF370 2023 Web API.pdb
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\csc.exe
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\csc.exe.config
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\csc.rsp
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\csi.exe
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\csi.exe.config
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\csi.rsp
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.CodeAnalysis.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.CSharp.Core.targets
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.Managed.Core.targets
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.VisualBasic.Core.targets
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.Win32.Primitives.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.AppContext.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Collections.Immutable.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Console.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Diagnostics.DiagnosticSource.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Diagnostics.StackTrace.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Globalization.Calendars.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.IO.Compression.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.IO.Compression.ZipFile.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.IO.FileSystem.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.IO.FileSystem.Primitives.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Net.Http.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Net.Sockets.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Reflection.Metadata.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Runtime.InteropServices.RuntimeInformation.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Security.Cryptography.Encoding.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Security.Cryptography.Primitives.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Text.Encoding.CodePages.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Threading.Tasks.Extensions.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.ValueTuple.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Xml.ReaderWriter.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Xml.XmlDocument.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Xml.XPath.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Xml.XPath.XDocument.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\vbc.exe
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\vbc.exe.config
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\vbc.rsp
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\VBCSCompiler.exe
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\VBCSCompiler.exe.config
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\EntityFramework.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\EntityFramework.SqlServer.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.AspNetCore.Http.Abstractions.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.AspNetCore.Http.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.AspNetCore.Http.Features.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.AspNetCore.WebUtilities.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.Extensions.ObjectPool.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.Extensions.Options.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.Extensions.Primitives.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.IdentityModel.Logging.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.IdentityModel.Tokens.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.Net.Http.Headers.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Newtonsoft.Json.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Ninject.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Ninject.Extensions.ChildKernel.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Buffers.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.ComponentModel.Annotations.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.IdentityModel.Tokens.Jwt.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Memory.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Net.Http.Formatting.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Numerics.Vectors.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Runtime.CompilerServices.Unsafe.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Text.Encodings.Web.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Web.Cors.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Web.Http.Cors.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Web.Http.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Web.Http.WebHost.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Twilio.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\WebApiContrib.IoC.Ninject.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\EntityFramework.xml
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\EntityFramework.SqlServer.xml
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.AspNetCore.Http.xml
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.AspNetCore.Http.Abstractions.xml
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.AspNetCore.Http.Features.xml
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.AspNetCore.WebUtilities.xml
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.Extensions.DependencyInjection.Abstractions.xml
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.Extensions.ObjectPool.xml
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.Extensions.Options.xml
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.Extensions.Primitives.xml
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.IdentityModel.Tokens.xml
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.Net.Http.Headers.xml
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Newtonsoft.Json.xml
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Ninject.xml
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Ninject.Extensions.ChildKernel.xml
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Buffers.xml
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.IdentityModel.Tokens.Jwt.xml
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Memory.xml
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Net.Http.Formatting.xml
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Numerics.Vectors.xml
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Runtime.CompilerServices.Unsafe.xml
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Text.Encodings.Web.xml
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Web.Http.xml
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Web.Http.Cors.xml
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Web.Http.WebHost.xml
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Twilio.xml
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\obj\Debug\INF370 2023 Web API.csproj.CoreCompileInputs.cache
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\obj\Debug\INF370 2023 Web API.csproj.CopyComplete
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\obj\Debug\INF370 2023 Web API.dll
+\\Mac\Home\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\obj\Debug\INF370 2023 Web API.pdb
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\IronBarCode.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\runtimes\linux-x64\native\IronPdfInterop.so
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\runtimes\osx-arm64\native\IronPdfInterop.dylib
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\runtimes\osx-x64\native\IronPdfInterop.dylib
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\runtimes\win-x64\native\IronPdfInterop.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\runtimes\win-x86\native\IronPdfInterop.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\INF370 2023 Web API.dll.config
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\INF370 2023 Web API.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\INF370 2023 Web API.pdb
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\csc.exe
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\csc.exe.config
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\csc.rsp
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\csi.exe
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\csi.exe.config
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\csi.rsp
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.Win32.Primitives.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.AppContext.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Console.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Diagnostics.DiagnosticSource.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Globalization.Calendars.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.IO.Compression.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.IO.Compression.ZipFile.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Net.Http.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Net.Sockets.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Runtime.InteropServices.RuntimeInformation.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Threading.Tasks.Extensions.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.ValueTuple.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Xml.XmlDocument.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Xml.XPath.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\vbc.exe
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\vbc.exe.config
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\vbc.rsp
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\VBCSCompiler.exe
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\BitMiracle.LibTiff.NET.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\BouncyCastle.Crypto.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\EntityFramework.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\EntityFramework.SqlServer.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\IronSoftware.Drawing.Common.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\itextsharp.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.AspNetCore.Http.Abstractions.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.AspNetCore.Http.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.AspNetCore.Http.Features.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.AspNetCore.WebUtilities.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.Extensions.ObjectPool.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.Extensions.Options.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.Extensions.Primitives.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.IdentityModel.Logging.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.IdentityModel.Tokens.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.Net.Http.Headers.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Newtonsoft.Json.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Ninject.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Ninject.Extensions.ChildKernel.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\SixLabors.Fonts.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\SixLabors.ImageSharp.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\SixLabors.ImageSharp.Drawing.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Buffers.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.ComponentModel.Annotations.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Memory.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Net.Http.Formatting.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Numerics.Vectors.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Text.Encoding.CodePages.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Text.Encodings.Web.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Web.Cors.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Web.Http.Cors.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Web.Http.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Web.Http.WebHost.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Twilio.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\WebApiContrib.IoC.Ninject.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\BitMiracle.LibTiff.NET.xml
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\EntityFramework.xml
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\EntityFramework.SqlServer.xml
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\IronBarCode.xml
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\IronSoftware.Drawing.Common.pdb
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\IronSoftware.Drawing.Common.xml
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\itextsharp.xml
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.AspNetCore.Http.xml
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.AspNetCore.Http.Abstractions.xml
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.AspNetCore.Http.Features.xml
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.AspNetCore.WebUtilities.xml
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.Extensions.DependencyInjection.Abstractions.xml
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.Extensions.Logging.Abstractions.xml
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.Extensions.ObjectPool.xml
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.Extensions.Options.xml
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.Extensions.Primitives.xml
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.IdentityModel.Tokens.xml
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.Net.Http.Headers.xml
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Newtonsoft.Json.xml
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Ninject.xml
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Ninject.Extensions.ChildKernel.xml
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\SixLabors.ImageSharp.xml
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Buffers.xml
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.IdentityModel.Tokens.Jwt.xml
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Memory.xml
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Net.Http.Formatting.xml
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Numerics.Vectors.xml
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Text.Encoding.CodePages.xml
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Text.Encodings.Web.xml
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Web.Http.xml
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Web.Http.Cors.xml
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\System.Web.Http.WebHost.xml
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Twilio.xml
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\obj\Debug\INF370 2023 Web API.csproj.AssemblyReference.cache
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\obj\Debug\INF370 2023 Web API.csproj.CoreCompileInputs.cache
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\obj\Debug\INF370 2023 Web API.csproj.CopyComplete
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\obj\Debug\INF370 2023 Web API.dll
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\obj\Debug\INF370 2023 Web API.pdb
+C:\Users\nabee\OneDrive\Desktop\370development-team-10\INF370 2023 Web API\INF370 2023 Web API\bin\QRCoder.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\runtimes\linux-x64\native\IronPdfInterop.so
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\runtimes\osx-arm64\native\IronPdfInterop.dylib
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\runtimes\osx-x64\native\IronPdfInterop.dylib
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\runtimes\win-x64\native\IronPdfInterop.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\runtimes\win-x86\native\IronPdfInterop.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\INF370 2023 Web API.dll.config
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\INF370 2023 Web API.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\INF370 2023 Web API.pdb
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\csc.exe
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\csc.exe.config
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\csc.rsp
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\csi.exe
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\csi.exe.config
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\csi.rsp
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\Microsoft.Win32.Primitives.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.AppContext.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Console.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Diagnostics.DiagnosticSource.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Globalization.Calendars.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.IO.Compression.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.IO.Compression.ZipFile.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Net.Http.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Net.Sockets.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Runtime.InteropServices.RuntimeInformation.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Threading.Tasks.Extensions.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.ValueTuple.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Xml.XmlDocument.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Xml.XPath.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\vbc.exe
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\vbc.exe.config
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\vbc.rsp
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\VBCSCompiler.exe
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\BitMiracle.LibTiff.NET.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\BouncyCastle.Crypto.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\EntityFramework.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\EntityFramework.SqlServer.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\IronBarCode.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\IronSoftware.Drawing.Common.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\itextsharp.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.AspNetCore.Http.Abstractions.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.AspNetCore.Http.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.AspNetCore.Http.Features.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.AspNetCore.WebUtilities.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.Extensions.ObjectPool.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.Extensions.Options.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.Extensions.Primitives.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.IdentityModel.Logging.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.IdentityModel.Tokens.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.Net.Http.Headers.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\Newtonsoft.Json.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\Ninject.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\Ninject.Extensions.ChildKernel.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\QRCoder.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\SixLabors.Fonts.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\SixLabors.ImageSharp.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\SixLabors.ImageSharp.Drawing.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\System.Buffers.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\System.ComponentModel.Annotations.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\System.Memory.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\System.Net.Http.Formatting.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\System.Numerics.Vectors.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\System.Text.Encoding.CodePages.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\System.Text.Encodings.Web.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\System.Web.Cors.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\System.Web.Http.Cors.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\System.Web.Http.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\System.Web.Http.WebHost.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\Twilio.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\WebApiContrib.IoC.Ninject.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\BitMiracle.LibTiff.NET.xml
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\EntityFramework.xml
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\EntityFramework.SqlServer.xml
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\IronBarCode.xml
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\IronSoftware.Drawing.Common.pdb
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\IronSoftware.Drawing.Common.xml
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\itextsharp.xml
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.AspNetCore.Http.xml
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.AspNetCore.Http.Abstractions.xml
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.AspNetCore.Http.Features.xml
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.AspNetCore.WebUtilities.xml
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.Extensions.DependencyInjection.Abstractions.xml
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.Extensions.Logging.Abstractions.xml
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.Extensions.ObjectPool.xml
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.Extensions.Options.xml
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.Extensions.Primitives.xml
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.IdentityModel.Tokens.xml
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.Net.Http.Headers.xml
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\Newtonsoft.Json.xml
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\Ninject.xml
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\Ninject.Extensions.ChildKernel.xml
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\SixLabors.ImageSharp.xml
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\System.Buffers.xml
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\System.IdentityModel.Tokens.Jwt.xml
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\System.Memory.xml
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\System.Net.Http.Formatting.xml
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\System.Numerics.Vectors.xml
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\System.Text.Encoding.CodePages.xml
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\System.Text.Encodings.Web.xml
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\System.Web.Http.xml
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\System.Web.Http.Cors.xml
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\System.Web.Http.WebHost.xml
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\Twilio.xml
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\obj\Debug\INF370 2023 Web API.csproj.AssemblyReference.cache
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\obj\Debug\INF370 2023 Web API.csproj.CoreCompileInputs.cache
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\obj\Debug\INF370 2023 Web API.csproj.CopyComplete
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\obj\Debug\INF370 2023 Web API.dll
+C:\Users\nabee\OneDrive\Desktop\Onyx API\INF370 2023 Web API\INF370 2023 Web API\obj\Debug\INF370 2023 Web API.pdb

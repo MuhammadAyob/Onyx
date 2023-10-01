@@ -131,6 +131,7 @@ export class ViewShortlistComponent implements OnInit {
         this.isLoading  = true;
         this.service.RejectShortlistedCandidate(this.id).subscribe(
           (result:any) => {
+            console.log(result)
             if(result.Status === 200)
             {
               this.snack.open(
@@ -143,7 +144,7 @@ export class ViewShortlistComponent implements OnInit {
                       }
               );
               this.isLoading  = false;
-              sessionStorage.removeItem('shortlist');
+             
               this.router.navigate(['admin/read-shortlist']);
 
               let audit = new AuditLog();
@@ -154,6 +155,7 @@ export class ViewShortlistComponent implements OnInit {
               audit.Date = '';
   
               this.aService.AddAudit(audit).subscribe((data) => {
+                sessionStorage.removeItem('shortlist');
                 //console.log(data);
                 //this.refreshForm();
               })

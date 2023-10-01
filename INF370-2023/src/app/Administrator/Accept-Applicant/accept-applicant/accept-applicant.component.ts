@@ -167,7 +167,7 @@ getQualificationList() {
 }
 
 onBack() {
-  sessionStorage.removeItem('shortlist');
+  //sessionStorage.removeItem('shortlist');
   this.location.back();
 }
 
