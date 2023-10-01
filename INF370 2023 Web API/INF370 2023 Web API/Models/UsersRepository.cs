@@ -1103,8 +1103,15 @@ namespace INF370_2023_Web_API.Models
                 var obj = await db.Users
                     .Include(s => s.UserRole)
                     .Where(s => s.UserRoleID == s.UserRole.UserRoleID)
-                    .Where(u => u.Activity == "False")
+                    .Where(u => u.Activity == "False").
+                    Select(x=> new
+                    {
+                        UserID = x.UserID,
+                        Username = x.Username,
+                        UserRole = x.UserRole.RoleName
+                    })
                     .ToListAsync();
+
                 return obj;
             }
             catch (Exception)

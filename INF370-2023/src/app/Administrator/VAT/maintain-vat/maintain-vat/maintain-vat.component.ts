@@ -164,7 +164,7 @@ showDialog(title: string, message: string): void {
                   dialogMessage: 'VAT Amount cannot be the same as the previous and next immediate date record.',
                   operation: 'ok',
                 },
-                width: '50vw',
+                width: '52vw',
                 height:'30vh'
               }
             );
@@ -181,7 +181,7 @@ showDialog(title: string, message: string): void {
                   dialogMessage: 'VAT Value cannot be the same as previous date record, please enter a different amount',
                   operation: 'ok',
                 },
-                width: '50vw',
+                width: '52vw',
                 height:'30vh'
               }
             );
@@ -197,7 +197,7 @@ showDialog(title: string, message: string): void {
                   dialogMessage: 'VAT Value cannot be the same as the next date record, please enter a different amount',
                   operation: 'ok',
                 },
-                width: '50vw',
+                width: '52vw',
                 height:'30vh'
               }
             );

@@ -59,7 +59,7 @@ ngOnInit(): void {
 
 GetHelp(){
   localStorage.removeItem('pageNumber');
-  localStorage.setItem('pageNumber', '79');
+  localStorage.setItem('pageNumber', '81');
 }
 
 GetLesson(){

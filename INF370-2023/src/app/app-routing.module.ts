@@ -225,7 +225,8 @@ canActivate:[AuthGuardGuard,AdminGuard]
 
 {
 path:'admin/audit-log',
-component:AuditLogComponent
+component:AuditLogComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
 },
 
 {
@@ -251,26 +252,26 @@ canActivate:[AuthGuardGuard,AdminGuard]
 
 {
 path:'admin/view-department',
-component:ViewDepartmentComponent
-//, add guards later
+component:ViewDepartmentComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
 },
 
 {
   path:'admin/read-department',
-  component:ReadDepartmentComponent
-  //, add guards later
+  component:ReadDepartmentComponent,
+  canActivate:[AuthGuardGuard,AdminGuard]
 },
 
 {
   path:'admin/maintain-department',
-  component:MaintainDepartmentComponent
-  //, add guards later
+  component:MaintainDepartmentComponent,
+  canActivate:[AuthGuardGuard,AdminGuard]
 },
 
 {
   path:'admin/add-department',
-  component:AddDepartmentComponent
-  //, add guards later
+  component:AddDepartmentComponent,
+  canActivate:[AuthGuardGuard,AdminGuard]
 },
 
 //admin quali sub-system
@@ -311,6 +312,7 @@ component:ContactUsComponent
 {
 path:'admin/override-faqs',
 component:FaqfileAddComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
 },
 
 {
@@ -603,68 +605,80 @@ component:ReadSkillComponent
 //FAQ
 {
 path:'admin/view-faq',
-component:ViewFaqComponent
+component:ViewFaqComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
 },
 
 //FAQ
 {
   path:'admin/read-faq',
-  component:ReadFaqComponent
+  component:ReadFaqComponent,
+  canActivate:[AuthGuardGuard,AdminGuard]
 },
 
 //FAQ
 {
   path:'admin/maintain-faq',
-  component:MaintainFaqComponent
+  component:MaintainFaqComponent,
+  canActivate:[AuthGuardGuard,AdminGuard]
 },
 
 //FAQ
 {
   path:'admin/add-faq',
-  component:AddFaqComponent
+  component:AddFaqComponent,
+  canActivate:[AuthGuardGuard,AdminGuard]
 },
 
 //Instructional Videos
 {
 path:'admin/read-instructional-videos',
-component:ReadTrainingVideoComponent
+component:ReadTrainingVideoComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
 },
 
 {
   path:'admin/maintain-instructional-video',
-  component:MaintainTrainingVideoComponent
+  component:MaintainTrainingVideoComponent,
+  canActivate:[AuthGuardGuard,AdminGuard]
 },
 
 {
   path:'admin/add-instructional-video',
-  component:AddTrainingVideoComponent
+  component:AddTrainingVideoComponent,
+  canActivate:[AuthGuardGuard,AdminGuard]
   },
 
 //Employee admin stuff
 
 {
   path:'admin/read-employees',
-  component:ReadEmployeeComponent
+  component:ReadEmployeeComponent,
+  canActivate:[AuthGuardGuard,AdminGuard]
 },
 
 {
   path:'admin/view-employee',
-  component:ViewEmployeeComponent
+  component:ViewEmployeeComponent,
+  canActivate:[AuthGuardGuard,AdminGuard]
 },
 
 {
   path:'admin/maintain-employee',
-  component:MaintainEmployeeComponent
+  component:MaintainEmployeeComponent,
+  canActivate:[AuthGuardGuard,AdminGuard]
 },
 
 {
   path:'admin/add-employee',
-  component:AddEmployeeComponent
+  component:AddEmployeeComponent,
+  canActivate:[AuthGuardGuard,AdminGuard]
 },
 
 {
 path:'admin/view-selected-employee',
-component:ViewSelectedEmployeeComponent
+component:ViewSelectedEmployeeComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
 },
 {
 path:'employee/request-update',
@@ -721,7 +735,8 @@ component:AddMaintenanceTypeComponent
 //Reactivate Users
 {
 path:'admin/re-activate-user',
-component:ReActivateUsersComponent
+component:ReActivateUsersComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
 },
 
 //Course Categories
@@ -767,22 +782,26 @@ component:MaintainResourceComponent
 
 {
 path:'admin/read-lessons',
-component:ReadLessonsComponent
+component:ReadLessonsComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
 },
 
 {
 path:'admin/view-lesson',
-component:ViewLessonComponent
+component:ViewLessonComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
 },
 
 {
   path:'admin/maintain-lesson',
-  component:MaintainLessonComponent
+  component:MaintainLessonComponent,
+  canActivate:[AuthGuardGuard,AdminGuard]
 },
 
 {
   path:'admin/add-lesson',
-  component:AddLessonComponent
+  component:AddLessonComponent,
+  canActivate:[AuthGuardGuard,AdminGuard]
 },
 
 // Courses admin
@@ -800,60 +819,71 @@ component:ScanCodeComponent
 
 {
 path:'admin/add-course',
-component:AddCourseComponent
+component:AddCourseComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
 },
 
 {
   path:'admin/maintain-course',
-  component:MaintainCourseComponent
+  component:MaintainCourseComponent,
+  canActivate:[AuthGuardGuard,AdminGuard]
 },
 
 {
 path:'admin/view-course',
-component:ViewCourseComponent
+component:ViewCourseComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
 },
 
 {
 path:'admin/read-courses',
-component:ReadCourseComponent
+component:ReadCourseComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
 },
 
 //Sections admin
 
 {
 path:'admin/read-sections',
-component:ReadSectionComponent
+component:ReadSectionComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
 },
 
 {
 path:'admin/view-section',
-component:ViewSectionComponent
+component:ViewSectionComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
 },
 
 {
 path:'admin/maintain-section',
-component:MaintainSectionComponent
+component:MaintainSectionComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
 },
 
 {
 path:'admin/add-section',
-component:AddSectionComponent
+component:AddSectionComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
 },
 //UserRoles
 
 {
 path:'admin/read-user-role',
-component:ReadUserRoleComponent
+component:ReadUserRoleComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
 },
 
 {
   path:'admin/view-user-role',
-  component:ViewUserRoleComponent
+  component:ViewUserRoleComponent,
+  canActivate:[AuthGuardGuard,AdminGuard]
 },
 
 {
   path:'admin/maintain-user-role',
-  component:MaintainUserRoleComponent
+  component:MaintainUserRoleComponent,
+  canActivate:[AuthGuardGuard,AdminGuard]
 },
 
 // Student sub-system

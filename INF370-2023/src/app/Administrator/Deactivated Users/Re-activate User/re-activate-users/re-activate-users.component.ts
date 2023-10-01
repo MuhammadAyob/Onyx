@@ -123,7 +123,7 @@ onView(obj:any) {
               audit.AuditLogID = 0;
               audit.UserID = this.security.User.UserID;
               audit.AuditName = 'Reactivate User';
-              audit.Description = 'Employee, ' + this.security.User.Username + ', reactivated the user: ' + obj.Username + ' - ' + obj.UserRole.RoleName
+              audit.Description = 'Employee, ' + this.security.User.Username + ', reactivated the user: ' + obj.Username + ' - ' + obj.UserRole
               audit.Date = '';
   
               this.aService.AddAudit(audit).subscribe((data) => {

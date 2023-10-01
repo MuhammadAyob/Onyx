@@ -56,7 +56,7 @@ ngOnInit(): void {
 
 GetHelp(){
   localStorage.removeItem('pageNumber');
-  localStorage.setItem('pageNumber', '74');
+  localStorage.setItem('pageNumber', '76');
 }
 
 getSection(){

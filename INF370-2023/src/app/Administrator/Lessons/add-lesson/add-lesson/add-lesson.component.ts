@@ -71,7 +71,7 @@ constructor(
 
   GetHelp(){
     localStorage.removeItem('pageNumber');
-    localStorage.setItem('pageNumber', '75');
+    localStorage.setItem('pageNumber', '77');
   }
 
   ngAfterViewInit() {
