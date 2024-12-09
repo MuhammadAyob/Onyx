@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b57861c8e0384a1d92366af1e54a7e21" Name="Diagram1" ZoomLevel="94">
+        <EntityTypeShape EntityType="Model.Application" Width="1.5" PointX="11.25" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AuditLog" Width="1.5" PointX="3" PointY="24.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.CartCourse" Width="1.5" PointX="17.125" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Course" Width="1.5" PointX="6" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.CourseAssistant" Width="1.5" PointX="8.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.CourseCategory" Width="1.5" PointX="3.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.CoursePrice" Width="1.5" PointX="8.25" PointY="28" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Department" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Employee" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.EmployeeQualification" Width="1.5" PointX="8.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.EmployeeSkill" Width="1.5" PointX="8.25" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.FAQ" Width="1.5" PointX="10.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.InstructionalVideo" Width="1.5" PointX="11.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.JobOppStatu" Width="1.5" PointX="3.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Lesson" Width="1.5" PointX="10.5" PointY="30.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.LessonResource" Width="1.5" PointX="12.75" PointY="30.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Maintenance" Width="1.5" PointX="9" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.MaintenancePriority" Width="1.5" PointX="6.75" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.MaintenanceStatu" Width="1.875" PointX="6.25" PointY="23" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.MaintenanceType" Width="1.5" PointX="6.5" PointY="25.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Qualification" Width="1.5" PointX="6" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Section" Width="1.5" PointX="8.25" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ShortList" Width="1.5" PointX="13.5" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Skill" Width="1.5" PointX="6" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.SkillType" Width="1.5" PointX="3.75" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Student" Width="1.5" PointX="12" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.StudentCourse" Width="1.5" PointX="18.25" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Title" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.UpdateRequest" Width="1.875" PointX="5.625" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.UpdateRequestStatu" Width="2.125" PointX="2.5" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.User" Width="1.5" PointX="0.75" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.UserRole" Width="1.5" PointX="1.5" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.VAT" Width="1.5" PointX="12.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.WorkType" Width="1.5" PointX="3.75" PointY="21.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.PayFast" Width="1.5" PointX="13.75" PointY="1.25" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_ShortList_Application" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_AuditLog_User" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_CartCourse_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Course_CourseCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_CourseAssistant_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_CoursePrice_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Section_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_StudentCourse_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_CourseAssistant_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Employee_Department" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Employee_Title" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Employee_User" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_EmployeeQualification_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_EmployeeSkill_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_UpdateRequest_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_EmployeeQualification_Qualification" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_EmployeeSkill_Skill" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Lesson_Section" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_LessonResource_Lesson" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Maintenance_MaintenancePriority" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Maintenance_MaintenanceStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Maintenance_MaintenanceType" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Maintenance_User" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Skill_SkillType" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Student_Title" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Student_User" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_StudentCourse_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_UpdateRequest_UpdateRequestStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_User_UserRole" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Model.OTPTimer" Width="1.5" PointX="15.375" PointY="4.75" />
+        <EntityTypeShape EntityType="Model.TermsAndCondition" Width="1.5" PointX="16.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.MaxSlotsPerDay" Width="1.5" PointX="11.375" PointY="16.75" />
+        <EntityTypeShape EntityType="Model.JobOpportunity" Width="1.5" PointX="6" PointY="9" />
+        <AssociationConnector Association="Model.FK_Application_JobOpportunity" />
+        <AssociationConnector Association="Model.FK_JobOpportunity_JobOppStatus" />
+        <AssociationConnector Association="Model.FK_JobOpportunity_WorkType" />
+        <EntityTypeShape EntityType="Model.ApplicationStatu" Width="1.5" PointX="8.375" PointY="14.875" />
+        <AssociationConnector Association="Model.FK_Application_ApplicationStatus" />
+        <EntityTypeShape EntityType="Model.Applicant" Width="1.5" PointX="8.375" PointY="1" />
+        <AssociationConnector Association="Model.FK_Application_Applicant" />
+        <EntityTypeShape EntityType="Model.CourseRating" Width="1.5" PointX="14.25" PointY="15.875" />
+        <AssociationConnector Association="Model.FK_CourseRating_Course" />
+        <AssociationConnector Association="Model.FK_CourseRating_Student" />
+        <EntityTypeShape EntityType="Model.Cart" Width="1.5" PointX="18" PointY="5.375" />
+        <AssociationConnector Association="Model.FK_Cart_Student" />
+        <AssociationConnector Association="Model.FK_Cart_VAT" />
+        <AssociationConnector Association="Model.FK_CartCourse_Cart" />
+        <EntityTypeShape EntityType="Model.InterviewSlot" Width="1.5" PointX="15.75" PointY="8.125" />
+        <AssociationConnector Association="Model.FK_InterviewSlot_ShortList" />
+        <EntityTypeShape EntityType="Model.Contact" Width="1.5" PointX="0.75" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

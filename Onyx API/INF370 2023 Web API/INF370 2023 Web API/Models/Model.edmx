@@ -1,0 +1,2860 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Applicant">
+          <Key>
+            <PropertyRef Name="ApplicantID" />
+          </Key>
+          <Property Name="ApplicantID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Surname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CV" Type="varbinary(max)" Nullable="false" />
+          <Property Name="Image" Type="varbinary(max)" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Biography" Type="varchar(max)" Nullable="false" />
+          <Property Name="RSAIDNumber" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Application">
+          <Key>
+            <PropertyRef Name="ApplicationID" />
+          </Key>
+          <Property Name="ApplicationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JobOppID" Type="int" Nullable="false" />
+          <Property Name="ApplicantID" Type="int" Nullable="false" />
+          <Property Name="ApplicationStatusID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ApplicationStatus">
+          <Key>
+            <PropertyRef Name="ApplicationStatusID" />
+          </Key>
+          <Property Name="ApplicationStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AuditLog">
+          <Key>
+            <PropertyRef Name="AuditLogID" />
+          </Key>
+          <Property Name="AuditLogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" Nullable="false" />
+          <Property Name="AuditName" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="CartID" />
+          </Key>
+          <Property Name="CartID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentID" Type="int" Nullable="false" />
+          <Property Name="Total" Type="float" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="PurchaseNumber" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="VatID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CartCourse">
+          <Key>
+            <PropertyRef Name="CartLineID" />
+          </Key>
+          <Property Name="CartLineID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CartID" Type="int" Nullable="false" />
+          <Property Name="CourseID" Type="int" Nullable="false" />
+          <Property Name="PriceAtTimeOfPurchase" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="ContactID" />
+          </Key>
+          <Property Name="ContactID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Query" Type="varchar(max)" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="CourseID" />
+          </Key>
+          <Property Name="CourseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" Nullable="false" />
+          <Property Name="Image" Type="varbinary(max)" Nullable="false" />
+          <Property Name="CategoryID" Type="int" Nullable="false" />
+          <Property Name="Active" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Preview" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CourseAssistant">
+          <Key>
+            <PropertyRef Name="AssistantCourseID" />
+          </Key>
+          <Property Name="AssistantCourseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeID" Type="int" Nullable="false" />
+          <Property Name="CourseID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CourseCategory">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Category" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CoursePrice">
+          <Key>
+            <PropertyRef Name="PriceID" />
+          </Key>
+          <Property Name="PriceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Price" Type="float" Nullable="false" />
+          <Property Name="CourseID" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CourseRating">
+          <Key>
+            <PropertyRef Name="RatingID" />
+          </Key>
+          <Property Name="RatingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CourseID" Type="int" Nullable="false" />
+          <Property Name="StudentID" Type="int" Nullable="false" />
+          <Property Name="Rating" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Comment" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DepartmentID" />
+          </Key>
+          <Property Name="DepartmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DepartmentName" Type="varchar(max)" Nullable="false" />
+          <Property Name="DepartmentDescription" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="Image" Type="varbinary(max)" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Surname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Biography" Type="varchar(max)" Nullable="false" />
+          <Property Name="RSAIDNumber" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TitleID" Type="int" Nullable="false" />
+          <Property Name="Deleted" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DepartmentID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EmployeeQualification">
+          <Key>
+            <PropertyRef Name="EmployeeQualificationID" />
+          </Key>
+          <Property Name="EmployeeQualificationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeID" Type="int" Nullable="false" />
+          <Property Name="QualificationID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EmployeeSkill">
+          <Key>
+            <PropertyRef Name="EmployeeSkillID" />
+          </Key>
+          <Property Name="EmployeeSkillID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeID" Type="int" Nullable="false" />
+          <Property Name="SkillID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FAQ">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Question" Type="varchar(max)" Nullable="false" />
+          <Property Name="Answer" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InstructionalVideo">
+          <Key>
+            <PropertyRef Name="VideoID" />
+          </Key>
+          <Property Name="VideoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VideoName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" Nullable="false" />
+          <Property Name="VideoLink" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InterviewSlot">
+          <Key>
+            <PropertyRef Name="InterviewSlotID" />
+          </Key>
+          <Property Name="InterviewSlotID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ShortListID" Type="int" Nullable="false" />
+          <Property Name="InterviewDate" Type="date" Nullable="false" />
+          <Property Name="StartTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="InterviewCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EndTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Attended" Type="varchar" MaxLength="50" />
+          <Property Name="DateAttended" Type="datetime" />
+        </EntityType>
+        <EntityType Name="JobOpportunity">
+          <Key>
+            <PropertyRef Name="JobOppID" />
+          </Key>
+          <Property Name="JobOppID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JobOppTitle" Type="varchar(max)" Nullable="false" />
+          <Property Name="JobOppDescription" Type="varchar(max)" Nullable="false" />
+          <Property Name="JobOppRequirements" Type="varchar(max)" Nullable="false" />
+          <Property Name="JobOppDeadline" Type="date" Nullable="false" />
+          <Property Name="WorkTypeID" Type="int" Nullable="false" />
+          <Property Name="JobOppStatusID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JobOppStatus">
+          <Key>
+            <PropertyRef Name="JobOppStatusID" />
+          </Key>
+          <Property Name="JobOppStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Lesson">
+          <Key>
+            <PropertyRef Name="LessonID" />
+          </Key>
+          <Property Name="LessonID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SectionID" Type="int" Nullable="false" />
+          <Property Name="LessonName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LessonDescription" Type="varchar(max)" Nullable="false" />
+          <Property Name="VideoID" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LessonResource">
+          <Key>
+            <PropertyRef Name="ResourceID" />
+          </Key>
+          <Property Name="ResourceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LessonID" Type="int" Nullable="false" />
+          <Property Name="ResourceName" Type="varchar(max)" Nullable="false" />
+          <Property Name="ResourceFile" Type="varbinary(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Maintenance">
+          <Key>
+            <PropertyRef Name="MaintenanceID" />
+          </Key>
+          <Property Name="MaintenanceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="MaintenanceTypeID" Type="int" Nullable="false" />
+          <Property Name="MaintenanceStatusID" Type="int" Nullable="false" />
+          <Property Name="MaintenancePriorityID" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" Nullable="false" />
+          <Property Name="Location" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateLogged" Type="datetime" Nullable="false" />
+          <Property Name="DateResolved" Type="datetime" />
+          <Property Name="Image" Type="varbinary(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MaintenancePriority">
+          <Key>
+            <PropertyRef Name="MaintenancePriorityID" />
+          </Key>
+          <Property Name="MaintenancePriorityID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Priority" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MaintenanceStatus">
+          <Key>
+            <PropertyRef Name="MaintenanceStatusID" />
+          </Key>
+          <Property Name="MaintenanceStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MaintenanceType">
+          <Key>
+            <PropertyRef Name="MaintenanceTypeID" />
+          </Key>
+          <Property Name="MaintenanceTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MaxSlotsPerDay">
+          <Key>
+            <PropertyRef Name="MaxID" />
+          </Key>
+          <Property Name="MaxID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumberOfSlots" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OTPTimer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MinutesUntilExpiry" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'INF370.dbo.PayFast' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PayFast">
+          <Key>
+            <PropertyRef Name="MerchantID" />
+            <PropertyRef Name="MerchantKey" />
+            <PropertyRef Name="return_url" />
+            <PropertyRef Name="cancel_url" />
+          </Key>
+          <Property Name="MerchantID" Type="int" Nullable="false" />
+          <Property Name="MerchantKey" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="return_url" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="cancel_url" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Qualification">
+          <Key>
+            <PropertyRef Name="QualificationID" />
+          </Key>
+          <Property Name="QualificationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QualificationName" Type="varchar(max)" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Section">
+          <Key>
+            <PropertyRef Name="SectionID" />
+          </Key>
+          <Property Name="SectionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CourseID" Type="int" Nullable="false" />
+          <Property Name="SectionName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SectionDescription" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ShortList">
+          <Key>
+            <PropertyRef Name="ShortListID" />
+          </Key>
+          <Property Name="ShortListID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ApplicationID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Skill">
+          <Key>
+            <PropertyRef Name="SkillID" />
+          </Key>
+          <Property Name="SkillID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SkillTypeID" Type="int" Nullable="false" />
+          <Property Name="SkillName" Type="varchar(max)" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SkillType">
+          <Key>
+            <PropertyRef Name="SkillTypeID" />
+          </Key>
+          <Property Name="SkillTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SkillTypeName" Type="varchar(max)" Nullable="false" />
+          <Property Name="TypeDescription" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TitleID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Surname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Deleted" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StudentCourse">
+          <Key>
+            <PropertyRef Name="EnrollmentID" />
+          </Key>
+          <Property Name="EnrollmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentID" Type="int" Nullable="false" />
+          <Property Name="CourseID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TermsAndCondition">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TCFile" Type="varbinary(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Title">
+          <Key>
+            <PropertyRef Name="TitleID" />
+          </Key>
+          <Property Name="TitleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TitleName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UpdateRequest">
+          <Key>
+            <PropertyRef Name="UpdateRequestID" />
+          </Key>
+          <Property Name="UpdateRequestID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeID" Type="int" Nullable="false" />
+          <Property Name="UpdateSubject" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UpdateDescription" Type="varchar(max)" Nullable="false" />
+          <Property Name="UpdateRequestStatusID" Type="int" Nullable="false" />
+          <Property Name="Proof" Type="varbinary(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UpdateRequestStatus">
+          <Key>
+            <PropertyRef Name="UpdateRequestStatusID" />
+          </Key>
+          <Property Name="UpdateRequestStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar(max)" Nullable="false" />
+          <Property Name="GUID" Type="varchar(max)" />
+          <Property Name="Activity" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="OTP" Type="int" />
+          <Property Name="UserRoleID" Type="int" Nullable="false" />
+          <Property Name="OTPExpiry" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="UserRoleID" />
+          </Key>
+          <Property Name="UserRoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="varchar(max)" Nullable="false" />
+          <Property Name="RoleDescription" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VAT">
+          <Key>
+            <PropertyRef Name="VatID" />
+          </Key>
+          <Property Name="VatID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VatDate" Type="datetime" Nullable="false" />
+          <Property Name="VatAmount" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkType">
+          <Key>
+            <PropertyRef Name="WorkTypeID" />
+          </Key>
+          <Property Name="WorkTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Application_Applicant">
+          <End Role="Applicant" Type="Self.Applicant" Multiplicity="1" />
+          <End Role="Application" Type="Self.Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Applicant">
+              <PropertyRef Name="ApplicantID" />
+            </Principal>
+            <Dependent Role="Application">
+              <PropertyRef Name="ApplicantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Application_ApplicationStatus">
+          <End Role="ApplicationStatus" Type="Self.ApplicationStatus" Multiplicity="1" />
+          <End Role="Application" Type="Self.Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApplicationStatus">
+              <PropertyRef Name="ApplicationStatusID" />
+            </Principal>
+            <Dependent Role="Application">
+              <PropertyRef Name="ApplicationStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Application_JobOpportunity">
+          <End Role="JobOpportunity" Type="Self.JobOpportunity" Multiplicity="1" />
+          <End Role="Application" Type="Self.Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobOpportunity">
+              <PropertyRef Name="JobOppID" />
+            </Principal>
+            <Dependent Role="Application">
+              <PropertyRef Name="JobOppID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AuditLog_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="AuditLog" Type="Self.AuditLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="AuditLog">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cart_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cart_VAT">
+          <End Role="VAT" Type="Self.VAT" Multiplicity="1" />
+          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VAT">
+              <PropertyRef Name="VatID" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="VatID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CartCourse_Cart">
+          <End Role="Cart" Type="Self.Cart" Multiplicity="1" />
+          <End Role="CartCourse" Type="Self.CartCourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cart">
+              <PropertyRef Name="CartID" />
+            </Principal>
+            <Dependent Role="CartCourse">
+              <PropertyRef Name="CartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CartCourse_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="CartCourse" Type="Self.CartCourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="CartCourse">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Course_CourseCategory">
+          <End Role="CourseCategory" Type="Self.CourseCategory" Multiplicity="1" />
+          <End Role="Course" Type="Self.Course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourseCategory">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Course">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseAssistant_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="CourseAssistant" Type="Self.CourseAssistant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="CourseAssistant">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseAssistant_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="CourseAssistant" Type="Self.CourseAssistant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="CourseAssistant">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoursePrice_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="CoursePrice" Type="Self.CoursePrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="CoursePrice">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseRating_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="CourseRating" Type="Self.CourseRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="CourseRating">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseRating_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="CourseRating" Type="Self.CourseRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="CourseRating">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DepartmentID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="DepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Title">
+          <End Role="Title" Type="Self.Title" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Title">
+              <PropertyRef Name="TitleID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="TitleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeQualification_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="EmployeeQualification" Type="Self.EmployeeQualification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="EmployeeQualification">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeQualification_Qualification">
+          <End Role="Qualification" Type="Self.Qualification" Multiplicity="1" />
+          <End Role="EmployeeQualification" Type="Self.EmployeeQualification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Qualification">
+              <PropertyRef Name="QualificationID" />
+            </Principal>
+            <Dependent Role="EmployeeQualification">
+              <PropertyRef Name="QualificationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeSkill_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="EmployeeSkill" Type="Self.EmployeeSkill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="EmployeeSkill">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeSkill_Skill">
+          <End Role="Skill" Type="Self.Skill" Multiplicity="1" />
+          <End Role="EmployeeSkill" Type="Self.EmployeeSkill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Skill">
+              <PropertyRef Name="SkillID" />
+            </Principal>
+            <Dependent Role="EmployeeSkill">
+              <PropertyRef Name="SkillID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InterviewSlot_ShortList">
+          <End Role="ShortList" Type="Self.ShortList" Multiplicity="1" />
+          <End Role="InterviewSlot" Type="Self.InterviewSlot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShortList">
+              <PropertyRef Name="ShortListID" />
+            </Principal>
+            <Dependent Role="InterviewSlot">
+              <PropertyRef Name="ShortListID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobOpportunity_JobOppStatus">
+          <End Role="JobOppStatus" Type="Self.JobOppStatus" Multiplicity="1" />
+          <End Role="JobOpportunity" Type="Self.JobOpportunity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobOppStatus">
+              <PropertyRef Name="JobOppStatusID" />
+            </Principal>
+            <Dependent Role="JobOpportunity">
+              <PropertyRef Name="JobOppStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobOpportunity_WorkType">
+          <End Role="WorkType" Type="Self.WorkType" Multiplicity="1" />
+          <End Role="JobOpportunity" Type="Self.JobOpportunity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkType">
+              <PropertyRef Name="WorkTypeID" />
+            </Principal>
+            <Dependent Role="JobOpportunity">
+              <PropertyRef Name="WorkTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lesson_Section">
+          <End Role="Section" Type="Self.Section" Multiplicity="1" />
+          <End Role="Lesson" Type="Self.Lesson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="SectionID" />
+            </Principal>
+            <Dependent Role="Lesson">
+              <PropertyRef Name="SectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LessonResource_Lesson">
+          <End Role="Lesson" Type="Self.Lesson" Multiplicity="1" />
+          <End Role="LessonResource" Type="Self.LessonResource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lesson">
+              <PropertyRef Name="LessonID" />
+            </Principal>
+            <Dependent Role="LessonResource">
+              <PropertyRef Name="LessonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Maintenance_MaintenancePriority">
+          <End Role="MaintenancePriority" Type="Self.MaintenancePriority" Multiplicity="1" />
+          <End Role="Maintenance" Type="Self.Maintenance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaintenancePriority">
+              <PropertyRef Name="MaintenancePriorityID" />
+            </Principal>
+            <Dependent Role="Maintenance">
+              <PropertyRef Name="MaintenancePriorityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Maintenance_MaintenanceStatus">
+          <End Role="MaintenanceStatus" Type="Self.MaintenanceStatus" Multiplicity="1" />
+          <End Role="Maintenance" Type="Self.Maintenance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaintenanceStatus">
+              <PropertyRef Name="MaintenanceStatusID" />
+            </Principal>
+            <Dependent Role="Maintenance">
+              <PropertyRef Name="MaintenanceStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Maintenance_MaintenanceType">
+          <End Role="MaintenanceType" Type="Self.MaintenanceType" Multiplicity="1" />
+          <End Role="Maintenance" Type="Self.Maintenance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaintenanceType">
+              <PropertyRef Name="MaintenanceTypeID" />
+            </Principal>
+            <Dependent Role="Maintenance">
+              <PropertyRef Name="MaintenanceTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Maintenance_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Maintenance" Type="Self.Maintenance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Maintenance">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Section_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="Section" Type="Self.Section" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="Section">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShortList_Application">
+          <End Role="Application" Type="Self.Application" Multiplicity="1" />
+          <End Role="ShortList" Type="Self.ShortList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Application">
+              <PropertyRef Name="ApplicationID" />
+            </Principal>
+            <Dependent Role="ShortList">
+              <PropertyRef Name="ApplicationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Skill_SkillType">
+          <End Role="SkillType" Type="Self.SkillType" Multiplicity="1" />
+          <End Role="Skill" Type="Self.Skill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SkillType">
+              <PropertyRef Name="SkillTypeID" />
+            </Principal>
+            <Dependent Role="Skill">
+              <PropertyRef Name="SkillTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_Title">
+          <End Role="Title" Type="Self.Title" Multiplicity="1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Title">
+              <PropertyRef Name="TitleID" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="TitleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentCourse_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="StudentCourse" Type="Self.StudentCourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="StudentCourse">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentCourse_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="StudentCourse" Type="Self.StudentCourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="StudentCourse">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UpdateRequest_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="UpdateRequest" Type="Self.UpdateRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="UpdateRequest">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UpdateRequest_UpdateRequestStatus">
+          <End Role="UpdateRequestStatus" Type="Self.UpdateRequestStatus" Multiplicity="1" />
+          <End Role="UpdateRequest" Type="Self.UpdateRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UpdateRequestStatus">
+              <PropertyRef Name="UpdateRequestStatusID" />
+            </Principal>
+            <Dependent Role="UpdateRequest">
+              <PropertyRef Name="UpdateRequestStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_UserRole">
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRole">
+              <PropertyRef Name="UserRoleID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="UserRoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetContacts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StartDate" Type="date" Mode="In" />
+          <Parameter Name="EndDate" Type="date" Mode="In" />
+        </Function>
+        <Function Name="GetCoursePerformance" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CourseID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetCourses" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetDashboardData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetEmployeesWithSkill" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SkillID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetMaintenance" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MaintenanceID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetMaintenanceList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetRevenueReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StartDate" Type="date" Mode="In" />
+          <Parameter Name="EndDate" Type="date" Mode="In" />
+        </Function>
+        <Function Name="GetSales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StartDate" Type="date" Mode="In" />
+          <Parameter Name="EndDate" Type="date" Mode="In" />
+        </Function>
+        <Function Name="GetSkillsWithTypes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="Applicant" EntityType="Self.Applicant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Application" EntityType="Self.Application" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ApplicationStatus" EntityType="Self.ApplicationStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AuditLog" EntityType="Self.AuditLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CartCourse" EntityType="Self.CartCourse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CourseAssistant" EntityType="Self.CourseAssistant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CourseCategory" EntityType="Self.CourseCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CoursePrice" EntityType="Self.CoursePrice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CourseRating" EntityType="Self.CourseRating" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeQualification" EntityType="Self.EmployeeQualification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeSkill" EntityType="Self.EmployeeSkill" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FAQ" EntityType="Self.FAQ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InstructionalVideo" EntityType="Self.InstructionalVideo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InterviewSlot" EntityType="Self.InterviewSlot" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobOpportunity" EntityType="Self.JobOpportunity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobOppStatus" EntityType="Self.JobOppStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lesson" EntityType="Self.Lesson" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LessonResource" EntityType="Self.LessonResource" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Maintenance" EntityType="Self.Maintenance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MaintenancePriority" EntityType="Self.MaintenancePriority" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MaintenanceStatus" EntityType="Self.MaintenanceStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MaintenanceType" EntityType="Self.MaintenanceType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MaxSlotsPerDay" EntityType="Self.MaxSlotsPerDay" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OTPTimer" EntityType="Self.OTPTimer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Qualification" EntityType="Self.Qualification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Section" EntityType="Self.Section" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShortList" EntityType="Self.ShortList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Skill" EntityType="Self.Skill" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SkillType" EntityType="Self.SkillType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentCourse" EntityType="Self.StudentCourse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TermsAndCondition" EntityType="Self.TermsAndCondition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Title" EntityType="Self.Title" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UpdateRequest" EntityType="Self.UpdateRequest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UpdateRequestStatus" EntityType="Self.UpdateRequestStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VAT" EntityType="Self.VAT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkType" EntityType="Self.WorkType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PayFast" EntityType="Self.PayFast" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PayFast].[MerchantID] AS [MerchantID], 
+    [PayFast].[MerchantKey] AS [MerchantKey], 
+    [PayFast].[return_url] AS [return_url], 
+    [PayFast].[cancel_url] AS [cancel_url]
+    FROM [dbo].[PayFast] AS [PayFast]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Application_Applicant" Association="Self.FK_Application_Applicant">
+            <End Role="Applicant" EntitySet="Applicant" />
+            <End Role="Application" EntitySet="Application" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Application_ApplicationStatus" Association="Self.FK_Application_ApplicationStatus">
+            <End Role="ApplicationStatus" EntitySet="ApplicationStatus" />
+            <End Role="Application" EntitySet="Application" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Application_JobOpportunity" Association="Self.FK_Application_JobOpportunity">
+            <End Role="JobOpportunity" EntitySet="JobOpportunity" />
+            <End Role="Application" EntitySet="Application" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AuditLog_User" Association="Self.FK_AuditLog_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="AuditLog" EntitySet="AuditLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cart_Student" Association="Self.FK_Cart_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Cart" EntitySet="Cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cart_VAT" Association="Self.FK_Cart_VAT">
+            <End Role="VAT" EntitySet="VAT" />
+            <End Role="Cart" EntitySet="Cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CartCourse_Cart" Association="Self.FK_CartCourse_Cart">
+            <End Role="Cart" EntitySet="Cart" />
+            <End Role="CartCourse" EntitySet="CartCourse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CartCourse_Course" Association="Self.FK_CartCourse_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="CartCourse" EntitySet="CartCourse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Course_CourseCategory" Association="Self.FK_Course_CourseCategory">
+            <End Role="CourseCategory" EntitySet="CourseCategory" />
+            <End Role="Course" EntitySet="Course" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseAssistant_Course" Association="Self.FK_CourseAssistant_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="CourseAssistant" EntitySet="CourseAssistant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseAssistant_Employee" Association="Self.FK_CourseAssistant_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="CourseAssistant" EntitySet="CourseAssistant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoursePrice_Course" Association="Self.FK_CoursePrice_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="CoursePrice" EntitySet="CoursePrice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseRating_Course" Association="Self.FK_CourseRating_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="CourseRating" EntitySet="CourseRating" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseRating_Student" Association="Self.FK_CourseRating_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="CourseRating" EntitySet="CourseRating" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Department" Association="Self.FK_Employee_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Title" Association="Self.FK_Employee_Title">
+            <End Role="Title" EntitySet="Title" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_User" Association="Self.FK_Employee_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeQualification_Employee" Association="Self.FK_EmployeeQualification_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="EmployeeQualification" EntitySet="EmployeeQualification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeQualification_Qualification" Association="Self.FK_EmployeeQualification_Qualification">
+            <End Role="Qualification" EntitySet="Qualification" />
+            <End Role="EmployeeQualification" EntitySet="EmployeeQualification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeSkill_Employee" Association="Self.FK_EmployeeSkill_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="EmployeeSkill" EntitySet="EmployeeSkill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeSkill_Skill" Association="Self.FK_EmployeeSkill_Skill">
+            <End Role="Skill" EntitySet="Skill" />
+            <End Role="EmployeeSkill" EntitySet="EmployeeSkill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InterviewSlot_ShortList" Association="Self.FK_InterviewSlot_ShortList">
+            <End Role="ShortList" EntitySet="ShortList" />
+            <End Role="InterviewSlot" EntitySet="InterviewSlot" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobOpportunity_JobOppStatus" Association="Self.FK_JobOpportunity_JobOppStatus">
+            <End Role="JobOppStatus" EntitySet="JobOppStatus" />
+            <End Role="JobOpportunity" EntitySet="JobOpportunity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobOpportunity_WorkType" Association="Self.FK_JobOpportunity_WorkType">
+            <End Role="WorkType" EntitySet="WorkType" />
+            <End Role="JobOpportunity" EntitySet="JobOpportunity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lesson_Section" Association="Self.FK_Lesson_Section">
+            <End Role="Section" EntitySet="Section" />
+            <End Role="Lesson" EntitySet="Lesson" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LessonResource_Lesson" Association="Self.FK_LessonResource_Lesson">
+            <End Role="Lesson" EntitySet="Lesson" />
+            <End Role="LessonResource" EntitySet="LessonResource" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Maintenance_MaintenancePriority" Association="Self.FK_Maintenance_MaintenancePriority">
+            <End Role="MaintenancePriority" EntitySet="MaintenancePriority" />
+            <End Role="Maintenance" EntitySet="Maintenance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Maintenance_MaintenanceStatus" Association="Self.FK_Maintenance_MaintenanceStatus">
+            <End Role="MaintenanceStatus" EntitySet="MaintenanceStatus" />
+            <End Role="Maintenance" EntitySet="Maintenance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Maintenance_MaintenanceType" Association="Self.FK_Maintenance_MaintenanceType">
+            <End Role="MaintenanceType" EntitySet="MaintenanceType" />
+            <End Role="Maintenance" EntitySet="Maintenance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Maintenance_User" Association="Self.FK_Maintenance_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Maintenance" EntitySet="Maintenance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Section_Course" Association="Self.FK_Section_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="Section" EntitySet="Section" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShortList_Application" Association="Self.FK_ShortList_Application">
+            <End Role="Application" EntitySet="Application" />
+            <End Role="ShortList" EntitySet="ShortList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Skill_SkillType" Association="Self.FK_Skill_SkillType">
+            <End Role="SkillType" EntitySet="SkillType" />
+            <End Role="Skill" EntitySet="Skill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Title" Association="Self.FK_Student_Title">
+            <End Role="Title" EntitySet="Title" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_User" Association="Self.FK_Student_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentCourse_Course" Association="Self.FK_StudentCourse_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="StudentCourse" EntitySet="StudentCourse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentCourse_Student" Association="Self.FK_StudentCourse_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="StudentCourse" EntitySet="StudentCourse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UpdateRequest_Employee" Association="Self.FK_UpdateRequest_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="UpdateRequest" EntitySet="UpdateRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UpdateRequest_UpdateRequestStatus" Association="Self.FK_UpdateRequest_UpdateRequestStatus">
+            <End Role="UpdateRequestStatus" EntitySet="UpdateRequestStatus" />
+            <End Role="UpdateRequest" EntitySet="UpdateRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_UserRole" Association="Self.FK_User_UserRole">
+            <End Role="UserRole" EntitySet="UserRole" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Application">
+          <Key>
+            <PropertyRef Name="ApplicationID" />
+          </Key>
+          <Property Name="ApplicationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JobOppID" Type="Int32" Nullable="false" />
+          <Property Name="ApplicantID" Type="Int32" Nullable="false" />
+          <Property Name="ApplicationStatusID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ShortLists" Relationship="Self.FK_ShortList_Application" FromRole="Application" ToRole="ShortList" />
+          <NavigationProperty Name="JobOpportunity" Relationship="Model.FK_Application_JobOpportunity" FromRole="Application" ToRole="JobOpportunity" />
+          <NavigationProperty Name="ApplicationStatu" Relationship="Model.FK_Application_ApplicationStatus" FromRole="Application" ToRole="ApplicationStatu" />
+          <NavigationProperty Name="Applicant" Relationship="Model.FK_Application_Applicant" FromRole="Application" ToRole="Applicant" />
+        </EntityType>
+        <EntityType Name="AuditLog">
+          <Key>
+            <PropertyRef Name="AuditLogID" />
+          </Key>
+          <Property Name="AuditLogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AuditName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_AuditLog_User" FromRole="AuditLog" ToRole="User" />
+        </EntityType>
+        <EntityType Name="CartCourse">
+          <Key>
+            <PropertyRef Name="CartLineID" />
+          </Key>
+          <Property Name="CartLineID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CartID" Type="Int32" Nullable="false" />
+          <Property Name="CourseID" Type="Int32" Nullable="false" />
+          <Property Name="PriceAtTimeOfPurchase" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Course" Relationship="Self.FK_CartCourse_Course" FromRole="CartCourse" ToRole="Course" />
+          <NavigationProperty Name="Cart" Relationship="Model.FK_CartCourse_Cart" FromRole="CartCourse" ToRole="Cart" />
+        </EntityType>
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="CourseID" />
+          </Key>
+          <Property Name="CourseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <Property Name="Active" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CartCourses" Relationship="Self.FK_CartCourse_Course" FromRole="Course" ToRole="CartCourse" />
+          <NavigationProperty Name="CourseCategory" Relationship="Self.FK_Course_CourseCategory" FromRole="Course" ToRole="CourseCategory" />
+          <NavigationProperty Name="CourseAssistants" Relationship="Self.FK_CourseAssistant_Course" FromRole="Course" ToRole="CourseAssistant" />
+          <NavigationProperty Name="CoursePrices" Relationship="Self.FK_CoursePrice_Course" FromRole="Course" ToRole="CoursePrice" />
+          <NavigationProperty Name="Sections" Relationship="Self.FK_Section_Course" FromRole="Course" ToRole="Section" />
+          <NavigationProperty Name="StudentCourses" Relationship="Self.FK_StudentCourse_Course" FromRole="Course" ToRole="StudentCourse" />
+          <Property Name="Preview" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CourseRatings" Relationship="Model.FK_CourseRating_Course" FromRole="Course" ToRole="CourseRating" />
+        </EntityType>
+        <EntityType Name="CourseAssistant">
+          <Key>
+            <PropertyRef Name="AssistantCourseID" />
+          </Key>
+          <Property Name="AssistantCourseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+          <Property Name="CourseID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Course" Relationship="Self.FK_CourseAssistant_Course" FromRole="CourseAssistant" ToRole="Course" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_CourseAssistant_Employee" FromRole="CourseAssistant" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="CourseCategory">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Courses" Relationship="Self.FK_Course_CourseCategory" FromRole="CourseCategory" ToRole="Course" />
+        </EntityType>
+        <EntityType Name="CoursePrice">
+          <Key>
+            <PropertyRef Name="PriceID" />
+          </Key>
+          <Property Name="PriceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="CourseID" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Course" Relationship="Self.FK_CoursePrice_Course" FromRole="CoursePrice" ToRole="Course" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DepartmentID" />
+          </Key>
+          <Property Name="DepartmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DepartmentName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_Employee_Department" FromRole="Department" ToRole="Employee" />
+          <Property Name="DepartmentDescription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Biography" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RSAIDNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TitleID" Type="Int32" Nullable="false" />
+          <Property Name="Deleted" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DepartmentID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CourseAssistants" Relationship="Self.FK_CourseAssistant_Employee" FromRole="Employee" ToRole="CourseAssistant" />
+          <NavigationProperty Name="Department" Relationship="Self.FK_Employee_Department" FromRole="Employee" ToRole="Department" />
+          <NavigationProperty Name="Title" Relationship="Self.FK_Employee_Title" FromRole="Employee" ToRole="Title" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Employee_User" FromRole="Employee" ToRole="User" />
+          <NavigationProperty Name="EmployeeQualifications" Relationship="Self.FK_EmployeeQualification_Employee" FromRole="Employee" ToRole="EmployeeQualification" />
+          <NavigationProperty Name="EmployeeSkills" Relationship="Self.FK_EmployeeSkill_Employee" FromRole="Employee" ToRole="EmployeeSkill" />
+          <NavigationProperty Name="UpdateRequests" Relationship="Self.FK_UpdateRequest_Employee" FromRole="Employee" ToRole="UpdateRequest" />
+        </EntityType>
+        <EntityType Name="EmployeeQualification">
+          <Key>
+            <PropertyRef Name="EmployeeQualificationID" />
+          </Key>
+          <Property Name="EmployeeQualificationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+          <Property Name="QualificationID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_EmployeeQualification_Employee" FromRole="EmployeeQualification" ToRole="Employee" />
+          <NavigationProperty Name="Qualification" Relationship="Self.FK_EmployeeQualification_Qualification" FromRole="EmployeeQualification" ToRole="Qualification" />
+        </EntityType>
+        <EntityType Name="EmployeeSkill">
+          <Key>
+            <PropertyRef Name="EmployeeSkillID" />
+          </Key>
+          <Property Name="EmployeeSkillID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+          <Property Name="SkillID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_EmployeeSkill_Employee" FromRole="EmployeeSkill" ToRole="Employee" />
+          <NavigationProperty Name="Skill" Relationship="Self.FK_EmployeeSkill_Skill" FromRole="EmployeeSkill" ToRole="Skill" />
+        </EntityType>
+        <EntityType Name="FAQ">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Question" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Answer" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InstructionalVideo">
+          <Key>
+            <PropertyRef Name="VideoID" />
+          </Key>
+          <Property Name="VideoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VideoName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="VideoLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JobOppStatu">
+          <Key>
+            <PropertyRef Name="JobOppStatusID" />
+          </Key>
+          <Property Name="JobOppStatusID" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="JobOpportunities" Relationship="Model.FK_JobOpportunity_JobOppStatus" FromRole="JobOppStatu" ToRole="JobOpportunity" />
+        </EntityType>
+        <EntityType Name="Lesson">
+          <Key>
+            <PropertyRef Name="LessonID" />
+          </Key>
+          <Property Name="LessonID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SectionID" Type="Int32" Nullable="false" />
+          <Property Name="LessonName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LessonDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="VideoID" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Section" Relationship="Self.FK_Lesson_Section" FromRole="Lesson" ToRole="Section" />
+          <NavigationProperty Name="LessonResources" Relationship="Self.FK_LessonResource_Lesson" FromRole="Lesson" ToRole="LessonResource" />
+        </EntityType>
+        <EntityType Name="LessonResource">
+          <Key>
+            <PropertyRef Name="ResourceID" />
+          </Key>
+          <Property Name="ResourceID" Type="Int32" Nullable="false" />
+          <Property Name="LessonID" Type="Int32" Nullable="false" />
+          <Property Name="ResourceName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ResourceFile" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <NavigationProperty Name="Lesson" Relationship="Self.FK_LessonResource_Lesson" FromRole="LessonResource" ToRole="Lesson" />
+        </EntityType>
+        <EntityType Name="Maintenance">
+          <Key>
+            <PropertyRef Name="MaintenanceID" />
+          </Key>
+          <Property Name="MaintenanceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="MaintenanceTypeID" Type="Int32" Nullable="false" />
+          <Property Name="MaintenanceStatusID" Type="Int32" Nullable="false" />
+          <Property Name="MaintenancePriorityID" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateLogged" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateResolved" Type="DateTime" Precision="3" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <NavigationProperty Name="MaintenancePriority" Relationship="Self.FK_Maintenance_MaintenancePriority" FromRole="Maintenance" ToRole="MaintenancePriority" />
+          <NavigationProperty Name="MaintenanceStatu" Relationship="Self.FK_Maintenance_MaintenanceStatus" FromRole="Maintenance" ToRole="MaintenanceStatus" />
+          <NavigationProperty Name="MaintenanceType" Relationship="Self.FK_Maintenance_MaintenanceType" FromRole="Maintenance" ToRole="MaintenanceType" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Maintenance_User" FromRole="Maintenance" ToRole="User" />
+        </EntityType>
+        <EntityType Name="MaintenancePriority">
+          <Key>
+            <PropertyRef Name="MaintenancePriorityID" />
+          </Key>
+          <Property Name="MaintenancePriorityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Priority" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Maintenances" Relationship="Self.FK_Maintenance_MaintenancePriority" FromRole="MaintenancePriority" ToRole="Maintenance" />
+        </EntityType>
+        <EntityType Name="MaintenanceStatu">
+          <Key>
+            <PropertyRef Name="MaintenanceStatusID" />
+          </Key>
+          <Property Name="MaintenanceStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Maintenances" Relationship="Self.FK_Maintenance_MaintenanceStatus" FromRole="MaintenanceStatus" ToRole="Maintenance" />
+        </EntityType>
+        <EntityType Name="MaintenanceType">
+          <Key>
+            <PropertyRef Name="MaintenanceTypeID" />
+          </Key>
+          <Property Name="MaintenanceTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Maintenances" Relationship="Self.FK_Maintenance_MaintenanceType" FromRole="MaintenanceType" ToRole="Maintenance" />
+        </EntityType>
+        <EntityType Name="Qualification">
+          <Key>
+            <PropertyRef Name="QualificationID" />
+          </Key>
+          <Property Name="QualificationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QualificationName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="EmployeeQualifications" Relationship="Self.FK_EmployeeQualification_Qualification" FromRole="Qualification" ToRole="EmployeeQualification" />
+        </EntityType>
+        <EntityType Name="Section">
+          <Key>
+            <PropertyRef Name="SectionID" />
+          </Key>
+          <Property Name="SectionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CourseID" Type="Int32" Nullable="false" />
+          <Property Name="SectionName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SectionDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Course" Relationship="Self.FK_Section_Course" FromRole="Section" ToRole="Course" />
+          <NavigationProperty Name="Lessons" Relationship="Self.FK_Lesson_Section" FromRole="Section" ToRole="Lesson" />
+        </EntityType>
+        <EntityType Name="ShortList">
+          <Key>
+            <PropertyRef Name="ShortListID" />
+          </Key>
+          <Property Name="ShortListID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ApplicationID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Application" Relationship="Self.FK_ShortList_Application" FromRole="ShortList" ToRole="Application" />
+          <NavigationProperty Name="InterviewSlots" Relationship="Model.FK_InterviewSlot_ShortList" FromRole="ShortList" ToRole="InterviewSlot" />
+        </EntityType>
+        <EntityType Name="Skill">
+          <Key>
+            <PropertyRef Name="SkillID" />
+          </Key>
+          <Property Name="SkillID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SkillTypeID" Type="Int32" Nullable="false" />
+          <Property Name="SkillName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="EmployeeSkills" Relationship="Self.FK_EmployeeSkill_Skill" FromRole="Skill" ToRole="EmployeeSkill" />
+          <NavigationProperty Name="SkillType" Relationship="Self.FK_Skill_SkillType" FromRole="Skill" ToRole="SkillType" />
+        </EntityType>
+        <EntityType Name="SkillType">
+          <Key>
+            <PropertyRef Name="SkillTypeID" />
+          </Key>
+          <Property Name="SkillTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SkillTypeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TypeDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Skills" Relationship="Self.FK_Skill_SkillType" FromRole="SkillType" ToRole="Skill" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TitleID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Deleted" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Title" Relationship="Self.FK_Student_Title" FromRole="Student" ToRole="Title" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Student_User" FromRole="Student" ToRole="User" />
+          <NavigationProperty Name="StudentCourses" Relationship="Self.FK_StudentCourse_Student" FromRole="Student" ToRole="StudentCourse" />
+          <NavigationProperty Name="CourseRatings" Relationship="Model.FK_CourseRating_Student" FromRole="Student" ToRole="CourseRating" />
+          <NavigationProperty Name="Carts" Relationship="Model.FK_Cart_Student" FromRole="Student" ToRole="Cart" />
+        </EntityType>
+        <EntityType Name="StudentCourse">
+          <Key>
+            <PropertyRef Name="EnrollmentID" />
+          </Key>
+          <Property Name="EnrollmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentID" Type="Int32" Nullable="false" />
+          <Property Name="CourseID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Course" Relationship="Self.FK_StudentCourse_Course" FromRole="StudentCourse" ToRole="Course" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_StudentCourse_Student" FromRole="StudentCourse" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="Title">
+          <Key>
+            <PropertyRef Name="TitleID" />
+          </Key>
+          <Property Name="TitleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TitleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_Employee_Title" FromRole="Title" ToRole="Employee" />
+          <NavigationProperty Name="Students" Relationship="Self.FK_Student_Title" FromRole="Title" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="UpdateRequest">
+          <Key>
+            <PropertyRef Name="UpdateRequestID" />
+          </Key>
+          <Property Name="UpdateRequestID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+          <Property Name="UpdateSubject" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UpdateDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UpdateRequestStatusID" Type="Int32" Nullable="false" />
+          <Property Name="Proof" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_UpdateRequest_Employee" FromRole="UpdateRequest" ToRole="Employee" />
+          <NavigationProperty Name="UpdateRequestStatu" Relationship="Self.FK_UpdateRequest_UpdateRequestStatus" FromRole="UpdateRequest" ToRole="UpdateRequestStatus" />
+        </EntityType>
+        <EntityType Name="UpdateRequestStatu">
+          <Key>
+            <PropertyRef Name="UpdateRequestStatusID" />
+          </Key>
+          <Property Name="UpdateRequestStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="UpdateRequests" Relationship="Self.FK_UpdateRequest_UpdateRequestStatus" FromRole="UpdateRequestStatus" ToRole="UpdateRequest" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GUID" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Activity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OTP" Type="Int32" />
+          <Property Name="UserRoleID" Type="Int32" Nullable="false" />
+          <Property Name="OTPExpiry" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AuditLogs" Relationship="Self.FK_AuditLog_User" FromRole="User" ToRole="AuditLog" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_Employee_User" FromRole="User" ToRole="Employee" />
+          <NavigationProperty Name="Maintenances" Relationship="Self.FK_Maintenance_User" FromRole="User" ToRole="Maintenance" />
+          <NavigationProperty Name="Students" Relationship="Self.FK_Student_User" FromRole="User" ToRole="Student" />
+          <NavigationProperty Name="UserRole" Relationship="Self.FK_User_UserRole" FromRole="User" ToRole="UserRole" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="UserRoleID" />
+          </Key>
+          <Property Name="UserRoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RoleDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_User_UserRole" FromRole="UserRole" ToRole="User" />
+        </EntityType>
+        <EntityType Name="VAT">
+          <Key>
+            <PropertyRef Name="VatID" />
+          </Key>
+          <Property Name="VatID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VatDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="VatAmount" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Carts" Relationship="Model.FK_Cart_VAT" FromRole="VAT" ToRole="Cart" />
+        </EntityType>
+        <EntityType Name="WorkType">
+          <Key>
+            <PropertyRef Name="WorkTypeID" />
+          </Key>
+          <Property Name="WorkTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="JobOpportunities" Relationship="Model.FK_JobOpportunity_WorkType" FromRole="WorkType" ToRole="JobOpportunity" />
+        </EntityType>
+        <EntityType Name="PayFast">
+          <Key>
+            <PropertyRef Name="MerchantID" />
+            <PropertyRef Name="MerchantKey" />
+            <PropertyRef Name="return_url" />
+            <PropertyRef Name="cancel_url" />
+          </Key>
+          <Property Name="MerchantID" Type="Int32" Nullable="false" />
+          <Property Name="MerchantKey" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="return_url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cancel_url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ShortList_Application">
+          <End Role="Application" Type="Self.Application" Multiplicity="1" />
+          <End Role="ShortList" Type="Self.ShortList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Application">
+              <PropertyRef Name="ApplicationID" />
+            </Principal>
+            <Dependent Role="ShortList">
+              <PropertyRef Name="ApplicationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AuditLog_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="AuditLog" Type="Self.AuditLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="AuditLog">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CartCourse_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="CartCourse" Type="Self.CartCourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="CartCourse">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Course_CourseCategory">
+          <End Role="CourseCategory" Type="Self.CourseCategory" Multiplicity="1" />
+          <End Role="Course" Type="Self.Course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourseCategory">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Course">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseAssistant_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="CourseAssistant" Type="Self.CourseAssistant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="CourseAssistant">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoursePrice_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="CoursePrice" Type="Self.CoursePrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="CoursePrice">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Section_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="Section" Type="Self.Section" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="Section">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentCourse_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="StudentCourse" Type="Self.StudentCourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="StudentCourse">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseAssistant_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="CourseAssistant" Type="Self.CourseAssistant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="CourseAssistant">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DepartmentID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="DepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Title">
+          <End Role="Title" Type="Self.Title" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Title">
+              <PropertyRef Name="TitleID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="TitleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeQualification_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="EmployeeQualification" Type="Self.EmployeeQualification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="EmployeeQualification">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeSkill_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="EmployeeSkill" Type="Self.EmployeeSkill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="EmployeeSkill">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UpdateRequest_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="UpdateRequest" Type="Self.UpdateRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="UpdateRequest">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeQualification_Qualification">
+          <End Role="Qualification" Type="Self.Qualification" Multiplicity="1" />
+          <End Role="EmployeeQualification" Type="Self.EmployeeQualification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Qualification">
+              <PropertyRef Name="QualificationID" />
+            </Principal>
+            <Dependent Role="EmployeeQualification">
+              <PropertyRef Name="QualificationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeSkill_Skill">
+          <End Role="Skill" Type="Self.Skill" Multiplicity="1" />
+          <End Role="EmployeeSkill" Type="Self.EmployeeSkill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Skill">
+              <PropertyRef Name="SkillID" />
+            </Principal>
+            <Dependent Role="EmployeeSkill">
+              <PropertyRef Name="SkillID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lesson_Section">
+          <End Role="Section" Type="Self.Section" Multiplicity="1" />
+          <End Role="Lesson" Type="Self.Lesson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="SectionID" />
+            </Principal>
+            <Dependent Role="Lesson">
+              <PropertyRef Name="SectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LessonResource_Lesson">
+          <End Role="Lesson" Type="Self.Lesson" Multiplicity="1" />
+          <End Role="LessonResource" Type="Self.LessonResource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lesson">
+              <PropertyRef Name="LessonID" />
+            </Principal>
+            <Dependent Role="LessonResource">
+              <PropertyRef Name="LessonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Maintenance_MaintenancePriority">
+          <End Role="MaintenancePriority" Type="Self.MaintenancePriority" Multiplicity="1" />
+          <End Role="Maintenance" Type="Self.Maintenance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaintenancePriority">
+              <PropertyRef Name="MaintenancePriorityID" />
+            </Principal>
+            <Dependent Role="Maintenance">
+              <PropertyRef Name="MaintenancePriorityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Maintenance_MaintenanceStatus">
+          <End Role="MaintenanceStatus" Type="Self.MaintenanceStatu" Multiplicity="1" />
+          <End Role="Maintenance" Type="Self.Maintenance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaintenanceStatus">
+              <PropertyRef Name="MaintenanceStatusID" />
+            </Principal>
+            <Dependent Role="Maintenance">
+              <PropertyRef Name="MaintenanceStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Maintenance_MaintenanceType">
+          <End Role="MaintenanceType" Type="Self.MaintenanceType" Multiplicity="1" />
+          <End Role="Maintenance" Type="Self.Maintenance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaintenanceType">
+              <PropertyRef Name="MaintenanceTypeID" />
+            </Principal>
+            <Dependent Role="Maintenance">
+              <PropertyRef Name="MaintenanceTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Maintenance_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Maintenance" Type="Self.Maintenance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Maintenance">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Skill_SkillType">
+          <End Role="SkillType" Type="Self.SkillType" Multiplicity="1" />
+          <End Role="Skill" Type="Self.Skill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SkillType">
+              <PropertyRef Name="SkillTypeID" />
+            </Principal>
+            <Dependent Role="Skill">
+              <PropertyRef Name="SkillTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_Title">
+          <End Role="Title" Type="Self.Title" Multiplicity="1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Title">
+              <PropertyRef Name="TitleID" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="TitleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentCourse_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="StudentCourse" Type="Self.StudentCourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="StudentCourse">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UpdateRequest_UpdateRequestStatus">
+          <End Role="UpdateRequestStatus" Type="Self.UpdateRequestStatu" Multiplicity="1" />
+          <End Role="UpdateRequest" Type="Self.UpdateRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UpdateRequestStatus">
+              <PropertyRef Name="UpdateRequestStatusID" />
+            </Principal>
+            <Dependent Role="UpdateRequest">
+              <PropertyRef Name="UpdateRequestStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_UserRole">
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRole">
+              <PropertyRef Name="UserRoleID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="UserRoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Applications" EntityType="Self.Application" />
+          <EntitySet Name="AuditLogs" EntityType="Self.AuditLog" />
+          <EntitySet Name="CartCourses" EntityType="Self.CartCourse" />
+          <EntitySet Name="Courses" EntityType="Self.Course" />
+          <EntitySet Name="CourseAssistants" EntityType="Self.CourseAssistant" />
+          <EntitySet Name="CourseCategories" EntityType="Self.CourseCategory" />
+          <EntitySet Name="CoursePrices" EntityType="Self.CoursePrice" />
+          <EntitySet Name="Departments" EntityType="Self.Department" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="EmployeeQualifications" EntityType="Self.EmployeeQualification" />
+          <EntitySet Name="EmployeeSkills" EntityType="Self.EmployeeSkill" />
+          <EntitySet Name="FAQs" EntityType="Self.FAQ" />
+          <EntitySet Name="InstructionalVideos" EntityType="Self.InstructionalVideo" />
+          <EntitySet Name="JobOppStatus" EntityType="Self.JobOppStatu" />
+          <EntitySet Name="Lessons" EntityType="Self.Lesson" />
+          <EntitySet Name="LessonResources" EntityType="Self.LessonResource" />
+          <EntitySet Name="Maintenances" EntityType="Self.Maintenance" />
+          <EntitySet Name="MaintenancePriorities" EntityType="Self.MaintenancePriority" />
+          <EntitySet Name="MaintenanceStatus" EntityType="Self.MaintenanceStatu" />
+          <EntitySet Name="MaintenanceTypes" EntityType="Self.MaintenanceType" />
+          <EntitySet Name="Qualifications" EntityType="Self.Qualification" />
+          <EntitySet Name="Sections" EntityType="Self.Section" />
+          <EntitySet Name="ShortLists" EntityType="Self.ShortList" />
+          <EntitySet Name="Skills" EntityType="Self.Skill" />
+          <EntitySet Name="SkillTypes" EntityType="Self.SkillType" />
+          <EntitySet Name="Students" EntityType="Self.Student" />
+          <EntitySet Name="StudentCourses" EntityType="Self.StudentCourse" />
+          <EntitySet Name="Titles" EntityType="Self.Title" />
+          <EntitySet Name="UpdateRequests" EntityType="Self.UpdateRequest" />
+          <EntitySet Name="UpdateRequestStatus" EntityType="Self.UpdateRequestStatu" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
+          <EntitySet Name="VATs" EntityType="Self.VAT" />
+          <EntitySet Name="WorkTypes" EntityType="Self.WorkType" />
+          <EntitySet Name="PayFasts" EntityType="Self.PayFast" />
+          <AssociationSet Name="FK_ShortList_Application" Association="Self.FK_ShortList_Application">
+            <End Role="Application" EntitySet="Applications" />
+            <End Role="ShortList" EntitySet="ShortLists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AuditLog_User" Association="Self.FK_AuditLog_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="AuditLog" EntitySet="AuditLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CartCourse_Course" Association="Self.FK_CartCourse_Course">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="CartCourse" EntitySet="CartCourses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Course_CourseCategory" Association="Self.FK_Course_CourseCategory">
+            <End Role="CourseCategory" EntitySet="CourseCategories" />
+            <End Role="Course" EntitySet="Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseAssistant_Course" Association="Self.FK_CourseAssistant_Course">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="CourseAssistant" EntitySet="CourseAssistants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoursePrice_Course" Association="Self.FK_CoursePrice_Course">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="CoursePrice" EntitySet="CoursePrices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Section_Course" Association="Self.FK_Section_Course">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="Section" EntitySet="Sections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentCourse_Course" Association="Self.FK_StudentCourse_Course">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="StudentCourse" EntitySet="StudentCourses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseAssistant_Employee" Association="Self.FK_CourseAssistant_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="CourseAssistant" EntitySet="CourseAssistants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Department" Association="Self.FK_Employee_Department">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Title" Association="Self.FK_Employee_Title">
+            <End Role="Title" EntitySet="Titles" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_User" Association="Self.FK_Employee_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeQualification_Employee" Association="Self.FK_EmployeeQualification_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="EmployeeQualification" EntitySet="EmployeeQualifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeSkill_Employee" Association="Self.FK_EmployeeSkill_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="EmployeeSkill" EntitySet="EmployeeSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UpdateRequest_Employee" Association="Self.FK_UpdateRequest_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="UpdateRequest" EntitySet="UpdateRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeQualification_Qualification" Association="Self.FK_EmployeeQualification_Qualification">
+            <End Role="Qualification" EntitySet="Qualifications" />
+            <End Role="EmployeeQualification" EntitySet="EmployeeQualifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeSkill_Skill" Association="Self.FK_EmployeeSkill_Skill">
+            <End Role="Skill" EntitySet="Skills" />
+            <End Role="EmployeeSkill" EntitySet="EmployeeSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lesson_Section" Association="Self.FK_Lesson_Section">
+            <End Role="Section" EntitySet="Sections" />
+            <End Role="Lesson" EntitySet="Lessons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LessonResource_Lesson" Association="Self.FK_LessonResource_Lesson">
+            <End Role="Lesson" EntitySet="Lessons" />
+            <End Role="LessonResource" EntitySet="LessonResources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Maintenance_MaintenancePriority" Association="Self.FK_Maintenance_MaintenancePriority">
+            <End Role="MaintenancePriority" EntitySet="MaintenancePriorities" />
+            <End Role="Maintenance" EntitySet="Maintenances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Maintenance_MaintenanceStatus" Association="Self.FK_Maintenance_MaintenanceStatus">
+            <End Role="MaintenanceStatus" EntitySet="MaintenanceStatus" />
+            <End Role="Maintenance" EntitySet="Maintenances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Maintenance_MaintenanceType" Association="Self.FK_Maintenance_MaintenanceType">
+            <End Role="MaintenanceType" EntitySet="MaintenanceTypes" />
+            <End Role="Maintenance" EntitySet="Maintenances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Maintenance_User" Association="Self.FK_Maintenance_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Maintenance" EntitySet="Maintenances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Skill_SkillType" Association="Self.FK_Skill_SkillType">
+            <End Role="SkillType" EntitySet="SkillTypes" />
+            <End Role="Skill" EntitySet="Skills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Title" Association="Self.FK_Student_Title">
+            <End Role="Title" EntitySet="Titles" />
+            <End Role="Student" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_User" Association="Self.FK_Student_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Student" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentCourse_Student" Association="Self.FK_StudentCourse_Student">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="StudentCourse" EntitySet="StudentCourses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UpdateRequest_UpdateRequestStatus" Association="Self.FK_UpdateRequest_UpdateRequestStatus">
+            <End Role="UpdateRequestStatus" EntitySet="UpdateRequestStatus" />
+            <End Role="UpdateRequest" EntitySet="UpdateRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_UserRole" Association="Self.FK_User_UserRole">
+            <End Role="UserRole" EntitySet="UserRoles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <EntitySet Name="OTPTimers" EntityType="Model.OTPTimer" />
+          <EntitySet Name="TermsAndConditions" EntityType="Model.TermsAndCondition" />
+          <EntitySet Name="MaxSlotsPerDays" EntityType="Model.MaxSlotsPerDay" />
+          <EntitySet Name="JobOpportunities" EntityType="Model.JobOpportunity" />
+          <AssociationSet Name="FK_Application_JobOpportunity" Association="Model.FK_Application_JobOpportunity">
+            <End Role="JobOpportunity" EntitySet="JobOpportunities" />
+            <End Role="Application" EntitySet="Applications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobOpportunity_JobOppStatus" Association="Model.FK_JobOpportunity_JobOppStatus">
+            <End Role="JobOppStatu" EntitySet="JobOppStatus" />
+            <End Role="JobOpportunity" EntitySet="JobOpportunities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobOpportunity_WorkType" Association="Model.FK_JobOpportunity_WorkType">
+            <End Role="WorkType" EntitySet="WorkTypes" />
+            <End Role="JobOpportunity" EntitySet="JobOpportunities" />
+          </AssociationSet>
+          <EntitySet Name="ApplicationStatus" EntityType="Model.ApplicationStatu" />
+          <AssociationSet Name="FK_Application_ApplicationStatus" Association="Model.FK_Application_ApplicationStatus">
+            <End Role="ApplicationStatu" EntitySet="ApplicationStatus" />
+            <End Role="Application" EntitySet="Applications" />
+          </AssociationSet>
+          <EntitySet Name="Applicants" EntityType="Model.Applicant" />
+          <AssociationSet Name="FK_Application_Applicant" Association="Model.FK_Application_Applicant">
+            <End Role="Applicant" EntitySet="Applicants" />
+            <End Role="Application" EntitySet="Applications" />
+          </AssociationSet>
+          <EntitySet Name="CourseRatings" EntityType="Model.CourseRating" />
+          <AssociationSet Name="FK_CourseRating_Course" Association="Model.FK_CourseRating_Course">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="CourseRating" EntitySet="CourseRatings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseRating_Student" Association="Model.FK_CourseRating_Student">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="CourseRating" EntitySet="CourseRatings" />
+          </AssociationSet>
+          <EntitySet Name="Carts" EntityType="Model.Cart" />
+          <AssociationSet Name="FK_Cart_Student" Association="Model.FK_Cart_Student">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="Cart" EntitySet="Carts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cart_VAT" Association="Model.FK_Cart_VAT">
+            <End Role="VAT" EntitySet="VATs" />
+            <End Role="Cart" EntitySet="Carts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CartCourse_Cart" Association="Model.FK_CartCourse_Cart">
+            <End Role="Cart" EntitySet="Carts" />
+            <End Role="CartCourse" EntitySet="CartCourses" />
+          </AssociationSet>
+          <EntitySet Name="InterviewSlots" EntityType="Model.InterviewSlot" />
+          <AssociationSet Name="FK_InterviewSlot_ShortList" Association="Model.FK_InterviewSlot_ShortList">
+            <End Role="ShortList" EntitySet="ShortLists" />
+            <End Role="InterviewSlot" EntitySet="InterviewSlots" />
+          </AssociationSet>
+          <EntitySet Name="Contacts" EntityType="Model.Contact" />
+          <FunctionImport Name="GetContacts">
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetCoursePerformance">
+          <Parameter Name="CourseID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetCourses" />
+          <FunctionImport Name="GetDashboardData" />
+          <FunctionImport Name="GetEmployeesWithSkill">
+          <Parameter Name="SkillID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetRevenueReport">
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetSales">
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetSkillsWithTypes" />
+          <FunctionImport Name="GetMaintenance">
+            <Parameter Name="MaintenanceID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetMaintenanceList" />
+        </EntityContainer>
+        <EntityType Name="OTPTimer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MinutesUntilExpiry" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TermsAndCondition">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TCFile" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="MaxSlotsPerDay">
+          <Key>
+            <PropertyRef Name="MaxID" />
+          </Key>
+          <Property Name="MaxID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumberOfSlots" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JobOpportunity">
+          <Key>
+            <PropertyRef Name="JobOppID" />
+          </Key>
+          <Property Name="JobOppID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JobOppTitle" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="JobOppDescription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="JobOppRequirements" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="JobOppDeadline" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="WorkTypeID" Type="Int32" Nullable="false" />
+          <Property Name="JobOppStatusID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Applications" Relationship="Model.FK_Application_JobOpportunity" FromRole="JobOpportunity" ToRole="Application" />
+          <NavigationProperty Name="JobOppStatu" Relationship="Model.FK_JobOpportunity_JobOppStatus" FromRole="JobOpportunity" ToRole="JobOppStatu" />
+          <NavigationProperty Name="WorkType" Relationship="Model.FK_JobOpportunity_WorkType" FromRole="JobOpportunity" ToRole="WorkType" />
+        </EntityType>
+        <Association Name="FK_Application_JobOpportunity">
+          <End Type="Model.JobOpportunity" Role="JobOpportunity" Multiplicity="1" />
+          <End Type="Model.Application" Role="Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobOpportunity">
+              <PropertyRef Name="JobOppID" />
+            </Principal>
+            <Dependent Role="Application">
+              <PropertyRef Name="JobOppID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobOpportunity_JobOppStatus">
+          <End Type="Model.JobOppStatu" Role="JobOppStatu" Multiplicity="1" />
+          <End Type="Model.JobOpportunity" Role="JobOpportunity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobOppStatu">
+              <PropertyRef Name="JobOppStatusID" />
+            </Principal>
+            <Dependent Role="JobOpportunity">
+              <PropertyRef Name="JobOppStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobOpportunity_WorkType">
+          <End Type="Model.WorkType" Role="WorkType" Multiplicity="1" />
+          <End Type="Model.JobOpportunity" Role="JobOpportunity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkType">
+              <PropertyRef Name="WorkTypeID" />
+            </Principal>
+            <Dependent Role="JobOpportunity">
+              <PropertyRef Name="WorkTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ApplicationStatu">
+          <Key>
+            <PropertyRef Name="ApplicationStatusID" />
+          </Key>
+          <Property Name="ApplicationStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Applications" Relationship="Model.FK_Application_ApplicationStatus" FromRole="ApplicationStatu" ToRole="Application" />
+        </EntityType>
+        <Association Name="FK_Application_ApplicationStatus">
+          <End Type="Model.ApplicationStatu" Role="ApplicationStatu" Multiplicity="1" />
+          <End Type="Model.Application" Role="Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApplicationStatu">
+              <PropertyRef Name="ApplicationStatusID" />
+            </Principal>
+            <Dependent Role="Application">
+              <PropertyRef Name="ApplicationStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Applicant">
+          <Key>
+            <PropertyRef Name="ApplicantID" />
+          </Key>
+          <Property Name="ApplicantID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CV" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="Image" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Biography" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="RSAIDNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Applications" Relationship="Model.FK_Application_Applicant" FromRole="Applicant" ToRole="Application" />
+        </EntityType>
+        <Association Name="FK_Application_Applicant">
+          <End Type="Model.Applicant" Role="Applicant" Multiplicity="1" />
+          <End Type="Model.Application" Role="Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Applicant">
+              <PropertyRef Name="ApplicantID" />
+            </Principal>
+            <Dependent Role="Application">
+              <PropertyRef Name="ApplicantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CourseRating">
+          <Key>
+            <PropertyRef Name="RatingID" />
+          </Key>
+          <Property Name="RatingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CourseID" Type="Int32" Nullable="false" />
+          <Property Name="StudentID" Type="Int32" Nullable="false" />
+          <Property Name="Rating" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Comment" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Course" Relationship="Model.FK_CourseRating_Course" FromRole="CourseRating" ToRole="Course" />
+          <NavigationProperty Name="Student" Relationship="Model.FK_CourseRating_Student" FromRole="CourseRating" ToRole="Student" />
+        </EntityType>
+        <Association Name="FK_CourseRating_Course">
+          <End Type="Model.Course" Role="Course" Multiplicity="1" />
+          <End Type="Model.CourseRating" Role="CourseRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="CourseRating">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseRating_Student">
+          <End Type="Model.Student" Role="Student" Multiplicity="1" />
+          <End Type="Model.CourseRating" Role="CourseRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="CourseRating">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="CartID" />
+          </Key>
+          <Property Name="CartID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentID" Type="Int32" Nullable="false" />
+          <Property Name="Total" Type="Double" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PurchaseNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VatID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Student" Relationship="Model.FK_Cart_Student" FromRole="Cart" ToRole="Student" />
+          <NavigationProperty Name="VAT" Relationship="Model.FK_Cart_VAT" FromRole="Cart" ToRole="VAT" />
+          <NavigationProperty Name="CartCourses" Relationship="Model.FK_CartCourse_Cart" FromRole="Cart" ToRole="CartCourse" />
+        </EntityType>
+        <Association Name="FK_Cart_Student">
+          <End Type="Model.Student" Role="Student" Multiplicity="1" />
+          <End Type="Model.Cart" Role="Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cart_VAT">
+          <End Type="Model.VAT" Role="VAT" Multiplicity="1" />
+          <End Type="Model.Cart" Role="Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VAT">
+              <PropertyRef Name="VatID" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="VatID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CartCourse_Cart">
+          <End Type="Model.Cart" Role="Cart" Multiplicity="1" />
+          <End Type="Model.CartCourse" Role="CartCourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cart">
+              <PropertyRef Name="CartID" />
+            </Principal>
+            <Dependent Role="CartCourse">
+              <PropertyRef Name="CartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="InterviewSlot">
+          <Key>
+            <PropertyRef Name="InterviewSlotID" />
+          </Key>
+          <Property Name="InterviewSlotID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ShortListID" Type="Int32" Nullable="false" />
+          <Property Name="InterviewDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="StartTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="InterviewCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EndTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Attended" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DateAttended" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ShortList" Relationship="Model.FK_InterviewSlot_ShortList" FromRole="InterviewSlot" ToRole="ShortList" />
+        </EntityType>
+        <Association Name="FK_InterviewSlot_ShortList">
+          <End Type="Model.ShortList" Role="ShortList" Multiplicity="1" />
+          <End Type="Model.InterviewSlot" Role="InterviewSlot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShortList">
+              <PropertyRef Name="ShortListID" />
+            </Principal>
+            <Dependent Role="InterviewSlot">
+              <PropertyRef Name="ShortListID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="ContactID" />
+          </Key>
+          <Property Name="ContactID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Query" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Applications">
+            <EntityTypeMapping TypeName="Model.Application">
+              <MappingFragment StoreEntitySet="Application">
+                <ScalarProperty Name="ApplicationID" ColumnName="ApplicationID" />
+                <ScalarProperty Name="JobOppID" ColumnName="JobOppID" />
+                <ScalarProperty Name="ApplicantID" ColumnName="ApplicantID" />
+                <ScalarProperty Name="ApplicationStatusID" ColumnName="ApplicationStatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AuditLogs">
+            <EntityTypeMapping TypeName="Model.AuditLog">
+              <MappingFragment StoreEntitySet="AuditLog">
+                <ScalarProperty Name="AuditLogID" ColumnName="AuditLogID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="AuditName" ColumnName="AuditName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CartCourses">
+            <EntityTypeMapping TypeName="Model.CartCourse">
+              <MappingFragment StoreEntitySet="CartCourse">
+                <ScalarProperty Name="CartLineID" ColumnName="CartLineID" />
+                <ScalarProperty Name="CartID" ColumnName="CartID" />
+                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+                <ScalarProperty Name="PriceAtTimeOfPurchase" ColumnName="PriceAtTimeOfPurchase" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Courses">
+            <EntityTypeMapping TypeName="Model.Course">
+              <MappingFragment StoreEntitySet="Course">
+                <ScalarProperty Name="Preview" ColumnName="Preview" />
+                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CourseAssistants">
+            <EntityTypeMapping TypeName="Model.CourseAssistant">
+              <MappingFragment StoreEntitySet="CourseAssistant">
+                <ScalarProperty Name="AssistantCourseID" ColumnName="AssistantCourseID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CourseCategories">
+            <EntityTypeMapping TypeName="Model.CourseCategory">
+              <MappingFragment StoreEntitySet="CourseCategory">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CoursePrices">
+            <EntityTypeMapping TypeName="Model.CoursePrice">
+              <MappingFragment StoreEntitySet="CoursePrice">
+                <ScalarProperty Name="PriceID" ColumnName="PriceID" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="Model.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="DepartmentDescription" ColumnName="DepartmentDescription" />
+                <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="Model.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Biography" ColumnName="Biography" />
+                <ScalarProperty Name="RSAIDNumber" ColumnName="RSAIDNumber" />
+                <ScalarProperty Name="TitleID" ColumnName="TitleID" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeQualifications">
+            <EntityTypeMapping TypeName="Model.EmployeeQualification">
+              <MappingFragment StoreEntitySet="EmployeeQualification">
+                <ScalarProperty Name="EmployeeQualificationID" ColumnName="EmployeeQualificationID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="QualificationID" ColumnName="QualificationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeSkills">
+            <EntityTypeMapping TypeName="Model.EmployeeSkill">
+              <MappingFragment StoreEntitySet="EmployeeSkill">
+                <ScalarProperty Name="EmployeeSkillID" ColumnName="EmployeeSkillID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="SkillID" ColumnName="SkillID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FAQs">
+            <EntityTypeMapping TypeName="Model.FAQ">
+              <MappingFragment StoreEntitySet="FAQ">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="Answer" ColumnName="Answer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InstructionalVideos">
+            <EntityTypeMapping TypeName="Model.InstructionalVideo">
+              <MappingFragment StoreEntitySet="InstructionalVideo">
+                <ScalarProperty Name="VideoID" ColumnName="VideoID" />
+                <ScalarProperty Name="VideoName" ColumnName="VideoName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="VideoLink" ColumnName="VideoLink" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobOppStatus">
+            <EntityTypeMapping TypeName="Model.JobOppStatu">
+              <MappingFragment StoreEntitySet="JobOppStatus">
+                <ScalarProperty Name="JobOppStatusID" ColumnName="JobOppStatusID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lessons">
+            <EntityTypeMapping TypeName="Model.Lesson">
+              <MappingFragment StoreEntitySet="Lesson">
+                <ScalarProperty Name="LessonID" ColumnName="LessonID" />
+                <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+                <ScalarProperty Name="LessonName" ColumnName="LessonName" />
+                <ScalarProperty Name="LessonDescription" ColumnName="LessonDescription" />
+                <ScalarProperty Name="VideoID" ColumnName="VideoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LessonResources">
+            <EntityTypeMapping TypeName="Model.LessonResource">
+              <MappingFragment StoreEntitySet="LessonResource">
+                <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
+                <ScalarProperty Name="LessonID" ColumnName="LessonID" />
+                <ScalarProperty Name="ResourceName" ColumnName="ResourceName" />
+                <ScalarProperty Name="ResourceFile" ColumnName="ResourceFile" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Maintenances">
+            <EntityTypeMapping TypeName="Model.Maintenance">
+              <MappingFragment StoreEntitySet="Maintenance">
+                <ScalarProperty Name="MaintenanceID" ColumnName="MaintenanceID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="MaintenanceTypeID" ColumnName="MaintenanceTypeID" />
+                <ScalarProperty Name="MaintenanceStatusID" ColumnName="MaintenanceStatusID" />
+                <ScalarProperty Name="MaintenancePriorityID" ColumnName="MaintenancePriorityID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="DateLogged" ColumnName="DateLogged" />
+                <ScalarProperty Name="DateResolved" ColumnName="DateResolved" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MaintenancePriorities">
+            <EntityTypeMapping TypeName="Model.MaintenancePriority">
+              <MappingFragment StoreEntitySet="MaintenancePriority">
+                <ScalarProperty Name="MaintenancePriorityID" ColumnName="MaintenancePriorityID" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MaintenanceStatus">
+            <EntityTypeMapping TypeName="Model.MaintenanceStatu">
+              <MappingFragment StoreEntitySet="MaintenanceStatus">
+                <ScalarProperty Name="MaintenanceStatusID" ColumnName="MaintenanceStatusID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MaintenanceTypes">
+            <EntityTypeMapping TypeName="Model.MaintenanceType">
+              <MappingFragment StoreEntitySet="MaintenanceType">
+                <ScalarProperty Name="MaintenanceTypeID" ColumnName="MaintenanceTypeID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Qualifications">
+            <EntityTypeMapping TypeName="Model.Qualification">
+              <MappingFragment StoreEntitySet="Qualification">
+                <ScalarProperty Name="QualificationID" ColumnName="QualificationID" />
+                <ScalarProperty Name="QualificationName" ColumnName="QualificationName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sections">
+            <EntityTypeMapping TypeName="Model.Section">
+              <MappingFragment StoreEntitySet="Section">
+                <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+                <ScalarProperty Name="SectionName" ColumnName="SectionName" />
+                <ScalarProperty Name="SectionDescription" ColumnName="SectionDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShortLists">
+            <EntityTypeMapping TypeName="Model.ShortList">
+              <MappingFragment StoreEntitySet="ShortList">
+                <ScalarProperty Name="ShortListID" ColumnName="ShortListID" />
+                <ScalarProperty Name="ApplicationID" ColumnName="ApplicationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Skills">
+            <EntityTypeMapping TypeName="Model.Skill">
+              <MappingFragment StoreEntitySet="Skill">
+                <ScalarProperty Name="SkillID" ColumnName="SkillID" />
+                <ScalarProperty Name="SkillTypeID" ColumnName="SkillTypeID" />
+                <ScalarProperty Name="SkillName" ColumnName="SkillName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SkillTypes">
+            <EntityTypeMapping TypeName="Model.SkillType">
+              <MappingFragment StoreEntitySet="SkillType">
+                <ScalarProperty Name="SkillTypeID" ColumnName="SkillTypeID" />
+                <ScalarProperty Name="SkillTypeName" ColumnName="SkillTypeName" />
+                <ScalarProperty Name="TypeDescription" ColumnName="TypeDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="Model.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="TitleID" ColumnName="TitleID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentCourses">
+            <EntityTypeMapping TypeName="Model.StudentCourse">
+              <MappingFragment StoreEntitySet="StudentCourse">
+                <ScalarProperty Name="EnrollmentID" ColumnName="EnrollmentID" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Titles">
+            <EntityTypeMapping TypeName="Model.Title">
+              <MappingFragment StoreEntitySet="Title">
+                <ScalarProperty Name="TitleID" ColumnName="TitleID" />
+                <ScalarProperty Name="TitleName" ColumnName="TitleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UpdateRequests">
+            <EntityTypeMapping TypeName="Model.UpdateRequest">
+              <MappingFragment StoreEntitySet="UpdateRequest">
+                <ScalarProperty Name="UpdateRequestID" ColumnName="UpdateRequestID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="UpdateSubject" ColumnName="UpdateSubject" />
+                <ScalarProperty Name="UpdateDescription" ColumnName="UpdateDescription" />
+                <ScalarProperty Name="UpdateRequestStatusID" ColumnName="UpdateRequestStatusID" />
+                <ScalarProperty Name="Proof" ColumnName="Proof" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UpdateRequestStatus">
+            <EntityTypeMapping TypeName="Model.UpdateRequestStatu">
+              <MappingFragment StoreEntitySet="UpdateRequestStatus">
+                <ScalarProperty Name="UpdateRequestStatusID" ColumnName="UpdateRequestStatusID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="Model.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="GUID" ColumnName="GUID" />
+                <ScalarProperty Name="Activity" ColumnName="Activity" />
+                <ScalarProperty Name="OTP" ColumnName="OTP" />
+                <ScalarProperty Name="UserRoleID" ColumnName="UserRoleID" />
+                <ScalarProperty Name="OTPExpiry" ColumnName="OTPExpiry" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRoles">
+            <EntityTypeMapping TypeName="Model.UserRole">
+              <MappingFragment StoreEntitySet="UserRole">
+                <ScalarProperty Name="UserRoleID" ColumnName="UserRoleID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleDescription" ColumnName="RoleDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VATs">
+            <EntityTypeMapping TypeName="Model.VAT">
+              <MappingFragment StoreEntitySet="VAT">
+                <ScalarProperty Name="VatID" ColumnName="VatID" />
+                <ScalarProperty Name="VatDate" ColumnName="VatDate" />
+                <ScalarProperty Name="VatAmount" ColumnName="VatAmount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkTypes">
+            <EntityTypeMapping TypeName="Model.WorkType">
+              <MappingFragment StoreEntitySet="WorkType">
+                <ScalarProperty Name="WorkTypeID" ColumnName="WorkTypeID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PayFasts">
+            <EntityTypeMapping TypeName="Model.PayFast">
+              <MappingFragment StoreEntitySet="PayFast">
+                <ScalarProperty Name="MerchantID" ColumnName="MerchantID" />
+                <ScalarProperty Name="MerchantKey" ColumnName="MerchantKey" />
+                <ScalarProperty Name="return_url" ColumnName="return_url" />
+                <ScalarProperty Name="cancel_url" ColumnName="cancel_url" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OTPTimers">
+            <EntityTypeMapping TypeName="Model.OTPTimer">
+              <MappingFragment StoreEntitySet="OTPTimer">
+                <ScalarProperty Name="MinutesUntilExpiry" ColumnName="MinutesUntilExpiry" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TermsAndConditions">
+            <EntityTypeMapping TypeName="Model.TermsAndCondition">
+              <MappingFragment StoreEntitySet="TermsAndCondition">
+                <ScalarProperty Name="TCFile" ColumnName="TCFile" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MaxSlotsPerDays">
+            <EntityTypeMapping TypeName="Model.MaxSlotsPerDay">
+              <MappingFragment StoreEntitySet="MaxSlotsPerDay">
+                <ScalarProperty Name="NumberOfSlots" ColumnName="NumberOfSlots" />
+                <ScalarProperty Name="MaxID" ColumnName="MaxID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobOpportunities">
+            <EntityTypeMapping TypeName="Model.JobOpportunity">
+              <MappingFragment StoreEntitySet="JobOpportunity">
+                <ScalarProperty Name="JobOppStatusID" ColumnName="JobOppStatusID" />
+                <ScalarProperty Name="WorkTypeID" ColumnName="WorkTypeID" />
+                <ScalarProperty Name="JobOppDeadline" ColumnName="JobOppDeadline" />
+                <ScalarProperty Name="JobOppRequirements" ColumnName="JobOppRequirements" />
+                <ScalarProperty Name="JobOppDescription" ColumnName="JobOppDescription" />
+                <ScalarProperty Name="JobOppTitle" ColumnName="JobOppTitle" />
+                <ScalarProperty Name="JobOppID" ColumnName="JobOppID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ApplicationStatus">
+            <EntityTypeMapping TypeName="Model.ApplicationStatu">
+              <MappingFragment StoreEntitySet="ApplicationStatus">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ApplicationStatusID" ColumnName="ApplicationStatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Applicants">
+            <EntityTypeMapping TypeName="Model.Applicant">
+              <MappingFragment StoreEntitySet="Applicant">
+                <ScalarProperty Name="RSAIDNumber" ColumnName="RSAIDNumber" />
+                <ScalarProperty Name="Biography" ColumnName="Biography" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="CV" ColumnName="CV" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ApplicantID" ColumnName="ApplicantID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CourseRatings">
+            <EntityTypeMapping TypeName="Model.CourseRating">
+              <MappingFragment StoreEntitySet="CourseRating">
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+                <ScalarProperty Name="RatingID" ColumnName="RatingID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Carts">
+            <EntityTypeMapping TypeName="Model.Cart">
+              <MappingFragment StoreEntitySet="Cart">
+                <ScalarProperty Name="VatID" ColumnName="VatID" />
+                <ScalarProperty Name="PurchaseNumber" ColumnName="PurchaseNumber" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="CartID" ColumnName="CartID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InterviewSlots">
+            <EntityTypeMapping TypeName="Model.InterviewSlot">
+              <MappingFragment StoreEntitySet="InterviewSlot">
+                <ScalarProperty Name="DateAttended" ColumnName="DateAttended" />
+                <ScalarProperty Name="Attended" ColumnName="Attended" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="InterviewCode" ColumnName="InterviewCode" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="InterviewDate" ColumnName="InterviewDate" />
+                <ScalarProperty Name="ShortListID" ColumnName="ShortListID" />
+                <ScalarProperty Name="InterviewSlotID" ColumnName="InterviewSlotID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contacts">
+            <EntityTypeMapping TypeName="Model.Contact">
+              <MappingFragment StoreEntitySet="Contact">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Query" ColumnName="Query" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ContactID" ColumnName="ContactID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetContacts" FunctionName="Model.Store.GetContacts" />
+          <FunctionImportMapping FunctionImportName="GetCoursePerformance" FunctionName="Model.Store.GetCoursePerformance" />
+          <FunctionImportMapping FunctionImportName="GetCourses" FunctionName="Model.Store.GetCourses" />
+          <FunctionImportMapping FunctionImportName="GetDashboardData" FunctionName="Model.Store.GetDashboardData" />
+          <FunctionImportMapping FunctionImportName="GetEmployeesWithSkill" FunctionName="Model.Store.GetEmployeesWithSkill" />
+          <FunctionImportMapping FunctionImportName="GetRevenueReport" FunctionName="Model.Store.GetRevenueReport" />
+          <FunctionImportMapping FunctionImportName="GetSales" FunctionName="Model.Store.GetSales" />
+          <FunctionImportMapping FunctionImportName="GetSkillsWithTypes" FunctionName="Model.Store.GetSkillsWithTypes" />
+          <FunctionImportMapping FunctionImportName="GetMaintenance" FunctionName="Model.Store.GetMaintenance" />
+          <FunctionImportMapping FunctionImportName="GetMaintenanceList" FunctionName="Model.Store.GetMaintenanceList" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

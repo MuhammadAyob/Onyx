@@ -1,0 +1,205 @@
+<!-- Card Form for Input -->
+<div style="padding-left: 3em; padding-right: 3em; padding-top: 9em;height:100vh;background-image: url('../../assets/gradient.gif');background-repeat: no-repeat;background-size: 100% 25%;">
+
+    <div>
+      <mat-card class="matCard" style="border-radius: 34px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8), 0 1px 3px rgba(0, 0, 0, 0.8);">
+        <mat-card-header class="cardHeader" style="padding-bottom: 1%;text-align: center">
+          <mat-card-title-group style="margin-left: 40%;">
+            <mat-card-title style="font-weight: 500; "
+              >View Query</mat-card-title
+            >
+          </mat-card-title-group>
+    
+       
+        </mat-card-header>
+    
+        <mat-card-content class="matContent">
+          <form>
+            <div class="form-group">
+              <br /><br />
+              <div style="padding: 0% 2.5% 0% 2%; min-width: 100%">
+                <!--Image-->
+                <div style="margin-left: 33%; padding-bottom: 50px">
+                  <mat-label style="color:#0e1a3c ; padding-left: 7%;"
+                    >Maintenance Issue Image</mat-label
+                  >
+                  <div>
+                    <div style="padding-top: 10px;">
+                      <img
+                        src="{{ 'data:image/png;base64,' + dataimage }}"
+                        width="300px; height;300px"
+                      >
+                    </div>
+                  </div>
+                </div>
+                <!--End of Image-->
+  <br>
+  <br>
+  <mat-label style="color: #0e1a3c">
+    Logged by</mat-label>
+  
+  <br />
+  <mat-form-field 
+  class="example-full-width" 
+  appearance="legacy"
+  style="width: 95%;">
+  
+    <input
+      readonly
+      type="text"
+      matInput
+      
+      name="maintainUserName"
+      [(ngModel)]="currentMaintenance.Username"
+     
+      
+      required
+      style="color: #0e1a3c"
+    />
+  </mat-form-field>
+  <br />
+  <br />
+  <mat-label style="color: #0e1a3c">
+    Date Logged</mat-label>
+  
+  <br />
+  <mat-form-field 
+  class="example-full-width" 
+  appearance="legacy"
+  style="width: 95%;">
+  
+    <input
+      readonly
+      type="text"
+      matInput
+      
+      name="maintainDateLogged"
+      [(ngModel)]="currentMaintenance.DateLogged"
+     
+      
+      required
+      style="color: #0e1a3c"
+    />
+  </mat-form-field>
+  <br />
+  <br />
+                <mat-label style="color: #0e1a3c">
+                  Maintenance Issue Type</mat-label>
+    
+                <br />
+                <mat-form-field 
+                class="example-full-width" 
+                appearance="legacy"
+                style="width: 95%;">
+    
+                  <input
+                    readonly
+                    type="text"
+                    matInput
+                    
+                    name="maintainTypeName"
+                    [(ngModel)]="currentMaintenance.MaintenanceType"
+                   
+                    
+                    required
+                    style="color: #0e1a3c"
+                  />
+                </mat-form-field>
+                <br />
+                <br />
+  
+                <mat-label style="color: #0e1a3c">
+                  Maintenance Issue Priority Level</mat-label>
+    
+                <br />
+                <mat-form-field 
+                class="example-full-width" 
+                appearance="legacy"
+                style="width: 95%;">
+    
+                  <input
+                    readonly
+                    type="text"
+                    matInput
+                    
+                    name="maintainPriorityName"
+                    [(ngModel)]="currentMaintenance.MaintenancePriority"
+                   
+                    
+                    required
+                    style="color: #0e1a3c"
+                  />
+                </mat-form-field>
+                <br />
+                <br />
+    
+                <mat-label style="color: #0e1a3c">
+                  Maintenance Issue Location</mat-label
+                >
+    
+                <br />
+                <mat-form-field
+                  class="example-full-width"
+                  appearance="legacy"
+                  style="width: 95%;"
+                >
+    
+                  <textarea
+                    readonly
+                    matInput
+                    rows="5"
+                    cols="90"
+                    name="MaintainLocation"
+                    [(ngModel)]="currentMaintenance.Location"
+                    
+                   
+                    style="color: #0e1a3c"></textarea>
+                </mat-form-field>
+                <br>
+                <br>
+  
+                <mat-label style="color: #0e1a3c">
+                  Maintenance Issue Description</mat-label
+                >
+    
+                <br />
+                <mat-form-field
+                  class="example-full-width"
+                  appearance="legacy"
+                  style="width: 95%;"
+                >
+    
+                  <textarea
+                    readonly
+                    matInput
+                    rows="5"
+                    cols="90"
+                    name="MaintainDesc"
+                    [(ngModel)]="currentMaintenance.Description"
+                    
+                   
+                    style="color: #0e1a3c"></textarea>
+                </mat-form-field>
+                <br>
+                <br>
+              </div>
+    
+              <div class="form-group" style="padding-right: 40%"></div>
+            </div>
+            
+            <br>
+            <div class="button-container">
+              <button style=" 
+              border: 2px solid rgb(0, 0, 0);
+              border-radius: 50px;
+              font-family: Montserrat;
+              font-size: 16px;
+              padding: 10px 25px 10px 25px;"
+              id="cancel" class="btn" (click)="onBack()">Back</button>
+               </div>
+            <br>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    </div>

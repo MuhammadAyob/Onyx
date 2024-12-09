@@ -1,0 +1,55 @@
+<!-- Card Form for Input -->
+<div style="padding-left: 3em; padding-right: 3em; padding-top: 9em;height:100vh;background-image: url('../../assets/gradient.gif');background-repeat: no-repeat;background-size: 100% 25%;">
+
+    <div>
+      <mat-card class="matCard" style="border-radius: 34px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8), 0 1px 3px rgba(0, 0, 0, 0.8);">
+        <mat-card-header class="cardHeader" style="padding-bottom: 1%;text-align: center">
+          <mat-card-title-group style="margin: 0 auto;">
+            <mat-card-title style="font-weight: 500; "
+              >View Terms and Conditions</mat-card-title
+            >
+          </mat-card-title-group>
+   
+         
+        </mat-card-header>
+    
+        <mat-card-content class="matContent">
+          <form>
+            <div *ngIf="Terms == null || undefined"
+            style="
+           display: flex;
+           align-items: center;
+           justify-content: center;">
+             <mat-spinner ></mat-spinner>
+           </div>
+            <div class="form-group"  *ngIf="!(Terms == null || undefined)">
+              <br /><br />
+              <pdf-viewer
+              [src]="pdfSrc"
+              
+              [rotation]="0"
+              [original-size]="false"
+              [show-all]="true"
+              [fit-to-page]="false"
+              [zoom]="0.85"
+              [zoom-scale]="'page-width'"
+              [stick-to-page]="false"
+              [render-text]="true"
+              [external-link-target]="'blank'"
+              [autoresize]="true"
+              [show-borders]="true"
+              style="width: 95%; height: 600px;"
+            ></pdf-viewer>
+    
+              <div class="form-group" style="padding-right: 40%"></div>
+            </div>
+    
+            <div class="button-container">
+              <button id="cancel" class="btn" (click)="onBack()">Back</button>
+              
+          </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    </div>

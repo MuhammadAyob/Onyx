@@ -1,0 +1,223 @@
+<!-- PARTICLE SYSTEM -->
+<div class="page-bg"></div>
+
+<div class="animation-wrapper">
+  <div class="particle particle-1"></div>
+  <div class="particle particle-2"></div>
+  <div class="particle particle-3"></div>
+  <div class="particle particle-4"></div>
+</div>
+
+
+  <div class="blurred-box">
+    <div style="background-image: url('../../assets/loading.gif');background-repeat: no-repeat;background-size: 100% 100%;" class="bouncer" *ngIf="isLoading">   
+    </div>
+    <div style="padding: 0% 2.5% 0% 2%;">
+      <br>
+      
+   <div>
+    <h1 style="margin-left: 33%; color: white;"> Create Student Account</h1>
+   </div>
+
+    <!-- image preview -->
+  
+  <form>
+    <div *ngIf="(titleList == null || undefined)"
+    style="
+   display: flex;
+   align-items: center;
+   justify-content: center;">
+     <mat-spinner ></mat-spinner>
+   </div>
+<br>
+<div *ngIf="!(titleList == null || undefined)">
+
+
+
+
+<mat-form-field class="full-width" appearance="fill" style="font-family: Montserrat; color: white;">
+  <mat-label  style="font-family: Montserrat;">Select Title</mat-label>
+  <mat-select class="white-text" (valueChange)="selectTitle($event)" [formControl]="titleFormControl" required>
+    <mat-option
+      *ngFor="let item of titleList"
+      [value]="item.TitleID"
+    >
+      {{ item.TitleName }}
+    </mat-option>
+  </mat-select>
+  <mat-error *ngIf="titleFormControl.hasError('required')">
+    Title Selection is <strong>required</strong>
+  </mat-error>
+</mat-form-field>
+
+
+
+<br>
+<mat-form-field class="full-width" appearance="fill" style="font-family: Montserrat;">
+    <mat-label  style="font-family: Montserrat;">Enter Name</mat-label>
+    <input
+                    type="text"
+                    matInput
+                    [formControl]="nameFormControl"
+                    name="ClientName"
+                    [(ngModel)]="student.Name"
+                    placeholder="Ex. Peter"
+                    required
+                  />
+                  <mat-error *ngIf="nameFormControl.hasError('required')">
+                    Name is <strong>required</strong>
+                  </mat-error>
+                  <mat-error *ngIf="nameFormControl.hasError('pattern')">
+                    Name must contain only <strong>alphabetic characters</strong>
+                  </mat-error>
+  </mat-form-field>
+<br>
+<mat-form-field class="full-width" appearance="fill" style="font-family: Montserrat;">
+    <mat-label  style="font-family: Montserrat;">Enter Surname</mat-label>
+    <input
+    type="text"
+    matInput
+    [formControl]="surnameFormControl"
+    name="ClientSurname"
+    [(ngModel)]="student.Surname"
+    placeholder="Ex. Pan"
+    required
+  />
+  <mat-error *ngIf="surnameFormControl.hasError('required')">
+    Surname is <strong>required</strong>
+  </mat-error>
+  <mat-error *ngIf="surnameFormControl.hasError('pattern')">
+    Surname must contain only <strong>alphabetic characters</strong>
+  </mat-error>
+  </mat-form-field>
+<br>
+<mat-form-field class="full-width" appearance="fill" style="font-family: Montserrat;">
+  <mat-label  style="font-family: Montserrat;">Enter Phone Number</mat-label>
+  <input
+                    type="text"
+                    matInput
+                    [formControl]="phoneFormControl"
+                    name="ClientPhone"
+                    [(ngModel)]="student.Phone"
+                    placeholder="Ex. 0822255566"
+                    required
+                  />
+                  <mat-error *ngIf="phoneFormControl.hasError('required')">
+                    Phone Number is <strong>required</strong>
+                  </mat-error>
+                  <mat-error *ngIf="phoneFormControl.hasError('pattern')">
+                    Enter a <strong>valid</strong> phone number
+                  </mat-error>
+</mat-form-field>
+<br>
+<mat-form-field class="full-width" appearance="fill" style="font-family: Montserrat;">
+  <mat-label  style="font-family: Montserrat;">Enter Email</mat-label>
+  <input
+  type="text"
+  matInput
+  [formControl]="emailFormControl"
+  name="ClientEmail"
+  [(ngModel)]="student.Email"
+  placeholder="Ex. xyz@gmail.com"
+  required
+/>
+<mat-error *ngIf="emailFormControl.hasError('required')">
+  Email is <strong>required</strong>
+</mat-error>
+<mat-error *ngIf="emailFormControl.hasError('email')">
+  Enter a <strong>valid</strong> email address
+</mat-error>
+</mat-form-field>
+<br>
+<mat-form-field class="full-width" appearance="fill" style="font-family: Montserrat;">
+  <mat-label  style="font-family: Montserrat;">Enter Password</mat-label>
+  <input
+  [formControl]="passwordFormControl"
+                [type]="hide ? 'password' : 'text'"
+                name="Password"           
+                matInput
+                placeholder="Ensure minimum 6 characters, max 16, at least one uppercase, lowercase, a number"
+                minlength="6"
+                [(ngModel)]="student.Password"
+                required
+/>
+<button
+mat-icon-button
+matSuffix
+(click)="hide = !hide"
+[attr.aria-label]="'Hide Password'"
+[attr.aria-pressed]="hide"
+>
+<mat-icon>
+  {{ hide ? "visibility_off" : "visibility" }}
+</mat-icon>
+</button>
+
+<mat-error *ngIf="passwordFormControl.hasError('required')">
+  Password is <strong>required</strong>
+</mat-error>
+<mat-error *ngIf="passwordFormControl.hasError('minlength')">
+  Password must have a minimum of <strong>6</strong> characters
+</mat-error>
+<mat-error *ngIf="passwordFormControl.hasError('maxlength')">
+  Password must have a maxiumum of <strong>16</strong> characters
+</mat-error>
+<mat-error *ngIf="passwordFormControl.hasError('pattern')">
+  Password must have at least <strong>1 upper case, 1 lower case and a number</strong>
+</mat-error>
+</mat-form-field>
+<br>
+<br>
+<mat-form-field class="full-width" appearance="fill" style="font-family: Montserrat;">
+  <mat-label  style="font-family: Montserrat;">Confirm Password</mat-label>
+  <input
+  [formControl]="confirmPasswordFormControl"
+  [type]="hide ? 'password' : 'text'"
+  matInput
+  name="confirmPassword"            
+  placeholder="Ensure minimum 6 characters, max 16, at least one uppercase, lowercase, a number"
+  minlength="6"
+  [(ngModel)]="confirmPassword"
+  required
+/>
+<button
+  mat-icon-button
+  matSuffix
+  (click)="hide = !hide"
+  [attr.aria-label]="'Hide Password'"
+  [attr.aria-pressed]="hide"
+>
+  <mat-icon>
+    {{ hide ? "visibility_off" : "visibility" }}
+  </mat-icon>
+</button>
+
+<mat-error *ngIf="confirmPasswordFormControl.hasError('required')">
+  Confirm password is <strong>required</strong>
+</mat-error>
+<mat-error *ngIf="confirmPasswordFormControl.hasError('minlength')">
+  Password must have a minimum of <strong>6</strong> characters
+</mat-error>
+<mat-error *ngIf="confirmPasswordFormControl.hasError('maxlength')">
+  Password must have a maxiumum of <strong>16</strong> characters
+</mat-error>
+<mat-error *ngIf="confirmPasswordFormControl.hasError('pattern')">
+  Password must have at least <strong>1 upper case, 1 lower case and a number</strong>
+</mat-error>
+</mat-form-field>
+<br>
+      <div class="button-container">
+        <button id="cancel" class="btn" (click)="onBack()">Back</button>
+        <button id="confirm" class="btn" (click)="onSubmit()">Submit</button>
+    </div>
+  </div>
+</form>
+
+    </div>
+  </div>
+
+
+
+
+
+<!-- </body> -->

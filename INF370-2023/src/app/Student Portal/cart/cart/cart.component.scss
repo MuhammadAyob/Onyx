@@ -1,0 +1,131 @@
+.cardButton {
+    float: right;
+  }
+  
+  .bigDiv {
+    background-color: #deeaf6;
+    display: flex;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .leftSearch {
+    padding: 0.5% 2% 0.5% 2%;
+    width: 100%;
+    float: left;
+    background-color: transparent;
+  }
+  
+  .rightSearch {
+    width: 20%;
+    float: right;
+    background-color: transparent;
+    padding: 1% 3% 0.5% 2%;
+  }
+  
+  .cardHeader {
+    background: linear-gradient(90deg, #0e1a3c, #b0c7fc);
+    background-size: 400% 400%;
+    color: white;
+    padding-top: 2%;
+    width: 100%;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+  
+    .mat-icon {
+      padding-right: 17%;
+    }
+  }
+  
+  th.mat-header-cell {
+    background-color: #920f4c;
+  }
+
+  table{
+    width: 100%;
+  }
+  
+  .table-container{
+    overflow: auto;
+    height: auto;
+  }
+  
+  .table-container::-webkit-scrollbar{
+    display: none;
+  }
+  .mat-paginator {
+    background: linear-gradient(90deg, #0e1a3c, #b0c7fc);
+    background-size: 400% 400%;
+   // animation: AnimationName 30s ease infinite;
+    border-bottom-left-radius: 34px;
+    border-bottom-right-radius: 34px;
+    margin-top: -14px;
+    
+    
+    
+  }
+  
+  
+  .matCard {
+    border-style: solid;
+    border-color: #ffffff;
+    border-radius: 10px;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+  
+  .btn
+  {
+      border: 2px solid rgb(0, 0, 0);
+      border-radius: 50px;
+      
+      font-family: MontserratMedium;
+      font-size: 16px;
+      color: white;
+      padding: 10px 25px 10px 25px;
+  }
+  
+  .btn:hover
+  {
+      background-color: white;
+      color: #00efd1;
+      transition-duration: 500ms;
+  }
+  
+  #cancel
+  {
+      margin-left: 43%;
+      font-family: Montserrat;
+      background-color: #0e1a3c;
+  }
+  
+  
+  
+  #cancel:hover{
+      color: #0e1a3c;
+      background-color: white;
+  }
+  
+  #confirm
+  {
+      margin-right: 10px;
+      float: right;
+      font-family: Montserrat;
+      background-color:  #19274b;;
+  }
+  
+  #confirm:hover
+  {
+  color: #19274b;
+  background-color: white;
+  }
+  
+  .button-container
+  {
+      margin-top: 20px;
+      width: 100%;
+      
+  }
+  

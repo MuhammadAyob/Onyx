@@ -1,0 +1,63 @@
+<!-- Card Form for Input -->
+<div style="padding-left: 3em; padding-right: 3em; padding-top: 9em;height:100vh;background-image: url('../../assets/gradient.gif');background-repeat: no-repeat;background-size: 100% 25%;">
+
+    <div>
+      <mat-card class="matCard" style="border-radius: 34px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8), 0 1px 3px rgba(0, 0, 0, 0.8);">
+        <mat-card-header class="cardHeader" style="padding-bottom: 1%;text-align: center">
+          <mat-card-title-group style="margin:0 auto;">
+            <mat-card-title style="font-weight: 500; "
+              >View VAT %</mat-card-title
+            >
+          </mat-card-title-group>
+    
+          <button mat-icon-button style="color: rgb(255, 255, 255); margin-left: 40%;margin-top: -10px;" (click)="onEdit()">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button style="margin-top: -10px;" (click)="onDelete()">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-card-header>
+    
+        <mat-card-content class="matContent">
+          <form>
+            <div class="form-group">
+              <br /><br />
+              <div style="padding: 0% 2.5% 0% 2%; min-width: 100%">
+                <mat-label style="color: #0e1a3c">
+                  VAT Amount</mat-label>
+    
+                <br />
+                <mat-form-field 
+                class="example-full-width" 
+                appearance="legacy"
+                style="width: 95%;">
+    
+                  <input
+                    readonly
+                    type="number"
+                    matInput
+                    name="deptName"
+                    [(ngModel)]="test.VatAmount"
+                    required
+                    style="color: #0e1a3c"
+                  />
+                </mat-form-field>
+                <br />
+               
+    
+               
+         
+              </div>
+    
+              <div class="form-group" style="padding-right: 40%"></div>
+            </div>
+    
+            <div class="button-container">
+              <button id="cancel" class="btn" (click)="onBack()">View All</button>
+              
+          </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    </div>

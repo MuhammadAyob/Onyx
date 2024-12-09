@@ -1,0 +1,949 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { AdminHomeComponent } from './Administrator/Admin-Home/admin-home/admin-home.component';
+import { AddCategoryComponent } from './Administrator/Course-Category/add-category/add-category/add-category.component';
+import { MaintainCategoryComponent } from './Administrator/Course-Category/maintain-category/maintain-category/maintain-category.component';
+import { ReadCategoryComponent } from './Administrator/Course-Category/read-category/read-category/read-category.component';
+import { AddCourseComponent } from './Administrator/Courses/add-course/add-course/add-course.component';
+import { MaintainCourseComponent } from './Administrator/Courses/maintain-course/maintain-course/maintain-course.component';
+import { ReadCourseComponent } from './Administrator/Courses/read-course/read-course/read-course.component';
+import { ViewCourseComponent } from './Administrator/Courses/view-course/view-course/view-course.component';
+import { ReActivateUsersComponent } from './Administrator/Deactivated Users/Re-activate User/re-activate-users/re-activate-users.component';
+import { AddDepartmentComponent } from './Administrator/Department/add-department/add-department/add-department.component';
+import { MaintainDepartmentComponent } from './Administrator/Department/maintain-department/maintain-department/maintain-department.component';
+import { ReadDepartmentComponent } from './Administrator/Department/read-department/read-department/read-department.component';
+import { ViewDepartmentComponent } from './Administrator/Department/view-department/view-department/view-department.component';
+import { AddEmployeeComponent } from './Administrator/Employees/add-employee/add-employee/add-employee.component';
+import { MaintainEmployeeComponent } from './Administrator/Employees/maintain-employee/maintain-employee/maintain-employee.component';
+import { ReadEmployeeComponent } from './Administrator/Employees/read-employee/read-employee/read-employee.component';
+import { ViewEmployeeComponent } from './Administrator/Employees/View-Employee/view-employee/view-employee.component';
+import { ViewSelectedEmployeeComponent } from './Administrator/Employees/view-selected-employee/view-selected-employee/view-selected-employee.component';
+import { AddFaqComponent } from './Administrator/FAQ/add-faq/add-faq/add-faq.component';
+import { MaintainFaqComponent } from './Administrator/FAQ/maintain-faq/maintain-faq/maintain-faq.component';
+import { ReadFaqComponent } from './Administrator/FAQ/read-faq/read-faq/read-faq.component';
+import { ViewFaqComponent } from './Administrator/FAQ/view-faq/view-faq/view-faq.component';
+import { AddResourceComponent } from './Administrator/Lesson Resources/add-resource/add-resource/add-resource.component';
+import { MaintainResourceComponent } from './Administrator/Lesson Resources/maintain-resource/maintain-resource/maintain-resource.component';
+import { ReadResourcesComponent } from './Administrator/Lesson Resources/read-resources/read-resources/read-resources.component';
+import { ViewResourceComponent } from './Administrator/Lesson Resources/view-resource/view-resource/view-resource.component';
+import { AddLessonComponent } from './Administrator/Lessons/add-lesson/add-lesson/add-lesson.component';
+import { MaintainLessonComponent } from './Administrator/Lessons/maintain-lesson/maintain-lesson/maintain-lesson.component';
+import { ReadLessonsComponent } from './Administrator/Lessons/read-lessons/read-lessons/read-lessons.component';
+import { ViewLessonComponent } from './Administrator/Lessons/view-lesson/view-lesson/view-lesson.component';
+import { AddPriorityComponent } from './Administrator/Maintenance Priority/add-maintenance-priority/add-priority/add-priority.component';
+import { MaintainPriorityComponent } from './Administrator/Maintenance Priority/maintain-priority/maintain-priority/maintain-priority.component';
+import { ReadPriorityComponent } from './Administrator/Maintenance Priority/read-priority/read-priority/read-priority.component';
+import { AddMaintenanceTypeComponent } from './Administrator/Maintenance Type/add-type/add-maintenance-type/add-maintenance-type.component';
+import { MaintainMaintenanceTypeComponent } from './Administrator/Maintenance Type/maintain-type/maintain-maintenance-type/maintain-maintenance-type.component';
+import { ReadMaintenanceTypesComponent } from './Administrator/Maintenance Type/read-types/read-maintenance-types/read-maintenance-types.component';
+import { ConfirmRequestComponent } from './Administrator/Maintenance/confirm-request/confirm-request/confirm-request.component';
+import { MaintainRequestComponent } from './Administrator/Maintenance/maintain-request/maintain-request/maintain-request.component';
+import { ReadRequestComponent } from './Administrator/Maintenance/read-request/read-request/read-request.component';
+import { AddQualificationComponent } from './Administrator/Qualification/add-qualification/add-qualification/add-qualification.component';
+import { MaintainQualificationComponent } from './Administrator/Qualification/maintain-qualification/maintain-qualification/maintain-qualification.component';
+import { ReadQualificationComponent } from './Administrator/Qualification/read-qualification/read-qualification/read-qualification.component';
+import { ViewQualificationComponent } from './Administrator/Qualification/view-qualification/view-qualification/view-qualification.component';
+import { AddSectionComponent } from './Administrator/Sections/add-section/add-section/add-section.component';
+import { MaintainSectionComponent } from './Administrator/Sections/maintain-section/maintain-section/maintain-section.component';
+import { ReadSectionComponent } from './Administrator/Sections/read-sections/read-section/read-section.component';
+import { ViewSectionComponent } from './Administrator/Sections/view-section/view-section/view-section.component';
+import { AddSkillTypeComponent } from './Administrator/Skill Type/add-skill-type/add-skill-type/add-skill-type.component';
+import { MaintainSkillTypeComponent } from './Administrator/Skill Type/maintain-skill-type/maintain-skill-type/maintain-skill-type.component';
+import { ReadSkillTypeComponent } from './Administrator/Skill Type/read-skill-type/read-skill-type/read-skill-type.component';
+import { ViewSkillTypeComponent } from './Administrator/Skill Type/view-skill-type/view-skill-type/view-skill-type.component';
+import { AddSkillComponent } from './Administrator/Skill/add-skill/add-skill/add-skill.component';
+import { MaintainSkillComponent } from './Administrator/Skill/maintain-skill/maintain-skill/maintain-skill.component';
+import { ReadSkillComponent } from './Administrator/Skill/read-skill/read-skill/read-skill.component';
+import { ViewSkillComponent } from './Administrator/Skill/view-skill/view-skill/view-skill.component';
+import { AddTrainingVideoComponent } from './Administrator/Training Videos/add-training-video/add-training-video/add-training-video.component';
+import { MaintainTrainingVideoComponent } from './Administrator/Training Videos/maintain-training-video/maintain-training-video/maintain-training-video.component';
+import { ReadTrainingVideoComponent } from './Administrator/Training Videos/read-training-video/read-training-video/read-training-video.component';
+import { MaintainUpdateRequestComponent } from './Administrator/update-request/maintain-update-request/maintain-update-request/maintain-update-request.component';
+import { ReadUpdateRequestsComponent } from './Administrator/update-request/read-update-requests/read-update-requests/read-update-requests.component';
+import { MaintainUserRoleComponent } from './Administrator/UserRole/maintain-UserRole/maintain-user-role/maintain-user-role.component';
+import { ReadUserRoleComponent } from './Administrator/UserRole/read-UserRole/read-user-role/read-user-role.component';
+import { ViewUserRoleComponent } from './Administrator/UserRole/view-UserRole/view-user-role/view-user-role.component';
+import { EmployeeHomeComponent } from './Employee TA Portal/employee-home/employee-home.component';
+import { RequestUpdateComponent } from './Employee TA Portal/request-update/request-update/request-update.component';
+import { EnterOtpComponent } from './enter-otp/enter-otp/enter-otp.component';
+import { AdminGuard } from './Guards/admin.guard';
+import { AuthGuardGuard } from './Guards/auth-guard.guard';
+import { EmployeeGuard } from './Guards/employee.guard';
+import { StudentGuard } from './Guards/student.guard';
+import { HomePageComponent } from './Home Page/home-page/home-page.component';
+import { LoginComponent } from './Login/login/login.component';
+import { RegisterComponent } from './Register/register/register.component';
+import { ResetPasswordComponent } from './reset-password/reset-password/reset-password.component';
+import { ViewAllCoursesComponent } from './Student Portal/Courses/view-all-courses/view-all-courses.component';
+import { SudentHomeComponent } from './Student Portal/Student-Home/sudent-home/sudent-home.component';
+import { AdminProfileUpdateComponent } from './update-profile/admin-profile-update/admin-profile-update/admin-profile-update.component';
+import { EmployeeProfileUpdateComponent } from './update-profile/employee-profile-update/employee-profile-update/employee-profile-update.component';
+import { StudentProfileUpdateComponent } from './update-profile/student-profile-update/student-profile-update/student-profile-update.component';
+import { ErrorAccessComponent } from './user/error access/error-access/error-access.component';
+import { LogMaintenanceRequestComponent } from './user/maintenance-request/log-maintenance-request/log-maintenance-request.component';
+import { AddVatComponent } from './Administrator/VAT/add-vat/add-vat/add-vat.component';
+import { ViewVATComponent } from './Administrator/VAT/view-vat/view-vat/view-vat.component';
+import { MaintainVATComponent } from './Administrator/VAT/maintain-vat/maintain-vat/maintain-vat.component';
+import { ReadVATComponent } from './Administrator/VAT/read-vat/read-vat/read-vat.component';
+import { ReadOTPComponent } from './Administrator/OTP/read-otp/read-otp/read-otp.component';
+import { MaintainOTPComponent } from './Administrator/OTP/maintain-otp/maintain-otp/maintain-otp.component';
+import { ReadTermsComponent } from './Administrator/TermsAndConditions/read-terms/read-terms.component';
+import { MaintainTermsComponent } from './Administrator/TermsAndConditions/maintain-terms/maintain-terms/maintain-terms.component';
+import { AddJobComponent } from './Administrator/JobOpps/add-job/add-job/add-job.component';
+import { MaintainJobComponent } from './Administrator/JobOpps/maintain-job/maintain-job/maintain-job.component';
+import { ReadJobsComponent } from './Administrator/JobOpps/read-job-opps/read-jobs/read-jobs.component';
+import { ViewJobComponent } from './Administrator/JobOpps/view-job/view-job/view-job.component';
+import { ViewJobOppsComponent } from './user/job-listings/view-job-opps/view-job-opps.component';
+import { ApplicantApplyComponent } from './user/apply/applicant-apply/applicant-apply.component';
+import { ReadSlotsComponent } from './Administrator/MaxSlots/read-slots/read-slots/read-slots.component';
+import { MaintainSlotsComponent } from './Administrator/MaxSlots/maintain-slots/maintain-slots/maintain-slots.component';
+import { ReadApplicationsComponent } from './Administrator/Applications/read-applications/read-applications/read-applications.component';
+import { ViewApplicationComponent } from './Administrator/Applications/view-application/view-application/view-application.component';
+import { ViewShortlistComponent } from './Administrator/Shortlist/view-shortlist/view-shortlist/view-shortlist.component';
+import { ReadShortlistComponent } from './Administrator/Shortlist/read-shortlist/read-shortlist/read-shortlist.component';
+import { AcceptApplicantComponent } from './Administrator/Accept-Applicant/accept-applicant/accept-applicant.component';
+import { ViewSlotComponent } from './Administrator/Interview-Slots/view-slot/view-slot/view-slot.component';
+import { ReadInterviewSlotsComponent } from './Administrator/Interview-Slots/read-interview-slots/read-interview-slots/read-interview-slots.component';
+import { MaintainSlotComponent } from './Administrator/Interview-Slots/maintain-slot/maintain-slot/maintain-slot.component';
+import { ReadStudentsComponent } from './Administrator/Students/read-students/read-students.component';
+import { StoreComponent } from './Student Portal/Store/store/store.component';
+import { ViewStructureComponent } from './Student Portal/view-course-structure/view-structure/view-structure.component';
+import { CartComponent } from './Student Portal/cart/cart/cart.component';
+import { PaymentSuccessComponent } from './Student Portal/payment-success/payment-success/payment-success.component';
+import { CancelPaymentComponent } from './Student Portal/cancel/cancel-payment/cancel-payment.component';
+import { StudentNotifyComponent } from './Student Portal/notify/student-notify/student-notify.component';
+import { ReadInvoicesComponent } from './Student Portal/invoices/read-invoices/read-invoices/read-invoices.component';
+import { ViewInvoiceComponent } from './Student Portal/invoices/view-invoice/view-invoice/view-invoice.component';
+import { ReadRatingsComponent } from './Student Portal/ratings/read-ratings/read-ratings/read-ratings.component';
+import { MaintainRatingComponent } from './Student Portal/ratings/maintain-rating/maintain-rating/maintain-rating.component';
+import { AddRatingComponent } from './Student Portal/ratings/add-rating/add-rating/add-rating.component';
+import { SendAnnouncementComponent } from './Administrator/Courses/send-announcement/send-announcement/send-announcement.component';
+import { ScanCodeComponent } from './Administrator/Interview-Slots/scan-code/scan-code/scan-code.component';
+import { ContactUsComponent } from './contact/contact-us/contact-us.component';
+import { FaqfileAddComponent } from './Administrator/FAQ/upload-json/faqfile-add/faqfile-add.component';
+import { ViewCourseContentComponent } from './Student Portal/view-content/view-course-content/view-course-content.component';
+import { CourseTrendReportComponent } from './Administrator/Reports/course-sales-trend/course-trend-report/course-trend-report.component';
+import { RevenueReportComponent } from './Administrator/Reports/revenue/revenue-report/revenue-report.component';
+import { MaintenanceReportComponent } from './Administrator/Reports/maintenance-report/maintenance-report/maintenance-report.component';
+import { CoursePerformanceComponent } from './Administrator/Reports/course-performance/course-performance/course-performance.component';
+import { EmployeeSkillReportComponent } from './Administrator/Reports/employee-skill/employee-skill-report/employee-skill-report.component';
+import { ContactReportComponent } from './Administrator/Reports/contacts/contact-report/contact-report.component';
+import { SalesReportComponent } from './Administrator/Reports/sales/sales-report/sales-report.component';
+import { ReportHomeComponent } from './Administrator/Reports/report-home/report-home.component';
+import { ReadMcComponent } from './Student Portal/maintenance-student/read-mc/read-mc/read-mc.component';
+import { ViewMcComponent } from './Student Portal/maintenance-student/view-mc/view-mc/view-mc.component';
+import { ViewSTermsComponent } from './Student Portal/terms-view/view-s-terms/view-s-terms.component';
+import { AboutUsComponent } from './about-us/about-us/about-us.component';
+import { AuditLogComponent } from './Administrator/Audit/audit-log/audit-log.component';
+import { HelpPdfComponent } from './help-pdf/help-pdf.component';
+import { StudentHelpComponent } from './student-help/student-help.component';
+
+
+const routes: Routes = [
+{
+  path: '',
+  redirectTo: 'home',
+  pathMatch: 'full',
+},
+
+{
+  path:'home',
+  component:HomePageComponent
+},
+
+{
+path:'employee/update-profile',
+component:EmployeeProfileUpdateComponent,
+canActivate:[AuthGuardGuard,EmployeeGuard]
+},
+
+{
+path:'admin/update-profile',
+component:AdminProfileUpdateComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+path:'student/update-profile',
+component:StudentProfileUpdateComponent,
+canActivate:[AuthGuardGuard,StudentGuard]
+},
+
+{
+path:'about',
+component:AboutUsComponent
+},
+
+{
+path:'help',
+component:HelpPdfComponent
+},
+
+{
+path:'_help',
+component:StudentHelpComponent
+},
+
+{
+path:'register-student',
+component:RegisterComponent
+},
+
+{
+path:'user/error-access',
+component:ErrorAccessComponent,
+canActivate:[AuthGuardGuard]
+},
+
+{
+path:'reset-password',
+component:ResetPasswordComponent
+},
+
+{
+path:'enter-otp',
+component:EnterOtpComponent
+},
+
+{
+path:'user/log-maintenance-request',
+component:LogMaintenanceRequestComponent,
+canActivate:[AuthGuardGuard]
+},
+
+{
+path:'admin/read-maintenance-requests',
+component:ReadRequestComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+path:'admin/confirm-maintenance-request',
+component:ConfirmRequestComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+path:'admin/audit-log',
+component:AuditLogComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+path:'admin/maintain-maintenance-request',
+component:MaintainRequestComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+// Admin Sub-system
+
+{
+  path:'home/admin-home',
+  component:AdminHomeComponent,
+  canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+  path:'admin/view-employee',
+  component:ViewEmployeeComponent
+},
+
+// Admin employee subystem
+
+{
+path:'admin/view-department',
+component:ViewDepartmentComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+  path:'admin/read-department',
+  component:ReadDepartmentComponent,
+  canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+  path:'admin/maintain-department',
+  component:MaintainDepartmentComponent,
+  canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+  path:'admin/add-department',
+  component:AddDepartmentComponent,
+  canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+//admin quali sub-system
+
+{
+  path:'admin/add-qualification',
+  component:AddQualificationComponent
+  //add guards later
+},
+
+{
+  path:'admin/read-qualification',
+  component:ReadQualificationComponent
+  //add guards later
+},
+
+{
+  path:'admin/view-qualification',
+  component:ViewQualificationComponent
+  //add guards later
+},
+
+{
+  path:'admin/maintain-qualification',
+  component:MaintainQualificationComponent
+  //add guards later
+},
+{
+path:'careers',
+component:ViewJobOppsComponent
+},
+
+{
+path:'contact',
+component:ContactUsComponent
+},
+
+{
+path:'admin/override-faqs',
+component:FaqfileAddComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+path:'applicant-apply',
+component:ApplicantApplyComponent
+},
+
+{
+path:'admin/read-students',
+component:ReadStudentsComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+path:'admin/add-job',
+component:AddJobComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+path:'admin/maintain-job',
+component:MaintainJobComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+path:'admin/read-jobs',
+component:ReadJobsComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+path:'admin/view-job',
+component:ViewJobComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+// Configurations
+
+{
+path:'admin/add-vat',
+component:AddVatComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+path:'admin/view-vat',
+component:ViewVATComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+path:'admin/maintain-vat',
+component:MaintainVATComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+  path:'admin/read-vat',
+  component:ReadVATComponent,
+  canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+path:'admin/read-max-slots',
+component:ReadSlotsComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+path:'admin/maintain-max-slots',
+component:MaintainSlotsComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+path:'admin/read-applications',
+component:ReadApplicationsComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+path:'admin/view-application',
+component:ViewApplicationComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+path:'admin/read-shortlist',
+component:ReadShortlistComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+path:'admin/view-shortlist',
+component:ViewShortlistComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+path:'admin/accept-applicant',
+component:AcceptApplicantComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+path:'admin/read-interview-slots',
+component:ReadInterviewSlotsComponent,
+//canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+path:'admin/maintain-interview-slot',
+component:MaintainSlotComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+path:'admin/view-slot',
+component:ViewSlotComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+  path:'admin/read-otp-timer',
+  component:ReadOTPComponent,
+  canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+  path:'admin/maintain-otp-timer',
+  component:MaintainOTPComponent,
+  canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+  path:'admin/read-terms',
+  component:ReadTermsComponent,
+  canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+  path:'admin/maintain-terms',
+  component:MaintainTermsComponent,
+  canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+path:'student/payment-success',
+component:PaymentSuccessComponent
+},
+
+{
+path:'student/cancel',
+component:CancelPaymentComponent
+},
+
+{path:'student/notify',
+component:StudentNotifyComponent
+},
+
+{
+path:'student/view-store',
+component:StoreComponent,
+canActivate:[AuthGuardGuard,StudentGuard]
+},
+
+{
+path:'student/view-course-structure',
+component:ViewStructureComponent,
+},
+
+{
+  path:'student/view-cart',
+  component:CartComponent,
+  canActivate:[AuthGuardGuard,StudentGuard]
+},
+
+{
+path:'student/read-invoices',
+component:ReadInvoicesComponent,
+canActivate:[AuthGuardGuard,StudentGuard]
+},
+
+{
+path:'student/view-invoice',
+component:ViewInvoiceComponent,
+canActivate:[AuthGuardGuard,StudentGuard]
+},
+
+{
+path:'student/read-ratings',
+component:ReadRatingsComponent,
+canActivate:[AuthGuardGuard,StudentGuard]
+},
+
+{
+path:'student/add-rating',
+component:AddRatingComponent,
+canActivate:[AuthGuardGuard,StudentGuard]
+},
+
+{
+path:'student/maintain-rating',
+component:MaintainRatingComponent,
+canActivate:[AuthGuardGuard,StudentGuard]
+},
+
+// reports
+
+{
+path:'admin/reports',
+component:ReportHomeComponent
+},
+
+{
+  path:'admin/reports/course-sales-trend-report',
+  component:CourseTrendReportComponent
+},
+
+{
+path:'admin/reports/revenue-report',
+component:RevenueReportComponent
+},
+
+{
+path:'admin/reports/maintenance-report',
+component:MaintenanceReportComponent
+},
+
+{
+path:'admin/reports/course-performance-report',
+component:CoursePerformanceComponent
+},
+{
+path:'admin/reports/employee-skill-report',
+component:EmployeeSkillReportComponent
+},
+
+{
+path:'admin/reports/contact-report',
+component:ContactReportComponent
+},
+
+{
+path:'admin/reports/sales-report',
+component:SalesReportComponent
+},
+
+// admin skill and skill type
+{
+path:'admin/read-skill',
+component:ReadSkillComponent
+},
+
+{
+  path:'admin/view-skill',
+  component:ViewSkillComponent
+},
+
+{
+  path:'admin/maintain-skill',
+  component:MaintainSkillComponent
+},
+
+{
+  path:'admin/add-skill',
+  component:AddSkillComponent
+},
+
+{
+  path:'admin/maintain-skill-type',
+  component:MaintainSkillTypeComponent
+},
+
+{
+  path:'admin/read-skill-type',
+  component:ReadSkillTypeComponent
+},
+
+{
+  path:'admin/add-skill-type',
+  component:AddSkillTypeComponent
+},
+
+{
+  path:'admin/view-skill-type',
+  component:ViewSkillTypeComponent
+},
+
+//FAQ
+{
+path:'admin/view-faq',
+component:ViewFaqComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+//FAQ
+{
+  path:'admin/read-faq',
+  component:ReadFaqComponent,
+  canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+//FAQ
+{
+  path:'admin/maintain-faq',
+  component:MaintainFaqComponent,
+  canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+//FAQ
+{
+  path:'admin/add-faq',
+  component:AddFaqComponent,
+  canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+//Instructional Videos
+{
+path:'admin/read-instructional-videos',
+component:ReadTrainingVideoComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+  path:'admin/maintain-instructional-video',
+  component:MaintainTrainingVideoComponent,
+  canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+  path:'admin/add-instructional-video',
+  component:AddTrainingVideoComponent,
+  canActivate:[AuthGuardGuard,AdminGuard]
+  },
+
+//Employee admin stuff
+
+{
+  path:'admin/read-employees',
+  component:ReadEmployeeComponent,
+  canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+  path:'admin/view-employee',
+  component:ViewEmployeeComponent,
+  canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+  path:'admin/maintain-employee',
+  component:MaintainEmployeeComponent,
+  canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+  path:'admin/add-employee',
+  component:AddEmployeeComponent,
+  canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+path:'admin/view-selected-employee',
+component:ViewSelectedEmployeeComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+{
+path:'employee/request-update',
+component:RequestUpdateComponent,
+canActivate:[AuthGuardGuard,EmployeeGuard]
+},
+
+{
+path:'admin/read-update-requests',
+component:ReadUpdateRequestsComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+path:'admin/maintain-update-request',
+component:MaintainUpdateRequestComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+//Maintenance Types
+
+{
+path:'admin/add-maintenance-type',
+component:AddMaintenanceTypeComponent
+},
+
+{
+  path:'admin/read-maintenance-types',
+  component:ReadMaintenanceTypesComponent
+},
+
+{
+  path:'admin/maintain-maintenance-type',
+  component:MaintainMaintenanceTypeComponent
+},
+
+//Maintenance Priorities
+
+{
+  path:'admin/add-maintenance-priority',
+  component:AddPriorityComponent
+},
+
+{
+  path:'admin/read-maintenance-priorities',
+  component:ReadPriorityComponent
+},
+
+{
+  path:'admin/maintain-maintenance-priority',
+  component:MaintainPriorityComponent
+},
+
+//Reactivate Users
+{
+path:'admin/re-activate-user',
+component:ReActivateUsersComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+//Course Categories
+
+{
+path:'admin/add-category',
+component:AddCategoryComponent
+},
+
+{
+path:'admin/read-categories',
+component:ReadCategoryComponent
+},
+
+{
+path:'admin/maintain-category',
+component:MaintainCategoryComponent
+},
+
+// Resources admin
+
+{
+path:'admin/read-resources',
+component:ReadResourcesComponent
+},
+
+{
+path:'admin/view-resource',
+component:ViewResourceComponent
+},
+
+{
+path:'admin/add-resource',
+component:AddResourceComponent
+},
+
+{
+path:'admin/maintain-resource',
+component:MaintainResourceComponent
+},
+
+// Lessons admin
+
+{
+path:'admin/read-lessons',
+component:ReadLessonsComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+path:'admin/view-lesson',
+component:ViewLessonComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+  path:'admin/maintain-lesson',
+  component:MaintainLessonComponent,
+  canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+  path:'admin/add-lesson',
+  component:AddLessonComponent,
+  canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+// Courses admin
+{
+path:'admin/send-course-announcement',
+component:SendAnnouncementComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+
+},
+
+{
+path:'admin/scan-code',
+component:ScanCodeComponent
+},
+
+{
+path:'admin/add-course',
+component:AddCourseComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+  path:'admin/maintain-course',
+  component:MaintainCourseComponent,
+  canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+path:'admin/view-course',
+component:ViewCourseComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+path:'admin/read-courses',
+component:ReadCourseComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+//Sections admin
+
+{
+path:'admin/read-sections',
+component:ReadSectionComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+path:'admin/view-section',
+component:ViewSectionComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+path:'admin/maintain-section',
+component:MaintainSectionComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+path:'admin/add-section',
+component:AddSectionComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+//UserRoles
+
+{
+path:'admin/read-user-role',
+component:ReadUserRoleComponent,
+canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+  path:'admin/view-user-role',
+  component:ViewUserRoleComponent,
+  canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+{
+  path:'admin/maintain-user-role',
+  component:MaintainUserRoleComponent,
+  canActivate:[AuthGuardGuard,AdminGuard]
+},
+
+// Student sub-system
+
+{
+  path:'home/student-home',
+  component:SudentHomeComponent,
+  canActivate:[AuthGuardGuard,StudentGuard]
+},
+
+{
+path:'student/read-queries',
+component:ReadMcComponent,
+canActivate:[AuthGuardGuard,StudentGuard]
+},
+
+{
+path:'student/view-query',
+component:ViewMcComponent,
+canActivate:[AuthGuardGuard,StudentGuard]
+},
+
+{
+  path:'student/view-terms',
+  component:ViewSTermsComponent
+},
+
+//Employee sub-system
+{
+path:'home/employee-home',
+component:EmployeeHomeComponent,
+canActivate:[AuthGuardGuard,EmployeeGuard]
+},
+
+{
+path:'student/view-course-content',
+component:ViewCourseContentComponent,
+//canActivate:[AuthGuardGuard,StudentGuard]
+},
+
+{
+  path:'student/view-enrolled-courses',
+  component:ViewAllCoursesComponent,
+  canActivate:[AuthGuardGuard,StudentGuard]
+},
+//Login and Register
+{
+path:'login',
+component:LoginComponent
+},
+// Unrecognized path
+{
+  path:'**',
+  redirectTo:'home'
+}
+
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }

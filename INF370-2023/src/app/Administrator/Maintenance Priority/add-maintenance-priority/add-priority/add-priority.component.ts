@@ -1,0 +1,199 @@
+import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from 'src/app/Dialog/confirm-dialog/confirm-dialog/confirm-dialog.component';
+import { ExistsDialogComponent } from 'src/app/Dialog/exists-dialog/exists-dialog/exists-dialog.component';
+import { SearchDialogComponent } from 'src/app/Dialog/search-dialog/search-dialog/search-dialog.component';
+import { InputDialogComponent } from 'src/app/Dialog/input-dialog/input-dialog/input-dialog.component';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Title } from '@angular/platform-browser';
+import { MaintenancePriority } from 'src/app/Models/maintenance-priority.model';
+import { MaintenancePriorityService } from 'src/app/Services/maintenance-priority.service';
+import { ToastrService } from 'ngx-toastr';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuditLog } from 'src/app/Models/audit.model';
+import { AuditLogService } from 'src/app/Services/audit-log.service';
+import { SecurityService } from 'src/app/Services/security.service';
+
+export interface DialogData {
+  dialogMessage: string;
+}
+
+@Component({
+  selector: 'app-add-priority',
+  templateUrl: './add-priority.component.html',
+  styleUrls: ['./add-priority.component.scss']
+})
+export class AddPriorityComponent implements OnInit {
+nameFormControl = new FormControl('', [Validators.required]);
+priority!:MaintenancePriority;
+isLoading:boolean=false;
+
+constructor(
+  public router: Router,
+  private location: Location,
+  private dialog: MatDialog,
+  private service: MaintenancePriorityService,
+  public toastr: ToastrService,
+  private _snack:MatSnackBar,
+  private titleservice: Title,
+  private aService:AuditLogService,
+  private security:SecurityService
+) { this.titleservice.setTitle('Maintenance Priority');}
+
+ngOnInit(): void {
+  this.refreshForm();
+}
+
+GetHelp(){
+  localStorage.removeItem('pageNumber');
+  localStorage.setItem('pageNumber', '161');
+}
+
+refreshForm() {
+  this.priority = {
+    MaintenancePriorityID: 0,
+    Priority: ''
+  };
+}
+
+onSubmit() {
+  const isInvalid = this.validateFormControls();
+  console.log(this.priority)
+  if (isInvalid == true) {
+    this.dialog.open(InputDialogComponent, {
+      data: {
+        dialogTitle: "Input Error",
+        dialogMessage: "Correct errors on highlighted fields"
+      },
+      width: '25vw',
+      height: '27vh',
+    });
+  } else {
+    const title = 'Confirm New Priority';
+    const message = 'Are you sure you want to add the new Priority?';
+    this.showDialog(title, message);
+  }
+}
+
+validateFormControls(): boolean {
+  if (
+    this.nameFormControl.hasError('required') == false
+  )
+  {return false}
+  else
+  {return true}
+}
+
+onArrowBack(): void {
+  this.location.back();
+}
+
+onBack() {
+  this.location.back();
+}
+
+showDialog(title: string, message: string): void {
+  const dialogReference = this.dialog.open(ConfirmDialogComponent, {
+    data: {
+      dialogTitle: title,
+      dialogMessage: message,
+      operation: 'add',
+      departmentData: this.priority,
+    }, //^captured department info here for validation
+    height: '30vh',
+    width: '50vw',
+  });
+
+  dialogReference.afterClosed().subscribe((result) => {
+    if (result == true) {
+      this.isLoading=true;
+      this.service.AddPriority(this.priority).subscribe(
+        (result:any) => {
+          console.log(result);
+          if(result.Status===200)
+          {
+            this.isLoading=false;
+            this._snack.open(
+              'Maintenance Priority added successfully!',
+                    'OK',
+                    {
+                      horizontalPosition: 'center',
+                      verticalPosition: 'bottom',
+                      duration: 3000,
+                    }
+            );
+            this.router.navigate(['admin/read-maintenance-priorities']);
+            let audit = new AuditLog();
+              audit.AuditLogID = 0;
+              audit.UserID = this.security.User.UserID;
+              audit.AuditName = 'Add Maintenance Priority';
+              audit.Description = 'Employee, ' + this.security.User.Username + ', added a new Maintenance Priority: ' + this.priority.Priority
+              audit.Date = '';
+  
+              this.aService.AddAudit(audit).subscribe((data) => {
+                //console.log(data);
+                //this.refreshForm();
+              })
+          }
+
+          else if(result.Status===404)
+          {
+            this.isLoading=false;
+            const dialogReference = this.dialog.open(
+              ExistsDialogComponent,
+              {
+                data: {
+                  dialogTitle: 'Error',
+                  dialogMessage: 'Invalid data request, please ensure data body is valid',
+                  operation: 'ok',
+                },
+                width: '25vw',
+              }
+            );
+          }
+
+          else if(result.Status===400)
+          {
+            this.isLoading=false;
+            const dialogReference = this.dialog.open(
+              ExistsDialogComponent,
+              {
+                data: {
+                  dialogTitle: 'Error',
+                  dialogMessage: 'Maintenance Priority exists, please enter a different name.',
+                  operation: 'ok',
+                },
+                width: '50vw',
+                height:'30vh'
+              }
+            );
+          }
+
+          else
+          {
+            this.isLoading=false;
+            const dialogReference = this.dialog.open(
+              ExistsDialogComponent,
+              {
+                data: {
+                  dialogTitle: 'Error',
+                  dialogMessage: 'Can not establish connection. Please try again',
+                  operation: 'ok',
+                },
+                width: '50vw',
+                height:'30vh'
+              }
+            );
+          }
+
+          
+        }
+      );
+    }
+  });
+}
+
+}

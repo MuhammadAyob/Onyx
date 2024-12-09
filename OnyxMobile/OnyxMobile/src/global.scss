@@ -1,0 +1,44 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import '@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+body { margin: 0; font-family: Montserrat, "Montserrat", sans-serif !important; }
+/* styles.scss */
+
+ion-toolbar {
+    --background: linear-gradient(180deg, #0e1a3c, #434d64);
+    color: white;
+}
+
+ion-card {
+    --border-radius: 10px  !important; /* Adjust the value to increase or decrease the border radius */
+    --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Adjust the values to control the box shadow */
+  }
+  
+  ion-card-content {
+    overflow: hidden; /* Ensure the card content doesn't overflow if the box shadow extends beyond the card boundaries */
+  }
+  
+  

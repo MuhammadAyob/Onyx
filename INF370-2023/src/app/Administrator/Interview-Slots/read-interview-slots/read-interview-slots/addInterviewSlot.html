@@ -1,0 +1,64 @@
+<h2 style="margin-right: 1%" mat-dialog-title>Add New Interview Slot</h2>
+<mat-dialog-content class="mat-typography">
+  <h3>Date Selected: {{data.date | date: 'dd MMM yyyy'}}</h3>
+
+  <form>
+    <mat-form-field>
+      <mat-label>Select Interviewee</mat-label>
+      <mat-select
+      (valueChange)="selectInterviewee($event)"
+      >
+        <ng-container *ngFor="let interviewee of intervieweeList">
+        <mat-option
+
+          [value]="interviewee"
+          >{{interviewee.Name}} {{interviewee.Surname}} - {{interviewee.Email}}
+          applied for: {{interviewee.JobOpp}}</mat-option
+        >
+      </ng-container>
+      </mat-select>
+      <mat-error *ngIf="intervieweeFormControl.hasError('required')">
+         Interviewee is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field>
+      <mat-label>Select Interview Slot Start Time</mat-label>
+      <input
+      type="time"
+      matInput
+      [formControl]="startTimeFormControl"
+      [(ngModel)]="InterviewDetails.StartTime"
+      required
+      >
+      <mat-error *ngIf="startTimeFormControl.hasError('required')">
+        Start Time is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field>
+      <mat-label>Select Interview Slot End Time</mat-label>
+      <input
+      type="time"
+      matInput
+      [formControl]="endTimeFormControl"
+      [(ngModel)]="InterviewDetails.EndTime"
+      required
+      >
+      <mat-error *ngIf="endTimeFormControl.hasError('required')">
+        End Time is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button (click)="onSubmit()" >
+    Add Interview Slot
+  </button>
+</mat-dialog-actions>

@@ -1,0 +1,106 @@
+
+<div style="padding-left: 3em; padding-right: 3em; padding-top: 9em;height:100vh;background-image: url('../../assets/gradient.gif');background-repeat: no-repeat;background-size: 100% 25%;">
+  <mat-card class="matCard">
+    <mat-tab-group>
+      <mat-tab label="Overview" class="lesson" style="color: #0e1a3c;">
+        <br>
+        <mat-card-header class="cardHeader" style="padding-bottom: 1%;text-align: center">
+          <mat-card-title-group style="margin: 0 auto">
+            <mat-card-title style="font-weight: 500">{{course.Name}} -> {{test.LessonName}}</mat-card-title>
+          </mat-card-title-group>
+    <div style="float:right">
+      <button mat-icon-button style="color: rgb(255, 255, 255); margin-top: -10px;" (click)="onEdit()">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button style="margin-top: -10px;" (click)="onDelete()">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+        
+        </mat-card-header>
+
+        <mat-card-content class="matContent">
+          <!--Project Details-->
+          <form>
+            <div class="form-group">
+              <br /><br />
+              <div style="padding: 0% 2.5% 0% 2%;">
+<br>
+                <h1 style="margin-left:42.5%;color: #0e1a3c; margin-bottom: -70px;"><b>Lesson Video</b></h1>
+                <br>
+               
+                <div class='embed-container'>
+                  <iframe [src]="test.VideoID | VimeoUrl" frameborder='0' webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+                </div>
+                <br>
+                <br>
+              <mat-label style="color: #0e1a3c">
+                Lesson Name</mat-label>
+  
+              <br />
+              <mat-form-field 
+              class="example-full-width" 
+              appearance="legacy"
+              style="width: 99%;">
+  
+                <input
+                  readonly
+                  type="text"
+                  matInput
+                  name="LessonName"
+                  [(ngModel)]="test.LessonName"
+                  
+                  required
+                  style="color: #0e1a3c"
+                />
+              </mat-form-field>
+              <br />
+              <br />
+  
+              <mat-label style="color: #0e1a3c">
+                Lesson Description</mat-label
+              >
+  
+              <br />
+              <mat-form-field
+                class="example-full-width"
+                appearance="legacy"
+                style="width: 99%;"
+              >
+  
+                <textarea
+                  readonly
+                  matInput
+                  rows="5"
+                  cols="90"
+                  name="LessonDesc"
+                  [(ngModel)]="test.LessonDescription"
+                 
+                  style="color: #0e1a3c"></textarea>
+              </mat-form-field>
+              <br>
+         
+              <br>
+              </div>
+              <div class="form-group" style="padding-right: 40%"></div>
+            </div>
+    
+            <div class="button-container">
+              <button style=" 
+              border: 2px solid rgb(0, 0, 0);
+              border-radius: 50px;
+              font-family: Montserrat;
+              font-size: 16px;
+              color: white;
+              padding: 10px 25px 10px 25px;"
+              id="cancel" class="btn" (click)="onBack()">Back</button>
+               </div>
+               
+          </form>
+        </mat-card-content>
+      </mat-tab>
+      
+     
+    </mat-tab-group>
+   </mat-card>
+</div>

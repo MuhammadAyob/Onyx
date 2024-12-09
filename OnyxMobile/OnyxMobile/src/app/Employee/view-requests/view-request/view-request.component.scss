@@ -1,0 +1,23 @@
+.btn
+{
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 50px;
+  
+  font-family: MontserratMedium;
+  font-size: 16px;
+  color: white;
+  padding: 10px 25px 10px 25px;
+}
+
+#confirm
+{
+  margin-left: 5%;
+  font-family: Montserrat;
+  background-color:  #19274b;;
+}
+
+#confirm:hover
+{
+color: #19274b;
+background-color: white;
+}

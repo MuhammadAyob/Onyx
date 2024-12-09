@@ -1,0 +1,106 @@
+<!-- PARTICLE SYSTEM -->
+<div class="page-bg"></div>
+
+<div class="animation-wrapper">
+  <div class="particle particle-1"></div>
+  <div class="particle particle-2"></div>
+  <div class="particle particle-3"></div>
+  <div class="particle particle-4"></div>
+</div>
+
+
+  <div class="blurred-box">
+    <div style="background-image: url('../../assets/loading.gif');background-repeat: no-repeat;background-size: 100% 100%;" class="bouncer" *ngIf="isLoading">   
+    </div>
+    <div style="padding: 0% 2.5% 0% 2%;">
+      <br>
+      <br>
+   <div>
+    <h1 style="margin-left: 35%; color: white;">Send Contact Query</h1>
+   </div>
+
+    <!-- image preview -->
+  <br>
+  <form>
+
+   
+    <br>
+    <br>
+     
+
+<mat-form-field class="full-width" appearance="fill" style="font-family: Montserrat;">
+    <mat-label  style="font-family: Montserrat;">Full Name</mat-label>
+    <input
+      
+    type="text"
+    matInput
+    [formControl]="nameFormControl"
+    name="EmployeeIDNumber"
+    [(ngModel)]="contact.Name"
+    placeholder="Muhammad Ayob"
+    required
+    />
+    <mat-error *ngIf="nameFormControl.hasError('required')">
+        Name required
+      </mat-error>
+      <mat-error *ngIf="nameFormControl.hasError('pattern')">
+      Name must contain only <strong>alpha characters</strong>
+        </mat-error>
+  </mat-form-field>
+<br>
+<mat-form-field class="full-width" appearance="fill" style="font-family: Montserrat;">
+    <mat-label  style="font-family: Montserrat;">Email</mat-label>
+    <input
+      
+    type="text"
+    matInput
+    [formControl]="emailFormControl"
+    name="appEmail"
+    [(ngModel)]="contact.Email"
+    placeholder="Ex. xyz@gmail.com"
+    required
+    />
+    <mat-error *ngIf="emailFormControl.hasError('required')">
+        Email is <strong>required</strong>
+      </mat-error>
+      <mat-error *ngIf="emailFormControl.hasError('email')">
+        Email is <strong>invalid</strong>
+      </mat-error>
+  </mat-form-field>
+<br>
+<mat-form-field class="full-width" appearance="fill" style="font-family: Montserrat;">
+    <mat-label  style="font-family: Montserrat;">Message</mat-label>
+    <textarea
+    type="text"
+    matInput
+    style="min-height: 40px;"
+    [formControl]="queryFormControl"
+    [(ngModel)]="contact.Query"
+    name="MaintainDesc"
+    placeholder="In terms of your teaching curriculum, I was wondering..."
+    required
+  ></textarea>
+  <mat-error *ngIf="queryFormControl.hasError('required')">
+    Message is <strong>required</strong>
+  </mat-error>
+  </mat-form-field>
+<br>
+
+<br>
+
+
+<br>
+      <div class="button-container">
+        <button id="cancel" class="btn" (click)="onBack()">Back</button>
+        <button id="confirm" class="btn" (click)="onSubmit()">Submit</button>
+    </div>
+</form>
+      
+    </div>
+  </div>
+
+
+
+
+
+<!-- </body> -->
